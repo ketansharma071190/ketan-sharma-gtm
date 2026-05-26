@@ -2,6 +2,13 @@
 
 Static landing page for the LinkedIn rebuild.
 
+## Live deployment
+
+- Homepage: https://ketansharma071190.github.io/ketan-sharma-gtm/
+- Simplifai APAC case study: https://ketansharma071190.github.io/ketan-sharma-gtm/simplifai-apac-enterprise-gtm.html
+- Fractional GTM engagement model: https://ketansharma071190.github.io/ketan-sharma-gtm/fractional-gtm-engagement.html
+- GitHub repo: https://github.com/ketansharma071190/ketan-sharma-gtm
+
 ## Local preview
 
 Open `index.html` directly in a browser, or serve the folder:
