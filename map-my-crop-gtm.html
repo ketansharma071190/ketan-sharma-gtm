@@ -20,12 +20,12 @@
   .kicker{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:20px;}
   .num{position:absolute;top:6vh;right:8.5vw;font-size:12px;font-weight:700;color:var(--grey);letter-spacing:.12em;}
   h1{font-size:clamp(30px,5vw,62px);line-height:1.03;font-weight:800;letter-spacing:-.022em;max-width:17ch;}
-  h2{font-size:clamp(25px,3.7vw,46px);line-height:1.07;font-weight:800;letter-spacing:-.018em;max-width:20ch;}
-  .lede{font-size:clamp(16px,1.8vw,22px);color:var(--grey);margin-top:24px;max-width:48ch;line-height:1.5;}
-  ul{list-style:none;max-width:62ch;margin-top:30px;}
-  li{font-size:clamp(15px,1.6vw,19.5px);line-height:1.45;padding:13px 0 13px 30px;position:relative;border-top:1px solid var(--line);}
+  h2{font-size:clamp(24px,3.4vw,42px);line-height:1.08;font-weight:800;letter-spacing:-.018em;max-width:20ch;}
+  .lede{font-size:clamp(15px,1.7vw,21px);color:var(--grey);margin-top:22px;max-width:48ch;line-height:1.5;}
+  ul{list-style:none;max-width:64ch;margin-top:28px;}
+  li{font-size:clamp(14.5px,1.55vw,19px);line-height:1.45;padding:12px 0 12px 30px;position:relative;border-top:1px solid var(--line);}
   li:first-child{border-top:none;}
-  li::before{content:"";position:absolute;left:0;top:21px;width:11px;height:11px;background:var(--gold);border-radius:2px;}
+  li::before{content:"";position:absolute;left:0;top:20px;width:11px;height:11px;background:var(--gold);border-radius:2px;}
   .big{font-weight:800;color:var(--green);}
   .attr{color:var(--grey);font-style:italic;}
   .dark{background:var(--ink2);color:var(--paper);border-bottom:1px solid var(--line-d);}
@@ -44,24 +44,31 @@
   .cover .who b{color:#fff;font-weight:700;}
   .foot{position:absolute;bottom:4.2vh;left:8.5vw;font-size:11.5px;color:var(--grey);letter-spacing:.02em;}
   .dark .foot{color:#8C9A88;}
+  /* two-column split (fixes slide-4 overlap) */
+  .split{display:flex;gap:5vw;align-items:center;width:100%;}
+  .split-l{flex:1.5;min-width:0;}
+  .split-r{flex:1;display:flex;justify-content:center;align-items:flex-end;}
   /* bar viz */
-  .bars{display:flex;align-items:flex-end;gap:46px;margin-top:40px;height:230px;}
+  .bars{display:flex;align-items:flex-end;gap:40px;height:215px;}
   .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
-  .bar .col{width:120px;border-radius:6px 6px 0 0;}
-  .bar .v{font-weight:800;font-size:20px;margin-bottom:10px;}
-  .bar .lab{margin-top:14px;font-size:14px;color:var(--grey);text-align:center;max-width:150px;line-height:1.3;}
-  .b-farmer{background:linear-gradient(180deg,#9fb0a3,#7f9286);height:14px;}
-  .b-inst{background:linear-gradient(180deg,var(--gold-soft),var(--gold));height:215px;}
-  .dark .bar .lab{color:#aebaa6;}
+  .bar .col{width:110px;border-radius:6px 6px 0 0;}
+  .bar .v{font-weight:800;font-size:19px;margin-bottom:10px;}
+  .bar .lab{margin-top:14px;font-size:13px;color:var(--grey);text-align:center;max-width:140px;line-height:1.3;}
+  .b-farmer{background:linear-gradient(180deg,#9fb0a3,#7f9286);height:13px;}
+  .b-inst{background:linear-gradient(180deg,var(--gold-soft),var(--gold));height:178px;}
   /* timeline */
-  .tl{display:flex;gap:0;margin-top:42px;max-width:900px;}
-  .tl .step{flex:1;padding:18px 16px;border-top:3px solid var(--line);position:relative;}
+  .tl{display:flex;gap:0;margin-top:42px;max-width:920px;}
+  .tl .step{flex:1;padding:18px 16px;border-top:3px solid var(--line);}
   .tl .step:nth-child(1){border-top-color:var(--green-soft);}
   .tl .step:nth-child(2){border-top-color:var(--green);}
   .tl .step:nth-child(3){border-top-color:var(--gold);}
   .tl .when{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:700;}
-  .tl .what{font-size:15.5px;margin-top:9px;line-height:1.4;}
-  .tl .what b{color:var(--ink);}
+  .tl .what{font-size:15.5px;margin-top:9px;line-height:1.4;color:var(--ink);}
+  .tl .what b{color:var(--ink);font-weight:700;}
+  /* dark-slide timeline legibility fix */
+  .dark .tl .what{color:#D7DECF;}
+  .dark .tl .what b{color:#fff;}
+  .dark .tl .when{color:#9DAA8E;}
   .hint{position:fixed;bottom:14px;right:18px;font-size:11px;color:var(--grey);background:rgba(255,255,255,.78);
     padding:6px 12px;border-radius:20px;border:1px solid var(--line);z-index:50;}
   @media print{
@@ -71,7 +78,7 @@
     @page{size:A4 landscape;margin:0;}
     .dark{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   }
-  @media(max-width:640px){ .bars{gap:24px;height:200px;} .bar .col{width:84px;} .tl{flex-direction:column;} .tl .step{border-top:none;border-left:3px solid var(--line);} }
+  @media(max-width:760px){ .split{flex-direction:column;align-items:flex-start;gap:34px;} .split-r{justify-content:flex-start;} .bars{gap:26px;} .bar .col{width:84px;} .tl{flex-direction:column;} .tl .step{border-top:none;border-left:3px solid var(--line);} }
 </style>
 </head>
 <body>
@@ -87,7 +94,7 @@
   <div class="num">01</div>
   <div class="kicker">The moment you are in</div>
   <h2>You are at $1M ARR and building toward a raise. The question is not the product. It is whether the revenue story is fundable.</h2>
-  <p class="lede">The technology is clearly real. What an investor underwrites next is not another model metric. It is a revenue motion that scales without the founders in every deal.</p>
+  <p class="lede">The technology is clearly real. What an investor underwrites next is not another model metric. It is a commercial function that turns revenue into a number, without the founders in every deal.</p>
 </section>
 
 <section class="slide">
@@ -107,22 +114,28 @@
   <div class="kicker">The ceiling</div>
   <h2>That model gets you to $2M with twice the work. It does not get you a Series A narrative.</h2>
   <ul>
-    <li>Farmer-by-farmer revenue is linear: more revenue means proportionally more effort.</li>
+    <li>Farmer-by-farmer revenue is linear: more revenue means proportionally more effort. <span class="big">That is effort scaling, not a function scaling.</span></li>
     <li>Selling to everyone, everywhere, across geographies dilutes the story rather than sharpening it.</li>
-    <li><span class="big">Investors fund leverage, not a treadmill.</span> They pay for a motion that compounds.</li>
+    <li><span class="big">Investors fund leverage, not a treadmill.</span> They pay for a function that compounds.</li>
     <li>The next $1M should be easier to win than the first, not harder.</li>
   </ul>
 </section>
 
 <section class="slide">
   <div class="num">04</div>
-  <div class="kicker">The unlock, already inside your product</div>
-  <h2>The institution that needs the farmer&rsquo;s data pays many times what the farmer pays. And it is the stickiest revenue you can build.</h2>
-  <div class="bars">
-    <div class="bar"><div class="v" style="color:#7f9286">~&#8377;3.5k</div><div class="col b-farmer"></div><div class="lab">Per farmer / year<br>high touch, high churn</div></div>
-    <div class="bar"><div class="v" style="color:#C8962A">10&ndash;100x</div><div class="col b-inst"></div><div class="lab">Per institutional contract<br>insurer, lender, input major</div></div>
+  <div class="split">
+    <div class="split-l">
+      <div class="kicker">The unlock, already inside your product</div>
+      <h2>The institution that needs the farmer&rsquo;s data pays many times what the farmer pays, and it is the stickiest revenue you can build.</h2>
+      <p class="lede">Your own site already names Insurance and Banking as a segment, and your Command Center already ships a Risk Intelligence Suite. The wedge is built. It is just not being sold as the lead motion. This is the revenue this function is built to win.</p>
+    </div>
+    <div class="split-r">
+      <div class="bars">
+        <div class="bar"><div class="v" style="color:#7f9286">~&#8377;3.5k</div><div class="col b-farmer"></div><div class="lab">Per farmer / year<br>high touch, high churn</div></div>
+        <div class="bar"><div class="v" style="color:#C8962A">10&ndash;100x</div><div class="col b-inst"></div><div class="lab">Per institutional contract<br>insurer, lender, input major</div></div>
+      </div>
+    </div>
   </div>
-  <p class="lede">Your own site already names Insurance and Banking as a segment, and your Command Center already ships a Risk Intelligence Suite. The wedge is built. It is not being sold as the lead motion.</p>
 </section>
 
 <section class="slide dark">
@@ -176,8 +189,8 @@
 
 <section class="slide">
   <div class="num">09</div>
-  <div class="kicker">The machine, so you can forecast it</div>
-  <h2>A motion you run on a dashboard, not in the founders&rsquo; heads.</h2>
+  <div class="kicker">The function, so you can forecast it</div>
+  <h2>The commercial function, run as a machine you forecast against, not in the founders&rsquo; heads.</h2>
   <ul>
     <li>Stages: ICP, Qualify, Co-create the pilot, Land, Handoff to delivery.</li>
     <li>Qualify bar: a live compliance mandate or an owned loss problem. If neither, disqualify fast.</li>
@@ -193,20 +206,21 @@
   <div class="tl">
     <div class="step"><div class="when">Days 0&ndash;30</div><div class="what">Live the product, lock the institutional ICP, build a <b>30-account hit-list</b>, write the outbound and the pilot offer.</div></div>
     <div class="step"><div class="when">Days 31&ndash;60</div><div class="what">Outbound into the wedge, real discovery with insurers and lenders, <b>2 to 3 pilots scoped</b>, the deck rebuilt around the risk buyer.</div></div>
-    <div class="step"><div class="when">By the raise</div><div class="what">A repeatable institutional motion and <b>marquee BFSI logos in pilot</b>. That is the slide that lifts the round.</div></div>
+    <div class="step"><div class="when">By the raise</div><div class="what">The commercial function stood up and producing a number, with <b>marquee BFSI logos in pilot</b>. That is the slide that lifts the round.</div></div>
   </div>
   <p class="lede">Modest and held-to, not a hockey stick. Enterprise and government cycles are long and compliance-gated, and I respect that.</p>
 </section>
 
 <section class="slide">
   <div class="num">11</div>
-  <div class="kicker">The ask</div>
-  <h2>Let me own the revenue engine, and make the next raise a stronger story.</h2>
+  <div class="kicker">The role</div>
+  <h2>Build and own the commercial function.</h2>
   <ul>
-    <li>Own the go-to-market for the institutional buyer, build it and run it.</li>
-    <li>Turn founder-led deals into a motion that scales without you in the room.</li>
-    <li>Give me your three hardest target accounts. In a few days I come back with exactly how I would open them.</li>
-    <li class="big">But first: tell me where I am wrong.</li>
+    <li>You have proven the revenue exists. What is missing is the <span class="big">commercial function</span> that turns it into a number your raise can underwrite. That is the job I want to build and own.</li>
+    <li>Owning the function means owning the number and the motion behind it: who we target, how we qualify, what we price, how it closes, how it compounds. Where marketing and customer success plug in, I build the plan and bring the right hands.</li>
+    <li>The institutional revenue already in your Risk Intelligence Suite is where this gets fundable. I would own opening it, pricing it, and making the first wins repeatable.</li>
+    <li>Head-of-revenue altitude, close to the raise, so the GTM story in the room matches the one on the ground.</li>
+    <li class="big">If there is a fit on both sides, the next conversation is how we close this, not another deck.</li>
   </ul>
 </section>
 
