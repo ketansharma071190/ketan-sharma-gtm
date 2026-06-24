@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Map My Crop — The revenue story for the next raise · Ketan Sharma</title>
+<title>Map My Crop — A go-to-market built around accuracy · Ketan Sharma</title>
 <style>
   :root{
     --paper:#F7F4EC; --ink:#13201A; --ink2:#0E1812;
@@ -27,10 +27,11 @@
   li:first-child{border-top:none;}
   li::before{content:"";position:absolute;left:0;top:20px;width:11px;height:11px;background:var(--gold);border-radius:2px;}
   .big{font-weight:800;color:var(--green);}
-  .attr{color:var(--grey);font-style:italic;}
+  .em{color:var(--ink);font-weight:700;}
   .dark{background:var(--ink2);color:var(--paper);border-bottom:1px solid var(--line-d);}
   .dark h1,.dark h2{color:#fff;}
   .dark .big{color:var(--gold-soft);}
+  .dark .em{color:#fff;}
   .dark li{border-top-color:rgba(255,255,255,.13);}
   .dark .lede{color:#C2CBBC;}
   .dark .kicker{color:var(--gold-soft);}
@@ -38,25 +39,20 @@
   .dark li::before{background:var(--gold-soft);}
   .cover{background:var(--ink2);color:var(--paper);justify-content:center;}
   .cover .bar{width:70px;height:6px;background:var(--gold);margin-bottom:32px;border-radius:3px;}
-  .cover h1{font-size:clamp(34px,6.2vw,80px);max-width:19ch;color:#fff;}
+  .cover h1{font-size:clamp(32px,5.6vw,72px);max-width:20ch;color:#fff;}
   .cover .lede{color:#C2CBBC;max-width:54ch;font-size:clamp(16px,1.9vw,22px);}
   .cover .who{margin-top:50px;font-size:15.5px;color:#aebaa6;}
   .cover .who b{color:#fff;font-weight:700;}
-  .foot{position:absolute;bottom:4.2vh;left:8.5vw;font-size:11.5px;color:var(--grey);letter-spacing:.02em;}
-  .dark .foot{color:#8C9A88;}
-  /* two-column split (fixes slide-4 overlap) */
   .split{display:flex;gap:5vw;align-items:center;width:100%;}
   .split-l{flex:1.5;min-width:0;}
   .split-r{flex:1;display:flex;justify-content:center;align-items:flex-end;}
-  /* bar viz */
   .bars{display:flex;align-items:flex-end;gap:40px;height:215px;}
   .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
   .bar .col{width:110px;border-radius:6px 6px 0 0;}
   .bar .v{font-weight:800;font-size:19px;margin-bottom:10px;}
-  .bar .lab{margin-top:14px;font-size:13px;color:var(--grey);text-align:center;max-width:140px;line-height:1.3;}
+  .bar .lab{margin-top:14px;font-size:13px;color:var(--grey);text-align:center;max-width:150px;line-height:1.3;}
   .b-farmer{background:linear-gradient(180deg,#9fb0a3,#7f9286);height:13px;}
   .b-inst{background:linear-gradient(180deg,var(--gold-soft),var(--gold));height:178px;}
-  /* timeline */
   .tl{display:flex;gap:0;margin-top:42px;max-width:920px;}
   .tl .step{flex:1;padding:18px 16px;border-top:3px solid var(--line);}
   .tl .step:nth-child(1){border-top-color:var(--green-soft);}
@@ -65,7 +61,6 @@
   .tl .when{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:700;}
   .tl .what{font-size:15.5px;margin-top:9px;line-height:1.4;color:var(--ink);}
   .tl .what b{color:var(--ink);font-weight:700;}
-  /* dark-slide timeline legibility fix */
   .dark .tl .what{color:#D7DECF;}
   .dark .tl .what b{color:#fff;}
   .dark .tl .when{color:#9DAA8E;}
@@ -85,39 +80,39 @@
 
 <section class="slide cover">
   <div class="bar"></div>
-  <h1>The revenue story for your next raise.</h1>
-  <p class="lede">An outside read of Map My Crop&rsquo;s go-to-market, sharpened after meeting your team. A point of view, not a finished plan. Tell me where I am wrong.</p>
-  <div class="who"><b>Ketan Sharma</b> &nbsp;&middot;&nbsp; Enterprise GTM, AI into BFSI &nbsp;&middot;&nbsp; Pune &nbsp;&middot;&nbsp; ketansharma071190@gmail.com</div>
+  <h1>Your edge is accuracy. The go-to-market should be built around it.</h1>
+  <p class="lede">An outside read on the commercial engine for Map My Crop, and the structure to scale it. From someone who builds them.</p>
+  <div class="who"><b>Ketan Sharma</b> &nbsp;&middot;&nbsp; Enterprise GTM &nbsp;&middot;&nbsp; Pune &nbsp;&middot;&nbsp; ketansharma071190@gmail.com</div>
 </section>
 
 <section class="slide dark">
   <div class="num">01</div>
-  <div class="kicker">The moment you are in</div>
-  <h2>You are at $1M ARR and building toward a raise. The question is not the product. It is whether the revenue story is fundable.</h2>
-  <p class="lede">The technology is clearly real. What an investor underwrites next is not another model metric. It is a commercial function that turns revenue into a number, without the founders in every deal.</p>
+  <div class="kicker">Start with what makes you different</div>
+  <h2>Your moat is accuracy. The closest-to-true yield in the field. That is a commercial weapon, not just a data point.</h2>
+  <p class="lede">Most agri data is a commodity. A prediction a buyer can trust enough to act on is not. The whole go-to-market should be built to sell that one difference, because it is the thing no competitor can copy quickly.</p>
 </section>
 
 <section class="slide">
   <div class="num">02</div>
-  <div class="kicker">The honest read</div>
-  <h2>You built the first $1M the hard way, one farmer at a time.</h2>
+  <div class="kicker">The honest read on the go-to-market</div>
+  <h2>Right now the best data in the field is sold to whoever will buy it.</h2>
   <ul>
-    <li>Roughly a few thousand rupees a year, across tens of thousands of farmers. As I understood it from our conversation.</li>
-    <li>It is real revenue and it proves the product works in the field.</li>
-    <li>But it is <span class="big">low ACV, high touch, and high effort per rupee</span>.</li>
-    <li class="attr">That is not a criticism. It is the proof that earns you the right to the next motion.</li>
+    <li>You have proven the product works, roughly <span class="em">$1M</span>, mostly won farmer by farmer.</li>
+    <li>But selling it one farmer at a time treats a precision instrument like a commodity.</li>
+    <li>An edge like accuracy is worth the most to whoever takes <span class="big">financial risk on being right</span>.</li>
+    <li>The work is to point the go-to-market at the buyers who pay for that, and to build the structure that makes it repeatable.</li>
   </ul>
 </section>
 
 <section class="slide dark">
   <div class="num">03</div>
-  <div class="kicker">The ceiling</div>
-  <h2>That model gets you to $2M with twice the work. It does not get you a Series A narrative.</h2>
+  <div class="kicker">The shift</div>
+  <h2>Sell the outcome your accuracy creates, not the map.</h2>
   <ul>
-    <li>Farmer-by-farmer revenue is linear: more revenue means proportionally more effort. <span class="big">That is effort scaling, not a function scaling.</span></li>
-    <li>Selling to everyone, everywhere, across geographies dilutes the story rather than sharpening it.</li>
-    <li><span class="big">Investors fund leverage, not a treadmill.</span> They pay for a function that compounds.</li>
-    <li>The next $1M should be easier to win than the first, not harder.</li>
+    <li>Nobody writes a cheque for NDVI. They pay for fewer surprises, a lower loss ratio, a better planting call.</li>
+    <li>The more financial weight a buyer puts on being right, the more your accuracy is worth to them.</li>
+    <li>That reframes the entire motion: from acreage and features to <span class="big">the decision your number improves</span>.</li>
+    <li>Accuracy is not a spec on a slide. It is pricing power, if the go-to-market is built to capture it.</li>
   </ul>
 </section>
 
@@ -125,14 +120,14 @@
   <div class="num">04</div>
   <div class="split">
     <div class="split-l">
-      <div class="kicker">The unlock, already inside your product</div>
-      <h2>The institution that needs the farmer&rsquo;s data pays many times what the farmer pays, and it is the stickiest revenue you can build.</h2>
-      <p class="lede">Your own site already names Insurance and Banking as a segment, and your Command Center already ships a Risk Intelligence Suite. The wedge is built. It is just not being sold as the lead motion. This is the revenue this function is built to win.</p>
+      <div class="kicker">Where the edge is worth the most</div>
+      <h2>The same prediction is worth a different order of magnitude depending on who acts on it.</h2>
+      <p class="lede">A yield call is worth a few thousand rupees to a farmer. To an insurer, a lender, or an input major planning a season on it, the same call is worth many times more, because they are betting real money on it being right.</p>
     </div>
     <div class="split-r">
       <div class="bars">
-        <div class="bar"><div class="v" style="color:#7f9286">~&#8377;3.5k</div><div class="col b-farmer"></div><div class="lab">Per farmer / year<br>high touch, high churn</div></div>
-        <div class="bar"><div class="v" style="color:#C8962A">10&ndash;100x</div><div class="col b-inst"></div><div class="lab">Per institutional contract<br>insurer, lender, input major</div></div>
+        <div class="bar"><div class="v" style="color:#7f9286">~&#8377;3.5k</div><div class="col b-farmer"></div><div class="lab">To a farmer<br>per year</div></div>
+        <div class="bar"><div class="v" style="color:#C8962A">10&ndash;100x</div><div class="col b-inst"></div><div class="lab">To whoever underwrites<br>on the number</div></div>
       </div>
     </div>
   </div>
@@ -140,86 +135,72 @@
 
 <section class="slide dark">
   <div class="num">05</div>
-  <div class="kicker">Why the timing is now</div>
-  <h2>India just made satellite yield data a compliance line item, not a nice-to-have.</h2>
+  <div class="kicker">The structure</div>
+  <h2>The commercial function, run as a machine you forecast against, not in the founders&rsquo; heads.</h2>
   <ul>
-    <li>The PMFBY and YES-TECH scheme pushes crop insurers toward satellite yield estimation. As I understand it, you know this better than I do.</li>
-    <li>That turns your data from a sale you have to make into a budget a buyer already has.</li>
-    <li>SatSure built a company on this lane in India, with HDFC, ICICI and Kotak as clients and investors.</li>
-    <li class="attr">Read that as the lane is bankable and funds itself, not as you are behind.</li>
+    <li>Stages: ICP, Qualify, Co-create the pilot, Land, Expand.</li>
+    <li>Qualify bar: does the buyer carry financial risk your accuracy reduces? If not, disqualify fast.</li>
+    <li>It lives in a CRM, with <span class="big">one number reviewed every week</span>.</li>
+    <li>A clean handoff to delivery, and a post-sale signal, so a landed account expands instead of churning.</li>
   </ul>
 </section>
 
 <section class="slide">
   <div class="num">06</div>
-  <div class="kicker">Why me, specifically</div>
-  <h2>I have already built this exact motion, into the exact buyer, across markets.</h2>
+  <div class="kicker">The motion</div>
+  <h2>One focused, named-account motion beats selling to everyone everywhere.</h2>
   <ul>
-    <li><span class="big">0 to $1M ARR in 12 months</span> at Simplifai, then grown to $1.7M, selling AI into banks and insurers.</li>
-    <li>Named, skeptical, regulated buyers: <span class="big">Kotak, Bajaj, HDFC Mutual Fund, Upstox</span>.</li>
-    <li>Stood up an enterprise org across APAC from zero: the multi-market muscle for your 80-plus-country footprint.</li>
-    <li class="attr">Honest split: those are buyers I sold into. The insurers in the plan are where I would start, not relationships I am claiming.</li>
+    <li>Pick the segment where accuracy commands the most, prove the number on a real pilot, then expand from strength.</li>
+    <li>A value-led sequence built on the decision your data improves, not a feature demo.</li>
+    <li>Land with a tightly scoped pilot, grow it into a platform relationship.</li>
+    <li>Build the deck, the demo-to-deal motion, and a CRM the team actually runs on.</li>
   </ul>
 </section>
 
 <section class="slide dark">
   <div class="num">07</div>
-  <div class="kicker">The gap is the asset</div>
-  <h2>I do not speak GIS. Neither does the underwriting head I would sell to.</h2>
+  <div class="kicker">The biggest version of the edge</div>
+  <h2>The institution that underwrites on your number is the lane you are already heading to.</h2>
   <ul>
-    <li>I will not pretend three weeks makes me a remote-sensing expert.</li>
-    <li>The bottleneck in these deals is not soil science. It is how a risk committee buys, how to survive a long tender, and how to turn a number into something an auditor signs.</li>
-    <li><span class="big">My job is to translate your science into their loss-ratio language.</span></li>
-    <li>I lean on your team for the science. I own the room where the budget sits.</li>
+    <li>Insurers and lenders are where accuracy turns straight into their P&amp;L, the BFSI direction you are planning for after the raise.</li>
+    <li>The motion and structure I build now are what make you <span class="big">ready to win that lane</span> the day you go for it, not starting from zero.</li>
+    <li>The regulatory tailwind is already there: PMFBY and YES-TECH are turning satellite yield into a budget line for insurers.</li>
+    <li>SatSure proved the lane is real and bankable. Your accuracy edge is the reason to believe you can take it.</li>
   </ul>
 </section>
 
 <section class="slide">
   <div class="num">08</div>
-  <div class="kicker">The play, India first then global</div>
-  <h2>One sequenced, named-account motion beats selling to everyone everywhere.</h2>
+  <div class="kicker">Why me</div>
+  <h2>I build commercial engines for technical products sold to demanding buyers.</h2>
   <ul>
-    <li><span class="big">Wave 1, India beachhead:</span> ICICI Lombard, HDFC Ergo, Bajaj Allianz, Agriculture Insurance Company of India.</li>
-    <li><span class="big">Wave 2:</span> agri-lending and KCC desks at HDFC, ICICI, Kotak, and agri-NBFCs.</li>
-    <li><span class="big">Wave 3:</span> reinsurers GIC Re, Swiss Re, Munich Re, where loss-ratio pain concentrates.</li>
-    <li>Then template the same motion across your global footprint. India leads because the mandate is here.</li>
-    <li class="attr">These are targets I would pursue, not relationships I am claiming.</li>
-  </ul>
-</section>
-
-<section class="slide">
-  <div class="num">09</div>
-  <div class="kicker">The function, so you can forecast it</div>
-  <h2>The commercial function, run as a machine you forecast against, not in the founders&rsquo; heads.</h2>
-  <ul>
-    <li>Stages: ICP, Qualify, Co-create the pilot, Land, Handoff to delivery.</li>
-    <li>Qualify bar: a live compliance mandate or an owned loss problem. If neither, disqualify fast.</li>
-    <li>It lives in a CRM, with <span class="big">one number reviewed every week</span>.</li>
-    <li>A handoff contract to delivery and a post-sale signal, so a landed account does not churn.</li>
+    <li><span class="big">0 to $1M ARR in 12 months</span> at Simplifai selling AI into banks and insurers, then grown to $1.7M.</li>
+    <li>Built ZenAdmin&rsquo;s commercial org to run without me. Founding sales at Craze, a YC company.</li>
+    <li>Stood up an enterprise org across APAC from zero, the muscle for your global footprint.</li>
+    <li>I build the motion, the structure, and the team that runs it, and I sell the hard, trust-first deals myself.</li>
   </ul>
 </section>
 
 <section class="slide dark">
-  <div class="num">10</div>
-  <div class="kicker">Aligned to the raise</div>
-  <h2>By the time you raise, the deck has a different slide.</h2>
+  <div class="num">09</div>
+  <div class="kicker">The first 90 days</div>
+  <h2>Build the engine, prove it on real deals, make it repeatable.</h2>
   <div class="tl">
-    <div class="step"><div class="when">Days 0&ndash;30</div><div class="what">Live the product, lock the institutional ICP, build a <b>30-account hit-list</b>, write the outbound and the pilot offer.</div></div>
-    <div class="step"><div class="when">Days 31&ndash;60</div><div class="what">Outbound into the wedge, real discovery with insurers and lenders, <b>2 to 3 pilots scoped</b>, the deck rebuilt around the risk buyer.</div></div>
-    <div class="step"><div class="when">By the raise</div><div class="what">The commercial function stood up and producing a number, with <b>marquee BFSI logos in pilot</b>. That is the slide that lifts the round.</div></div>
+    <div class="step"><div class="when">Days 0&ndash;30</div><div class="what">Live the product, lock the highest-value ICP, build the account hit-list, design the motion and the <b>pilot offer</b>.</div></div>
+    <div class="step"><div class="when">Days 31&ndash;60</div><div class="what">Run the motion, real discovery with the buyers who pay for accuracy, <b>first pilots scoped</b>, the CRM and weekly cadence stood up.</div></div>
+    <div class="step"><div class="when">Days 61&ndash;90</div><div class="what">Convert the first pilot, document the motion so it runs <b>without the founders</b>, hire the first seat behind a proven playbook.</div></div>
   </div>
-  <p class="lede">Modest and held-to, not a hockey stick. Enterprise and government cycles are long and compliance-gated, and I respect that.</p>
+  <p class="lede">Modest and held-to. The deliverable is a repeatable engine, not a spike.</p>
 </section>
 
 <section class="slide">
-  <div class="num">11</div>
+  <div class="num">10</div>
   <div class="kicker">The role</div>
   <h2>Build and own the commercial function.</h2>
   <ul>
-    <li>You have proven the revenue exists. What is missing is the <span class="big">commercial function</span> that turns it into a number your raise can underwrite. That is the job I want to build and own.</li>
+    <li>You have the product and the edge. What is missing is the <span class="big">commercial function</span> that turns them into a predictable, repeatable number.</li>
     <li>Owning the function means owning the number and the motion behind it: who we target, how we qualify, what we price, how it closes, how it compounds. Where marketing and customer success plug in, I build the plan and bring the right hands.</li>
-    <li>The institutional revenue already in your Risk Intelligence Suite is where this gets fundable. I would own opening it, pricing it, and making the first wins repeatable.</li>
-    <li>Head-of-revenue altitude, close to the raise, so the GTM story in the room matches the one on the ground.</li>
+    <li>I build the motion, the structure, and the team, and run it at head-of-revenue altitude.</li>
     <li class="big">If there is a fit on both sides, the next conversation is how we close this, not another deck.</li>
   </ul>
 </section>
