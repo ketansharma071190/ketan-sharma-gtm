@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowthPal — From founder-led selling to a repeatable global engine · Ketan Sharma</title>
+<style>
+  :root{
+    --paper:#F7F4EC; --ink:#13201A; --ink2:#0E1812;
+    --green:#2E7D5B; --green-soft:#6FB89A;
+    --gold:#C8962A; --gold-soft:#E7C77E;
+    --grey:#6E7568; --line:#E2DBC9; --line-d:#2C3A30; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--paper);scroll-snap-type:y mandatory;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.4;}
+  .slide{min-height:100vh;width:100%;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
+    padding:8vh 8.5vw;position:relative;border-bottom:1px solid var(--line);}
+  .kicker{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:20px;}
+  .num{position:absolute;top:6vh;right:8.5vw;font-size:12px;font-weight:700;color:var(--grey);letter-spacing:.12em;}
+  h1{font-size:clamp(30px,5vw,62px);line-height:1.03;font-weight:800;letter-spacing:-.022em;max-width:17ch;}
+  h2{font-size:clamp(24px,3.4vw,42px);line-height:1.08;font-weight:800;letter-spacing:-.018em;max-width:20ch;}
+  .lede{font-size:clamp(15px,1.7vw,21px);color:var(--grey);margin-top:22px;max-width:50ch;line-height:1.5;}
+  ul{list-style:none;max-width:66ch;margin-top:28px;}
+  li{font-size:clamp(14.5px,1.55vw,19px);line-height:1.45;padding:12px 0 12px 30px;position:relative;border-top:1px solid var(--line);}
+  li:first-child{border-top:none;}
+  li::before{content:"";position:absolute;left:0;top:20px;width:11px;height:11px;background:var(--gold);border-radius:2px;}
+  .big{font-weight:800;color:var(--green);}
+  .em{color:var(--ink);font-weight:700;}
+  .dark{background:var(--ink2);color:var(--paper);border-bottom:1px solid var(--line-d);}
+  .dark h1,.dark h2{color:#fff;}
+  .dark .big{color:var(--gold-soft);}
+  .dark .em{color:#fff;}
+  .dark li{border-top-color:rgba(255,255,255,.13);}
+  .dark .lede{color:#C2CBBC;}
+  .dark .kicker{color:var(--gold-soft);}
+  .dark .num{color:#8C9A88;}
+  .dark li::before{background:var(--gold-soft);}
+  .cover{background:var(--ink2);color:var(--paper);justify-content:center;}
+  .cover .bar{width:70px;height:6px;background:var(--gold);margin-bottom:32px;border-radius:3px;}
+  .cover h1{font-size:clamp(32px,5.6vw,72px);max-width:20ch;color:#fff;}
+  .cover .lede{color:#C2CBBC;max-width:56ch;font-size:clamp(16px,1.9vw,22px);}
+  .cover .who{margin-top:50px;font-size:15.5px;color:#aebaa6;}
+  .cover .who b{color:#fff;font-weight:700;}
+  .tl{display:flex;gap:0;margin-top:42px;max-width:960px;}
+  .tl .step{flex:1;padding:18px 16px;border-top:3px solid var(--line);}
+  .tl .step:nth-child(1){border-top-color:var(--green-soft);}
+  .tl .step:nth-child(2){border-top-color:var(--green);}
+  .tl .step:nth-child(3){border-top-color:var(--gold);}
+  .tl .when{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:700;}
+  .tl .what{font-size:15.5px;margin-top:9px;line-height:1.4;color:var(--ink);}
+  .tl .what b{color:var(--ink);font-weight:700;}
+  .dark .tl .what{color:#D7DECF;}
+  .dark .tl .what b{color:#fff;}
+  .dark .tl .when{color:#9DAA8E;}
+  .hint{position:fixed;bottom:14px;right:18px;font-size:11px;color:var(--grey);background:rgba(255,255,255,.78);
+    padding:6px 12px;border-radius:20px;border:1px solid var(--line);z-index:50;}
+  @media print{
+    body{scroll-snap-type:none;}
+    .slide{min-height:0;height:188mm;page-break-after:always;border-bottom:none;padding:16mm 18mm;justify-content:center;}
+    .hint{display:none;}
+    @page{size:A4 landscape;margin:0;}
+    .dark{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+  @media(max-width:760px){ .tl{flex-direction:column;} .tl .step{border-top:none;border-left:3px solid var(--line);} }
+</style>
+</head>
+<body>
+
+<section class="slide cover">
+  <div class="bar"></div>
+  <h1>From founder-led selling to a repeatable global engine.</h1>
+  <p class="lede">An outside read on the US and EU go-to-market for GrowthPal, and the structure to scale it. A starting point for a conversation with Maneesh, not a finished plan. From someone who builds these engines.</p>
+  <div class="who"><b>Ketan Sharma</b> &nbsp;&middot;&nbsp; Enterprise GTM &nbsp;&middot;&nbsp; Pune &nbsp;&middot;&nbsp; ketansharma071190@gmail.com</div>
+</section>
+
+<section class="slide dark">
+  <div class="num">01</div>
+  <div class="kicker">Where the edge actually is</div>
+  <h2>Your edge is not a better database. It is the outcome.</h2>
+  <ul>
+    <li>Grata, Sourcescrub, Cyndx and PitchBook sell data and search. The buyer still does the work.</li>
+    <li>GrowthPal does the <span class="big">thesis-to-target reasoning</span>, then puts a human banking team on validation and outreach to LOI.</li>
+    <li>You win the sub-70M off-market band that bankers ignore and the data tools under-serve.</li>
+    <li>So the go-to-market sells the outcome and the discretion, not a feature list. That is how financial-services buyers actually buy.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="num">02</div>
+  <div class="kicker">Who you sell to</div>
+  <h2>Four buyers, one shape: senior, consultative, trust-first.</h2>
+  <ul>
+    <li>Corp-dev and strategy teams, the Razorpay and PhonePe and Salesforce sweet spot, buy on time-to-target and proprietary flow.</li>
+    <li>PE and PE-backed platforms doing roll-ups buy proprietary flow to dodge auctions and banker fees, and benchmark hard against their stack.</li>
+    <li>Investment banks and boutiques buy leverage to win and service the sub-70M mandates they cannot economically staff.</li>
+    <li>Across all four the economic buyer is a <span class="big">CFO, a corp-dev head, a PE partner</span>. Exactly the financial-services C-suite I sell to.</li>
+  </ul>
+</section>
+
+<section class="slide dark">
+  <div class="num">03</div>
+  <div class="kicker">The honest fit</div>
+  <h2>The buyer is my home turf. The category is my ramp.</h2>
+  <ul>
+    <li>Home turf: complex AI and data products into financial-services and C-suite buyers. <span class="big">Simplifai 0 to 1.6M ARR</span>, anchors closed personally at Kotak, HDFC MF, Bajaj, Upstox.</li>
+    <li>Home turf: founder-led to repeatable. ZenAdmin's commercial org built to run without me.</li>
+    <li>Home turf: international enterprise GTM, US and EU at ZenAdmin.</li>
+    <li>The ramp: M&amp;A and deal-intelligence as a category. I climb it fast because I rebuild the motion from first principles every time.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="num">04</div>
+  <div class="kicker">The real problem to solve</div>
+  <h2>The core GTM problem is your hybrid model, not finding a closer.</h2>
+  <ul>
+    <li>Revenue is subscription plus success-fee-on-close. Lumpy, and the opposite of the predictable engine investors want.</li>
+    <li>You cannot just hand AEs a quota when half the value is advisory judgment you only partly control.</li>
+    <li>So the build is three things at once: <span class="big">codify the intake, guarantee sourcing quality, separate the repeatable motion from the bespoke</span>.</li>
+    <li>The hardest job here is engineering predictability on top of a contingent revenue line.</li>
+  </ul>
+</section>
+
+<section class="slide dark">
+  <div class="num">05</div>
+  <div class="kicker">The motion</div>
+  <h2>Make committed subscription the forecastable base. Success fees are the upside.</h2>
+  <ul>
+    <li>Push committed-mandate subscription, priced by mandates and geographies, as the <span class="big">forecastable revenue spine</span>.</li>
+    <li>Treat success fees as upside, never as the number the team forecasts against.</li>
+    <li>Land-and-expand is the engine. The client who closed 7 acquisitions in 18 months is the template for retention through more mandates and geographies.</li>
+    <li>Predictability comes from committed mandates and a sourcing-quality SLA the client trusts, not from hoping deals close.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="num">06</div>
+  <div class="kicker">The structure</div>
+  <h2>This is a services-blended engine, not a pure SaaS team.</h2>
+  <ul>
+    <li>Codify thesis-to-mandate intake so it lives in a playbook, not only in Maneesh's head.</li>
+    <li>Build BDRs and AEs for the land motion, orchestrated with the in-house banking and analyst team that validates and runs outreach.</li>
+    <li>The sourcing-quality SLA is the <span class="big">trust contract</span>. A signed mandate that does not produce trusted targets churns and kills the success fee.</li>
+    <li>Land, activate, prove sourcing quality. GTM and delivery are fused, or the model breaks.</li>
+  </ul>
+</section>
+
+<section class="slide dark">
+  <div class="num">07</div>
+  <div class="kicker">Risks, named not hidden</div>
+  <h2>The two real GTM risks, on the table.</h2>
+  <ul>
+    <li><span class="em">Trust</span> in a discretion-first, relationship-driven world: lead with proof of proprietary off-market flow and references, the 7-in-18-months story, not features.</li>
+    <li><span class="em">Adoption and behavior change</span>: the binding constraint in AI-for-M&amp;A is people, not technology. Onboarding and activation are part of the sale.</li>
+    <li>Coexisting with installed Grata, Sourcescrub and Affinity stacks at PE buyers: slot in as origination, do not pick a database fight.</li>
+    <li>I would rather walk in naming these than pretend the motion is frictionless.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="num">08</div>
+  <div class="kicker">Why me</div>
+  <h2>Why me, specifically, for this build.</h2>
+  <ul>
+    <li>I have done founder-led to repeatable <span class="big">four times</span> and handed the engine off each time: ZenAdmin, Simplifai, Dineout, Craze.</li>
+    <li>I earn trust with the exact financial-services C-suite buyer GrowthPal sells to, on complex AI products, from zero.</li>
+    <li>I run services-blended motions, not just clean SaaS. Dineout on the ground and my own profitable brand prove it.</li>
+    <li>I think like an owner, which is why I build durable engines that outlast me. I want to build this one deeply.</li>
+  </ul>
+</section>
+
+<section class="slide dark">
+  <div class="num">09</div>
+  <div class="kicker">The first six months</div>
+  <h2>First 180 days: 30 / 90 / 180.</h2>
+  <div class="tl">
+    <div class="step"><div class="when">First 30 days</div><div class="what">Ride every live deal with Maneesh. Map the real motion. Write down the <b>thesis-to-mandate intake</b>. Separate committed from contingent in the forecast.</div></div>
+    <div class="step"><div class="when">By 90 days</div><div class="what">Ship the playbook and operating cadence. Define the <b>sourcing-quality SLA</b>. Make the first repeatable AE hires. Close one marquee US or EU deal myself.</div></div>
+    <div class="step"><div class="when">By 180 days</div><div class="what">A forecastable subscription base. A <b>US and EU pipeline that does not route through the founder</b>. A land-and-expand motion live. A team running the engine.</div></div>
+  </div>
+  <p class="lede">Throughout, I take selling off Maneesh's back deal by deal, never all at once, to protect the trust that closes today.</p>
+</section>
+
+<section class="slide">
+  <div class="num">10</div>
+  <div class="kicker">The conversation I want to have</div>
+  <h2>What I would want from Maneesh.</h2>
+  <ul>
+    <li>The real numbers: committed versus contingent split, win rates, where deals actually stall.</li>
+    <li>Clarity on US and EU bias: feet on the ground first, or run from India and layer in.</li>
+    <li>Room to build the engine, and the <span class="big">equity to build it like an owner</span>.</li>
+    <li class="big">This deck is a starting point for that conversation, not a finished plan. Let us pressure-test it together.</li>
+  </ul>
+</section>
+
+<div class="hint">Scroll or press Space / arrows &nbsp;&middot;&nbsp; Cmd or Ctrl + P to save as PDF</div>
+<script>
+document.addEventListener('keydown',function(e){
+  var s=[].slice.call(document.querySelectorAll('.slide'));
+  var i=s.findIndex(function(x){var t=x.getBoundingClientRect().top;return t>=-5&&t<window.innerHeight/2;});
+  if(i<0)i=0;
+  if(['ArrowDown','ArrowRight',' ','PageDown'].indexOf(e.key)>-1){e.preventDefault();if(s[i+1])s[i+1].scrollIntoView();}
+  if(['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();if(s[i-1])s[i-1].scrollIntoView();}
+});
+</script>
+</body>
+</html>
