@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The GrowthPal Revenue Engine — an operating plan · Ketan Sharma</title>
+<style>
+  :root{
+    --bg:#070B11; --panel:#0C121B; --panel2:#0F1722;
+    --ink:#EAF0F6; --ink2:#C6D2DE; --muted:#76879A; --faint:#46566A;
+    --line:rgba(255,255,255,.075); --line2:rgba(255,255,255,.14);
+    --em:#37E0A0; --em-d:#1F8C66; --amber:#F4B740; --red:#FF6F6F; --violet:#8FA0FF;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);
+    scroll-snap-type:y mandatory;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;
+    background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.022) 1px, transparent 0);
+    background-size:34px 34px;}
+  .slide{min-height:100vh;width:100%;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;
+    padding:7.5vh 7.5vw;position:relative;border-bottom:1px solid var(--line);}
+  .idx{position:absolute;top:5vh;right:7.5vw;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--faint);}
+  .tag{position:absolute;top:5vh;left:7.5vw;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--em);text-transform:uppercase;}
+  .tag::before{content:"";display:inline-block;width:7px;height:7px;background:var(--em);border-radius:50%;margin-right:9px;vertical-align:middle;box-shadow:0 0 10px var(--em);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
+  h1{font-size:clamp(30px,5.2vw,64px);line-height:1.02;font-weight:780;letter-spacing:-.025em;max-width:17ch;}
+  h2{font-size:clamp(23px,3.5vw,44px);line-height:1.06;font-weight:760;letter-spacing:-.02em;max-width:21ch;}
+  .lede{font-size:clamp(15px,1.65vw,20px);color:var(--ink2);margin-top:22px;max-width:54ch;line-height:1.55;}
+  .lede b{color:var(--ink);font-weight:650;}
+  .em{color:var(--em);font-weight:650;} .am{color:var(--amber);font-weight:650;} .rd{color:var(--red);font-weight:650;}
+  ul{list-style:none;max-width:68ch;margin-top:26px;}
+  li{font-size:clamp(14px,1.5vw,18px);line-height:1.5;padding:13px 0 13px 28px;position:relative;border-top:1px solid var(--line);color:var(--ink2);}
+  li:first-child{border-top:none;}
+  li::before{content:"";position:absolute;left:0;top:21px;width:9px;height:9px;border:1.5px solid var(--em);border-radius:1px;transform:rotate(45deg);}
+  li b{color:var(--ink);font-weight:650;}
+  .src{font-family:var(--mono);color:var(--faint);font-size:.84em;}
+  /* metric row */
+  .metrics{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
+  .metric{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;}
+  .metric .v{font-family:var(--mono);font-size:clamp(22px,2.6vw,32px);font-weight:600;color:var(--em);letter-spacing:-.02em;}
+  .metric .v.am{color:var(--amber);} .metric .v.rd{color:var(--red);} .metric .v.ink{color:var(--ink);}
+  .metric .l{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.35;}
+  /* cover */
+  .cover{justify-content:center;}
+  .ticker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--faint);position:absolute;top:5vh;left:7.5vw;right:7.5vw;display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;}
+  .ticker .on{color:var(--em);}
+  .cover .bar{width:64px;height:5px;background:var(--em);border-radius:3px;margin-bottom:30px;box-shadow:0 0 18px rgba(55,224,160,.5);}
+  .cover h1{font-size:clamp(34px,6vw,76px);max-width:18ch;}
+  .cover .lede{max-width:60ch;font-size:clamp(16px,1.9vw,22px);}
+  .who{margin-top:46px;font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.04em;}
+  .who b{color:var(--ink);}
+  /* homework grid */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;max-width:1020px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px 20px 18px;}
+  .card .h{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--em);margin-bottom:10px;}
+  .card .t{font-size:15px;color:var(--ink2);line-height:1.5;}
+  .card .t b{color:var(--ink);font-weight:650;}
+  /* bar chart */
+  .chart{display:flex;align-items:flex-end;gap:26px;height:220px;margin-top:34px;max-width:760px;}
+  .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;}
+  .col .bx{width:100%;max-width:78px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--em),var(--em-d));position:relative;}
+  .col.amb .bx{background:linear-gradient(180deg,var(--amber),#9c7212);}
+  .col.dim .bx{background:linear-gradient(180deg,#3a4a5e,#222d3b);}
+  .col .vv{font-family:var(--mono);font-size:15px;font-weight:600;margin-bottom:9px;color:var(--ink);}
+  .col .ll{font-size:12px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.3;max-width:120px;}
+  /* re-rating */
+  .rerate{display:flex;align-items:flex-end;gap:40px;height:240px;margin-top:30px;}
+  .rr{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
+  .rr .bx{width:120px;border-radius:6px 6px 0 0;}
+  .rr.lo .bx{height:38px;background:linear-gradient(180deg,#5a3a3a,#3a2424);}
+  .rr.hi .bx{height:204px;background:linear-gradient(180deg,var(--em),var(--em-d));box-shadow:0 0 30px rgba(55,224,160,.25);}
+  .rr .vv{font-family:var(--mono);font-size:22px;font-weight:600;margin-bottom:11px;}
+  .rr.lo .vv{color:var(--red);} .rr.hi .vv{color:var(--em);}
+  .rr .ll{font-size:13px;color:var(--muted);margin-top:14px;text-align:center;max-width:170px;line-height:1.35;}
+  .rerate .arrow{align-self:center;font-family:var(--mono);color:var(--amber);font-size:14px;letter-spacing:.1em;padding-bottom:80px;}
+  /* timeline */
+  .tl{display:flex;gap:0;margin-top:34px;max-width:1040px;border-top:1px solid var(--line2);}
+  .tl .st{flex:1;padding:20px 18px 6px;border-left:1px solid var(--line);position:relative;}
+  .tl .st:first-child{border-left:none;}
+  .tl .st::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--em);box-shadow:0 0 10px var(--em);}
+  .tl .st:nth-child(2)::before{background:var(--em);} .tl .st:nth-child(3)::before{background:var(--amber);box-shadow:0 0 10px var(--amber);} .tl .st:nth-child(4)::before{background:var(--violet);box-shadow:0 0 10px var(--violet);}
+  .tl .wn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--em);text-transform:uppercase;}
+  .tl .st:nth-child(3) .wn{color:var(--amber);} .tl .st:nth-child(4) .wn{color:var(--violet);}
+  .tl .wt{font-size:14px;color:var(--ink2);margin-top:11px;line-height:1.45;} .tl .wt b{color:var(--ink);font-weight:650;}
+  /* two-col split */
+  .split{display:flex;gap:5vw;align-items:flex-start;width:100%;}
+  .split-l{flex:1.25;min-width:0;} .split-r{flex:1;min-width:0;}
+  .qbox{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:0 10px 10px 0;padding:16px 18px;margin-top:12px;font-size:14.5px;color:var(--ink2);line-height:1.5;}
+  .qbox b{color:var(--ink);}
+  .foot{position:absolute;bottom:4.5vh;left:7.5vw;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.1em;}
+  .hint{position:fixed;bottom:14px;right:18px;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:rgba(12,18,27,.85);
+    padding:7px 13px;border-radius:20px;border:1px solid var(--line);z-index:50;letter-spacing:.06em;}
+  @media print{
+    body{scroll-snap-type:none;background:var(--bg);}
+    .slide{min-height:0;height:190mm;page-break-after:always;border-bottom:none;padding:15mm 16mm;justify-content:center;}
+    .hint{display:none;}
+    @page{size:A4 landscape;margin:0;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+  @media(max-width:820px){
+    .grid{grid-template-columns:1fr;} .chart{gap:14px;height:170px;} .rerate{gap:22px;}
+    .split{flex-direction:column;gap:30px;} .tl{flex-direction:column;} .tl .st{border-left:none;border-top:1px solid var(--line);}
+    .metric{min-width:130px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 0 COVER -->
+<section class="slide cover">
+  <div class="ticker"><span>GROWTHPAL &middot; M&amp;A INTELLIGENCE</span><span class="on">&bull; REVENUE ENGINE &middot; OPERATING PLAN</span><span>A WORKING DRAFT</span></div>
+  <div class="bar"></div>
+  <h1>The GrowthPal revenue engine, designed.</h1>
+  <p class="lede">An operating plan for the next chapter: turn lumpy success fees into a forecastable, sticky US and EU motion built on your own off-market edge. Written after reading your founders, the tech and IT M&amp;A market, and Inven, Grata, PitchBook and Capital IQ. A plan to pressure-test together, not a finished answer.</p>
+  <div class="who"><b>Ketan Sharma</b> &nbsp;/&nbsp; Founder-led sales to repeatable enterprise GTM &nbsp;/&nbsp; ketansharma071190@gmail.com</div>
+</section>
+
+<!-- 1 HOMEWORK / DOMAIN COMMAND -->
+<section class="slide">
+  <div class="tag">Pre-read</div><div class="idx">01 / 11</div>
+  <div class="kicker">I did the reading first</div>
+  <h2>The domain is not a year away. This plan is the proof.</h2>
+  <div class="grid">
+    <div class="card"><div class="h">The category</div><div class="t">Read the GTM of <b>Inven, Grata, PitchBook and Capital IQ</b>. They sell data and search. The buyer still does the work, and the data layer is consolidating.</div></div>
+    <div class="card"><div class="h">The founders</div><div class="t">Studied <b>Maneesh</b>, who has sat in every seat of the deal: sold a company, ran corporate M&amp;A at Persistent, and angel-funded exits. Off-market, precision over breadth.</div></div>
+    <div class="card"><div class="h">The market</div><div class="t">Mapped the serial tech and IT acquirers and why they buy 1 to 2+ times a year, and where corporate development is genuinely under-resourced.</div></div>
+    <div class="card"><div class="h">The problem</div><div class="t">Took the real challenge you named: revenue spikes with a success fee, and you need <b>stickiness, expansion and a scalable motion</b>. The rest of this plan answers exactly that.</div></div>
+  </div>
+</section>
+
+<!-- 2 MARKET TRUTH -->
+<section class="slide">
+  <div class="tag">The market</div><div class="idx">02 / 11</div>
+  <div class="kicker">Acquisition is the operating model, and it is accelerating</div>
+  <h2>Serial acquirers buy constantly. The best ones never stop.</h2>
+  <div class="chart">
+    <div class="col"><div class="vv">~39</div><div class="bx" style="height:78px"></div><div class="ll">Accenture deals / yr</div></div>
+    <div class="col"><div class="vv">30-100+</div><div class="bx" style="height:200px"></div><div class="ll">Constellation deals / yr</div></div>
+    <div class="col"><div class="vv">30+</div><div class="bx" style="height:62px"></div><div class="ll">Cisco in last 4 yrs</div></div>
+    <div class="col amb"><div class="vv">+76%</div><div class="bx" style="height:150px"></div><div class="ll">Tech M&amp;A value, 2025 YoY</div></div>
+  </div>
+  <p class="lede" style="margin-top:30px;">McKinsey: companies doing <b>2+ small deals a year</b> beat peers by 20%+ over a decade, and 5+ a year do even better at lower risk. Bain: roughly <b>half of large strategic tech deal value is now AI-driven</b>. Buying capability you cannot build fast enough is a board-level reflex. <span class="src">Sources: McKinsey programmatic M&amp;A; Bain 2025 M&amp;A report; Tracxn.</span></p>
+</section>
+
+<!-- 3 BUYER PAIN -->
+<section class="slide">
+  <div class="tag">The buyer</div><div class="idx">03 / 11</div>
+  <div class="kicker">You sell into the exact bottleneck</div>
+  <h2>Corporate development is starved precisely where you are strong: sourcing.</h2>
+  <div class="metrics">
+    <div class="metric"><div class="v">0-2</div><div class="l">people on sourcing at most corp-dev teams (Deloitte)</div></div>
+    <div class="metric"><div class="v am">32%</div><div class="l">of deal flow is banker-dependent, the part everyone wants to escape</div></div>
+    <div class="metric"><div class="v">60%</div><div class="l">of leaders want to be a "preferred acquirer" and dodge auctions</div></div>
+    <div class="metric"><div class="v ink">+36% / +5%</div><div class="l">deal value vs deal count growth: the sub-$100M long tail is underserved</div></div>
+  </div>
+  <p class="lede">Sourcing is the most time-consuming, least-staffed stage of the funnel, and the value is concentrating in mega-deals while the off-market, founder-owned long tail goes unworked. That tail is where Maneesh said the value hides, and it is exactly what GrowthPal is built to surface. <span class="src">Source: Deloitte Corporate Development survey; Bain.</span></p>
+</section>
+
+<!-- 4 THE FIELD / EDGE -->
+<section class="slide">
+  <div class="tag">Your edge</div><div class="idx">04 / 11</div>
+  <div class="kicker">What I learned from Inven, Grata, PitchBook and Capital IQ</div>
+  <h2>They sell the database. You sell the outcome. That is where value is migrating.</h2>
+  <ul>
+    <li><b>The data layer is commoditizing and consolidating.</b> Datasite rolled up Grata and Sourcescrub, the two biggest sourcing datasets, into one owner. Owning a list is no longer the moat.</li>
+    <li><b>Even the leader is cooling, in your buyer.</b> PitchBook's net revenue retention fell from <span class="am">127% to about 103%</span> and seats declined in 2025, with the churn concentrated in the corporate segment, the exact buyer you are chasing.</li>
+    <li><b>The winners lock in on workflow, not data.</b> Capital IQ's Excel plug-in and academic certification, Grata and Affinity's two-way CRM sync. The product becomes the system of record, then it cannot be ripped out.</li>
+    <li><b>GrowthPal already does the part they do not.</b> Thesis to precision target to a human banking team to LOI. You sell a closed outcome, not a search box. Build the recurring engine on top of that and you leapfrog the category.</li>
+  </ul>
+</section>
+
+<!-- 5 THE PROBLEM NAMED -->
+<section class="slide">
+  <div class="tag">The problem</div><div class="idx">05 / 11</div>
+  <div class="split">
+    <div class="split-l">
+      <div class="kicker">The challenge you named, in numbers</div>
+      <h2>The success fee proves the value. It is also what caps the company.</h2>
+      <p class="lede">A success fee is the best ROI proof you have, and it is back-loaded, lumpy and hard to forecast. The market pays for the opposite. So the job is not to find a better closer. It is to <b>engineer predictability on top of a contingent line</b>, which is the single highest-leverage move available to this business.</p>
+    </div>
+    <div class="split-r">
+      <div class="rerate">
+        <div class="rr lo"><div class="vv">~1.5x</div><div class="bx"></div><div class="ll">success-fee &amp; services revenue, valued like a service</div></div>
+        <div class="arrow">re-rates &rarr;</div>
+        <div class="rr hi"><div class="vv">~8x</div><div class="bx"></div><div class="ll">committed recurring revenue, valued like SaaS</div></div>
+      </div>
+      <p class="src" style="margin-top:22px;text-align:center;">Every dollar shifted from success-fee to recurring re-rates roughly 4 to 6 times. NRR above 120% is a 2 to 3x multiple premium on its own.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 THE FIX / RECURRING ENGINE -->
+<section class="slide">
+  <div class="tag">The fix</div><div class="idx">06 / 11</div>
+  <div class="kicker">Make the recurring line the spine, the success fee the kicker</div>
+  <h2>The committed-mandate subscription is the forecastable base. Everything else is upside.</h2>
+  <ul>
+    <li><b>Price the base on coverage, not closes.</b> Subscription on mandates times geographies, so the recurring line never competes with the outcome. Your public tiers, <span class="src">$129 / $299 / $1,000 per user</span>, are the seed of this.</li>
+    <li><b>Make the success fee creditable.</b> A draw-down retainer credited against the fee at close turns spiky into steady, the move roughly 70% of M&amp;A advisors already use. Add prepaid origination credits for committed-upfront, burn-on-use revenue.</li>
+    <li><b>Lock duration in.</b> Multi-year, sector-exclusive mandates with tail clauses convert one engagement into always-on coverage and post-term economics.</li>
+    <li><b>Report it like the winners.</b> Committed ARR and Usage ARR shown separately, with NRR. DealCloud runs this exact shape, committed base plus expansion, at <span class="em">124% net revenue retention</span>.</li>
+  </ul>
+</section>
+
+<!-- 7 STICKINESS -->
+<section class="slide">
+  <div class="tag">Stickiness</div><div class="idx">07 / 11</div>
+  <div class="kicker">Stickiness is the NRR, and the NRR is the valuation</div>
+  <h2>Make the platform un-rippable. Become the corp-dev system of record.</h2>
+  <ul>
+    <li><b>Two-way CRM sync into DealCloud, Affinity and Salesforce.</b> The move every winner made. Once your sourcing feeds their pipeline daily, leaving means stale data across the whole funnel.</li>
+    <li><b>Always-on, not episodic.</b> Saved theses, live market mapping and intent alerts convert a one-time search into a daily-use subscription, the reason to renew.</li>
+    <li><b>Land and expand by seats and modules.</b> Land a thesis, grow into more mandates, geographies and the analyst seats around the champion. Auto-capture kills the adoption problem, the lever that took Affinity to 96% firm-wide adoption.</li>
+    <li><b>A data moat that compounds.</b> Off-market, proprietary and predictive signal that gets sharper with every deal the human team validates. That loop is yours, not a reseller's.</li>
+  </ul>
+</section>
+
+<!-- 8 GTM MOTION -->
+<section class="slide">
+  <div class="tag">The motion</div><div class="idx">08 / 11</div>
+  <div class="kicker">Focused where it pays: US 85%, Europe 15%</div>
+  <h2>A named-account motion into serial tech and IT acquirers and PE.</h2>
+  <ul>
+    <li><b>Multi-thread the three buyers.</b> The champion is the VP of corporate development, the economic buyer is the CFO or CSO, the power users are the analysts. Engage all three in parallel.</li>
+    <li><b>The pilot is the sale.</b> A 30-day, time-boxed bake-off on their real data, with one test: show me an off-market target I have not seen. Time-to-value inside 30 days is the published bar.</li>
+    <li><b>De-risk the slow part early.</b> A pre-filled security and procurement pack on day one removes the longest stall in enterprise cycles.</li>
+    <li><b>Two speeds, one playbook.</b> PE lands fast on urgency, corporates land slower but stickier and bigger. Channel through data integrations and M&amp;A advisors who already own the acquirer relationships. India stays deprioritized, correctly, on ACV.</li>
+  </ul>
+</section>
+
+<!-- 9 TEAM SHAPE -->
+<section class="slide">
+  <div class="tag">The build</div><div class="idx">09 / 11</div>
+  <div class="kicker">Bang on, not rushed, your words</div>
+  <h2>Hire precision into a proven motion, not headcount into a hope.</h2>
+  <div class="split">
+    <div class="split-l">
+      <ul>
+        <li><b>Founder-led first.</b> Maneesh stays on the marquee deals while we codify exactly how he qualifies, sources and closes, until the motion repeats on its own.</li>
+        <li><b>Prove, then hire.</b> Roughly 10 to 15 reference closes through a documented process before the first dedicated AE, so every hire drops into a machine, not a blank page.</li>
+        <li><b>Right shape of seller.</b> A trust-first, judgment-led seller for a high-trust buyer, not a volume rep. AI works the broad universe, humans work the named accounts.</li>
+      </ul>
+    </div>
+    <div class="split-r">
+      <div class="qbox" style="border-left-color:var(--em);">This is the opposite of "let's hire 10 people." The discipline is to be precise about the one motion that works before scaling the team around it, which is exactly the bar you set.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 WHY ME -->
+<section class="slide">
+  <div class="tag">Why me</div><div class="idx">10 / 11</div>
+  <div class="kicker">Calibrated to what you actually screen for</div>
+  <h2>The buyer is my home turf. The category is the ramp, and I am already up it.</h2>
+  <div class="metrics">
+    <div class="metric"><div class="v">CFO / CXO</div><div class="l">sold complex AI into the financial-services C-suite from zero at Simplifai, and CFOs and CEOs at ZenAdmin</div></div>
+    <div class="metric"><div class="v">US + EU</div><div class="l">built and ran the ZenAdmin commercial function across the US and Europe, then handed it off as a machine</div></div>
+    <div class="metric"><div class="v am">104% / 300%</div><div class="l">net revenue retention and ACV expansion at ZenAdmin: the exact stickiness muscle this needs</div></div>
+    <div class="metric"><div class="v">4x</div><div class="l">founder-led to repeatable builds handed off: Simplifai, ZenAdmin, Dineout, Craze</div></div>
+  </div>
+  <p class="lede">You screen for someone who has carried a number, sold trust to a senior buyer, and built the engine. The one open question is M&amp;A domain. The answer is this plan: the learning curve you worry takes a year, I have climbed in days.</p>
+</section>
+
+<!-- 11 PLAN + QUESTIONS -->
+<section class="slide">
+  <div class="tag">The plan</div><div class="idx">11 / 11</div>
+  <div class="kicker">First 180 days, then the questions I would put to you and Maneesh</div>
+  <h2>An action plan, calibrated to a long, high-trust cycle.</h2>
+  <div class="tl">
+    <div class="st"><div class="wn">First 30</div><div class="wt">Ride every live deal with Maneesh. Write down how he qualifies, sources and closes. Split <b>committed from contingent</b> in the forecast.</div></div>
+    <div class="st"><div class="wn">By 90</div><div class="wt">Ship the <b>recurring-engine pricing</b> and the sourcing-quality SLA. First repeatable AE in. Multi-thread the first marquee US or EU account.</div></div>
+    <div class="st"><div class="wn">By 180</div><div class="wt">A <b>forecastable Committed-ARR base</b>, a US and EU pipeline that does not route through the founder, and the CRM-integration stickiness live.</div></div>
+    <div class="st"><div class="wn">Throughout</div><div class="wt">Take selling off Maneesh's back <b>deal by deal</b>, never all at once, to protect the trust that closes today.</div></div>
+  </div>
+  <div class="qbox" style="margin-top:26px;max-width:1040px;"><b>The questions I would ask you and Maneesh:</b> &nbsp; What is the real committed-versus-contingent split today, and where do deals actually stall? &nbsp;&middot;&nbsp; US and EU: feet on the ground, or run from India and layer in? &nbsp;&middot;&nbsp; How far do you want the CRM-integration and data moat to go? &nbsp;&middot;&nbsp; What would make Maneesh say yes after we meet?</div>
+  <div class="foot">A starting point for the conversation, not a finished plan. &middot; Ketan Sharma</div>
+</section>
+
+<div class="hint">Scroll or arrows &nbsp;&middot;&nbsp; Cmd/Ctrl + P to save as PDF</div>
+<script>
+document.addEventListener('keydown',function(e){
+  var s=[].slice.call(document.querySelectorAll('.slide'));
+  var i=s.findIndex(function(x){var t=x.getBoundingClientRect().top;return t>=-5&&t<window.innerHeight/2;});
+  if(i<0)i=0;
+  if(['ArrowDown','ArrowRight',' ','PageDown'].indexOf(e.key)>-1){e.preventDefault();if(s[i+1])s[i+1].scrollIntoView();}
+  if(['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();if(s[i-1])s[i-1].scrollIntoView();}
+});
+</script>
+</body>
+</html>
