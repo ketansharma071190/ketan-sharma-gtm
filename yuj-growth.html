@@ -111,7 +111,8 @@ tr.tot td.num{color:var(--purple); font-size:16px;}
 .bar.tot .val,.bar.add .val{color:var(--ink);}
 .bridge .axis{position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--line2);}
 /* radar */
-.radar-wrap{display:grid; grid-template-columns:340px 1fr; gap:40px; align-items:center; margin-top:24px;}
+.radar-wrap{display:grid; grid-template-columns:360px 1fr; gap:48px; align-items:center; margin-top:24px;}
+.radar{overflow:visible;}
 .radar text{font-family:var(--mono); font-size:10px; fill:var(--mut);}
 .dark .radar text{fill:rgba(246,243,236,.7);}
 .gauge{display:flex; gap:30px; margin-top:20px;}
@@ -237,7 +238,7 @@ tr.tot td.num{color:var(--purple); font-size:16px;}
     <div class="kick">A diagnostic YUJ can own</div>
     <h2 style="margin-bottom:6px;">The <span class="p">Design Friction Index.</span> Turn "good design" into a number a CFO will fund.</h2>
     <div class="radar-wrap">
-      <svg class="radar" viewBox="0 0 220 220" width="320" height="320" aria-label="Design Friction Index radar">
+      <svg class="radar" viewBox="-58 -6 336 232" width="360" height="248" aria-label="Design Friction Index radar">
         <!-- rings -->
         <polygon points="110,20 188,65 188,155 110,200 32,155 32,65" fill="none" stroke="rgba(246,243,236,.22)" stroke-width="1"/>
         <polygon points="110,65 149,87.5 149,132.5 110,155 71,132.5 71,87.5" fill="none" stroke="rgba(246,243,236,.14)" stroke-width="1"/>
