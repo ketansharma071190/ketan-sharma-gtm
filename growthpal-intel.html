@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>GrowthPal · Market & Competitor Intelligence</title>
+<style>
+:root{
+  --bg:#070B11; --bg2:#0A1119; --panel:#0C141E; --panel2:#0E1825;
+  --ink:#EAF2F0; --mut:#8FA3A8; --dim:#5C6E74; --line:#1B2A34; --line2:#243743;
+  --em:#37E0A0; --emd:#1E8E66; --amber:#F4B740; --rose:#E8709A; --slate:#6F8893;
+  --mono:'SF Mono',ui-monospace,'JetBrains Mono','Menlo',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden;
+  background-image:radial-gradient(circle at 1px 1px, rgba(55,224,160,.05) 1px, transparent 0);
+  background-size:34px 34px;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:0 7vw}
+/* progress + nav */
+#prog{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--emd),var(--em)); z-index:60; box-shadow:0 0 10px rgba(55,224,160,.5)}
+nav{position:sticky; top:0; z-index:50; background:rgba(7,11,17,.82); backdrop-filter:blur(14px); border-bottom:1px solid var(--line)}
+nav .nin{max-width:1000px; margin:0 auto; padding:13px 7vw; display:flex; align-items:center; justify-content:space-between; gap:14px}
+nav .brand{font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--mut); text-transform:uppercase; white-space:nowrap}
+nav .brand b{color:var(--em)}
+nav .jumps{display:flex; gap:20px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase}
+nav .jumps a{color:var(--dim); text-decoration:none; transition:color .2s; white-space:nowrap; padding:4px 0; border-bottom:1px solid transparent}
+nav .jumps a:hover,nav .jumps a.act{color:var(--em); border-bottom-color:var(--em)}
+/* sections */
+section{padding:9vh 0; border-bottom:1px solid var(--line)}
+.tag{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--em); display:inline-flex; align-items:center; gap:9px; margin-bottom:22px}
+.tag::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--em); box-shadow:0 0 10px var(--em)}
+.tag .n{color:var(--dim); margin-left:4px}
+h1{font-size:62px; line-height:1.02; font-weight:680; letter-spacing:-.02em; margin-bottom:26px}
+h2{font-size:39px; line-height:1.08; font-weight:660; letter-spacing:-.018em; margin-bottom:20px}
+h3{font-size:21px; font-weight:640; letter-spacing:-.01em; margin-bottom:10px}
+.lede{font-size:21px; color:#C4D4D2; max-width:760px; line-height:1.5}
+.mut{color:var(--mut)}
+.src{font-family:var(--mono); font-size:11px; color:var(--dim); letter-spacing:.02em; line-height:1.7}
+b,strong{color:#fff; font-weight:640}
+em{color:var(--em); font-style:normal}
+.amb{color:var(--amber)}
+/* masthead */
+#top{padding:18vh 0 11vh; border-bottom:1px solid var(--line)}
+#top .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--mut); margin-bottom:30px}
+#top .eyebrow b{color:var(--em)}
+#top .bar{width:62px; height:3px; background:var(--em); margin:30px 0; box-shadow:0 0 16px rgba(55,224,160,.6)}
+#top .meta{font-family:var(--mono); font-size:12px; color:var(--dim); letter-spacing:.04em; margin-top:38px; line-height:1.9}
+#top .meta b{color:var(--mut); font-weight:600}
+/* cards / grids */
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px}
+.grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:36px}
+.card{background:linear-gradient(160deg,var(--panel),var(--bg2)); border:1px solid var(--line); border-radius:14px; padding:26px 24px; position:relative; overflow:hidden}
+.card .ix{font-family:var(--mono); font-size:11px; color:var(--em); letter-spacing:.16em; margin-bottom:14px; display:block}
+.card p{font-size:15px; color:var(--mut); line-height:1.6}
+.card p+p{margin-top:10px}
+/* stat strip */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:42px}
+.stat{border-left:2px solid var(--line2); padding:4px 0 4px 16px}
+.stat .v{font-size:34px; font-weight:680; letter-spacing:-.02em; line-height:1; font-family:var(--mono)}
+.stat .v.e{color:var(--em)} .stat .v.a{color:var(--amber)}
+.stat .l{font-size:12.5px; color:var(--mut); margin-top:9px; line-height:1.4}
+/* positioning map */
+.mapwrap{margin-top:44px; display:grid; grid-template-columns:1fr; gap:0}
+.plot{position:relative; width:100%; max-width:600px; aspect-ratio:1/1; margin:34px auto 0;
+  background:
+    linear-gradient(0deg,rgba(55,224,160,.018),rgba(55,224,160,.018)),
+    repeating-linear-gradient(0deg,transparent,transparent 9.99%,rgba(36,55,67,.4) 10%,rgba(36,55,67,.4) calc(10% + 1px)),
+    repeating-linear-gradient(90deg,transparent,transparent 9.99%,rgba(36,55,67,.4) 10%,rgba(36,55,67,.4) calc(10% + 1px));
+  border:1px solid var(--line2); border-radius:10px;
+}
+.plot .qfill{position:absolute; top:0; right:0; width:50%; height:50%; background:radial-gradient(circle at 75% 25%, rgba(55,224,160,.13), transparent 70%); border-left:1px dashed rgba(55,224,160,.25); border-bottom:1px dashed rgba(55,224,160,.25)}
+.plot .qlabel{position:absolute; top:11px; right:13px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; color:var(--em); text-align:right; text-transform:uppercase; opacity:.9}
+.dot{position:absolute; transform:translate(-50%,50%); cursor:default}
+.dot .pt{width:11px; height:11px; border-radius:50%; background:var(--slate); border:1.5px solid #9DB2BC; transition:transform .2s}
+.dot.minor .pt{width:8px; height:8px; opacity:.72}
+.dot .nm{position:absolute; left:16px; top:50%; transform:translateY(-50%); font-family:var(--mono); font-size:11px; color:var(--mut); white-space:nowrap; letter-spacing:.02em}
+.dot.minor .nm{display:none}
+.dot .tip{position:absolute; left:50%; bottom:20px; transform:translateX(-50%) translateY(6px); background:var(--panel2); border:1px solid var(--line2); border-radius:8px; padding:8px 11px; font-size:11.5px; color:var(--ink); width:172px; line-height:1.45; opacity:0; pointer-events:none; transition:.18s; z-index:10; box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.dot:hover{z-index:20}
+.dot:hover .pt{transform:scale(1.5)}
+.dot:hover .tip{opacity:1; transform:translateX(-50%) translateY(0)}
+.dot:hover .nm{color:var(--ink)}
+.dot.gp .pt{width:17px; height:17px; background:var(--em); border-color:#BFFBE4; box-shadow:0 0 0 6px rgba(55,224,160,.16); animation:pulse 2.6s ease-in-out infinite}
+.dot.gp .nm{color:var(--em); font-weight:600; font-size:12px}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 5px rgba(55,224,160,.16)}50%{box-shadow:0 0 0 11px rgba(55,224,160,.05)}}
+.axL{position:absolute; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; color:var(--dim); text-transform:uppercase}
+.axL.x0{bottom:-30px; left:0} .axL.x1{bottom:-30px; right:0; text-align:right}
+.axL.y0{left:-12px; bottom:0; transform:rotate(-90deg); transform-origin:left bottom}
+.axL.y1{left:-12px; top:0; transform:rotate(-90deg) translateX(-100%); transform-origin:left top}
+.maplegend{font-family:var(--mono); font-size:11px; color:var(--dim); text-align:center; margin-top:48px; letter-spacing:.04em}
+.maplegend b{color:var(--em)}
+/* matrix */
+.mxhint{display:none}
+.mxscroll{margin-top:38px; overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:14px}
+table.mx{border-collapse:collapse; width:100%; min-width:760px; font-size:13.5px}
+table.mx th,table.mx td{text-align:left; padding:15px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+table.mx thead th{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); background:var(--bg2); position:sticky; top:0; font-weight:500}
+table.mx thead th.gp{color:var(--em)}
+table.mx tbody th{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--dim); text-transform:uppercase; font-weight:500; white-space:nowrap; background:rgba(10,17,25,.5)}
+table.mx td{color:var(--mut); line-height:1.5}
+table.mx td.gp{color:#D6E8E2; background:rgba(55,224,160,.045); border-left:1px solid rgba(55,224,160,.18); border-right:1px solid rgba(55,224,160,.18)}
+table.mx tr:last-child td,table.mx tr:last-child th{border-bottom:none}
+/* teardown */
+.tear{background:linear-gradient(165deg,var(--panel),var(--bg2)); border:1px solid var(--line); border-radius:16px; padding:34px 32px; margin-top:22px; position:relative}
+.tear::before{content:""; position:absolute; left:0; top:28px; bottom:28px; width:3px; background:var(--accent,var(--slate)); border-radius:3px}
+.tear .th{display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:8px}
+.tear .nm{font-size:26px; font-weight:680; letter-spacing:-.01em}
+.tear .role{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent,var(--slate))}
+.tear .sub{font-size:15.5px; color:#B9C9C6; margin-bottom:22px; max-width:720px}
+.trows{display:grid; grid-template-columns:repeat(2,1fr); gap:18px 30px; margin-bottom:24px}
+.trow .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); margin-bottom:5px}
+.trow .vv{font-size:14px; color:var(--mut); line-height:1.5}
+.tear .take{background:rgba(55,224,160,.05); border:1px solid rgba(55,224,160,.16); border-radius:10px; padding:16px 18px; display:grid; grid-template-columns:1fr 1fr; gap:14px 26px}
+.tear .take .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px}
+.tear .take .k.tk{color:var(--em)} .tear .take .k.df{color:var(--amber)}
+.tear .take p{font-size:14px; color:#CFE0DC; line-height:1.5}
+/* ladder (multiple re-rating) */
+.ladder{margin-top:40px; display:flex; flex-direction:column; gap:11px}
+.rung{display:grid; grid-template-columns:130px 1fr auto; align-items:center; gap:16px}
+.rung .rk{font-family:var(--mono); font-size:12px; color:var(--mut); letter-spacing:.02em}
+.rung .rt{height:30px; border-radius:6px; background:linear-gradient(90deg,var(--c1),var(--c2)); display:flex; align-items:center; padding-left:13px; font-family:var(--mono); font-size:12px; color:#06120D; font-weight:600}
+.rung .rv{font-family:var(--mono); font-size:14px; color:var(--ink); font-weight:600; white-space:nowrap}
+/* levers list */
+.levers{margin-top:34px; display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+.lev{border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:var(--panel)}
+.lev .lh{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+.lev .lh .nn{font-family:var(--mono); font-size:11px; color:var(--em); border:1px solid var(--line2); border-radius:5px; padding:2px 7px}
+.lev .lh h4{font-size:15px; font-weight:620}
+.lev p{font-size:13.5px; color:var(--mut); line-height:1.55}
+/* synthesis */
+.synth{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:40px}
+.scard{border:1px solid var(--line); border-radius:13px; padding:24px; background:linear-gradient(160deg,var(--panel),var(--bg2))}
+.scard .from{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate); margin-bottom:12px}
+.scard .from b{color:var(--ink)}
+.scard p{font-size:15px; color:var(--mut); line-height:1.55}
+.scard p em{color:var(--em)}
+.kicker{margin-top:46px; padding:34px 36px; border:1px solid rgba(55,224,160,.22); border-radius:16px; background:radial-gradient(circle at 0% 0%, rgba(55,224,160,.08), transparent 60%),var(--panel)}
+.kicker p{font-size:25px; line-height:1.4; font-weight:560; letter-spacing:-.01em; color:#EAF7F2}
+.kicker p em{color:var(--em); font-weight:640}
+/* sources */
+#sources{padding:8vh 0 12vh; border-bottom:none}
+.srcgrid{columns:2; column-gap:34px; margin-top:30px}
+.srcgrid .s{break-inside:avoid; margin-bottom:14px; font-size:12.5px; color:var(--mut); line-height:1.5; padding-left:16px; position:relative}
+.srcgrid .s::before{content:"›"; position:absolute; left:0; color:var(--em)}
+.srcgrid .s b{color:var(--ink); font-weight:600}
+.note{margin-top:30px; font-size:13px; color:var(--dim); font-style:italic; border-top:1px solid var(--line); padding-top:22px}
+.foot{margin-top:40px; font-family:var(--mono); font-size:11.5px; color:var(--dim); letter-spacing:.04em; line-height:1.9}
+.foot a{color:var(--em); text-decoration:none}
+/* reveal (fail-safe: visible by default, animate only when .in is added) */
+@keyframes rise{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:none}}
+.rv.in .tag,.rv.in h1,.rv.in h2,.rv.in .lede,.rv.in .card,.rv.in .stat,.rv.in .tear,.rv.in .scard,.rv.in .lev,.rv.in .rung,.rv.in .plot,.rv.in .kicker,.rv.in .mxscroll{animation:rise .6s ease both}
+.rv.in .card:nth-child(2),.rv.in .stat:nth-child(2),.rv.in .scard:nth-child(2),.rv.in .lev:nth-child(2){animation-delay:.06s}
+.rv.in .card:nth-child(3),.rv.in .stat:nth-child(3){animation-delay:.12s}
+.rv.in .stat:nth-child(4){animation-delay:.18s}
+/* MOBILE */
+@media(max-width:760px){
+  .wrap{padding:0 6vw}
+  nav .nin{padding:11px 6vw}
+  nav .jumps{display:none}
+  section{padding:7vh 0}
+  h1{font-size:38px} h2{font-size:28px} h3{font-size:19px}
+  .lede{font-size:18px}
+  #top{padding:13vh 0 9vh}
+  .grid3,.grid2,.stats,.levers,.synth,.take{grid-template-columns:1fr !important}
+  .stats{gap:20px}
+  .trows{grid-template-columns:1fr}
+  .tear{padding:26px 22px}
+  .tear .take{grid-template-columns:1fr; gap:16px}
+  .plot{max-width:none}
+  .dot .nm{font-size:9.5px}
+  .dot.gp .nm{font-size:10px}
+  .axL{font-size:9px}
+  .mxhint{display:block; font-family:var(--mono); font-size:11px; color:var(--dim); margin-top:30px; letter-spacing:.04em}
+  .mxscroll{margin-top:12px}
+  .rung{grid-template-columns:96px 1fr auto; gap:10px}
+  .rung .rk{font-size:10.5px}
+  .srcgrid{columns:1}
+  .kicker p{font-size:20px}
+  #top h1{font-size:42px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav>
+  <div class="nin">
+    <div class="brand"><b>GROWTHPAL</b> · MARKET INTELLIGENCE</div>
+    <div class="jumps">
+      <a href="#shift">Shift</a>
+      <a href="#map">Map</a>
+      <a href="#matrix">Matrix</a>
+      <a href="#teardowns">Teardowns</a>
+      <a href="#market">Market</a>
+      <a href="#engine">Engine</a>
+      <a href="#take">Synthesis</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <section id="top" class="rv">
+    <div class="eyebrow">GROWTHPAL · <b>MARKET &amp; COMPETITOR INTELLIGENCE</b> · COMPANION TO THE REVENUE-ENGINE PLAN</div>
+    <h1>The depth<br>behind the plan.</h1>
+    <div class="bar"></div>
+    <p class="lede">A teardown of how this category sells, how it retains, and how it is valued, and the one quadrant no funded player occupies yet. The reading behind the operating plan, sourced.</p>
+    <div class="meta"><b>Ketan Sharma</b> &nbsp;/&nbsp; the analysis under the GrowthPal revenue engine &nbsp;/&nbsp; built to be read with the plan, not instead of it</div>
+  </section>
+
+  <!-- 01 THE SHIFT -->
+  <section id="shift" class="rv">
+    <div class="tag">THE CATEGORY SHIFT <span class="n">01</span></div>
+    <h2>Owning the data is no longer the moat.</h2>
+    <p class="lede">Three things are happening at once, and they all point the same direction: value is leaving the database and moving to the deal.</p>
+    <div class="grid3">
+      <div class="card">
+        <span class="ix">01 — CONSOLIDATING</span>
+        <h3>The data layer is being rolled up.</h3>
+        <p><b>Datasite acquired Grata</b> (~$200M+, announced Jun 2025), then bought rival <b>Sourcescrub</b> (Aug 2025) and is merging it in. The independent sourcing-data players are becoming one unit inside a deal-execution incumbent.</p>
+        <p class="mut">Signal: raw data and search are commoditizing fast enough that the prize is now consolidation, not differentiation.</p>
+      </div>
+      <div class="card">
+        <span class="ix">02 — COOLING</span>
+        <h3>The research-first incumbent is maturing.</h3>
+        <p><b>PitchBook</b> runs ~80% recurring on breadth, but it sells research, not outcomes. Its own jab, <em>"if it's in PitchBook, it's too late,"</em> is the tell: by the time a target is in the database, the edge is gone.</p>
+        <p class="mut">Signal: the buyer increasingly pays for what is <i>not</i> in the database yet.</p>
+      </div>
+      <div class="card">
+        <span class="ix">03 — MIGRATING</span>
+        <h3>Value moves to the outcome.</h3>
+        <p>Every dollar is shifting from <i>"here is the data"</i> to <i>"here is the deal."</i> Sourcing fused with execution, sold as a closed result. That is the layer the roll-ups are reaching toward, and the layer we already stand on.</p>
+        <p class="mut">Signal: the winner sells the LOI, not the list.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 POSITIONING MAP -->
+  <section id="map" class="rv">
+    <div class="tag">THE OPEN QUADRANT <span class="n">02</span></div>
+    <h2>Eight funded players, one empty corner.</h2>
+    <p class="lede">Plot the category on what it sells and how it charges. Everyone funded sits in the same corner: access to data, on a pure subscription. The outcome-plus-alignment quadrant is empty.</p>
+
+    <div class="mapwrap">
+      <div class="plot" id="plot">
+        <div class="qfill"></div>
+        <div class="qlabel">SELL THE OUTCOME ·<br>ALIGN ON THE RESULT</div>
+
+        <!-- competitors: bottom-left cluster -->
+        <div class="dot" style="left:18%; bottom:13%">
+          <div class="pt"></div><div class="nm">PitchBook</div>
+          <div class="tip">Research-first breadth. ~80% recurring, but sells data, not deals.</div>
+        </div>
+        <div class="dot" style="left:11%; bottom:21%">
+          <div class="pt"></div><div class="nm">S&amp;P Capital IQ</div>
+          <div class="tip">Sales-led, module-gated. Moat is the Excel plug-in, not the outcome.</div>
+        </div>
+        <div class="dot" style="left:30%; bottom:14%">
+          <div class="pt"></div><div class="nm">Grata</div>
+          <div class="tip">Sourcing-first search engine. Now rolled into Datasite. Sells the list.</div>
+        </div>
+        <div class="dot" style="left:37%; bottom:23%">
+          <div class="pt"></div><div class="nm">Inven</div>
+          <div class="tip">AI-native semantic search + contact credits. Hands over a list, not an LOI.</div>
+        </div>
+        <div class="dot minor" style="left:22%; bottom:9%">
+          <div class="pt"></div>
+          <div class="tip">Sourcescrub — saved-search / watchlist data. Acquired by Datasite.</div>
+        </div>
+        <div class="dot minor" style="left:31%; bottom:30%">
+          <div class="pt"></div>
+          <div class="tip">Cyndx — predictive "projected to raise" signals. Pure SaaS.</div>
+        </div>
+        <div class="dot minor" style="left:15%; bottom:30%">
+          <div class="pt"></div>
+          <div class="tip">AlphaSense — market intelligence / research search. Seat subscription.</div>
+        </div>
+        <div class="dot minor" style="left:26%; bottom:7%">
+          <div class="pt"></div>
+          <div class="tip">Tracxn — broad company database. Volume coverage, pure SaaS.</div>
+        </div>
+
+        <!-- GrowthPal -->
+        <div class="dot gp" style="left:80%; bottom:81%">
+          <div class="pt"></div><div class="nm">GrowthPal</div>
+          <div class="tip">Thesis to LOI, on a committed coverage base with success on the close. The open quadrant.</div>
+        </div>
+
+        <div class="axL x0">Sell access to data</div>
+        <div class="axL x1">Sell the closed outcome</div>
+        <div class="axL y0">Pure SaaS, buyer does the work</div>
+        <div class="axL y1">Aligned: base + success</div>
+      </div>
+      <div class="maplegend">Hover any node for its position. <b>The top-right quadrant is unclaimed, and it is ours to own.</b></div>
+    </div>
+  </section>
+
+  <!-- 03 MATRIX -->
+  <section id="matrix" class="rv">
+    <div class="tag">THE COMPARISON <span class="n">03</span></div>
+    <h2>How the category actually sells and retains.</h2>
+    <p class="lede">Four funded benchmarks against the engine we are building. Read down the GrowthPal column: the difference is not a better database, it is a different thing being sold.</p>
+    <div class="mxhint">Swipe the table sideways →</div>
+    <div class="mxscroll">
+      <table class="mx">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Grata</th>
+            <th>Inven</th>
+            <th>PitchBook</th>
+            <th>S&amp;P Capital IQ</th>
+            <th class="gp">GrowthPal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>What they sell</th>
+            <td>Proprietary search over private/mid-market companies</td>
+            <td>AI-native semantic search, 28M cos / 430M contacts</td>
+            <td>Research-first breadth, unified IDs &amp; taxonomies</td>
+            <td>Financial data + models inside Excel</td>
+            <td class="gp">The closed outcome: thesis to a short list to LOI</td>
+          </tr>
+          <tr>
+            <th>Model</th>
+            <td>Pure SaaS, persona tiers</td>
+            <td>Pure SaaS, per-seat + contact credits</td>
+            <td>Annual seat subscription</td>
+            <td>Sales-led module subscription</td>
+            <td class="gp">Committed base + creditable success fee on close</td>
+          </tr>
+          <tr>
+            <th>Pricing</th>
+            <td>Demo-gated, est. ~$18–60k/yr</td>
+            <td>Demo-gated, seat + $0.25/contact credits</td>
+            <td>~$5–14k/seat; enterprise $45–124k/yr</td>
+            <td>~$25–30k/seat; median deal ~$53k</td>
+            <td class="gp">Public self-serve $129 / $299 / $1,000 + advisory tier</td>
+          </tr>
+          <tr>
+            <th>Land motion</th>
+            <td>Content/SEO, competitor-conquest, MCP into LLMs</td>
+            <td>"Inven vs X" SEO, MCP, Chrome ext, G2 momentum</td>
+            <td>Brand + breadth, enterprise sales</td>
+            <td>Module sales + academia (free student access)</td>
+            <td class="gp">Pilot-as-the-sale on real data, founder-led ABM</td>
+          </tr>
+          <tr>
+            <th>Stickiness wedge</th>
+            <td>CRM 2-way sync (DealCloud/Affinity/SFDC)</td>
+            <td>CRM sync, pipeline dedupe, shared lists</td>
+            <td>Unified IDs + taxonomies + breadth</td>
+            <td>Excel plug-in (=CIQ formulas wired into models)</td>
+            <td class="gp">Become the corp-dev system of record; always-on mandates</td>
+          </tr>
+          <tr>
+            <th>Retention</th>
+            <td>Not disclosed; ~90–95% real data accuracy</td>
+            <td>Young; 670% YoY growth</td>
+            <td>~80% recurring; corporate-segment churn</td>
+            <td>~90% retention</td>
+            <td class="gp">Target NRR &gt;120% via module + seat + coverage expansion</td>
+          </tr>
+          <tr>
+            <th>The gap they leave</th>
+            <td>Sells the list; buyer still does the work</td>
+            <td>Hands over contacts, not a closed deal</td>
+            <td>"Too late" by the time it's in the database</td>
+            <td>A model moat, not a sourcing outcome</td>
+            <td class="gp">Sells the result, on a recurring base, defended by workflow</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 04 TEARDOWNS -->
+  <section id="teardowns" class="rv">
+    <div class="tag">THE TEARDOWNS <span class="n">04</span></div>
+    <h2>Four benchmarks, read closely.</h2>
+    <p class="lede">What each one got right, where each one stops, and the exact lesson we carry into the GrowthPal motion.</p>
+
+    <!-- GRATA -->
+    <div class="tear" style="--accent:var(--em)">
+      <div class="th"><div class="nm">Grata</div><div class="role">THE CONSOLIDATION SIGNAL</div></div>
+      <div class="sub">Built the sourcing-first search engine and a sharp narrative, then got absorbed. The most important competitive fact in the category is that Grata is no longer independent.</div>
+      <div class="trows">
+        <div class="trow"><div class="k">Status</div><div class="vv">Acquired by Datasite (~$200M+, Jun 2025). Datasite then bought Sourcescrub and is merging it into Grata. Founded 2016 NY, ~$35M raised.</div></div>
+        <div class="trow"><div class="k">ICP &amp; model</div><div class="vv">PE, IBs, corp dev, family offices. Pure SaaS in 3 persona tiers (Growth → Scale → Alpha), all demo-gated.</div></div>
+        <div class="trow"><div class="k">Positioning</div><div class="vv">Sourcing-first vs research-first. Tagline: <em>"if it's already in PitchBook, it's probably too late."</em> Finds founder-owned, never-raised companies.</div></div>
+        <div class="trow"><div class="k">Stickiness</div><div class="vv">CRM 2-way sync is the core lock-in (Salesforce, DealCloud, HubSpot, Affinity). Becomes the enrichment layer feeding the system of record.</div></div>
+      </div>
+      <div class="take">
+        <div><div class="k tk">WHAT WE TAKE</div><p>Content-led land plus competitor-conquest SEO, and CRM integration as the stickiness wedge. Own the "AI-native deal sourcing" narrative.</p></div>
+        <div><div class="k df">WHAT WE DO DIFFERENTLY</div><p>Grata sells data and search; the buyer still does the work. We reason from thesis to target and run it to LOI. We sell the outcome, and the roll-up proves the value is migrating exactly where we already sit.</p></div>
+      </div>
+    </div>
+
+    <!-- INVEN -->
+    <div class="tear" style="--accent:var(--amber)">
+      <div class="th"><div class="nm">Inven</div><div class="role">THE AI-NATIVE ANALOG</div></div>
+      <div class="sub">The closest pure-AI comparable, and the clearest read on the modern land motion: distribution through the LLMs the buyer already lives in.</div>
+      <div class="trows">
+        <div class="trow"><div class="k">Traction</div><div class="vv">Helsinki, AI-native. $12.75M Series A (May 2025), 700–1,000+ firms, ~670% YoY. 28M companies / 430M contacts.</div></div>
+        <div class="trow"><div class="k">Model</div><div class="vv">Demo-gated, per-seat plus contact <b>credits</b> ($0.25 each / $250 per 1,000) = usage gating on top of subscription. Free trial.</div></div>
+        <div class="trow"><div class="k">Land</div><div class="vv">Competitor-conquest SEO ("Inven vs PitchBook/Grata"), MCP into Claude/ChatGPT/Perplexity, Chrome extension, G2 #1 Momentum Leader.</div></div>
+        <div class="trow"><div class="k">Stickiness</div><div class="vv">CRM sync (HubSpot/Salesforce/Affinity), pipeline-overlap dedupe, shared lists, signals.</div></div>
+      </div>
+      <div class="take">
+        <div><div class="k tk">WHAT WE TAKE</div><p>AI-channel distribution (MCP inside the LLM tools the buyer uses) and a usage-credit lever for expansion that posts higher NRR.</p></div>
+        <div><div class="k df">WHAT WE DO DIFFERENTLY</div><p>Inven hands over a list of contacts. We close to LOI with a human banking team on top of the AI. The credit becomes a draw against origination outcomes, not a meter on rows of data.</p></div>
+      </div>
+    </div>
+
+    <!-- PITCHBOOK -->
+    <div class="tear" style="--accent:var(--slate)">
+      <div class="th"><div class="nm">PitchBook</div><div class="role">THE INCUMBENT, MATURING</div></div>
+      <div class="sub">The benchmark for recurring revenue in the category, and the proof that breadth alone eventually cools when it is not fused to an outcome.</div>
+      <div class="trows">
+        <div class="trow"><div class="k">Model</div><div class="vv">Morningstar-owned. Annual seat subscription, ~$4.9k–13.5k/seat, enterprise $45–124k/yr. ~80% recurring revenue.</div></div>
+        <div class="trow"><div class="k">Moat</div><div class="vv">Unified IDs, taxonomies and breadth across public + private + VC/PE. The system of record for research.</div></div>
+        <div class="trow"><div class="k">The crack</div><div class="vv">Growth is maturing and the corporate segment is the softer one. The "too late" critique lands precisely on the research-first model.</div></div>
+        <div class="trow"><div class="k">AI stance</div><div class="vv">AI positioned as a breadth and citation enhancer, not a re-think of what is being sold.</div></div>
+      </div>
+      <div class="take">
+        <div><div class="k tk">WHAT WE TAKE</div><p>~80% recurring is the prize to aim the whole engine at. Recurring is what re-rates, and the multiple lives here.</p></div>
+        <div><div class="k df">WHAT WE DO DIFFERENTLY</div><p>We reach high-recurring through a committed origination base and outcome alignment, not a static research library. We are paid for what is not in the database yet.</p></div>
+      </div>
+    </div>
+
+    <!-- CAP IQ -->
+    <div class="tear" style="--accent:var(--rose)">
+      <div class="th"><div class="nm">S&amp;P Capital IQ</div><div class="role">THE WORKFLOW MOAT</div></div>
+      <div class="sub">The masterclass in un-rippable stickiness and in manufacturing pre-trained champions. The lesson here is about defense, not data.</div>
+      <div class="trows">
+        <div class="trow"><div class="k">Model</div><div class="vv">Sales-led, module-gated. ~$25–30k/seat list, median deal ~$53k (range $15–215k+), ~90% retention.</div></div>
+        <div class="trow"><div class="k">The moat</div><div class="vv">The Excel plug-in. Models wired to <em>=CIQ()</em> formulas, so switching means re-plumbing every model. The workflow is the lock-in, not the data.</div></div>
+        <div class="trow"><div class="k">CAC hack</div><div class="vv">Academia. Free student access + certification manufactures analysts who arrive at the buyer already trained and loyal.</div></div>
+        <div class="trow"><div class="k">AI stance</div><div class="vv">ChatIQ positioned as a moat-deepener (citations, auditability), not a disruptor.</div></div>
+      </div>
+      <div class="take">
+        <div><div class="k tk">WHAT WE TAKE</div><p>Build the workflow moat and the pre-trained champion. Lock-in lives in the daily habit and the model that depends on us, not the data feed.</p></div>
+        <div><div class="k df">WHAT WE DO DIFFERENTLY</div><p>Our embed is the corp-dev pipeline and the live mandate, not a spreadsheet formula. Un-rippable because the deal flow runs through us, with alignment they cannot get from a data vendor.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 MARKET -->
+  <section id="market" class="rv">
+    <div class="tag">THE MARKET <span class="n">05</span></div>
+    <h2>The demand is structural, and the buyer is starved exactly where we sell.</h2>
+    <p class="lede">This is not a market that needs to be created. Serial acquirers buy constantly, the data says they should buy more, and the people who do the sourcing are the thinnest team in the building.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="v e" data-to="478" data-pre="$" data-suf="B">$478B</div><div class="l">tech M&amp;A in 2025, <span class="amb">+76% YoY</span> (Bain). ~half of big strategic deal value is AI-driven.</div></div>
+      <div class="stat"><div class="v" data-to="39" data-suf="/yr">39/yr</div><div class="l">Accenture's deal pace. Constellation does 30–100+/yr; Cisco 30+ in four years.</div></div>
+      <div class="stat"><div class="v a" data-to="2">2</div><div class="l">min deals/yr for programmatic outperformance: <span class="amb">+2.1% median excess TSR</span> over a decade (McKinsey).</div></div>
+      <div class="stat"><div class="v" data-to="32" data-suf="%">32%</div><div class="l">of deals come from bankers; only 0–2 people sit on sourcing in most corp-dev teams (Deloitte).</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <span class="ix">THE PROOF IT COMPOUNDS</span>
+        <h3>Small, high-frequency M&amp;A is the winning strategy.</h3>
+        <p>McKinsey's programmatic finding: a minimum of two small or mid deals a year beats peers by 20%+ over a decade, at lower risk. <b>Constellation Software</b> ran 1,000+ vertical-software acquisitions, mostly under $5M, into ~22% revenue CAGR. The long tail of small deals is where compounding lives, and it is exactly the band we serve.</p>
+      </div>
+      <div class="card">
+        <span class="ix">THE WEDGE</span>
+        <h3>Value is concentrating up; the long tail is left to us.</h3>
+        <p>Deal <i>value</i> is up ~36% while deal <i>count</i> is up only ~5%, so value piles into mega-deals and bankers chase those. The sub-$100M, founder-owned, off-market companies are <b>underserved by bankers</b>. Find them before the bankers do and you lift the buyer's employee-sourced rate and cross the programmatic-outperformance line at once.</p>
+      </div>
+    </div>
+    <p class="src" style="margin-top:24px">Sources: Bain 2025 M&amp;A Report; McKinsey programmatic M&amp;A; Deloitte corporate development survey; company filings (Accenture, Constellation Software, Cisco).</p>
+  </section>
+
+  <!-- 06 THE RECURRING ENGINE -->
+  <section id="engine" class="rv">
+    <div class="tag">THE RECURRING ENGINE <span class="n">06</span></div>
+    <h2>The whole game is turning a spiky success fee into a base that re-rates.</h2>
+    <p class="lede">This is the problem the founder's office named, stated as math. Recurring revenue is worth multiples of what a success fee is worth. Every dollar moved from one to the other re-rates four-to-six times.</p>
+
+    <div class="ladder">
+      <div class="rung"><div class="rk">Success fee</div><div class="rt" style="--c1:#5C6E74;--c2:#8FA3A8; width:14%">services</div><div class="rv">~1.5x</div></div>
+      <div class="rung"><div class="rk">Hybrid blend</div><div class="rt" style="--c1:#8a7320;--c2:var(--amber); width:42%">base + variable</div><div class="rv">re-rating</div></div>
+      <div class="rung"><div class="rk">Recurring ARR</div><div class="rt" style="--c1:var(--emd);--c2:var(--em); width:74%">SaaS revenue</div><div class="rv">~10x</div></div>
+      <div class="rung"><div class="rk">NRR &gt;120%</div><div class="rt" style="--c1:var(--emd);--c2:#7BFFC9; width:100%">best-in-class</div><div class="rv">20x+</div></div>
+    </div>
+    <p class="src" style="margin-top:18px">Recurring re-rates like SaaS and climbs toward the 20x-and-up that best-in-class commands; a success fee trades like a service, around 1.5x. NRR above 120% adds a further multiple premium. The gap between the rungs is the prize.</p>
+
+    <h3 style="margin-top:50px">The proven shape, and the levers to get there.</h3>
+    <p class="lede" style="font-size:18px; margin-top:8px">Intapp/DealCloud posts <b>124% cloud NRR</b> on a committed base plus module expansion (834 clients over $100k ARR). Hybrid models out-earn pure ones: hybrid firms run ~38% higher NRR and growth. Here is how the success fee becomes recurring without cannibalizing itself.</p>
+
+    <div class="levers">
+      <div class="lev"><div class="lh"><span class="nn">A</span><h4>Creditable retainer</h4></div><p>A monthly retainer creditable against the success fee at close. Spiky becomes steady; ~72% of advisors already net the retainer against the fee.</p></div>
+      <div class="lev"><div class="lh"><span class="nn">B</span><h4>Sector-exclusive mandates + tail</h4></div><p>12–18 month multi-year mandates with a 6–12 month tail clause. Locked recurring plus post-term coverage on deals we sourced.</p></div>
+      <div class="lev"><div class="lh"><span class="nn">C</span><h4>Committed minimums</h4></div><p>A minimum per mandate so the base is contracted, not hoped for. The floor is real ARR before any deal closes.</p></div>
+      <div class="lev"><div class="lh"><span class="nn">D</span><h4>Prepaid origination credits</h4></div><p>A committed wallet burned against intros and outcomes, the Inven credit lever pointed at deals instead of rows of data.</p></div>
+      <div class="lev"><div class="lh"><span class="nn">E</span><h4>Price the base on coverage</h4></div><p>Charge the subscription on coverage (mandates × geographies), the success fee on the outcome (deals closed). The two never cannibalize.</p></div>
+      <div class="lev"><div class="lh"><span class="nn">F</span><h4>Report it clean</h4></div><p>Committed ARR vs Usage ARR, with NRR reported separately. The board sees a forecastable base and a variable upside, not one blurred line.</p></div>
+    </div>
+
+    <div class="grid2" style="margin-top:38px">
+      <div class="card">
+        <span class="ix">STICKINESS THAT RECURS ACROSS WINNERS</span>
+        <h3>Become the system of record, then expansion is free.</h3>
+        <p>Auto-capture kills the adoption problem (<b>Affinity hit 96% adoption</b> at Munich Re Ventures). Two-way CRM sync into DealCloud/Affinity/Salesforce makes us the corp-dev system of record. Always-on alerts turn episodic research into daily use. A predictive, relationship-intelligence data loop deepens with every deal worked.</p>
+      </div>
+      <div class="card">
+        <span class="ix">THE PILOT IS THE SALE</span>
+        <h3>Land on proof, expand on workflow.</h3>
+        <p>A 30-day time-boxed bake-off on the customer's real data, the "show me a net-new deal I haven't seen" test, adoption measured at 30/60/90. Land at $20–60k, expand to six figures through seats, modules and coverage, exactly the DealCloud expansion shape, on a base we already align to the outcome.</p>
+      </div>
+    </div>
+    <p class="src" style="margin-top:24px">Sources: Intapp investor filings (Dec 2025); Bessemer / OpenView / ICONIQ usage-based NRR benchmarks; Affinity case study (Munich Re Ventures); M&amp;A advisory retainer-structure norms.</p>
+  </section>
+
+  <!-- 07 SYNTHESIS -->
+  <section id="take" class="rv">
+    <div class="tag">THE SYNTHESIS <span class="n">07</span></div>
+    <h2>What we take from each, and where we win.</h2>
+    <p class="lede">Every benchmark teaches one move. Stacked together, they describe a motion none of them run, in the quadrant none of them occupy.</p>
+
+    <div class="synth">
+      <div class="scard"><div class="from">FROM <b>GRATA</b></div><p>Content-led land and CRM-integration stickiness. <em>But we sell the outcome, not the search box, and the roll-up proves the value is moving our way.</em></p></div>
+      <div class="scard"><div class="from">FROM <b>INVEN</b></div><p>AI-channel distribution and usage credits. <em>But we close to LOI with a human team, and the credit draws against deals, not data rows.</em></p></div>
+      <div class="scard"><div class="from">FROM <b>PITCHBOOK</b></div><p>~80% recurring is the prize. <em>But we reach it on a committed origination base, paid for what is not in the database yet.</em></p></div>
+      <div class="scard"><div class="from">FROM <b>CAPITAL IQ</b></div><p>The workflow moat and the pre-trained champion. <em>But our embed is the live mandate and the pipeline, un-rippable by a data vendor.</em></p></div>
+    </div>
+
+    <div class="kicker">
+      <p>We are not a nicer database. We are the first to sell M&amp;A as an <em>outcome</em> on a <em>recurring base</em>, in the one quadrant the whole funded category left open, and defended by the workflow it runs through.</p>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section id="sources" class="rv">
+    <div class="tag">SOURCES &amp; METHOD</div>
+    <h2 style="font-size:30px">The reading, cited.</h2>
+    <div class="srcgrid">
+      <div class="s"><b>Datasite / Grata.</b> Acquisition announced Jun 2025 (~$200M+, WSJ); Sourcescrub acquisition Aug 2025.</div>
+      <div class="s"><b>Inven.</b> $12.75M Series A (May 2025); pricing and credit structure from public site and G2.</div>
+      <div class="s"><b>PitchBook / Morningstar.</b> Segment financials and recurring-revenue disclosures; per-seat and enterprise pricing from third-party bands.</div>
+      <div class="s"><b>S&amp;P Capital IQ.</b> Seat pricing, retention and Excel plug-in workflow from category benchmarks.</div>
+      <div class="s"><b>McKinsey.</b> Programmatic M&amp;A excess-TSR study.</div>
+      <div class="s"><b>Bain.</b> 2025 M&amp;A Report (deal value +76% YoY; AI-driven share).</div>
+      <div class="s"><b>Deloitte.</b> Corporate development sourcing survey (team size, banker dependence, headcount intent).</div>
+      <div class="s"><b>Intapp / DealCloud.</b> 124% cloud NRR; $100k+ ARR client count (Dec 2025 filings).</div>
+      <div class="s"><b>Bessemer / OpenView / ICONIQ.</b> Usage-based and hybrid NRR benchmarks.</div>
+      <div class="s"><b>Affinity.</b> 96% adoption case study (Munich Re Ventures).</div>
+      <div class="s"><b>Company filings.</b> Accenture, Constellation Software, Cisco deal-pace disclosures.</div>
+      <div class="s"><b>GrowthPal.</b> Public pricing and database scale from the company site.</div>
+    </div>
+    <p class="note">Method: competitor facts are drawn from public sources, filings and third-party pricing bands; pricing ranges are estimates where vendors gate disclosure. GrowthPal's own traction figures are self-reported and are treated as the proof already built, not independently verified.</p>
+    <div class="foot">
+      GROWTHPAL · MARKET &amp; COMPETITOR INTELLIGENCE &nbsp;/&nbsp; companion to the revenue-engine plan<br>
+      Ketan Sharma &nbsp;/&nbsp; <a href="growthpal-engine.html">→ the operating plan</a> &nbsp;/&nbsp; ketansharma071190@gmail.com
+    </div>
+  </section>
+
+</div>
+
+<script>
+// scroll progress
+var prog=document.getElementById('prog');
+function onScroll(){
+  var h=document.documentElement, st=h.scrollTop||document.body.scrollTop;
+  var sh=(h.scrollHeight-h.clientHeight); prog.style.width=(sh>0?(st/sh*100):0)+'%';
+}
+document.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+// reveal (fail-safe: content visible by default; .in only adds animation)
+var secs=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.1});
+  secs.forEach(function(s){io.observe(s);});
+} else { secs.forEach(function(s){s.classList.add('in');}); }
+
+// nav active state
+var navlinks=document.querySelectorAll('nav .jumps a');
+var ids=['shift','map','matrix','teardowns','market','engine','take'];
+function activeNav(){
+  var pos=window.scrollY+140, cur=ids[0];
+  ids.forEach(function(id){ var el=document.getElementById(id); if(el && el.offsetTop<=pos) cur=id; });
+  navlinks.forEach(function(a){ a.classList.toggle('act', a.getAttribute('href')==='#'+cur); });
+}
+document.addEventListener('scroll',activeNav,{passive:true}); activeNav();
+
+// count-up on the market stats (fail-safe: text already shows the final value)
+function countUp(el){
+  var to=parseFloat(el.getAttribute('data-to')), pre=el.getAttribute('data-pre')||'', suf=el.getAttribute('data-suf')||'';
+  var dur=1100, t0=null;
+  function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
+    var val=Math.round(to*e); el.textContent=pre+val+suf; if(p<1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+var counted=false;
+var mkt=document.getElementById('market');
+var cio=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting && !counted){ counted=true;
+    document.querySelectorAll('#market .stat .v[data-to]').forEach(countUp); cio.disconnect(); } });
+},{threshold:.4});
+if(mkt) cio.observe(mkt);
+</script>
+</body>
+</html>
