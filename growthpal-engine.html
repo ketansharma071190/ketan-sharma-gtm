@@ -219,8 +219,8 @@
         <div class="mult" id="m_mult">3.8x</div>
         <div class="mval">implied enterprise value on $10M revenue: <b id="m_val">$38M</b></div>
         <div class="mbars">
-          <div class="mb rec"><div class="bx" id="m_brec" style="height:42px"></div><div class="lab"><b id="m_lrec">35%</b>committed / recurring</div></div>
-          <div class="mb suc"><div class="bx" id="m_bsuc" style="height:24px"></div><div class="lab"><b id="m_lsuc">65%</b>success-fee / usage</div></div>
+          <div class="mb rec"><div class="bx" id="m_brec" style="height:46px"></div><div class="lab"><b id="m_lrec">35%</b>committed / recurring</div></div>
+          <div class="mb suc"><div class="bx" id="m_bsuc" style="height:84px"></div><div class="lab"><b id="m_lsuc">65%</b>success-fee / usage</div></div>
         </div>
         <input type="range" id="m_slider" min="0" max="100" value="35" aria-label="recurring revenue mix">
         <div class="mcap">recurring is valued like SaaS at <span class="am">~8x</span>, success-fee like a service at <span class="am">~1.5x</span>. every point you shift re-rates the whole company.</div>
@@ -346,14 +346,13 @@ if(sig){rsig();setInterval(function(){fi=(fi+1)%feed.length;rsig();},1900);}
 // interactive revenue model
 var sl=document.getElementById('m_slider');
 function upd(){
-  var v=+sl.value,mix=v/100,m=mix*8+(1-mix)*1.5,val=Math.round(10*m);
-  var recM=80*mix,sucM=15*(1-mix),max=80,H=130;
+  var v=+sl.value,mix=v/100,m=mix*8+(1-mix)*1.5,val=Math.round(10*m),H=130;
   document.getElementById('m_mult').textContent=m.toFixed(1)+'x';
   document.getElementById('m_val').textContent='$'+val+'M';
   document.getElementById('m_lrec').textContent=Math.round(mix*100)+'%';
   document.getElementById('m_lsuc').textContent=Math.round((1-mix)*100)+'%';
-  document.getElementById('m_brec').style.height=Math.max(2,recM/max*H)+'px';
-  document.getElementById('m_bsuc').style.height=Math.max(2,sucM/max*H)+'px';
+  document.getElementById('m_brec').style.height=Math.max(3,mix*H)+'px';
+  document.getElementById('m_bsuc').style.height=Math.max(3,(1-mix)*H)+'px';
   sl.style.setProperty('--p',v+'%');
 }
 if(sl){sl.addEventListener('input',upd);upd();}
