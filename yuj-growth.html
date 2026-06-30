@@ -3,586 +3,601 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YUJ · The Growth Engine · Ketan Sharma</title>
+<title>YUJ · The Trust Layer · Ketan Sharma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 @page { size: 1280px 720px; margin: 0; }
 *{box-sizing:border-box; margin:0; padding:0;}
 :root{
-  --ink:#15121C;        /* near-black, slight violet */
-  --ink2:#2A2535;
-  --paper:#F6F3EC;      /* warm off-white */
-  --paper2:#FBF9F4;
-  --purple:#4D2CC7;     /* yuj brand */
-  --purpled:#33199A;
-  --lime:#C8E54F;       /* single bright accent */
-  --mut:#76707F;
-  --faint:#A49DAE;
-  --line:rgba(21,18,28,.14);
-  --line2:rgba(21,18,28,.30);
-  --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,monospace;
+  --ink:#0B0912;            /* deep near-black violet */
+  --ink2:#171326;
+  --paper:#F4F1E9;          /* warm paper */
+  --paper2:#FBF9F3;
+  --pur:#5A2EEA;            /* electric purple */
+  --pur2:#8A6BFF;           /* light violet */
+  --purd:#3A1C9E;
+  --cream:#EDE8FB;          /* soft on-dark */
+  --mut:#6E6880;
+  --faint:#A39CB4;
+  --line:rgba(11,9,18,.13);
+  --line2:rgba(11,9,18,.28);
+  --dline:rgba(237,232,251,.16);
+  --disp:'Space Grotesk','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'Space Mono','SF Mono',ui-monospace,Menlo,monospace;
 }
-html,body{background:#0E0B14; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased;}
+html,body{background:#070611; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased;}
 .deck{width:1280px; margin:0 auto;}
-.slide{
-  position:relative; width:1280px; height:720px; overflow:hidden;
-  page-break-after:always; break-after:page;
-  padding:58px 70px 54px;
-  background:var(--paper);
-  display:flex; flex-direction:column;
-}
+.slide{position:relative; width:1280px; height:720px; overflow:hidden; page-break-after:always; break-after:page;
+  padding:62px 76px 56px; background:var(--paper); display:flex; flex-direction:column;}
 .slide:last-child{page-break-after:auto;}
-/* dark variant */
-.slide.dark{background:var(--ink); color:var(--paper);}
-.slide.violet{background:linear-gradient(150deg,var(--purpled),var(--ink)); color:var(--paper);}
-/* faint modular grid on light slides */
-.slide.grid{
-  background-image:
-    linear-gradient(var(--line) 1px,transparent 1px),
-    linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:64px 64px; background-position:-1px -1px; background-color:var(--paper);
-}
+.slide.dark{background:var(--ink); color:var(--cream);}
+.slide.glow{background:radial-gradient(1100px 700px at 78% 12%, rgba(90,46,234,.42), transparent 60%), radial-gradient(700px 600px at 10% 95%, rgba(138,107,255,.18), transparent 55%), var(--ink); color:var(--cream);}
 /* chrome */
-.snum{font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--purple); font-weight:600;}
-.dark .snum,.violet .snum{color:var(--lime);}
-.mark{position:absolute; top:50px; right:70px; width:60px; height:60px; background:var(--purple); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:24px; letter-spacing:-.02em; border-radius:3px;}
-.dark .mark,.violet .mark{background:var(--lime); color:var(--ink);}
-.top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:auto;}
-.foot{position:absolute; left:70px; right:70px; bottom:26px; display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); border-top:1px solid var(--line); padding-top:12px;}
-.dark .foot,.violet .foot{color:rgba(246,243,236,.5); border-top-color:rgba(246,243,236,.16);}
-.foot b{color:var(--mut); font-weight:600;} .dark .foot b,.violet .foot b{color:rgba(246,243,236,.8);}
+.top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:34px;}
+.snum{font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--pur); font-weight:700;}
+.dark .snum,.glow .snum{color:var(--pur2);}
+.mark{font-family:var(--disp); font-weight:700; font-size:23px; letter-spacing:-.04em; color:var(--ink); background:none; display:flex; align-items:center; gap:0;}
+.mark b{background:var(--pur); color:#fff; padding:3px 9px 5px; border-radius:5px; line-height:1;}
+.dark .mark,.glow .mark{color:var(--cream);}
+.foot{position:absolute; left:76px; right:76px; bottom:28px; display:flex; justify-content:space-between;
+  font-family:var(--mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--faint); border-top:1px solid var(--line); padding-top:13px;}
+.dark .foot,.glow .foot{color:rgba(237,232,251,.45); border-top-color:var(--dline);}
+.foot b{color:var(--mut); font-weight:600;} .dark .foot b,.glow .foot b{color:rgba(237,232,251,.8);}
 /* type */
-h1{font-size:62px; line-height:.98; font-weight:800; letter-spacing:-.025em; max-width:1000px;}
-h2{font-size:40px; line-height:1.04; font-weight:760; letter-spacing:-.02em; max-width:1020px;}
-h2 .p{color:var(--purple);} .dark h2 .p,.violet h2 .p{color:var(--lime);}
-h3{font-size:20px; font-weight:720; letter-spacing:-.01em;}
-.kick{font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin-bottom:16px;}
-.dark .kick,.violet .kick{color:var(--faint);}
-.lede{font-size:20px; line-height:1.4; color:var(--ink2); max-width:880px; font-weight:420;}
-.dark .lede,.violet .lede{color:rgba(246,243,236,.84);}
-.body{flex:1; display:flex; flex-direction:column; justify-content:center;}
-.body.top-align{justify-content:flex-start; padding-top:6px;}
-.hl{color:var(--purple); font-weight:680;} .dark .hl,.violet .hl{color:var(--lime);}
-.amb{color:#E2742F; font-weight:680;}
-small.src{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.02em; color:var(--faint); margin-top:14px; line-height:1.5;}
-.dark small.src,.violet small.src{color:rgba(246,243,236,.42);}
+.body{flex:1; display:flex; flex-direction:column; justify-content:center; min-height:0;}
+.body.ta{justify-content:flex-start;}
+h1{font-family:var(--disp); font-size:66px; line-height:1.0; font-weight:600; letter-spacing:-.03em; max-width:1010px;}
+h2{font-family:var(--disp); font-size:42px; line-height:1.05; font-weight:600; letter-spacing:-.025em; max-width:1040px;}
+.huge{font-family:var(--disp); font-size:80px; line-height:.98; font-weight:600; letter-spacing:-.035em; max-width:1080px;}
+.p{color:var(--pur);} .dark .p,.glow .p{color:var(--pur2);}
+.kick{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin-bottom:20px;}
+.dark .kick,.glow .kick{color:var(--pur2);}
+.lede{font-size:20px; line-height:1.42; color:var(--ink2); max-width:860px; font-weight:400;}
+.dark .lede,.glow .lede{color:rgba(237,232,251,.84);}
+.hl{color:var(--pur); font-weight:600;} .dark .hl,.glow .hl{color:var(--pur2); font-weight:600;}
+b,strong{font-weight:600; color:var(--ink);} .dark b,.glow b,.dark strong,.glow strong{color:#fff;}
+small.src{display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.01em; color:var(--faint); margin-top:16px; line-height:1.55;}
+.dark small.src,.glow small.src{color:rgba(237,232,251,.4);}
+.note{font-size:12.5px; color:var(--faint); font-style:italic; margin-top:14px; line-height:1.5;}
+.dark .note,.glow .note{color:rgba(237,232,251,.5);}
+/* layout helpers */
+.cols{display:grid; gap:16px; margin-top:30px;} .c2{grid-template-columns:1fr 1fr;} .c3{grid-template-columns:repeat(3,1fr);} .c4{grid-template-columns:repeat(4,1fr);}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:26px;}
+.split{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; margin-top:18px;}
 /* cards */
-.cols{display:grid; gap:16px; margin-top:30px;}
-.c2{grid-template-columns:1fr 1fr;} .c3{grid-template-columns:1fr 1fr 1fr;} .c4{grid-template-columns:repeat(4,1fr);}
-.card{background:var(--paper2); border:1px solid var(--line); border-radius:12px; padding:22px 22px 24px; position:relative;}
-.dark .card,.violet .card{background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.14);}
-.card .t{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--purple); margin-bottom:12px; font-weight:600;}
-.dark .card .t,.violet .card .t{color:var(--lime);}
-.card h3{margin-bottom:9px;}
-.card p{font-size:14.5px; line-height:1.45; color:var(--mut);}
-.dark .card p,.violet .card p{color:rgba(246,243,236,.72);}
-/* stat row */
-.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:30px;}
-.stat{border-left:3px solid var(--purple); padding:2px 0 2px 16px;}
-.dark .stat,.violet .stat{border-left-color:var(--lime);}
-.stat .v{font-size:40px; font-weight:800; letter-spacing:-.03em; line-height:1; font-family:var(--mono);}
-.stat .l{font-size:13px; color:var(--mut); margin-top:8px; line-height:1.35;}
-.dark .stat .l,.violet .stat .l{color:rgba(246,243,236,.7);}
+.card{background:var(--paper2); border:1px solid var(--line); border-radius:14px; padding:22px 22px 24px;}
+.dark .card,.glow .card{background:rgba(237,232,251,.05); border-color:var(--dline);}
+.card .t{font-family:var(--mono); font-size:10px; letter-spacing:.11em; text-transform:uppercase; color:var(--pur); margin-bottom:12px; font-weight:700;}
+.dark .card .t,.glow .card .t{color:var(--pur2);}
+.card h3{font-family:var(--disp); font-size:19px; font-weight:600; letter-spacing:-.01em; margin-bottom:9px;}
+.card p{font-size:14px; line-height:1.45; color:var(--mut);} .dark .card p,.glow .card p{color:rgba(237,232,251,.74);}
 /* bullets */
-ul.k{list-style:none; margin-top:8px;}
-ul.k li{position:relative; padding-left:22px; margin-bottom:11px; font-size:15.5px; line-height:1.42; color:var(--ink2);}
-.dark ul.k li,.violet ul.k li{color:rgba(246,243,236,.84);}
-ul.k li:before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; background:var(--purple); border-radius:1px;}
-.dark ul.k li:before,.violet ul.k li:before{background:var(--lime);}
-ul.k li b{color:var(--ink); font-weight:680;} .dark ul.k li b,.violet ul.k li b{color:#fff;}
+ul.k{list-style:none;} ul.k li{position:relative; padding-left:24px; margin-bottom:12px; font-size:15.5px; line-height:1.4; color:var(--ink2);}
+.dark ul.k li,.glow ul.k li{color:rgba(237,232,251,.85);}
+ul.k li:before{content:""; position:absolute; left:0; top:8px; width:9px; height:9px; background:var(--pur); border-radius:50%;}
+.dark ul.k li:before,.glow ul.k li:before{background:var(--pur2);}
+/* stats */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:30px;}
+.stat{border-top:2px solid var(--pur); padding-top:14px;} .dark .stat,.glow .stat{border-top-color:var(--pur2);}
+.stat .v{font-family:var(--disp); font-size:42px; font-weight:600; letter-spacing:-.03em; line-height:1; color:var(--pur);}
+.dark .stat .v,.glow .stat .v{color:var(--pur2);}
+.stat .l{font-size:12.5px; color:var(--mut); margin-top:9px; line-height:1.35;} .dark .stat .l,.glow .stat .l{color:rgba(237,232,251,.7);}
 /* tables */
-table{width:100%; border-collapse:collapse; margin-top:22px; font-size:14px;}
-th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.35;}
-thead th{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); font-weight:500;}
-tbody td{color:var(--ink2);}
-tbody td.h{font-weight:700; color:var(--ink); white-space:nowrap;}
-td.num{font-family:var(--mono); font-weight:600; color:var(--purple); white-space:nowrap;}
-tr.tot td{border-top:2px solid var(--line2); border-bottom:none; font-weight:800; color:var(--ink);}
-tr.tot td.num{color:var(--purple); font-size:16px;}
-/* tables on dark/violet slides */
-.dark th,.violet th{color:rgba(246,243,236,.55);}
-.dark tbody td,.violet tbody td{color:rgba(246,243,236,.82);}
-.dark td.h,.violet td.h,.dark tr.tot td,.violet tr.tot td{color:#fff;}
-.dark th,.dark td,.violet th,.violet td{border-bottom-color:rgba(246,243,236,.15);}
-.dark tr.tot td,.violet tr.tot td{border-top-color:rgba(246,243,236,.32);}
-/* pills */
-.pill{display:inline-block; align-self:flex-start; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:6px 13px; border-radius:20px; background:var(--ink); color:var(--lime); font-weight:600;}
-.dark .pill,.violet .pill{background:var(--lime); color:var(--ink);}
-/* waterfall */
-.bridge{position:relative; height:280px; margin:34px 0 0; display:block;}
-.bar{position:absolute; width:120px; border-radius:4px 4px 0 0;}
-.bar .lab{position:absolute; bottom:-46px; left:50%; transform:translateX(-50%); width:150px; text-align:center; font-size:11.5px; color:var(--mut); line-height:1.3;}
-.bar .val{position:absolute; top:-26px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:15px; font-weight:700; color:var(--ink); white-space:nowrap;}
-.bar.base{background:var(--ink);} .bar.add{background:var(--purple);} .bar.tot{background:var(--lime);}
-.bar.tot .val,.bar.add .val{color:var(--ink);}
-.bridge .axis{position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--line2);}
-/* radar */
-.radar-wrap{display:grid; grid-template-columns:360px 1fr; gap:48px; align-items:center; margin-top:24px;}
-.radar{overflow:visible;}
-.radar text{font-family:var(--mono); font-size:10px; fill:var(--mut);}
-.dark .radar text{fill:rgba(246,243,236,.7);}
-.gauge{display:flex; gap:30px; margin-top:20px;}
-.gauge .g{flex:1;}
-.gauge .g .n{font-family:var(--mono); font-size:34px; font-weight:800; line-height:1; color:var(--purple);}
-.dark .gauge .g .n,.violet .gauge .g .n{color:var(--lime);}
-.gauge .g .c{font-size:12.5px; color:var(--mut); margin-top:7px; line-height:1.35;}
-.dark .gauge .g .c{color:rgba(246,243,236,.7);}
-/* email blocks */
-.mail{background:var(--paper2); border:1px solid var(--line); border-left:3px solid var(--purple); border-radius:9px; padding:16px 18px;}
-.dark .mail,.violet .mail{background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.14); border-left-color:var(--lime);}
-.mail .s{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--purple); margin-bottom:7px; font-weight:600;}
-.dark .mail .s,.violet .mail .s{color:var(--lime);}
-.mail p{font-size:13px; line-height:1.45; color:var(--ink2);} .dark .mail p,.violet .mail p{color:rgba(246,243,236,.82);}
-.mail p+p{margin-top:7px;}
+table{width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;}
+th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.34;}
+thead th{font-family:var(--mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--mut); font-weight:400;}
+tbody td{color:var(--ink2);} td.h{font-weight:600; color:var(--ink); white-space:nowrap; font-family:var(--disp);}
+td.num{font-family:var(--mono); font-weight:700; color:var(--pur); white-space:nowrap;}
+tr.tot td{border-top:2px solid var(--line2); border-bottom:none; font-weight:700;}
+.dark th,.glow th{color:rgba(237,232,251,.55);} .dark tbody td,.glow tbody td{color:rgba(237,232,251,.82);}
+.dark td.h,.glow td.h,.dark tr.tot td,.glow tr.tot td{color:#fff;}
+.dark th,.dark td,.glow th,.glow td{border-bottom-color:var(--dline);} .dark tr.tot td,.glow tr.tot td{border-top-color:rgba(237,232,251,.3);}
+.dark td.num,.glow td.num{color:var(--pur2);}
+/* pill */
+.pill{display:inline-block; align-self:flex-start; font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; padding:7px 14px; border-radius:30px; border:1px solid var(--pur); color:var(--pur); font-weight:700; margin-bottom:16px;}
+.dark .pill,.glow .pill{border-color:var(--pur2); color:var(--pur2);}
+/* 3-col positioning */
+.posrow{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
+.poscol{border:1px solid var(--line); border-radius:14px; padding:24px; background:var(--paper2);}
+.poscol.win{border:1.5px solid var(--pur); background:linear-gradient(165deg, rgba(90,46,234,.07), var(--paper2)); box-shadow:0 16px 40px rgba(90,46,234,.10);}
+.poscol .who{font-family:var(--disp); font-size:21px; font-weight:600; margin-bottom:4px;}
+.poscol .sub{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); margin-bottom:16px;}
+.poscol.win .sub{color:var(--pur);}
+.poscol p{font-size:13.5px; line-height:1.45; color:var(--mut); margin-bottom:9px;} .poscol p b{color:var(--ink);}
+.poscol .x{color:#B23B5E; font-weight:600;} .poscol .ok{color:var(--pur); font-weight:600;}
+/* engine bars (10x) */
+.engines{margin-top:24px;}
+.eng{display:grid; grid-template-columns:230px 1fr 70px; align-items:center; gap:18px; margin-bottom:13px;}
+.eng .name{font-family:var(--disp); font-size:15px; font-weight:500;}
+.eng .name span{display:block; font-family:var(--sans); font-size:11.5px; color:var(--mut); font-weight:400; margin-top:2px;}
+.eng .track{height:26px; background:rgba(11,9,18,.05); border-radius:5px; overflow:hidden;}
+.eng .fill{height:100%; background:linear-gradient(90deg,var(--purd),var(--pur)); border-radius:5px;}
+.eng .amt{font-family:var(--mono); font-size:15px; font-weight:700; color:var(--pur); text-align:right;}
+.totline{display:grid; grid-template-columns:230px 1fr 70px; align-items:center; gap:18px; margin-top:8px; padding-top:14px; border-top:2px solid var(--line2);}
+.totline .name{font-family:var(--disp); font-size:18px; font-weight:600;}
+.totline .amt{font-family:var(--disp); font-size:30px; font-weight:700; color:var(--pur); text-align:right;}
+/* trust ladder */
+.ladder{display:flex; align-items:flex-end; gap:14px; margin-top:30px; height:330px;}
+.rung{flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%;}
+.rung .bar{border-radius:8px 8px 0 0; background:linear-gradient(180deg,var(--pur2),var(--pur)); position:relative; display:flex; flex-direction:column; justify-content:flex-start; padding:14px 14px 0;}
+.rung .step{font-family:var(--mono); font-size:10px; letter-spacing:.06em; color:rgba(255,255,255,.7);}
+.rung .nm{font-family:var(--disp); font-size:17px; font-weight:600; color:#fff; line-height:1.05; margin-top:3px;}
+.rung .cap{font-size:12px; line-height:1.35; color:var(--mut); margin-top:11px;}
+.dark .rung .cap,.glow .rung .cap{color:rgba(237,232,251,.7);}
+.rung:nth-child(1) .bar{height:40%; background:linear-gradient(180deg,#3a3550,#2a2640);}
+.rung:nth-child(2) .bar{height:55%; background:linear-gradient(180deg,#5a3aa8,#46259a);}
+.rung:nth-child(3) .bar{height:70%;}
+.rung:nth-child(4) .bar{height:85%;}
+.rung:nth-child(5) .bar{height:100%; background:linear-gradient(180deg,#9f82ff,var(--pur));}
+.laxis{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-top:6px;}
+.dark .laxis,.glow .laxis{color:rgba(237,232,251,.5);}
 /* timeline */
-.tl{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:28px; border:1px solid var(--line); border-radius:12px; overflow:hidden;}
-.tl .ph{padding:22px; border-right:1px solid var(--line);}
-.tl .ph:last-child{border-right:none;}
-.tl .ph .d{font-family:var(--mono); font-size:12px; color:var(--purple); font-weight:700; letter-spacing:.06em;}
-.dark .tl,.violet .tl{border-color:rgba(255,255,255,.14);}
-.dark .tl .ph,.violet .tl .ph{border-right-color:rgba(255,255,255,.14);}
-.dark .tl .ph .d,.violet .tl .ph .d{color:var(--lime);}
-.tl .ph h3{margin:10px 0 10px;}
-.tl .ph li{font-size:13px; margin-bottom:8px; padding-left:18px;}
-.tl .ph li:before{top:7px; width:6px; height:6px;}
-/* sample output mock */
-.mock{background:#0E0B14; border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:18px 20px; font-family:var(--mono); font-size:12px; line-height:1.6; color:rgba(246,243,236,.86);}
-.mock .pr{color:var(--lime);} .mock .dim{color:rgba(246,243,236,.5);} .mock b{color:#fff;}
-.tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
-.tag-row span{font-family:var(--mono); font-size:11px; padding:5px 10px; border:1px solid var(--line); border-radius:6px; color:var(--mut);}
-.dark .tag-row span,.violet .tag-row span{border-color:rgba(255,255,255,.18); color:rgba(246,243,236,.7);}
-.logo-row{display:flex; flex-wrap:wrap; gap:10px 12px; margin-top:18px;}
-.logo-row span{font-size:13px; font-weight:600; color:var(--ink2); border:1px solid var(--line); border-radius:7px; padding:8px 13px; background:var(--paper2);}
-.dark .logo-row span,.violet .logo-row span{color:rgba(246,243,236,.85); border-color:rgba(255,255,255,.16); background:rgba(255,255,255,.05);}
-.two{display:grid; grid-template-columns:1fr 1fr; gap:34px; margin-top:26px;}
-.cover-meta{font-family:var(--mono); font-size:13px; letter-spacing:.04em; color:rgba(246,243,236,.7); line-height:2;}
+.tl{display:grid; grid-template-columns:repeat(3,1fr); margin-top:26px; border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+.tl .ph{padding:22px; border-right:1px solid var(--line);} .tl .ph:last-child{border-right:none;}
+.tl .ph .d{font-family:var(--mono); font-size:11px; color:var(--pur); font-weight:700; letter-spacing:.05em;}
+.dark .tl,.glow .tl{border-color:var(--dline);} .dark .tl .ph,.glow .tl .ph{border-right-color:var(--dline);} .dark .tl .ph .d,.glow .tl .ph .d{color:var(--pur2);}
+.tl .ph h3{font-family:var(--disp); font-size:16px; font-weight:600; margin:9px 0 10px;}
+.tl .ph li{font-size:12.5px; margin-bottom:8px; padding-left:18px;} .tl .ph li:before{top:7px; width:6px; height:6px;}
+/* mail */
+.mail{background:var(--paper2); border:1px solid var(--line); border-left:3px solid var(--pur); border-radius:9px; padding:15px 17px;}
+.dark .mail,.glow .mail{background:rgba(237,232,251,.05); border-color:var(--dline); border-left-color:var(--pur2);}
+.mail .s{font-family:var(--mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--pur); margin-bottom:7px; font-weight:700;}
+.dark .mail .s,.glow .mail .s{color:var(--pur2);}
+.mail p{font-size:12.5px; line-height:1.45; color:var(--ink2);} .dark .mail p,.glow .mail p{color:rgba(237,232,251,.82);} .mail p+p{margin-top:6px;}
+/* mock */
+.mock{background:#070611; border:1px solid var(--dline); border-radius:11px; padding:18px 20px; font-family:var(--mono); font-size:11.5px; line-height:1.65; color:rgba(237,232,251,.86);}
+.mock .pr{color:var(--pur2);} .mock .dim{color:rgba(237,232,251,.45);} .mock b{color:#fff;}
+/* logos */
+.logos{display:flex; flex-wrap:wrap; gap:9px; margin-top:8px;}
+.logos span{font-family:var(--disp); font-size:13px; font-weight:500; color:var(--ink2); border:1px solid var(--line); border-radius:8px; padding:7px 12px; background:var(--paper2);}
+.dark .logos span,.glow .logos span{color:rgba(237,232,251,.85); border-color:var(--dline); background:rgba(237,232,251,.05);}
+.cover-meta{font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; color:rgba(237,232,251,.72); line-height:2;}
 .cover-meta b{color:#fff;}
-.big-num{position:absolute; right:54px; bottom:30px; font-size:150px; font-weight:850; letter-spacing:-.04em; color:rgba(77,44,199,.10); line-height:.8;}
-.dark .big-num,.violet .big-num{color:rgba(200,229,79,.12);}
-.note{font-size:12.5px; color:var(--faint); font-style:italic; margin-top:14px;}
-.dark .note,.violet .note{color:rgba(246,243,236,.5);}
+.statementsub{font-family:var(--sans); font-size:22px; line-height:1.4; color:rgba(237,232,251,.8); max-width:840px; margin-top:30px; font-weight:400;}
 </style>
 </head>
 <body>
 <div class="deck">
 
 <!-- 00 COVER -->
-<section class="slide violet">
-  <div class="top"><span class="snum">Director of Business &amp; Revenue Growth · Assignment</span><div class="mark">yuj</div></div>
+<section class="slide glow">
+  <div class="top"><span class="snum">Director of Business &amp; Revenue Growth · Assignment</span><div class="mark">y<b>uj</b></div></div>
   <div class="body">
-    <div class="kick" style="color:var(--lime)">Ketan Sharma · for YUJ Designs</div>
-    <h1>Design is not a cost line.<br>It is a <span style="color:var(--lime)">revenue instrument.</span></h1>
-    <p class="lede" style="margin-top:26px;">YUJ has the rarest asset in this market: Fortune 500 craft and an AI-native design practice. What it has never had is a revenue engine. This is the plan to build one, and take YUJ to 10x.</p>
+    <div class="kick" style="color:var(--pur2)">Ketan Sharma · a growth plan for YUJ</div>
+    <h1 class="huge">The hard part of AI<br>isn't building it.<br>It's <span class="p">trusting</span> it.</h1>
+    <p class="statementsub">That gap is a new design category with no owner yet. Here is the plan to make YUJ the firm enterprises call to close it, and to grow the business 10x doing it.</p>
   </div>
-  <div class="cover-meta">
-    <b>The 10x growth plan</b> &nbsp;·&nbsp; two live client proposals &nbsp;·&nbsp; a lead-generation system &nbsp;·&nbsp; the executive ROI model<br>
-    <b>The proof:</b> a $210K enterprise win, an account-expansion method, AI in the workflow, and the network to open doors
-  </div>
+  <div class="cover-meta"><b>Inside:</b> the 10x thesis · two live client proposals · a lead engine · the executive ROI case · and the proof I have sold this exact motion before</div>
   <div class="foot"><span>Ketan Sharma · ketansharma071190@gmail.com</span><span>Prepared for YUJ Designs · June 2026</span></div>
 </section>
 
 <!-- 01 THE READ -->
-<section class="slide grid">
-  <div class="top"><span class="snum">01 · The read</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>YUJ already won the hard part. The craft is world-class. The <span class="p">growth engine is the missing piece.</span></h2>
-    <p class="lede" style="margin-top:18px;">I did the homework before writing a plan. Here is what the numbers say, honestly.</p>
+<section class="slide">
+  <div class="top"><span class="snum">01 · The read</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>YUJ holds a rare hand. It has just never been <span class="p">played for growth.</span></h2>
+    <p class="lede" style="margin-top:16px;">I did the homework before the plan. Here is the honest position.</p>
     <div class="cols c4">
-      <div class="card"><div class="t">The asset</div><h3>Fortune 500 craft</h3><p>PayPal, Cisco, Honeywell, Ford, Verizon, Tata Motors. Red Dot and Good Design winning work. 8 to 10 year client relationships. This reputation takes a decade to build.</p></div>
-      <div class="card"><div class="t">The edge</div><h3>AI-native, early</h3><p>Positioned as a "Human-Led, AI-native" agency with a dedicated Agentic AI design practice, exactly as Gartner says 40% of enterprise apps add AI agents by 2026.</p></div>
-      <div class="card"><div class="t">The gap</div><h3>No revenue motion</h3><p>Headcount has contracted to ~95 (down ~17% YoY). Growth has been referral and founder led. There has never been a built, repeatable, outbound engine. That is precisely why this role exists.</p></div>
-      <div class="card"><div class="t">The opening</div><h3>Buyers are spending</h3><p>Enterprises are actively funding design consolidation now. CrowdStrike, Palo Alto and Okta are all rebuilding product UX. The demand is moving; YUJ just needs to be in the room.</p></div>
+      <div class="card"><div class="t">The hand</div><h3>F500 craft, 16 years</h3><p>Honeywell, Cisco, Intel, PayPal, Ford, Tata Motors. Red Dot winning work, 8 to 10 year relationships. A reputation that takes a decade to earn.</p></div>
+      <div class="card"><div class="t">The rare card</div><h3>An agentic-AI practice</h3><p>YUJ runs a dedicated Agentic AI design practice, one of the only studios that does. That is the card the whole market is about to need.</p></div>
+      <div class="card"><div class="t">The problem</div><h3>No engine, and shrinking</h3><p>Bootstrapped, ~95 people and down ~17% in a year. Growth has been referral and founder led. A repeatable revenue motion has never existed. That is the job.</p></div>
+      <div class="card"><div class="t">The squeeze</div><h3>Caught in the middle</h3><p>Too boutique to bundle like frog or Designit, too premium to win on cost like the 2,500-person India shops. And AI is eating generic UX. Sitting still loses.</p></div>
     </div>
-    <small class="src">Sources: yujdesigns.com; Tracxn (headcount, ~95, -17% YoY, bootstrapped); Clutch (4.5/5, 23 reviews); Gartner (Aug 2025); CrowdStrike Fal.Con 2025, Palo Alto Cortex XSIAM, Okta 2025. Firm-reported figures labelled as such.</small>
+    <small class="src">Sources: yujdesigns.com; Tracxn (~95 staff, -17% YoY, bootstrapped); Clutch (4.5/5, 23 reviews; verticals). Competitive set: frog/Capgemini, Designit/Wipro, Robosoft, TO THE NEW. Firm-reported figures labelled as such.</small>
   </div>
   <div class="foot"><span><b>Assignment 1A</b> · Strategy</span><span>The honest diagnosis</span></div>
 </section>
 
-<!-- 02 THE 10x MATH -->
-<section class="slide">
-  <div class="top"><span class="snum">02 · The 10x math</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>10x in three years is not one heroic deal. It is <span class="p">four engines compounding.</span></h2>
-    <div class="bridge" id="bridge">
-      <div class="axis"></div>
-      <!-- computed: base 4, +expand 8(→12), +new retainers 12(→24), +AI pods 7(→31), +US logos 9(→40). scale 6px/$M, h=240 -->
-      <div class="bar base" style="left:0;   bottom:0;   height:24px;"><span class="val">$4M</span><span class="lab">Base today<br>(illustrative midpoint)</span></div>
-      <div class="bar add"  style="left:186px; bottom:24px;  height:48px;"><span class="val">+$8M</span><span class="lab">Expand the F500 base<br>(design systems + ops, NRR&gt;130%)</span></div>
-      <div class="bar add"  style="left:372px; bottom:72px;  height:72px;"><span class="val">+$12M</span><span class="lab">New enterprise retainers<br>(the missing motion)</span></div>
-      <div class="bar add"  style="left:558px; bottom:144px; height:42px;"><span class="val">+$7M</span><span class="lab">AI-design premium pods<br>(agentic differentiation)</span></div>
-      <div class="bar add"  style="left:744px; bottom:186px; height:54px;"><span class="val">+$9M</span><span class="lab">US new-logo motion<br>(Sunnyvale, outbound)</span></div>
-      <div class="bar tot"  style="left:930px; bottom:0;   height:240px;"><span class="val">~$40M</span><span class="lab">3-year target<br>(~10x)</span></div>
-    </div>
-    <p class="note" style="margin-top:62px;">Illustrative model, not a promise. The base and margins get calibrated against real pipeline in week one. The logic, not the line, is the point: more logos &times; higher ACV &times; expansion &times; retention.</p>
+<!-- 02 THE THESIS -->
+<section class="slide glow">
+  <div class="top"><span class="snum">02 · The bet</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body">
+    <div class="kick" style="color:var(--pur2)">The 10x thesis, in one line</div>
+    <h2 class="huge">Stop selling UX.<br>Own the <span class="p">human layer</span><br>of enterprise AI.</h2>
+    <p class="statementsub">Generic design is racing to zero against AI and offshore scale. But every enterprise shipping AI hits the same wall: humans will not trust, adopt, or be accountable for a system they cannot see, steer, or override. <b>Designing that trust is a new discipline with no incumbent.</b> It is premium, defensible, and it is exactly what YUJ already does.</p>
   </div>
-  <div class="foot"><span><b>Assignment 1A</b> · Strategy</span><span>Growth = logos × ACV × NRR × retention</span></div>
+  <div class="foot"><span><b>Assignment 1A</b> · Strategy · the positioning bet</span><span>From design vendor to category owner</span></div>
 </section>
 
-<!-- 03 MARKETS & SEGMENTS -->
-<section class="slide grid">
-  <div class="top"><span class="snum">03 · Markets &amp; segments</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>Do not chase everyone who says "we need design." <span class="p">Chase complexity with budget.</span></h2>
+<!-- 03 WHY NOW -->
+<section class="slide dark">
+  <div class="top"><span class="snum">03 · Why now</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>Everyone is deploying AI. <span class="p">Most of it is failing on the human side.</span></h2>
+    <div class="stats" style="margin-top:30px;">
+      <div class="stat"><div class="v">40%</div><div class="l">of enterprise apps will carry task-specific AI agents by 2026, up from under 5% in 2025 (Gartner)</div></div>
+      <div class="stat"><div class="v">&gt;40%</div><div class="l">of agentic-AI projects will be scrapped by 2027, on cost, unclear value and weak controls (Gartner)</div></div>
+      <div class="stat"><div class="v">33%</div><div class="l">of enterprise software will embed agentic AI by 2028, up from under 1% in 2024 (Gartner)</div></div>
+      <div class="stat"><div class="v">50%</div><div class="l">of design leaders now hire first for AI fluency, ahead of any other skill (Designlab 2026)</div></div>
+    </div>
+    <p class="lede" style="margin-top:30px; max-width:1040px;">The leaders already see it. CrowdStrike shipped a <span class="hl">persona-aware</span> AI console. Abnormal builds <span class="hl">"human-centered AI"</span> for the SOC. Palo Alto sells an <span class="hl">"intuitive, task-oriented"</span> agentic experience. The race is no longer to build the model. It is to make a human trust it. That is design, and it has no category leader.</p>
+    <small class="src">Sources: Gartner press release (Aug 2025); Gartner agentic-AI forecasts (2025); Designlab State of AI in UX &amp; Product Design 2026; CrowdStrike Fal.Con 2025; Abnormal Security; Palo Alto Cortex XSIAM.</small>
+  </div>
+  <div class="foot"><span><b>Assignment 1A</b> · Strategy · the timing</span><span>Adoption is racing; trust is the bottleneck</span></div>
+</section>
+
+<!-- 04 WHY YUJ WINS (positioning) -->
+<section class="slide">
+  <div class="top"><span class="snum">04 · The position</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>Why YUJ wins the category the giants <span class="p">cannot.</span></h2>
+    <div class="posrow">
+      <div class="poscol"><div class="who">The bundlers</div><div class="sub">frog · Designit · Capgemini</div>
+        <p><b>Win by</b> burying design inside multi-year transformation deals.</p>
+        <p><span class="x">Can't own it:</span> AI-trust work is fast, specialist and senior. It dies inside a 200-person SI program.</p>
+      </div>
+      <div class="poscol"><div class="who">The scale shops</div><div class="sub">Robosoft · TO THE NEW</div>
+        <p><b>Win by</b> design-to-dev throughput at offshore cost, 500 to 2,500 people.</p>
+        <p><span class="x">Can't own it:</span> trust design is judgment and research, not staffing. Volume is the wrong weapon.</p>
+      </div>
+      <div class="poscol win"><div class="who">YUJ</div><div class="sub">The trust-layer specialist</div>
+        <p><b>Wins by</b> being the senior, research-led studio with a real agentic practice and F500 trust.</p>
+        <p><span class="ok">Owns it:</span> small enough to be senior, credentialed enough to be believed, early enough to plant the flag.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:24px; font-size:18px;">The gap is not a better service. It is a category nobody has claimed: <span class="hl">design as the trust layer for enterprise AI.</span> YUJ is the rare firm positioned to own it.</p>
+  </div>
+  <div class="foot"><span><b>Assignment 1A</b> · Strategy · approach</span><span>The unclaimed quadrant</span></div>
+</section>
+
+<!-- 05 THE 10x MODEL -->
+<section class="slide">
+  <div class="top"><span class="snum">05 · The 10x model</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>10x is four engines, and the first one is <span class="p">already inside the building.</span></h2>
+    <div class="engines">
+      <div class="eng"><div class="name">1 · Expand the F500 base<span>Every existing client is deploying AI. Warmest pipeline on earth.</span></div><div class="track"><div class="fill" style="width:38%;"></div></div><div class="amt">+$9M</div></div>
+      <div class="eng"><div class="name">2 · Trust-layer retainers<span>New logos who are shipping agents and stalling on adoption.</span></div><div class="track"><div class="fill" style="width:50%;"></div></div><div class="amt">+$12M</div></div>
+      <div class="eng"><div class="name">3 · Premium category pricing<span>No incumbent means no price comparison. Sell the outcome.</span></div><div class="track"><div class="fill" style="width:30%;"></div></div><div class="amt">+$7M</div></div>
+      <div class="eng"><div class="name">4 · The US motion<span>Sunnyvale, outbound into the AI-deploying enterprise.</span></div><div class="track"><div class="fill" style="width:33%;"></div></div><div class="amt">+$8M</div></div>
+      <div class="totline"><div class="name">From an illustrative ~$4M base</div><div class="track"><div class="fill" style="width:100%; background:linear-gradient(90deg,var(--pur),var(--pur2));"></div></div><div class="amt">~$40M</div></div>
+    </div>
+    <p class="note" style="margin-top:18px;">Illustrative model, calibrated against real pipeline and margins in week one. The logic is the point: a warm F500 base + an uncontested category + premium pricing compounds far faster than chasing generic UX deals.</p>
+  </div>
+  <div class="foot"><span><b>Assignment 1A</b> · Strategy · the model</span><span>Land · expand · premium · US</span></div>
+</section>
+
+<!-- 06 THE TRUST LADDER (signature) -->
+<section class="slide dark">
+  <div class="top"><span class="snum">06 · The method</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <div class="kick">A productized method YUJ can own</div>
+    <h2 style="margin-bottom:4px;">The <span class="p">Trust Ladder.</span> Every AI deployment has to climb it. YUJ designs the climb.</h2>
+    <div class="ladder">
+      <div class="rung"><div class="bar"><span class="step">Rung 1</span><span class="nm">Opaque</span></div><div class="cap">A black box. Users distrust it, ignore it, or route around it.</div></div>
+      <div class="rung"><div class="bar"><span class="step">Rung 2</span><span class="nm">Explainable</span></div><div class="cap">Design shows the why. Confidence, sources, reasoning made legible.</div></div>
+      <div class="rung"><div class="bar"><span class="step">Rung 3</span><span class="nm">Controllable</span></div><div class="cap">Humans can steer, correct, and override. The off-ramp is designed.</div></div>
+      <div class="rung"><div class="bar"><span class="step">Rung 4</span><span class="nm">Accountable</span></div><div class="cap">Audit, escalation and responsibility are clear. Safe to deploy at scale.</div></div>
+      <div class="rung"><div class="bar"><span class="step">Rung 5</span><span class="nm">Trusted</span></div><div class="cap">Adopted, relied on, expanded. The AI investment finally pays back.</div></div>
+    </div>
+    <div class="laxis">Bar height = human trust &amp; adoption →&nbsp;&nbsp;·&nbsp;&nbsp;the design interventions are the rungs &nbsp;·&nbsp; it is the lead-gen teardown, the engagement scope, and the quarterly metric, all at once</div>
+  </div>
+  <div class="foot"><span><b>Signature method</b> · used across this plan</span><span>Trust, made designable and measurable</span></div>
+</section>
+
+<!-- 07 MARKETS -->
+<section class="slide">
+  <div class="top"><span class="snum">07 · Markets</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>Hunt where <span class="p">autonomous AI meets high-stakes human accountability.</span></h2>
     <table>
-      <thead><tr><th style="width:170px;">Segment</th><th>The pain that has a budget</th><th style="width:200px;">Who buys</th><th style="width:150px;">Shape</th></tr></thead>
+      <thead><tr><th style="width:160px;">Segment</th><th>The trust problem worth paying for</th><th style="width:210px;">Who buys</th><th style="width:140px;">Shape</th></tr></thead>
       <tbody>
-        <tr><td class="h">Enterprise<br>cybersecurity</td><td>Alert fatigue, console sprawl, analyst burnout. Bad UX literally slows breach response, and a US breach now costs $10.22M.</td><td>CPO, Chief Design Officer, VP Product</td><td class="num">$400–750K<br>retainer</td></tr>
-        <tr><td class="h">B2C digital<br>health</td><td>The signup-to-first-visit funnel leaks 50–60% of hard-bought users. Funnel waste is burning the round they just raised.</td><td>Founder, VP Product</td><td class="num">$120–250K<br>project</td></tr>
-        <tr><td class="h">Fintech &amp;<br>banking</td><td>Onboarding, KYC and compliance friction kills digital adoption. A third of users quit a bank app over UX.</td><td>CPO, Head of Digital</td><td class="num">project →<br>retainer</td></tr>
-        <tr><td class="h">AI-native<br>SaaS</td><td>Powerful agents, zero trust or workflow clarity. Gartner: &gt;40% of agentic projects get cancelled. Trust UX is the survival layer.</td><td>Founder, CPO</td><td class="num">paid diagnostic<br>→ pod</td></tr>
+        <tr><td class="h">Enterprise<br>cybersecurity</td><td>AI agents now triage alerts, but analysts will not trust an autonomous SOC they cannot override. A US breach costs $10.22M; misplaced trust is fatal.</td><td>CPO, Chief Design Officer, VP Product</td><td class="num">$400–750K<br>retainer</td></tr>
+        <tr><td class="h">B2C digital<br>health</td><td>AI triages, recommends and nudges patients. Without designed consent and explainability, users churn and clinicians refuse it.</td><td>Founder, VP Product</td><td class="num">$120–250K<br>project</td></tr>
+        <tr><td class="h">Fintech &amp;<br>banking</td><td>Autonomous decisioning on credit, fraud and advice. Trust, auditability and human override are regulatory and commercial necessities.</td><td>CPO, Head of Digital</td><td class="num">project →<br>retainer</td></tr>
+        <tr><td class="h">AI-native<br>SaaS</td><td>The product IS the agent. With no trust UX it joins the &gt;40% of agentic projects that get cancelled. The whole company depends on the climb.</td><td>Founder, CPO</td><td class="num">paid teardown<br>→ pod</td></tr>
       </tbody>
     </table>
-    <small class="src">Sources: IBM Cost of a Data Breach 2025 ($10.22M US); Rock Health 2025; Gartner 2025; YUJ vertical mix (Clutch: automotive 20%, fintech 15%, medical 10%). Qualifier on every segment: the Design Friction Index (next).</small>
+    <small class="src">Sources: IBM Cost of a Data Breach 2025 ($10.22M US); Gartner 2025 (&gt;40% agentic projects cancelled); YUJ vertical mix (Clutch). Qualifier on every account: where does this product sit on the Trust Ladder, and what does the next rung unlock.</small>
   </div>
   <div class="foot"><span><b>Assignment 1A</b> · Markets, segments, approach</span><span>ICP discipline</span></div>
 </section>
 
-<!-- 04 THE SIGNATURE: DFI -->
-<section class="slide dark">
-  <div class="top"><span class="snum">04 · The wedge</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <div class="kick">A diagnostic YUJ can own</div>
-    <h2 style="margin-bottom:6px;">The <span class="p">Design Friction Index.</span> Turn "good design" into a number a CFO will fund.</h2>
-    <div class="radar-wrap">
-      <svg class="radar" viewBox="-58 -6 336 232" width="360" height="248" aria-label="Design Friction Index radar">
-        <!-- rings -->
-        <polygon points="110,20 188,65 188,155 110,200 32,155 32,65" fill="none" stroke="rgba(246,243,236,.22)" stroke-width="1"/>
-        <polygon points="110,65 149,87.5 149,132.5 110,155 71,132.5 71,87.5" fill="none" stroke="rgba(246,243,236,.14)" stroke-width="1"/>
-        <!-- axes -->
-        <g stroke="rgba(246,243,236,.16)" stroke-width="1">
-          <line x1="110" y1="110" x2="110" y2="20"/><line x1="110" y1="110" x2="188" y2="65"/>
-          <line x1="110" y1="110" x2="188" y2="155"/><line x1="110" y1="110" x2="110" y2="200"/>
-          <line x1="110" y1="110" x2="32" y2="155"/><line x1="110" y1="110" x2="32" y2="65"/>
-        </g>
-        <!-- friction polygon -->
-        <polygon points="110,38 180,69 149,133 110,187 48,146 55,79" fill="rgba(200,229,79,.22)" stroke="#C8E54F" stroke-width="2"/>
-        <g><circle cx="110" cy="38" r="3" fill="#C8E54F"/><circle cx="180" cy="69" r="3" fill="#C8E54F"/><circle cx="149" cy="133" r="3" fill="#C8E54F"/><circle cx="110" cy="187" r="3" fill="#C8E54F"/><circle cx="48" cy="146" r="3" fill="#C8E54F"/><circle cx="55" cy="79" r="3" fill="#C8E54F"/></g>
-        <text x="110" y="12" text-anchor="middle">Onboarding</text>
-        <text x="196" y="62" text-anchor="start">Workflow</text>
-        <text x="196" y="160" text-anchor="start">Adoption</text>
-        <text x="110" y="214" text-anchor="middle">Support load</text>
-        <text x="24" y="160" text-anchor="end">Consistency</text>
-        <text x="24" y="62" text-anchor="end">Trust</text>
-      </svg>
+<!-- 08 PROPOSAL 1 -->
+<section class="slide">
+  <div class="top"><span class="snum">08 · Proposal 1 · Retainer</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <span class="pill">Enterprise Cybersecurity Firm · US · $400–750K ACV</span>
+    <h2 style="font-size:34px;">Their AI analyst is shipping. Their human analysts don't trust it yet.</h2>
+    <div class="two" style="margin-top:18px;">
       <div>
-        <p class="lede" style="font-size:18px;">A repeatable scorecard that rates any enterprise product on six friction axes, then converts the score into <span class="hl">revenue at risk</span>. It is the same move that took M&amp;A and credit from opinion to index.</p>
-        <div class="gauge">
-          <div class="g"><div class="n">72<span style="font-size:18px;">/100</span></div><div class="c">Friction score for a sample security console (higher = worse)</div></div>
-          <div class="g"><div class="n">~$6M</div><div class="c">Modelled annual revenue at risk from adoption, churn and support drag</div></div>
-        </div>
-        <p class="note">It becomes the lead-gen wedge (a free teardown), the spine of the ROI model, the metric in every quarterly review, and a category YUJ owns. Vendor becomes advisor.</p>
-      </div>
-    </div>
-  </div>
-  <div class="foot"><span><b>Signature method</b> · used across this plan</span><span>From craft to a fundable number</span></div>
-</section>
-
-<!-- 05 PROPOSAL 1: CYBER -->
-<section class="slide grid">
-  <div class="top"><span class="snum">05 · Proposal 1 · Retainer</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <span class="pill" style="margin-bottom:14px;">Enterprise Cybersecurity Firm · US · $400–750K ACV</span>
-    <h2 style="font-size:34px;">Security tools are powerful and exhausting. We make the workflow win the deal.</h2>
-    <div class="two" style="margin-top:20px;">
-      <div>
-        <div class="kick">The pain (quantified)</div>
+        <div class="kick">The problem</div>
         <ul class="k">
-          <li><b>64%</b> of SOC analysts spend over half their hours on manual work; <b>71%</b> report burnout (Tines).</li>
-          <li>Enterprises juggle <b>130+</b> security tools; the "swivel-chair" between consoles slows everything.</li>
-          <li>A US breach now averages <b>$10.22M</b>; slow detection adds <b>$1.14M</b> (IBM 2025). UX is now a risk lever.</li>
-          <li>CrowdStrike, Palo Alto and Okta are all rebuilding console UX right now. The category agrees.</li>
+          <li><b>64%</b> of SOC analysts already spend over half their time on manual work; <b>71%</b> are burnt out (Tines). They need the AI to help, not to be one more thing to babysit.</li>
+          <li>An autonomous SOC with no designed <b>override or escalation</b> is a liability, not a feature. A US breach averages <b>$10.22M</b> (IBM 2025).</li>
+          <li>The category is moving: CrowdStrike, Palo Alto and Abnormal are all racing to design the human-AI layer right now.</li>
         </ul>
       </div>
       <div>
-        <div class="kick">The engagement · embedded design pod</div>
-        <table style="margin-top:8px;">
+        <div class="kick">The engagement · embedded trust-design pod</div>
+        <table style="margin-top:6px;">
           <tbody>
-            <tr><td class="h">Principal design lead</td><td class="num">0.5 FTE</td></tr>
+            <tr><td class="h">Principal trust-design lead</td><td class="num">0.5 FTE</td></tr>
             <tr><td class="h">Sr. product designers ×2</td><td class="num">2.0 FTE</td></tr>
-            <tr><td class="h">UX researcher</td><td class="num">0.5 FTE</td></tr>
-            <tr><td class="h">Design-systems / strategy</td><td class="num">0.5 FTE</td></tr>
+            <tr><td class="h">UX researcher (SOC analysts)</td><td class="num">0.5 FTE</td></tr>
+            <tr><td class="h">Design systems / strategy</td><td class="num">0.5 FTE</td></tr>
             <tr class="tot"><td>Annual investment</td><td class="num">$450K → $750K</td></tr>
           </tbody>
         </table>
-        <p class="note">A US senior product designer costs ~$210K+ loaded (Salesforce lead ~$286K). This is a 2–4 senior-FTE pod with continuous discovery, not contractors.</p>
+        <p class="note">A US senior product designer runs ~$210K+ loaded (Salesforce lead ~$286K). This is a senior 2 to 4 FTE pod with continuous discovery, not contractors.</p>
       </div>
     </div>
-    <div class="tl" style="margin-top:20px;">
-      <div class="ph"><span class="d">Weeks 1–6</span><h3 style="font-size:16px;">Diagnose</h3><ul class="k"><li>DFI baseline on 2 core workflows</li><li>Analyst + admin research, telemetry</li></ul></div>
-      <div class="ph"><span class="d">Weeks 7–14</span><h3 style="font-size:16px;">Redesign &amp; validate</h3><ul class="k"><li>Priority workflow + console prototype</li><li>Design-system governance, usability tests</li></ul></div>
-      <div class="ph"><span class="d">Quarterly</span><h3 style="font-size:16px;">Expand</h3><ul class="k"><li>Second product line, exec review on DFI movement</li><li>$450K → $750K as scope grows</li></ul></div>
+    <div class="tl">
+      <div class="ph"><span class="d">Weeks 1–6</span><h3>Locate on the ladder</h3><ul class="k"><li>Trust audit of the AI console</li><li>Analyst override &amp; escalation research</li></ul></div>
+      <div class="ph"><span class="d">Weeks 7–14</span><h3>Design the climb</h3><ul class="k"><li>Explainability + control patterns</li><li>Prototype, test with real analysts</li></ul></div>
+      <div class="ph"><span class="d">Quarterly</span><h3>Expand</h3><ul class="k"><li>Second product surface, exec review on ladder movement</li><li>$450K → $750K as scope grows</li></ul></div>
     </div>
   </div>
   <div class="foot"><span><b>Assignment 1B</b> · Client proposal 1 (retainer)</span><span>Scope · team · timeline · investment</span></div>
 </section>
 
-<!-- 06 PROPOSAL 2: HEALTH -->
-<section class="slide grid">
-  <div class="top"><span class="snum">06 · Proposal 2 · Project</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <span class="pill" style="margin-bottom:14px;">B2C Healthcare Startup · Series B/C · $120–250K ACV</span>
-    <h2 style="font-size:34px;">Your funnel is leaking the capital you just raised. We seal the highest-cost leak.</h2>
-    <div class="two" style="margin-top:20px;">
+<!-- 09 PROPOSAL 2 -->
+<section class="slide">
+  <div class="top"><span class="snum">09 · Proposal 2 · Project</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <span class="pill">B2C Healthcare Startup · Series B/C · $120–250K ACV</span>
+    <h2 style="font-size:34px;">Your AI guides care. Patients and clinicians have to trust it to use it.</h2>
+    <div class="two" style="margin-top:18px;">
       <div>
-        <div class="kick">The pain (quantified)</div>
+        <div class="kick">The problem</div>
         <ul class="k">
-          <li>B2C health apps lose <b>50–60%</b> of users between signup and first visit; profile completion is the biggest leak.</li>
-          <li>Hims spent <b>$390M</b> on marketing in one year, ~<b>$785 CAC</b>. Funnel drop-off burns that spend.</li>
-          <li>Day-30 retention sits near <b>4%</b>; yet only <b>24%</b> of leaders name churn a top worry. Under-owned lever.</li>
-          <li>HIPAA asks for "reasonable safeguards," not a disclaimer on every screen. Most friction is self-inflicted.</li>
+          <li>B2C health apps lose <b>50–60%</b> of users from signup to first visit; AI that feels opaque or pushy makes it worse, not better.</li>
+          <li>Day-30 retention sits near <b>4%</b>, yet only <b>24%</b> of leaders name churn a worry. Trust in the AI journey is the under-owned lever.</li>
+          <li>HIPAA asks for "reasonable safeguards," not friction on every screen. Designed consent and explainability lift trust without breaking compliance.</li>
         </ul>
       </div>
       <div>
         <div class="kick">The engagement · 12–14 week project</div>
-        <table style="margin-top:8px;">
+        <table style="margin-top:6px;">
           <tbody>
-            <tr><td class="h">Discovery + research sprint</td><td class="num">2–4 wks</td></tr>
-            <tr><td class="h">One critical-funnel redesign</td><td class="num">onboarding / consent</td></tr>
+            <tr><td class="h">Discovery + trust research</td><td class="num">2–4 wks</td></tr>
+            <tr><td class="h">One AI journey redesign</td><td class="num">consent / explainability</td></tr>
             <tr><td class="h">Prototype + 2 usability rounds</td><td class="num">validated</td></tr>
-            <tr><td class="h">Design-system starter</td><td class="num">handoff-ready</td></tr>
+            <tr><td class="h">Trust-pattern starter kit</td><td class="num">handoff-ready</td></tr>
             <tr class="tot"><td>Fixed investment</td><td class="num">$150K → $220K</td></tr>
           </tbody>
         </table>
-        <p class="note">Scoped to one funnel with measurable business impact: activation, first-visit completion, or paid conversion. Upside path: a post-launch optimization retainer.</p>
+        <p class="note">Scoped to the one AI-touched journey that moves the metric: activation, first-visit completion, or adherence. Upside: a post-launch optimization retainer.</p>
       </div>
     </div>
-    <div class="cols c3" style="margin-top:18px;">
-      <div class="card"><div class="t">The ask</div><p>Pick the one journey where a 10-point lift moves the fundraising story: activation, booking, or adherence.</p></div>
-      <div class="card"><div class="t">The proof bar</div><p>Best-in-class is real: Hims retains 85% past two years, Maven 98% (enterprise). The gap is designable.</p></div>
-      <div class="card"><div class="t">Why YUJ</div><p>Research-led, compliance-fluent, and fast. 40% faster delivery than traditional agencies (firm-reported).</p></div>
+    <div class="cols c3" style="margin-top:16px;">
+      <div class="card"><div class="t">The ask</div><p>Pick the journey where trust in the AI decides the fundraising story.</p></div>
+      <div class="card"><div class="t">The proof bar</div><p>Best-in-class is real: Hims retains 85% past two years, Maven 98%. The gap is designable.</p></div>
+      <div class="card"><div class="t">Why YUJ</div><p>Research-led, compliance-fluent, fast. 40% faster delivery than traditional agencies (firm-reported).</p></div>
     </div>
   </div>
   <div class="foot"><span><b>Assignment 1B</b> · Client proposal 2 (project)</span><span>Scope · team · timeline · investment</span></div>
 </section>
 
-<!-- 07 LEAD GEN SYSTEM -->
+<!-- 10 LEAD GEN -->
 <section class="slide">
-  <div class="top"><span class="snum">07 · Lead generation</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>Sell the <span class="p">diagnosis before the design.</span> That is how you earn a CPO's reply.</h2>
+  <div class="top"><span class="snum">10 · Lead generation</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>Lead with a <span class="p">free AI Trust Teardown.</span> Diagnosis earns the meeting, not a portfolio.</h2>
     <div class="cols c3">
       <div class="card"><div class="t">Who we target</div>
         <ul class="k" style="margin:0;">
-          <li>CPOs &amp; VPs Product at US cyber, fintech, healthtech, AI-SaaS.</li>
-          <li>Trigger signals: funding, a redesign or design-system hire, an AI launch, 1-star app reviews, an enterprise up-market push.</li>
-          <li>Tier 1 = UX friction visibly slows revenue, adoption, or the sales demo.</li>
+          <li>CPOs &amp; VPs Product at companies shipping AI features in cyber, fintech, healthtech, AI-SaaS.</li>
+          <li>Trigger signals: an AI or agent launch, an "AI" hire spree, a model partnership, 1-star reviews on a new AI feature, an enterprise push.</li>
+          <li>Tier 1 = the product's value now hinges on users trusting its AI.</li>
         </ul>
       </div>
       <div class="card"><div class="t">Sequence logic</div>
         <ul class="k" style="margin:0;">
-          <li>Lead with a <b>named friction hypothesis</b>, not a brochure.</li>
-          <li>Quantify the <b>business cost</b> of that friction.</li>
-          <li>Offer a <b>free Design Friction Index teardown</b> of one workflow. Low risk, high signal.</li>
-          <li>Multi-thread: economic buyer, design exec, product validator.</li>
+          <li>Name a specific <b>trust gap</b> in their AI, not a generic pitch.</li>
+          <li>Quantify the <b>cost</b>: stalled adoption, churn, a cancelled rollout.</li>
+          <li>Offer a free <b>AI Trust Teardown</b>: where their product sits on the ladder.</li>
+          <li>Multi-thread the buyer, the design exec, the product owner.</li>
         </ul>
       </div>
       <div class="card"><div class="t">Success metric</div>
         <ul class="k" style="margin:0;">
-          <li>North star: <b>qualified DFI teardowns booked / month</b> (the real leading indicator).</li>
+          <li>North star: <b>qualified teardowns booked / month.</b></li>
           <li>Then: teardown → paid diagnostic conversion.</li>
-          <li>Then: diagnostic → retainer conversion + pipeline ARR created.</li>
+          <li>Then: diagnostic → retainer conversion + pipeline ARR.</li>
         </ul>
       </div>
     </div>
-    <p class="lede" style="margin-top:26px; font-size:18px;">The teardown is the whole wedge. It is useful on its own, it proves our thinking before they spend a rupee, and it makes the first meeting about <span class="hl">their product</span>, not our portfolio.</p>
+    <p class="lede" style="margin-top:24px; font-size:18px;">The teardown is the wedge: useful on its own, it proves YUJ's thinking before a rupee changes hands, and it makes the first meeting about <span class="hl">their AI</span>, not our logos.</p>
   </div>
   <div class="foot"><span><b>Assignment 1C</b> · Lead generation</span><span>Targeting · sequence · success metric</span></div>
 </section>
 
-<!-- 08 OUTREACH COPY -->
-<section class="slide grid">
-  <div class="top"><span class="snum">08 · The outreach</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
+<!-- 11 OUTREACH -->
+<section class="slide">
+  <div class="top"><span class="snum">11 · The outreach</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
     <h2 style="font-size:34px;">Three emails to a CPO. Two LinkedIn notes. Each earns the next reply.</h2>
-    <div class="two" style="margin-top:18px; gap:24px;">
-      <div style="display:flex; flex-direction:column; gap:11px;">
-        <div class="mail"><div class="s">Email 1 · the friction hypothesis</div><p>Subject: your admin setup vs your activation curve</p><p>"Your platform is powerful, but the setup path looks built for experts. If new accounts need a human to reach value, design has quietly become a revenue problem, not a polish one. Seeing that pattern in your space a lot right now."</p></div>
-        <div class="mail"><div class="s">Email 2 · the business cost</div><p>"Usually the cost hides in support tickets, slow onboarding, weaker demos, and PMs shipping around the same confusion twice. We turn that into a friction map with a number attached. One chart, your product."</p></div>
-        <div class="mail"><div class="s">Email 3 · the low-risk ask</div><p>"Worth a 30-minute Design Friction Index teardown on one workflow? If nothing material surfaces, you lose half an hour. If it does, you leave with a funded redesign case."</p></div>
+    <div class="two" style="margin-top:16px; gap:26px;">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="mail"><div class="s">Email 1 · the trust-gap hypothesis</div><p>Subject: the gap between your AI shipping and your users trusting it</p><p>"You shipped the agent. The harder part is the human one: people adopt AI they can see, steer and override, and route around the rest. Seeing that exact gap across your space right now."</p></div>
+        <div class="mail"><div class="s">Email 2 · the cost</div><p>"Untrusted AI doesn't fail loudly. It shows up as stalled adoption, support tickets, and a rollout quietly shelved. Gartner expects 40%+ of agentic projects to be scrapped. We turn that risk into a designed climb."</p></div>
+        <div class="mail"><div class="s">Email 3 · the low-risk ask</div><p>"Worth a 30-minute AI Trust Teardown on one AI flow? You leave knowing exactly which rung you're stuck on and what the next one unlocks. No deck, your product."</p></div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:11px;">
-        <div class="mail"><div class="s">LinkedIn · cold</div><p>"Noticed you're pushing deeper into enterprise. That's usually where the product gets more powerful and onboarding quietly starts dragging adoption. I'm with YUJ; we turn that friction into a roadmap executives fund. Worth comparing notes on one workflow?"</p></div>
-        <div class="mail"><div class="s">LinkedIn · referral</div><p>"Trying to reach whoever owns product adoption / design maturity at [Company]. Not a 'do you need UX' question, more whether one complex workflow is slowing sales or onboarding. Could you point me to the right product or design leader?"</p></div>
-        <div class="card" style="margin-top:2px;"><div class="t">Copy principle</div><p>Sound like a useful operator who already understands their product, never a vendor reading from a deck. Specific hypothesis first, business impact second, the ask last.</p></div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="mail"><div class="s">LinkedIn · cold</div><p>"Saw you're pushing AI deeper into the product. That's usually where trust becomes the real design problem: users won't lean on what they can't see or steer. I'm with YUJ, we design that human layer for enterprise AI. Worth comparing notes on one flow?"</p></div>
+        <div class="mail"><div class="s">LinkedIn · referral</div><p>"Trying to reach whoever owns AI adoption / design at [Company]. Not a 'do you need UX' question, more whether users actually trust the new AI features enough to rely on them. Could you point me to the right product or design leader?"</p></div>
+        <div class="card" style="margin-top:2px;"><div class="t">Copy principle</div><p>Sound like an operator who already understands their AI, never a vendor. Specific trust gap first, business cost second, the teardown ask last.</p></div>
       </div>
     </div>
   </div>
   <div class="foot"><span><b>Assignment 1C</b> · 3-email drip + 2 LinkedIn templates</span><span>Cold &amp; referral</span></div>
 </section>
 
-<!-- 09 ROI MODEL -->
+<!-- 12 ROI -->
 <section class="slide dark">
-  <div class="top"><span class="snum">09 · Executive ROI</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
+  <div class="top"><span class="snum">12 · Executive ROI</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
     <div class="kick">For a CPO + C-level audience</div>
-    <h2>The pitch is one sentence with receipts: <span class="p">design compounds revenue, and we can measure it.</span></h2>
+    <h2>One sentence with receipts: <span class="p">untrusted AI is the expensive failure. Design is the fix.</span></h2>
     <div class="stats" style="margin-top:26px;">
-      <div class="stat"><div class="v" style="color:var(--lime)">+32<span style="font-size:20px;">pp</span></div><div class="l">higher revenue growth for top-quartile design-led firms over 5 yrs (McKinsey Design Index)</div></div>
-      <div class="stat"><div class="v" style="color:var(--lime)">+56<span style="font-size:20px;">pp</span></div><div class="l">higher total shareholder returns, same study, 300 companies, 2M+ data points</div></div>
-      <div class="stat"><div class="v" style="color:var(--lime)">301%</div><div class="l">ROI and ~$36M NPV over 3 yrs from design thinking (Forrester TEI of IBM)</div></div>
-      <div class="stat"><div class="v" style="color:var(--lime)">~35%</div><div class="l">checkout-conversion lift from fixing UX; avg site has 32 fixable issues (Baymard)</div></div>
+      <div class="stat"><div class="v">&gt;40%</div><div class="l">of agentic-AI projects scrapped by 2027. The wasted AI spend dwarfs any design fee (Gartner)</div></div>
+      <div class="stat"><div class="v">+32<span style="font-size:20px;">pp</span></div><div class="l">higher revenue growth for top-quartile design-led firms over 5 yrs (McKinsey Design Index)</div></div>
+      <div class="stat"><div class="v">301%</div><div class="l">ROI and ~$36M NPV over 3 yrs from design thinking (Forrester TEI of IBM)</div></div>
+      <div class="stat"><div class="v">+56<span style="font-size:20px;">pp</span></div><div class="l">higher total shareholder returns, same McKinsey study, 300 companies</div></div>
     </div>
-    <div class="two" style="margin-top:30px; gap:40px;">
+    <div class="two" style="margin-top:28px; gap:40px;">
       <div>
         <div class="kick">Worked example · the cyber retainer</div>
         <table>
           <tbody>
-            <tr><td class="h">Investment (annual retainer)</td><td class="num" style="color:var(--lime)">$450K</td></tr>
-            <tr><td class="h">Adoption lift on a $40M product line (+3%)</td><td class="num" style="color:var(--lime)">+$1.2M</td></tr>
-            <tr><td class="h">Support / onboarding cost avoided</td><td class="num" style="color:var(--lime)">+$0.8M</td></tr>
-            <tr><td class="h">Renewal / NRR protected (churn risk down)</td><td class="num" style="color:var(--lime)">+$2.0M</td></tr>
-            <tr class="tot"><td>Modelled year-1 return</td><td class="num" style="color:var(--lime)">~9x</td></tr>
+            <tr><td class="h">Investment (annual retainer)</td><td class="num">$450K</td></tr>
+            <tr><td class="h">AI rollout saved from the scrap heap</td><td class="num">+$3.0M</td></tr>
+            <tr><td class="h">Analyst adoption + time recovered</td><td class="num">+$1.2M</td></tr>
+            <tr><td class="h">Renewal / NRR protected</td><td class="num">+$2.0M</td></tr>
+            <tr class="tot"><td>Modelled year-1 return</td><td class="num">~13x</td></tr>
           </tbody>
         </table>
       </div>
       <div>
         <div class="kick">Commercial terms · the clear ask</div>
         <ul class="k">
-          <li><b>Start small:</b> a paid Design Friction Index diagnostic, fixed fee.</li>
-          <li><b>Then the roadmap:</b> diagnostic credits toward the engagement.</li>
-          <li><b>Then the pod:</b> quarterly retainer tied to a named product metric.</li>
-          <li><b>The ask:</b> one workflow, 30 days, measured before and after.</li>
+          <li><b>Start small:</b> a paid AI Trust audit, fixed fee.</li>
+          <li><b>Then the roadmap:</b> the audit credits toward the engagement.</li>
+          <li><b>Then the pod:</b> a quarterly retainer tied to ladder movement.</li>
+          <li><b>The ask:</b> one AI flow, 30 days, measured before and after.</li>
         </ul>
-        <p class="note">Numbers are illustrative and modelled per client. The point is that every figure is one a CFO already tracks.</p>
+        <p class="note">Figures are illustrative and modelled per client. Every line is one a CFO already tracks.</p>
       </div>
     </div>
-    <small class="src">Sources: McKinsey, The Business Value of Design (2018); Forrester TEI of IBM's Design Thinking Practice (2018); Baymard Institute; PwC Experience is Everything (16% premium, 32% leave after one bad experience). The often-quoted "$1 in UX returns $100" is deliberately omitted: its provenance does not survive a numerate CFO.</small>
+    <small class="src">Sources: Gartner 2025; McKinsey, The Business Value of Design (2018); Forrester TEI of IBM (2018). The often-quoted "$1 in UX returns $100" is deliberately omitted: its provenance does not survive a numerate CFO.</small>
   </div>
   <div class="foot"><span><b>Assignment 1D</b> · Executive ROI presentation</span><span>Pain · quantified ROI · terms · ask</span></div>
 </section>
 
-<!-- 10 BD STORY -->
-<section class="slide grid">
-  <div class="top"><span class="snum">10 · The proof · BD story</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>A real win that transfers: complex buyer, new category, large trust gap, <span class="p">a $210K enterprise close.</span></h2>
-    <p class="lede" style="margin-top:14px;">At Simplifai I built the APAC business from zero and personally closed the anchor logos. The marquee was Upstox.</p>
-    <div class="cols c4" style="margin-top:24px;">
-      <div class="card"><div class="t">Find</div><h3>Zero to pipeline</h3><p>Built APAC 0→15 reps. Found BFSI workflows where AI cut cost, time and risk, before the category existed in the buyer's mind.</p></div>
-      <div class="card"><div class="t">Qualify &amp; close</div><h3>The room</h3><p>Sold across risk, compliance and business owners. Closed Kotak, HDFC Mutual Fund, Bajaj, and Upstox. Upstox was <b>$210K TCV / $70K ACV</b>.</p></div>
-      <div class="card"><div class="t">Obstacles</div><h3>Trust, not features</h3><p>New category, long enterprise cycle, heavy compliance. Won by selling the outcome and de-risking the pilot, not the product spec.</p></div>
-      <div class="card"><div class="t">Outcome</div><h3>A repeatable engine</h3><p><b>$1M ARR in 12 months</b>, grown to <b>$1.7M</b> by exit, while cutting cycle times ~50%. The motion outlived me.</p></div>
+<!-- 13 BD STORY -->
+<section class="slide">
+  <div class="top"><span class="snum">13 · The proof · BD story</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>I have sold this exact motion before: <span class="p">a new, trust-gated AI category into skeptics.</span></h2>
+    <p class="lede" style="margin-top:14px;">At Simplifai I built the APAC business from zero, selling AI into conservative banks that did not trust it yet. The marquee close was Upstox.</p>
+    <div class="cols c4" style="margin-top:22px;">
+      <div class="card"><div class="t">Find</div><h3>Zero to pipeline</h3><p>Built APAC 0→15 reps. Found BFSI workflows where AI cut cost and risk, before the buyer believed AI could.</p></div>
+      <div class="card"><div class="t">Qualify &amp; close</div><h3>The trust sale</h3><p>Sold across risk, compliance and business owners. Closed Kotak, HDFC Mutual Fund, Bajaj, Upstox. Upstox was <b>$210K TCV / $70K ACV.</b></p></div>
+      <div class="card"><div class="t">Obstacle</div><h3>Trust, not features</h3><p>A new category and deep AI skepticism. Won by de-risking the pilot and selling the outcome, not the model.</p></div>
+      <div class="card"><div class="t">Outcome</div><h3>A repeatable engine</h3><p><b>$1M ARR in 12 months,</b> grown to <b>$1.7M</b> by exit, cycle times cut ~50%. The motion outlived me.</p></div>
     </div>
-    <p class="note" style="margin-top:18px;">The transfer to YUJ: enterprise, multi-stakeholder, trust-gated, outcome-sold. Exactly the 6 to 18 month design sale the role describes.</p>
+    <p class="lede" style="margin-top:18px; font-size:18px;">That is the YUJ play, one to one: <span class="hl">a new AI category, trust-gated enterprise buyers, sold from zero to a repeatable engine.</span></p>
   </div>
   <div class="foot"><span><b>Assignment 2A</b> · Business development story</span><span>$150K+ ACV win · found → closed → scaled</span></div>
 </section>
 
-<!-- 11 ACCOUNT MANAGEMENT -->
-<section class="slide grid">
-  <div class="top"><span class="snum">11 · Account management</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>Manage the <span class="p">business outcome,</span> not just the deliverable. That is how a project becomes a decade.</h2>
-    <div class="cols" style="grid-template-columns:repeat(5,1fr); margin-top:26px;">
-      <div class="card"><div class="t">01 Map</div><p>Products, stakeholders, the metrics they own, design maturity, delivery risk.</p></div>
-      <div class="card"><div class="t">02 Prove</div><p>One high-impact workflow with a measured before and after. DFI moves the number.</p></div>
-      <div class="card"><div class="t">03 Review</div><p>Quarterly exec business review framed on DFI movement and product velocity, not hours billed.</p></div>
-      <div class="card"><div class="t">04 Expand</div><p>Second product line, design systems, DesignOps, research, AI redesign. Land and expand.</p></div>
-      <div class="card"><div class="t">05 Defend</div><p>Watch churn signals: budget-owner change, agency competition, delivery saturation.</p></div>
+<!-- 14 ACCOUNT MANAGEMENT -->
+<section class="slide">
+  <div class="top"><span class="snum">14 · Account management</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>Manage the <span class="p">climb,</span> not the deliverable. The ladder turns a project into a decade.</h2>
+    <div class="cols" style="grid-template-columns:repeat(5,1fr); margin-top:24px;">
+      <div class="card"><div class="t">01 Map</div><p>Plot every AI surface on the Trust Ladder. Owners, metrics, risk.</p></div>
+      <div class="card"><div class="t">02 Prove</div><p>Move one surface up one rung with a measured before and after.</p></div>
+      <div class="card"><div class="t">03 Review</div><p>Quarterly exec review framed on ladder movement, not hours billed.</p></div>
+      <div class="card"><div class="t">04 Expand</div><p>Next AI surface, design system, research, the whole product line.</p></div>
+      <div class="card"><div class="t">05 Defend</div><p>Watch churn signals: budget-owner change, agency entry, saturation.</p></div>
     </div>
-    <div class="two" style="margin-top:26px;">
-      <div>
-        <div class="kick">The expansion engine</div>
-        <p class="lede" style="font-size:17px;">YUJ's F500 base is the single biggest growth lever. Design systems and DesignOps are recurring by nature. They convert one-off projects into multi-year, governance-heavy contracts.</p>
-      </div>
-      <div>
-        <div class="kick">The proof I have done this</div>
-        <p class="lede" style="font-size:17px;">At ZenAdmin I built the commercial function to <span class="hl">104% net revenue retention</span> and a ~300% ACV increase. Expansion is a system, not luck.</p>
-      </div>
+    <div class="two" style="margin-top:24px;">
+      <div><div class="kick">The expansion engine</div><p class="lede" style="font-size:17px;">YUJ's F500 base is the biggest lever. Every account is deploying AI, and trust work is never "done", which makes it naturally recurring and multi-surface.</p></div>
+      <div><div class="kick">Proof I have done this</div><p class="lede" style="font-size:17px;">At ZenAdmin I built the commercial function to <span class="hl">104% net revenue retention</span> and a ~300% ACV increase. Expansion is a system, not luck.</p></div>
     </div>
   </div>
   <div class="foot"><span><b>Assignment 2B</b> · Account management plan</span><span>Approach &amp; methodology</span></div>
 </section>
 
-<!-- 12 MARKETING + AI WORKFLOW + SAMPLE -->
+<!-- 15 MARKETING + AI WORKFLOW -->
 <section class="slide dark">
-  <div class="top"><span class="snum">12 · Marketing &amp; AI in the workflow</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2 style="font-size:34px;">Co-create <span class="p">category evidence,</span> not generic content. And put AI to work in the open.</h2>
-    <div class="two" style="margin-top:20px; gap:34px;">
+  <div class="top"><span class="snum">15 · Marketing &amp; AI in the workflow</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2 style="font-size:34px;">Build the <span class="p">category's evidence,</span> and put AI to work in the open.</h2>
+    <div class="two" style="margin-top:18px; gap:34px;">
       <div>
         <div class="kick">Marketing collaboration</div>
         <ul class="k">
-          <li>A quarterly <b>Design Friction Index report</b> per vertical (cyber, fintech, health). Owned IP, inbound magnet.</li>
-          <li>Case studies framed as business before-and-after, not design artifacts.</li>
-          <li>Founder and CPO interviews on product complexity and design maturity.</li>
-          <li>Public workflow teardowns turned into executive-safe POVs.</li>
+          <li>A flagship <b>"State of AI Trust"</b> report and quarterly teardowns. Own the category's vocabulary.</li>
+          <li>Case studies told as ladder climbs: untrusted to adopted, with the business result.</li>
+          <li>Founder and CPO interviews on AI adoption and the human layer.</li>
+          <li>Public teardowns of well-known AI features, turned into executive POVs.</li>
         </ul>
-        <p class="note">Sales and marketing build the same asset: proof that design is a revenue lever.</p>
+        <p class="note">Sales and marketing build one asset: proof that trust design pays back.</p>
       </div>
       <div>
         <div class="kick">AI in my workflow · sample output</div>
         <div class="mock">
           <span class="dim"># prompt</span><br>
-          <span class="pr">"Score Acme Security's onboarding console on the DFI<br>and estimate revenue at risk."</span><br><br>
+          <span class="pr">"Score Acme's new AI assistant on the Trust Ladder<br>and draft the teardown wedge."</span><br><br>
           <span class="dim"># generated brief (then human-edited)</span><br>
-          <b>Friction score: 74/100</b> · top drags: 11-step admin setup,<br>4 disconnected consoles, no role-based first-run.<br>
-          <b>Signals:</b> 3.4★ app store, 2 redesign hires, Series-D push.<br>
-          <b>Revenue at risk:</b> ~$6M (adoption + support + churn).<br>
-          <b>Wedge:</b> free teardown of the policy-creation flow.
+          <b>Ladder position: Rung 2 of 5 (Explainable).</b><br>
+          Shows answers, hides confidence and sources. No override.<br>
+          <b>Signals:</b> "AI copilot" launched, 3.6★ reviews cite "can't trust it", 2 AI-PM hires.<br>
+          <b>Stuck cost:</b> adoption flat, renewal at risk.<br>
+          <b>Wedge:</b> free teardown of the approve / override moment.
         </div>
-        <p class="note">AI drafts the research, hypotheses and first-pass scope. Human judgment decides what survives. This very deck's market research was run as a verified multi-agent workflow.</p>
+        <p class="note">AI drafts research, hypotheses and first-pass scope; human judgment decides what survives. This deck's market research ran as a verified multi-agent workflow.</p>
       </div>
     </div>
   </div>
   <div class="foot"><span><b>Assignment 2C &amp; 2D</b> · Marketing collaboration · AI workflow + sample</span><span>Category evidence + a real output</span></div>
 </section>
 
-<!-- 13 NETWORK -->
-<section class="slide grid">
-  <div class="top"><span class="snum">13 · Relevant network</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>An honest network. <span class="p">CXO, product and founder relationships</span> that convert to design-leader access.</h2>
-    <div class="cols c3" style="margin-top:24px;">
-      <div class="card"><div class="t">Enterprise BFSI</div><h3>C-suite trust</h3><p>Kotak, HDFC Mutual Fund, Bajaj, Upstox. Compliance-heavy, digital-adoption buyers, the same UX stakes as fintech design work.</p></div>
-      <div class="card"><div class="t">Global SaaS · US/EU</div><h3>Product &amp; ops leaders</h3><p>Built and sold into remote-first ICP companies: Remote, Deel, Omnipresent, Eventbrite, Igloo, Sleek, Temasek. Product, ops and revenue buyers across markets.</p></div>
-      <div class="card"><div class="t">Founder-led</div><h3>Early enterprise GTM</h3><p>High-growth companies where product complexity outruns process and the founder still shapes the buy. The exact B2C/Series-B profile in proposal 2.</p></div>
+<!-- 16 NETWORK -->
+<section class="slide">
+  <div class="top"><span class="snum">16 · Relevant network</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>An honest network: <span class="p">CXO, product and founder trust</span> that converts to AI-buyer access.</h2>
+    <div class="cols c3" style="margin-top:22px;">
+      <div class="card"><div class="t">Enterprise BFSI</div><h3>C-suite, AI-deploying</h3><p>Kotak, HDFC Mutual Fund, Bajaj, Upstox. Exactly the regulated buyers now wrestling with autonomous AI and trust.</p>
+        <div class="logos"><span>Kotak</span><span>HDFC MF</span><span>Bajaj</span><span>Upstox</span></div></div>
+      <div class="card"><div class="t">Global SaaS · US/EU</div><h3>Product &amp; ops leaders</h3><p>Built and sold into remote-first ICP companies. Product, ops and revenue buyers across markets.</p>
+        <div class="logos"><span>Remote</span><span>Deel</span><span>Omnipresent</span><span>Eventbrite</span></div></div>
+      <div class="card"><div class="t">Founder-led</div><h3>Early enterprise GTM</h3><p>High-growth companies where the founder still owns the buy. The exact Series-B profile in proposal 2.</p></div>
     </div>
-    <p class="lede" style="margin-top:26px; font-size:18px;">I will not pretend to hand over a ready-made CPO rolodex. I will do something more useful: open doors with a sharper hypothesis than most sellers ever bring, and build the design-leader network deliberately, the same way I built three commercial functions from zero.</p>
+    <p class="lede" style="margin-top:22px; font-size:18px;">I will not pretend to hand over a ready-made CPO rolodex. I will open doors with a sharper hypothesis than most sellers bring, and build the design-buyer network deliberately, the way I built three commercial functions from zero.</p>
   </div>
   <div class="foot"><span><b>Assignment 2E</b> · Relevant client network</span><span>Credible, not inflated</span></div>
 </section>
 
-<!-- 14 FIRST 90 DAYS + CLOSE -->
-<section class="slide violet">
-  <div class="top"><span class="snum">14 · First 90 days</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
-    <h2>If I owned the number at YUJ, here is the <span class="p">first 90 days.</span></h2>
-    <div class="tl" style="margin-top:26px;">
-      <div class="ph"><span class="d">Days 0–30 · Package &amp; proof</span><ul class="k"><li>Audit clients, margins, cycle, proof library</li><li>Turn services into 3 executive packages</li><li>Calibrate the real 10x model</li><li>Ship the first Design Friction Index report</li></ul></div>
-      <div class="ph"><span class="d">Days 31–60 · Pipeline</span><ul class="k"><li>Build a 100-account Tier-1 list</li><li>Launch two vertical campaigns (cyber, health)</li><li>Open 8–10 live DFI teardowns</li><li>Stand up CRM + forecast discipline</li></ul></div>
-      <div class="ph"><span class="d">Days 61–90 · Convert</span><ul class="k"><li>Close the first paid diagnostic or retainer</li><li>Launch the account-review cadence</li><li>Lock proposal templates + expansion map</li><li>First expansion conversation in the F500 base</li></ul></div>
+<!-- 17 FIRST 90 DAYS + CLOSE -->
+<section class="slide glow">
+  <div class="top"><span class="snum">17 · First 90 days</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
+    <h2>If I owned the number at YUJ, the <span class="p">first 90 days.</span></h2>
+    <div class="tl" style="margin-top:24px;">
+      <div class="ph"><span class="d">Days 0–30 · Frame</span><ul class="k"><li>Audit clients, margins, proof, capacity</li><li>Calibrate the real 10x model</li><li>Package the trust-layer offer</li><li>Ship the first "State of AI Trust" teardown</li></ul></div>
+      <div class="ph"><span class="d">Days 31–60 · Pipeline</span><ul class="k"><li>Build a 100-account Tier-1 list of AI shippers</li><li>Launch two vertical teardown campaigns</li><li>Open 8–10 live AI Trust Teardowns</li><li>Stand up CRM + forecast discipline</li></ul></div>
+      <div class="ph"><span class="d">Days 61–90 · Convert</span><ul class="k"><li>Close the first paid audit or retainer</li><li>Launch the account-review cadence</li><li>First expansion in the F500 base</li><li>Lock proposal templates + the model</li></ul></div>
     </div>
-    <p class="lede" style="margin-top:28px; font-size:21px; font-weight:520;">The first win is not activity. It is getting YUJ into the room as the firm that makes design <span class="hl">the lever, not the afterthought.</span></p>
+    <p class="lede" style="margin-top:26px; font-size:21px; font-weight:500;">The first win is not activity. It is YUJ being the name an enterprise says when its AI is built but <span class="hl">nobody trusts it yet.</span></p>
   </div>
   <div class="foot"><span><b>Operating plan</b> · reports to the CEO</span><span>Built to run, then to scale</span></div>
 </section>
 
-<!-- 15 SOURCES / COVERAGE -->
+<!-- 18 SOURCES -->
 <section class="slide">
-  <div class="top"><span class="snum">Coverage &amp; sources</span><div class="mark">yuj</div></div>
-  <div class="body top-align">
+  <div class="top"><span class="snum">Coverage &amp; sources</span><div class="mark">y<b>uj</b></div></div>
+  <div class="body ta">
     <h2 style="font-size:32px;">Every prompt, answered. Every number, sourced.</h2>
-    <div class="two" style="margin-top:22px;">
+    <div class="two" style="margin-top:20px;">
       <div>
         <div class="kick">Assignment coverage</div>
         <ul class="k" style="font-size:14px;">
-          <li><b>1A Strategy</b> · the read, the 10x bridge, market segments (sl. 1–3)</li>
-          <li><b>1B Proposals</b> · cybersecurity retainer + healthcare project (sl. 5–6)</li>
-          <li><b>1C Lead gen</b> · system, 3-email drip, 2 LinkedIn templates (sl. 7–8)</li>
-          <li><b>1D ROI</b> · quantified model, terms, the ask (sl. 9)</li>
-          <li><b>2A–2E</b> · BD story, account plan, marketing + AI, network (sl. 10–13)</li>
-          <li><b>Signature</b> · the Design Friction Index threads it all (sl. 4)</li>
+          <li><b>1A Strategy</b> · the read, the bet, why-now, the position, the 10x model (sl. 1–5, 7)</li>
+          <li><b>1B Proposals</b> · cybersecurity retainer + healthcare project (sl. 8–9)</li>
+          <li><b>1C Lead gen</b> · system, 3-email drip, 2 LinkedIn templates (sl. 10–11)</li>
+          <li><b>1D ROI</b> · quantified model, terms, the ask (sl. 12)</li>
+          <li><b>2A–2E</b> · BD story, account plan, marketing + AI, network (sl. 13–16)</li>
+          <li><b>Signature</b> · the Trust Ladder runs through all of it (sl. 6)</li>
         </ul>
       </div>
       <div>
         <div class="kick">Key sources (verified)</div>
         <ul class="k" style="font-size:13px;">
-          <li>YUJ: yujdesigns.com, Tracxn, Clutch (firm-reported figures labelled as such)</li>
+          <li>Gartner 2025 (AI-agent adoption + agentic-project cancellation rates)</li>
           <li>McKinsey, The Business Value of Design (2018); Forrester TEI of IBM (2018)</li>
-          <li>IBM Cost of a Data Breach 2025; Tines Voice of the SOC; Gartner (2025)</li>
-          <li>Rock Health 2025; Baymard Institute; PwC Experience is Everything</li>
-          <li>CrowdStrike, Palo Alto, Okta, Snyk public product-UX investments</li>
+          <li>IBM Cost of a Data Breach 2025; Tines Voice of the SOC; Designlab 2026</li>
+          <li>CrowdStrike, Palo Alto, Abnormal public AI-product moves; Rock Health 2025</li>
+          <li>YUJ: yujdesigns.com, Tracxn, Clutch (firm-reported figures labelled as such)</li>
         </ul>
         <p class="note">Research run as a verified multi-agent workflow; disputed or firm-reported claims are flagged, not asserted.</p>
       </div>
