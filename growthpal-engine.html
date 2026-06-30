@@ -102,7 +102,7 @@
   .model .mhead{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--em);margin-bottom:10px;}
   .model .mult{font-family:var(--mono);font-size:clamp(42px,5.2vw,66px);font-weight:600;color:var(--em);letter-spacing:-.02em;line-height:1;text-shadow:0 0 30px rgba(55,224,160,.3);}
   .model .mval{font-family:var(--mono);font-size:14px;color:var(--muted);margin-top:9px;} .model .mval b{color:var(--amber);}
-  .model .mbars{display:flex;gap:16px;align-items:flex-end;height:130px;margin:24px 0 6px;}
+  .model .mbars{display:flex;gap:16px;align-items:flex-end;height:118px;margin:42px 0 6px;}
   .model .mb{flex:1;display:flex;flex-direction:column;justify-content:flex-end;}
   .model .mb .bx{border-radius:5px 5px 0 0;transition:height .22s ease;min-height:2px;}
   .model .mb.rec .bx{background:linear-gradient(180deg,var(--em),var(--em-d));box-shadow:0 0 22px rgba(55,224,160,.22);}
@@ -346,7 +346,7 @@ if(sig){rsig();setInterval(function(){fi=(fi+1)%feed.length;rsig();},1900);}
 // interactive revenue model
 var sl=document.getElementById('m_slider');
 function upd(){
-  var v=+sl.value,mix=v/100,m=mix*8+(1-mix)*1.5,val=Math.round(10*m),H=130;
+  var v=+sl.value,mix=v/100,m=mix*8+(1-mix)*1.5,val=Math.round(10*m),H=118;
   document.getElementById('m_mult').textContent=m.toFixed(1)+'x';
   document.getElementById('m_val').textContent='$'+val+'M';
   document.getElementById('m_lrec').textContent=Math.round(mix*100)+'%';
