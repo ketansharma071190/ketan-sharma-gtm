@@ -75,15 +75,13 @@
   .hint{position:fixed;bottom:14px;right:18px;font-family:var(--mono);font-size:10.5px;color:var(--muted);background:rgba(12,18,27,.85);
     padding:7px 13px;border-radius:20px;border:1px solid var(--line);z-index:50;letter-spacing:.06em;}
 
-  /* ===== alive layer: reveal on scroll ===== */
-  .kicker,h1,h2,.lede,.who,.cover .bar,li,.card,.metric,.col,.tl .st,.qbox,.model{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
-  .in .kicker,.in h1,.in h2,.in .lede,.in .who,.in .bar,.in li,.in .card,.in .metric,.in .col,.in .tl .st,.in .qbox,.in .model{opacity:1;transform:none;}
-  .in .lede{transition-delay:.12s} .in .who{transition-delay:.22s}
-  .in li:nth-child(2),.in .card:nth-child(2),.in .metric:nth-child(2),.in .col:nth-child(2),.in .tl .st:nth-child(2){transition-delay:.08s}
-  .in li:nth-child(3),.in .card:nth-child(3),.in .metric:nth-child(3),.in .col:nth-child(3),.in .tl .st:nth-child(3){transition-delay:.16s}
-  .in li:nth-child(4),.in .card:nth-child(4),.in .metric:nth-child(4),.in .col:nth-child(4),.in .tl .st:nth-child(4){transition-delay:.24s}
-  .col .bx{transform:scaleY(0);transform-origin:bottom;transition:transform .9s cubic-bezier(.2,.7,.2,1) .2s;}
-  .in .col .bx{transform:scaleY(1);}
+  /* ===== alive layer: reveal (FAIL-SAFE: visible by default, animate in only when .in is added) ===== */
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .in .kicker,.in h1,.in h2,.in .lede,.in .who,.in .bar,.in li,.in .card,.in .metric,.in .col,.in .tl .st,.in .qbox,.in .model{animation:rise .6s ease both;}
+  .in .lede{animation-delay:.1s} .in .who{animation-delay:.2s}
+  .in li:nth-child(2),.in .card:nth-child(2),.in .metric:nth-child(2),.in .col:nth-child(2),.in .tl .st:nth-child(2){animation-delay:.07s}
+  .in li:nth-child(3),.in .card:nth-child(3),.in .metric:nth-child(3),.in .col:nth-child(3),.in .tl .st:nth-child(3){animation-delay:.14s}
+  .in li:nth-child(4),.in .card:nth-child(4),.in .metric:nth-child(4),.in .col:nth-child(4),.in .tl .st:nth-child(4){animation-delay:.21s}
 
   /* ===== cover live terminal ===== */
   .term{position:absolute;right:7vw;top:50%;transform:translateY(-50%);width:332px;background:rgba(10,16,24,.6);border:1px solid var(--line2);border-radius:12px;padding:17px 18px;font-family:var(--mono);font-size:12px;box-shadow:0 0 60px rgba(0,0,0,.5);opacity:0;animation:fadein 1s ease .4s forwards;}
@@ -145,7 +143,7 @@
   <div class="who"><b>Ketan Sharma</b> &nbsp;/&nbsp; Founder-led sales to repeatable enterprise GTM &nbsp;/&nbsp; ketansharma071190@gmail.com</div>
   <div class="term">
     <div class="th"><span>LIVE &middot; OFF-MARKET SIGNAL</span><span class="dot"></span></div>
-    <div class="r"><span class="g">&gt;</span> index <b class="cnt" data-to="4012847">0</b> companies</div>
+    <div class="r"><span class="g">&gt;</span> index <b class="cnt" data-to="4012847">4,012,847</b> companies</div>
     <div class="r"><span class="g">&gt;</span> scanning for thesis fit</div>
     <div class="sig" id="sig"></div>
     <div class="r"><span class="g">&gt;</span> 3 precision-fit targets surfaced<span class="cur"></span></div>
@@ -328,13 +326,15 @@ document.addEventListener('keydown',function(e){
   if(['ArrowDown','ArrowRight',' ','PageDown'].indexOf(e.key)>-1){e.preventDefault();if(s[i+1])s[i+1].scrollIntoView();}
   if(['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();if(s[i-1])s[i-1].scrollIntoView();}
 });
-// reveal on scroll
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.16});
-document.querySelectorAll('.slide').forEach(function(s){io.observe(s);});
+// reveal on scroll (fail-safe: content is visible by default; this only adds entrance animation)
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
+var slides=document.querySelectorAll('.slide');
+slides.forEach(function(s){io.observe(s);});
+if(slides[0])slides[0].classList.add('in'); // cover is always in view on load
 // count-up
 document.querySelectorAll('.cnt').forEach(function(el){
   var to=+el.dataset.to,st=null,d=1700;
-  function f(t){if(!st)st=t;var p=Math.min((t-st)/d,1);el.textContent=Math.floor((0.1+0.9*p)*0+p*to).toLocaleString();if(p<1)requestAnimationFrame(f);else el.textContent=to.toLocaleString();}
+  function f(t){if(!st)st=t;var p=Math.min((t-st)/d,1);el.textContent=Math.floor(p*to).toLocaleString();if(p<1)requestAnimationFrame(f);}
   requestAnimationFrame(f);
 });
 // signal ticker
