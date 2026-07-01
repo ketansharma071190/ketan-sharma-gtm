@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map My Crop · The Underwriting-Lane Plan · Ketan Sharma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@page { size: 1280px 720px; margin: 0; }
+*{box-sizing:border-box; margin:0; padding:0;}
+:root{
+  --ink:#13241C; --ink2:#28382E; --paper:#F4F1E7; --paper2:#FBF9F1;
+  --green:#1C8A50; --green2:#43BE7B; --greend:#0F5C34; --cream:#EAF3EA;
+  --amber:#C1841C; --amber2:#E1A93B;
+  --mut:#6C7269; --faint:#9AA396; --line:rgba(19,36,28,.13); --line2:rgba(19,36,28,.28); --dline:rgba(234,243,234,.15);
+  --disp:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',ui-monospace,Menlo,monospace;
+}
+html,body{background:#0A140F; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased;}
+.deck{width:1280px; margin:0 auto;}
+.slide{position:relative; width:1280px; height:720px; overflow:hidden; page-break-after:always; break-after:page; padding:56px 70px 52px; background:var(--paper); display:flex; flex-direction:column;}
+.slide:last-child{page-break-after:auto;}
+.slide.dark{background:var(--ink); color:var(--cream);}
+/* faint satellite field-plot grid on dark slides */
+.slide.grid{background-image:linear-gradient(rgba(67,190,123,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(67,190,123,.09) 1px,transparent 1px); background-size:56px 56px; background-color:var(--ink);}
+.slide.grid::after{content:""; position:absolute; inset:0; background:radial-gradient(900px 520px at 82% 8%, rgba(28,138,80,.32), transparent 62%); pointer-events:none;}
+.top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:22px; position:relative; z-index:2;}
+.snum{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--green); font-weight:600;}
+.dark .snum,.grid .snum{color:var(--green2);}
+.mark{font-family:var(--disp); font-weight:600; font-size:19px; letter-spacing:-.01em; color:var(--ink);}
+.dark .mark,.grid .mark{color:var(--cream);} .mark b{color:var(--green);} .dark .mark b,.grid .mark b{color:var(--green2);}
+.foot{position:absolute; left:70px; right:70px; bottom:26px; display:flex; justify-content:space-between; font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); border-top:1px solid var(--line); padding-top:11px; z-index:2;}
+.dark .foot,.grid .foot{color:rgba(234,243,234,.45); border-top-color:var(--dline);}
+.foot b{color:var(--mut); font-weight:600;} .dark .foot b,.grid .foot b{color:rgba(234,243,234,.8);}
+.body{flex:1; display:flex; flex-direction:column; justify-content:center; min-height:0; position:relative; z-index:2;}
+.body.ta{justify-content:flex-start;}
+h1{font-family:var(--disp); font-size:62px; line-height:1.02; font-weight:600; letter-spacing:-.02em; max-width:1010px;}
+h2{font-family:var(--disp); font-size:37px; line-height:1.08; font-weight:600; letter-spacing:-.015em; max-width:1050px;}
+.huge{font-family:var(--disp); font-size:72px; line-height:1.0; font-weight:600; letter-spacing:-.02em; max-width:1080px;}
+.g{color:var(--green);} .dark .g,.grid .g{color:var(--green2);}
+.am{color:var(--amber);} .dark .am,.grid .am{color:var(--amber2);}
+.kick{font-family:var(--mono); font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--mut); margin-bottom:16px;}
+.dark .kick,.grid .kick{color:var(--green2);}
+.lede{font-size:19px; line-height:1.42; color:var(--ink2); max-width:900px; font-weight:400;}
+.dark .lede,.grid .lede{color:rgba(234,243,234,.85);}
+b,strong{font-weight:600; color:var(--ink);} .dark b,.grid b,.dark strong,.grid strong{color:#fff;}
+small.src{display:block; font-family:var(--mono); font-size:9px; letter-spacing:.01em; color:var(--faint); margin-top:13px; line-height:1.5;}
+.dark small.src,.grid small.src{color:rgba(234,243,234,.4);}
+.note{font-size:12px; color:var(--faint); font-style:italic; margin-top:12px; line-height:1.5;}
+.dark .note,.grid .note{color:rgba(234,243,234,.5);}
+.cols{display:grid; gap:15px; margin-top:24px;} .c2{grid-template-columns:1fr 1fr;} .c3{grid-template-columns:repeat(3,1fr);} .c4{grid-template-columns:repeat(4,1fr);}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:22px;}
+.card{background:var(--paper2); border:1px solid var(--line); border-radius:12px; padding:20px;}
+.dark .card,.grid .card{background:rgba(234,243,234,.05); border-color:var(--dline);}
+.card .t{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:10px; font-weight:600;}
+.dark .card .t,.grid .card .t{color:var(--green2);}
+.card h3{font-family:var(--disp); font-size:18px; font-weight:600; letter-spacing:-.01em; margin-bottom:8px;}
+.card p{font-size:13.5px; line-height:1.42; color:var(--mut);} .dark .card p,.grid .card p{color:rgba(234,243,234,.74);}
+ul.k{list-style:none;} ul.k li{position:relative; padding-left:22px; margin-bottom:10px; font-size:15px; line-height:1.4; color:var(--ink2);}
+.dark ul.k li,.grid ul.k li{color:rgba(234,243,234,.85);}
+ul.k li:before{content:""; position:absolute; left:2px; top:8px; width:8px; height:8px; background:var(--green); border-radius:1px; transform:rotate(45deg);}
+.dark ul.k li:before,.grid ul.k li:before{background:var(--green2);}
+ul.k.sm li{font-size:13px; margin-bottom:7px; padding-left:18px;} ul.k.sm li:before{top:7px; width:6px; height:6px;}
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:26px;}
+.stat{border-top:2px solid var(--green); padding-top:13px;} .dark .stat,.grid .stat{border-top-color:var(--green2);}
+.stat .v{font-family:var(--disp); font-size:38px; font-weight:600; letter-spacing:-.02em; line-height:1; color:var(--green);}
+.dark .stat .v,.grid .stat .v{color:var(--green2);} .stat .v.a{color:var(--amber);} .dark .stat .v.a,.grid .stat .v.a{color:var(--amber2);}
+.stat .l{font-size:12px; color:var(--mut); margin-top:8px; line-height:1.35;} .dark .stat .l,.grid .stat .l{color:rgba(234,243,234,.7);}
+table{width:100%; border-collapse:collapse; margin-top:14px; font-size:13.5px;}
+th,td{text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.3;}
+thead th{font-family:var(--mono); font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--mut); font-weight:400;}
+tbody td{color:var(--ink2);} td.h{font-weight:600; color:var(--ink); font-family:var(--disp);}
+td.num{font-family:var(--mono); font-weight:600; color:var(--amber); white-space:nowrap;}
+tr.tot td{border-top:2px solid var(--line2); border-bottom:none; font-weight:700;}
+.dark th,.grid th{color:rgba(234,243,234,.55);} .dark tbody td,.grid tbody td{color:rgba(234,243,234,.82);}
+.dark td.h,.grid td.h,.dark tr.tot td,.grid tr.tot td{color:#fff;} .dark td.num,.grid td.num{color:var(--amber2);}
+.dark th,.dark td,.grid th,.grid td{border-bottom-color:var(--dline);} .dark tr.tot td,.grid tr.tot td{border-top-color:rgba(234,243,234,.3);}
+.pill{display:inline-block; align-self:flex-start; font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:6px 13px; border-radius:30px; border:1px solid var(--green); color:var(--green); font-weight:600; margin-bottom:14px;}
+.pill.am{border-color:var(--amber); color:var(--amber);}
+/* target board */
+.board{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:22px;}
+.rail{border:1px solid var(--line); border-radius:12px; padding:16px 16px 18px; background:var(--paper2);}
+.rail .rh{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--green); font-weight:600; margin-bottom:4px;}
+.rail .rn{font-family:var(--disp); font-size:15px; font-weight:600; margin-bottom:11px;}
+.rail .acct{font-size:12.5px; line-height:1.3; color:var(--ink2); margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed var(--line);}
+.rail .acct:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+.rail .acct b{color:var(--ink); font-weight:600;} .rail .acct span{color:var(--mut); display:block; font-size:11px; margin-top:1px;}
+/* play slide */
+.play{display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:14px;}
+.buyer{display:inline-block; font-family:var(--mono); font-size:12px; color:var(--mut); margin-bottom:6px;} .buyer b{font-family:var(--disp); font-size:15px; color:var(--ink);}
+.kv{margin-top:2px;} .kv .r{display:grid; grid-template-columns:96px 1fr; gap:12px; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+.kv .r .kk{font-family:var(--mono); font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--green); padding-top:2px;}
+.kv .r .vv{color:var(--ink2); line-height:1.36;}
+.cover-meta{font-family:var(--mono); font-size:12px; letter-spacing:.03em; color:rgba(234,243,234,.72); line-height:1.95;} .cover-meta b{color:#fff;}
+.statementsub{font-family:var(--sans); font-size:21px; line-height:1.42; color:rgba(234,243,234,.82); max-width:880px; margin-top:26px; font-weight:400;}
+.years{display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:22px;}
+.yr{border:1px solid var(--dline); border-radius:12px; padding:20px; background:rgba(234,243,234,.05);}
+.yr .yl{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--green2); font-weight:600; margin-bottom:10px;}
+.yr li{font-size:12.5px; line-height:1.38; margin-bottom:6px; padding-left:16px;} .yr li:before{top:7px; width:6px; height:6px;}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 00 COVER -->
+<section class="slide grid">
+  <div class="top"><span class="snum">A growth plan · prepared for the founders</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body">
+    <div class="kick" style="color:var(--green2)">Ketan Sharma · for Map My Crop</div>
+    <h1 class="huge">I went and did<br>the <span class="g">first month</span>.</h1>
+    <p class="statementsub">After our last conversation I kept pulling the thread. This is the named-account plan to take your accuracy into the one economy that pays 10 to 100x a farmer for it: the people who underwrite on being right.</p>
+  </div>
+  <div class="cover-meta"><b>Inside:</b> why accuracy is now a funded, regulated line · the honest read vs the field · a named target board · three account plays with buyers, pilots and price · the first 90 days</div>
+  <div class="foot"><span>Ketan Sharma · ketansharma071190@gmail.com · Pune</span><span>Second conversation · July 2026</span></div>
+</section>
+
+<!-- 01 THE BET -->
+<section class="slide">
+  <div class="top"><span class="snum">01 · The bet</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>We agreed the moat is <span class="g">accuracy</span>. This is who pays the most for it.</h2>
+    <p class="lede" style="margin-top:16px;">The read I sent after we spoke, sharpened into a plan.</p>
+    <div class="cols c3">
+      <div class="card"><div class="t">The moat</div><h3>Closest to true</h3><p>A yield call a buyer can act on is not a commodity. Your <b>90% forecast accuracy, up to 3 months out</b>, is pricing power, if we point it at the right buyer.</p></div>
+      <div class="card"><div class="t">The shift</div><h3>Sell the decision</h3><p>Nobody pays for a map or an NDVI layer. They pay for a lower loss ratio, a safer loan, a better season bet. Sell the decision your number improves.</p></div>
+      <div class="card"><div class="t">The prize</div><h3>10 to 100x a farmer</h3><p>The same yield call worth <b>~₹3.5k</b> to a farmer is worth many times more to whoever bets real money on it being right. That is the lane.</p></div>
+    </div>
+    <p class="lede" style="margin-top:22px; font-size:17px;">Selling a precision instrument one farmer at a time is the leak. The work is to point the go-to-market at the institutions that underwrite on the number, and build the engine that lands them.</p>
+  </div>
+  <div class="foot"><span>The go-to-market read, after our conversation</span><span>Accuracy is the product</span></div>
+</section>
+
+<!-- 02 WHY NOW -->
+<section class="slide grid">
+  <div class="top"><span class="snum">02 · Why now</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>You are not creating demand. <span class="g">The government already funds this line.</span></h2>
+    <div class="stats" style="margin-top:26px;">
+      <div class="stat"><div class="v">30%</div><div class="l">minimum weightage now mandated to satellite yield in PMFBY claims (YES-TECH, since Kharif 2023). MP runs 100%.</div></div>
+      <div class="stat"><div class="v a">₹825<span style="font-size:18px;">cr</span></div><div class="l">the FIAT fund the Cabinet created (Jan 2025) explicitly to pay for YES-TECH accuracy</div></div>
+      <div class="stat"><div class="v a">₹9.8<span style="font-size:18px;">L cr</span></div><div class="l">Kisan Credit Card crop-loan book (7.75 cr accounts) now underwritten increasingly on satellite yield</div></div>
+      <div class="stat"><div class="v">10 min</div><div class="l">KCC turnaround under RBI's ULI, down from 4 to 6 weeks. Satellite yield is becoming default infrastructure.</div></div>
+    </div>
+    <p class="lede" style="margin-top:26px; max-width:1050px;">Accuracy just moved from a nice-to-have to a <span class="am">regulated, budgeted requirement</span>. PMFBY covers ~4.19 crore farmer applications on a ~₹39,000 crore market, and manual crop-cutting experiments across ~250,000 insurance units are slow, disputed and litigated. Whoever's yield is closest to true wins the tender and survives the dispute. That is your moat, meeting a mandate.</p>
+    <small class="src">Sources: PMFBY / YES-TECH Manual 2023; PIB / Cabinet note (FIAT ₹824.77 cr, Jan 2025); Economic Survey 2024-25 (KCC 7.75 cr / ₹9.81 L cr); RBI Innovation Hub / Axis Bank ULI pilot; Markets and Data (market size). Figures verified.</small>
+  </div>
+  <div class="foot"><span><b>Strategy</b> · the tailwind</span><span>Accuracy is now a mandate</span></div>
+</section>
+
+<!-- 03 THE HONEST READ -->
+<section class="slide">
+  <div class="top"><span class="snum">03 · The honest read</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>The field is real and funded. <span class="g">We win it on accuracy, not on scale.</span></h2>
+    <div class="two" style="margin-top:18px;">
+      <div>
+        <div class="kick" style="margin-bottom:8px;">Who already owns the logos</div>
+        <ul class="k sm">
+          <li><b>SatSure</b> — ~$29M raised; ICICI, HDFC and Kotak literally <b>invested</b> in it; CIBIL Credit-and-Farm Report; 2.1M+ plots. The category is proven and bankable.</li>
+          <li><b>RMSI Cropalytics</b> — empanelled by the Ministry to run YES-TECH nationally.</li>
+          <li><b>Cropin, WRMS, Satyukt</b> — plot-level risk APIs to lenders and insurers.</li>
+        </ul>
+        <p class="note">The buyers put money into SatSure. That means the education cost is zero: they already believe satellite yield de-risks lending and insurance.</p>
+      </div>
+      <div>
+        <div class="kick" style="margin-bottom:8px;">Why we still win a beachhead</div>
+        <ul class="k sm">
+          <li>None of them leads with a <b>defensible, quantified accuracy number</b>. That is the one thing a risk desk pays a premium for.</li>
+          <li>We are early and small on purpose here: <b>hardware-free, fast to deploy, one number to beat.</b></li>
+          <li>We do not out-scale SatSure. We <b>out-accurate them on one deep vertical</b>, prove it on the buyer's own book, and expand from strength.</li>
+        </ul>
+        <p class="note">Honest footing: Map My Crop is early vs these players. The plan does not claim contracts we don't have. It wins the first one on accuracy.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Strategy</b> · competitive read</span><span>Out-accurate, don't out-scale</span></div>
+</section>
+
+<!-- 04 TARGET BOARD -->
+<section class="slide">
+  <div class="top"><span class="snum">04 · The target board</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>The accounts I'd open, <span class="g">already mapped.</span></h2>
+    <div class="board">
+      <div class="rail"><div class="rh">Rail 0 · the key</div><div class="rn">Empanelment</div>
+        <div class="acct"><b>MNCFC</b> (YES-TECH)<span>the license to bid nationally</span></div>
+        <div class="acct"><b>State PMFBY cells</b><span>district yield contracts</span></div>
+      </div>
+      <div class="rail"><div class="rh">Rail 1 · highest value</div><div class="rn">Crop insurers</div>
+        <div class="acct"><b>AIC</b><span>&gt;50% share, ~25M farmers</span></div>
+        <div class="acct"><b>ICICI Lombard</b><span>largest private, bids selective</span></div>
+        <div class="acct"><b>Bajaj General</b> · Atul Mehta<span>aggressive PMFBY player</span></div>
+        <div class="acct"><b>HDFC Ergo</b><span>actuarial, selective</span></div>
+      </div>
+      <div class="rail"><div class="rh">Rail 2 · volume</div><div class="rn">Agri-lenders</div>
+        <div class="acct"><b>SBI</b> Agri &amp; Rural<span>largest KCC book</span></div>
+        <div class="acct"><b>NABARD</b><span>sets the standard, 1-to-many</span></div>
+        <div class="acct"><b>Jai Kisan</b> · A. Ahluwalia<span>collateral-free, founder-led</span></div>
+        <div class="acct"><b>Samunnati · Dvara KGFS</b><span>FPO / deep-rural credit</span></div>
+      </div>
+      <div class="rail"><div class="rh">Rail 3 · demand</div><div class="rn">Input majors</div>
+        <div class="acct"><b>UPL</b> / nurture<span>already uses satellite acreage</span></div>
+        <div class="acct"><b>Bayer CropScience</b><span>~35k dealers, forecast pain</span></div>
+        <div class="acct"><b>Coromandel</b><span>fertiliser season bet</span></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px;">Every name here is real, with a real buyer and a decision your accuracy improves. Sequenced next: land the key, then the highest-value rail.</p>
+  </div>
+  <div class="foot"><span><b>Strategy</b> · named-account motion</span><span>Complexity with budget, deploying on the number</span></div>
+</section>
+
+<!-- 05 PLAY 1 -->
+<section class="slide grid">
+  <div class="top"><span class="snum">05 · Play 1 · the key</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <span class="pill">MNCFC · YES-TECH empanelment</span>
+    <h2 style="font-size:30px;">Get empanelled. It is the license that de-risks every other conversation.</h2>
+    <div class="play">
+      <div>
+        <div class="kv">
+          <div class="r"><div class="kk">Decision</div><div class="vv">Become an empanelled Work Implementing Partner for YES-TECH yield estimation. It is the credential that opens all-state government volume and makes every insurer take the meeting.</div></div>
+          <div class="r"><div class="kk">Buyer</div><div class="vv">MNCFC Director + the DA&amp;FW PMFBY / YES-TECH cell. Bid / EoI-driven, not a single signature.</div></div>
+          <div class="r"><div class="kk">The gate</div><div class="vv">~₹5 cr turnover over 3 years in crop mapping / yield modelling; technical qualifying mark 60/100.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="kick" style="margin-bottom:8px;">The pilot to win it</div>
+        <ul class="k sm">
+          <li>Run a demonstration insurance-unit yield estimate for paddy or soybean in one target state.</li>
+          <li>Benchmark it against MITR-validated CCE ground truth to clear the technical gate.</li>
+          <li>That accuracy proof becomes the reference for every insurer play that follows.</li>
+        </ul>
+        <p class="note">Honest path: if we don't clear the turnover gate solo yet, we subcontract under an already-empanelled agency for one season, build the record, then bid direct. RMSI is empanelled; SatSure ships YES-TECH models. The door is open.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Client play 1</b> · government / empanelment rail</span><span>Credential → national volume</span></div>
+</section>
+
+<!-- 06 PLAY 2 -->
+<section class="slide">
+  <div class="top"><span class="snum">06 · Play 2 · highest value</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <span class="pill am">Private crop insurer · ICICI Lombard / Bajaj / HDFC Ergo</span>
+    <h2 style="font-size:30px;">Sell accuracy as a pricing weapon, alongside the mandated 30%.</h2>
+    <div class="play">
+      <div>
+        <div class="kv">
+          <div class="r"><div class="kk">Decision</div><div class="vv">Which district clusters to bid L1 on and at what rate; how to reserve in-season; how to defend a disputed CCE. All decided by whose yield is closest to true.</div></div>
+          <div class="r"><div class="kk">Buyer</div><div class="vv">Head of Rural &amp; Agri, Chief Underwriting Officer, Appointed Actuary. At Bajaj General, <b>Atul Mehta</b> (CDO, Institutional) owns crop + government business.</div></div>
+          <div class="r"><div class="kk">Price</div><div class="vv">SaaS + data licence, roughly ₹1 to 5 cr / yr, priced in loss-ratio basis points, not per acre.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="kick" style="margin-bottom:8px;">The pilot + the ROI</div>
+        <ul class="k sm">
+          <li>Pre-bid: score 15 to 20 candidate clusters on modelled loss cost, so they bid sharp on winners and walk from the adverse-selected ones.</li>
+          <li>In-season: fortnightly yield-trajectory dashboards to reserve and reinsure early, and an audit-grade yield ready to defend claims.</li>
+        </ul>
+        <p class="note">Why it dwarfs the farmer price: a 2-point loss-ratio improvement on a ₹1,000 cr crop book is ~₹20 cr, against a ₹2 cr contract. ~10x, and it is their number, not ours. (Illustrative.)</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Client play 2</b> · insurer-direct / risk rail</span><span>The 10 to 100x lives here</span></div>
+</section>
+
+<!-- 07 PLAY 3 -->
+<section class="slide">
+  <div class="top"><span class="snum">07 · Play 3 · volume</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <span class="pill">Agri-lending · SBI / Jai Kisan / Samunnati</span>
+    <h2 style="font-size:30px;">On a collateral-free crop loan, your yield call is the underwriting.</h2>
+    <div class="play">
+      <div>
+        <div class="kv">
+          <div class="r"><div class="kk">Decision</div><div class="vv">Is there a real crop on this plot (kills ghost loans); how big should the loan be (size to real yield); is it stressing mid-season (early NPA warning).</div></div>
+          <div class="r"><div class="kk">Buyer</div><div class="vv">SBI: DMD Agri + Risk CGM. Jai Kisan: CEO <b>Arjun Ahluwalia</b> + Head of Credit. Samunnati: CRO + founder <b>Anil Kumar SG</b>.</div></div>
+          <div class="r"><div class="kk">Price</div><div class="vv">~₹50 to 300 per accuracy-verified farm report at origination, plus a monitoring SaaS layer per active account. Sticky ARR.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="kick" style="margin-bottom:8px;">The pilot + the wedge</div>
+        <ul class="k sm">
+          <li>Back-test: score 25 to 50k existing KCC accounts in 3 to 4 high-NPA districts; correlate our yield accuracy to actual delinquency vs the current process.</li>
+          <li>Success = flagged accounts that map to real defaults + acreage-mismatch fraud caught.</li>
+        </ul>
+        <p class="note">SatSure has ICICI / HDFC / Kotak. So we win the banks and NBFCs they haven't locked, and win them on the accuracy delta, then plug into the ULI rail as it nationalises satellite-underwritten credit.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Client play 3</b> · lending rail</span><span>Accuracy = the underwriting</span></div>
+</section>
+
+<!-- 08 PRICING SHIFT -->
+<section class="slide grid">
+  <div class="top"><span class="snum">08 · The pricing shift</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>Stop pricing the map. <span class="am">Price the accuracy delta.</span></h2>
+    <div class="two" style="margin-top:18px; gap:40px;">
+      <div>
+        <div class="kick">Three models, let the buyer self-select</div>
+        <ul class="k sm">
+          <li><b>Empanelment</b> — per insurance-unit, government rate card. Thin margin, national volume, the reference logo.</li>
+          <li><b>Insurer / lender SaaS + data</b> — ₹1 to 5 cr / yr, priced in loss-ratio or NPA basis points. Where the money is.</li>
+          <li><b>Outcome / success fee</b> — a base plus a share of the loss-ratio or default reduction we drive. Highest trust, highest value.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="kick">Worked example (illustrative)</div>
+        <table>
+          <tbody>
+            <tr><td class="h">Farmer advisory today</td><td class="num">~₹3.5k / farmer / yr</td></tr>
+            <tr><td class="h">Insurer data + SaaS contract</td><td class="num">~₹2 cr / yr</td></tr>
+            <tr><td class="h">2-pt loss-ratio gain on a ₹1,000 cr book</td><td class="num">~₹20 cr</td></tr>
+            <tr class="tot"><td>Value to the buyer vs our fee</td><td class="num">~10x</td></tr>
+          </tbody>
+        </table>
+        <p class="note">The same yield call, sold to whoever carries the risk, is worth 10 to 100x. Every basis point of accuracy compounds across a crore-account book. (Illustrative; the real numbers are theirs, pulled in the pilot.)</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Commercial model</b></span><span>Accuracy, priced in basis points</span></div>
+</section>
+
+<!-- 09 FIRST 90 DAYS -->
+<section class="slide grid">
+  <div class="top"><span class="snum">09 · The first 90 days</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>Build the structure first. <span class="g">The number follows.</span></h2>
+    <div class="years">
+      <div class="yr"><div class="yl">Days 0–30 · Prove &amp; file</div>
+        <ul class="k sm"><li>Live the product, map what's already working in the pipeline</li><li>File / scope the MNCFC empanelment (or the subcontract path)</li><li>Run 2 retrospective accuracy back-tests as proof artifacts</li><li>Lock the named target board + the qualify bar</li></ul></div>
+      <div class="yr"><div class="yl">Days 31–60 · First pilots</div>
+        <ul class="k sm"><li>First private-insurer pre-bid or in-season pilot</li><li>First lender KCC accuracy back-test</li><li>Stand up the CRM + one number reviewed weekly</li><li>Input-major pre-season forecast conversation opened</li></ul></div>
+      <div class="yr"><div class="yl">Days 61–90 · First signed</div>
+        <ul class="k sm"><li>First signed pilot or LOI in the underwriting lane</li><li>Clean pilot-to-delivery handoff, so it expands not churns</li><li>Pricing logic + rate card locked across the three models</li><li>Forecastable pipeline, not in the founders' heads</li></ul></div>
+    </div>
+    <p class="lede" style="margin-top:22px; font-size:19px; font-weight:500;">The one number I'd run the team on: <span class="am">qualified underwriting pilots that convert to a signed contract.</span></p>
+  </div>
+  <div class="foot"><span><b>Operating plan</b></span><span>Structure → pipeline → first signed</span></div>
+</section>
+
+<!-- 10 WHY ME -->
+<section class="slide">
+  <div class="top"><span class="snum">10 · Why me</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2>I have built exactly this: <span class="g">a technical product sold to trust-first, regulated buyers.</span></h2>
+    <div class="cols c3" style="margin-top:22px;">
+      <div class="card"><div class="t">The exact lane</div><h3>AI into banks &amp; insurers</h3><p>At Simplifai I built APAC from zero to <b>$1M ARR in 12 months</b>, grown to $1.7M, selling AI into conservative BFSI buyers who take financial risk on being right. Your buyers, my track record.</p></div>
+      <div class="card"><div class="t">The engine</div><h3>Built to run without me</h3><p>At ZenAdmin I built the whole commercial function to <b>104% net revenue retention</b> and a ~300% ACV lift. I build the motion, the structure and the team, not just close.</p></div>
+      <div class="card"><div class="t">The founder's chair</div><h3>I sell the hard ones</h3><p>Founding sales at Craze (YC), founder of my own venture. I stand up the enterprise motion and personally close the first trust-gated deals myself.</p></div>
+    </div>
+    <p class="lede" style="margin-top:22px; font-size:17px;">The underwriting lane is a technical product, a regulated buyer, and a long trust-first sale. That is the exact motion I have built from zero, more than once.</p>
+  </div>
+  <div class="foot"><span><b>The operator</b></span><span>Ketan Sharma · Enterprise GTM</span></div>
+</section>
+
+<!-- 11 SOURCES -->
+<section class="slide">
+  <div class="top"><span class="snum">Sources &amp; honest footing</span><div class="mark">map my <b>crop</b></div></div>
+  <div class="body ta">
+    <h2 style="font-size:30px;">Built on verified ground.</h2>
+    <div class="two" style="margin-top:18px;">
+      <div>
+        <div class="kick">Key sources (fact-checked)</div>
+        <ul class="k sm">
+          <li>PMFBY / YES-TECH Manual 2023; PIB / Cabinet note (FIAT ₹824.77 cr, Jan 2025)</li>
+          <li>Economic Survey 2024-25 (KCC 7.75 cr / ₹9.81 L cr); RBI Innovation Hub ULI + Axis Bank pilot</li>
+          <li>MNCFC empanelment EoI (ncfc.gov.in, Oct 2023); AIC, ICICI Lombard, Bajaj, HDFC Ergo disclosures</li>
+          <li>SatSure (funding + ICICI/HDFC/Kotak investment, CIBIL CCFR), Cropin, RMSI Cropalytics, Satyukt, WRMS</li>
+          <li>Market sizing: Markets and Data via IBEF (single-vendor estimate, attributed)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="kick">Honest footing</div>
+        <ul class="k sm">
+          <li>Map My Crop is early vs the incumbents. This plan wins the <b>first</b> contract on accuracy and focus, and claims no logos we don't hold.</li>
+          <li>All ROI and pricing figures are <b>illustrative</b> value-logic; the real numbers get pulled from the buyer's own book in the pilot.</li>
+          <li>Empanelment may need a season of subcontracting under an empanelled agency first. Flagged, not hidden.</li>
+        </ul>
+        <p class="note">Every institution, mandate and competitor fact here was researched and adversarially fact-checked before it went on a slide.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Ketan Sharma · for Map My Crop</span><span>July 2026</span></div>
+</section>
+
+</div>
+</body>
+</html>
