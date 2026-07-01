@@ -122,6 +122,22 @@
       .vrow .v b{color:var(--accent)}
       .verdict .vcta{margin-top:18px}
       .verdict .vnote{margin-top:12px;font-size:12.5px;color:var(--muted-2)}
+      .health{margin:18px 0 4px;display:none}
+      .health.show{display:block;animation:fade .4s ease}
+      .health .hlab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+      .hbar{margin-bottom:11px}
+      .hbar .hb-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:5px}
+      .hbar .hb-top .nm{color:var(--cream)}
+      .hbar .hb-top .nm.weak{color:var(--amber);font-weight:600}
+      .hbar .hb-top .nm .st{font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.08em;margin-left:8px}
+      .hbar .hb-top .sc{font-family:var(--mono);font-size:11px;color:var(--muted)}
+      .hbar .hb-track{height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+      .hbar .hb-fill{height:100%;border-radius:6px;width:0;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+      .dep{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+      .dep .dep-top{display:flex;justify-content:space-between;font-size:12.5px;font-family:var(--mono);color:var(--muted);margin-bottom:7px}
+      .dep .dep-top b{color:var(--amber)}
+      .dep .dep-track{height:9px;border-radius:9px;background:var(--line-2);overflow:hidden}
+      .dep .dep-fill{height:100%;border-radius:9px;background:linear-gradient(90deg,var(--amber),#E7894C);width:35%;transition:width .45s ease}
 
       /* calculator */
       .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
@@ -267,6 +283,10 @@
                   <div class="vrow"><span class="k">Fit</span><span class="v" id="vmode"></span></div>
                   <div class="vrow"><span class="k">Where to start</span><span class="v" id="vtier"></span></div>
                   <div class="vrow"><span class="k">First 30 days</span><span class="v" id="vfirst"></span></div>
+                  <div class="health" id="health">
+                    <div class="hlab">Motion health, weakest first</div>
+                    <div id="healthBars"></div>
+                  </div>
                   <a class="btn primary vcta" id="vcta" href="#">Talk through this read &rarr;</a>
                   <p class="vnote">This is a read, not a verdict. The first real conversation is a diagnostic, not a pitch.</p>
                 </div>
@@ -309,6 +329,10 @@
                   <div class="bignum" id="outHrs" style="color:var(--cream)">644 hrs<small>A YEAR YOU SPEND IN THE ROOM INSTEAD OF ON THE COMPANY</small></div>
                 </div>
                 <p class="calc-note" id="calcNote"></p>
+                <div class="dep">
+                  <div class="dep-top"><span>How much of a full-time sales hire your own week already holds</span><b id="depPct">35%</b></div>
+                  <div class="dep-track"><div class="dep-fill" id="depFill"></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -501,8 +525,30 @@
         document.getElementById('vtier').innerHTML = r.tier;
         document.getElementById('vfirst').innerHTML = r.first;
         document.getElementById('vcta').href = 'mailto:ketansharma071190@gmail.com?subject=' + encodeURIComponent(r.subject) + '&body=' + encodeURIComponent(r.body);
+        var H = computeHealth(ans);
+        var dims=[{k:'ICP clarity',v:H.icp},{k:'Qualification',v:H.qual},{k:'Founder handoff',v:H.handoff},{k:'Pipeline truth',v:H.pipeline},{k:'Hiring readiness',v:H.hiring}];
+        dims.sort(function(x,y){return x.v-y.v});
+        var hb=document.getElementById('healthBars'); hb.innerHTML='';
+        dims.forEach(function(d,i){
+          var col = d.v<40?'var(--amber)':(d.v<70?'#8FB39F':'var(--accent)');
+          var weak = i===0?' weak':'';
+          var st = i===0?'<span class="st">start here</span>':'';
+          hb.innerHTML += '<div class="hbar"><div class="hb-top"><span class="nm'+weak+'">'+d.k+st+'</span><span class="sc">'+d.v+'</span></div><div class="hb-track"><div class="hb-fill" style="background:'+col+'"></div></div></div>';
+        });
+        var fills=hb.querySelectorAll('.hb-fill');
+        dims.forEach(function(d,i){ (function(el,w){ setTimeout(function(){ el.style.width=w+'%'; },40); })(fills[i], d.v); });
+        document.getElementById('health').classList.add('show');
       }
 
+      function clampH(x){return Math.max(10,Math.min(95,Math.round(x)))}
+      function computeHealth(a){
+        var icp = ({rel:35,hope:52,engine:85})[a.pipe] + ({pre:-8,a:0,b:5,c:12})[a.arr];
+        var qual = ({no:40,jr:56,yes:76})[a.leader] + (a.closer==='none'?-10:0) + (a.pipe==='engine'?10:0);
+        var handoff = ({founder:26,rep:52,none:34})[a.closer] + ({no:0,jr:12,yes:30})[a.leader];
+        var pipeline = ({rel:30,hope:44,engine:90})[a.pipe];
+        var hiring = ({no:36,jr:56,yes:80})[a.leader] + (a.hire==='unsure'?-8:0) + ((a.hire==='head'&&a.leader==='no')?-6:0);
+        return {icp:clampH(icp),qual:clampH(qual),handoff:clampH(handoff),pipeline:clampH(pipeline),hiring:clampH(hiring)};
+      }
       function diagnose(a){
         // past the fractional window
         if(a.arr==='c' || (a.leader==='yes' && a.pipe==='engine')){
@@ -596,6 +642,9 @@
           note = 'That is <b>'+fmt(rev)+'</b> of revenue and <b>'+hoursYr.toLocaleString()+' hours</b> depending on you being in the room. A fractional lead at <span class="grn">$4,000/mo</span> is about <span class="grn">$48K a year</span>: the cost of making that not true, before it breaks at the worst possible time.';
         }
         document.getElementById('calcNote').innerHTML = note;
+        var depPct = Math.min(100, Math.round(h/40*100));
+        document.getElementById('depPct').textContent = depPct + '%';
+        document.getElementById('depFill').style.width = depPct + '%';
       }
       [deal,deals,hrs].forEach(function(el){el.addEventListener('input',calc)});
       calc();
