@@ -3,168 +3,654 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fractional GTM Engagement | Ketan Sharma</title>
+    <title>Fractional Head of Sales for AI into BFSI | Ketan Sharma</title>
     <meta
       name="description"
-      content="Fractional Head of Sales and GTM engagement model for B2B SaaS founders turning founder-led sales into repeatable enterprise GTM."
+      content="Fractional Head of Sales for B2B AI products selling into BFSI and complex enterprise. Diagnose your sales motion, see what founder-led selling is costing you, and pick the engagement that fits."
     >
-    <link rel="stylesheet" href="./styles.css">
+    <meta property="og:title" content="Fractional Head of Sales for AI into BFSI | Ketan Sharma">
+    <meta property="og:description" content="I build the first repeatable enterprise sales motion for AI selling into BFSI. Diagnose your motion in 60 seconds.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --ink:#0A0E0D; --ink-2:#0E1413; --ink-3:#131C19; --raise:#17211D;
+        --line:rgba(232,229,221,0.10); --line-2:rgba(232,229,221,0.16);
+        --cream:#ECE8DF; --muted:#93A099; --muted-2:#6C7873;
+        --accent:#34E0A0; --accent-deep:#0F8F63; --accent-soft:rgba(52,224,160,0.12);
+        --amber:#E7B24C; --amber-soft:rgba(231,178,76,0.12);
+        --radius:16px; --radius-s:11px;
+        --sans:'Inter',system-ui,sans-serif; --disp:'Space Grotesk',var(--sans); --mono:'IBM Plex Mono',ui-monospace,monospace;
+        --maxw:1120px;
+      }
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
+      body{
+        background:var(--ink); color:var(--cream); font-family:var(--sans);
+        line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+        background-image:radial-gradient(1200px 600px at 80% -10%, rgba(52,224,160,0.07), transparent 60%),
+                         radial-gradient(900px 500px at -10% 10%, rgba(231,178,76,0.045), transparent 55%);
+      }
+      a{color:inherit;text-decoration:none}
+      .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+      .mono{font-family:var(--mono)}
+      .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:500}
+      .muted{color:var(--muted)}
+      h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.08;letter-spacing:-0.02em}
+
+      /* header */
+      header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+        background:rgba(10,14,13,0.72);border-bottom:1px solid var(--line)}
+      .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+      .brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:600;font-size:15px}
+      .brand .mk{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:12px;
+        background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#04120C;font-weight:700}
+      nav.links{display:flex;gap:26px;font-size:14px}
+      nav.links a{color:var(--muted);transition:color .15s}
+      nav.links a:hover{color:var(--cream)}
+      .top .cta{font-family:var(--mono);font-size:12.5px;padding:9px 15px;border:1px solid var(--line-2);border-radius:9px;color:var(--cream);transition:.15s}
+      .top .cta:hover{border-color:var(--accent);color:var(--accent)}
+      @media(max-width:760px){nav.links{display:none}}
+
+      /* hero */
+      .hero{padding:78px 0 40px}
+      .hero .status{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:var(--muted);
+        border:1px solid var(--line);border-radius:100px;padding:6px 13px;margin-bottom:26px}
+      .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(52,224,160,.5);animation:pulse 2.4s infinite}
+      @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,224,160,.45)}70%{box-shadow:0 0 0 9px rgba(52,224,160,0)}100%{box-shadow:0 0 0 0 rgba(52,224,160,0)}}
+      .hero h1{font-size:clamp(34px,5.4vw,60px);max-width:16ch}
+      .hero h1 .hl{color:var(--accent)}
+      .hero .lede{margin-top:22px;font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:60ch}
+      .hero .lede b{color:var(--cream);font-weight:600}
+      .hero-actions{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+      .btn{font-family:var(--mono);font-size:13.5px;padding:13px 20px;border-radius:11px;transition:.16s;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:9px}
+      .btn.primary{background:var(--accent);color:#04120C;font-weight:600}
+      .btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px rgba(52,224,160,.5)}
+      .btn.ghost{border-color:var(--line-2);color:var(--cream)}
+      .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+      .logos{margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;
+        display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+      .logos .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-right:6px}
+      .logos .logo{font-family:var(--disp);font-weight:600;font-size:17px;color:var(--cream);opacity:.82}
+      .logos .sep{color:var(--muted-2)}
+      .statline{margin-top:20px;display:flex;flex-wrap:wrap;gap:34px}
+      .statline .s strong{font-family:var(--disp);font-size:26px;color:var(--accent);display:block;letter-spacing:-.02em}
+      .statline .s span{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em}
+
+      /* section shell */
+      section.blk{padding:66px 0;border-top:1px solid var(--line)}
+      .shead{max-width:60ch;margin-bottom:34px}
+      .shead h2{font-size:clamp(25px,3.4vw,38px);margin-top:12px}
+      .shead p{margin-top:14px;color:var(--muted);font-size:16.5px}
+
+      /* interactive card frame */
+      .console{background:linear-gradient(180deg,var(--ink-2),var(--ink));border:1px solid var(--line-2);border-radius:var(--radius);overflow:hidden}
+      .console-bar{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,0.015)}
+      .console-bar .d{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+      .console-bar .d.g{background:var(--accent)}
+      .console-bar .t{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em}
+
+      /* diagnostic */
+      .diag-grid{display:grid;grid-template-columns:1.15fr .95fr;gap:0}
+      @media(max-width:880px){.diag-grid{grid-template-columns:1fr}}
+      .diag-q{padding:26px 28px;border-right:1px solid var(--line)}
+      @media(max-width:880px){.diag-q{border-right:none;border-bottom:1px solid var(--line)}}
+      .q{margin-bottom:22px}
+      .q .qlab{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em;margin-bottom:10px;display:flex;gap:8px}
+      .q .qlab i{color:var(--accent);font-style:normal}
+      .opts{display:flex;flex-wrap:wrap;gap:8px}
+      .opt{font-size:13.5px;padding:9px 13px;border:1px solid var(--line-2);border-radius:9px;cursor:pointer;color:var(--muted);transition:.14s;background:transparent}
+      .opt:hover{border-color:var(--accent);color:var(--cream)}
+      .opt.sel{background:var(--accent-soft);border-color:var(--accent);color:var(--cream)}
+      .diag-out{padding:26px 28px;display:flex;flex-direction:column}
+      .diag-empty{color:var(--muted-2);font-family:var(--mono);font-size:13px;margin:auto 0;text-align:center;padding:30px 10px}
+      .verdict{display:none}
+      .verdict.show{display:block;animation:fade .35s ease}
+      @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+      .vtag{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:100px;display:inline-block}
+      .vtag.frac{background:var(--accent-soft);color:var(--accent)}
+      .vtag.ft{background:rgba(120,170,255,.14);color:#8FB6FF}
+      .vtag.warm{background:var(--amber-soft);color:var(--amber)}
+      .vtag.early{background:var(--amber-soft);color:var(--amber)}
+      .verdict h3{font-size:23px;margin:14px 0 6px}
+      .verdict .vsub{color:var(--muted);font-size:14.5px;margin-bottom:16px}
+      .vrow{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+      .vrow .k{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+      .vrow .v{text-align:right;font-weight:500}
+      .vrow .v b{color:var(--accent)}
+      .verdict .vcta{margin-top:18px}
+      .verdict .vnote{margin-top:12px;font-size:12.5px;color:var(--muted-2)}
+
+      /* calculator */
+      .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+      @media(max-width:880px){.calc-grid{grid-template-columns:1fr}}
+      .calc-in{padding:28px;border-right:1px solid var(--line)}
+      @media(max-width:880px){.calc-in{border-right:none;border-bottom:1px solid var(--line)}}
+      .field{margin-bottom:26px}
+      .field label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-bottom:11px}
+      .field label b{color:var(--cream);font-size:15px}
+      input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:4px;background:var(--line-2);outline:none}
+      input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--ink);box-shadow:0 0 0 1px var(--accent)}
+      input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--ink)}
+      .calc-out{padding:28px;display:flex;flex-direction:column;justify-content:center;gap:20px;background:rgba(255,255,255,0.012)}
+      .bignum{font-family:var(--disp);font-size:clamp(30px,4.4vw,42px);color:var(--amber);letter-spacing:-.02em;line-height:1}
+      .bignum small{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;margin-top:9px;font-weight:400}
+      .calc-note{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+      .calc-note b{color:var(--cream)}
+      .calc-note .grn{color:var(--accent)}
+
+      /* rate ladder */
+      .rate-toggle{display:flex;gap:10px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+      .seg{display:inline-flex;border:1px solid var(--line-2);border-radius:10px;overflow:hidden}
+      .seg button{font-family:var(--mono);font-size:12.5px;padding:8px 14px;background:transparent;color:var(--muted);border:none;cursor:pointer;transition:.14s}
+      .seg button.on{background:var(--accent);color:#04120C;font-weight:600}
+      .rates{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+      @media(max-width:880px){.rates{grid-template-columns:1fr 1fr}}
+      @media(max-width:520px){.rates{grid-template-columns:1fr}}
+      .rate{background:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--radius-s);padding:20px 18px;transition:.16s;position:relative}
+      .rate:hover{border-color:var(--accent);transform:translateY(-3px)}
+      .rate.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+      .rate .flag{position:absolute;top:-9px;left:16px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--accent);color:#04120C;padding:3px 9px;border-radius:100px;font-weight:600}
+      .rate .nm{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+      .rate .amt{font-family:var(--disp);font-size:27px;margin:9px 0 3px;letter-spacing:-.02em}
+      .rate .amt .per{font-size:13px;color:var(--muted);font-family:var(--mono)}
+      .rate .hrs{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:11px}
+      .rate p{font-size:13px;color:var(--muted);line-height:1.5}
+      .rate-foot{margin-top:18px;font-size:13.5px;color:var(--muted)}
+      .rate-foot b{color:var(--cream)}
+
+      /* first 30 days tabs */
+      .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+      .tab{font-family:var(--mono);font-size:12.5px;padding:10px 15px;border:1px solid var(--line-2);border-radius:9px;cursor:pointer;color:var(--muted);transition:.14s}
+      .tab.on{background:var(--accent-soft);border-color:var(--accent);color:var(--cream)}
+      .tabpanel{background:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--radius-s);padding:26px 26px;min-height:150px}
+      .tabpanel h3{font-size:20px;margin-bottom:8px}
+      .tabpanel .wk{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em;margin-bottom:10px}
+      .tabpanel p{color:var(--muted);font-size:15px;max-width:64ch}
+
+      /* two column generic */
+      .two{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+      @media(max-width:880px){.two{grid-template-columns:1fr;gap:26px}}
+      .stack .it{padding:18px 0;border-top:1px solid var(--line)}
+      .stack .it h3{font-size:16.5px;margin-bottom:5px}
+      .stack .it p{color:var(--muted);font-size:14.5px}
+      .whytxt p{color:var(--muted);font-size:16px;margin-bottom:14px;max-width:56ch}
+      .whytxt p b{color:var(--cream)}
+      .pull{font-family:var(--disp);font-size:clamp(20px,2.6vw,26px);line-height:1.25;color:var(--cream);border-left:2px solid var(--accent);padding-left:20px;margin:6px 0}
+
+      /* proof */
+      .proof-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      @media(max-width:760px){.proof-cards{grid-template-columns:1fr}}
+      .pc{background:var(--ink-2);border:1px solid var(--line);border-radius:var(--radius-s);padding:22px}
+      .pc strong{font-family:var(--disp);font-size:30px;color:var(--accent);display:block;letter-spacing:-.02em}
+      .pc span{font-size:14px;color:var(--muted);display:block;margin-top:7px}
+
+      /* close */
+      .close{background:linear-gradient(180deg,var(--ink-3),var(--ink-2));border:1px solid var(--line-2);border-radius:var(--radius);padding:44px 38px;text-align:center}
+      .close h2{font-size:clamp(24px,3.4vw,34px);max-width:22ch;margin:0 auto 10px}
+      .close p{color:var(--muted);max-width:52ch;margin:0 auto 24px;font-size:16px}
+      .doors{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px;margin:0 auto 26px;text-align:left}
+      @media(max-width:640px){.doors{grid-template-columns:1fr}}
+      .door{background:var(--ink);border:1px solid var(--line-2);border-radius:var(--radius-s);padding:20px}
+      .door .dh{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px}
+      .door h4{font-family:var(--disp);font-size:17px;margin-bottom:6px}
+      .door p{color:var(--muted);font-size:13.5px;margin:0}
+
+      footer.foot{border-top:1px solid var(--line);padding:34px 0;margin-top:20px}
+      footer.foot .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:13px;color:var(--muted)}
+      footer.foot a:hover{color:var(--accent)}
+    </style>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="./index.html" aria-label="Ketan Sharma home">
-        <span class="brand-mark">KS</span>
-        <span>Ketan Sharma</span>
-      </a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="./index.html#work">Work</a>
-        <a href="./founder-led-sales-diagnostic.html">Diagnostic</a>
-        <a href="./simplifai-apac-enterprise-gtm.html">Case study</a>
-        <a href="./index.html#systems">AI GTM</a>
-        <a href="./index.html#contact">Talk</a>
-      </nav>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href="./index.html"><span class="mk">KS</span><span>Ketan Sharma</span></a>
+        <nav class="links">
+          <a href="#diagnose">Diagnose</a>
+          <a href="#cost">The cost</a>
+          <a href="#rates">Engagement</a>
+          <a href="./simplifai-apac-enterprise-gtm.html">Case study</a>
+        </nav>
+        <a class="cta" href="mailto:ketansharma071190@gmail.com?subject=Fractional%20GTM%20conversation">Start a conversation</a>
+      </div>
     </header>
 
     <main>
-      <section class="case-hero">
-        <p class="eyebrow">Fractional Head of Sales / GTM Leader</p>
-        <h1>If you need a deck, hire a consultant. If you need the motion fixed, I work inside it.</h1>
-        <p class="lede">
-          I take on a maximum of two serious engagements at a time. The work is hands-on: founder
-          syncs, customer and lost-deal calls, live deal reviews, outbound build, CRM truth, hiring,
-          coaching, and the operating cadence needed to move sales out of the founder's head.
-        </p>
-      </section>
-
-      <section class="section split">
-        <div>
-          <p class="eyebrow">Best fit</p>
-          <h2>This works when the problem is real enough to deserve operator time.</h2>
-        </div>
-        <div class="fit-list">
-          <p>B2B SaaS company around $500K-$10M ARR.</p>
-          <p>Founder is still closing most important deals.</p>
-          <p>There is at least some pipeline, but no reliable system.</p>
-          <p>You have one or two reps, or are about to hire the first serious sales hire.</p>
-          <p>You want someone who can join calls, inspect deals, build process, and coach the team.</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Engagement options</p>
-          <h2>Clear commercial model. No hidden consulting fog.</h2>
-        </div>
-        <div class="pricing-grid">
-          <article class="price-card">
-            <span>Starter</span>
-            <h3>$3,000 / month</h3>
-            <p>10-12 hours per week. 3-month minimum. Best for a focused GTM diagnostic, pipeline cleanup, ICP work, and first playbook.</p>
-          </article>
-          <article class="price-card featured-price">
-            <span>Standard</span>
-            <h3>$4,000 / month</h3>
-            <p>15-20 hours per week. 3-6 months. Best for active founder handoff, outbound build, live deal reviews, hiring support, and weekly operating cadence.</p>
-          </article>
-          <article class="price-card">
-            <span>Intensive</span>
-            <h3>$5,500 / month</h3>
-            <p>25+ hours per week. For companies in active scale mode that need deep sales leadership without waiting for a full-time hire.</p>
-          </article>
-          <article class="price-card">
-            <span>Ad hoc</span>
-            <h3>$250 / hour</h3>
-            <p>Minimum 2 hours. Deal reviews, hiring decisions, pricing strategy, GTM problem-solving, or founder-led sales teardown.</p>
-          </article>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrap">
+          <span class="status"><span class="dot"></span> Taking a maximum of two engagements at a time</span>
+          <h1>I build the first repeatable enterprise sales motion for <span class="hl">AI selling into BFSI</span>.</h1>
+          <p class="lede">
+            I did it zero to <b>$1M ARR in 12 months</b> at Simplifai, into Kotak, Bajaj, HDFC Mutual Fund and Upstox, back when nobody trusted AI inside a bank. Then grew it to <b>$1.7M</b>. If the founder is still the sales engine, I come inside the motion and fix it. Full-time or fractional are just two speeds of the same outcome.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#diagnose">Diagnose your sales motion &rarr;</a>
+            <a class="btn ghost" href="#rates">See engagement options</a>
+          </div>
+          <div class="logos">
+            <span class="lab">Built the motion into</span>
+            <span class="logo">Kotak</span><span class="sep">/</span>
+            <span class="logo">Bajaj</span><span class="sep">/</span>
+            <span class="logo">HDFC Mutual Fund</span><span class="sep">/</span>
+            <span class="logo">Upstox</span>
+          </div>
+          <div class="statline">
+            <div class="s"><strong>0 &rarr; $1M</strong><span>ARR IN 12 MONTHS</span></div>
+            <div class="s"><strong>$1.7M</strong><span>ARR AT EXIT</span></div>
+            <div class="s"><strong>$210K</strong><span>TOP ENTERPRISE TCV</span></div>
+            <div class="s"><strong>0 &rarr; 15</strong><span>REPS BUILT AND RUN</span></div>
+          </div>
         </div>
       </section>
 
-      <section class="section timeline-section">
-        <div class="section-heading">
-          <p class="eyebrow">How it works</p>
-          <h2>The first month is designed to find the truth, then move.</h2>
-        </div>
-        <div class="timeline">
-          <article>
-            <span>Week 1</span>
-            <h3>Customer, lost-deal, founder, and team interviews</h3>
-            <p>No assumptions. I inspect the deals, calls, CRM, messaging, current outbound, pricing, and team reality.</p>
-          </article>
-          <article>
-            <span>Week 2</span>
-            <h3>ICP locked, pipeline audited, gaps exposed</h3>
-            <p>We identify who actually buys, where deals stall, what is fantasy pipeline, and what needs to be fixed first.</p>
-          </article>
-          <article>
-            <span>Week 3</span>
-            <h3>Playbook v1 and outbound motion live</h3>
-            <p>Qualification, discovery, objection handling, CRM discipline, and outbound sequences begin running. Not perfect. Moving.</p>
-          </article>
-          <article>
-            <span>Week 4</span>
-            <h3>Operating review</h3>
-            <p>We review what is working and what is not. Real pipeline signal usually starts showing in week 6-8, not before.</p>
-          </article>
+      <!-- DIAGNOSTIC -->
+      <section class="blk" id="diagnose">
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">60-second self-diagnostic</span>
+            <h2>Where is your sales motion actually stuck?</h2>
+            <p>Answer five honest questions. I will tell you whether the fix is fractional, full-time, or not yet, which engagement fits, and what the first 30 days would go after for you. No email required to see it.</p>
+          </div>
+          <div class="console">
+            <div class="console-bar"><span class="d g"></span><span class="d"></span><span class="d"></span><span class="t">founder_led_sales.diagnostic</span></div>
+            <div class="diag-grid">
+              <div class="diag-q" id="diagQ"></div>
+              <div class="diag-out">
+                <div class="diag-empty" id="diagEmpty">Your read appears here as you answer.<br>Five quick taps.</div>
+                <div class="verdict" id="verdict">
+                  <span class="vtag" id="vtag"></span>
+                  <h3 id="vhead"></h3>
+                  <p class="vsub" id="vsub"></p>
+                  <div class="vrow"><span class="k">Fit</span><span class="v" id="vmode"></span></div>
+                  <div class="vrow"><span class="k">Where to start</span><span class="v" id="vtier"></span></div>
+                  <div class="vrow"><span class="k">First 30 days</span><span class="v" id="vfirst"></span></div>
+                  <a class="btn primary vcta" id="vcta" href="#">Talk through this read &rarr;</a>
+                  <p class="vnote">This is a read, not a verdict. The first real conversation is a diagnostic, not a pitch.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section systems">
-        <div class="systems-copy">
-          <p class="eyebrow">What is included</p>
-          <h2>I do not write a strategy deck and call it work.</h2>
-          <p>
-            The engagement is built around live operating work: weekly founder sync, daily async via
-            WhatsApp or Slack, live pitch/deal involvement, hiring support, playbook build, CRM truth,
-            and AI-first GTM systems where they make the team faster.
+      <!-- COST CALCULATOR -->
+      <section class="blk" id="cost">
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">The founder-bottleneck calculator</span>
+            <h2>What founder-led selling is quietly costing you.</h2>
+            <p>Founder energy closes the first ten logos. It also becomes the one wall holding the roof up. Move the sliders to your reality.</p>
+          </div>
+          <div class="console">
+            <div class="console-bar"><span class="d g"></span><span class="d"></span><span class="d"></span><span class="t">bottleneck.calc</span></div>
+            <div class="calc-grid">
+              <div class="calc-in">
+                <div class="field">
+                  <label>Average enterprise deal (ACV) <b id="lblDeal">$40,000</b></label>
+                  <input type="range" id="deal" min="5000" max="300000" step="5000" value="40000">
+                </div>
+                <div class="field">
+                  <label>Deals a month you personally close or rescue <b id="lblDeals">4</b></label>
+                  <input type="range" id="deals" min="0" max="20" step="1" value="4">
+                </div>
+                <div class="field">
+                  <label>Hours a week you spend selling <b id="lblHrs">14</b></label>
+                  <input type="range" id="hrs" min="0" max="40" step="1" value="14">
+                </div>
+              </div>
+              <div class="calc-out">
+                <div>
+                  <div class="bignum" id="outRev">$1.9M<small>OF NEW REVENUE A YEAR RUNS THROUGH ONE CALENDAR: YOURS</small></div>
+                </div>
+                <div>
+                  <div class="bignum" id="outHrs" style="color:var(--cream)">644 hrs<small>A YEAR YOU SPEND IN THE ROOM INSTEAD OF ON THE COMPANY</small></div>
+                </div>
+                <p class="calc-note" id="calcNote"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RATE LADDER -->
+      <section class="blk" id="rates">
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">Engagement options</span>
+            <h2>A clear commercial model. No hidden consulting fog.</h2>
+            <p>Hours-based, not a mystery retainer. Best fit is B2B SaaS or AI between $500K and $10M ARR. Pick what you actually need.</p>
+          </div>
+          <div class="rate-toggle">
+            <span class="mono" style="font-size:12.5px;color:var(--muted)">Currency</span>
+            <div class="seg" id="curSeg">
+              <button class="on" data-cur="usd">USD</button>
+              <button data-cur="inr">INR approx</button>
+            </div>
+            <span class="mono" style="font-size:12.5px;color:var(--muted);margin-left:12px">What do you need</span>
+            <div class="seg" id="needSeg">
+              <button class="on" data-need="all">Show all</button>
+              <button data-need="light">Just a diagnostic</button>
+              <button data-need="anchor">Handoff + build</button>
+              <button data-need="scale">Scale mode</button>
+            </div>
+          </div>
+          <div class="rates" id="rateCards"></div>
+          <p class="rate-foot">
+            <b>Retainers are renewable.</b> Payment in USD or INR equivalent. Full-time conversion can be discussed from month 3, with fractional fees credited if both sides want to make it permanent. Remote-first by default; I travel for the meetings that actually matter. Cash-strapped but strong at pre-seed: the light tier, ad-hoc, or reduced cash plus a small equity slice. I say yes fast.
           </p>
         </div>
-        <div class="system-stack">
-          <article>
-            <h3>Sales motion build</h3>
-            <p>ICP, qualification, discovery, objections, close plans, stakeholder maps, deal inspection, and operating cadence.</p>
-          </article>
-          <article>
-            <h3>Founder handoff</h3>
-            <p>Document and transfer the founder's sales instinct so the team can make decisions without constant founder rescue.</p>
-          </article>
-          <article>
-            <h3>Hiring and coaching</h3>
-            <p>Define the role, run the process, onboard the rep, coach live deals, and inspect whether the person can actually sell this motion.</p>
-          </article>
-          <article>
-            <h3>AI-first GTM systems</h3>
-            <p>Prospecting, enrichment, call intelligence, proposal drafts, CRM updates, and follow-up workflows where automation improves unit economics.</p>
-          </article>
+      </section>
+
+      <!-- FIRST 30 DAYS -->
+      <section class="blk">
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">How it works</span>
+            <h2>The first month finds the truth, then moves.</h2>
+            <p>No strategy deck pretending to be work. Click through what actually happens.</p>
+          </div>
+          <div class="tabs" id="tabs"></div>
+          <div class="tabpanel" id="tabPanel"></div>
         </div>
       </section>
 
-      <section class="section engagement">
-        <div>
-          <p class="eyebrow">Terms</p>
-          <h2>Simple enough to start. Serious enough to matter.</h2>
+      <!-- WHY NOW -->
+      <section class="blk">
+        <div class="wrap two">
+          <div>
+            <span class="eyebrow">Why this profile, why now</span>
+            <div class="whytxt" style="margin-top:14px">
+              <p>The market just moved under everyone. SaaSBoomi, the community that defined India's SaaS decade, is reframing around AI. The SaaS era of selling seats is giving way to the AI-native era of selling outcomes into regulated, skeptical enterprises.</p>
+              <p><b>That shift is screaming for one specific profile:</b> someone who has already sold AI into a bank that did not trust AI yet, and built a repeatable motion around it. Not a generic SaaS sales leader. An AI-into-BFSI GTM operator.</p>
+              <p>The hard part of enterprise AI was never the model. It is the 1998 procurement form, the compliance owner on leave, the buyer who needs proof before trust. I have sat in that exact chair and closed anyway.</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center">
+            <p class="pull">"I am the person who already did AI-into-BFSI go-to-market when nobody trusted AI in a bank yet. I carried the number, and at Mathurawala I also signed the payroll."</p>
+          </div>
         </div>
-        <p>
-          Retainers are renewable. Payment can be in USD or INR equivalent. Full-time conversion can
-          be discussed from month 3, with fractional fees credited if both sides want to make it
-          permanent. Remote-first by default; I travel for meetings that actually matter.
-        </p>
       </section>
 
-      <section class="contact">
-        <p class="eyebrow">Start with the motion</p>
-        <h2>If the founder is still the sales engine, the first conversation is a diagnostic, not a pitch.</h2>
-        <div class="hero-actions">
-          <a class="button primary" href="mailto:ketansharma071190@gmail.com?subject=Fractional%20GTM%20engagement">Talk about a fractional engagement</a>
-          <a class="button secondary" href="./founder-led-sales-diagnostic.html">Start with diagnostic</a>
-          <a class="button secondary" href="./index.html">Back to main page</a>
+      <!-- WHAT I DO / OPERATOR -->
+      <section class="blk">
+        <div class="wrap two">
+          <div>
+            <span class="eyebrow">What the engagement is</span>
+            <h2 style="font-size:clamp(23px,3vw,32px);margin-top:12px">Live operating work, not a document.</h2>
+            <p class="muted" style="margin-top:14px;font-size:16px;max-width:52ch">Weekly founder sync, daily async on WhatsApp or Slack, live deal reviews, outbound build, CRM truth, hiring and coaching, and AI-first GTM systems where they make the team faster. I join the calls. I inspect the deals. I move the motion out of your head.</p>
+          </div>
+          <div class="stack">
+            <div class="it"><h3>Sales motion build</h3><p>ICP, qualification, discovery, objection handling, close plans, stakeholder maps, deal inspection, and the operating cadence that holds it together.</p></div>
+            <div class="it"><h3>Founder handoff</h3><p>Document and transfer the founder's sales instinct so the team can decide without constant founder rescue.</p></div>
+            <div class="it"><h3>Hiring and coaching</h3><p>Define the role, run the process, onboard the rep, coach live deals, and honestly assess whether they can sell this motion.</p></div>
+            <div class="it"><h3>AI-first GTM systems</h3><p>Prospecting, enrichment, call intelligence, proposal drafts, CRM updates and follow-up, where automation actually improves unit economics.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROOF -->
+      <section class="blk">
+        <div class="wrap">
+          <div class="shead"><span class="eyebrow">The receipts</span><h2>Where the confidence comes from.</h2></div>
+          <div class="proof-cards">
+            <div class="pc"><strong>0 &rarr; $1.7M</strong><span>Built and scaled Simplifai's APAC AI-SaaS revenue from zero, into BFSI, carrying a larger annual target into the next year.</span></div>
+            <div class="pc"><strong>104% NRR</strong><span>Built ZenAdmin's entire commercial function from scratch to a 15-person team, around 20% MoM ARR growth.</span></div>
+            <div class="pc"><strong>&#8377;10M / yr</strong><span>Founded and ran Mathurawala to profitability. I have carried the number and also signed the payroll.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSE -->
+      <section class="blk">
+        <div class="wrap">
+          <div class="close">
+            <span class="eyebrow">Two doors, same outcome</span>
+            <h2>If the founder is still the sales engine, let's change that.</h2>
+            <p>Read your stage, name the mode that fits. You never have to choose "open to both."</p>
+            <div class="doors">
+              <div class="door">
+                <div class="dh">Fractional</div>
+                <h4>Run it for 3 to 6 months to de-risk it first</h4>
+                <p>Install the motion, prove the signal, and only then decide if it deserves a full-time seat. Fees credited if it converts.</p>
+              </div>
+              <div class="door">
+                <div class="dh">Full-time</div>
+                <h4>Come in as your Head of Sales</h4>
+                <p>If you are ready to hire and the motion needs daily ownership and continuity, I own it end to end.</p>
+              </div>
+            </div>
+            <div class="hero-actions" style="justify-content:center">
+              <a class="btn primary" href="mailto:ketansharma071190@gmail.com?subject=Fractional%20or%20full-time%20GTM%20conversation">Start the diagnostic conversation &rarr;</a>
+              <a class="btn ghost" href="https://www.linkedin.com/in/ketan7/">LinkedIn</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <span>Ketan Sharma</span>
-      <a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a>
-      <a href="https://www.linkedin.com/in/ketan7/">linkedin.com/in/ketan7</a>
+    <footer class="foot">
+      <div class="wrap">
+        <span>Ketan Sharma &middot; Fractional Head of Sales, AI into BFSI</span>
+        <span>
+          <a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://www.linkedin.com/in/ketan7/">linkedin.com/in/ketan7</a>
+        </span>
+      </div>
     </footer>
+
+    <script>
+      /* ---------- DIAGNOSTIC ---------- */
+      var QS = [
+        {id:'closer', q:'Who closes your biggest deals?', opts:[
+          {t:'The founder (me)', v:'founder'},
+          {t:'A rep or two', v:'rep'},
+          {t:'Nobody, not consistently', v:'none'}]},
+        {id:'arr', q:'Where is your ARR?', opts:[
+          {t:'Under $500K', v:'pre'},
+          {t:'$500K to $2M', v:'a'},
+          {t:'$2M to $10M', v:'b'},
+          {t:'$10M+', v:'c'}]},
+        {id:'leader', q:'Is there a sales leader above your reps?', opts:[
+          {t:'No leader', v:'no'},
+          {t:'A junior lead', v:'jr'},
+          {t:'Yes, a real one', v:'yes'}]},
+        {id:'pipe', q:'Your enterprise pipeline is mostly...', opts:[
+          {t:'My own relationships', v:'rel'},
+          {t:'Some process, a lot of hope', v:'hope'},
+          {t:'A repeatable engine', v:'engine'}]},
+        {id:'hire', q:'The next hire you are about to make?', opts:[
+          {t:'First AE', v:'ae'},
+          {t:'More SDRs / AEs', v:'more'},
+          {t:'A Head of Sales', v:'head'},
+          {t:'Not sure yet', v:'unsure'}]}
+      ];
+      var ans = {};
+      var qEl = document.getElementById('diagQ');
+      QS.forEach(function(item){
+        var wrap = document.createElement('div'); wrap.className='q';
+        var lab = document.createElement('div'); lab.className='qlab';
+        lab.innerHTML = '<i>'+ (QS.indexOf(item)+1) +'.</i> '+ item.q;
+        var opts = document.createElement('div'); opts.className='opts';
+        item.opts.forEach(function(o){
+          var b = document.createElement('button'); b.className='opt'; b.textContent=o.t;
+          b.onclick=function(){
+            ans[item.id]=o.v;
+            Array.prototype.forEach.call(opts.children,function(c){c.classList.remove('sel')});
+            b.classList.add('sel');
+            render();
+          };
+          opts.appendChild(b);
+        });
+        wrap.appendChild(lab); wrap.appendChild(opts); qEl.appendChild(wrap);
+      });
+
+      function render(){
+        if(Object.keys(ans).length < 5) return;
+        var r = diagnose(ans);
+        document.getElementById('diagEmpty').style.display='none';
+        var v = document.getElementById('verdict'); v.classList.add('show');
+        var tag = document.getElementById('vtag');
+        tag.className = 'vtag ' + r.cls; tag.textContent = r.badge;
+        document.getElementById('vhead').textContent = r.head;
+        document.getElementById('vsub').textContent = r.sub;
+        document.getElementById('vmode').innerHTML = r.mode;
+        document.getElementById('vtier').innerHTML = r.tier;
+        document.getElementById('vfirst').innerHTML = r.first;
+        document.getElementById('vcta').href = 'mailto:ketansharma071190@gmail.com?subject=' + encodeURIComponent(r.subject) + '&body=' + encodeURIComponent(r.body);
+      }
+
+      function diagnose(a){
+        // past the fractional window
+        if(a.arr==='c' || (a.leader==='yes' && a.pipe==='engine')){
+          return {cls:'ft', badge:'Likely full-time',
+            head:'You may be past the fractional window.',
+            sub:'You have scale and structure. What you need is daily ownership and continuity, not a part-time installer.',
+            mode:'<b>Full-time Head of Sales</b>, or a short advisory cadence',
+            tier:'Let\'s talk scope, not a retainer tier',
+            first:'Team, forecast integrity, and the next tier of the motion',
+            subject:'Full-time / advisory GTM conversation',
+            body:'Hi Ketan, I ran your diagnostic. We are at scale and I think we need daily sales ownership. Wanted to talk.'};
+        }
+        var founderLed = (a.closer==='founder' || a.closer==='none');
+        var thin = (a.pipe==='rel' || a.pipe==='hope');
+        var noLeader = (a.leader==='no' || a.leader==='jr');
+        // very early
+        if(a.arr==='pre'){
+          return {cls:'early', badge:'Start light',
+            head:'You are early. Buy a diagnosis, not a package.',
+            sub:'Under $500K, the risk is installing a heavy motion before you know who really buys. Start small and honest.',
+            mode:'<b>Fractional, light</b>, or an ad-hoc teardown',
+            tier:'<b>$3,000/mo</b> light, or $250/hr ad-hoc',
+            first:'ICP truth and which deals are real vs hope',
+            subject:'Early-stage GTM diagnostic',
+            body:'Hi Ketan, I ran your diagnostic. We are pre-$500K and founder-led. I want a sharp read before committing to a big hire.'};
+        }
+        // ready-to-hire signal
+        if(a.hire==='head' && !founderLed){
+          return {cls:'ft', badge:'Ready to hire',
+            head:'You are hiring a Head of Sales. Get the mode right first.',
+            sub:'The real question is whether the issue is a missing leader, or the ICP, process, and handoff underneath. I can own it, or de-risk it fractionally before you commit a full salary.',
+            mode:'<b>Full-time</b>, or fractional-first to de-risk',
+            tier:'<b>$4,000/mo</b> fractional to de-risk, then convert',
+            first:'ICP, qualification, and the founder handoff map',
+            subject:'Head of Sales: full-time or fractional-first',
+            body:'Hi Ketan, I ran your diagnostic. We are about to hire a Head of Sales. Curious how you would de-risk that.'};
+        }
+        // core fractional ICP
+        if(founderLed && noLeader && thin){
+          var isBig = (a.arr==='b');
+          return {cls:'frac', badge:'Core fractional fit',
+            head:'You are in the founder-bottleneck zone.',
+            sub:'The number lives in your relationships, your head, your calendar. Everyone calls it traction. It is a single point of failure in a nice suit. This is exactly what I come in to fix.',
+            mode:'<b>Fractional Head of Sales</b>',
+            tier: isBig ? '<b>$5,500/mo</b> (25+ hrs), scale-mode build' : '<b>$4,000/mo</b> (15-20 hrs), the anchor engagement',
+            first:'Founder handoff, real-vs-hope pipeline, and a live playbook',
+            subject:'Fractional Head of Sales conversation',
+            body:'Hi Ketan, I ran your diagnostic and landed on the founder-bottleneck read. I am still closing most serious deals myself. Let\'s talk.'};
+        }
+        // reps close but no real leader, and pipeline is thin
+        if(noLeader && a.closer==='rep' && thin){
+          return {cls:'frac', badge:'Fractional fit',
+            head:'Your reps are working, but not reproducing you.',
+            sub:'Effort is there, judgment is not transferring. That gap is a leader and a playbook problem, not an activity problem.',
+            mode:'<b>Fractional Head of Sales</b>',
+            tier:'<b>$4,000/mo</b> (15-20 hrs), the anchor engagement',
+            first:'Qualification gap, lost-deal teardown, and rep coaching',
+            subject:'Fractional Head of Sales conversation',
+            body:'Hi Ketan, I ran your diagnostic. My reps are busy but not closing like I do. Wanted to talk about the handoff.'};
+        }
+        // fallback / ambiguous -> warm, diagnostic first
+        return {cls:'warm', badge:'Start with a diagnostic',
+          head:'The signal is mixed. Let\'s find the real bottleneck first.',
+          sub:'Your answers do not point to one obvious break. That is exactly what a short diagnostic is for: name what is actually leaking before anyone sells you a package.',
+          mode:'<b>Diagnostic first</b>, then fractional or full-time',
+          tier:'Start with the diagnostic, scope after',
+          first:'A 7 to 10 day read on where the motion leaks',
+          subject:'Founder-led sales diagnostic',
+          body:'Hi Ketan, I ran your self-diagnostic and the read was mixed. I would like a sharper outside look at our motion.'};
+      }
+
+      /* ---------- COST CALCULATOR ---------- */
+      var deal=document.getElementById('deal'), deals=document.getElementById('deals'), hrs=document.getElementById('hrs');
+      function fmt(n){
+        if(n>=1000000) return '$'+(n/1000000).toFixed(n%1000000===0?0:1)+'M';
+        if(n>=1000) return '$'+Math.round(n/1000)+'K';
+        return '$'+n;
+      }
+      function calc(){
+        var d=+deal.value, n=+deals.value, h=+hrs.value;
+        document.getElementById('lblDeal').textContent = '$'+(+d).toLocaleString();
+        document.getElementById('lblDeals').textContent = n;
+        document.getElementById('lblHrs').textContent = h;
+        var rev = d*n*12;
+        var hoursYr = h*46;
+        document.getElementById('outRev').innerHTML = fmt(rev)+'<small>OF NEW REVENUE A YEAR RUNS THROUGH ONE CALENDAR: YOURS</small>';
+        document.getElementById('outHrs').innerHTML = hoursYr.toLocaleString()+' hrs<small>A YEAR YOU SPEND IN THE ROOM INSTEAD OF ON THE COMPANY</small>';
+        var note;
+        if(n===0 && h===0){ note = 'Move the sliders. Most founders underestimate how much of the number is sitting inside their own week.'; }
+        else {
+          note = 'That is <b>'+fmt(rev)+'</b> of revenue and <b>'+hoursYr.toLocaleString()+' hours</b> depending on you being in the room. A fractional lead at <span class="grn">$4,000/mo</span> is about <span class="grn">$48K a year</span>: the cost of making that not true, before it breaks at the worst possible time.';
+        }
+        document.getElementById('calcNote').innerHTML = note;
+      }
+      [deal,deals,hrs].forEach(function(el){el.addEventListener('input',calc)});
+      calc();
+
+      /* ---------- RATE LADDER ---------- */
+      var RATES = [
+        {key:'light', nm:'Starter', usd:'$3,000', inr:'~₹2.5L', per:'/mo', hrs:'10-12 hrs/wk, 3-mo min', p:'A focused GTM diagnostic, pipeline cleanup, ICP work, and the first playbook. The land-fast entry.'},
+        {key:'anchor', nm:'Standard', usd:'$4,000', inr:'~₹3.3L', per:'/mo', hrs:'15-20 hrs/wk, 3-6 mo', p:'Founder handoff, outbound build, live deal reviews, hiring support, and a weekly operating cadence.', feat:true},
+        {key:'scale', nm:'Intensive', usd:'$5,500', inr:'~₹4.6L', per:'/mo', hrs:'25+ hrs/wk', p:'Active scale mode: deep sales leadership without waiting for a full-time hire to ramp.'},
+        {key:'light', nm:'Ad hoc', usd:'$250', inr:'~₹20K', per:'/hr', hrs:'min 2 hrs', p:'Deal reviews, hiring decisions, pricing strategy, or a founder-led sales teardown. The premium ad-hoc rate, not the engagement model.', adhoc:true}
+      ];
+      var curCur='usd', curNeed='all';
+      function drawRates(){
+        var host=document.getElementById('rateCards'); host.innerHTML='';
+        RATES.forEach(function(r){
+          var show = (curNeed==='all') || (curNeed==='light'&&r.adhoc) || (curNeed===r.key);
+          if(curNeed==='light'){ show = (r.nm==='Starter'||r.adhoc); }
+          if(curNeed==='anchor'){ show = (r.nm==='Standard'); }
+          if(curNeed==='scale'){ show = (r.nm==='Intensive'); }
+          if(!show) return;
+          var el=document.createElement('article'); el.className='rate'+(r.feat?' feat':'');
+          el.innerHTML = (r.feat?'<span class="flag">Most common</span>':'')
+            + '<div class="nm">'+r.nm+'</div>'
+            + '<div class="amt">'+(curCur==='usd'?r.usd:r.inr)+'<span class="per">'+r.per+'</span></div>'
+            + '<div class="hrs">'+r.hrs+'</div>'
+            + '<p>'+r.p+'</p>';
+          host.appendChild(el);
+        });
+        if(!host.children.length){ host.innerHTML='<p class="muted mono" style="grid-column:1/-1">No tier for that filter. Show all.</p>'; }
+      }
+      document.getElementById('curSeg').addEventListener('click',function(e){
+        if(e.target.dataset.cur){ curCur=e.target.dataset.cur;
+          Array.prototype.forEach.call(this.children,function(b){b.classList.remove('on')}); e.target.classList.add('on'); drawRates(); }
+      });
+      document.getElementById('needSeg').addEventListener('click',function(e){
+        if(e.target.dataset.need){ curNeed=e.target.dataset.need;
+          Array.prototype.forEach.call(this.children,function(b){b.classList.remove('on')}); e.target.classList.add('on'); drawRates(); }
+      });
+      drawRates();
+
+      /* ---------- FIRST 30 DAYS TABS ---------- */
+      var WEEKS=[
+        {t:'Week 1', h:'Customer, lost-deal, founder and team interviews', p:'No assumptions. I inspect the real deals, the calls, the CRM, the messaging, the current outbound, the pricing, and the team as it actually is.'},
+        {t:'Week 2', h:'ICP locked, pipeline audited, gaps exposed', p:'We name who actually buys, where deals stall, what is fantasy pipeline, and what has to be fixed first before adding any activity.'},
+        {t:'Week 3', h:'Playbook v1 and outbound motion live', p:'Qualification, discovery, objection handling, CRM discipline and outbound sequences start running. Not perfect. Moving.'},
+        {t:'Week 4', h:'Operating review', p:'We review what is working and what is not. Real pipeline signal usually starts showing in week 6 to 8, not before. I will not pretend otherwise.'}
+      ];
+      var tabs=document.getElementById('tabs'), panel=document.getElementById('tabPanel');
+      WEEKS.forEach(function(w,i){
+        var b=document.createElement('div'); b.className='tab'+(i===0?' on':''); b.textContent=w.t;
+        b.onclick=function(){ Array.prototype.forEach.call(tabs.children,function(c){c.classList.remove('on')}); b.classList.add('on'); paint(i); };
+        tabs.appendChild(b);
+      });
+      function paint(i){ var w=WEEKS[i]; panel.innerHTML='<div class="wk">'+w.t.toUpperCase()+'</div><h3>'+w.h+'</h3><p>'+w.p+'</p>'; }
+      paint(0);
+    </script>
   </body>
 </html>
