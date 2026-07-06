@@ -96,8 +96,8 @@
   .term .feed div:first-child{opacity:1;color:var(--ink);}
   .cur{display:inline-block;width:7px;height:13px;background:var(--em);vertical-align:-2px;margin-left:4px;animation:blink 1.1s steps(1) infinite;}
   @keyframes blink{50%{opacity:0}}
-  .scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(55,224,160,.5),transparent);animation:scan 8s linear infinite;pointer-events:none;z-index:1;}
-  @keyframes scan{0%{top:-2%}100%{top:102%}}
+  .scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(55,224,160,.5),transparent);animation:scan 8s linear infinite;pointer-events:none;z-index:1;will-change:transform;}
+  @keyframes scan{0%{transform:translateY(-2vh)}100%{transform:translateY(102vh)}}
 
   /* interactive revenue model */
   .model .mhead{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--em);margin-bottom:10px;}
