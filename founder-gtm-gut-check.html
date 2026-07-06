@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Founder GTM Gut-Check | Ketan Sharma</title>
-    <meta name="description" content="Four quick, uncomfortable checks on the sales motion you think is working: your ICP, your pipeline, your discipline, and how much of the number still runs through you.">
+    <meta name="description" content="Five quick, uncomfortable checks on the sales motion you think is working: your ICP, your pipeline, your discipline, how much of the number still runs through you, and whether the market actually pulls.">
     <meta property="og:title" content="The Founder GTM Gut-Check | Ketan Sharma">
-    <meta property="og:description" content="Four 60-second checks that tell a founder where their sales motion is actually breaking. Try it.">
+    <meta property="og:description" content="Five 60-second checks that tell a founder where their sales motion is actually breaking. Try it.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,10 +129,10 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <span class="kick"><span class="mono">GUT-CHECK</span> &middot; four checks, about five minutes</span>
-          <h1>The motion you think is working. <span class="hl">Four honest checks.</span></h1>
+          <span class="kick"><span class="mono">GUT-CHECK</span> &middot; five checks, about six minutes</span>
+          <h1>The motion you think is working. <span class="hl">Five honest checks.</span></h1>
           <p class="lede">
-            Most founders do not have a sales problem. They have a few quiet lies the pipeline tells them, and nobody with the standing to call it. These four checks do. Answer them honestly, the way a skeptical VP of Sales would, not the way you hope. <b>Nothing is stored, nothing is sent.</b> You just see the truth for yourself.
+            Most founders do not have a sales problem. They have a few quiet lies the pipeline tells them, and nobody with the standing to call it. These five checks do. Answer them honestly, the way a skeptical VP of Sales would, not the way you hope. <b>Nothing is stored, nothing is sent.</b> You just see the truth for yourself.
           </p>
         </div>
       </section>
@@ -218,11 +218,30 @@
               <div class="reveal" id="fdReveal"></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- EX 5: demand pull -->
+      <section class="blk">
+        <div class="wrap">
+          <div class="console">
+            <div class="console-bar"><span class="d g"></span><span class="d"></span><span class="d"></span><span class="t">check_05.demand</span></div>
+            <div class="exhead">
+              <div class="n">CHECK 05 / DEMAND</div>
+              <h2>Do people pull, or are you pushing five logos uphill?</h2>
+              <div class="nq">The four checks above test your sales motion. None test whether the market wants it enough at the price. This one does.</div>
+            </div>
+            <div class="exbody">
+              <div id="demandQs"></div>
+              <button class="btn primary run" id="demandRun">Test the demand</button>
+              <div class="reveal" id="demandReveal"></div>
+            </div>
+          </div>
 
           <div class="close">
             <span class="eyebrow">If any of that stung</span>
             <h2>Good. That sting is the gap between founder-led selling and a real motion.</h2>
-            <p>I build the system that closes those gaps: the ICP that repeats, the gates that hold, the discipline you can hand to a rep, and a motion that runs when you are on a plane. I have done it from zero more than once.</p>
+            <p>I build the system that closes those gaps: the ICP that repeats, the gates that hold, the discipline you can hand to a rep, real demand you can prove, and a motion that runs when you are on a plane. I have done it from zero more than once.</p>
             <div class="hero-actions">
               <a class="btn primary" href="https://calendar.app.google/zChCq9cW1VXNA1pk9">Book 20 minutes &rarr;</a>
               <a class="btn ghost" href="mailto:ketansharma071190@gmail.com?subject=Founder%20GTM%20gut-check%20conversation">Or email me</a>
@@ -389,6 +408,47 @@
         }
       };
       drawFd();
+
+      /* ---------- CHECK 05: demand pull ---------- */
+      var DEM_Q=[
+        {id:'pull', q:'Of your last five wins, how many came to YOU (inbound or referral) versus you chasing them cold?'},
+        {id:'price', q:'When you hold your price firm, no discount, do deals still close?'},
+        {id:'urgency', q:'Are buyers replacing a budgeted must-have, or funding a nice-to-have?'},
+        {id:'breadth', q:'Beyond the logos you have closed, how many obvious next buyers have the SAME urgent pain right now?'},
+        {id:'expand', q:'Do customers expand or renew on their own, without you pushing?'}
+      ];
+      var DEM_OPTS={
+        pull:[{t:'Most came to us',v:3},{t:'About half',v:2},{t:'A couple',v:1},{t:'We chased all five',v:0}],
+        price:[{t:'Yes, price rarely blocks',v:3},{t:'Usually, small give',v:2},{t:'Only with real discounts',v:1},{t:'We discount to win',v:0}],
+        urgency:[{t:'Budgeted must-have',v:3},{t:'Important, discretionary',v:2},{t:'Nice-to-have',v:1},{t:'They love it, cannot fund it',v:0}],
+        breadth:[{t:'Dozens, clear market',v:3},{t:'A solid handful',v:2},{t:'A few we can name',v:1},{t:'Honestly, these five',v:0}],
+        expand:[{t:'Expand on their own',v:3},{t:'Renew, but flat',v:2},{t:'Renew only if we push',v:1},{t:'One-and-done / churn',v:0}]
+      };
+      var demAns={};
+      var demQs=document.getElementById('demandQs');
+      DEM_Q.forEach(function(q){
+        var row=mk('div','qrow'); row.appendChild(mk('div','ql',q.q));
+        var opts=mk('div','opts');
+        DEM_OPTS[q.id].forEach(function(o){
+          var b=mk('button','optbtn',o.t);
+          b.onclick=function(){demAns[q.id]=o.v;Array.prototype.forEach.call(opts.children,function(c){c.classList.remove('sel')});b.classList.add('sel');};
+          opts.appendChild(b);
+        });
+        row.appendChild(opts); demQs.appendChild(row);
+      });
+      document.getElementById('demandRun').onclick=function(){
+        var ids=['pull','price','urgency','breadth','expand'];
+        if(ids.some(function(k){return demAns[k]==null;})){flash('demandReveal','Answer all five first.');return;}
+        var score=ids.reduce(function(a,k){return a+demAns[k];},0); // 0..15
+        var r=document.getElementById('demandReveal'); r.classList.add('show');
+        if(score>=11){
+          r.innerHTML='<div class="big">Real <b style="color:var(--accent)">pull</b>. The market wants this, not just your five logos.</div><p>Buyers come to you, hold at price, and expand on their own. That is demand, not heroics. The job now is capacity: build the motion that can actually catch all the pull, because a thin team is the only thing standing between you and the number.</p>'+cta('Real demand plus a thin motion is the good problem. Let us build for it.');
+        } else if(score>=6){
+          r.innerHTML='<div class="big">Half pull, half push. The number rides on <b>your</b> effort, not the market\'s.</div><p>There is real signal in here, but you are still carrying deals uphill: chasing cold, discounting to win, or leaning on logos that never expand. That works while you are the engine. It stalls the day you hand it to a rep who cannot push the way you do.</p>'+cta('Let us separate the real pull from the push, and build on the part that is real.');
+        } else {
+          r.innerHTML='<div class="big">This is the gap the other four checks <b>miss</b>.</div><p>Your motion can be clean and your demand still thin: buyers do not come, price only moves with a discount, and there is no obvious next wave beyond these five. A founder who closes on sheer credibility hides this for a year, right up until the reps hit a market that was never really pulling, and this fifth check turns out to be the first one that actually mattered.</p>'+cta('If demand is thin, more sales effort just spends money faster. Let us pressure-test it honestly first.');
+        }
+      };
 
       /* helpers */
       function money(n){ if(n>=1000000)return '$'+(n/1000000).toFixed(n%1000000===0?0:1)+'M'; if(n>=1000)return '$'+Math.round(n/1000)+'K'; return '$'+n; }
