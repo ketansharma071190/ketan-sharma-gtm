@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CraftifAI &times; Ketan Sharma</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0E0D;--ink2:#0E1413;--ink3:#131C19;--raise:#17211D;
+  --line:rgba(232,229,221,.10);--line2:rgba(232,229,221,.18);
+  --fg:#E8E5DD;--mut:#9AA5A0;--dim:#6F7C77;
+  --acc:#5EE6A8;--acc2:#7FD9FF;--warn:#FFC46B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--fg);font:16px/1.62 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+h1,h2,h3,.mono{font-family:'Space Grotesk',sans-serif}
+.mono,code{font-family:'IBM Plex Mono',monospace}
+header{padding:64px 0 30px;border-bottom:1px solid var(--line)}
+.kicker{font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.20em;text-transform:uppercase;color:var(--acc)}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:16px 0 12px;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:17px;max-width:66ch}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;font-weight:600}
+h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
+p{color:#CFD6D2;margin-bottom:14px}
+p.tight{margin-bottom:8px}
+.grid{display:grid;gap:14px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card.hi{border-color:rgba(94,230,168,.34);background:linear-gradient(180deg,rgba(94,230,168,.06),transparent 60%),var(--ink2)}
+.lbl{font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.big{font-family:'Space Grotesk';font-size:29px;font-weight:600;letter-spacing:-.02em}
+.acc{color:var(--acc)}.acc2{color:var(--acc2)}.warn{color:var(--warn)}
+ul{margin:0 0 12px 18px;color:#CFD6D2}li{margin-bottom:7px}
+.toggle{display:inline-flex;background:var(--ink3);border:1px solid var(--line2);border-radius:11px;padding:4px;gap:4px;margin-bottom:26px;flex-wrap:wrap}
+.toggle button{background:none;border:0;color:var(--mut);font:600 14px/1 'Space Grotesk';padding:11px 20px;border-radius:8px;cursor:pointer}
+.toggle button.on{background:var(--acc);color:#06120C}
+.pane{display:none}.pane.on{display:block}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--dim);font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.13em;text-transform:uppercase}
+.gantt{display:grid;grid-template-columns:150px 1fr;gap:8px;align-items:center;font-size:13px}
+.bar{height:26px;border-radius:6px;background:var(--ink3);position:relative;overflow:hidden}
+.fill{position:absolute;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,rgba(94,230,168,.85),rgba(127,217,255,.6));display:flex;align-items:center;padding-left:9px;font:500 11px/1 'IBM Plex Mono';color:#06120C;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--acc);margin:6px 0}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pill{display:inline-block;font:500 11px/1 'IBM Plex Mono';padding:5px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);margin:0 5px 5px 0;cursor:pointer;user-select:none}
+.pill.on{background:var(--acc);color:#06120C;border-color:var(--acc)}
+.out{background:var(--ink3);border:1px solid var(--line2);border-radius:12px;padding:18px;margin-top:16px}
+.btn{display:inline-block;background:var(--acc);color:#06120C;font:600 14px/1 'Space Grotesk';padding:13px 20px;border:0;border-radius:9px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:none;border:1px solid var(--line2);color:var(--fg)}
+.note{font-size:13px;color:var(--dim)}
+footer{padding:40px 0 70px;color:var(--dim);font-size:13px}
+.caveat{border-left:2px solid var(--warn);padding-left:14px;color:#C9C2B4}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kicker">Prepared for Pratik Sharda &middot; CraftifAI</div>
+  <h1>Pilots are not a motion.</h1>
+  <p class="sub">You asked for an engagement scope. A scope written without understanding your actual GTM would be worth nothing, so here is what I think is true about CraftifAI first. Tell me where I have it wrong, because some of it will be wrong.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>What I can see from outside</h2>
+  <div class="grid g3">
+    <div class="card"><div class="lbl">Funding</div><div class="big">$3M</div><p class="note">Seed, Feb 2026. Ankur Capital, with IvyCap, Capital-A, Antler.</p></div>
+    <div class="card"><div class="lbl">Customers</div><div class="big">Pilots</div><p class="note">Indian OEMs in robotics, drones, AI cameras. Plus one US-listed semiconductor company.</p></div>
+    <div class="card"><div class="lbl">Age</div><div class="big">~18mo</div><p class="note">Founded 2024. Orbit, PipeGen, EdgeFlow, FirmGen.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Three things I think are actually going on</h2>
+
+  <div class="card hi" style="margin-bottom:14px">
+    <h3><span class="acc">01.</span> The whole business right now is pilot-to-paid, and that is a different sale from the one that won the pilots</h3>
+    <p>A pilot gets approved by an engineering lead who is curious and has a discretionary budget. Converting it to paid needs a different signature, usually procurement plus whoever owns the safety and quality process. The pitch that wins the pilot is "this will save my team months". The pitch that wins the contract is "this will not get us sued". Most seed companies discover this in month nine, after the pilots quietly expire.</p>
+  </div>
+
+  <div class="card hi" style="margin-bottom:14px">
+    <h3><span class="acc">02.</span> Your real objection is not price or accuracy. It is liability.</h3>
+    <p>You are generating firmware for drones, cameras, automotive and aerospace. If AI-written firmware fails in the field, someone has to own it. No embedded org has a policy for that yet, so the honest answer from your buyer is not "no", it is "I do not know who signs this". That is not a sales objection you close, it is a proof artefact you build once and reuse: what Orbit generates, what it never touches, how it is verified, and what the customer's own engineers still sign off on.</p>
+    <p class="tight">Whoever writes that document first defines the category. It is also the single highest-leverage thing a GTM person could build for you, and it is not a deck.</p>
+  </div>
+
+  <div class="card hi">
+    <h3><span class="acc">03.</span> Indian OEMs and a US-listed semiconductor company are two different companies</h3>
+    <p>An Indian robotics or drone OEM is a fast, price-sensitive, founder-to-founder sale where your PhonePe SmartSpeaker background is genuinely load-bearing. A US-listed semiconductor company is nine to eighteen months, a buying committee, security review, and your India-ness is a question rather than an asset. Both are in your pilot list. At eighteen months old with a $3M seed you can fund one of those motions properly, not two.</p>
+    <p class="tight">Picking one is not narrowing. It is the only way anything compounds.</p>
+  </div>
+
+  <p class="caveat" style="margin-top:18px">Where I might be wrong: you may already have paid conversions I cannot see, the US semi relationship may be a design partnership rather than a sales motion, and Yashwant's Xilinx and Sima.ai network may make the US path far warmer than it looks from outside. All three would change the answer.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>So, two shapes. Pick the one that fits.</h2>
+  <div class="toggle">
+    <button id="tF" class="on" onclick="pane('F')">Fractional</button>
+    <button id="tE" onclick="pane('E')">Full time, shaped by you</button>
+  </div>
+
+  <div id="pF" class="pane on">
+    <div class="card" style="margin-bottom:16px">
+      <div class="lbl">What I would actually do, in order</div>
+      <div class="gantt">
+        <div>Pilot post-mortems</div><div class="bar"><div class="fill" style="left:0%;width:26%">Wk 1&ndash;3</div></div>
+        <div>The liability artefact</div><div class="bar"><div class="fill" style="left:14%;width:36%">Wk 2&ndash;6</div></div>
+        <div>Pick the motion</div><div class="bar"><div class="fill" style="left:33%;width:20%">Wk 4&ndash;6</div></div>
+        <div>20&ndash;30 named accounts</div><div class="bar"><div class="fill" style="left:41%;width:45%">Wk 5&ndash;12</div></div>
+        <div>Pricing that fits</div><div class="bar"><div class="fill" style="left:58%;width:26%">Wk 7&ndash;10</div></div>
+        <div>Playbook + hire spec</div><div class="bar"><div class="fill" style="left:75%;width:25%">Wk 10&ndash;12</div></div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card"><div class="lbl">Weeks 1&ndash;3 &middot; Pilot post-mortems</div><p class="note">Every pilot, win or stall, interviewed properly. Who approved it, what budget line, what would have to be true to sign, and who blocks. This is where the real ICP is hiding, not in a persona doc.</p></div>
+      <div class="card"><div class="lbl">Weeks 2&ndash;6 &middot; The liability artefact</div><p class="note">The verification and accountability story for AI-generated firmware, written once, reusable in every deal. Scope of what Orbit writes, what it never writes, how output is verified, what your customer still signs. This is the asset that lets a non-founder close.</p></div>
+      <div class="card"><div class="lbl">Weeks 4&ndash;6 &middot; Pick the motion</div><p class="note">India OEM or US semiconductor. Written decision with the reasoning, so it stops being re-argued every month.</p></div>
+      <div class="card"><div class="lbl">Weeks 5&ndash;12 &middot; 20&ndash;30 named accounts</div><p class="note">Not a funnel. A named list in the chosen motion, worked properly, with the learnings written down before anything scales. I am in these conversations, not watching them.</p></div>
+      <div class="card"><div class="lbl">Weeks 7&ndash;10 &middot; Pricing</div><p class="note">Per seat, per project, per device or usage. Embedded tooling has no default and the wrong choice caps you for years.</p></div>
+      <div class="card"><div class="lbl">Weeks 10&ndash;12 &middot; Playbook and hire spec</div><p class="note">What repeats, written down, plus an honest answer on whether your next hire is a rep, a solutions engineer, or nobody yet.</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card"><div class="lbl">Engaged</div><div class="big">$4,000<span style="font-size:15px;color:var(--mut)">/mo</span></div><p class="note">15&ndash;20 hrs/week. Three month minimum. <strong>This is the one I would pick</strong>, because the pilot post-mortems and the liability artefact are real work, not advice.</p></div>
+      <div class="card"><div class="lbl">Lighter</div><div class="big" style="color:var(--mut)">$3,000<span style="font-size:15px">/mo</span></div><p class="note">10&ndash;12 hrs/week. Same sequence, slower, and I am in fewer of the customer conversations. Honest but weaker.</p></div>
+    </div>
+
+    <p class="caveat" style="margin-top:16px">What this will not do: produce a repeatable, forecastable sales motion in twelve weeks. At eighteen months old with pilots not yet converted, anyone promising that is selling you a story. Twelve weeks converts pilots, picks the motion, and builds the asset that makes the next hire viable.</p>
+  </div>
+
+  <div id="pE" class="pane">
+    <p>In July you asked which shape fits. You floated full time and a Bengaluru move, and said budget was the constraint. So rather than send you a number, here is the actual trade. Move the sliders. Every combination below is one I would sign.</p>
+
+    <div class="card" style="margin-top:16px">
+      <div class="lbl">Base location</div>
+      <div id="loc">
+        <span class="pill on" data-l="pune" data-f="70">Pune, remote</span>
+        <span class="pill" data-l="blr" data-f="80">Bengaluru, relocate</span>
+      </div>
+      <p class="note" id="locNote">Pune keeps my costs where they are. Bengaluru means moving a family, and that has a real price, so the fixed goes up. Nothing else changes.</p>
+
+      <div style="margin-top:22px">
+        <div class="row"><span class="lbl" style="margin:0">Fixed cash</span><span class="mono acc" id="fxL">&#8377;70L</span></div>
+        <input type="range" id="fx" min="45" max="85" value="70" step="1">
+        <p class="note">Drag it down and the equity and variable move up to compensate. Drag it up and they come down. The total stays roughly constant to me, so this is genuinely your choice, not a negotiation.</p>
+      </div>
+
+      <div class="grid g3" style="margin-top:20px">
+        <div class="card"><div class="lbl">Equity</div><div class="big acc2" id="eq">0.60%</div><p class="note">Four years, one year cliff, at the seed price.</p></div>
+        <div class="card"><div class="lbl">Variable</div><div class="big" id="va">&#8377;12L</div><p class="note">On converted pilot revenue, which is the number I would actually own.</p></div>
+        <div class="card"><div class="lbl">Year one cash</div><div class="big" id="tc">&#8377;82L</div><p class="note">Fixed plus variable at plan.</p></div>
+      </div>
+
+      <div class="out">
+        <div class="lbl">What you just built</div>
+        <p class="mono" id="summary" style="color:var(--fg);font-size:14px;margin:0"></p>
+        <button class="btn" style="margin-top:14px" onclick="copyIt()">Copy this and send it back to me</button>
+        <span class="note" id="copied" style="margin-left:10px"></span>
+      </div>
+      <p class="note" style="margin-top:12px">For reference, my last package was &#8377;66L fixed plus variable plus 1% ESOP. Anything at or below 66 here is a genuine cut, and I am fine with that if the equity does the work.</p>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Why me for this specifically</h2>
+  <p>At ZenAdmin I re-pointed the commercial motion from South East Asia into North America and Europe, and personally closed Remote, Deel, Omnipresent and Eventbrite. US and global buyers, sold from India, on their hours. That is the exact question your US semiconductor pilot raises.</p>
+  <p>Before that I built Simplifai's APAC org from zero to $1M ARR in twelve months selling AI into banks and insurers, which is the closest analogue I have to your problem: a buyer who is personally accountable if the thing goes wrong, and who needs proof that a peer survived the decision before they will move.</p>
+  <p>And I have run my own company, so I know what $3M of runway feels like and I will not spend it on a funnel.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Ketan Sharma &middot; Pune &middot; +91 98993 80222</p>
+  <p style="margin-top:6px">Built for this conversation only. Everything above is an outside read and I would rather be corrected than agreed with.</p>
+</div></footer>
+
+<script>
+function pane(k){
+  document.getElementById('pF').classList.toggle('on',k==='F');
+  document.getElementById('pE').classList.toggle('on',k==='E');
+  document.getElementById('tF').classList.toggle('on',k==='F');
+  document.getElementById('tE').classList.toggle('on',k==='E');
+}
+var LOC='Pune, remote', BASE=70;
+document.querySelectorAll('#loc .pill').forEach(function(p){
+  p.onclick=function(){
+    document.querySelectorAll('#loc .pill').forEach(function(x){x.classList.remove('on')});
+    p.classList.add('on');
+    BASE=+p.dataset.f; LOC=p.textContent.trim();
+    document.getElementById('fx').value=BASE;
+    calc();
+  };
+});
+function calc(){
+  var fx=+document.getElementById('fx').value;
+  var gap=BASE-fx;                          // how far below the location baseline
+  var eqN=0.60+gap*0.030;                   // every 1L of cash given up buys 0.03% equity
+  eqN=Math.max(0.35,Math.min(1.25,eqN));    // floor and CEILING. 1.25% is the most I would ask at seed.
+  var eq=eqN.toFixed(2);
+  var va=Math.max(0,Math.round(12+gap*0.55));
+  document.getElementById('fxL').textContent='₹'+fx+'L';
+  document.getElementById('eq').textContent=eq+'%';
+  document.getElementById('va').textContent='₹'+va+'L';
+  document.getElementById('tc').textContent='₹'+(fx+va)+'L';
+  document.getElementById('summary').textContent=
+    LOC+' · ₹'+fx+'L fixed · '+eq+'% equity (4yr, 1yr cliff) · ₹'+va+
+    'L variable on converted pilot revenue · year one cash ₹'+(fx+va)+'L';
+}
+document.getElementById('fx').addEventListener('input',calc);
+function copyIt(){
+  navigator.clipboard.writeText(document.getElementById('summary').textContent).then(function(){
+    document.getElementById('copied').textContent='copied';
+    setTimeout(function(){document.getElementById('copied').textContent='';},2200);
+  });
+}
+calc();
+</script>
+</body>
+</html>
