@@ -98,81 +98,44 @@ footer{padding:40px 0 70px;color:var(--dim);font-size:13px}
 </div></section>
 
 <section><div class="wrap">
-  <h2>So, two shapes. Pick the one that fits.</h2>
-  <div class="toggle">
-    <button id="tF" class="on" onclick="pane('F')">Fractional</button>
-    <button id="tE" onclick="pane('E')">Full time, shaped by you</button>
-  </div>
+  <h2>The scope you asked for</h2>
+  <p style="font-size:18px;color:var(--fg)"><strong>Ninety days. One aim: your pilots become revenue, or you know exactly why not.</strong> Fifteen to twenty hours a week, embedded, in the conversations rather than watching them.</p>
 
-  <div id="pF" class="pane on">
-    <div class="card" style="margin-bottom:16px">
-      <div class="lbl">What I would actually do, in order</div>
-      <div class="gantt">
-        <div>Pilot post-mortems</div><div class="bar"><div class="fill" style="left:0%;width:26%">Wk 1&ndash;3</div></div>
-        <div>The liability artefact</div><div class="bar"><div class="fill" style="left:14%;width:36%">Wk 2&ndash;6</div></div>
-        <div>Pick the motion</div><div class="bar"><div class="fill" style="left:33%;width:20%">Wk 4&ndash;6</div></div>
-        <div>20&ndash;30 named accounts</div><div class="bar"><div class="fill" style="left:41%;width:45%">Wk 5&ndash;12</div></div>
-        <div>Pricing that fits</div><div class="bar"><div class="fill" style="left:58%;width:26%">Wk 7&ndash;10</div></div>
-        <div>Playbook + hire spec</div><div class="bar"><div class="fill" style="left:75%;width:25%">Wk 10&ndash;12</div></div>
-      </div>
-    </div>
-
-    <div class="grid g2">
-      <div class="card"><div class="lbl">Weeks 1&ndash;3 &middot; Pilot post-mortems</div><p class="note">Every pilot, win or stall, interviewed properly. Who approved it, what budget line, what would have to be true to sign, and who blocks. This is where the real ICP is hiding, not in a persona doc.</p></div>
-      <div class="card"><div class="lbl">Weeks 2&ndash;6 &middot; The liability artefact</div><p class="note">The verification and accountability story for AI-generated firmware, written once, reusable in every deal. Scope of what Orbit writes, what it never writes, how output is verified, what your customer still signs. This is the asset that lets a non-founder close.</p></div>
-      <div class="card"><div class="lbl">Weeks 4&ndash;6 &middot; Pick the motion</div><p class="note">India OEM or US semiconductor. Written decision with the reasoning, so it stops being re-argued every month.</p></div>
-      <div class="card"><div class="lbl">Weeks 5&ndash;12 &middot; 20&ndash;30 named accounts</div><p class="note">Not a funnel. A named list in the chosen motion, worked properly, with the learnings written down before anything scales. I am in these conversations, not watching them.</p></div>
-      <div class="card"><div class="lbl">Weeks 7&ndash;10 &middot; Pricing</div><p class="note">Per seat, per project, per device or usage. Embedded tooling has no default and the wrong choice caps you for years.</p></div>
-      <div class="card"><div class="lbl">Weeks 10&ndash;12 &middot; Playbook and hire spec</div><p class="note">What repeats, written down, plus an honest answer on whether your next hire is a rep, a solutions engineer, or nobody yet.</p></div>
-    </div>
-
-    <div class="grid g2" style="margin-top:16px">
-      <div class="card"><div class="lbl">Engaged</div><div class="big">$4,000<span style="font-size:15px;color:var(--mut)">/mo</span></div><p class="note">15&ndash;20 hrs/week. Three month minimum. <strong>This is the one I would pick</strong>, because the pilot post-mortems and the liability artefact are real work, not advice.</p></div>
-      <div class="card"><div class="lbl">Lighter</div><div class="big" style="color:var(--mut)">$3,000<span style="font-size:15px">/mo</span></div><p class="note">10&ndash;12 hrs/week. Same sequence, slower, and I am in fewer of the customer conversations. Honest but weaker.</p></div>
-    </div>
-
-    <p class="caveat" style="margin-top:16px">What this will not do: produce a repeatable, forecastable sales motion in twelve weeks. At eighteen months old with pilots not yet converted, anyone promising that is selling you a story. Twelve weeks converts pilots, picks the motion, and builds the asset that makes the next hire viable.</p>
-  </div>
-
-  <div id="pE" class="pane">
-    <p>In July you asked which shape fits. You floated full time and a Bengaluru move, and said budget was the constraint. So rather than send you a number, here is the actual trade. Move the sliders. Every combination below is one I would sign.</p>
-
-    <div class="card" style="margin-top:16px">
-      <div class="lbl">Base location</div>
-      <div id="loc">
-        <span class="pill on" data-l="pune" data-f="70">Pune, remote</span>
-        <span class="pill" data-l="blr" data-f="80">Bengaluru, relocate</span>
-      </div>
-      <p class="note" id="locNote">Pune keeps my costs where they are. Bengaluru means moving a family, and that has a real price, so the fixed goes up. Nothing else changes.</p>
-
-      <div style="margin-top:22px">
-        <div class="row"><span class="lbl" style="margin:0">Fixed cash</span><span class="mono acc" id="fxL">&#8377;70L</span></div>
-        <input type="range" id="fx" min="45" max="85" value="70" step="1">
-        <p class="note">Drag it down and the equity and variable move up to compensate. Drag it up and they come down. The total stays roughly constant to me, so this is genuinely your choice, not a negotiation.</p>
-      </div>
-
-      <div class="grid g3" style="margin-top:20px">
-        <div class="card"><div class="lbl">Equity</div><div class="big acc2" id="eq">0.60%</div><p class="note">Four years, one year cliff, at the seed price.</p></div>
-        <div class="card"><div class="lbl">Variable</div><div class="big" id="va">&#8377;12L</div><p class="note">On converted pilot revenue, which is the number I would actually own.</p></div>
-        <div class="card"><div class="lbl">Year one cash</div><div class="big" id="tc">&#8377;82L</div><p class="note">Fixed plus variable at plan.</p></div>
-      </div>
-
-      <div class="out">
-        <div class="lbl">What you just built</div>
-        <p class="mono" id="summary" style="color:var(--fg);font-size:14px;margin:0"></p>
-        <button class="btn" style="margin-top:14px" onclick="copyIt()">Copy this and send it back to me</button>
-        <span class="note" id="copied" style="margin-left:10px"></span>
-      </div>
-      <p class="note" style="margin-top:12px">For reference, my last package was &#8377;66L fixed plus variable plus 1% ESOP. Anything at or below 66 here is a genuine cut, and I am fine with that if the equity does the work.</p>
+  <div class="card" style="margin:18px 0 16px">
+    <div class="lbl">The plan, in order</div>
+    <div class="gantt">
+      <div>Pilot post-mortems</div><div class="bar"><div class="fill" style="left:0%;width:26%">Wk 1&ndash;3</div></div>
+      <div>The liability artefact</div><div class="bar"><div class="fill" style="left:14%;width:36%">Wk 2&ndash;6</div></div>
+      <div>The motion decision</div><div class="bar"><div class="fill" style="left:33%;width:20%">Wk 4&ndash;6</div></div>
+      <div>Conversion pushes</div><div class="bar"><div class="fill" style="left:41%;width:52%">Wk 5&ndash;12</div></div>
+      <div>Pricing that fits</div><div class="bar"><div class="fill" style="left:58%;width:26%">Wk 7&ndash;10</div></div>
+      <div>Playbook + hire answer</div><div class="bar"><div class="fill" style="left:75%;width:25%">Wk 10&ndash;12</div></div>
     </div>
   </div>
-</div></section>
 
-<section><div class="wrap">
-  <h2>Why me for this specifically</h2>
-  <p>At ZenAdmin I re-pointed the commercial motion from South East Asia into North America and Europe, and personally closed Remote, Deel, Omnipresent and Eventbrite. US and global buyers, sold from India, on their hours. That is the exact question your US semiconductor pilot raises.</p>
-  <p>Before that I built Simplifai's APAC org from zero to $1M ARR in twelve months selling AI into banks and insurers, which is the closest analogue I have to your problem: a buyer who is personally accountable if the thing goes wrong, and who needs proof that a peer survived the decision before they will move.</p>
-  <p>And I have run my own company, so I know what $3M of runway feels like and I will not spend it on a funnel.</p>
+  <div class="grid g2">
+    <div class="card"><div class="lbl">Weeks 1&ndash;3 &middot; Pilot post-mortems</div><p class="note">Every pilot, live or stalled, interviewed properly. Who approved it, whose budget line, what would have to be true to sign, who blocks. The real ICP is hiding in these answers, not in a persona doc.</p></div>
+    <div class="card"><div class="lbl">Weeks 2&ndash;6 &middot; The liability artefact</div><p class="note">The verification and accountability story for AI-written firmware, built once, used in every deal: what Orbit generates, what it never touches, how output is verified, what your customer's engineers still sign. The asset that lets a deal close without you in the room.</p></div>
+    <div class="card"><div class="lbl">Weeks 4&ndash;6 &middot; The motion decision</div><p class="note">India OEM or US semiconductor. Decided on paper, with reasons, so it stops being re-argued every month.</p></div>
+    <div class="card"><div class="lbl">Weeks 5&ndash;12 &middot; Conversion pushes</div><p class="note">The live pilots worked to a decision, plus 20 to 30 named accounts opened in the chosen motion. I am in these conversations. Learnings written down before anything scales.</p></div>
+    <div class="card"><div class="lbl">Weeks 7&ndash;10 &middot; Pricing</div><p class="note">Per seat, per project, per device or usage. Embedded tooling has no default and the wrong pick caps you for years.</p></div>
+    <div class="card"><div class="lbl">Weeks 10&ndash;12 &middot; Playbook + the hire answer</div><p class="note">What repeats, written down, and an honest answer on whether your next hire is a rep, a solutions engineer, or nobody yet.</p></div>
+  </div>
+
+  <div class="card hi" style="margin-top:16px">
+    <div class="lbl">Day 90, defined</div>
+    <p class="tight">Every current pilot decisioned: converted, in contract, or killed with a written reason. The liability artefact in use in live deals. One motion chosen on paper. Pricing settled. A written answer on the next hire.</p>
+    <p class="tight" style="color:var(--mut)">If we get there and you do not renew, you keep all of it.</p>
+  </div>
+
+  <div class="row" style="margin-top:22px;align-items:center">
+    <div><div class="lbl">The commercials</div><div class="big">$4,000<span style="font-size:15px;color:var(--mut)">/month &middot; three months</span></div></div>
+  </div>
+  <p class="note" style="margin-top:8px">Renewable after. If this works and you want it full time from month three, everything paid credits against that, and we set those terms then, when we both know what this actually is.</p>
+
+  <p class="caveat" style="margin-top:18px">What this will not produce: a repeatable, forecastable sales motion in ninety days. At eighteen months old with pilots not yet converted, anyone promising that is selling you a story. Ninety days converts what exists and builds the two assets that compound: the artefact and the decision.</p>
+
+  <p style="margin-top:26px"><strong>Next step:</strong> read this, then twenty minutes on Thursday or Friday. If the diagnosis is wrong, tell me which part and I will tear it up myself.</p>
 </div></section>
 
 <footer><div class="wrap">
@@ -180,46 +143,6 @@ footer{padding:40px 0 70px;color:var(--dim);font-size:13px}
   <p style="margin-top:6px">Built for this conversation only. Everything above is an outside read and I would rather be corrected than agreed with.</p>
 </div></footer>
 
-<script>
-function pane(k){
-  document.getElementById('pF').classList.toggle('on',k==='F');
-  document.getElementById('pE').classList.toggle('on',k==='E');
-  document.getElementById('tF').classList.toggle('on',k==='F');
-  document.getElementById('tE').classList.toggle('on',k==='E');
-}
-var LOC='Pune, remote', BASE=70;
-document.querySelectorAll('#loc .pill').forEach(function(p){
-  p.onclick=function(){
-    document.querySelectorAll('#loc .pill').forEach(function(x){x.classList.remove('on')});
-    p.classList.add('on');
-    BASE=+p.dataset.f; LOC=p.textContent.trim();
-    document.getElementById('fx').value=BASE;
-    calc();
-  };
-});
-function calc(){
-  var fx=+document.getElementById('fx').value;
-  var gap=BASE-fx;                          // how far below the location baseline
-  var eqN=0.60+gap*0.030;                   // every 1L of cash given up buys 0.03% equity
-  eqN=Math.max(0.35,Math.min(1.25,eqN));    // floor and CEILING. 1.25% is the most I would ask at seed.
-  var eq=eqN.toFixed(2);
-  var va=Math.max(0,Math.round(12+gap*0.55));
-  document.getElementById('fxL').textContent='₹'+fx+'L';
-  document.getElementById('eq').textContent=eq+'%';
-  document.getElementById('va').textContent='₹'+va+'L';
-  document.getElementById('tc').textContent='₹'+(fx+va)+'L';
-  document.getElementById('summary').textContent=
-    LOC+' · ₹'+fx+'L fixed · '+eq+'% equity (4yr, 1yr cliff) · ₹'+va+
-    'L variable on converted pilot revenue · year one cash ₹'+(fx+va)+'L';
-}
-document.getElementById('fx').addEventListener('input',calc);
-function copyIt(){
-  navigator.clipboard.writeText(document.getElementById('summary').textContent).then(function(){
-    document.getElementById('copied').textContent='copied';
-    setTimeout(function(){document.getElementById('copied').textContent='';},2200);
-  });
-}
-calc();
-</script>
+
 </body>
 </html>
