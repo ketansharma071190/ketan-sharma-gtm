@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyphenbox &times; Ketan Sharma</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#07090C;--ink2:#0C1016;--ink3:#11161E;--raise:#161C26;
+  --line:rgba(226,232,240,.10);--line2:rgba(226,232,240,.18);
+  --fg:#E6EAF0;--mut:#94A0B0;--dim:#66738A;
+  --acc:#7C9CFF;--acc2:#5EE6C0;--warn:#FFB86B;--hot:#FF6B8A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--fg);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+h1,h2,h3,.mono{font-family:'Space Grotesk',sans-serif}
+.mono,code{font-family:'IBM Plex Mono',monospace}
+header{padding:66px 0 30px;border-bottom:1px solid var(--line)}
+.kicker{font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.20em;text-transform:uppercase;color:var(--acc)}
+h1{font-size:clamp(31px,5.2vw,50px);line-height:1.08;margin:16px 0 14px;letter-spacing:-.025em}
+.sub{color:var(--mut);font-size:17px;max-width:64ch}
+section{padding:46px 0;border-bottom:1px solid var(--line)}
+h2{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--dim);margin-bottom:22px;font-weight:600}
+h3{font-size:20px;margin:0 0 9px;letter-spacing:-.01em}
+p{color:#CBD4E1;margin-bottom:14px}
+p.tight{margin-bottom:8px}
+.grid{display:grid;gap:14px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card.hi{border-color:rgba(124,156,255,.34);background:linear-gradient(180deg,rgba(124,156,255,.07),transparent 62%),var(--ink2)}
+.card.hot{border-color:rgba(255,107,138,.32);background:linear-gradient(180deg,rgba(255,107,138,.06),transparent 62%),var(--ink2)}
+.lbl{font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.big{font-family:'Space Grotesk';font-size:29px;font-weight:600;letter-spacing:-.02em}
+.acc{color:var(--acc)}.acc2{color:var(--acc2)}.warn{color:var(--warn)}.hot{color:var(--hot)}
+ul{margin:0 0 12px 18px;color:#CBD4E1}li{margin-bottom:7px}
+.said{border-left:2px solid var(--acc);padding:2px 0 2px 16px;margin:0 0 14px;color:#D7DEE9}
+.said .who{font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:7px}
+.gantt{display:grid;grid-template-columns:118px 1fr;gap:9px;align-items:center;font-size:13px}
+.gl{color:var(--mut);font:500 12px/1.3 'IBM Plex Mono',monospace}
+.bar{height:30px;border-radius:7px;background:var(--ink3);position:relative;overflow:hidden}
+.fill{position:absolute;top:0;bottom:0;border-radius:7px;display:flex;align-items:center;padding-left:11px;font:500 11px/1 'IBM Plex Mono';color:#050810;white-space:nowrap;overflow:hidden}
+.f1{background:linear-gradient(90deg,rgba(124,156,255,.95),rgba(124,156,255,.55))}
+.f2{background:linear-gradient(90deg,rgba(94,230,192,.95),rgba(94,230,192,.5))}
+.f3{background:linear-gradient(90deg,rgba(255,184,107,.95),rgba(255,184,107,.5))}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.13em;text-transform:uppercase}
+.demo{background:var(--ink3);border:1px solid var(--line2);border-radius:12px;padding:18px;margin-top:12px;font-size:14.5px;line-height:1.6}
+.demo .tag{font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:5px;display:inline-block;margin-bottom:11px}
+.tag.bad{background:rgba(255,107,138,.14);color:var(--hot)}
+.tag.good{background:rgba(94,230,192,.14);color:var(--acc2)}
+.demo p{color:#C3CCDA;margin-bottom:9px}
+.big2{font-family:'Space Grotesk';font-size:38px;font-weight:600;letter-spacing:-.03em}
+.big2 span{font-size:15px;color:var(--mut);font-weight:500;letter-spacing:0}
+.note{font-size:13px;color:var(--dim)}
+footer{padding:42px 0 76px;color:var(--dim);font-size:13px}
+.rule{height:1px;background:var(--line);margin:22px 0}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kicker">Prepared for Vishruth N &middot; Hyphenbox</div>
+  <h1>You probably do not need a hundred emails a day.</h1>
+  <p class="sub">You need every lab that exists covered properly, by someone who is not you. That is a different hire, a different system, and a much shorter road. Here is the plan you asked for, and the one place I think your question is pointed slightly wrong.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>What you told me on Friday</h2>
+  <div class="said"><span class="who">Your words, so we are working off facts and not my guesses</span>
+    Four paying customers, somewhere around 100 to 200K ARR. Outbound is bottlenecked. Most of what has landed came through warm references and connects. You are writing the emails yourself. You lead the GTM motion end to end. You want SDRs so you can get to a hundred emails a day. And you do not like what AI writes.
+  </div>
+  <p>Everything below is built on those six facts and on what Hyphenbox actually sells. If any of them is wrong, the plan changes, and I would rather you tell me now than at week four.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The one thing that changes the answer</h2>
+
+  <div class="card hot" style="margin-bottom:16px">
+    <h3><span class="hot">Your market is a list, not a funnel.</span></h3>
+    <p>Hyphenbox sells training-ready data for dexterous manipulation. The buyer is a frontier robotics lab, or a data-collection partner feeding one. That is not a category you spray. It is a category you can <strong>enumerate</strong>.</p>
+    <p class="tight">So before anything else, do this yourself, on paper, tonight: <strong>write down every organisation on earth that could plausibly buy training-ready manipulation data in the next twelve months.</strong> Not "robotics companies". Ones with a model in training, a data bottleneck they have said out loud, and budget.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card"><div class="lbl">If that list is under a few hundred names</div>
+      <p>Then a hundred emails a day is not ambition, it is arithmetic that does not survive your own market. You exhaust every account that could ever buy from you inside a fortnight, and you do it with the least informed message you will ever send. There is no second first impression with a lab.</p></div>
+    <div class="card"><div class="lbl">And if it is genuinely in the thousands</div>
+      <p>Then I am wrong, volume is the right instrument, and you should hire two SDRs on Monday and ignore the rest of this page. You know that number better than I do. It is the first thing I would want to see.</p></div>
+  </div>
+
+  <p style="margin-top:18px">Here is the part that should be reassuring rather than alarming. <strong>Warm references and connects is not a crutch you outgrew. For a market this size it is the correct motion.</strong> It has produced four paying customers and real ARR. The problem is not that it is the wrong motion. The problem is that it only runs when you personally run it, and it has no coverage guarantee. Nobody can tell you today which labs have never been touched.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Why an SDR is the wrong first hire here, specifically</h2>
+  <div class="grid g3">
+    <div class="card"><div class="lbl">01 &middot; The room</div><p>Your buyer is an ML or robotics lead who can tell in one line whether the sender understands occlusion, hand tracking or why training-ready data costs six to seven times raw capture. Two years of SDR experience cannot fake that, and in this audience faking it is worse than silence.</p></div>
+    <div class="card"><div class="lbl">02 &middot; The thing to work from</div><p>An SDR needs a system: who to contact, what is true, what has worked, what to say when they push back. That system currently lives in your head. Hiring someone to execute a system that has not been written down is how you conclude, wrongly, that outbound does not work.</p></div>
+    <div class="card"><div class="lbl">03 &middot; The order</div><p>Build the motion, then buy the volume. An SDR hired after the system exists ramps in weeks against a known playbook. An SDR hired before it exists spends six months inventing one, badly, while you keep selling anyway.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>You asked three questions. Here they are, answered.</h2>
+  <table>
+    <tr><th style="width:38%">What you asked</th><th>The answer</th></tr>
+    <tr><td><strong>What does the engagement look like if you build it?</strong></td><td>Twelve weeks, embedded. Roughly fifteen to twenty hours a week, in the calls rather than watching them. The week by week is below.</td></tr>
+    <tr><td><strong>When is the setup complete?</strong></td><td><strong>End of week six.</strong> At that point the account universe is enumerated and tiered, the message architecture is written and tested against real replies, and the research pipeline runs without me.</td></tr>
+    <tr><td><strong>When can we send at volume?</strong></td><td><strong>Week seven.</strong> But the target I would hold you to is not a hundred a day. It is <strong>every tier-one account touched, properly, with a reason</strong>, and a measured reply rate you can forecast against. If your list turns out to be large, volume follows easily from the same system. It does not work the other way around.</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The twelve weeks</h2>
+  <div class="gantt">
+    <div class="gl">Wk 1&ndash;3</div><div class="bar"><div class="fill f1" style="left:0%;width:25%">Ramp on the product</div></div>
+    <div class="gl">Wk 2&ndash;4</div><div class="bar"><div class="fill f1" style="left:8%;width:25%">Enumerate the universe</div></div>
+    <div class="gl">Wk 4&ndash;6</div><div class="bar"><div class="fill f2" style="left:25%;width:25%">What has actually worked</div></div>
+    <div class="gl">Wk 5&ndash;8</div><div class="bar"><div class="fill f2" style="left:33%;width:33%">Build the system</div></div>
+    <div class="gl">Wk 7&ndash;12</div><div class="bar"><div class="fill f3" style="left:50%;width:50%">Run it live, with you</div></div>
+    <div class="gl">Wk 10&ndash;12</div><div class="bar"><div class="fill f3" style="left:75%;width:25%">Hand over + hiring answer</div></div>
+  </div>
+  <div class="rule"></div>
+  <div class="grid g2">
+    <div class="card"><div class="lbl">Weeks 1 to 3 &middot; ramp</div><p>I learn what you sell well enough to be dangerous: what training-ready actually means, where annotation breaks, why the six to seven times multiple is defensible, what a lab asks in month two. I sit on your calls. I do not write a word of outbound in this window.</p></div>
+    <div class="card"><div class="lbl">Weeks 2 to 4 &middot; the universe</div><p>Every lab, every data-collection partner, every frontier group with a manipulation roadmap. Tiered by whether they have a stated data bottleneck, a model in training, and money. This is the artefact you do not have today and it outlives the engagement.</p></div>
+    <div class="card"><div class="lbl">Weeks 4 to 6 &middot; what works</div><p>I read every outbound email you have sent, every reply, and how all four customers actually closed. Not what you think worked. What the record shows. That becomes the message architecture, and it is evidence, not opinion.</p></div>
+    <div class="card"><div class="lbl">Weeks 5 to 8 &middot; the system</div><p>The research pipeline that produces genuine per-account depth at speed, the sequence, the qualification bar, and where it all lives so a hire can pick it up. This is the part that turns your head into an asset someone else can run.</p></div>
+    <div class="card"><div class="lbl">Weeks 7 to 12 &middot; live</div><p>We run it against tier one together. I take the first conversations so the system is tested by a human who can be argued with, not by a template. You stay in the deals that need a founder.</p></div>
+    <div class="card"><div class="lbl">Weeks 10 to 12 &middot; hand over</div><p>Written playbook, and a straight answer on the next hire: SDR, AE, or neither yet, with the numbers that justify it. If the honest answer is that you should not hire anyone, I will tell you that.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>On not liking what AI writes</h2>
+  <p>You are right, and I am not going to argue you out of it. Almost everything AI writes for outbound is bad, and for <em>your</em> market it is worse than bad, because a lab lead can smell a generated email in one line and you have a finite number of them.</p>
+  <p>So to be exact about where I would use it: <strong>not for writing. For research depth per account.</strong> The bottleneck in a small, technical market is never typing speed. It is knowing enough about each lab to earn the reply. That is reading papers, release notes, job posts, talks and GitHub activity across a few hundred organisations, which is slow for a human and fast for a machine. The sentence still gets written by someone who understands the buyer.</p>
+  <div class="demo">
+    <span class="tag bad">What you have seen, and rightly dislike</span>
+    <p>Hi [Name], I came across your work in robotics and wanted to reach out. We help companies like yours accelerate AI training with high quality annotated data. Would you be open to a quick 15 minute chat to explore synergies?</p>
+  </div>
+  <div class="demo">
+    <span class="tag good">What research depth produces instead</span>
+    <p>Saw the manipulation demo you posted last month, the bimanual folding one. The failure cases in the last twenty seconds all look like occlusion during the handoff, which is the exact thing dense action labels are for and the exact thing raw capture will not give you.</p>
+    <p>We turn egocentric capture into training-ready sets: dense action labels, 2D to 3D hand tracking, human verified. Six to seven times the cost of raw capture and it is the difference between footage and a dataset.</p>
+    <p>If occlusion during contact is not your bottleneck right now, say so and I will leave it. If it is, I will send one annotated clip from your own footage.</p>
+  </div>
+  <p class="note" style="margin-top:14px">The second one is not better writing. It is better knowing. That is the part a system can carry, and it is the part an SDR with two years of experience cannot.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What it costs, and what done looks like</h2>
+  <div class="grid g2">
+    <div class="card hi">
+      <div class="lbl">The engagement</div>
+      <div class="big2">$4,000<span>&nbsp;/month &middot; three months</span></div>
+      <p style="margin-top:12px">Twelve thousand dollars total, as we discussed. Fifteen to twenty hours a week, embedded. No notice period, no equity conversation, no recruiter fee.</p>
+      <p class="note">For reference, that is materially less than three months of a single SDR plus their ramp, and this way you find out what the SDR should be doing first.</p>
+    </div>
+    <div class="card">
+      <div class="lbl">Day 90, defined</div>
+      <ul>
+        <li>Your buyer universe enumerated and tiered, in a file you own.</li>
+        <li>A message architecture built from your own closed deals, not from theory.</li>
+        <li>A research pipeline producing per-account depth without me.</li>
+        <li>Tier one covered, with a measured reply rate you can forecast against.</li>
+        <li>A written answer on the next hire, with the evidence behind it.</li>
+      </ul>
+      <p class="note">If we get there and you do not continue, you keep all of it.</p>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The next step</h2>
+  <p style="font-size:17px">Twenty minutes, Monday or Tuesday. Bring the list you wrote, even if it is rough. If it turns out your market really is thousands of accounts wide, I will tell you to hire the SDRs and this page was still worth writing.</p>
+  <p class="note">And if you think the diagnosis is wrong somewhere, tell me which part. I would rather be corrected than agreed with.</p>
+</div></section>
+
+<footer><div class="wrap">
+  Ketan Sharma &middot; built B2B SaaS and AI sales orgs from zero at Simplifai, ZenAdmin, Dineout and Craze (YC S22).<br>
+  Prepared for Vishruth N at Hyphenbox, August 2026. Not shared with anyone else.
+</div></footer>
+
+</body>
+</html>
