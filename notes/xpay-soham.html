@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>xPay Call One</title>
+<meta property="og:title" content="xPay: call one, scripted">
+<meta property="og:description" content="A scripted first call and five buyer questions, four read off xPay's public pages and one off RBI's.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, like a payment trace read top to bottom. Scripted call, five buyer questions, month one, proof, ask. */
+:root {
+  --paper: #f4f6f9;
+  --sheet: #ffffff;
+  --ink: #141a2e;
+  --ink-soft: #545d74;
+  --rule: #d9deea;
+  --signal: #1d4ed8;
+  --signal-wash: #e7edfc;
+  --leak: #a64b06;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1120;
+    --sheet: #151a2c;
+    --ink: #e8ebf3;
+    --ink-soft: #a3abc2;
+    --rule: #2a3149;
+    --signal: #8fb0ff;
+    --signal-wash: #1c2645;
+    --leak: #f2a860;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0d1120;
+  --sheet: #151a2c;
+  --ink: #e8ebf3;
+  --ink-soft: #a3abc2;
+  --rule: #2a3149;
+  --signal: #8fb0ff;
+  --signal-wash: #1c2645;
+  --leak: #f2a860;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 40px 64px;
+  -webkit-text-size-adjust: 100%;
+}
+.page-wrap { max-width: 44rem; margin-inline: auto; display: flex; flex-direction: column; gap: 56px; }
+.page-wrap>section, .page-wrap>header, .page-wrap>footer { min-width: 0; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 6.5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.45rem, 4.2vw, 1.85rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--signal); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: 2px; }
+strong { font-weight: 600; }
+
+.section-label {
+  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 0 0 10px;
+}
+.section-body { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+.src-link {
+  font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.02em; white-space: nowrap;
+  padding: 1px 5px; border: 1px solid var(--rule); border-radius: 4px; text-decoration: none; vertical-align: 1px;
+}
+.src-link:hover { background: var(--signal-wash); }
+.claim-note { font-size: 0.9rem; color: var(--ink-soft); }
+.section-intro { margin-top: 12px; }
+
+/* Header */
+.hero-block { display: flex; flex-direction: column; gap: 14px; }
+.hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 36rem; }
+.hero-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); }
+
+/* Buyer questions */
+.leak-list { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+.leak-list>article {
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 18px 16px;
+  display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.leak-index { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--leak); }
+.leak-who { font-size: 0.95rem; color: var(--ink-soft); }
+.leak-who>b { font-weight: 600; color: var(--ink); }
+.leak-question { font-size: 0.98rem; border-left: 3px solid var(--leak); padding: 2px 0 2px 12px; }
+.leak-question>b { color: var(--leak); font-weight: 600; }
+
+/* Call script */
+.call-script { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.call-script>div { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 12px; align-items: baseline; }
+.speaker-tag { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+.speaker-tag--us { color: var(--signal); }
+.line-us { font-weight: 500; }
+.math-box {
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.55; background: var(--signal-wash);
+  border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-variant-numeric: tabular-nums;
+}
+.math-box>div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
+.math-box>div+div { margin-top: 6px; }
+.math-box b { font-weight: 500; color: var(--signal); }
+.discovery-list { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 6px; }
+.discovery-list>li { padding-left: 2px; }
+.fork-list { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+.fork-list>div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.fork-list dt { font-style: italic; color: var(--ink-soft); }
+.fork-list dd { margin: 0; }
+.fork-list code { font-family: var(--font-mono); font-size: 0.85em; background: var(--signal-wash); padding: 1px 4px; border-radius: 3px; }
+@media (max-width: 560px) { .fork-list>div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.no-promise { border-left: 3px solid var(--signal); padding: 4px 0 4px 14px; }
+.section-body>h3 { margin-top: 16px; }
+
+/* Month one */
+.month-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.month-list>li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
+.month-when { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); padding-top: 3px; }
+@media (max-width: 480px) { .month-list>li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* Proof */
+.proof-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.proof-list>li { display: flex; flex-direction: column; gap: 2px; }
+.proof-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+.gap-note { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+
+/* Ask */
+.ask-panel { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; }
+.ask-panel>.section-label { color: inherit; opacity: 0.8; margin: 0; }
+.ask-panel h2 { color: var(--paper); }
+.ask-panel a { color: var(--paper); }
+.ask-panel a:focus-visible { outline-color: currentColor; }
+.ask-sign { font-family: var(--font-mono); font-size: 0.85rem; opacity: 0.85; }
+
+/* Sources */
+.source-drawer summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); }
+.source-drawer summary:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.source-drawer ul { margin: 12px 0 0; padding-left: 1.1rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 6px; overflow-wrap: anywhere; }
+.page-foot { font-size: 0.85rem; color: var(--ink-soft); display: flex; flex-direction: column; gap: 12px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<header class="hero-block">
+  <p class="section-label">For Soham Mahajan, xPay &middot; 30 Sep 2026</p>
+  <h1>Call one, without Soham or an engineer on it</h1>
+  <p class="hero-sub">Aniket's post says this role starts with getting on a call, speaking APIs and winning the deal yourself. <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">source</a> So here is the first call we would take off your plate, scripted from your docs, then five questions a buyer brings to that call, four read off xPay's public pages and one off RBI's.</p>
+  <p class="hero-meta">Ketan Sharma &middot; about an 8 minute read &middot; every xPay fact links to its source</p>
+</header>
+
+<section id="call-one">
+  <p class="section-label">Call one, scripted</p>
+  <h2>A finance lead at a Series&nbsp;D EdTech company asks for a lower MDR</h2>
+  <div class="section-body">
+    <p>Your careers page names listed, Series D and Series E customers in EdTech and Travel. <a class="src-link" href="https://www.xpaycheckout.com/careers/head-of-sales">source</a> Your August post says a deal is often won before the first demo, and that a request for a lower MDR can hide a success-rate, support or reconciliation problem. <a class="src-link" href="https://www.linkedin.com/posts/soham-mahajan-130142193_business-sales-growth-share-7494386459983134720-tEuM/">source</a> Here is how we would run that call. The buyer's numbers are invented.</p>
+
+    <div class="call-script">
+      <div><span class="speaker-tag">Buyer</span><p>We like what we have seen. Your card rate is higher than what we pay today. Can you come down?</p></div>
+      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">We can talk about rate. First, of your international orders last month, what share completed?</p></div>
+      <div><span class="speaker-tag">Buyer</span><p>Around 70%, I think.</p></div>
+      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Then rate is probably the smaller lever. Two checks first. Is that 70% per attempt or per order? Retries inflate failures. And on a typical ticket, what lands in INR after fees and FX today? We will show you the same number with us. That is the number to compare, not the headline rate.</p></div>
+      <div><span class="speaker-tag">Buyer</span><p>Per order, I think. I'd have to check the INR.</p></div>
+      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Here is the ceiling on $1M a month of international orders.</p></div>
+    </div>
+
+    <div class="math-box"><div><span>Cut the rate by 0.5 points on the $700K that clears</span><b>$3,500 a month saved</b></div><div><span>Lift success from 70% to 85%</span><b>up to $150,000 a month more collected</b></div></div>
+    <p class="claim-note">A ceiling, not a promise: some failed orders come back through another payment method. On a real call we would ask for a week of gateway data and size it together. xPay's own PayGlocal comparison runs the same 15-point, $150,000 sum <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a>, the home page claims 95% success <a class="src-link" href="https://www.xpaycheckout.com/">source</a>, and the fee schedule lists FX conversion as handled by AD1 banks at bank rates <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a>. The PayGlocal post says live mid-market FX with zero hidden markup <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a>, so we would confirm which applies before quoting a landed-INR number.</p>
+
+    <div class="call-script">
+      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Second question: how long does your team spend matching payouts to invoices and chasing FIRCs? With xPay the FIRC is available from the dashboard.</p></div>
+    </div>
+    <p class="claim-note">FIRC from the dashboard: <a class="src-link" href="https://www.xpaycheckout.com/">home</a> <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">payout docs</a></p>
+
+    <h3>Then their engineer joins</h3>
+    <p>What we ask before we answer anything:</p>
+    <ol class="discovery-list">
+      <li>Who processes your international cards today, and would we replace them or sit alongside?</li>
+      <li>Which three countries cause most of your failures?</li>
+      <li>When a subscription renewal fails, who retries, and when?</li>
+      <li>How does finance match a payout to invoices, and what do you need on each FIRC?</li>
+    </ol>
+    <p>Then the fork, depending on what we hear:</p>
+    <dl class="fork-list">
+      <div><dt>"Why would the same card succeed more with you? Prove the 95%."</dt><dd>Our PayGlocal comparison credits optimised routing, local acquiring partnerships and wallet and alternative-method coverage, together, for higher authorization and capture. <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a> But don't take our number: Get Intent returns every attempt and failure on an intent, so a pilot gives you attempt-level data from your own traffic. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/get-intent">get intent</a> Build it first in the sandbox, a clone of your xPay account. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/sandbox/sandbox">sandbox</a></dd></div>
+      <div><dt>"We have no developer time this quarter."</dt><dd>Payment Links, for one-time and subscription payments, with no technical integration. <a class="src-link" href="https://docs.xpaycheckout.com/products/payment-links/payment-links">source</a></dd></div>
+      <div><dt>"We run our own checkout."</dt><dd>Call <code>Create Intent</code> first, authenticated with HTTP Basic. Listen for the Success and Failed webhooks and verify the signature (two supported methods). Send an idempotency key on Create Intent, so a retried request does not create a second payment. Set <code>manualCapture</code> to authorise now and capture later. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/create-intent">create intent</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/introduction">webhooks</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/idempotency">idempotency</a></dd></div>
+      <div><dt>"Most of our revenue is subscriptions."</dt><dd>The Subscriptions API: create, edit, pause and one-time charge. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/subscriptions/create-subscription">API</a> A failed renewal retries automatically at 4, 8, 12 and 24 hours, and you can retry manually once it is unpaid. <a class="src-link" href="https://docs.xpaycheckout.com/products/subscription/subscription-retry-mechanism">retry</a></dd></div>
+      <div><dt>"We are a platform with our own sellers."</dt><dd>Platform Connect: sub-merchants under one platform account, each with its own transactions and settlements. xPay enables it per account. <a class="src-link" href="https://docs.xpaycheckout.com/products/platform-connect/overview">source</a></dd></div>
+      <div><dt>"Our students pay inside our app."</dt><dd>Embed the checkout in a WebView and handle deep links, per the mobile guide. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/mobileIntegration">source</a></dd></div>
+      <div><dt>"How does finance know what landed?"</dt><dd>Subscribe to the Payout Initiated and Payout Success webhooks and pull List Payouts for the period. The FIRC comes from the dashboard. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">events</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payouts/list-payouts">list payouts</a> <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">payouts</a></dd></div>
+      <div><dt>"Chargebacks hurt us."</dt><dd>Disputes arrive as webhooks (Disputed, Dispute Under Review, Dispute Won, Dispute Lost), plus an Early Fraud Warning ahead of any formal dispute. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">events</a> The docs cover how to fight or accept each reason code. <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/dispute-management/responding-by-reason">disputes</a> Act on the warning: block that card's fingerprint with the Block Fingerprint by Intent API, and Argus, xPay's in-house fraud system, applies it to future payments. <a class="src-link" href="https://docs.xpaycheckout.com/products/argus/overview">argus</a></dd></div>
+    </dl>
+
+    <div class="no-promise">
+      <p><strong>What we would not promise on the call.</strong> "Our docs list no Shopify or WooCommerce plugin and no native mobile SDK, so we won't promise one today. Your in-app flow runs on the WebView guide. If you need a plugin, you get a written answer on the roadmap within a day." <a class="src-link" href="https://docs.xpaycheckout.com/llms.txt">docs index</a></p>
+    </div>
+
+    <h3>Then the close</h3>
+    <div class="call-script">
+      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">So the ask today is not a rate. It is a pilot: your engineer builds against our sandbox, then you send one country's live traffic through us for two weeks and compare success on the same card mix. If we don't beat what that traffic completes with you today, you switch it back. You have spent one integration sprint, not a migration.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="questions">
+  <p class="section-label">Five questions a buyer brings to call one</p>
+  <h2>What we would need to answer in one line</h2>
+  <p class="claim-note section-intro">Four come off xPay's public pages, one off RBI's. Some you have probably fixed or chosen on purpose.</p>
+  <div class="leak-list">
+
+    <article>
+      <span class="leak-index">Question 1 of 5</span>
+      <h3>"Which settlement applies to us?"</h3>
+      <p>Home page: bank-account collections settled in 24 hours. <a class="src-link" href="https://www.xpaycheckout.com/">source</a> Terms: INR to the merchant's Indian account once every two weeks, a timeline that "may be adjusted over time based on the procedures imposed by the regulator". <a class="src-link" href="https://www.xpaycheckout.com/terms-and-condition">source</a> Skydo comparison post: T+1 INR payouts. <a class="src-link" href="https://www.xpaycheckout.com/blog/skydo-vs-xpay-best-skydo-alternative-for-international-payments-in-india">source</a> Docs: payouts in USD, 24 to 48 working hours, Mondays and Thursdays by default, $500 minimum. <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">source</a></p>
+      <p class="leak-who"><b>Who asks:</b> the finance lead planning cash flow.</p>
+      <p class="leak-question"><b>What would help:</b> if each line belongs to a different product, one table saying which applies to whom settles it before a call.</p>
+    </article>
+
+    <article>
+      <span class="leak-index">Question 2 of 5</span>
+      <h3>"Why does this page say 5% a sale?"</h3>
+      <p>A marketplace page, live and listed in your sitemap, quotes "5% /sale" on a Basic plan that bundles xPay Marketing with xPay Payments, behind "Join Waitlist" buttons. <a class="src-link" href="https://www.xpaycheckout.com/marketplace-home">source</a> The pricing page says 3% + $0.35. <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a></p>
+      <p class="leak-who"><b>Who asks:</b> the buyer who Googles xPay before replying.</p>
+      <p class="leak-question"><b>How we would answer:</b> "That is the marketplace plan, which bundles marketing with payments. Card checkout on its own is 3% + $0.35." If that plan is retired, a redirect stops the next buyer asking.</p>
+    </article>
+
+    <article>
+      <span class="leak-index">Question 3 of 5</span>
+      <h3>"Is there a price between list and enterprise?"</h3>
+      <p>Standard is 3% + $0.35. The next tier is Enterprise, above $750K a month processed internationally, with volume-based tiered pricing. <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a></p>
+      <p class="leak-who"><b>Who asks:</b> a company doing $200K to $700K a month, comparing list price with its current rate without ever calling you.</p>
+      <p class="leak-question"><b>What would help:</b> if the gap is there to push that company to Talk to The Team, one line on where volume pricing starts makes the push work.</p>
+    </article>
+
+    <article>
+      <span class="leak-index">Question 4 of 5</span>
+      <h3>"Can you show us a customer like us?"</h3>
+      <p>Testimonials from PeerUp, Radical Health, Attikkel Technologies, Remedo.io and Edureka <a class="src-link" href="https://www.xpaycheckout.com/">source</a>. The strongest story we saw is Aniket's mid-May post: a large Indian consumer company whose success rate went "up by ~12% as compared to the incumbent", which he put at "an extra $5M in Annualized revenue". <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_heres-how-xpay-yc-w24-got-our-first-large-share-7460410812491468809-ungU/">source</a></p>
+      <p class="leak-who"><b>Who asks:</b> the champion carrying your proof through the relay your June post describes: finance, sales, product and tech, back to sales, then finance and management. <a class="src-link" href="https://www.linkedin.com/posts/soham-mahajan-130142193_growth-startups-b2b-share-7469344903701942272-PT6q/">source</a></p>
+      <p class="leak-question"><b>What would help:</b> large customers often will not be named. An anonymised one-pager with those numbers travels through that relay better than a post.</p>
+    </article>
+
+    <article>
+      <span class="leak-index">Question 5 of 5</span>
+      <h3>"What changes for us on 1 Oct?"</h3>
+      <p>RBI's new FEMA export regulations take effect on 1 Oct 2026. For services other than software, the new work is an EDF declaration within 30 days of the end of the month each invoice is raised (they may also file by the day payment arrives); software's SOFTEX moves to the same EDF. The time to realise stays at nine months from the invoice date: a 22 Sep amendment replaced the fifteen months in the January text before it took effect. Rupee-invoiced exports get twelve months. <a class="src-link" href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13277&amp;Mode=0">regulations</a> <a class="src-link" href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10395">current rule</a> <a class="src-link" href="https://www.lkslaw.com/insights/articles/rbi-releases-fema-2026-export-import-trade-regulations-what-businesses-need-to-know">SOFTEX change</a></p>
+      <p class="leak-who"><b>Who asks:</b> the finance lead at a services exporter that invoices clients abroad every month and gets paid by wire.</p>
+      <p class="leak-question"><b>What would help:</b> it is a dated reason for that finance lead to review how export receipts are collected and documented this quarter. For a client who pays by wire, one answer on the collection side is a USD virtual bank account on the invoice, taking ACH, domestic wire or SWIFT. <a class="src-link" href="https://docs.xpaycheckout.com/products/virtual-bank-accounts/virtual-bank-accounts">source</a> That is a conversation xPay can open.</p>
+    </article>
+
+  </div>
+</section>
+
+<section id="month-one">
+  <p class="section-label">Month one</p>
+  <h2>Deep before wide</h2>
+  <div class="section-body">
+    <ol class="month-list">
+      <li><span class="month-when">Weeks 1 to 2</span><p>On your calls, listening first, then leading while you listen. Learn the objections you already know by heart.</p></li>
+      <li><span class="month-when">Weeks 3 to 4</span><p>Solo on first calls. You join only the ones you choose.</p></li>
+      <li><span class="month-when">By day 30</span><p>The first deal we take from first call to proposal has no engineer on it.</p></li>
+      <li><span class="month-when">Scope</span><p>One vertical, one channel, both set with you after we read where the last 20 closed deals came from.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="proof">
+  <p class="section-label">Why we can run it</p>
+  <h2>Closer first, the team later</h2>
+  <div class="section-body">
+    <ul class="proof-list">
+      <li><span class="proof-name">Simplifai, 2020 to 2022</span><p>AI automation sold into banks, reaching $1M ARR within 12 months of launching GTM. Our standout deal was Upstox at $210K TCV, and we cut the sales cycle by half.</p></li>
+      <li><span class="proof-name">ZenAdmin, 2022 to 2023</span><p>Commercial Director, taking GTM from Southeast Asia into Europe and North America and closing mostly remote-first buyers: Remote, Multiplier, Omnipresent, Eventbrite, Temasek and Sleek. We started with beta customers and no revenue and took it past $200K ARR.</p></li>
+      <li><span class="proof-name">Craze (YC S22), 2025 to 2026</span><p>Founding Head of Sales. We built the first outbound and signed 40+ logos.</p></li>
+      <li><span class="proof-name">Torqus, for when the team comes</span><p>A 60+ person sales engine, 10x MRR in 6 months, about 92% renewals.</p></li>
+    </ul>
+    <div class="gap-note">
+      <p><strong>The gap, plainly:</strong> I did not start as an engineer (BCom, PGDAMC), and your careers page makes that a hard requirement. <a class="src-link" href="https://www.xpaycheckout.com/careers/head-of-sales">source</a> Aniket's post wants APIs discussed "without needing an engineer or solutions consultant". <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">source</a> The call above is my answer to that, so test me on it live. About 13 years in, based in Pune, ready to be on site at HSR, Bengaluru.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ask" class="ask-panel">
+  <p class="section-label">The ask</p>
+  <h2>Twenty minutes</h2>
+  <p>Play your toughest buyer on a mock first call, finance lead and engineer both.</p>
+  <p>If I can't hold the integration call, you've lost twenty minutes.</p>
+  <p class="ask-sign">Ketan Sharma &middot; <a href="https://www.linkedin.com/in/ketan7/">linkedin.com/in/ketan7</a></p>
+</section>
+
+<footer class="page-foot">
+  <details class="source-drawer">
+    <summary>All sources, read 29 to 30 Sep 2026</summary>
+    <ul>
+      <li><a href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">Aniket Gupta, Head of Sales post, 29 Sep 2026</a>: role starts on a call speaking APIs, first call without needing an engineer or solutions consultant, engineering degree a big plus</li>
+      <li><a href="https://www.xpaycheckout.com/">xpaycheckout.com home page</a>: 24-hour settlement for bank-account collections, 95% success claim, FIRC, testimonials</li>
+      <li><a href="https://www.xpaycheckout.com/terms-and-condition">Terms and conditions</a>: INR settlement once every two weeks, timeline may be adjusted</li>
+      <li><a href="https://www.xpaycheckout.com/blog/skydo-vs-xpay-best-skydo-alternative-for-international-payments-in-india">Skydo vs xPay post</a>: T+1 INR payouts</li>
+      <li><a href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">PayGlocal vs xPay post</a>: $1M a month, 15 points of success, $150,000; routing, local acquiring partnerships, wallet and alternative method coverage</li>
+      <li><a href="https://www.xpaycheckout.com/marketplace-home">Marketplace page</a>: 5% a sale on a Basic plan bundling xPay Marketing and xPay Payments</li>
+      <li><a href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">Payouts docs</a>: USD, 24 to 48 working hours, Mon and Thu, $500 minimum, FIRC</li>
+      <li><a href="https://www.xpaycheckout.com/careers/head-of-sales">Head of Sales page</a>: customer profile, engineering start a hard requirement, office in HSR, Bengaluru</li>
+      <li><a href="https://www.xpaycheckout.com/pricing">Pricing</a>: 3% + $0.35, Enterprise above $750K a month, FX conversion handled by AD1 banks at bank rates</li>
+      <li><a href="https://docs.xpaycheckout.com/llms.txt">Docs index (plain text)</a>: the full page list, with no Shopify or WooCommerce plugin and no native mobile SDK entry</li>
+      <li>Docs pages: <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/create-intent">Create Intent</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/get-intent">Get Intent</a>, <a href="https://docs.xpaycheckout.com/developer-resources/idempotency">Idempotency</a>, <a href="https://docs.xpaycheckout.com/developer-resources/webhooks/introduction">Webhooks</a>, <a href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">Webhook events</a>, <a href="https://docs.xpaycheckout.com/developer-resources/sandbox/sandbox">Sandbox</a>, <a href="https://docs.xpaycheckout.com/products/payment-links/payment-links">Payment Links</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/subscriptions/create-subscription">Subscriptions API</a>, <a href="https://docs.xpaycheckout.com/products/subscription/subscription-retry-mechanism">Subscription retry</a>, <a href="https://docs.xpaycheckout.com/products/platform-connect/overview">Platform Connect</a>, <a href="https://docs.xpaycheckout.com/developer-resources/mobileIntegration">Mobile integration</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payouts/list-payouts">List Payouts</a>, <a href="https://docs.xpaycheckout.com/dashboard-operations/dispute-management/responding-by-reason">Responding to disputes</a>, <a href="https://docs.xpaycheckout.com/products/argus/overview">Argus</a>, <a href="https://docs.xpaycheckout.com/products/virtual-bank-accounts/virtual-bank-accounts">Virtual Bank Accounts</a></li>
+      <li><a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13277&amp;Mode=0">RBI, FEMA 23(R)/2026-RB</a>: in force 1 Oct 2026, EDF for services within 30 days of month end, nine months to realise (twelve if invoiced in rupees) after the 22 Sep 2026 amendment</li>
+      <li><a href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10395">RBI Master Direction, Export of Goods and Services</a>, para A.2 (updated 17 Jul 2026): nine months for all exporters today</li>
+      <li><a href="https://www.linkedin.com/posts/soham-mahajan-130142193_business-sales-growth-share-7494386459983134720-tEuM/">Soham Mahajan, post of 19 Aug 2026</a>: five lessons from onboarding customers</li>
+      <li><a href="https://www.linkedin.com/posts/soham-mahajan-130142193_growth-startups-b2b-share-7469344903701942272-PT6q/">Soham Mahajan, post of 8 Jun 2026</a>: closing one deal through every team</li>
+      <li><a href="https://www.linkedin.com/posts/theaniketg_heres-how-xpay-yc-w24-got-our-first-large-share-7460410812491468809-ungU/">Aniket Gupta, post of 14 May 2026</a>: the first large enterprise win</li>
+    </ul>
+  </details>
+  <p>Built from public pages only. No xPay customer names beyond its own public testimonials. Unlisted, not indexed.</p>
+</footer>
+
+</div>
+</body>
+</html>
