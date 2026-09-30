@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>FlytBase, the Proof That Adds Up</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+<style>
+:root{
+  --bg:#05070C;--panel:#0A0F17;--panel2:#0E1521;--line:#19222F;--line2:#27364A;
+  --ink:#EAF0F8;--mid:#8193A9;--dim:#5A6B80;
+  --blue:#3B84FF;--blue-d:#0C2751;--blue-e:#081830;
+  --t0:#8FA3BA;--t1:#3B84FF;--t2:#A78BFA;--t3:#F2B535;--t4:#5A6B80;
+  --amber:#F5A623;--amber-d:#241906;--green:#4ADE80;
+}
+:root[data-theme="light"]{
+  --bg:#EEF2F7;--panel:#FFFFFF;--panel2:#F6F9FC;--line:#DBE2EB;--line2:#C2CEDC;
+  --ink:#060E19;--mid:#4F5F77;--dim:#7E90A7;
+  --blue:#0E4FCB;--blue-d:#DCE9FF;--blue-e:#F1F6FF;
+  --t0:#5C6E85;--t1:#0E4FCB;--t2:#6338D4;--t3:#9A6A00;--t4:#7E90A7;
+  --amber:#8A5400;--amber-d:#FDF3E0;--green:#1B7F42;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#EEF2F7;--panel:#FFFFFF;--panel2:#F6F9FC;--line:#DBE2EB;--line2:#C2CEDC;
+  --ink:#060E19;--mid:#4F5F77;--dim:#7E90A7;
+  --blue:#0E4FCB;--blue-d:#DCE9FF;--blue-e:#F1F6FF;
+  --t0:#5C6E85;--t1:#0E4FCB;--t2:#6338D4;--t3:#9A6A00;--t4:#7E90A7;
+  --amber:#8A5400;--amber-d:#FDF3E0;--green:#1B7F42;
+}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);margin:0;font-family:"Inter",system-ui,sans-serif;font-size:14px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:0 70px}
+.lbl{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--dim);font-weight:700}
+
+/* top bar + tabs */
+.bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.who{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.who b{color:var(--ink)}
+.tabs{display:flex;gap:4px;background:var(--panel2);border:1px solid var(--line2);border-radius:99px;padding:3px}
+.tabs button{font-family:inherit;font-size:12px;font-weight:600;background:none;border:0;color:var(--mid);padding:7px 15px;border-radius:99px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--blue);color:#fff}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pane[hidden]{display:none}
+
+/* STORY */
+.story{max-width:720px;margin:0 auto;padding-top:40px}
+.story h1{font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.1;letter-spacing:-.03em;font-weight:800;margin:0;text-wrap:balance}
+.story p.sub{font-family:"Inter",sans-serif;font-size:15.5px;color:var(--mid);margin:14px 0 0;line-height:1.55;max-width:58ch}
+.story p.lbl{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.17em;line-height:1.4}
+.story h2{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:40px 0 12px;display:flex;align-items:center;gap:10px}
+.story h2 .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1px solid var(--blue);border-radius:50%;font-size:9.5px;letter-spacing:0}
+.story p{font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.6;margin:0 0 13px}
+.story p b{font-weight:600}
+.story .big{font-family:"Inter",sans-serif;font-size:20px;line-height:1.35;font-weight:600;letter-spacing:-.015em;margin:0 0 14px}
+.story .big em{font-style:normal;color:var(--blue)}
+.story .q{border-left:2px solid var(--blue);padding:3px 0 3px 15px;margin:18px 0}
+.story .q p{font-size:18px;margin:0 0 6px}
+.story .q span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.grewlist{border:1px solid var(--line);border-radius:5px;background:var(--panel);margin:14px 0 16px}
+.grewlist>div{display:grid;grid-template-columns:128px 1fr;gap:12px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45}
+.grewlist>div:last-child{border-bottom:0}
+.grewlist b{font-weight:700}
+.grewlist span{color:var(--mid)}
+@media(max-width:520px){.grewlist>div{grid-template-columns:1fr;gap:2px}}
+.surfaces{display:grid;gap:8px;grid-template-columns:1fr;margin:14px 0 16px}
+@media(min-width:620px){.surfaces{grid-template-columns:repeat(3,1fr)}}
+.surf{border:1px solid var(--line2);border-top:3px solid var(--blue);border-radius:4px;background:var(--panel);padding:12px 13px}
+.surf .k{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.surf .t{font-size:14px;font-weight:700;margin-top:5px;line-height:1.25}
+.surf .d{font-size:12px;color:var(--mid);margin-top:5px;line-height:1.45}
+.days{border:1px solid var(--line);border-radius:5px;background:var(--panel);margin:12px 0}
+.day{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.day:last-child{border-bottom:0}
+.day .w{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--blue);font-weight:700;text-transform:uppercase;line-height:1.4}
+.day .h{font-size:14px;font-weight:700;margin-bottom:4px}
+.day .x{font-size:12.5px;color:var(--mid);line-height:1.55}
+@media(max-width:520px){.day{grid-template-columns:1fr;gap:4px}}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border:1px solid var(--blue);background:var(--blue-e);border-radius:6px;padding:16px 18px;margin:16px 0}
+.cta .t{font-size:15px;font-weight:700}
+.cta .d{font-size:12.5px;color:var(--mid);margin-top:3px;max-width:52ch}
+.btn{font-family:inherit;font-size:13px;font-weight:700;background:var(--blue);color:#fff;border:0;border-radius:4px;padding:11px 18px;cursor:pointer;white-space:nowrap}
+.found{display:grid;gap:8px;grid-template-columns:1fr;margin:12px 0}
+@media(min-width:620px){.found{grid-template-columns:repeat(3,1fr)}}
+.found>div{border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:3px;background:var(--panel);padding:10px 12px}
+.found .v{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:700;color:var(--amber);line-height:1}
+.found .k{font-size:11.5px;color:var(--mid);margin-top:5px;line-height:1.4}
+table.m{border-collapse:collapse;width:100%;margin:10px 0 12px;font-size:13px}
+table.m th,table.m td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+table.m th{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+table.m td:first-child{font-weight:700;white-space:nowrap;padding-right:16px}
+table.m td{color:var(--mid)}
+table.m td:first-child{color:var(--ink)}
+.small{border-left:2px solid var(--line2);padding-left:14px;margin:0 0 14px;font-size:13px;color:var(--mid);line-height:1.55}
+.small b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:3px}
+.small code{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--amber)}
+.wrong{border-top:1px solid var(--line2);margin-top:36px;padding-top:6px}
+.wrong ul{margin:0 0 12px;padding-left:18px;font-family:"Newsreader",Georgia,serif;font-size:16px;line-height:1.55}
+.wrong li{margin:6px 0}
+.fine{font-size:12px;color:var(--dim);line-height:1.6}
+
+/* GLIMPSE */
+.gl-head{padding-top:32px}
+.gl-head h1{font-size:clamp(1.6rem,4.6vw,2.5rem);line-height:1.05;letter-spacing:-.028em;font-weight:800;margin:0;max-width:22ch;text-wrap:balance}
+.gl-head h1 em{font-style:normal;color:var(--blue)}
+.gl-head p{font-size:14.5px;color:var(--mid);max-width:62ch;margin:11px 0 0;line-height:1.6}
+.gl-head p b{color:var(--ink);font-weight:600}
+.ask{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:15px;margin-top:20px}
+.ask .ttl{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:11px}
+.qrow{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.qrow{grid-template-columns:repeat(3,1fr)}}
+.qb .qt{font-size:12px;color:var(--mid);margin-bottom:6px}
+.opts{display:flex;flex-wrap:wrap;gap:5px}
+.opts button{font-family:inherit;font-size:11.5px;background:var(--panel2);border:1px solid var(--line2);color:var(--mid);padding:6px 11px;border-radius:99px;cursor:pointer}
+.opts button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.views{display:flex;gap:0;margin-top:22px;border-bottom:1px solid var(--line2);overflow-x:auto}
+.views button{font-family:inherit;background:none;border:0;border-bottom:2px solid transparent;color:var(--mid);padding:11px 16px 10px;cursor:pointer;text-align:left;flex:none}
+.views button .vk{display:block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--dim)}
+.views button .vt{display:block;font-size:13.5px;font-weight:700;margin-top:2px}
+.views button[aria-selected=true]{border-bottom-color:var(--blue);color:var(--ink)}
+.views button[aria-selected=true] .vk{color:var(--blue)}
+.view[hidden]{display:none}
+.sec{margin-top:24px}
+.sechd{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:12px}
+.sechd h2{font-size:17px;margin:0;font-weight:700;letter-spacing:-.02em}
+.sechd .sm{font-size:12px;color:var(--mid)}
+.deck{display:flex;flex-wrap:wrap;gap:12px}
+
+.card{width:206px;min-height:300px;flex:none;display:flex;flex-direction:column;border-radius:7px;background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line2);cursor:pointer;position:relative;overflow:hidden;padding:0;text-align:left;font-family:inherit;color:inherit;transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .16s}
+.card>span{display:block}
+.card:hover,.card:focus-visible{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.42);outline:none}
+.card .top{height:4px;background:var(--tc)}
+.card .hd{display:block;padding:11px 12px 0}
+.card .tier{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:8.5px;font-weight:700;letter-spacing:.13em;color:var(--tc);border:1px solid var(--tc);border-radius:2px;padding:2px 6px}
+.card .nm{display:block;font-size:15.5px;font-weight:700;line-height:1.16;margin-top:8px;letter-spacing:-.02em}
+.card .mt{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;color:var(--dim);margin-top:4px;letter-spacing:.05em;text-transform:uppercase}
+.card .hero{display:block;padding:13px 12px 11px;margin-top:9px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(127,160,200,.05)}
+.card .hv{display:block;font-family:"JetBrains Mono",monospace;font-size:27px;font-weight:700;line-height:1.15;letter-spacing:-.03em;color:var(--tc)}
+.card .hv.txt{font-size:13px;line-height:1.3;letter-spacing:0}
+.card .hk{display:block;font-size:10px;color:var(--mid);margin-top:5px;line-height:1.3}
+.card .st{display:grid;padding:9px 12px;gap:5px;flex:1}
+.card .st>div{display:flex;justify-content:space-between;gap:8px;font-size:9.5px;line-height:1.3;align-items:baseline}
+.card .st .k{display:block;color:var(--dim);min-width:0;flex:1}
+.card .st .v{display:block;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--ink);flex:none}
+.card .pips{display:flex;gap:4px;padding:0 12px 9px}
+.pip{flex:1;height:3px;border-radius:2px;background:var(--line2)}
+.pip.on{background:var(--tc)}
+.card .foot{display:block;padding:0 12px 11px;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.card.grew .foot{color:var(--tc)}
+.empty{border:1px dashed var(--amber);border-radius:5px;padding:13px 15px;color:var(--mid);font-size:12.5px;line-height:1.55;background:var(--amber-d)}
+.empty b{color:var(--ink)}
+.pipkey{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.pipkey i{display:inline-block;width:14px;height:3px;border-radius:2px;background:var(--blue);margin-right:5px;vertical-align:2px}
+
+/* rep brief */
+.brief{display:grid;gap:14px;grid-template-columns:1fr;margin-top:20px}
+@media(min-width:900px){.brief{grid-template-columns:1.25fr 1fr}}
+.box{border:1px solid var(--line);border-radius:5px;background:var(--panel);padding:15px 16px}
+.box .bk{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:9px}
+.box p{margin:0 0 10px;font-size:13.5px;line-height:1.55}
+.box p:last-child{margin-bottom:0}
+.who2{display:grid;gap:8px}
+.who2 button{font-family:inherit;text-align:left;background:var(--panel2);border:1px solid var(--line2);border-left:3px solid var(--tc);border-radius:3px;padding:9px 11px;cursor:pointer;color:inherit}
+.who2 .a{display:block;font-size:13px;font-weight:700}
+.who2 .b{display:block;font-size:11.5px;color:var(--mid);margin-top:2px;line-height:1.4}
+ol.asks{margin:0;padding-left:20px}
+ol.asks li{font-size:13.5px;line-height:1.5;margin:0 0 9px}
+ul.dont{margin:0;padding-left:18px}
+ul.dont li{font-size:12.5px;color:var(--mid);line-height:1.5;margin:0 0 6px}
+.chip{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--line2);border-radius:2px;padding:2px 6px;color:var(--mid);margin-right:4px}
+.chip.b{border-color:var(--blue);color:var(--blue)}
+
+/* cfo */
+.cfo{margin-top:20px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);overflow:hidden}
+.cfo .ch{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.cfo .ch .k{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.cfo .ch input.co{font-family:inherit;font-size:20px;font-weight:800;letter-spacing:-.02em;background:none;border:0;border-bottom:1px dashed var(--line2);color:var(--ink);padding:2px 0;margin-top:4px;width:min(100%,360px)}
+.cfo .cb{padding:16px 18px;display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:900px){.cfo .cb{grid-template-columns:1fr 1fr}}
+.inp{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.inp label{display:block;font-size:10px;color:var(--dim);margin-bottom:4px;font-family:"JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+.inp input{width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line2);border-radius:3px;padding:8px 10px;font-family:"JetBrains Mono",monospace;font-size:14px;font-weight:700}
+.inp .src{display:block;font-size:10px;color:var(--mid);margin-top:4px;line-height:1.35}
+.rows{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.rows>div{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
+.rows>div:last-child{border-bottom:0}
+.rows .l{color:var(--mid)}
+.rows .r{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:15px;white-space:nowrap}
+.rows .tot{background:var(--blue-e)}
+.rows .tot .r{color:var(--blue);font-size:18px}
+.lab{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;color:var(--dim);margin-top:8px;line-height:1.5}
+.proof{display:grid;gap:8px}
+.proof>div{border-left:2px solid var(--blue);padding:3px 0 3px 12px}
+.proof .pn{font-size:12.5px;font-weight:700}
+.proof .pv{font-family:"Newsreader",Georgia,serif;font-size:14.5px;line-height:1.5;margin-top:2px}
+.proof a{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--blue)}
+
+/* overlay */
+.ov{position:fixed;inset:0;background:rgba(2,5,10,.82);z-index:50;display:none;overflow-y:auto;padding:22px 14px}
+.ov.on{display:block}
+.sheet{max-width:760px;margin:0 auto;background:var(--panel);border:1px solid var(--line2);border-radius:7px;overflow:hidden}
+.sheet .sh{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.sheet .sh h3{margin:0;font-size:20px;font-weight:700;letter-spacing:-.024em;line-height:1.15}
+.sheet .sh .m{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--dim);margin-top:5px;letter-spacing:.05em;text-transform:uppercase}
+.xclose{background:none;border:1px solid var(--line2);color:var(--mid);border-radius:3px;width:28px;height:28px;font-size:15px;cursor:pointer;flex:none;line-height:1}
+.poster{position:relative;display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#0d1726,#060a11);border-bottom:1px solid var(--line);overflow:hidden;text-decoration:none}
+.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.poster .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,6,12,.92) 0%,rgba(3,6,12,.25) 55%,rgba(3,6,12,.4) 100%)}
+.poster .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.5);transition:transform .15s}
+.poster:hover .play{transform:translate(-50%,-50%) scale(1.09)}
+.poster .pt{position:absolute;left:16px;right:16px;bottom:13px}
+.poster .pk{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.poster .pn{display:block;font-size:16px;font-weight:700;color:#fff;margin-top:3px;letter-spacing:-.02em}
+.novid{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:var(--panel2);border-bottom:1px solid var(--line);color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:16px}
+.sb{padding:16px 18px}
+.grp{margin-bottom:15px}
+.grp .k{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:5px}
+.grp .v{font-family:"Newsreader",Georgia,serif;font-size:15px;line-height:1.5}
+.grp .v.na{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--amber);letter-spacing:.03em}
+.numgrid{display:grid;gap:7px;grid-template-columns:repeat(auto-fit,minmax(138px,1fr))}
+.numgrid>div{border:1px solid var(--line);border-left:2px solid var(--blue);border-radius:3px;padding:8px 10px;background:var(--panel2)}
+.numgrid .nv{font-family:"JetBrains Mono",monospace;font-size:16px;font-weight:700;line-height:1}
+.numgrid .nk{font-size:10px;color:var(--mid);margin-top:3px;line-height:1.3}
+.sheet a{color:var(--blue);font-family:"JetBrains Mono",monospace;font-size:10px}
+.gnote{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--mid);line-height:1.6;max-width:84ch}
+.gnote b{color:var(--ink)}
+</style>
+
+<div class="bar"><div class="in">
+  <span class="who"><b>Ketan Sharma</b> &nbsp;for FlytBase</span>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tStory" aria-selected="true" aria-controls="pStory">The problem and the plan</button>
+    <button role="tab" id="tGl" aria-selected="false" aria-controls="pGl">A glimpse, already built</button>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<!-- ========== STORY ========== -->
+<section class="pane" id="pStory" role="tabpanel" aria-labelledby="tStory">
+<div class="story">
+  <p class="lbl" style="margin:0 0 14px">September 2026</p>
+  <h1>We already wrote this eighteen times.</h1>
+  <p class="sub">What I would own, why it moves the number, and the first piece of it, already built from outside.</p>
+
+  <h2><span class="n">1</span>What I would own</h2>
+  <p class="big">Positioning. Not a tagline. <em>Every place a prospect meets us</em>, and making sure sales walks into every conversation already carrying the full range of what we do.</p>
+  <p>That means the site, the videos, what a rep has in hand before a first call, and what gets sent to a customer's CFO afterwards. One story, told the same way in all of them.</p>
+  <p><b>What it moves:</b> average contract value, dramatically, because the ceiling becomes visible from the first minute. And the sales cycle, somewhat, because the first call stops being spent explaining what we are.</p>
+
+  <h2><span class="n">2</span>Where we are</h2>
+  <p>We have the strongest evidence base in this category. <b>Twenty four published deployments, twenty industries, six continents.</b> A copper mine in Zambia flown from a control room in another country. A fire brigade in Kiel wired straight into the 112 dispatch line. Australia's first airport BVLOS approval. A solar operator that grew seven times in four years without growing the team.</p>
+  <p>Sixteen of those twenty four stories already come with the customer on video. The raw material is not the problem.</p>
+
+  <h2><span class="n">3</span>What is in the way</h2>
+  <p class="big">None of it compounds.</p>
+  <p>Each story is a standalone article. A buyer who reads one forms his whole idea of how far this goes from a sample of one. And eighteen of the twenty four already contain a sentence saying the customer grew:</p>
+  <div class="grewlist">
+    <div><b>Kansanshi</b><span>expanded the deployment to four docks</span></div>
+    <div><b>OvrWatch</b><span>began with four or five docking stations, then thirteen</span></div>
+    <div><b>Ibn Firnas</b><span>ran one site first, then the client asked for three</span></div>
+    <div><b>SQM</b><span>has ordered additional docks for its security department</span></div>
+    <div><b>MSS Security</b><span>has submitted seven additional BVLOS approvals</span></div>
+    <div><b>Sensorem</b><span>plans around thirty more systems in the next twelve months</span></div>
+  </div>
+  <p>That is the growth story, written by us eighteen times and filed on eighteen pages that do not point at each other.</p>
+  <div class="q">
+    <p>"The same chat could convert into a four thousand dollar order, or a forty thousand dollar order, or a four hundred thousand dollar order. And that depends on the sales guy."</p>
+    <span>Achal</span>
+  </div>
+  <p>So a buyer arrives small, and whether he stays small depends on who picks up. <b>That is not a seller problem. It is that every seller starts from nothing, every time.</b></p>
+
+  <h2><span class="n">4</span>Where we get to</h2>
+  <p>A buyer arrives already knowing how far this goes, having half sorted himself. A rep opens a new account and the picture is already built for that prospect. The customer's CFO gets a page that makes the case in his own numbers. <b>ACV rises, the cycle shortens, and none of it depends on which seller picked up the phone.</b></p>
+
+  <h2><span class="n">5</span>The vessel</h2>
+  <p class="big">Cards, not case studies.</p>
+  <p>A case study is an article, and nobody reads twenty four of them. A card is an object. You collect it, compare it, show it to someone else. A buyer answers three questions and gets the cards that are his, plus the ones one size above him. Each opens into the customer on video, the operation running, the published numbers, and what it returned.</p>
+  <p>The four questions already on our homepage, BVLOS path, ROI framework, data to intelligence, IT and compliance, become the four things every card answers. Then the same cards run through all three places:</p>
+  <div class="surfaces">
+    <div class="surf"><div class="k">The buyer</div><div class="t">On the site, before anyone calls</div><div class="d">The prospect who never books a demo still sees how far this goes.</div></div>
+    <div class="surf"><div class="k">The rep</div><div class="t">In the CRM, before the first call</div><div class="d">Built the moment a lead is assigned. Who to name, what to ask, what not to claim.</div></div>
+    <div class="surf"><div class="k">The CFO</div><div class="t">After the call, in his own numbers</div><div class="d">The rep edits it, the customer forwards it. Named proof, no invented figures.</div></div>
+  </div>
+
+  <h2><span class="n">6</span>The first ninety days</h2>
+  <p>Output from the first month, not onboarding.</p>
+  <div class="days">
+    <div class="day"><div class="w">Days<br>1 to 30</div><div><div class="h">Ship the first cards, fix what is already broken</div><div class="x">Sit on live calls and read the last hundred inbound conversations. In the same month: the first card set live for our largest segment, the case study counters fixed, and the missing dock counts published.</div></div></div>
+    <div class="day"><div class="w">Days<br>31 to 60</div><div><div class="h">Agree the story, then go and film it</div><div class="x">One agreed answer to what FlytBase is for, signed off with you and Nitin rather than written by me alone. Then customer sites, and the footage the cards need. The rep view goes to the team.</div></div></div>
+    <div class="day"><div class="w">Days<br>61 to 90</div><div><div class="h">Make it run without me</div><div class="x">The rep view builds itself when a lead lands in the CRM. The CFO page goes live. Every new case study adds a card instead of an article, so it improves from work the team already does.</div></div></div>
+  </div>
+
+  <h2><span class="n">7</span>A glimpse, already built</h2>
+  <p>I built the first piece from outside, using only our public site. The same three answers, shown on all three surfaces: what the buyer sees, what the rep gets, what goes to the CFO. Everything in it is transcribed from our own pages. None of it is generated.</p>
+  <div class="cta">
+    <div><div class="t">Open the glimpse</div><div class="d">Three questions, then the same prospect on all three surfaces.</div></div>
+    <button class="btn" id="goGl">A glimpse, already built &rarr;</button>
+  </div>
+  <p>Building it turned up three things worth knowing:</p>
+  <div class="found">
+    <div><div class="v">9 of 24</div><div class="k">stories never state a dock count, the one number that sets the size of the deal</div></div>
+    <div><div class="v">10+ docks</div><div class="k">nobody at that size has published an answer to our own IT and compliance question</div></div>
+    <div><div class="v">16 of 24</div><div class="k">already have a customer video. The footage exists, it is just not connected</div></div>
+  </div>
+
+  <h2><span class="n">8</span>What I would be measured on</h2>
+  <table class="m">
+    <tr><th>Measure</th><th>Why this one</th></tr>
+    <tr><td>The gap between sellers</td><td>Average deal size, and the distance between our best seller and our median one on the same kind of conversation. If the range becomes visible, that distance closes.</td></tr>
+    <tr><td>How buyers arrive</td><td>The mix of inbound by size. We do not have this number today, it costs nothing to produce, and it arrives inside the first month.</td></tr>
+    <tr><td>Senior hours per deal</td><td>You said the team is buried. This is whether that changed.</td></tr>
+    <tr><td>Whether the words spread</td><td>How many customers, partners and journalists describe us the way we describe ourselves.</td></tr>
+  </table>
+  <p class="fine">Our cycle runs nine to eighteen months, so nothing closes inside a quarter. The first two measures move well before that.</p>
+
+  <h2><span class="n">9</span>Three small things, all quick</h2>
+  <div class="small"><b>The case studies page shows zeros to anything that does not scroll.</b>Every headline number is served as <code>0</code> and only counts up when a person scrolls. A crawler, a link preview, or a model answering a buyer's question sees "0st BVLOS approval" and "0 USD saved". Our robots.txt invites five AI crawlers in and serves them that.</div>
+  <div class="small"><b>One tile understates our best number by ten times.</b>The TNB story is titled "90x" and its body says a 90-fold improvement. The stat tile on the same page says 90%.</div>
+  <div class="small"><b>The platform share card still sells the old category.</b>Its title reads "World's first drone autonomy platform" while the headline on the same page says "The Physical AI platform behind the world's largest drone dock programs."</div>
+
+  <div class="wrong">
+  <h2><span class="n">10</span>Where I could be wrong</h2>
+  <ul>
+    <li>If deal size is set by the customer's budget rather than the conversation, this is a targeting problem, not a visibility one.</li>
+    <li>If our best sellers already work from something written down that simply is not reaching the others, this is a smaller job than I think.</li>
+    <li>If long first calls come from procurement or regulation rather than from confusion about what we are.</li>
+    <li>If someone already owns this and I could not see it from outside.</li>
+  </ul>
+  <p class="fine">Any of those would show within the first month. Everything here comes from our public pages and from what you told me. I have used no revenue or headcount numbers, because the ones visible from outside are guesses. Axpo is left out on purpose: its case study never mentions FlytBase, names FlightHub 2 as the mission software, and says the team is exploring alternative platforms.</p>
+  </div>
+</div>
+</section>
+
+<!-- ========== GLIMPSE ========== -->
+<section class="pane" id="pGl" role="tabpanel" aria-labelledby="tGl" hidden>
+  <div class="gl-head">
+    <p class="lbl" style="margin:0 0 11px">Built from outside, off the public site</p>
+    <h1>Three answers. <em>One prospect. Three surfaces.</em></h1>
+    <p>Answer the three questions a buyer would. Then look at what <b>he</b> sees, what <b>the rep</b> gets before the first call, and what goes to <b>his CFO</b> afterwards. Every name, number and quote is from that customer's own page on flytbase.com.</p>
+  </div>
+
+  <div class="ask">
+    <div class="ttl">The buyer answers</div>
+    <div class="qrow">
+      <div class="qb"><div class="qt">What are you trying to do?</div>
+        <div class="opts" id="qLane">
+          <button data-v="catch" aria-pressed="true">Catch an intruder</button>
+          <button data-v="inspect" aria-pressed="false">Inspect an asset</button>
+          <button data-v="emerg" aria-pressed="false">Respond to an emergency</button>
+          <button data-v="count" aria-pressed="false">Count what is there</button>
+        </div></div>
+      <div class="qb"><div class="qt">How big are you starting?</div>
+        <div class="opts" id="qNow">
+          <button data-v="0" aria-pressed="false">1 dock</button>
+          <button data-v="1" aria-pressed="true">2 to 4</button>
+          <button data-v="2" aria-pressed="false">5 to 9</button>
+          <button data-v="3" aria-pressed="false">10 or more</button>
+        </div></div>
+      <div class="qb"><div class="qt">Where do you expect to be in a year?</div>
+        <div class="opts" id="qSoon">
+          <button data-v="0" aria-pressed="false">Same place</button>
+          <button data-v="1" aria-pressed="false">2 to 4</button>
+          <button data-v="2" aria-pressed="true">5 to 9</button>
+          <button data-v="3" aria-pressed="false">10 or more</button>
+        </div></div>
+    </div>
+  </div>
+
+  <div class="views" role="tablist">
+    <button role="tab" data-view="vBuyer" aria-selected="true"><span class="vk">Surface 1</span><span class="vt">What the buyer sees</span></button>
+    <button role="tab" data-view="vRep" aria-selected="false"><span class="vk">Surface 2</span><span class="vt">What the rep gets</span></button>
+    <button role="tab" data-view="vCfo" aria-selected="false"><span class="vk">Surface 3</span><span class="vt">What goes to the CFO</span></button>
+  </div>
+
+  <div class="view" id="vBuyer">
+    <div class="sec">
+      <div class="sechd"><h2>Your hand</h2><span class="sm" id="handSub"></span></div>
+      <div class="deck" id="hand"></div>
+    </div>
+    <div class="sec">
+      <div class="sechd"><h2 id="upTtl">One size up</h2><span class="sm" id="upSub"></span></div>
+      <div class="deck" id="up"></div>
+      <div id="upEmpty" style="margin-top:12px"></div>
+    </div>
+    <div class="pipkey"><span>the four bars on each card:</span><span><i></i>BVLOS path</span><span><i></i>ROI framework</span><span><i></i>Data to intelligence</span><span><i></i>IT and compliance</span></div>
+  </div>
+
+  <div class="view" id="vRep" hidden>
+    <div class="brief" id="brief"></div>
+  </div>
+
+  <div class="view" id="vCfo" hidden>
+    <div class="cfo">
+      <div class="ch">
+        <div><div class="k">Prepared for</div><input class="co" id="coName" value="Your company" aria-label="Company name"></div>
+        <div style="text-align:right"><div class="k">Prepared by your FlytBase rep</div><div class="lab" id="cfoLane"></div></div>
+      </div>
+      <div class="cb">
+        <div>
+          <div class="inp">
+            <div><label for="cSites">Sites</label><input id="cSites" type="number" min="1" value="2"></div>
+            <div><label for="cToday">Today, per site, per month</label><input id="cToday" type="number" min="0" value="13000"><span class="src" id="cTodaySrc"></span></div>
+            <div style="grid-column:1/-1"><label for="cNew">The programme, per site, per month</label><input id="cNew" type="number" min="0" value="6100"><span class="src" id="cNewSrc"></span></div>
+          </div>
+          <div class="rows" style="margin-top:14px">
+            <div><span class="l">What this costs you today, a year</span><span class="r" id="oToday"></span></div>
+            <div><span class="l">The programme, a year</span><span class="r" id="oNew"></span></div>
+            <div class="tot"><span class="l">Difference, a year</span><span class="r" id="oDiff"></span></div>
+          </div>
+          <div class="lab" id="oLab"></div>
+        </div>
+        <div>
+          <div class="bk" style="font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:10px">What customers like you published</div>
+          <div class="proof" id="proof"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gnote"><b>What this is and is not.</b> A glimpse of one piece, built from outside in two days. The real version has the customer playing inline inside every card; YouTube will not play inside this sandbox, so here the poster opens the video in a new tab. <b>Nothing is generated.</b> Every sentence is transcribed from that customer's page, with the link. The four bars on each card are the four questions on our own homepage, lit only where that customer's page answers them. Axpo is not in the deck: its case study never mentions FlytBase, names FlightHub 2 as the mission software, and says the team is exploring alternative platforms.</div>
+</section>
+
+</div>
+
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+
+<script>
+var CARDS=[{"id": "24-7-drone-force-residential-estate-security-docks-south-africa", "nm": "24-7 Drone Force", "full": "24-7 Drone Force", "ct": "South Africa", "ind": "Site Security", "pt": "HDRT (Hennies Drone Repair and Training) and Metagrated", "sz": "SIZE N/P", "b": 4, "lane": "catch", "hero": {"v": "99%", "k": "Dock serviceability"}, "stats": [{"v": "1200+", "k": "Drone flights completed"}], "lines": ["1,200+ completed flights", "300+ hours of flight time", "99% system serviceability rate", "25-30 minutes of operational flight time per mission"], "B": "The team worked closely with the South African Civil Aviation Authority to develop Standard Operating Procedures (SOPs) for BVLOS operations, as no existing framework existed for drone-in-a-box security applications.", "R": null, "D": null, "I": null, "reg": "The team worked closely with the South African Civil Aviation Authority to develop Standard Operating Procedures (SOPs) for BVLOS operations, as no existing framework existed for drone-in-a-box security applications.", "gr": "Over the past year, they've moved from traditional manual drone deployments to implementing DJI Dock solutions integrated with FlytBase to enhance their perimeter security capabilities.", "q": {"quote": "Most of our services provide some sort of perimeter security based solution. In South Africa, there's a huge trend towards guided communities, guided business properties, and huge perimeter infrastructures around business environments.", "attributed_to": "David De Lima, Managing Director, 24-7 Drone Force"}, "yt": "u8dr8WwXbWA", "url": "https://www.flytbase.com/case-studies/24-7-drone-force-residential-estate-security-docks-south-africa"}, {"id": "accelerating-road-incident-response-with-remotely-operated-drone-technology-at-transport-for-nsw", "nm": "Transport for NSW", "full": "Transport for NSW", "ct": "Australia", "ind": "BVLOS", "pt": null, "sz": "SIZE N/P", "b": 4, "lane": "emerg", "hero": {"v": "", "k": "allowing drones to cover up to 16km of road per deployment"}, "stats": [], "lines": ["allowing drones to cover up to 16km of road per deployment", "housed more than 50km away", "stationed more than 50km away", "stationed over 50km away"], "B": "Through the Drones for Roads Program, Transport for NSW became the first Australian agency to receive approval for beyond visual line-of-sight (BVLOS) drone operations on highways, enabling accredited pilots to remotely deploy and supervise drones from the Transport Management Centre (TMC).", "R": null, "D": null, "I": null, "reg": "Recently, they have received a first-of-its-kind approval by the Civil Aviation Safety Authority (CASA) for BVLOS operations, which allows accredited Transport for NSW pilots to deploy and supervise drones from the Transport Management Centre (TMC) nerve centre, housed more than 50km away, slashing the time it takes to get eyes on an incident.", "gr": null, "q": null, "yt": null, "url": "https://www.flytbase.com/case-studies/accelerating-road-incident-response-with-remotely-operated-drone-technology-at-transport-for-nsw"}, {"id": "aerial-fences-automating-ranch-security-oversight-drones-flytbase", "nm": "Aerial Fences", "full": "Aerial Fences", "ct": "United States", "ind": "Agriculture", "pt": "Aerial Fences", "sz": "1 DOCK", "b": 0, "lane": "inspect", "hero": {"v": "35,000 USD", "k": "Estimated Annual Savings per Ranch"}, "stats": [{"v": "50 days", "k": "Manual patrol visits eliminated each year"}], "lines": ["reduced management-related travel by 60%", "Ranch visits for management reduced by 60% .", "AI and query-based video review cut manual analysis time by 70% .", "Over 30 days, detections included 10 cattle, 8 deer, 4 oryx, 4 watusi, and 1 blackbird ."], "B": null, "R": null, "D": "Owners accessed answers instantly, without sifting through raw footage.", "I": null, "reg": "Regulatory : Operations were conducted under FAA Part 107 with a roadmap to BVLOS approvals.", "gr": null, "q": {"quote": "Nearly 80% of the time ranch owners visited their land, it was for management tasks — not recreation. That's a huge burden.", "attributed_to": "Kishore Kumar, Director of Technology, Aerial Fences"}, "yt": "Gnp1Krg-yg0", "url": "https://www.flytbase.com/case-studies/aerial-fences-automating-ranch-security-oversight-drones-flytbase"}, {"id": "agtech360-livestock-monitoring-autonomous-drones-australia", "nm": "AgTech360", "full": "AgTech360", "ct": "Australia", "ind": "Agriculture", "pt": "AgTech360", "sz": "SIZE N/P", "b": 4, "lane": "inspect", "hero": {"v": "75%", "k": "Reduced Inspection Time"}, "stats": [], "lines": ["reducing inspection times by up to 75%", "Reduced inspection times by up to 75% compared to traditional methods", "75% reduction in inspection time", "Most operations report significant returns within 12-18 months of implementation."], "B": null, "R": null, "D": "Scheduled Inspections: Drones can be programmed to conduct regular inspections of critical infrastructure, with images and data automatically analyzed and integrated into the management platform.", "I": null, "reg": "The page states no approval, licence or authority by name; the only regulatory content is Coenraad Brandt's forward-looking opinion, \"I believe safety is number one... and I believe the risk for farmers also needs to be reduced without adding any risks to the airspace users. I believe this process will be streamlined,\" notes Coenraad Brandt regarding the regulatory landscape .", "gr": "AgTech360 approached the implementation through a phased deployment, beginning with water infrastructure monitoring as the initial use case. This allowed the team to establish operational protocols and validate the technology's reliability before expanding to more complex livestock monitoring scenarios.", "q": {"quote": "Australia is known for its variable climate, droughts, floods, extreme temperatures, and it's one of the driest habitable continents. It's also a mass of areas. I mean, just to give you a bit of background, driving from coast to coast is like driving to the moon and back twice.", "attributed_to": "Coenraad Brandt, Project Manager, AgTech360"}, "yt": null, "url": "https://www.flytbase.com/case-studies/agtech360-livestock-monitoring-autonomous-drones-australia"}, {"id": "aiview-autonomous-drones-italian-highway-monitoring", "nm": "AI View", "full": "AI View Group", "ct": "Italy", "ind": "Transportation", "pt": "AI View Group", "sz": "7 DOCKS", "b": 2, "lane": "emerg", "hero": {"v": "50%", "k": "Decrease in intervention time"}, "stats": [{"v": "23%", "k": "Increase in event detection"}], "lines": ["over 3,000 remote drone missions conducted for traffic monitoring alone", "more than 30 full-time staff plus an extended professional network", "the drones provide continuous 30-minute aerial surveillance", "approximately 50 dock drone stations across Italian highways in the coming year"], "B": "Securing regulatory approvals, culminating in AI View becoming one of the first companies to obtain an LUC (Light UAS Operator Certificate) for remote drone operations without on-site observers.", "R": null, "D": "Live video feeds transmit directly to highway operators' control rooms while AI algorithms simultaneously analyze the footage to detect vehicles, assess traffic flow, identify infrastructure damage, and highlight safety hazards.", "I": "A significant implementation challenge involved addressing cybersecurity concerns, as highway infrastructure falls under Europe's NIS2 (Network and Information Systems) regulations for critical infrastructure protection. AI View Group developed comprehensive security protocols to ensure compliance while maintaining system reliability.", "reg": "Securing regulatory approvals, culminating in AI View becoming one of the first companies to obtain an LUC (Light UAS Operator Certificate) for remote drone operations without on-site observers.", "gr": "The initial deployment included five docking stations installed at strategic toll gates and service areas, allowing commuters to witness the drones monitoring highway conditions. After demonstrating success with the first operator, AI View expanded the program to a second major Italian highway company with two additional docking stations.", "q": {"quote": "Highway operators face significant challenges in maintaining real-time awareness across hundreds of kilometers of roadways, especially during peak traffic periods or emergencies.", "attributed_to": "Nicola Marietti, CEO, AI View Group"}, "yt": "SOHfeVv0OZ0", "url": "https://www.flytbase.com/case-studies/aiview-autonomous-drones-italian-highway-monitoring"}, {"id": "anglo-american-autonomous-mining-drones-peru-case-study", "nm": "Anglo American", "full": "Anglo American", "ct": "Peru", "ind": "Mining", "pt": "UAV LATAM", "sz": "1 SITE", "b": 0, "lane": "catch", "hero": {"v": "90%", "k": "Reduced Travel Time"}, "stats": [{"v": "2,000", "k": "Daily survey Images"}], "lines": ["Mining operations worldwide have seen a 67% increase in drone adoption over the past three years"], "B": "UAV LATAM managed all regulatory aspects and continues to monitor compliance requirements.", "R": null, "D": null, "I": null, "reg": "Since Quellaveco operates as a private mining property, Beyond Visual Line of Sight operations can proceed through a streamlined regulatory process. Monthly reports are provided to DGAC under an agreement made with the Peruvian CAA, where they highlight the total flight time per drone dock.", "gr": null, "q": {"quote": "This technology was implemented to optimize operational outcomes, and we're seeing consistent improvements.", "attributed_to": "Representative, Anglo American"}, "yt": null, "url": "https://www.flytbase.com/case-studies/anglo-american-autonomous-mining-drones-peru-case-study"}, {"id": "autonomous-drone-inspections-oil-and-gas", "nm": "Shell", "full": "Shell Petroleum", "ct": "Netherlands", "ind": "Oil & Gas", "pt": "Skeye Netherlands (drone operations) and DroneLand Netherlands (hardware provider)", "sz": "5 DOCKS", "b": 2, "lane": "inspect", "hero": {"v": "30,000+", "k": "Drone flights logged"}, "stats": [{"v": "5+", "k": "Docks for 24/7 ops"}], "lines": ["Operating 12 hours daily (expanding to 24/7)", "approximately 30 kilometers of Rotterdam's harbor area", "The implementation process spanned approximately 6-7 months to obtain all necessary permissions and overcome regulatory hurdles.", "This requires training approximately 16 additional pilots."], "B": "The implementation process spanned approximately 6-7 months to obtain all necessary permissions and overcome regulatory hurdles.", "R": null, "D": "After collection, images are transferred to Shell's servers where machine vision models analyze each photo to identify potential issues. Results are delivered to operators in the control room via Shell's UTL system, allowing for quick response to any detected problems.", "I": "Future plans include integrating with intrusion alarm systems, exploring relaxation of ATEX zone restrictions through spark testing, and increasing cybersecurity with on-premise solutions ensuring data remains secure on controlled servers.", "reg": "The implementation process spanned approximately 6-7 months to obtain all necessary permissions and overcome regulatory hurdles, operating within the controlled airspace of Rotterdam Airport.", "gr": "Shell Petroleum is already expanding their drone operations from the current 12-hour daily schedule to a full 24/7 operation. \"At the moment, we're ramping up to twenty-four hours a day with five drone-in-a-box systems on-site,\" explained Pieter Franken.", "q": {"quote": "It took about six to seven months before we had all these new permissions in place. And we operate also within the controlled airspace of Rotterdam Airport, which causes some other challenges.", "attributed_to": "Pieter Franken, QHSE and Compliance Manager at Skeye Netherlands"}, "yt": "948YmvT5W94", "url": "https://www.flytbase.com/case-studies/autonomous-drone-inspections-oil-and-gas"}, {"id": "csx-autonomous-drone-rail-inspection", "nm": "CSX", "full": "CSX Transportation", "ct": "United States", "ind": "Transportation", "pt": null, "sz": "13 SITES", "b": 3, "lane": "inspect", "hero": {"v": "1/8", "k": "inch defect detection"}, "stats": [{"v": "13", "k": "Deployed sites"}], "lines": ["docks at 13 sites across 10 locations", "detect defects as small as 1/8 inch (the width of a credit card) from 100 feet above tracks", "26 states, Washington D.C., and parts of Canada", "50-80 preprogrammed missions at each yard location, with each mission containing as many as 70 individual waypoints"], "B": "The team spent several years building relationships with regulators and developing a compelling safety case for beyond visual line of sight operations.", "R": null, "D": "Defect Detection : Machine learning algorithms process the images to detect critical defects including:", "I": null, "reg": "The implementation strategy leveraged the physical infrastructure of rail yards, using high-mast light poles as natural barriers that allowed for \"infrastructure masking\" arguments to support FAA waiver applications.", "gr": "The company has already identified approximately 30 total use cases for the technology, with eight currently implemented and more in development.", "q": {"quote": "Safety is our number one pillar here for CSX Transportation. We want our employees, we want the public, we want everybody to go home the way they came to work that day", "attributed_to": "Patrick Barnett, Technical Director, GIS Services, CSX Transportation"}, "yt": "ZCBXBT_PhuQ", "url": "https://www.flytbase.com/case-studies/csx-autonomous-drone-rail-inspection"}, {"id": "daniel-yomtobian-private-estate-autonomous-drone-surveillance", "nm": "Daniel Yomtobian", "full": "Daniel Yomtobian", "ct": "United States", "ind": "Construction & Infrastructure", "pt": null, "sz": "1 DOCK", "b": 0, "lane": "inspect", "hero": {"v": "2.5x", "k": "more of the property under surveillance vs. fixed cameras"}, "stats": [{"v": "90%+", "k": "reduction in on-site construction oversight visits"}], "lines": ["Coverage went from 40% to 100% of the property on every flight.", "Property coverage went from 40% to 100%.", "On-site construction oversight visits dropped by over 90%.", "8,000+ missions completed at 99.9% uptime."], "B": "The deployment required no regulatory approvals beyond standard airspace compliance for the location. The absence of a complex approval process reflects the residential context, and allowed the system to go from procurement decision to live operations without a long lead time.", "R": null, "D": null, "I": null, "reg": "The deployment required no regulatory approvals beyond standard airspace compliance for the location.", "gr": null, "q": null, "yt": null, "url": "https://www.flytbase.com/case-studies/daniel-yomtobian-private-estate-autonomous-drone-surveillance"}, {"id": "discovery-land-autonomous-drone-security", "nm": "Discovery Land", "full": "Discovery Land Company", "ct": "United States", "ind": "Site Security", "pt": "UVT", "sz": "3 SITES", "b": 1, "lane": "catch", "hero": {"v": "20,000 USD", "k": "Saved in contractor fees"}, "stats": [{"v": "300%", "k": "Increase in mapping data utilization"}], "lines": ["a 300% increase in mapping data utilization", "saved approximately $20,000 in third-party contracting fees over six months at a single property", "costing up to $20,000 over six months at a single location", "Drones launch from their docking stations within 10-45 seconds"], "B": "The company faced regulatory hurdles related to Beyond Visual Line of Sight (BVLOS) operations, particularly at properties near airports or military installations, requiring careful airspace planning and the strategic positioning of visual observers throughout the properties.", "R": "By creating a shared resource that serves multiple business functions, the company has maximized return on investment while improving both security and operational efficiency.", "D": "Collected mapping data transfers automatically to DroneDeploy for processing and analysis", "I": "All drone footage is recorded and stored on internal servers alongside fixed camera feeds for comprehensive incident documentation", "reg": "The company faced regulatory hurdles related to Beyond Visual Line of Sight (BVLOS) operations, particularly at properties near airports or military installations, requiring careful airspace planning and the strategic positioning of visual observers throughout the properties.", "gr": "The implementation process began with three initial properties receiving 24/7 drone coverage.", "q": {"quote": "Due to our very visible, very front-facing profile, security is absolutely paramount for our members and our residents who live in our communities.", "attributed_to": "Edmond Jacobs, Security Systems Design Engineer, Discovery Land Company"}, "yt": "iJq0yjf2lJo", "url": "https://www.flytbase.com/case-studies/discovery-land-autonomous-drone-security"}, {"id": "dole-asia-autonomous-plantation-drone-security-philippines", "nm": "Dole Asia", "full": "Dole Asia Company", "ct": "The Philippines", "ind": "Agriculture", "pt": "ASY Electronics", "sz": "SIZE N/P", "b": 4, "lane": "inspect", "hero": {"v": "24/7", "k": "Drone surveillance coverage"}, "stats": [{"v": "35%", "k": "Reduction in unauthorized access incidents"}], "lines": ["24,000 hectares of pineapple plantations", "24,000 hectares of pineapple plantations with 30,000 employees", "employs another 30,000 workers", "operates in more than 70 countries"], "B": "The team worked closely with the Civil Aviation Authority to obtain necessary approvals for Beyond Visual Line of Sight (BVLOS) operations. This required extensive documentation and certification to demonstrate that the system met all safety requirements.", "R": "This added value extends the ROI of the system beyond security alone.", "D": null, "I": null, "reg": "The team worked closely with the Civil Aviation Authority to obtain necessary approvals for Beyond Visual Line of Sight (BVLOS) operations. This required extensive documentation and certification to demonstrate that the system met all safety requirements.", "gr": null, "q": {"quote": "One of the real big challenges that we have with such a massive environment to protect is the fact that it is so big. We can put thousands of guards out there. We can put a lot and we have been investing heavily in security. But what we decided to do was look at technology.", "attributed_to": "Tyron Mangakahia, Global Security Director, Dole Asia Company"}, "yt": "NTw9EWmuPiM", "url": "https://www.flytbase.com/case-studies/dole-asia-autonomous-plantation-drone-security-philippines"}, {"id": "enbw-scaled-solar-pv-inspections-150-mw-to-1-gw-autonomous-drone-docks", "nm": "EnBW", "full": "EnBW", "ct": "Germany", "ind": "Solar", "pt": null, "sz": "2 DOCKS", "b": 1, "lane": "inspect", "hero": {"v": "2-4x", "k": "More inspections at same annual budget"}, "stats": [{"v": "3cm GSD", "k": "Thermal resolution for ISE compliance"}], "lines": ["growing from 150 MW to 1 GW in just four years", "the company's 567% portfolio growth over four years", "managed 567% portfolio growth (150 MW to 1 GW) without proportional staff increases", "Our solar capacity exploded 7x in 4 years"], "B": "The team has submitted Beyond Visual Line of Sight (BVLOS) approval requests to German aviation authorities, though processing backlogs mean approval timelines remain uncertain.", "R": "As I said, the next step would be that we are trying to deploy more of the drone docks. But first, we have to show it's beneficial. Our management will see if it's worth it to invest in docks, in software, in training people to do BVLOS flights and so on,", "D": "The software's machine learning algorithms process visual and thermal data simultaneously, detecting anomalies including hotspots, string failures, bypass diode issues, and glass breakage.", "I": "The deployment operates on a separate LTE network outside EnBW's critical infrastructure (KRITIS) during the proof-of-concept phase, enabling faster testing and iteration without extensive cybersecurity approval processes.", "reg": "The team has submitted Beyond Visual Line of Sight (BVLOS) approval requests to German aviation authorities, though processing backlogs mean approval timelines remain uncertain.", "gr": "EnBW currently operates two autonomous docks with a third Dock 3 system deploying in spring 2024.", "q": {"quote": "Our solar capacity exploded 7x in 4 years. We now have way more solar farms to inspect, and each farm is bigger than before-but we can't hire 7x more people to inspect them all,", "attributed_to": "Timo Freund, Technical Specialist for PV Modules, EnBW"}, "yt": "AEOante77r0", "url": "https://www.flytbase.com/case-studies/enbw-scaled-solar-pv-inspections-150-mw-to-1-gw-autonomous-drone-docks"}, {"id": "how-bf-kiel-turned-emergency-response-into-a-3-minute-aerial-operation-with-autonomous-drones", "nm": "BF Kiel", "full": "BF Kiel", "ct": "Germany", "ind": "Public Safety", "pt": null, "sz": "1 DOCK", "b": 0, "lane": "emerg", "hero": {"v": "5–7 Minutes", "k": "Reduction in water-rescue response time"}, "stats": [{"v": "<1 Minute", "k": "Drone response during bridge collapse"}], "lines": ["reduced water-rescue response times from 10–12 minutes to 3–5 minutes", "achieved more than 95 percent mission readiness in harsh coastal conditions", "covering up to 201 square kilometers per dock", "protecting 250,000 residents"], "B": "Stage 3: Regulatory Preparation Daniel coordinated with police, airspace authorities, and airport operators over three to four months to ensure full compliance with BVLOS regulations and local policies.", "R": null, "D": null, "I": "Maintained full GDPR compliance through EU based servers", "reg": "BVLOS approvals under EASA, plus coordination with police, airport authorities, and airspace control. Manual authorization is still required for each takeoff.", "gr": "Plans include 24/7 operations, a third dock covering remaining outskirt regions, and AI assisted detection for persons in water and smoke classification.", "q": {"quote": "Persons at risk of drowning do not have those ten to twelve minutes, and we often do not even know exactly where they are.", "attributed_to": "Drone Program Manager Daniel Ritter"}, "yt": "7fmM8p0YsI4", "url": "https://www.flytbase.com/case-studies/how-bf-kiel-turned-emergency-response-into-a-3-minute-aerial-operation-with-autonomous-drones"}, {"id": "ibn-firnas-drone-center-oman-government-construction-monitoring", "nm": "Ibn Firnas", "full": "Ibn Firnas Drone Center", "ct": "Oman", "ind": "Construction & Infrastructure", "pt": "Ibn Firnas Drone Center (IFDC)", "sz": "3 DOCKS", "b": 1, "lane": "inspect", "hero": {"v": "87%", "k": "reduction in stakeholder reporting time"}, "stats": [{"v": "3x", "k": "sites monitored from one hub"}], "lines": ["87% reduction in stakeholder reporting time.", "90 minutes to under 30 per HSE inspection zone.", "2–3 hours down to under 60 minutes for night patrol coverage.", "Nine months of operation, 300+ autonomous missions, 99% dock uptime, and a client that tripled the program without being asked."], "B": "Regulatory approvals were secured before hardware was procured. Operating autonomous drones over government construction sites in Oman required clearance from both the Civil Aviation Authority for BVLOS and autonomous operations, and the National Security Authority given the sensitivity of the sites.", "R": "Client expanded from one site to three. After observing site one performing in production, the client asked IFDC to expand the program. That decision required no pitch and no commercial incentive — it is the most credible form of validation available.", "D": "During patrol flights, it analyzes the live video feed continuously and pushes detections to the operations hub in real time, while the drone is still in the air. The supervisor can act on a violation as it happens, not hours later when an inspection report arrives.", "I": "On-premises brings all operational data fully within Oman's national infrastructure, satisfying data sovereignty requirements for more sensitive government programs that cloud configurations cannot serve.", "reg": "Operating autonomous drones over government construction sites in Oman required clearance from both the Civil Aviation Authority for BVLOS and autonomous operations, and the National Security Authority given the sensitivity of the sites.", "gr": "The program launched at one site in September 2025. Running a single site first let IFDC and the client validate all four mission types, refine the operational parameters, and build confidence in the system before committing to the full configuration. After observing site one in operation, the client requested expansion to sites two and three. No proposal was required.", "q": null, "yt": null, "url": "https://www.flytbase.com/case-studies/ibn-firnas-drone-center-oman-government-construction-monitoring"}, {"id": "kansanshi-mining-plc-transformed-mine-security-to-proactive-uav-surveillance", "nm": "Kansanshi", "full": "Kansanshi Mining Plc (KMP)", "ct": "Zambia", "ind": "Mining", "pt": "FS Systems International Ltd", "sz": "4 DOCKS", "b": 1, "lane": "catch", "hero": {"v": "30-50%", "k": "Faster response times to intrusion events"}, "stats": [{"v": "2-3", "k": "Scheduled patrol missions per day"}], "lines": ["Response times improved by 30 to 50%", "KMP has scaled from 2 docks to 4 within months of initial deployment, with further expansion approved before year-end.", "running 2 to 3 scheduled patrol missions per day without requiring on-site pilots", "Missions run 20 to 35 minutes on average and cover 15 to 20% of the site per day"], "B": "While the drone is permanently stationed on-site within an automated Drone-in-a-Box system, all flight operations, mission management, and operational oversight are conducted from FS Systems International's dedicated Drone Operations Control Room in South Africa.", "R": "Starting with two docks and scaling on the basis of validated outcomes gave KMP's leadership the confidence to approve each stage of expansion. The programme built its own business case through demonstrated performance.", "D": null, "I": null, "reg": "This centralized control environment allows qualified BVLOS (Beyond Visual Line of Sight) drone pilots and mission specialists to monitor, manage, and support operations across multiple sites simultaneously while maintaining full regulatory compliance and operational safety.", "gr": "As operational results were validated, KMP expanded the deployment to four docks, with the programme now running consistent daily operations across high-risk zones throughout the site.", "q": {"quote": "The implementation of intelligence-based drone usage to directly secure our perimeters and assets by transforming physical security from a reactive model to a highly proactive, predictive defense are now paying dividends. Unmanned Aerial Vehicles (UAVs) act as mobile, high-speed sensor platforms that actively hunt for anomalies rather than waiting for an alarm to trigger. The UAV deployment at KMP has fundamentally strengthened our security posture as we've moved from reacting to incidents to preventing them, with faster response times and a clear reduction in theft and intrusion attempts.", "attributed_to": "Francois Peacock, Manager: KMP Risk & Asset Management"}, "yt": null, "url": "https://www.flytbase.com/case-studies/kansanshi-mining-plc-transformed-mine-security-to-proactive-uav-surveillance"}, {"id": "mss-security-airport-bvlos-drone-operations-australia", "nm": "MSS Security", "full": "MSS Security", "ct": "Australia", "ind": "Site Security", "pt": null, "sz": "3 DOCKS", "b": 1, "lane": "catch", "hero": {"v": "1st", "k": "BVLOS approval in airport by CASA"}, "stats": [{"v": "7", "k": "Sites expansion potential"}], "lines": ["MSS Security employs approximately 8,000 staff managing defense contracts, government facilities, and 22 airports throughout Australia", "an unprecedented 18-month process with no existing precedent for such operations in Australia", "Within 24 hours of initial contact, FlytBase established connections to MSS Security's drone-in-a-box units", "the approval process with CASA for BVLOS operations at sensitive locations like airports can take 12-18 months"], "B": "Obtaining approval from CASA (Civil Aviation Safety Authority) for drone operations at Port Lincoln Airport required an unprecedented 18-month process with no existing precedent for such operations in Australia.", "R": null, "D": "AI analysis simultaneously scans the video feed to identify security threats including unauthorized personnel, vehicles approaching perimeter fences, and wildlife intrusions.", "I": null, "reg": "Obtaining approval from CASA (Civil Aviation Safety Authority) for drone operations at Port Lincoln Airport required an unprecedented 18-month process with no existing precedent for such operations in Australia.", "gr": "Building on their successful implementations, MSS Security has already submitted seven additional BVLOS operation approvals across Australia.", "q": {"quote": "About a week before we were supposed to go live, they finally came back to me after chasing them up about getting the software connected to our drones, and they said we don't have it. So, naturally, fear and panic set in.", "attributed_to": "Gregory Neyland, Head of Aviation and Emerging Technologies, MSS Security"}, "yt": "t3hN3rn7u-0", "url": "https://www.flytbase.com/case-studies/mss-security-airport-bvlos-drone-operations-australia"}, {"id": "ovrwatch-asheville-hurricane-disaster-recovery-drones-public-safety", "nm": "OvrWatch", "full": "OvrWatch", "ct": "United States", "ind": "Public Safety", "pt": "OvrWatch", "sz": "13 DOCKS", "b": 3, "lane": "emerg", "hero": {"v": "90%", "k": "Faster response"}, "stats": [{"v": "13", "k": "Citywide docks deployed"}], "lines": ["a network of 13 drone docking stations across the city", "13 drone docking stations placed strategically across Asheville", "an initial deployment of 4-5 docking stations in the most severely affected areas of Asheville", "OvrWatch gradually expanded to 13 docking stations"], "B": "Captain Moore of Asheville PD, who had previously established a drone program with Beyond Visual Line of Sight (BVLOS) waivers, was instrumental in facilitating this rapid deployment.", "R": "Rather than relying exclusively on city funds, OvrWatch established partnerships with local businesses who provided hosting locations for the docking stations in exchange for security benefits and access to aerial data. This distributed cost model made the large-scale deployment financially feasible during a time when municipal resources were already stretched thin by disaster recovery needs.", "D": null, "I": null, "reg": "Captain Moore of Asheville PD, who had previously established a drone program with Beyond Visual Line of Sight (BVLOS) waivers, was instrumental in facilitating this rapid deployment.", "gr": "The implementation began with an initial deployment of 4-5 docking stations in the most severely affected areas of Asheville. After demonstrating value, OvrWatch gradually expanded to 13 docking stations to achieve complete coverage of the damaged zones within city limits.", "q": {"quote": "I've been through hurricanes before, and we've done disaster stuff in multiple different types of disasters. There are a lot of different experts in that field and a lot of different aspects to it. One of the biggest things that we prioritize with OvrWatch is if you have the data and information to back things up, it makes life a lot easier during the whole rebuild process.", "attributed_to": "Rhys Andersen, Founder and CEO, OvrWatch"}, "yt": null, "url": "https://www.flytbase.com/case-studies/ovrwatch-asheville-hurricane-disaster-recovery-drones-public-safety"}, {"id": "premier-security-autonomous-drone-surveillance", "nm": "Premier Security", "full": "Premier Security Solutions", "ct": "United States", "ind": "Emergency Response", "pt": "UVT", "sz": "1 DOCK", "b": 0, "lane": "emerg", "hero": {"v": "US$ 750,000", "k": "Potential loss prevented in one incident"}, "stats": [{"v": "6000+", "k": "Drone flights conducted till date"}], "lines": ["conducted over 6,000 flights", "prevented theft of assets worth up to $750,000 in a single incident", "1,400 hourly guards across 17 states", "Fortune 500 clients protecting $4 billion in daily inventory"], "B": "The team secured necessary waivers for shielded operations at various sites and installed detect-and-avoid technology to maintain compliance with FAA regulations.", "R": "If you can deploy a drone to cover a more proactive area outside even the factory or location to call out things that aren't getting called out until they're an issue, you can now look at reducing your guards. It really becomes cost-neutral at some point. And if you have asset protection that's occurring at a level it never did before, and at the end of the year, losses are 50% of what they were the year before, it solves itself very quickly.", "D": null, "I": "Connectivity Infrastructure: Independent LTE/cellular connections via Cradlepoint modems and Starlink satellite communications, operating completely separate from client networks to address cybersecurity concerns", "reg": "The team secured necessary waivers for shielded operations at various sites and installed detect-and-avoid technology to maintain compliance with FAA regulations.", "gr": "Premier Security and UVT adopted a phased deployment approach, starting with a single drone dock at the initial facility.", "q": {"quote": "We began to use technology to provide a higher level of security and create a more proactive approach. Traditional security is reactive - cameras record, alarms sound, and then you respond. But what if security could be proactive?", "attributed_to": "Todd Lanning, VP of Commercial Operations, Premier Security"}, "yt": "VZ7waM6gKSM", "url": "https://www.flytbase.com/case-studies/premier-security-autonomous-drone-surveillance"}, {"id": "sensorem-autonomous-docked-drones-deployment-australia", "nm": "Sensorem", "full": "Sensorem", "ct": "Australia", "ind": "Agriculture", "pt": "Sensorem", "sz": "20 DOCKS", "b": 3, "lane": "inspect", "hero": {"v": "11,000", "k": "Autonomous BVLOS flights"}, "stats": [{"v": "24-7", "k": "Drone operations"}], "lines": ["a network of 20 autonomous drone-in-a-box systems across remote industrial sites in Western Australia", "completed over 11,000 BVLOS missions", "Completed over 11,000 autonomous BVLOS flights with plans to reach 30,000 flights by the end of 2025", "20 drone-in-a-box systems (7 DJI Dock 1 and 13 DJI Dock 2 units)"], "B": "The implementation process required close collaboration with regulators to secure BVLOS approvals.", "R": null, "D": "AI-powered object detection now provides automatic alerts for vehicles, people, and anomalies, including nighttime detection", "I": null, "reg": "The implementation process required close collaboration with regulators to secure BVLOS approvals.", "gr": "Sensorem plans to deploy approximately 30 additional autonomous drone systems in the next 12 months, nearly tripling their current network size.", "q": {"quote": "The distances are vast. Even something that seems just a few hundred kilometers away to go out to site and back is often a five or six hour round trip.", "attributed_to": "Ed Boxall, Founder and Managing Director, Sensorem"}, "yt": "hgCsTtKBUyY", "url": "https://www.flytbase.com/case-studies/sensorem-autonomous-docked-drones-deployment-australia"}, {"id": "slovakia-military-wildfire-detection-dock-drones", "nm": "Military Forest", "full": "Slovakia's Military Forest (VLM)", "ct": "Slovakia", "ind": "Emergency Response", "pt": "UAVONIC", "sz": "1 DOCK", "b": 0, "lane": "emerg", "hero": {"v": "", "k": "63,000 hectares of forest and agricultural land"}, "stats": [], "lines": ["63,000 hectares of forest and agricultural land", "27,000 hectares of highly flammable pine forest in the Záhorie Military District", "a 2-3 kilometer operational radius", "a 1994 wildfire that burned 1,171 hectares, a 2007 fire that destroyed three hectares, and a 2012 fire that consumed 200 hectares of pine forest"], "B": "Airspace Coordination: Operating in restricted airspace (LZR 314) required establishing procedures for continuous communication with Malacky Air Traffic Control and coordination with military training activities at the Zuzana firing range, which operates in the same altitude zone.", "R": null, "D": null, "I": "IT Security Integration: As a state-owned company under the Ministry of Defense, VLM follows strict military standards for IT security. Creating a network architecture that satisfied both VLM's security requirements and FlytBase's operational needs was a significant challenge, requiring careful coordination between VLM's IT team and FlytBase developers.", "reg": "Airspace Coordination: Operating in restricted airspace (LZR 314) required establishing procedures for continuous communication with Malacky Air Traffic Control and coordination with military training activities at the Zuzana firing range, which operates in the same altitude zone.", "gr": "Multi-Dock Deployment: Plans to expand the system by installing additional dock stations across VLM's four operational areas, creating a comprehensive monitoring network.", "q": {"quote": "Understanding the factors of highly flammable pine forests combined with dry conditions and strong winds is essential for developing effective prevention and response strategies.", "attributed_to": "Michal Severa, CEO, UAVONIC"}, "yt": null, "url": "https://www.flytbase.com/case-studies/slovakia-military-wildfire-detection-dock-drones"}, {"id": "sqm-678-km2-mine-autonomous-inspection-adentu-and-flytbase", "nm": "SQM", "full": "SQM", "ct": "Chile", "ind": "Mining", "pt": "Adentu", "sz": "1 DOCK", "b": 0, "lane": "catch", "hero": {"v": "4×", "k": "higher iodine concentration"}, "stats": [{"v": "70%", "k": "less hazardous terrain exposure"}], "lines": ["678 km² mining operation in northern Chile", "cut inspection time from days to hours, achieved more than 95 percent mission reliability, doubled inspection frequency, and improved iodine extraction yield by two percent", "Mission reliability exceeded 95 percent even under harsh desert conditions.", "Detection time fell from several days to under 90 minutes."], "B": null, "R": "The total system investment was between USD 70,000 and 80,000, with ROI achieved in less than a year.", "D": "Machine learning models, trained on SQM's own imagery, classify the zones as optimal, wet, or dry. Within ninety minutes of flight completion, SQM's operators have a refreshed dashboard on their screens with color-coded maps that highlight anomalies and pinpoint coordinates.", "I": null, "reg": "BVLOS (Beyond Visual Line of Sight) operations are also on the roadmap, enabling drones to cover larger zones autonomously.", "gr": "The company has ordered additional DJI Docks for its security department, planning to run 24/7 site surveillance missions.", "q": {"quote": "Every hour our engineers spent walking was an hour not solving the problem,", "attributed_to": "Rodrigo Toler, Deputy Manager of Digital Innovation at SQM"}, "yt": "l10orAovdPI", "url": "https://www.flytbase.com/case-studies/sqm-678-km2-mine-autonomous-inspection-adentu-and-flytbase"}, {"id": "titan-protection-autonomous-drone-security", "nm": "Titan Protection", "full": "Titan Protection", "ct": "United States", "ind": "Public Safety", "pt": null, "sz": "SIZE N/P", "b": 4, "lane": "emerg", "hero": {"v": "40%", "k": "Reduction in security incidents"}, "stats": [{"v": "70%", "k": "Faster response times"}], "lines": ["a 40% reduction in security incidents while delivering 60% cost savings compared to traditional security guard deployments", "Compared to traditional security officer coverage costing approximately $13,000 monthly, the drone security package provides more comprehensive protection at $6,100 monthly—representing a 60% cost reduction while improving security coverage.", "The autonomous drone system has demonstrated a 40% reduction in security incidents across deployed sites.", "typically 84 hours weekly at approximately $13,000 monthly"], "B": "This regulatory milestone significantly accelerated their deployment capabilities, eliminating the need for site-by-site waiver applications that had previously slowed implementation.", "R": "Construction sites, for example, utilize security drones at night for protection, then repurpose the same technology during daylight hours for project management, equipment monitoring, and site inspections—creating cost synergies across different departmental budgets.", "D": null, "I": "AI-R Device Implementation : Artificial intelligence applications that enable people and vehicle tracking while also providing cybersecurity measures for the on-premises solution.", "reg": "As the first security company to receive a nationwide BVLOS waiver from the FAA , Titan can remotely operate drones from their central monitoring facility without requiring on-site visual observers.", "gr": null, "q": {"quote": "The traditional model of security officers working 12-hour shifts had clear limitations in effectiveness, coverage, and cost efficiency,", "attributed_to": "Ryan Smith, Founder and President, Titan Protection"}, "yt": "0ip710wGq34", "url": "https://www.flytbase.com/case-studies/titan-protection-autonomous-drone-security"}, {"id": "tnb-warehouse-asset-monitoring-autonomous-drones-malaysia", "nm": "TNB", "full": "Tenaga Nasional Berhad (TNB)", "ct": "Malaysia", "ind": "Inspections", "pt": "Aerodyne Group", "sz": "1 DOCK", "b": 0, "lane": "count", "hero": {"v": "90%", "k": "Faster verification"}, "stats": [{"v": "2000+", "k": "Images processed daily"}], "lines": ["reduced inventory verification time from three months to just 24 hours", "achieved 90% detection accuracy for critical equipment", "a 90-fold improvement in verification speed", "43-hectare storage facility"], "B": null, "R": null, "D": "Without AI, a normal person will have to go there and do individual verification, or even if you want to rely on mapping and let GIS analysts do the identification on a daily basis, one single map will take at least two weeks for classification. But with AI, we can take pictures today, and TNB will have the results by the end of the next working day. By the third day, they can use those insights already.", "I": null, "reg": "The body of the case study states no regulatory position; the only regulatory content is the FAQ, which says that in Malaysia, obtaining approval for Beyond Visual Line of Sight (BVLOS) operations requires a rigorous five-month audit process with the civil aviation authority.", "gr": "Deployment of additional docks at the same warehouse location for security surveillance", "q": {"quote": "Doing manual inspection would take a lot of time. In fact, when we spoke to our client initially back in 2023, the initial pain point was the time constraint because for each round of asset inspection, it would take them about three months to complete.", "attributed_to": "Azfar Helmi, Technical Product Manager, Aerodyne Group"}, "yt": "7NRNXEw7jKQ", "url": "https://www.flytbase.com/case-studies/tnb-warehouse-asset-monitoring-autonomous-drones-malaysia"}, {"id": "uae-waste-management-autonomous-drone-implementation-case-study", "nm": "UAE Waste Authority", "full": "UAE Waste Management Authority", "ct": "United Arab Emirates", "ind": "Emergency Response", "pt": "The Drone Centre", "sz": "SIZE N/P", "b": 4, "lane": "emerg", "hero": {"v": "70%", "k": "Reduction in manual inspections"}, "stats": [], "lines": ["obtaining flight permits for autonomous drones typically takes 3-4 weeks in the UAE", "The technology generally pays for itself within 12-18 months through operational savings."], "B": null, "R": null, "D": "AI Analysis : The system uses artificial intelligence to analyze the collected data, identifying potential security threats, environmental hazards, and calculating waste volumes.", "I": null, "reg": "The body of the case study states no regulatory position; the only regulatory content is FAQ Q4, which says that for government entities like waste management authorities, obtaining flight permits for autonomous drones typically takes 3-4 weeks in the UAE, and that private companies face more stringent requirements.", "gr": "Following successful trials, full-scale deployment occurred across strategic locations in Dubai, Abu Dhabi, and Sharjah.", "q": {"quote": "Managing large-scale waste facilities comes with unique operational challenges - constant monitoring, safety risks, and efficiency bottlenecks. Traditional inspection and surveillance methods are slow, labor-intensive, and often reactive rather than proactive,", "attributed_to": "Samruddh Ramesh, Technical Product Manager at The Drone Centre"}, "yt": "FfPHwgMuec0", "url": "https://www.flytbase.com/case-studies/uae-waste-management-autonomous-drone-implementation-case-study"}];
+var TIER=["var(--t0)","var(--t1)","var(--t2)","var(--t3)","var(--t4)"];
+var BANDNM=["1 dock","2 to 4 docks","5 to 9 docks","10 or more docks","size not published"];
+var LANENM={catch:"catching intruders",inspect:"inspecting assets",emerg:"emergency response",count:"counting what is there"};
+var QS=[{k:"B",n:"BVLOS path"},{k:"R",n:"ROI framework"},{k:"D",n:"Data to intelligence"},{k:"I",n:"IT and compliance"}];
+var ASK={
+  B:"Are you planning to get approvals site by site yourselves, or would a managed service be easier?",
+  R:"Which budget line does this come out of today, and what does the next phase have to show to get funded?",
+  D:"Who reviews the footage today, and how many hours a week does that take?",
+  I:"Where does your security team need the data to live, and does NDAA apply to you?"};
+var PROOF={
+ catch:[{n:"Titan Protection",v:"Officer coverage at approximately $13,000 a month, against $6,100 a month for the drone security package.",id:"titan-protection-autonomous-drone-security"},
+        {n:"Discovery Land Company",v:"Saved approximately $20,000 in third-party contracting fees over six months at a single property.",id:"discovery-land-autonomous-drone-security"},
+        {n:"Aerial Fences",v:"$35,000 estimated annual savings per ranch.",id:"aerial-fences-automating-ranch-security-oversight-drones-flytbase"}],
+ inspect:[{n:"EnBW",v:"Two to four times more inspections at the same annual budget.",id:"enbw-scaled-solar-pv-inspections-150-mw-to-1-gw-autonomous-drone-docks"},
+        {n:"SQM",v:"The total system investment was between USD 70,000 and 80,000, with ROI achieved in less than a year.",id:"sqm-678-km2-mine-autonomous-inspection-adentu-and-flytbase"}],
+ emerg:[{n:"OvrWatch",v:"Rather than relying only on city funds, local businesses host the docking stations in exchange for security coverage.",id:"ovrwatch-asheville-hurricane-disaster-recovery-drones-public-safety"},
+        {n:"BF Kiel",v:"A dock wired into the 112 dispatch line, launching within seconds of a call.",id:"how-bf-kiel-turned-emergency-response-into-a-3-minute-aerial-operation-with-autonomous-drones"}],
+ count:[{n:"TNB",v:"Inventory verification that took three months now completes within 24 hours, a 90-fold improvement.",id:"tnb-warehouse-asset-monitoring-autonomous-drones-malaysia"}]
+};
+var CFODEF={catch:{t:13000,n:6100,ts:"Titan's published figure for 24/7 officer coverage. Replace with yours.",ns:"Titan's published drone package price. Replace with your FlytBase quote."},
+  inspect:{t:0,n:0,ts:"Enter what inspections cost you today, per site.",ns:"Enter your FlytBase quote, per site."},
+  emerg:{t:0,n:0,ts:"Enter what response costs you today, per site.",ns:"Enter your FlytBase quote, per site."},
+  count:{t:0,n:0,ts:"Enter what stock verification costs you today, per site.",ns:"Enter your FlytBase quote, per site."}};
+
+function $(s){return document.querySelector(s);}
+function $$(s){return [].slice.call(document.querySelectorAll(s));}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function money(n){return "$"+Math.round(n).toLocaleString("en-US");}
+function pick(id){var b=document.querySelector("#"+id+" button[aria-pressed=true]");return b?b.getAttribute("data-v"):null;}
+function byId(id){for(var i=0;i<CARDS.length;i++){if(CARDS[i].id===id)return CARDS[i];}return null;}
+
+/* top tabs */
+function showPane(which){
+  var story=which==="story";
+  $("#pStory").hidden=!story; $("#pGl").hidden=story;
+  $("#tStory").setAttribute("aria-selected",story?"true":"false");
+  $("#tGl").setAttribute("aria-selected",story?"false":"true");
+  window.scrollTo(0,0);
+}
+$("#tStory").onclick=function(){showPane("story");};
+$("#tGl").onclick=function(){showPane("gl");};
+$("#goGl").onclick=function(){showPane("gl");};
+
+/* surface tabs */
+$$(".views button").forEach(function(b){
+  b.onclick=function(){
+    $$(".views button").forEach(function(x){x.setAttribute("aria-selected","false");});
+    b.setAttribute("aria-selected","true");
+    ["vBuyer","vRep","vCfo"].forEach(function(v){$("#"+v).hidden=(v!==b.getAttribute("data-view"));});
+  };
+});
+
+/* questions */
+var lastLane=null;
+["qLane","qNow","qSoon"].forEach(function(id){
+  $$("#"+id+" button").forEach(function(b){
+    b.onclick=function(){
+      $$("#"+id+" button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true"); render();};});
+});
+
+function state(){
+  var lane=pick("qLane"), now=+pick("qNow"), soon=+pick("qSoon");
+  if(soon<now) soon=now;
+  var mine=CARDS.filter(function(c){return c.lane===lane&&c.b===now;});
+  if(mine.length<2){
+    var extra=CARDS.filter(function(c){return c.lane===lane&&c.b!==now&&c.b!==4&&mine.indexOf(c)<0;})
+      .sort(function(a,b){return Math.abs(a.b-now)-Math.abs(b.b-now);});
+    mine=mine.concat(extra.slice(0,3-mine.length));
+  }
+  if(!mine.length) mine=CARDS.filter(function(c){return c.b===now;}).slice(0,3);
+  var target=soon>now?soon:Math.min(now+1,3);
+  var above=CARDS.filter(function(c){return c.b===target&&mine.indexOf(c)<0;});
+  if(!above.length) above=CARDS.filter(function(c){return c.b>now&&c.b!==4&&mine.indexOf(c)<0;}).sort(function(a,b){return a.b-b.b;}).slice(0,4);
+  var gaps=QS.filter(function(q){return !above.some(function(c){return c[q.k];});});
+  return {lane:lane,now:now,soon:soon,target:target,mine:mine,above:above,gaps:gaps};
+}
+
+function cardHTML(c){
+  var tc=TIER[c.b], lit=QS.filter(function(q){return c[q.k];}).length;
+  var hv=c.hero.v?('<span class="hv">'+esc(c.hero.v)+'</span>'):('<span class="hv txt">'+esc((c.hero.k||"").slice(0,72))+'</span>');
+  var hk=c.hero.v?('<span class="hk">'+esc(c.hero.k)+'</span>'):'';
+  var st=(c.stats||[]).slice(0,2).map(function(s){return '<div><span class="k">'+esc(s.k.slice(0,30))+'</span><span class="v">'+esc(s.v)+'</span></div>';}).join("");
+  var pips=QS.map(function(q){return '<span class="pip'+(c[q.k]?' on':'')+'"></span>';}).join("");
+  return '<button class="card'+(c.gr?' grew':'')+'" style="--tc:'+tc+'" data-id="'+esc(c.id)+'" aria-label="'+esc(c.full)+'">'+
+   '<span class="top"></span><span class="hd"><span class="tier">'+esc(c.sz)+'</span><span class="nm">'+esc(c.nm)+'</span>'+
+   '<span class="mt">'+esc(c.ct)+(c.ind?' &middot; '+esc(c.ind):'')+'</span></span>'+
+   '<span class="hero">'+hv+hk+'</span><span class="st">'+st+'</span><span class="pips">'+pips+'</span>'+
+   '<span class="foot">'+(c.gr?'&#9650; this one grew':(lit+' of 4 answered'))+'</span></button>';
+}
+
+function renderBuyer(S){
+  $("#hand").innerHTML=S.mine.map(cardHTML).join("");
+  $("#up").innerHTML=S.above.map(cardHTML).join("");
+  $("#handSub").textContent=S.mine.length+" of 24, matched on what you do and how big you are starting";
+  $("#upTtl").textContent=S.soon>S.now?"Where you said you would be in a year":"One size up";
+  $("#upSub").textContent=S.above.length+" already standing there";
+  $("#upEmpty").innerHTML=S.gaps.length
+    ?'<div class="empty"><b>Nobody at that size has published an answer to '+S.gaps.map(function(q){return q.n;}).join(" or ")+'.</b> A gap in our evidence at exactly the size this buyer is heading for.</div>':'';
+}
+
+function renderRep(S){
+  var name=function(c){return '<button data-id="'+esc(c.id)+'" style="--tc:'+TIER[c.b]+'"><span class="a">'+esc(c.full)+' <span class="chip">'+esc(c.sz)+'</span></span><span class="b">'+
+      esc(c.gr?c.gr:(c.hero.v?(c.hero.v+", "+c.hero.k):c.hero.k)).slice(0,190)+'</span></button>';};
+  var asks=[];
+  if(S.soon>S.now) asks.push("You said you expect to be at "+BANDNM[S.soon]+" within a year. What has to be true for that to happen, and who signs it off?");
+  S.gaps.forEach(function(q){if(asks.length<3)asks.push(ASK[q.k]);});
+  ["R","B","D","I"].forEach(function(k){if(asks.length<3&&asks.indexOf(ASK[k])<0)asks.push(ASK[k]);});
+  var np=S.mine.concat(S.above).filter(function(c){return c.b===4;});
+  var dont=['Do not quote a dock count for a customer who never published one'+(np.length?(': '+np.map(function(c){return c.nm;}).join(", ")):'')+'.',
+    'Do not blend pilot ratios. One to six is what a customer runs. One to twelve is our own managed operation.',
+    'Do not cite Axpo. Its case study names FlightHub 2 as the mission software.'];
+  $("#brief").innerHTML=
+   '<div class="box"><div class="bk">Before your first call with this account</div>'+
+     '<p><span class="chip b">'+esc(BANDNM[S.now])+'</span> '+esc(LANENM[S.lane])+'. '+
+     (S.soon>S.now?('Their own answer says <b>'+esc(BANDNM[S.soon])+'</b> within a year. <b>They told us the size of this deal before we asked.</b> Open there.'):'They expect to stay at this size for now. Anchor on the next step, not the ceiling.')+'</p>'+
+     '<div class="bk" style="margin-top:14px">Name these, they look like him</div><div class="who2">'+S.mine.map(name).join("")+'</div>'+
+     '<div class="bk" style="margin-top:14px">Then point up to these</div><div class="who2">'+S.above.slice(0,3).map(name).join("")+'</div>'+
+   '</div>'+
+   '<div style="display:grid;gap:14px;align-content:start">'+
+     '<div class="box"><div class="bk">Three questions to ask</div><ol class="asks">'+asks.slice(0,3).map(function(a){return '<li>'+esc(a)+'</li>';}).join("")+'</ol></div>'+
+     (S.gaps.length?('<div class="box" style="border-color:var(--amber)"><div class="bk" style="color:var(--amber)">Where we have no published proof at his target size</div><p>'+S.gaps.map(function(q){return esc(q.n);}).join(", ")+'. Do not improvise here. Offer to come back with a named reference.</p></div>'):'')+
+     '<div class="box"><div class="bk">Do not claim</div><ul class="dont">'+dont.map(function(d){return '<li>'+esc(d)+'</li>';}).join("")+'</ul></div>'+
+   '</div>';
+  $$("#brief .who2 button").forEach(function(b){b.onclick=function(){open_(b.getAttribute("data-id"));};});
+}
+
+function renderCfo(S, laneChanged){
+  var d=CFODEF[S.lane];
+  if(laneChanged){ $("#cToday").value=d.t||""; $("#cNew").value=d.n||""; }
+  $("#cTodaySrc").textContent=d.ts; $("#cNewSrc").textContent=d.ns;
+  $("#cfoLane").textContent=LANENM[S.lane]+", starting at "+BANDNM[S.now];
+  var sites=Math.max(+$("#cSites").value||0,0), t=+$("#cToday").value||0, n=+$("#cNew").value||0;
+  var yT=sites*t*12, yN=sites*n*12;
+  $("#oToday").textContent=t?money(yT):"enter today's cost";
+  $("#oNew").textContent=n?money(yN):"rep enters the quote";
+  if(t&&n){
+    var diff=yT-yN, pct=yT?Math.round(100*diff/yT):0;
+    $("#oDiff").textContent=(diff>=0?money(diff)+" less":money(-diff)+" more")+(yT?" ("+Math.abs(pct)+"%)":"");
+  } else $("#oDiff").textContent="needs both figures";
+  $("#oLab").textContent=S.lane==="catch"&&t===13000&&n===6100
+    ?"Illustration only: Titan's two published monthly figures applied to your site count. Our arithmetic, not a FlytBase quote. Hardware, installation and approvals are quoted separately."
+    :"Your figures in, our arithmetic out. Hardware, installation and approvals are quoted separately.";
+  var P=PROOF[S.lane]||[];
+  $("#proof").innerHTML=P.map(function(p){
+    return '<div><div class="pn">'+esc(p.n)+'</div><div class="pv">'+esc(p.v)+'</div><a href="https://www.flytbase.com/case-studies/'+esc(p.id)+'" target="_blank" rel="noopener">source</a></div>';}).join("");
+}
+
+function render(){
+  var S=state(), laneChanged=(S.lane!==lastLane); lastLane=S.lane;
+  renderBuyer(S); renderRep(S); renderCfo(S,laneChanged);
+  $$("#pGl .card").forEach(function(b){b.onclick=function(){open_(b.getAttribute("data-id"));};});
+}
+["cSites","cToday","cNew"].forEach(function(id){$("#"+id).oninput=function(){renderCfo(state(),false);};});
+
+function open_(id){
+  var c=byId(id); if(!c)return;
+  var vid=c.yt
+    ?'<a class="poster" href="https://www.youtube.com/watch?v='+esc(c.yt)+'" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/'+esc(c.yt)+'/maxresdefault.jpg" alt="" onerror="this.style.display=\'none\'"><span class="scrim"></span><span class="play"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pt"><span class="pk">Customer video, published by FlytBase</span><span class="pn">'+esc(c.full)+'</span></span></a>'
+    :'<div class="novid"><span>No video on this story</span><span style="text-transform:none;letter-spacing:0;font-size:10px">In the real version this is where the customer speaks</span></div>';
+  var nums=(c.hero.v?[c.hero]:[]).concat(c.stats||[]);
+  var numgrid=nums.length?'<div class="grp"><div class="k">What they published</div><div class="numgrid">'+nums.map(function(n){return '<div><div class="nv">'+esc(n.v)+'</div><div class="nk">'+esc(n.k)+'</div></div>';}).join("")+'</div></div>':'';
+  var qs=QS.map(function(q){return '<div class="grp"><div class="k">'+q.n+'</div><div class="v'+(c[q.k]?'':' na')+'">'+(c[q.k]?esc(c[q.k]):'no published sentence answers this')+'</div></div>';}).join("");
+  var grew=c.gr?'<div class="grp"><div class="k">And then it grew</div><div class="v">'+esc(c.gr)+'</div></div>':'';
+  var quote=c.q?'<div class="grp"><div class="k">In their words</div><div class="v">&ldquo;'+esc(c.q.quote)+'&rdquo;<div style="font-family:JetBrains Mono,monospace;font-size:9.5px;color:var(--dim);margin-top:6px">'+esc(c.q.attributed_to)+'</div></div></div>':'';
+  var reg=c.reg?'<div class="grp"><div class="k">Regulatory</div><div class="v">'+esc(c.reg)+'</div></div>':'';
+  var via=(c.pt&&c.pt.toLowerCase().indexOf(c.nm.toLowerCase())<0)?' &middot; via '+esc(c.pt):'';
+  $("#sheet").innerHTML='<div class="sh"><div><h3>'+esc(c.full)+'</h3><div class="m">'+esc(c.sz)+' &middot; '+esc(c.ct)+(c.ind?' &middot; '+esc(c.ind):'')+via+'</div></div><button class="xclose" id="xb" aria-label="Close">&times;</button></div>'+
+    vid+'<div class="sb">'+numgrid+grew+quote+qs+reg+'<div class="grp" style="margin:0"><a href="'+esc(c.url)+'" target="_blank" rel="noopener">read the source page on flytbase.com</a></div></div>';
+  $("#ov").classList.add("on"); document.body.style.overflow="hidden"; $("#xb").onclick=close_;
+}
+function close_(){$("#ov").classList.remove("on");$("#sheet").innerHTML="";document.body.style.overflow="";}
+$("#ov").onclick=function(e){if(e.target===$("#ov"))close_();};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close_();});
+render();
+</script>
+
+</html>
