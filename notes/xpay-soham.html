@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>xPay Call One</title>
-<meta property="og:title" content="xPay: call one, scripted">
-<meta property="og:description" content="A scripted first call and five buyer questions, four read off xPay's public pages and one off RBI's.">
+<title>xPay Seller Kit</title>
+<meta property="og:title" content="xPay: every seller, an L1 solution architect">
+<meta property="og:description" content="The plan, and a working call-one kit built from xPay's public docs: who is on the line, what to ask, what not to promise, the next step.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one reading column, like a payment trace read top to bottom. Scripted call, five buyer questions, month one, proof, ask. */
 :root {
   --paper: #f4f6f9;
   --sheet: #ffffff;
@@ -21,9 +22,11 @@
   --signal: #1d4ed8;
   --signal-wash: #e7edfc;
   --leak: #a64b06;
+  --stop: #b3261e;
   --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -35,6 +38,7 @@
     --signal: #8fb0ff;
     --signal-wash: #1c2645;
     --leak: #f2a860;
+    --stop: #ff8f87;
     color-scheme: dark;
   }
 }
@@ -47,289 +51,1240 @@
   --signal: #8fb0ff;
   --signal-wash: #1c2645;
   --leak: #f2a860;
+  --stop: #ff8f87;
   color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  padding-inline: 16px;
-  padding-block: 40px 64px;
-  -webkit-text-size-adjust: 100%;
-}
-.page-wrap { max-width: 44rem; margin-inline: auto; display: flex; flex-direction: column; gap: 56px; }
-.page-wrap>section, .page-wrap>header, .page-wrap>footer { min-width: 0; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
-h1 { font-size: clamp(2rem, 6.5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.45rem, 4.2vw, 1.85rem); font-weight: 700; letter-spacing: -0.01em; }
-h3 { font-size: 1.2rem; font-weight: 700; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.15; text-wrap: balance; }
 p { margin: 0; }
 a { color: var(--signal); text-underline-offset: 3px; }
-a:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: 2px; }
-strong { font-weight: 600; }
+button { font: inherit; color: inherit; }
+b, strong { font-weight: 600; }
+:where(a, button, input, textarea, summary):focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+[tabindex="-1"]:focus { outline: none; }
+.xk-k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; line-height: 1.5; }
+.xk-k em { font-style: normal; color: var(--leak); }
+.xk-lock { flex: none; vertical-align: -2px; }
 
-.section-label {
-  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--ink-soft); margin: 0 0 10px;
+/* Bar and tabs */
+.xk-bar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.xk-bar-in { max-width: 64rem; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.xk-who { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.xk-who b { color: var(--ink); font-weight: 500; }
+.xk-tabs { display: flex; gap: 4px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 99px; padding: 3px; }
+.xk-tabs button { font-size: 0.82rem; font-weight: 600; line-height: 1.25; background: none; border: 0; color: var(--ink-soft); padding: 8px 14px; border-radius: 99px; cursor: pointer; }
+.xk-tabs button[aria-selected="true"] { background: var(--signal); color: var(--sheet); }
+@media (max-width: 560px) { .xk-tabs { width: 100%; } .xk-tabs button { flex: 1 1 0; padding: 12px 6px; } }
+@media (max-width: 400px) { .xk-tabs button { font-size: 0.74rem; padding: 13px 4px; } }
+.xk-pane[hidden], .xk-view[hidden] { display: none; }
+.xk-main { padding: 0 16px 64px; }
+
+/* Plan */
+.xk-plan { max-width: 44rem; margin: 0 auto; padding-top: 40px; }
+.xk-eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
+.xk-plan h1 { font-size: clamp(2rem, 6.4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+.xk-sub { font-size: 1.1rem; color: var(--ink-soft); margin-top: 16px; }
+.xk-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 24px; }
+.xk-btn { font-weight: 600; font-size: 0.95rem; line-height: 1.2; background: var(--signal); color: var(--sheet); border: 0; border-radius: 6px; padding: 12px 18px; cursor: pointer; }
+.xk-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); }
+.xk-skip { font-size: 0.95rem; margin-top: 14px; }
+.xk-skip a { padding: 4px 0; }
+.xk-sec { margin-top: 52px; }
+.xk-h2 { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--signal); font-weight: 500; display: flex; align-items: center; gap: 10px; margin: 0 0 14px; line-height: 1.4; }
+.xk-n { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px; border: 1px solid currentColor; border-radius: 50%; font-size: 0.72rem; letter-spacing: 0; }
+.xk-big { font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+.xk-plan p + p { margin-top: 12px; }
+.xk-para { border-left: 2px solid var(--signal); padding: 2px 0 2px 16px; margin: 16px 0; }
+.xk-tag { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.xk-tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin: 16px 0 20px; }
+@media (min-width: 600px) { .xk-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.xk-tile { background: var(--sheet); border: 1px solid var(--rule); border-top: 3px solid var(--signal); border-radius: 6px; padding: 14px 16px; }
+.xk-tile p { font-size: 0.95rem; margin-top: 4px; }
+.xk-tile .xk-k { color: var(--signal); }
+.xk-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid var(--signal); background: var(--signal-wash); border-radius: 8px; padding: 18px; margin: 16px 0 24px; }
+.xk-cta-t { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
+.xk-cta-d { font-size: 0.95rem; color: var(--ink-soft); margin-top: 4px; max-width: 32rem; }
+.xk-finds { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.xk-find { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 14px; background: var(--sheet); border: 1px solid var(--rule); border-left: 3px solid var(--leak); border-radius: 6px; padding: 14px 16px; font-size: 0.97rem; }
+.xk-find-v { font-family: var(--font-mono); font-weight: 500; font-size: 1.3rem; color: var(--leak); line-height: 1.25; }
+.xk-find ul { margin: 8px 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 4px; }
+.xk-find p + p { margin-top: 8px; }
+.xk-inline { background: none; border: 0; padding: 0; color: var(--signal); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: inherit; }
+@media (max-width: 520px) { .xk-find { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.xk-days { border: 1px solid var(--rule); border-radius: 8px; background: var(--sheet); }
+.xk-day { border-bottom: 1px solid var(--rule); }
+.xk-day:last-child { border-bottom: 0; }
+.xk-legend + .xk-days { margin-top: 8px; }
+.xk-day > summary { display: block; cursor: pointer; list-style: none; padding: 14px 16px; border-radius: 7px; }
+.xk-day > summary::-webkit-details-marker { display: none; }
+.xk-day-s { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; }
+.xk-day-w { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--signal); font-weight: 500; line-height: 1.4; white-space: nowrap; }
+.xk-day-h { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; line-height: 1.25; }
+.xk-day-c { width: 9px; height: 9px; border-right: 2px solid var(--signal); border-bottom: 2px solid var(--signal); transform: rotate(45deg); margin: 0 4px 4px 8px; }
+.xk-day[open] .xk-day-c { transform: rotate(-135deg); margin-bottom: -4px; }
+.xk-day ul { margin: 12px 16px 16px calc(7.5rem + 30px); padding-left: 1.1rem; font-size: 0.95rem; display: flex; flex-direction: column; gap: 6px; }
+.xk-day .xk-tag { display: inline; margin: 0; white-space: nowrap; }
+@media (max-width: 520px) { .xk-day-s { grid-template-columns: minmax(0, 1fr) auto; } .xk-day-w { grid-column: 1 / -1; } .xk-day ul { margin-left: 16px; } }
+
+/* Who runs call one */
+.xk-strip { margin-top: 26px; }
+.xk-strip-h { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-top: 2px; }
+.xk-legend { font-size: 0.88rem; color: var(--ink-soft); margin-top: 4px; }
+.xk-steps { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.xk-steps > li { border-bottom: 1px solid var(--rule); }
+.xk-step { display: grid; grid-template-columns: 8rem auto minmax(0, 1fr); gap: 8px 14px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 12px 6px; cursor: pointer; }
+.xk-step:hover, .xk-step[aria-expanded="true"] { background: var(--signal-wash); }
+.xk-step-w { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--signal); font-weight: 500; white-space: nowrap; }
+.xk-step-l { font-size: 0.92rem; line-height: 1.45; }
+.xk-trio { display: flex; gap: 6px; }
+.xk-who3 { display: inline-flex; align-items: center; justify-content: center; min-width: 2.4rem; height: 1.9rem; padding: 0 6px; border-radius: 99px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; }
+.xk-who3[data-s="lead"] { background: var(--signal); color: var(--sheet); border: 2px solid var(--signal); }
+.xk-who3[data-s="listen"] { background: transparent; color: var(--signal); border: 2px solid var(--signal); }
+.xk-who3[data-s="off"] { background: transparent; color: var(--ink-soft); border: 2px dashed var(--ink-soft); text-decoration: line-through; }
+.xk-true { padding: 2px 6px 14px; font-size: 0.92rem; }
+.xk-true[hidden] { display: none; }
+.xk-true b { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--signal); font-weight: 500; margin-right: 6px; }
+@media (max-width: 560px) { .xk-step { grid-template-columns: auto minmax(0, 1fr); } .xk-step-l { grid-column: 1 / -1; } }
+
+.xk-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 8px; }
+.xk-table th, .xk-table td { text-align: left; vertical-align: top; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--rule); }
+.xk-table th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+.xk-table td:first-child { font-weight: 600; width: 55%; }
+.xk-table td:last-child { color: var(--ink-soft); }
+@media (max-width: 560px) {
+  .xk-table thead { display: none; }
+  .xk-table, .xk-table tbody, .xk-table tr, .xk-table td { display: block; width: auto; }
+  .xk-table tr { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .xk-table td { border: 0; padding: 0; }
+  .xk-table td:first-child { width: auto; }
 }
-.section-body { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-.src-link {
-  font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.02em; white-space: nowrap;
-  padding: 1px 5px; border: 1px solid var(--rule); border-radius: 4px; text-decoration: none; vertical-align: 1px;
-}
-.src-link:hover { background: var(--signal-wash); }
-.claim-note { font-size: 0.9rem; color: var(--ink-soft); }
-.section-intro { margin-top: 12px; }
-
-/* Header */
-.hero-block { display: flex; flex-direction: column; gap: 14px; }
-.hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 36rem; }
-.hero-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); }
-
-/* Buyer questions */
-.leak-list { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
-.leak-list>article {
-  background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 18px 16px;
-  display: flex; flex-direction: column; gap: 10px; min-width: 0;
-}
-.leak-index { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--leak); }
-.leak-who { font-size: 0.95rem; color: var(--ink-soft); }
-.leak-who>b { font-weight: 600; color: var(--ink); }
-.leak-question { font-size: 0.98rem; border-left: 3px solid var(--leak); padding: 2px 0 2px 12px; }
-.leak-question>b { color: var(--leak); font-weight: 600; }
-
-/* Call script */
-.call-script { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
-.call-script>div { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 12px; align-items: baseline; }
-.speaker-tag { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
-.speaker-tag--us { color: var(--signal); }
-.line-us { font-weight: 500; }
-.math-box {
-  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.55; background: var(--signal-wash);
-  border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-variant-numeric: tabular-nums;
-}
-.math-box>div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
-.math-box>div+div { margin-top: 6px; }
-.math-box b { font-weight: 500; color: var(--signal); }
-.discovery-list { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 6px; }
-.discovery-list>li { padding-left: 2px; }
-.fork-list { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
-.fork-list>div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
-.fork-list dt { font-style: italic; color: var(--ink-soft); }
-.fork-list dd { margin: 0; }
-.fork-list code { font-family: var(--font-mono); font-size: 0.85em; background: var(--signal-wash); padding: 1px 4px; border-radius: 3px; }
-@media (max-width: 560px) { .fork-list>div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
-.no-promise { border-left: 3px solid var(--signal); padding: 4px 0 4px 14px; }
-.section-body>h3 { margin-top: 16px; }
-
-/* Month one */
-.month-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.month-list>li { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; }
-.month-when { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); padding-top: 3px; }
-@media (max-width: 480px) { .month-list>li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
-
-/* Proof */
-.proof-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
-.proof-list>li { display: flex; flex-direction: column; gap: 2px; }
-.proof-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
-.gap-note { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+.xk-fine { font-size: 0.92rem; color: var(--ink-soft); margin-top: 10px; }
+.xk-proof { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.xk-proof-n { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; display: block; }
+.xk-gap { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; }
+.xk-wrong { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 8px; }
 
 /* Ask */
-.ask-panel { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; }
-.ask-panel>.section-label { color: inherit; opacity: 0.8; margin: 0; }
-.ask-panel h2 { color: var(--paper); }
-.ask-panel a { color: var(--paper); }
-.ask-panel a:focus-visible { outline-color: currentColor; }
-.ask-sign { font-family: var(--font-mono); font-size: 0.85rem; opacity: 0.85; }
+.xk-ask { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 24px 20px; margin-top: 52px; scroll-margin-top: 120px; }
+.xk-ask .xk-h2 { color: var(--paper); }
+.xk-ask h3 { font-size: 1.6rem; color: var(--paper); }
+.xk-ask p + p { margin-top: 10px; }
+.xk-ask-body { margin-top: 10px; }
+.xk-askchips { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 18px; }
+@media (min-width: 560px) { .xk-askchips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.xk-askchip { display: flex; gap: 10px; align-items: flex-start; text-align: left; background: transparent; color: var(--paper); border: 1.5px solid var(--paper); border-radius: 10px; padding: 10px 12px; cursor: pointer; font-size: 0.92rem; line-height: 1.35; }
+.xk-askchip b { font-family: var(--font-mono); font-weight: 500; flex: none; }
+.xk-askchip[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+.xk-switch { display: inline-flex; flex-wrap: wrap; border: 1.5px solid var(--paper); border-radius: 22px; padding: 3px; gap: 3px; margin-top: 14px; }
+.xk-switch button { background: none; border: 0; color: var(--paper); padding: 7px 14px; border-radius: 99px; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+.xk-switch button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+.xk-reply { font-family: var(--font-mono); font-size: 0.95rem; border-left: 3px solid var(--paper); padding: 6px 0 6px 12px; margin-top: 14px; }
+.xk-askrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 14px; }
+.xk-ask .xk-btn { background: var(--paper); color: var(--ink); border: 1.5px solid var(--paper); }
+.xk-ask .xk-btn:disabled { background: transparent; color: var(--paper); border-style: dashed; cursor: not-allowed; }
+.xk-ask a { color: var(--paper); }
+.xk-ask :focus-visible { outline-color: var(--paper); }
+.xk-sign { font-family: var(--font-mono); font-size: 0.88rem; margin-top: 18px; }
+.xk-sign a { display: inline-block; padding: 4px 0; }
+.xk-logi { font-size: 0.92rem; }
+.xk-foot { font-size: 0.85rem; color: var(--ink-soft); margin-top: 40px; }
 
-/* Sources */
-.source-drawer summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); }
-.source-drawer summary:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
-.source-drawer ul { margin: 12px 0 0; padding-left: 1.1rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 6px; overflow-wrap: anywhere; }
-.page-foot { font-size: 0.85rem; color: var(--ink-soft); display: flex; flex-direction: column; gap: 12px; }
+/* Kit */
+.xk-kit { max-width: 64rem; margin: 0 auto; padding-top: 32px; font-size: 1rem; }
+.xk-kit-h { font-size: clamp(1.6rem, 4.6vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; }
+.xk-note { background: var(--sheet); border: 1px solid var(--rule); border-left: 3px solid var(--signal); border-radius: 6px; padding: 14px 16px; font-size: 0.95rem; margin-top: 16px; max-width: 48rem; }
+.xk-flow { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 16px 0 0; padding: 0; list-style: none; font-size: 0.95rem; font-weight: 600; }
+.xk-flow li { display: flex; align-items: center; gap: 8px; }
+.xk-flow b { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--signal); color: var(--sheet); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; }
+.xk-modes-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-top: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.xk-modes { display: flex; flex-wrap: wrap; gap: 4px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 4px; }
+.xk-modes button { background: none; border: 0; border-radius: 7px; padding: 9px 16px; font-weight: 600; font-size: 0.95rem; color: var(--ink-soft); cursor: pointer; }
+.xk-modes button[aria-pressed="true"] { background: var(--signal); color: var(--sheet); }
+.xk-sess { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.xk-textbtn { background: none; border: 0; padding: 4px 2px; color: var(--signal); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: 0.9rem; font-family: var(--font-body); }
+.xk-view { margin-top: 20px; }
+.xk-lead { color: var(--ink-soft); max-width: 48rem; }
+.xk-lead b { color: var(--ink); }
+
+/* Before */
+.xk-segs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.xk-seg { background: var(--sheet); border: 1.5px solid var(--ink-soft); border-radius: 22px; padding: 8px 16px; cursor: pointer; font-weight: 600; font-size: 0.95rem; text-align: left; line-height: 1.25; }
+.xk-seg small { display: block; font-weight: 500; font-family: var(--font-mono); font-size: 0.72rem; color: var(--leak); }
+.xk-seg[aria-pressed="true"] { background: var(--signal); border-color: var(--signal); color: var(--sheet); }
+.xk-seg[aria-pressed="true"] small { color: var(--sheet); }
+.xk-brief { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; margin-top: 14px; }
+.xk-brief-row { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 6px 18px; padding: 14px 18px; border-bottom: 1px solid var(--rule); }
+.xk-brief-row:last-child { border-bottom: 0; }
+.xk-brief-row p + p { margin-top: 6px; }
+.xk-brief-empty { padding: 18px; color: var(--ink-soft); }
+@media (max-width: 640px) { .xk-brief-row { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; } }
+.xk-spot { font-size: 0.92rem; color: var(--ink-soft); }
+.xk-count { font-family: var(--font-mono); font-size: 0.85rem; color: var(--leak); margin-top: 6px; }
+.xk-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.xk-pill { display: inline-block; border: 1px solid var(--signal); color: var(--signal); border-radius: 99px; padding: 2px 10px; font-size: 0.85rem; }
+.xk-readfirst { display: flex; flex-direction: column; gap: 6px; }
+.xk-route { margin-top: 14px; font-size: 0.92rem; color: var(--ink-soft); border-left: 3px solid var(--ink-soft); padding: 4px 0 4px 12px; max-width: 52rem; }
+.xk-route b { color: var(--ink); }
+
+/* During */
+.xk-seats { display: grid; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); gap: 8px; margin-top: 14px; }
+@media (max-width: 520px) { .xk-seats { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 900px) { .xk-seats { grid-template-columns: repeat(6, minmax(0, 1fr)); } .xk-seat { grid-column: span 2; } .xk-seat:nth-child(n+4) { grid-column: span 3; } }
+.xk-seat { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; background: var(--sheet); border: 1.5px solid var(--ink-soft); border-radius: 10px; padding: 10px 12px; cursor: pointer; min-width: 0; }
+.xk-seat-n { font-weight: 700; font-size: 0.95rem; display: flex; gap: 8px; align-items: flex-start; line-height: 1.3; }
+.xk-seat-n .xk-box { margin-top: 2px; }
+.xk-seat-r { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.35; }
+.xk-seat[aria-pressed="true"] { border-color: var(--signal); background: var(--signal-wash); box-shadow: inset 0 0 0 1px var(--signal); }
+.xk-box { width: 16px; height: 16px; flex: none; color: var(--signal); }
+.xk-likely { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--leak); margin-left: 6px; white-space: nowrap; }
+.xk-lines { margin-top: 18px; display: flex; flex-direction: column; gap: 16px; }
+.xk-hint { color: var(--ink-soft); font-size: 0.95rem; }
+.xk-linebtns { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.xk-line { display: flex; gap: 10px; align-items: flex-start; text-align: left; width: 100%; background: var(--sheet); border: 1.5px solid var(--ink-soft); border-radius: 8px; padding: 10px 12px; cursor: pointer; font-size: 0.95rem; line-height: 1.4; }
+.xk-line-id { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500; color: var(--signal); padding-top: 2px; flex: none; width: 1.9rem; }
+.xk-line-t { min-width: 0; }
+.xk-line.is-locked { border-style: dashed; border-color: var(--leak); background: transparent; }
+.xk-line.is-locked .xk-line-id { color: var(--leak); }
+.xk-line[aria-expanded="true"] { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal); }
+.xk-lockl { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--leak); margin-top: 4px; }
+.xk-cardpanel { margin-top: 16px; }
+.xk-card { background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--signal); border-radius: 10px; padding: 18px 20px 20px; scroll-margin-top: 130px; }
+.xk-card.is-locked { border: 2px dashed var(--leak); }
+.xk-card-k { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--signal); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.xk-card.is-locked .xk-card-k { color: var(--leak); }
+.xk-card h3 { font-size: 1.3rem; margin-top: 6px; }
+.xk-card > .xk-lockl { margin-top: 6px; }
+.xk-row { padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--rule); }
+.xk-row > .xk-k { margin-bottom: 6px; }
+.xk-row ul, .xk-row ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 4px; }
+.xk-row p + p { margin-top: 6px; }
+.xk-row.xk-stoprow { border-top: 0; border-left: 3px solid var(--stop); padding: 4px 0 4px 14px; margin-top: 18px; }
+.xk-stoprow > .xk-k { color: var(--stop); }
+.xk-for { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--leak); margin-left: 6px; white-space: nowrap; }
+.xk-inlock { display: flex; gap: 8px; align-items: flex-start; border-left: 2px dashed var(--leak); padding: 2px 0 2px 12px; margin-top: 10px; font-size: 0.92rem; }
+.xk-inlock .xk-lock { color: var(--leak); margin-top: 4px; }
+.xk-sends { display: flex; flex-wrap: wrap; gap: 6px; }
+.xk-send { display: inline-flex; align-items: center; border: 1px solid var(--signal); border-radius: 99px; padding: 4px 12px; font-size: 0.88rem; text-decoration: none; line-height: 1.4; }
+.xk-send:hover { background: var(--signal-wash); }
+.xk-sendrow + .xk-sendrow { margin-top: 10px; }
+.xk-nextbtn { margin-top: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; text-align: left; background: var(--signal); color: var(--sheet); border: 0; border-radius: 8px; padding: 12px 14px; cursor: pointer; }
+.xk-nextbtn span { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.xk-fill { margin-top: 14px; }
+.xk-index { margin-top: 22px; }
+.xk-index-b { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.xk-ix { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; background: var(--sheet); color: var(--signal); border: 1.5px solid var(--ink-soft); border-radius: 6px; padding: 5px 9px; cursor: pointer; }
+.xk-ix.is-locked { border-style: dashed; border-color: var(--leak); color: var(--leak); background: transparent; display: inline-flex; gap: 4px; align-items: center; }
+.xk-ix[aria-current="true"] { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal); }
+
+/* F1 calculator */
+.xk-calc { margin-top: 12px; }
+.xk-calc-k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--leak); }
+.xk-calc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr)); gap: 10px 20px; margin-top: 10px; }
+.xk-field { display: grid; grid-template-columns: minmax(0, 1fr) 7.5rem; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--ink-soft); }
+@media (max-width: 340px) { .xk-field { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.xk-field input { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-soft); border-radius: 6px; padding: 7px 10px; width: 100%; min-width: 0; }
+.xk-us { margin-top: 12px; font-size: 0.92rem; }
+.xk-fxnote { font-size: 0.85rem; color: var(--leak); margin-top: 4px; }
+.xk-out { margin-top: 14px; border-left: 3px solid var(--signal); padding: 4px 0 4px 14px; }
+.xk-out-be { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
+.xk-out-be b { color: var(--signal); font-weight: 700; }
+.xk-out-pp { margin-top: 4px; }
+.xk-banner { font-weight: 600; color: var(--leak); margin-bottom: 6px; }
+.xk-banner[hidden], .xk-out-pp[hidden] { display: none; }
+.xk-caveat { font-size: 0.88rem; color: var(--ink-soft); margin-top: 6px; }
+.xk-turns { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.xk-turns[hidden] { display: none; }
+.xk-turn { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); gap: 10px; }
+.xk-turn-who { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-top: 3px; }
+.xk-turn.is-us .xk-turn-who { color: var(--signal); }
+.xk-turn.is-us p { font-weight: 500; }
+
+/* After */
+.xk-after { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 14px; }
+@media (min-width: 900px) { .xk-after { grid-template-columns: repeat(2, minmax(0, 1fr)); } .xk-after > .xk-blk:first-child { grid-column: 1 / -1; } }
+.xk-blk { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; min-width: 0; }
+.xk-blk h3 { font-size: 1.1rem; }
+.xk-blk-d { font-size: 0.9rem; color: var(--ink-soft); margin-top: 4px; }
+.xk-blk textarea { display: block; width: 100%; min-height: 11rem; font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.55; color: var(--ink); background: var(--paper); border: 1px solid var(--ink-soft); border-radius: 6px; padding: 10px 12px; margin-top: 10px; resize: vertical; }
+.xk-blk textarea::placeholder { color: var(--ink-soft); opacity: 1; }
+@media (max-width: 640px) { .xk-blk textarea { font-size: 1rem; } }
+.xk-blk-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 10px; }
+.xk-copy { font-weight: 600; font-size: 0.92rem; background: var(--signal); color: var(--sheet); border: 1.5px solid var(--signal); border-radius: 6px; padding: 8px 16px; cursor: pointer; }
+.xk-copy:disabled { background: transparent; color: var(--ink-soft); border: 1.5px dashed var(--ink-soft); cursor: not-allowed; }
+.xk-warn { color: var(--stop); font-size: 0.9rem; font-weight: 600; }
+.xk-warn[hidden] { display: none; }
+
+/* Drill */
+.xk-drill { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; max-width: 48rem; margin-top: 14px; }
+.xk-dq { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-top: 6px; line-height: 1.3; }
+.xk-choices { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.xk-choice { text-align: left; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink-soft); border-radius: 8px; padding: 10px 12px; cursor: pointer; font-size: 0.95rem; line-height: 1.45; }
+.xk-choice:disabled { cursor: default; color: var(--ink); }
+.xk-choice.is-right { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal); }
+.xk-choice.is-wrong { border-color: var(--stop); border-style: dashed; }
+.xk-choice-tag { display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+.xk-choice.is-right .xk-choice-tag { color: var(--signal); }
+.xk-choice.is-wrong .xk-choice-tag { color: var(--stop); }
+.xk-fb { margin-top: 12px; font-weight: 600; }
+.xk-fb.is-right { color: var(--signal); }
+.xk-fb.is-wrong { color: var(--stop); }
+.xk-drill .xk-btn { margin-top: 14px; }
+.xk-score { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; line-height: 1.3; }
+.xk-score-d { margin-top: 6px; }
+.xk-checks { margin: 10px 0 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 480px) { .xk-card, .xk-drill { padding: 16px; } .xk-blk { padding: 14px 16px; } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
 
-<div class="page-wrap">
-
-<header class="hero-block">
-  <p class="section-label">For Soham Mahajan, xPay &middot; 30 Sep 2026</p>
-  <h1>Call one, without Soham or an engineer on it</h1>
-  <p class="hero-sub">Aniket's post says this role starts with getting on a call, speaking APIs and winning the deal yourself. <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">source</a> So here is the first call we would take off your plate, scripted from your docs, then five questions a buyer brings to that call, four read off xPay's public pages and one off RBI's.</p>
-  <p class="hero-meta">Ketan Sharma &middot; about an 8 minute read &middot; every xPay fact links to its source</p>
-</header>
-
-<section id="call-one">
-  <p class="section-label">Call one, scripted</p>
-  <h2>A finance lead at a Series&nbsp;D EdTech company asks for a lower MDR</h2>
-  <div class="section-body">
-    <p>Your careers page names listed, Series D and Series E customers in EdTech and Travel. <a class="src-link" href="https://www.xpaycheckout.com/careers/head-of-sales">source</a> Your August post says a deal is often won before the first demo, and that a request for a lower MDR can hide a success-rate, support or reconciliation problem. <a class="src-link" href="https://www.linkedin.com/posts/soham-mahajan-130142193_business-sales-growth-share-7494386459983134720-tEuM/">source</a> Here is how we would run that call. The buyer's numbers are invented.</p>
-
-    <div class="call-script">
-      <div><span class="speaker-tag">Buyer</span><p>We like what we have seen. Your card rate is higher than what we pay today. Can you come down?</p></div>
-      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">We can talk about rate. First, of your international orders last month, what share completed?</p></div>
-      <div><span class="speaker-tag">Buyer</span><p>Around 70%, I think.</p></div>
-      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Then rate is probably the smaller lever. Two checks first. Is that 70% per attempt or per order? Retries inflate failures. And on a typical ticket, what lands in INR after fees and FX today? We will show you the same number with us. That is the number to compare, not the headline rate.</p></div>
-      <div><span class="speaker-tag">Buyer</span><p>Per order, I think. I'd have to check the INR.</p></div>
-      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Here is the ceiling on $1M a month of international orders.</p></div>
-    </div>
-
-    <div class="math-box"><div><span>Cut the rate by 0.5 points on the $700K that clears</span><b>$3,500 a month saved</b></div><div><span>Lift success from 70% to 85%</span><b>up to $150,000 a month more collected</b></div></div>
-    <p class="claim-note">A ceiling, not a promise: some failed orders come back through another payment method. On a real call we would ask for a week of gateway data and size it together. xPay's own PayGlocal comparison runs the same 15-point, $150,000 sum <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a>, the home page claims 95% success <a class="src-link" href="https://www.xpaycheckout.com/">source</a>, and the fee schedule lists FX conversion as handled by AD1 banks at bank rates <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a>. The PayGlocal post says live mid-market FX with zero hidden markup <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a>, so we would confirm which applies before quoting a landed-INR number.</p>
-
-    <div class="call-script">
-      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">Second question: how long does your team spend matching payouts to invoices and chasing FIRCs? With xPay the FIRC is available from the dashboard.</p></div>
-    </div>
-    <p class="claim-note">FIRC from the dashboard: <a class="src-link" href="https://www.xpaycheckout.com/">home</a> <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">payout docs</a></p>
-
-    <h3>Then their engineer joins</h3>
-    <p>What we ask before we answer anything:</p>
-    <ol class="discovery-list">
-      <li>Who processes your international cards today, and would we replace them or sit alongside?</li>
-      <li>Which three countries cause most of your failures?</li>
-      <li>When a subscription renewal fails, who retries, and when?</li>
-      <li>How does finance match a payout to invoices, and what do you need on each FIRC?</li>
-    </ol>
-    <p>Then the fork, depending on what we hear:</p>
-    <dl class="fork-list">
-      <div><dt>"Why would the same card succeed more with you? Prove the 95%."</dt><dd>Our PayGlocal comparison credits optimised routing, local acquiring partnerships and wallet and alternative-method coverage, together, for higher authorization and capture. <a class="src-link" href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">source</a> But don't take our number: Get Intent returns every attempt and failure on an intent, so a pilot gives you attempt-level data from your own traffic. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/get-intent">get intent</a> Build it first in the sandbox, a clone of your xPay account. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/sandbox/sandbox">sandbox</a></dd></div>
-      <div><dt>"We have no developer time this quarter."</dt><dd>Payment Links, for one-time and subscription payments, with no technical integration. <a class="src-link" href="https://docs.xpaycheckout.com/products/payment-links/payment-links">source</a></dd></div>
-      <div><dt>"We run our own checkout."</dt><dd>Call <code>Create Intent</code> first, authenticated with HTTP Basic. Listen for the Success and Failed webhooks and verify the signature (two supported methods). Send an idempotency key on Create Intent, so a retried request does not create a second payment. Set <code>manualCapture</code> to authorise now and capture later. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/create-intent">create intent</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/introduction">webhooks</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/idempotency">idempotency</a></dd></div>
-      <div><dt>"Most of our revenue is subscriptions."</dt><dd>The Subscriptions API: create, edit, pause and one-time charge. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/subscriptions/create-subscription">API</a> A failed renewal retries automatically at 4, 8, 12 and 24 hours, and you can retry manually once it is unpaid. <a class="src-link" href="https://docs.xpaycheckout.com/products/subscription/subscription-retry-mechanism">retry</a></dd></div>
-      <div><dt>"We are a platform with our own sellers."</dt><dd>Platform Connect: sub-merchants under one platform account, each with its own transactions and settlements. xPay enables it per account. <a class="src-link" href="https://docs.xpaycheckout.com/products/platform-connect/overview">source</a></dd></div>
-      <div><dt>"Our students pay inside our app."</dt><dd>Embed the checkout in a WebView and handle deep links, per the mobile guide. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/mobileIntegration">source</a></dd></div>
-      <div><dt>"How does finance know what landed?"</dt><dd>Subscribe to the Payout Initiated and Payout Success webhooks and pull List Payouts for the period. The FIRC comes from the dashboard. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">events</a> <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/endpoints/payouts/list-payouts">list payouts</a> <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">payouts</a></dd></div>
-      <div><dt>"Chargebacks hurt us."</dt><dd>Disputes arrive as webhooks (Disputed, Dispute Under Review, Dispute Won, Dispute Lost), plus an Early Fraud Warning ahead of any formal dispute. <a class="src-link" href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">events</a> The docs cover how to fight or accept each reason code. <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/dispute-management/responding-by-reason">disputes</a> Act on the warning: block that card's fingerprint with the Block Fingerprint by Intent API, and Argus, xPay's in-house fraud system, applies it to future payments. <a class="src-link" href="https://docs.xpaycheckout.com/products/argus/overview">argus</a></dd></div>
-    </dl>
-
-    <div class="no-promise">
-      <p><strong>What we would not promise on the call.</strong> "Our docs list no Shopify or WooCommerce plugin and no native mobile SDK, so we won't promise one today. Your in-app flow runs on the WebView guide. If you need a plugin, you get a written answer on the roadmap within a day." <a class="src-link" href="https://docs.xpaycheckout.com/llms.txt">docs index</a></p>
-    </div>
-
-    <h3>Then the close</h3>
-    <div class="call-script">
-      <div><span class="speaker-tag speaker-tag--us">Us</span><p class="line-us">So the ask today is not a rate. It is a pilot: your engineer builds against our sandbox, then you send one country's live traffic through us for two weeks and compare success on the same card mix. If we don't beat what that traffic completes with you today, you switch it back. You have spent one integration sprint, not a migration.</p></div>
-    </div>
+<div class="xk-bar"><div class="xk-bar-in">
+  <span class="xk-who"><b>Ketan Sharma</b> for xPay</span>
+  <div class="xk-tabs" role="tablist" aria-label="Page sections">
+    <button type="button" role="tab" id="tStory" aria-selected="true" aria-controls="pStory" tabindex="0" data-act="tab" data-k="story">The problem and the plan</button>
+    <button type="button" role="tab" id="tGl" aria-selected="false" aria-controls="pGl" tabindex="-1" data-act="tab" data-k="gl">A glimpse, already built</button>
   </div>
-</section>
+</div></div>
 
-<section id="questions">
-  <p class="section-label">Five questions a buyer brings to call one</p>
-  <h2>What we would need to answer in one line</h2>
-  <p class="claim-note section-intro">Four come off xPay's public pages, one off RBI's. Some you have probably fixed or chosen on purpose.</p>
-  <div class="leak-list">
+<main class="xk-main">
 
-    <article>
-      <span class="leak-index">Question 1 of 5</span>
-      <h3>"Which settlement applies to us?"</h3>
-      <p>Home page: bank-account collections settled in 24 hours. <a class="src-link" href="https://www.xpaycheckout.com/">source</a> Terms: INR to the merchant's Indian account once every two weeks, a timeline that "may be adjusted over time based on the procedures imposed by the regulator". <a class="src-link" href="https://www.xpaycheckout.com/terms-and-condition">source</a> Skydo comparison post: T+1 INR payouts. <a class="src-link" href="https://www.xpaycheckout.com/blog/skydo-vs-xpay-best-skydo-alternative-for-international-payments-in-india">source</a> Docs: payouts in USD, 24 to 48 working hours, Mondays and Thursdays by default, $500 minimum. <a class="src-link" href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">source</a></p>
-      <p class="leak-who"><b>Who asks:</b> the finance lead planning cash flow.</p>
-      <p class="leak-question"><b>What would help:</b> if each line belongs to a different product, one table saying which applies to whom settles it before a call.</p>
-    </article>
+<!-- ========== THE PROBLEM AND THE PLAN ========== -->
+<section class="xk-pane" id="pStory" role="tabpanel" aria-labelledby="tStory">
+<div class="xk-plan">
 
-    <article>
-      <span class="leak-index">Question 2 of 5</span>
-      <h3>"Why does this page say 5% a sale?"</h3>
-      <p>A marketplace page, live and listed in your sitemap, quotes "5% /sale" on a Basic plan that bundles xPay Marketing with xPay Payments, behind "Join Waitlist" buttons. <a class="src-link" href="https://www.xpaycheckout.com/marketplace-home">source</a> The pricing page says 3% + $0.35. <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a></p>
-      <p class="leak-who"><b>Who asks:</b> the buyer who Googles xPay before replying.</p>
-      <p class="leak-question"><b>How we would answer:</b> "That is the marketplace plan, which bundles marketing with payments. Card checkout on its own is 3% + $0.35." If that plan is retired, a redirect stops the next buyer asking.</p>
-    </article>
+  <header>
+    <p class="xk-eyebrow">Ketan Sharma for xPay. September 2026.</p>
+    <h1>Every seller, an L1 solution architect on call one.</h1>
+    <p class="xk-sub">Aniket's post says xPay's salespeople are also L1 solution architects. Here is what I would own to make that true for every seller xPay hires, and the first piece of it, already built from outside.</p>
+    <div class="xk-hero-cta">
+      <button type="button" class="xk-btn" data-act="openkit">Open the kit</button>
+      <span class="xk-meta">About an 8 minute read, then the kit.</span>
+    </div>
+    <p class="xk-skip">Short on time? <a href="#xk-ask">Skip to the four cards only your team can fill.</a></p>
+  </header>
 
-    <article>
-      <span class="leak-index">Question 3 of 5</span>
-      <h3>"Is there a price between list and enterprise?"</h3>
-      <p>Standard is 3% + $0.35. The next tier is Enterprise, above $750K a month processed internationally, with volume-based tiered pricing. <a class="src-link" href="https://www.xpaycheckout.com/pricing">source</a></p>
-      <p class="leak-who"><b>Who asks:</b> a company doing $200K to $700K a month, comparing list price with its current rate without ever calling you.</p>
-      <p class="leak-question"><b>What would help:</b> if the gap is there to push that company to Talk to The Team, one line on where volume pricing starts makes the push work.</p>
-    </article>
+  <section class="xk-sec" aria-labelledby="h-own">
+    <h2 class="xk-h2" id="h-own"><span class="xk-n">1</span>What I would own</h2>
+    <p class="xk-big">Call one, for every seller.</p>
+    <p>The answers the founding team gives on a first call, written once, checked against our docs and in every seller's hands before, during and after the call, with a bar every seller clears before going solo.</p>
+    <p><b>What it moves:</b> new processing volume going live each month, first calls with no one from the founding team on them, and the days from a new seller's start to a solo call one.</p>
+  </section>
 
-    <article>
-      <span class="leak-index">Question 4 of 5</span>
-      <h3>"Can you show us a customer like us?"</h3>
-      <p>Testimonials from PeerUp, Radical Health, Attikkel Technologies, Remedo.io and Edureka <a class="src-link" href="https://www.xpaycheckout.com/">source</a>. The strongest story we saw is Aniket's mid-May post: a large Indian consumer company whose success rate went "up by ~12% as compared to the incumbent", which he put at "an extra $5M in Annualized revenue". <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_heres-how-xpay-yc-w24-got-our-first-large-share-7460410812491468809-ungU/">source</a></p>
-      <p class="leak-who"><b>Who asks:</b> the champion carrying your proof through the relay your June post describes: finance, sales, product and tech, back to sales, then finance and management. <a class="src-link" href="https://www.linkedin.com/posts/soham-mahajan-130142193_growth-startups-b2b-share-7469344903701942272-PT6q/">source</a></p>
-      <p class="leak-question"><b>What would help:</b> large customers often will not be named. An anonymised one-pager with those numbers travels through that relay better than a post.</p>
-    </article>
+  <section class="xk-sec" aria-labelledby="h-where">
+    <h2 class="xk-h2" id="h-where"><span class="xk-n">2</span>Where we are</h2>
+    <p class="xk-big">The answers already exist.</p>
+    <p>Soham's posts hold the best of them.</p>
+    <div class="xk-para">
+      <p>A request for a lower MDR often hides a success-rate, support or reconciliation problem. And a fintech deal needs finance, tech, compliance and leadership to agree, each with its own reason to say no.</p>
+      <span class="xk-tag">Soham's posts, paraphrased</span>
+    </div>
+    <p>Our docs hold the technical half. And Aniket's post says Account Executives with 4+ years are being hired alongside this role.</p>
+  </section>
 
-    <article>
-      <span class="leak-index">Question 5 of 5</span>
-      <h3>"What changes for us on 1 Oct?"</h3>
-      <p>RBI's new FEMA export regulations take effect on 1 Oct 2026. For services other than software, the new work is an EDF declaration within 30 days of the end of the month each invoice is raised (they may also file by the day payment arrives); software's SOFTEX moves to the same EDF. The time to realise stays at nine months from the invoice date: a 22 Sep amendment replaced the fifteen months in the January text before it took effect. Rupee-invoiced exports get twelve months. <a class="src-link" href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13277&amp;Mode=0">regulations</a> <a class="src-link" href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10395">current rule</a> <a class="src-link" href="https://www.lkslaw.com/insights/articles/rbi-releases-fema-2026-export-import-trade-regulations-what-businesses-need-to-know">SOFTEX change</a></p>
-      <p class="leak-who"><b>Who asks:</b> the finance lead at a services exporter that invoices clients abroad every month and gets paid by wire.</p>
-      <p class="leak-question"><b>What would help:</b> it is a dated reason for that finance lead to review how export receipts are collected and documented this quarter. For a client who pays by wire, one answer on the collection side is a USD virtual bank account on the invoice, taking ACH, domestic wire or SWIFT. <a class="src-link" href="https://docs.xpaycheckout.com/products/virtual-bank-accounts/virtual-bank-accounts">source</a> That is a conversation xPay can open.</p>
-    </article>
+  <section class="xk-sec" aria-labelledby="h-way">
+    <h2 class="xk-h2" id="h-way"><span class="xk-n">3</span>What is in the way</h2>
+    <p class="xk-big">From outside, I cannot see any of that in a new seller's hands on call one.</p>
+    <p>If it is not there, the call waits for someone from the founding team, or goes out on a guess.</p>
+    <p>Aniket's post asks for someone to "make us redundant". One good hire does not do that. Every answer has to be written once, guarded, and drilled.</p>
+  </section>
 
-  </div>
-</section>
+  <section class="xk-sec" aria-labelledby="h-sys">
+    <h2 class="xk-h2" id="h-sys"><span class="xk-n">4</span>The system</h2>
+    <div class="xk-tiles">
+      <div class="xk-tile"><p class="xk-k">Before</p><p>A 60-second brief by buyer type, including why now.</p></div>
+      <div class="xk-tile"><p class="xk-k">During</p><p>The card for who is on the line and what they just said.</p></div>
+      <div class="xk-tile"><p class="xk-k">After</p><p>The same short recap every time, plus a handoff card engineering gets before any technical call.</p></div>
+      <div class="xk-tile"><p class="xk-k">The bar</p><p>Every AE and SDR clears the drill and an engineer-scored live call before a solo first call.</p></div>
+    </div>
+    <p><b>Where call one comes from.</b> The trigger we watch is a change in how an account gets paid: going monthly, opening a new country, a new filing rule. That tells an SDR who to call this week and what to open with.</p>
+    <p><b>The loop.</b> Every "not on this call" a buyer pushes on goes to product on Friday. Every recap gap becomes a card.</p>
+  </section>
 
-<section id="month-one">
-  <p class="section-label">Month one</p>
-  <h2>Deep before wide</h2>
-  <div class="section-body">
-    <ol class="month-list">
-      <li><span class="month-when">Weeks 1 to 2</span><p>On your calls, listening first, then leading while you listen. Learn the objections you already know by heart.</p></li>
-      <li><span class="month-when">Weeks 3 to 4</span><p>Solo on first calls. You join only the ones you choose.</p></li>
-      <li><span class="month-when">By day 30</span><p>The first deal we take from first call to proposal has no engineer on it.</p></li>
-      <li><span class="month-when">Scope</span><p>One vertical, one channel, both set with you after we read where the last 20 closed deals came from.</p></li>
-    </ol>
-  </div>
-</section>
+  <section class="xk-sec" aria-labelledby="h-gl">
+    <h2 class="xk-h2" id="h-gl"><span class="xk-n">5</span>A glimpse, already built</h2>
+    <div class="xk-cta">
+      <div><p class="xk-cta-t">The call-one kit</p><p class="xk-cta-d">I built the first piece from outside, from our public docs, pricing and the founding team's posts. Pick a buyer, open what they said, copy the recap.</p></div>
+      <button type="button" class="xk-btn" data-act="openkit">Open the kit</button>
+    </div>
+    <p>Building it turned up three things worth knowing:</p>
+    <div class="xk-finds">
+      <div class="xk-find"><p class="xk-find-v">12 of 16</p><div><p>12 of the 16 cards could be built from our public docs and pages. 4 need an answer only the founding team has. That is the job: getting those out of a few heads and into every seller's hands.</p></div></div>
+      <div class="xk-find"><p class="xk-find-v">71.3%</p><div><p>Against a gateway that also charges 3%, the whole price gap is our fixed $0.35, and the answer is a number, not a discount. At a $20 ticket, if they convert 70% today, list price pays for itself at 71.3% success. The pilot has to beat 71.3%, not 95%.</p><p><button type="button" class="xk-inline" data-act="card" data-k="F1">Run it in card F1</button></p></div></div>
+      <div class="xk-find"><p class="xk-find-v">4 lines</p><div><p>A new seller most needs the lines not to cross, where they will see them.</p>
+        <ul>
+          <li>No Shopify or WooCommerce plugin and no native mobile SDK in our docs.</li>
+          <li>Platform Connect is switched on by us, per account.</li>
+          <li>Sandbox access comes through support, after account verification.</li>
+          <li>Our Payouts doc says payouts are made in USD, with a $500 default minimum.</li>
+        </ul>
+        <p>Once those are on the card, nobody promises otherwise, and engineering never inherits a promise sales made.</p></div></div>
+    </div>
+  </section>
 
-<section id="proof">
-  <p class="section-label">Why we can run it</p>
-  <h2>Closer first, the team later</h2>
-  <div class="section-body">
-    <ul class="proof-list">
-      <li><span class="proof-name">Simplifai, 2020 to 2022</span><p>AI automation sold into banks, reaching $1M ARR within 12 months of launching GTM. Our standout deal was Upstox at $210K TCV, and we cut the sales cycle by half.</p></li>
-      <li><span class="proof-name">ZenAdmin, 2022 to 2023</span><p>Commercial Director, taking GTM from Southeast Asia into Europe and North America and closing mostly remote-first buyers: Remote, Multiplier, Omnipresent, Eventbrite, Temasek and Sleek. We started with beta customers and no revenue and took it past $200K ARR.</p></li>
-      <li><span class="proof-name">Craze (YC S22), 2025 to 2026</span><p>Founding Head of Sales. We built the first outbound and signed 40+ logos.</p></li>
-      <li><span class="proof-name">Torqus, for when the team comes</span><p>A 60+ person sales engine, 10x MRR in 6 months, about 92% renewals.</p></li>
+  <section class="xk-sec" aria-labelledby="h-90">
+    <h2 class="xk-h2" id="h-90"><span class="xk-n">6</span>The first ninety days</h2>
+    <p class="xk-legend">Tap a block to open it.</p>
+    <div class="xk-days">
+      <details class="xk-day"><summary><span class="xk-day-s"><span class="xk-day-w">Days 1 to 30</span><span class="xk-day-h">Listen, lead, carry my own deals, write it down.</span><span class="xk-day-c" aria-hidden="true"></span></span></summary><ul>
+        <li>Sit on the founding team's first calls, then lead while they listen.</li>
+        <li>Take first calls from week 3 with the kit open, and carry my own deals to close from there: the kit gets written by the person winning with it. Every call fills or fixes a card, and the 4 locked cards are filled by day 30.</li>
+        <li>One vertical and one channel, set together after reading where the last 20 closed deals came from: one channel, worked deep, before the next. <span class="xk-tag">Soham, paraphrased</span></li>
+      </ul></details>
+      <details class="xk-day"><summary><span class="xk-day-s"><span class="xk-day-w">Days 31 to 60</span><span class="xk-day-h">Every seller clears the bar.</span><span class="xk-day-c" aria-hidden="true"></span></span></summary><ul>
+        <li>Every AE and SDR clears the drill and a live mock call scored by one of our engineers before a solo first call, me first.</li>
+        <li>Recaps go into the CRM in the same format, and handoff cards go to engineering before any technical call.</li>
+        <li>Lost reasons and "not on this call" pushes go to product every Friday.</li>
+        <li>The kit can learn from call recordings, but no new answer reaches a seller until it carries a "not on this call" line and an OK from the founding team.</li>
+      </ul></details>
+      <details class="xk-day"><summary><span class="xk-day-s"><span class="xk-day-w">Days 61 to 90</span><span class="xk-day-h">Call one without the founding team is normal.</span><span class="xk-day-c" aria-hidden="true"></span></span></summary><ul>
+        <li>Certified AEs own growth-lane first calls.</li>
+        <li>Enterprise (above our $750K a month line, or listed, Series D and E) stays with me; a founder joins once, at the exec step.</li>
+        <li>First calls without the founding team are counted weekly.</li>
+        <li>The kit becomes onboarding for every new seller.</li>
+      </ul></details>
+    </div>
+
+    <div class="xk-strip" role="group" aria-labelledby="h-strip">
+      <p class="xk-k">My commitments, not claims about xPay.</p>
+      <h3 class="xk-strip-h" id="h-strip">Who runs call one</h3>
+      <p class="xk-legend">F is the founding team, K is me. Solid leads, outlined listens, dashed is off the call. Tap a step.</p>
+      <ol class="xk-steps">
+        <li><button type="button" class="xk-step" aria-expanded="false" aria-controls="xk-t0" data-act="step" data-k="0" data-t="Every question the founding team answers on a first call is on a card.">
+          <span class="xk-step-w">Weeks 1 to 2</span>
+          <span class="xk-trio"><span class="xk-who3" role="img" data-s="lead" aria-label="Founding team leads">F</span><span class="xk-who3" role="img" data-s="listen" aria-label="K listens">K</span><span class="xk-who3" role="img" data-s="off" aria-label="AE not on the call">AE</span></span>
+          <span class="xk-step-l"><b>Leads:</b> the founding team, then K.</span>
+        </button><p class="xk-true" id="xk-t0" hidden></p></li>
+        <li><button type="button" class="xk-step" aria-expanded="false" aria-controls="xk-t1" data-act="step" data-k="1" data-t="4 locked cards filled; first AE certified.">
+          <span class="xk-step-w">Weeks 3 to 6</span>
+          <span class="xk-trio"><span class="xk-who3" role="img" data-s="listen" aria-label="Founding team on calls they choose">F</span><span class="xk-who3" role="img" data-s="lead" aria-label="K leads">K</span><span class="xk-who3" role="img" data-s="off" aria-label="AE not on the call">AE</span></span>
+          <span class="xk-step-l"><b>Leads:</b> K, kit open, carrying my own deals. The founding team joins calls they choose.</span>
+        </button><p class="xk-true" id="xk-t1" hidden></p></li>
+        <li><button type="button" class="xk-step" aria-expanded="false" aria-controls="xk-t2" data-act="step" data-k="2" data-t="Every AE and SDR has cleared the drill and the live call; a recap and a handoff card follow every call.">
+          <span class="xk-step-w">Weeks 7 to 10</span>
+          <span class="xk-trio"><span class="xk-who3" role="img" data-s="off" aria-label="Founding team not on the call">F</span><span class="xk-who3" role="img" data-s="listen" aria-label="K listens">K</span><span class="xk-who3" role="img" data-s="lead" aria-label="AE leads">AE</span></span>
+          <span class="xk-step-l"><b>Leads:</b> a certified AE, growth lane. <b>On the line:</b> K.</span>
+        </button><p class="xk-true" id="xk-t2" hidden></p></li>
+        <li><button type="button" class="xk-step" aria-expanded="false" aria-controls="xk-t3" data-act="step" data-k="3" data-t="Growth-lane call one runs without the founding team, counted every week.">
+          <span class="xk-step-w">Weeks 11 to 13</span>
+          <span class="xk-trio"><span class="xk-who3" role="img" data-s="off" aria-label="Founding team on calls they choose only">F</span><span class="xk-who3" role="img" data-s="off" aria-label="K on enterprise and escalations only">K</span><span class="xk-who3" role="img" data-s="lead" aria-label="AE leads alone">AE</span></span>
+          <span class="xk-step-l"><b>Leads:</b> the AE alone, growth lane. K on enterprise and escalations; the founding team on calls they choose.</span>
+        </button><p class="xk-true" id="xk-t3" hidden></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="xk-sec" aria-labelledby="h-meas">
+    <h2 class="xk-h2" id="h-meas"><span class="xk-n">7</span>What I would be measured on</h2>
+    <table class="xk-table">
+      <thead><tr><th scope="col">Measure</th><th scope="col">Why this one</th></tr></thead>
+      <tbody>
+        <tr><td>New monthly processing volume live, against a number we set in week one</td><td>the number the role exists for; on enterprise I carry it personally</td></tr>
+        <tr><td>Days from call one to the first live transaction</td><td>the kit is judged at go-live, not at the recap</td></tr>
+        <tr><td>First calls with no one from the founding team on them, weekly</td><td>"make us redundant", in numbers</td></tr>
+        <tr><td>Days from a new seller's start to a solo call one</td><td>whether the kit and the drill work</td></tr>
+        <tr><td>Share of first calls that end with a pilot booked</td><td>call one has one job: the next step</td></tr>
+        <tr><td>Deals reaching proposal with every seat answered</td><td>from the recaps; whether the relay stops restarting</td></tr>
+        <tr><td>Founding-team hours on sales calls a week</td><td>the same question, from your side</td></tr>
+      </tbody>
+    </table>
+    <p class="xk-fine">We set the volume number together in week one. The rest cannot be read from outside; the recaps start producing them once first calls run on the kit, and go-live dates follow as pilots finish.</p>
+  </section>
+
+  <section class="xk-sec" aria-labelledby="h-why">
+    <h2 class="xk-h2" id="h-why"><span class="xk-n">8</span>Why we can build it</h2>
+    <p class="xk-big">Four teams, each built for other sellers to run.</p>
+    <ul class="xk-proof">
+      <li><span class="xk-proof-n">Craze (YC S22), 2025 to 2026</span><p>Founding Head of Sales. We built the first outbound, hired the founding SDRs and signed 40+ logos.</p></li>
+      <li><span class="xk-proof-n">ZenAdmin, 2022 to 2023</span><p>Commercial Director. We built the commercial function from scratch to 15 people and took GTM from Southeast Asia into Europe and North America, closing mostly remote-first buyers: Remote, Multiplier, Omnipresent, Eventbrite, Temasek, Sleek.</p></li>
+      <li><span class="xk-proof-n">Simplifai, 2020 to 2022</span><p>We built APAC from zero to 15 reps, selling AI automation into banks and Upstox. $1M ARR in the first 12 months, grown to $1.7M, with the sales cycle halved.</p></li>
+      <li><span class="xk-proof-n">Torqus (acquired by Dineout), 2017 to 2020</span><p>A 60+ person sales engine: about 40 on-roll plus an outsourced outbound team we set up and trained. 10x MRR in 6 months, about 92% renewals.</p></li>
     </ul>
-    <div class="gap-note">
-      <p><strong>The gap, plainly:</strong> I did not start as an engineer (BCom, PGDAMC), and your careers page makes that a hard requirement. <a class="src-link" href="https://www.xpaycheckout.com/careers/head-of-sales">source</a> Aniket's post wants APIs discussed "without needing an engineer or solutions consultant". <a class="src-link" href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">source</a> The call above is my answer to that, so test me on it live. About 13 years in, based in Pune, ready to be on site at HSR, Bengaluru.</p>
+    <p class="xk-fine">About 13 years in. Based in Pune, ready to be on site at HSR, Bengaluru.</p>
+  </section>
+
+  <section class="xk-sec" aria-labelledby="h-obv">
+    <h2 class="xk-h2" id="h-obv">The obvious question</h2>
+    <div class="xk-gap">
+      <p>I did not start as an engineer. The filter is there because a buyer's engineer can tell when a seller is guessing, and call one has to run without one of ours. Judge that on the kit: it is built from our docs, and it says idempotency keys, webhook signature checks and the 4, 8, 12 and 24 hour retry schedule for failed renewals as plainly as it says where the docs stop. At Simplifai we sold AI automation into banks and Upstox, starting from zero. And the bar applies to me before anyone: the drill, then a live call with one of our engineers as the buyer's engineer. If I guess, I don't go solo.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="ask" class="ask-panel">
-  <p class="section-label">The ask</p>
-  <h2>Twenty minutes</h2>
-  <p>Play your toughest buyer on a mock first call, finance lead and engineer both.</p>
-  <p>If I can't hold the integration call, you've lost twenty minutes.</p>
-  <p class="ask-sign">Ketan Sharma &middot; <a href="https://www.linkedin.com/in/ketan7/">linkedin.com/in/ketan7</a></p>
-</section>
-
-<footer class="page-foot">
-  <details class="source-drawer">
-    <summary>All sources, read 29 to 30 Sep 2026</summary>
-    <ul>
-      <li><a href="https://www.linkedin.com/posts/theaniketg_were-hiring-a-head-of-sales-at-xpay-yc-share-7509989131536506880-w27B">Aniket Gupta, Head of Sales post, 29 Sep 2026</a>: role starts on a call speaking APIs, first call without needing an engineer or solutions consultant, engineering degree a big plus</li>
-      <li><a href="https://www.xpaycheckout.com/">xpaycheckout.com home page</a>: 24-hour settlement for bank-account collections, 95% success claim, FIRC, testimonials</li>
-      <li><a href="https://www.xpaycheckout.com/terms-and-condition">Terms and conditions</a>: INR settlement once every two weeks, timeline may be adjusted</li>
-      <li><a href="https://www.xpaycheckout.com/blog/skydo-vs-xpay-best-skydo-alternative-for-international-payments-in-india">Skydo vs xPay post</a>: T+1 INR payouts</li>
-      <li><a href="https://www.xpaycheckout.com/blog/payglocal-vs-xpay-best-payglocal-alternative">PayGlocal vs xPay post</a>: $1M a month, 15 points of success, $150,000; routing, local acquiring partnerships, wallet and alternative method coverage</li>
-      <li><a href="https://www.xpaycheckout.com/marketplace-home">Marketplace page</a>: 5% a sale on a Basic plan bundling xPay Marketing and xPay Payments</li>
-      <li><a href="https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts">Payouts docs</a>: USD, 24 to 48 working hours, Mon and Thu, $500 minimum, FIRC</li>
-      <li><a href="https://www.xpaycheckout.com/careers/head-of-sales">Head of Sales page</a>: customer profile, engineering start a hard requirement, office in HSR, Bengaluru</li>
-      <li><a href="https://www.xpaycheckout.com/pricing">Pricing</a>: 3% + $0.35, Enterprise above $750K a month, FX conversion handled by AD1 banks at bank rates</li>
-      <li><a href="https://docs.xpaycheckout.com/llms.txt">Docs index (plain text)</a>: the full page list, with no Shopify or WooCommerce plugin and no native mobile SDK entry</li>
-      <li>Docs pages: <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/create-intent">Create Intent</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payments/get-intent">Get Intent</a>, <a href="https://docs.xpaycheckout.com/developer-resources/idempotency">Idempotency</a>, <a href="https://docs.xpaycheckout.com/developer-resources/webhooks/introduction">Webhooks</a>, <a href="https://docs.xpaycheckout.com/developer-resources/webhooks/events-list">Webhook events</a>, <a href="https://docs.xpaycheckout.com/developer-resources/sandbox/sandbox">Sandbox</a>, <a href="https://docs.xpaycheckout.com/products/payment-links/payment-links">Payment Links</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/subscriptions/create-subscription">Subscriptions API</a>, <a href="https://docs.xpaycheckout.com/products/subscription/subscription-retry-mechanism">Subscription retry</a>, <a href="https://docs.xpaycheckout.com/products/platform-connect/overview">Platform Connect</a>, <a href="https://docs.xpaycheckout.com/developer-resources/mobileIntegration">Mobile integration</a>, <a href="https://docs.xpaycheckout.com/developer-resources/endpoints/payouts/list-payouts">List Payouts</a>, <a href="https://docs.xpaycheckout.com/dashboard-operations/dispute-management/responding-by-reason">Responding to disputes</a>, <a href="https://docs.xpaycheckout.com/products/argus/overview">Argus</a>, <a href="https://docs.xpaycheckout.com/products/virtual-bank-accounts/virtual-bank-accounts">Virtual Bank Accounts</a></li>
-      <li><a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13277&amp;Mode=0">RBI, FEMA 23(R)/2026-RB</a>: in force 1 Oct 2026, EDF for services within 30 days of month end, nine months to realise (twelve if invoiced in rupees) after the 22 Sep 2026 amendment</li>
-      <li><a href="https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=10395">RBI Master Direction, Export of Goods and Services</a>, para A.2 (updated 17 Jul 2026): nine months for all exporters today</li>
-      <li><a href="https://www.linkedin.com/posts/soham-mahajan-130142193_business-sales-growth-share-7494386459983134720-tEuM/">Soham Mahajan, post of 19 Aug 2026</a>: five lessons from onboarding customers</li>
-      <li><a href="https://www.linkedin.com/posts/soham-mahajan-130142193_growth-startups-b2b-share-7469344903701942272-PT6q/">Soham Mahajan, post of 8 Jun 2026</a>: closing one deal through every team</li>
-      <li><a href="https://www.linkedin.com/posts/theaniketg_heres-how-xpay-yc-w24-got-our-first-large-share-7460410812491468809-ungU/">Aniket Gupta, post of 14 May 2026</a>: the first large enterprise win</li>
+  <section class="xk-sec" aria-labelledby="h-wrong">
+    <h2 class="xk-h2" id="h-wrong"><span class="xk-n">9</span>Where I could be wrong</h2>
+    <ul class="xk-wrong">
+      <li>If the answers already live in a doc the team uses, this is distribution, not writing, and faster.</li>
+      <li>If most enterprise deals start from a warm founder intro, the Before brief matters more than the call card.</li>
+      <li>If compliance decides before finance at listed companies, the locked compliance card gets filled first.</li>
+      <li>If most new revenue arrives inbound, speed to lead beats triggers, and Why now becomes a routing rule.</li>
     </ul>
-  </details>
-  <p>Built from public pages only. No xPay customer names beyond its own public testimonials. Unlisted, not indexed.</p>
-</footer>
+    <p class="xk-fine">Any of these would show inside the first month.</p>
+  </section>
+
+  <section class="xk-ask" id="xk-ask" aria-labelledby="h-ask">
+    <p class="xk-h2"><span class="xk-n">10</span>The ask</p>
+    <h3 id="h-ask">Pick one locked card.</h3>
+    <p class="xk-ask-body">Reply with the card and I'll send my outside draft by the next morning, for you to tear up. Or give me 20 minutes on how you answer it today, and you have it back the next morning as a finished card, a drill question and a recap line, yours to hand to the team.</p>
+    <div class="xk-askchips" role="group" aria-label="Locked cards">
+      <button type="button" class="xk-askchip" aria-pressed="false" data-act="askcard" data-k="L4"><b>L4</b><span>The pain inside the pain</span></button>
+      <button type="button" class="xk-askchip" aria-pressed="false" data-act="askcard" data-k="L2"><b>L2</b><span>A price between list and Enterprise</span></button>
+      <button type="button" class="xk-askchip" aria-pressed="false" data-act="askcard" data-k="L3"><b>L3</b><span>A customer like us</span></button>
+      <button type="button" class="xk-askchip" aria-pressed="false" data-act="askcard" data-k="L1"><b>L1</b><span>Entity and regulation</span></button>
+    </div>
+    <div class="xk-switch" role="group" aria-label="How to fill it">
+      <button type="button" aria-pressed="true" data-act="askmode" data-k="draft">Send me the draft</button>
+      <button type="button" aria-pressed="false" data-act="askmode" data-k="20">20 minutes</button>
+    </div>
+    <p class="xk-reply" id="xk-reply" aria-live="polite">Pick a card to see your reply.</p>
+    <div class="xk-askrow">
+      <button type="button" class="xk-btn" id="xk-askcopy" data-act="askcopy" disabled>Copy my reply</button>
+      <span id="xk-askstat" aria-live="polite"></span>
+    </div>
+    <p class="xk-sign">Ketan Sharma, <a href="https://www.linkedin.com/in/ketan7/" target="_blank" rel="noopener">linkedin.com/in/ketan7</a></p>
+    <p class="xk-logi">Paste it as your reply; nothing here sends anything. Finished cards go back privately and are never published. For L1, my draft is the question list and seller lines only.</p>
+  </section>
+
+  <footer class="xk-foot">
+    <p>Built from outside, from xPay's public site, docs and the founding team's posts, September 2026. Nothing here is from inside xPay. Unlisted, not indexed.</p>
+  </footer>
 
 </div>
+</section>
+
+<!-- ========== A GLIMPSE, ALREADY BUILT ========== -->
+<section class="xk-pane" id="pGl" role="tabpanel" aria-labelledby="tGl" hidden>
+<div class="xk-kit">
+  <p class="xk-eyebrow">A glimpse, already built</p>
+  <h2 class="xk-kit-h" id="xk-kit-h" tabindex="-1">Call one, in every seller's hands.</h2>
+  <p class="xk-note">A glimpse, built from outside in a day, from our public docs, pricing and the founding team's posts. The real one gets built on our calls. Example numbers are labelled. Guesses about a buyer say so.</p>
+  <ol class="xk-flow"><li><b>1</b>Pick the buyer.</li><li><b>2</b>Open what they said.</li><li><b>3</b>Copy the recap.</li></ol>
+
+  <div class="xk-modes-row">
+    <div class="xk-modes" role="group" aria-label="Kit mode">
+      <button type="button" aria-pressed="true" data-act="mode" data-k="before">Before</button>
+      <button type="button" aria-pressed="false" data-act="mode" data-k="during">During</button>
+      <button type="button" aria-pressed="false" data-act="mode" data-k="after">After</button>
+      <button type="button" aria-pressed="false" data-act="mode" data-k="drill">Drill</button>
+    </div>
+    <div class="xk-sess"><span id="xk-sess" aria-live="polite"></span><button type="button" class="xk-textbtn" data-act="restart">Start over</button></div>
+  </div>
+
+  <div class="xk-view" id="xk-v-before"></div>
+  <div class="xk-view" id="xk-v-during" hidden></div>
+  <div class="xk-view" id="xk-v-after" hidden></div>
+  <div class="xk-view" id="xk-v-drill" hidden></div>
+</div>
+</section>
+
+</main>
+
+<script>
+(function () {
+'use strict';
+
+var DATA = {
+  LINKS: {
+    create: ['Create Intent', 'https://docs.xpaycheckout.com/developer-resources/endpoints/payments/create-intent'],
+    getintent: ['Get Intent', 'https://docs.xpaycheckout.com/developer-resources/endpoints/payments/get-intent'],
+    idem: ['Idempotency', 'https://docs.xpaycheckout.com/developer-resources/idempotency'],
+    webhooks: ['Webhooks', 'https://docs.xpaycheckout.com/developer-resources/webhooks/introduction'],
+    events: ['Webhook events', 'https://docs.xpaycheckout.com/developer-resources/webhooks/events-list'],
+    sandbox: ['Sandbox', 'https://docs.xpaycheckout.com/developer-resources/sandbox/sandbox'],
+    links: ['Payment Links', 'https://docs.xpaycheckout.com/products/payment-links/payment-links'],
+    subs: ['Subscriptions API', 'https://docs.xpaycheckout.com/developer-resources/endpoints/subscriptions/create-subscription'],
+    retry: ['Subscription retry', 'https://docs.xpaycheckout.com/products/subscription/subscription-retry-mechanism'],
+    pconnect: ['Platform Connect', 'https://docs.xpaycheckout.com/products/platform-connect/overview'],
+    mobile: ['Mobile integration', 'https://docs.xpaycheckout.com/developer-resources/mobileIntegration'],
+    listpayouts: ['List Payouts', 'https://docs.xpaycheckout.com/developer-resources/endpoints/payouts/list-payouts'],
+    payouts: ['Payouts', 'https://docs.xpaycheckout.com/dashboard-operations/payouts/payouts'],
+    disputes: ['Responding to disputes', 'https://docs.xpaycheckout.com/dashboard-operations/dispute-management/responding-by-reason'],
+    argus: ['Argus', 'https://docs.xpaycheckout.com/products/argus/overview'],
+    vba: ['Virtual Bank Accounts', 'https://docs.xpaycheckout.com/products/virtual-bank-accounts/virtual-bank-accounts'],
+    pricing: ['Pricing', 'https://www.xpaycheckout.com/pricing'],
+    usentity: ["xPay's US-entity post", 'https://www.xpaycheckout.com/blog/as-an-indian-business-should-i-set-up-a-us-entity'],
+    terms: ['Platform Terms', 'https://www.xpaycheckout.com/platform_terms/platform-terms-version1.0']
+  },
+  SEATS: [
+    { id: 'founding', name: 'Founding team or CEO', no: 'Why switch at all?', cards: ['C1', 'C2', 'L3', 'L4'] },
+    { id: 'finance', name: 'Finance', no: 'What does it cost, and what lands?', cards: ['F1', 'F2', 'L2'] },
+    { id: 'product', name: 'Product or growth', no: 'Does checkout conversion move?', cards: ['P1', 'P2'] },
+    { id: 'engineer', name: 'Their engineer', no: 'How much work, and what breaks?', cards: ['E1', 'E2', 'E3', 'E4', 'E5'] },
+    { id: 'compliance', name: 'Compliance or risk', no: 'Is it allowed, and who is liable?', cards: ['R1', 'L1'] }
+  ],
+  SEGMENTS: [
+    { id: 'edtech', name: 'EdTech',
+      why: 'A move to monthly plans for learners abroad, or fees published in a new currency. Monthly turns one payment into twelve renewals, so a declined renewal card becomes the leak.',
+      spot: 'Pricing pages and "now in the US" announcements.',
+      guess: 'Learners abroad pay fees by card, often small tickets, so the $0.35 matters.',
+      seats: ['finance', 'engineer', 'product'], read: ['F1', 'E3', 'P2'],
+      extra: 'How many learners pay from abroad, and from which countries?' },
+    { id: 'saas', name: 'SaaS',
+      why: 'Launching abroad without a Stripe account (invite-only in India since May 2024), or USD monthly plans going live.',
+      spot: 'USD pricing pages and US roles on careers pages.',
+      guess: 'USD subscriptions, failed renewals, the Stripe wall.',
+      seats: ['engineer', 'founding', 'finance'], read: ['E3', 'C2', 'F2'],
+      extra: 'What share of renewals fail, and who retries?' },
+    { id: 'travel', name: 'Travel',
+      why: 'A new region or corridor goes live: new currencies, new methods, and a dispute bill that grows with it.',
+      spot: 'Launch releases and new country pages.',
+      guess: 'Large tickets, disputes and fraud warnings, many currencies.',
+      seats: ['engineer', 'product', 'finance'], read: ['E4', 'P1', 'F1'],
+      extra: 'Dispute rate, and who fights them?' },
+    { id: 'consumer', name: 'Consumer app',
+      why: "A launch for users abroad (diaspora, a new country's store listing), where foreign cards and wallets decide conversion.",
+      spot: 'Store listings and launch posts.',
+      guess: 'Pays inside the app, and wallets decide conversion.',
+      seats: ['product', 'engineer'], read: ['P1', 'P2', 'E2'],
+      extra: 'Web, app or both, and which countries pay most?' },
+    { id: 'services', name: 'Services exporter', edf: true,
+      why: "The 1 Oct rule: every month's invoices now need an EDF within 30 days of month end, and wires still have to be matched and FIRCs chased.",
+      spot: 'Job posts that mention SOFTEX, EDF or FIRC work.',
+      guess: 'Invoices clients abroad monthly, and gets paid by wire.',
+      seats: ['compliance', 'finance', 'founding'], read: ['R1', 'F2', 'C1'],
+      extra: 'How do clients pay today, card or wire?' }
+  ],
+  CARDS: [
+    { id: 'F1', seat: 'finance', q: 'Your rate is higher. Can you come down?',
+      hides: 'A success-rate, support or reconciliation problem.', hidesTag: "Soham's point, paraphrased",
+      ask: ["What share of last month's international orders completed, per order rather than per attempt?", 'Average ticket?', 'After fees and FX, what lands in INR per $100 today?'],
+      ans: ['Rate is usually the smaller lever, so show the break-even.'], calc: true,
+      not: [{ t: 'A rate cut' }, { t: '95% as their number' }], notNote: 'Pricing below list is Enterprise, above $750K a month.',
+      next: "A two-week pilot, starting once their account is verified (our docs say that typically takes up to 48 hours). Their engineer builds in the sandbox, then a fixed share of one country's traffic runs through us alongside their gateway, same weeks, same card mix. We agree the order count up front, and the pilot wins if our success beats theirs by more than the break-even gap.",
+      send: [['their finance lead', ['pricing']]], ns: 'E1' },
+    { id: 'F2', seat: 'finance', q: 'When do we get paid, and in what currency?',
+      ask: ['USD or INR to land?', 'How does finance match payouts to invoices?', 'What must each FIRC show?'],
+      ans: ['Our Payouts doc: payouts are initiated on Mondays and Thursdays by default, typically arrive within 24 to 48 working hours, are made in USD, and wait until the balance clears a $500 default minimum. Each payout has a FIRC in the dashboard.', 'The Payout Initiated and Payout Success webhooks plus List Payouts let finance reconcile.'],
+      inlock: 'Which settlement and landing currency applies to which product (our home page says INR account, the Payouts doc says USD): one line from the founding team makes this final.',
+      not: [{ t: 'A landing currency or settlement timeline for a product you have not confirmed they are on' }],
+      next: 'Their finance lead gets the Payouts page today, and we confirm which product they would be on.',
+      send: [['their finance lead', ['payouts']], ['their engineer', ['listpayouts', 'events']]], ns: 'L1' },
+    { id: 'C1', seat: 'founding', q: 'We already have a gateway. Why add another?',
+      ask: ['Replace, or sit alongside?', 'Which three countries fail most?'],
+      ans: ["Ask for one slice, their worst country's international cards, next to what they run today.", "Our blog puts Indian gateways at 60 to 75% on international cards. Don't quote that; measure it."],
+      not: [{ t: 'Knocking the incumbent' }],
+      next: 'The F1 pilot: two weeks, one country, a fixed share of traffic alongside what they run today.', ns: 'F1' },
+    { id: 'C2', seat: 'founding', q: "Stripe won't take us. Should we set up a US entity?",
+      ask: ['Which three markets matter most?'],
+      ans: ['Stripe India has been invite-only since May 2024.', 'We collect globally without a foreign entity: cards plus 45+ local methods, a virtual account for wires, and sales tax collection they can switch on, per our home page.', 'Our blog puts the ODI route to a US entity at 6 to 8 months and $10K to $15K, plus annual compliance.'],
+      not: [{ t: 'Tax or structuring advice', n: 'Whether they need a Merchant of Record goes to their finance lead and CA.' }],
+      next: 'Map their top three markets to methods.',
+      send: [['their founder', ['usentity']]], ns: 'F2' },
+    { id: 'E1', seat: 'engineer', q: 'How long will this take? No dev time this quarter.',
+      ask: ['Hosted link, or your own checkout? Who would build it?'],
+      ans: ['No dev time: Payment Links, one-time or subscription, with no integration.', 'Own checkout: Create Intent with HTTP Basic auth; Success and Failed webhooks with signature checks; an idempotency key so a retry does not charge twice.'],
+      not: [{ t: 'A Shopify or WooCommerce plugin, or a native mobile SDK', n: 'Our docs list neither, so they get a written roadmap answer within a day.', g: 'a Shopify or WooCommerce plugin, or a native mobile SDK' }, { t: 'Sandbox keys today' }],
+      next: 'Request sandbox access today. It goes through our support and, after account verification, they get a complete clone of their account. Then one engineer, one country, two weeks.',
+      send: [['their engineer', ['create', 'webhooks', 'idem', 'links', 'sandbox']]], ns: 'E2',
+      path: 'Payment Links (no dev time) or Create Intent (own checkout)', hooks: 'Success, Failed' },
+    { id: 'E2', seat: 'engineer', q: 'Prove the 95% before we switch.',
+      ask: ['How do you count success today: per attempt or per order?'],
+      ans: ["Don't defend the number. Get Intent, with charge attempts expanded, returns every attempt and failure, so the pilot gives attempt-level data from their own traffic.", 'Why we say it can be higher: routing, local acquiring partnerships, and wallet and local-method coverage.'],
+      not: [{ t: 'Any lift before the pilot' }],
+      next: 'Agree the metric first: per order, same countries, same card mix, two weeks.',
+      send: [['their engineer', ['getintent']]], ns: 'F1' },
+    { id: 'E3', seat: 'engineer', q: 'Most of our revenue is subscriptions.',
+      ask: ['Which plans renew monthly, and in which currencies?'],
+      ans: ['Subscriptions API: create, edit, pause, one-time charge.', 'Failed renewals retry automatically at 4, 8, 12 and 24 hours; manual retry once unpaid, with a 4-hour cooldown.', 'Subscription billing is 0.40% per transaction on top.'],
+      not: [{ t: 'Any recovery rate' }],
+      next: "Pull last quarter's failed renewals: that is the pilot's baseline.",
+      send: [['their engineer', ['subs', 'retry']]], ns: 'F2', path: 'Subscriptions' },
+    { id: 'E4', seat: 'engineer', q: 'Chargebacks hurt us.',
+      ask: ['Which dispute reasons come up most, and do you fight them today?'],
+      ans: ['Dispute webhooks: Disputed, Under Review, Won, Lost, plus an Early Fraud Warning before a formal dispute.', 'Our pricing page also lists Dispute Prevention (RDR and Ethoca early resolution) at $35 per resolved dispute, and xPay Intelligent Disputes, which fights the disputes they do not, at 50% of the transaction amount, charged only on a win.', 'Block the card fingerprint by intent, and Argus applies the block to future payments.', 'Fees: $15 per dispute received, $15 more per dispute fought; chargeback protection is 0.50% per transaction.'],
+      not: [{ t: 'A win rate' }],
+      next: "Pull last quarter's disputes by reason: that is the pilot's baseline.",
+      send: [['their engineer', ['events', 'argus', 'disputes']]], ns: 'F2',
+      hooks: 'Disputed, Under Review, Won, Lost, Early Fraud Warning' },
+    { id: 'E5', seat: 'engineer', q: "We're a platform with our own sellers.",
+      ask: ['Do your sellers need their own settlements?'],
+      ans: ['Platform Connect gives sub-merchants their own transactions and settlements.'],
+      not: [{ t: 'That they can switch it on themselves', n: 'We enable it per account.' }],
+      next: 'Book the eligibility call before hanging up.',
+      send: [['their engineer', ['pconnect']]], ns: 'L1', path: 'Platform Connect' },
+    { id: 'P1', seat: 'product', q: 'Will this lift checkout conversion?',
+      ask: ['Where do buyers drop at checkout today, and on which devices?'],
+      ans: ['Wallets: Apple Pay, Google Pay, CashApp and Amazon Pay at 3.9% + $0.35, and PayPal at 5% + $0.35.', 'Klarna and Afterpay at 7.5% + $0.35.', '45+ local payment methods, per our home page.'],
+      not: [{ t: 'BNPL in every market or at every ticket size', n: 'Our docs scope Klarna and Afterpay to USD, in the US and Canada at most, and wallets and BNPL are enabled on request.', g: 'BNPL in every market or at every ticket size' }],
+      next: 'Pick the one country where wallets matter most, and run it in the pilot.', ns: 'E1' },
+    { id: 'P2', seat: 'product', q: 'Our users pay inside our app.',
+      ask: ['Is checkout inside the app today, on iOS, Android or both?'],
+      ans: ['A WebView plus deep links, per the mobile guide.'],
+      not: [{ t: 'A native SDK', n: 'Our docs list none.', g: 'a native mobile SDK' }],
+      next: 'Their engineer gets the mobile guide today, and the pilot runs in the WebView.',
+      send: [['their engineer', ['mobile']]], ns: 'E1', path: 'WebView' },
+    { id: 'R1', seat: 'compliance', q: 'What changes for us on 1 Oct?',
+      ask: ['Do you invoice in USD or rupees, and do clients pay by card or wire?'],
+      ans: ["From 1 Oct 2026, services need an EDF within 30 days of the end of the invoice month. Services other than software may file by the day payment arrives. Software's SOFTEX moves to the same EDF.", 'Realise within nine months, or twelve if invoiced or settled in rupees.', 'For wire payers: a virtual account (our docs list USD over ACH, domestic wire and SWIFT), with the FIRC from the dashboard. Our pricing page lists Global Collection Accounts at 1% per transaction.'],
+      edf: true,
+      not: [{ t: 'FEMA advice, or that we file the EDF', n: 'Their CA and AD bank handle that.' }],
+      next: 'Their finance lead gets the Virtual Bank Accounts page, and their CA joins the next call.',
+      send: [['their finance lead', ['vba']]], ns: 'F2' }
+  ],
+  LOCKED: [
+    { id: 'L1', seat: 'compliance', q: 'Which entity are we contracting with, and how is the money regulated end to end?',
+      mk: 'Seller line meanwhile', mv: "\"The contracting entity is the one named in our Platform Terms and on your Order Form, and I'll send the terms page now. How the money is regulated end to end comes in writing from our founders today.\"",
+      send: [['their compliance lead', ['terms']]],
+      need: 'The regulatory answer, in writing, and who on the founding team sends it.', ns: 'F2' },
+    { id: 'L2', seat: 'finance', q: 'Is there a price between list and Enterprise?',
+      mk: 'Public part', mv: '3% + $0.35 at list, and Enterprise above $750K a month.',
+      need: 'The price book, and who approves what.', ns: 'F1' },
+    { id: 'L3', seat: 'founding', q: 'Show me a customer like us.',
+      mk: 'Public meanwhile', mv: "Our home-page testimonials: PeerUp, Radical Health, Attikkel, Remedo.io and Edureka. And Aniket's May post: a large Indian consumer company whose success rate rose about 12% over the incumbent, which he put at about $5M a year.",
+      mtag: "Aniket's May post, paraphrased",
+      need: 'Who takes reference calls, by vertical.', ns: 'C1' },
+    { id: 'L4', seat: 'founding', internal: true, q: 'The pain inside the pain, for our best vertical.',
+      mk: 'The idea', mv: 'What a buyer asks for first is rarely what decides the deal. The objection is usually the symptom: a lower-MDR ask often hides a success-rate, support or reconciliation problem.',
+      mtag: "Soham's August post, paraphrased",
+      need: 'The vertical, the pain, and the one question that surfaces it. That becomes the opener for every call in that vertical.', ns: 'C1' }
+  ],
+  DRILL: [
+    { who: 'Finance', q: 'Your rate is higher. Can you come down?',
+      c: [["Before rate: what share of last month's international orders completed, per order, and what's your average ticket?", 'right'], ['We can match what you pay today if you move all your international volume to us. Shall I send that over in writing?', 'over'], ["Let me check with our founders what discount we can do at your volume, and I'll come back with a better rate this week.", 'cave']],
+      chk: 'size the success-rate problem before the rate.' },
+    { who: 'Engineer', q: 'Do you have a Shopify plugin?',
+      c: [["Our docs don't list one today. Payment Links work with no integration, and you'll get a written roadmap answer within a day.", 'right'], ["It's on the way. Build on Payment Links for now and you'll have the plugin before go-live, so nothing changes on your side.", 'over'], ["Here's our docs link. Everything we support is listed in there, so your engineer can check what fits and come back to us with questions.", 'dump']],
+      chk: "state the line we don't cross, offer what exists." },
+    { who: 'Compliance', q: 'Which entity are we contracting with, and how is the money regulated end to end?',
+      c: [["The contracting entity is named in our Platform Terms, which I'll send now. The regulatory answer comes in writing from our founders today, so it's exact. Who on your side should it go to?", 'right'], ["I'm fairly sure it's all covered, the same way it is with any gateway. Go ahead and start the integration, and I'll confirm the details with our team after this call.", 'over'], ["It's all on our website. The docs and the FAQ cover the compliance side, so your team can read those first and come back to us with whatever is still missing.", 'dump']],
+      chk: 'never improvise regulatory status.' },
+    { who: 'Engineer', q: 'Prove the 95% before we switch.',
+      c: [["Don't take our number. Get Intent, with charge attempts expanded, returns every attempt and failure, so two weeks on one country's traffic gives you your own data. Let's agree the metric first: per order, same card mix.", 'right'], ['Our routing and local acquiring get most merchants to 95% inside the first month, so you can plan the pilot on that number. If it helps, I can put the 95% in the proposal so you have it in writing.', 'over'], ["Every merchant is different, so I can't really say what you would see. It depends on your card mix and your countries. Maybe start the integration, and we can look at the numbers together after go-live.", 'cave']],
+      chk: 'agree the metric, let their data prove it.' },
+    { who: 'Founder', q: "Stripe won't take us. Should we set up a US entity?",
+      c: [['Before you spend months on that: we collect globally without a foreign entity, cards plus 45+ local methods and a USD account for wires. Which three markets matter most?', 'right'], ["Yes, set one up alongside us, and we'll handle the tax structuring for you. Our team can walk your CA through the paperwork, so you don't lose any time on it.", 'over'], ["That's one for your CA. We only handle the payments side, so once you have decided on the entity, come back to us and we'll see what we can set up for you.", 'dump']],
+      chk: 'no tax advice; map markets to methods.' },
+    { who: 'Product', q: 'Will Apple Pay lift our conversion?',
+      c: [['What share of your paying users are on iPhone and Safari, and in which countries? Apple Pay is 3.9% plus 35 cents with us, so we test it in the pilot and let the numbers decide.', 'right'], ["Yes, expect a big jump. Wallets convert better than cards everywhere, so switch Apple Pay on for every market on day one and you'll see the lift inside the first week.", 'over'], ["It depends on your users. Here's our pricing page with the Apple Pay rate, and the docs have the setup steps, so your product team can work out whether it is worth it for your markets.", 'dump']],
+      chk: 'no lift before the pilot.' }
+  ],
+  TURNS: [
+    ['Buyer', 'Your card rate is higher than what we pay today. Can you come down?'],
+    ['Us', "We can talk about rate. First, what share of last month's international orders completed, per order rather than per attempt? Retries inflate failures."],
+    ['Buyer', 'About 70% per order, I think. Average ticket is around $20, and we pay 3% flat.'],
+    ['Us', 'Then compare what lands in INR after fees and FX, not the headline rate. At $20 and 3% on both sides, the whole gap is our fixed 35 cents, 1.75 points on the ticket. At 70% today, we pay for ourselves once success crosses 71.3%, and every point above that is money you are not collecting now.'],
+    ['Buyer', "And if you don't get there?"],
+    ['Us', "Then you switch it back. The ask today isn't a rate. It's two weeks: your engineer builds in our sandbox, then a fixed share of one country's traffic runs through us alongside your gateway, on the same card mix. If our success doesn't beat yours by more than 1.3 points, the 71.3% against your 70%, you've spent two weeks, not a migration."]
+  ]
+};
+
+var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var TAGS = { right: 'Right', over: 'Overpromise', cave: 'Caves', dump: 'Dumps the docs' };
+var CALC_KEYS = ['T', 's0', 'f0', 'c0', 'fx0', 'V'];
+var CALC_DEF = { T: '20', s0: '70', f0: '3', c0: '0', fx0: '0', V: '200,000', fxX: '0', g: '100' };
+var LOCK = '<svg class="xk-lock" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+var BOX_ON = '<svg class="xk-box" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1" y="1" width="14" height="14" rx="3" fill="currentColor"/><path d="M4.2 8.3l2.4 2.4 5-5.2" fill="none" stroke="var(--sheet)" stroke-width="2"/></svg>';
+var BOX_OFF = '<svg class="xk-box" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1.75" y="1.75" width="12.5" height="12.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function inArr(a, v) { return a.indexOf(v) > -1; }
+var ALL = DATA.CARDS.concat(DATA.LOCKED);
+function card(id) { for (var i = 0; i < ALL.length; i++) if (ALL[i].id === id) return ALL[i]; return null; }
+function isLocked(c) { return c && c.id.charAt(0) === 'L'; }
+function seatOf(id) { for (var i = 0; i < DATA.SEATS.length; i++) if (DATA.SEATS[i].id === id) return DATA.SEATS[i]; return null; }
+function seg() { for (var i = 0; i < DATA.SEGMENTS.length; i++) if (DATA.SEGMENTS[i].id === S.segment) return DATA.SEGMENTS[i]; return null; }
+function segName() { var g = seg(); return g ? g.name : 'no segment picked'; }
+function today() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+function fmtDate(d) { return d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear(); }
+function reduced() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+/* EDF countdown: a month's invoices are due 30 days after month end. Shows the nearest deadline still open (October 2026 before the rule starts). */
+function edfDue(f) { return new Date(f.getFullYear(), f.getMonth() + 1, 30); }
+function edf(now) {
+  var t = now || today(), start = new Date(2026, 9, 1), pick = null;
+  if (t < start) pick = start;
+  for (var k = 2; k >= 0 && !pick; k--) { var f = new Date(t.getFullYear(), t.getMonth() - k, 1); if (f >= start && edfDue(f) >= t) pick = f; }
+  var due = edfDue(pick), m = MONTH[pick.getMonth()];
+  var n = Math.round((due - t) / 86400000);
+  return { month: m, due: fmtDate(due), n: n, text: 'Invoices raised in ' + m + ': EDF due by ' + fmtDate(due) + ' (' + (n === 0 ? 'today)' : n + (n === 1 ? ' day)' : ' days)')) };
+}
+
+/* ---------- state ---------- */
+var S, UI = { mode: 'before', ask: { card: null, mode: 'draft' }, strip: null };
+function newDrill() {
+  return { i: 0, picks: [], order: DATA.DRILL.map(function () {
+    var a = [0, 1, 2];
+    for (var k = a.length - 1; k > 0; k--) { var j = Math.floor(Math.random() * (k + 1)); var x = a[k]; a[k] = a[j]; a[j] = x; }
+    return a;
+  }) };
+}
+function fresh() {
+  S = { segment: null, seatsTicked: [], cardsOpened: [], asksUsed: [], notPromised: [], nextStep: '', lockedOpened: [] };
+  UI.openCard = null; UI.callOpen = false; UI.drill = newDrill(); UI.edits = {}; UI.gen = {};
+  UI.calc = {}; for (var k in CALC_DEF) UI.calc[k] = CALC_DEF[k];
+}
+fresh();
+
+function tickSeat(id) {
+  if (!inArr(S.seatsTicked, id)) S.seatsTicked.push(id);
+  S.seatsTicked = DATA.SEATS.map(function (s) { return s.id; }).filter(function (x) { return inArr(S.seatsTicked, x); });
+}
+function record(c) {
+  if (!inArr(S.cardsOpened, c.id)) S.cardsOpened.push(c.id);
+  if (isLocked(c)) { if (!inArr(S.lockedOpened, c.id)) S.lockedOpened.push(c.id); return; }
+  if (c.ask && c.ask[0] && !inArr(S.asksUsed, c.ask[0])) S.asksUsed.push(c.ask[0]);
+  c.not.forEach(function (n) {
+    if (!S.notPromised.some(function (x) { return x.t === n.t; })) S.notPromised.push({ t: n.t, g: n.g || '', card: c.id, seg: segName() });
+  });
+  if (c.next) S.nextStep = c.next;
+}
+
+/* ---------- panes and routing ---------- */
+function setHash(h) { try { history.replaceState(null, '', location.pathname + location.search + h); } catch (e) {} }
+function showPane(which, o) {
+  o = o || {};
+  var story = which === 'story';
+  $('#pStory').hidden = !story; $('#pGl').hidden = story;
+  $('#tStory').setAttribute('aria-selected', story ? 'true' : 'false');
+  $('#tGl').setAttribute('aria-selected', story ? 'false' : 'true');
+  $('#tStory').tabIndex = story ? 0 : -1; $('#tGl').tabIndex = story ? -1 : 0;
+  if (!o.keepHash) setHash(story ? '' : '#kit');
+  if (!story) render();
+  if (!o.noScroll) window.scrollTo(0, 0);
+}
+function route() {
+  var h = decodeURIComponent((location.hash || '').slice(1));
+  if (h === 'kit') { showPane('gl', { keepHash: true }); }
+  else if (h === 'drill') { showPane('gl', { keepHash: true }); setMode('drill'); }
+  else if (/^card-[A-Z][0-9]$/.test(h) && card(h.slice(5))) { showPane('gl', { keepHash: true }); openCard(h.slice(5)); }
+  else if (h === '') { showPane('story', { keepHash: true, noScroll: true }); }
+}
+
+function setMode(m) {
+  UI.mode = m;
+  $$('[data-act="mode"]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === m ? 'true' : 'false'); });
+  ['before', 'during', 'after', 'drill'].forEach(function (v) { $('#xk-v-' + v).hidden = v !== m; });
+  render();
+}
+function render() {
+  renderSess();
+  if (UI.mode === 'before') renderBefore();
+  else if (UI.mode === 'during') renderDuring();
+  else if (UI.mode === 'after') renderAfter();
+  else renderDrill();
+}
+function renderSess() {
+  $('#xk-sess').textContent = 'Session: ' + (seg() ? seg().name : 'no buyer picked') + ' | ' + S.seatsTicked.length + (S.seatsTicked.length === 1 ? ' seat' : ' seats') + ' | ' + S.cardsOpened.length + (S.cardsOpened.length === 1 ? ' card' : ' cards');
+}
+
+/* ---------- BEFORE ---------- */
+function cardBtn(id, cls) {
+  var c = card(id), lk = isLocked(c);
+  return '<button type="button" class="xk-line' + (lk ? ' is-locked' : '') + (cls || '') + '" data-act="card" data-k="' + id + '"' +
+    (UI.mode === 'during' ? ' aria-controls="xk-cardpanel" aria-expanded="' + (UI.openCard === id ? 'true' : 'false') + '"' : '') + '>' +
+    '<span class="xk-line-id">' + id + '</span><span class="xk-line-t">"' + esc(c.q) + '"' +
+    (lk ? '<span class="xk-lockl">' + LOCK + 'Only the founding team can answer this today</span>' : '') + '</span></button>';
+}
+function renderBefore() {
+  var e = edf(), g = seg();
+  var h = '<p class="xk-lead"><b>Who, and why now.</b> Pick the buyer type. The brief takes a minute to read before the call.</p><div class="xk-segs" role="group" aria-label="Buyer type">';
+  DATA.SEGMENTS.forEach(function (s) {
+    h += '<button type="button" class="xk-seg" aria-pressed="' + (S.segment === s.id ? 'true' : 'false') + '" data-act="seg" data-k="' + s.id + '">' + esc(s.name) +
+      (s.edf ? '<small>EDF due ' + (e.n === 0 ? 'today' : 'in ' + e.n + (e.n === 1 ? ' day' : ' days')) + '</small>' : '') + '</button>';
+  });
+  h += '</div><div class="xk-brief" aria-live="polite">';
+  if (!g) {
+    h += '<p class="xk-brief-empty">Pick a buyer type to see why now, the fit check, and what to read first.</p>';
+  } else {
+    h += '<div class="xk-brief-row"><p class="xk-k">Why now</p><div><p>' + esc(g.why) + '</p><p class="xk-spot">How an SDR spots it: ' + esc(g.spot) + '</p>' +
+      (g.edf ? '<p class="xk-count">' + esc(e.text) + '</p>' : '') + '</div></div>';
+    h += '<div class="xk-brief-row"><p class="xk-k">Fit check <em>our read</em></p><p>Which entity bills their customers abroad? If a foreign entity does, it can still be ours: our pricing page lists a 1% payout fee for payouts outside India, and multi entity global settlements under Enterprise. It goes to the Head of Sales.</p></div>';
+    h += '<div class="xk-brief-row"><p class="xk-k">Our guess <em>confirm on the call</em></p><p>' + esc(g.guess) + '</p></div>';
+    h += '<div class="xk-brief-row"><p class="xk-k">Seats likely on the relay</p><div><div class="xk-pills">' +
+      g.seats.map(function (id) { return '<span class="xk-pill">' + esc(seatOf(id).name) + '</span>'; }).join('') +
+      '</div><p class="xk-spot" style="margin-top:6px">These are marked "likely" in the During strip.</p></div></div>';
+    h += '<div class="xk-brief-row"><p class="xk-k">Read first</p><div class="xk-readfirst">' + g.read.map(function (id) { return cardBtn(id); }).join('') + '</div></div>';
+    h += '<div class="xk-brief-row"><p class="xk-k">Extra question</p><div><p>' + esc(g.extra) + '</p><p class="xk-spot">Added to Ask first on every card while ' + esc(g.name) + ' is picked.</p></div></div>';
+  }
+  h += '</div><p class="xk-route"><b>Routing.</b> Listed, Series D or E, or likely above $750K a month: the Head of Sales owns it and a founder joins once, at the exec step. Everything else: the SDR fit-checks within a working day, and the AE makes the first touch.</p>';
+  $('#xk-v-before').innerHTML = h;
+}
+
+/* ---------- DURING ---------- */
+function links(keys) {
+  return keys.map(function (k) { var l = DATA.LINKS[k]; return '<a class="xk-send" href="' + l[1] + '" target="_blank" rel="noopener">' + esc(l[0]) + '</a>'; }).join('');
+}
+function sendRow(c) {
+  return '<div class="xk-row">' + c.send.map(function (s) { return '<div class="xk-sendrow"><p class="xk-k">Send to ' + esc(s[0]) + '</p><p class="xk-sends">' + links(s[1]) + '</p></div>'; }).join('') + '</div>';
+}
+function renderCard(id) {
+  var c = card(id); if (!c) return '';
+  var st = seatOf(c.seat), g = seg(), h;
+  var nx = card(c.ns), nxSeat = seatOf(nx.seat);
+  var nextBtn = '<button type="button" class="xk-nextbtn" data-act="card" data-k="' + nx.id + '"><span>' + (nx.seat === c.seat ? 'Next line: ' : 'Next seat: ') + esc(nxSeat.name) + ', ' + nx.id + '</span>"' + esc(nx.q) + '"</button>';
+  if (isLocked(c)) {
+    h = '<article class="xk-card is-locked" aria-labelledby="xk-card-h"><p class="xk-card-k">' + c.id + ' | ' + esc(st.name) + '</p>' +
+      '<p class="xk-lockl">' + LOCK + 'Only the founding team can answer this today</p>' +
+      '<h3 id="xk-card-h" tabindex="-1">"' + esc(c.q) + '"</h3>' +
+      '<div class="xk-row"><p class="xk-k">' + esc(c.mk) + '</p><p>' + esc(c.mv) + '</p>' + (c.mtag ? '<span class="xk-tag">' + esc(c.mtag) + '</span>' : '') + '</div>' +
+      (c.send ? sendRow(c) : '') +
+      '<div class="xk-row"><p class="xk-k">Needed from the founding team</p><p>' + esc(c.need) + '</p>' +
+      '<p class="xk-fill"><button type="button" class="xk-inline" data-act="fill" data-k="' + c.id + '">Fill this one with me</button></p></div>' +
+      nextBtn + '</article>';
+    return h;
+  }
+  h = '<article class="xk-card" aria-labelledby="xk-card-h"><p class="xk-card-k">' + c.id + ' | ' + esc(st.name) + '</p><h3 id="xk-card-h" tabindex="-1">"' + esc(c.q) + '"</h3>';
+  if (c.hides) h += '<div class="xk-row"><p class="xk-k">Usually hides</p><p>' + esc(c.hides) + '</p><span class="xk-tag">' + esc(c.hidesTag) + '</span></div>';
+  h += '<div class="xk-row"><p class="xk-k">Ask first</p><ol>' + c.ask.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') +
+    (g ? '<li>' + esc(g.extra) + '<span class="xk-for">for ' + esc(g.name) + '</span></li>' : '') + '</ol></div>';
+  h += '<div class="xk-row"><p class="xk-k">The answer</p>' + (c.ans.length > 1 ? '<ul>' + c.ans.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>' : '<p>' + esc(c.ans[0]) + '</p>');
+  if (c.inlock) h += '<p class="xk-inlock">' + LOCK + '<span>' + esc(c.inlock) + '</span></p>';
+  if (c.edf) h += '<p class="xk-count">' + esc(edf().text) + '</p>';
+  if (c.calc) h += calcHTML();
+  h += '</div>';
+  h += '<div class="xk-row xk-stoprow"><p class="xk-k">Not on this call</p><ul>' + c.not.map(function (n) { return '<li>' + esc(n.t + (n.n ? '. ' + n.n : '')) + '</li>'; }).join('') + '</ul>' +
+    (c.notNote ? '<p style="margin-top:6px">' + esc(c.notNote) + '</p>' : '') + '</div>';
+  if (c.next) h += '<div class="xk-row"><p class="xk-k">Next step</p><p>' + esc(c.next) + '</p></div>';
+  if (c.send) h += sendRow(c);
+  h += nextBtn + '</article>';
+  return h;
+}
+function calcHTML() {
+  var L = { T: 'Average ticket, $', s0: 'Their success today, per order, %', f0: 'Their fee, %', c0: 'Their fixed fee, $', fx0: 'Their FX markup, %', V: 'Monthly international orders attempted, $' };
+  var h = '<div class="xk-calc" id="xk-calc"><p class="xk-calc-k">Break-even. Example, replace with theirs</p><div class="xk-calc-grid">';
+  CALC_KEYS.forEach(function (k) {
+    h += '<label class="xk-field"><span>' + L[k] + '</span><input type="text" inputmode="decimal" autocomplete="off" maxlength="12" data-calc="' + k + '" value="' + esc(UI.calc[k]) + '"></label>';
+  });
+  h += '</div><p class="xk-us"><b>Us, at list:</b> 3% + $0.35 a transaction.</p>' +
+    '<div class="xk-calc-grid"><div><label class="xk-field"><span>Our FX spread, %, optional</span><input type="text" inputmode="decimal" autocomplete="off" maxlength="12" data-calc="fxX" value="' + esc(UI.calc.fxX) + '"></label>' +
+    '<p class="xk-fxnote">Our FX spread is unconfirmed: the fee schedule says AD1 banks at bank rates, get it in writing before quoting landed INR.</p></div>' +
+    '<div><label class="xk-field"><span>Their gross margin on an order, %, optional</span><input type="text" inputmode="decimal" autocomplete="off" maxlength="12" data-calc="g" value="' + esc(UI.calc.g) + '"></label>' +
+    '<p class="xk-caveat">Margin: leave 100 where a recovered order is worth its full ticket (SaaS, EdTech). Lower it for travel or goods, where it is worth its margin.</p></div></div>' +
+    '<div class="xk-out" aria-live="polite"><p class="xk-banner" id="xk-banner" hidden>Enterprise range: volume pricing applies, list is the ceiling.</p>' +
+    '<p class="xk-out-be" id="xk-be"></p><p class="xk-out-pp" id="xk-pp"></p>' +
+    '<p class="xk-caveat">Any lift is a ceiling, not a promise: some failed orders come back through another method. The pilot measures it.</p></div>' +
+    '<p style="margin-top:10px"><button type="button" class="xk-textbtn" data-act="call" aria-expanded="' + (UI.callOpen ? 'true' : 'false') + '" aria-controls="xk-turns">See it run as a call</button></p>' +
+    '<div class="xk-turns" id="xk-turns"' + (UI.callOpen ? '' : ' hidden') + '>' +
+    DATA.TURNS.map(function (t) { return '<div class="xk-turn' + (t[0] === 'Us' ? ' is-us' : '') + '"><span class="xk-turn-who">' + t[0] + '</span><p>' + esc(t[1]) + '</p></div>'; }).join('') +
+    '</div></div>';
+  return h;
+}
+function num(s) {
+  s = String(s == null ? '' : s).replace(/[,$%]/g, '').trim();
+  if (s === '' || !/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
+  var n = parseFloat(s); return isFinite(n) ? n : NaN;
+}
+function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+/* be = s0 * (T*(g - f0 - fx0) - c0) / (T*(g - 0.03 - fxX) - 0.35), with g = their gross margin (1 by default) */
+function calcResult(c) {
+  var v = {}, blank = false, bad = false;
+  CALC_KEYS.forEach(function (k) { if (String(c[k] == null ? '' : c[k]).trim() === '') blank = true; v[k] = num(c[k]); if (isNaN(v[k])) bad = true; });
+  [['fxX', 0], ['g', 100]].forEach(function (o) { var s = String(c[o[0]] == null ? '' : c[o[0]]).trim(); v[o[0]] = s === '' ? o[1] : num(s); if (isNaN(v[o[0]])) bad = true; });
+  if (blank) return { kind: 'fill' };
+  if (bad) return { kind: 'nan' };
+  if (v.s0 <= 0 || v.s0 > 100) return { kind: 'range', v: v };
+  if (v.T < 0 || v.V < 0 || v.c0 < 0 || v.f0 < 0 || v.f0 > 100 || v.fx0 < 0 || v.fx0 > 100 || v.fxX < 0 || v.fxX > 100 || v.g <= 0 || v.g > 100) return { kind: 'pct', v: v };
+  var ent = v.V >= 750000, g = v.g / 100;
+  var usNet = v.T * (g - 0.03 - v.fxX / 100) - 0.35;
+  var themNet = v.T * (g - v.f0 / 100 - v.fx0 / 100) - v.c0;
+  if (usNet <= 0) return { kind: 'nofit', ent: ent, v: v };
+  if (themNet <= 0) return { kind: 'themneg', ent: ent, v: v };
+  var be = v.s0 * themNet / usNet;
+  var pp = (v.V / v.T) * 0.01 * usNet;
+  if (be > 100) return { kind: 'over', be: be, ent: ent, v: v };
+  return { kind: be <= v.s0 ? 'cheaper' : 'ok', be: be, pp: pp, ent: ent, v: v };
+}
+function updateCalc() {
+  var out = $('#xk-be'); if (!out) return;
+  var r = calcResult(UI.calc), pp = $('#xk-pp');
+  $('#xk-banner').hidden = !r.ent;
+  pp.hidden = !(r.kind === 'ok' || r.kind === 'cheaper');
+  if (r.kind === 'fill') out.textContent = 'Fill in all six.';
+  else if (r.kind === 'nan') out.textContent = 'Numbers only, in every field.';
+  else if (r.kind === 'range') out.textContent = 'Success today is a share of orders, above 0 and up to 100.';
+  else if (r.kind === 'pct') out.textContent = 'Fees, FX and margin are percentages from 0 to 100, and amounts cannot be negative.';
+  else if (r.kind === 'nofit') out.textContent = r.v.g < 100 ? 'Our fees are larger than what this order earns at this margin. Not a fit at this ticket.' : 'Our fixed fee is larger than what this ticket nets. Not a fit at this ticket.';
+  else if (r.kind === 'themneg') out.textContent = 'At these numbers their gateway leaves them nothing on an order. Check their fee, fixed fee and margin.';
+  else if (r.kind === 'over') out.textContent = 'Break-even comes out above 100%: at this ticket and their ' + r.v.s0 + '% today, our fixed fee cannot pay back on success alone. Talk volume, or park it.';
+  else if (r.kind === 'cheaper') out.innerHTML = 'Break-even is <b>' + r.be.toFixed(1) + '%</b>, at or below their ' + esc(String(r.v.s0)) + '% today. Cheaper at this ticket before any lift.';
+  else out.innerHTML = 'Pays for itself above <b>' + r.be.toFixed(1) + '%</b>.';
+  if (!pp.hidden) pp.innerHTML = 'Each point of success above that is about <b>' + money(r.pp) + '</b> a month.';
+}
+function renderDuring() {
+  var g = seg(), likely = g ? g.seats : [];
+  var h = '<p class="xk-lead"><b>The relay.</b> Tick who is on the line, then open what they just said.</p><div class="xk-seats" role="group" aria-label="Seats on the call">';
+  DATA.SEATS.forEach(function (s) {
+    var on = inArr(S.seatsTicked, s.id);
+    h += '<button type="button" class="xk-seat" aria-pressed="' + (on ? 'true' : 'false') + '" data-act="seat" data-k="' + s.id + '">' +
+      '<span class="xk-seat-n">' + (on ? BOX_ON : BOX_OFF) + '<span>' + esc(s.name) + (inArr(likely, s.id) ? '<span class="xk-likely">likely</span>' : '') + '</span></span>' +
+      '<span class="xk-seat-r">"' + esc(s.no) + '"</span></button>';
+  });
+  h += '</div><div class="xk-lines">';
+  if (!S.seatsTicked.length) h += '<p class="xk-hint">Tick a seat to list what that person usually says first.' + (g ? ' For ' + esc(g.name) + ', start with the seats marked likely.' : '') + '</p>';
+  S.seatsTicked.forEach(function (sid) {
+    var s = seatOf(sid);
+    h += '<div><p class="xk-k">' + esc(s.name) + ' | ' + esc(s.no) + '</p><div class="xk-linebtns">' + s.cards.map(function (id) { return cardBtn(id); }).join('') + '</div></div>';
+  });
+  h += '</div><div class="xk-cardpanel" id="xk-cardpanel">' + (UI.openCard ? renderCard(UI.openCard) : '') + '</div>';
+  h += '<div class="xk-index"><p class="xk-k">All 16 cards: 12 built, 4 locked</p><div class="xk-index-b">' + ALL.map(function (c) {
+    return '<button type="button" class="xk-ix' + (isLocked(c) ? ' is-locked' : '') + '" data-act="card" data-k="' + c.id + '" aria-current="' + (UI.openCard === c.id ? 'true' : 'false') + '" aria-label="' + c.id + ': ' + esc(c.q) + (isLocked(c) ? ' (locked)' : '') + '">' + (isLocked(c) ? LOCK : '') + c.id + '</button>';
+  }).join('') + '</div></div>';
+  $('#xk-v-during').innerHTML = h;
+  if (UI.openCard === 'F1') updateCalc();
+}
+function openCard(id) {
+  var c = card(id); if (!c) return;
+  tickSeat(c.seat);
+  UI.openCard = id; UI.callOpen = false;
+  record(c);
+  if (UI.mode !== 'during') setMode('during'); else render();
+  var hd = document.getElementById('xk-card-h');
+  if (hd) {
+    try { hd.focus({ preventScroll: true }); } catch (e) { hd.focus(); }
+    hd.closest('.xk-card').scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' });
+  }
+}
+
+/* ---------- AFTER ---------- */
+function joinOr(a, none) { return a.length ? a.join('; ') : none; }
+/* one line per promise: drop an item whose gap is already inside a wider item (P2's native SDK inside E1's) */
+function notShown() {
+  return S.notPromised.filter(function (n) {
+    if (!n.g) return true;
+    var core = n.g.replace(/^an? /, '');
+    return !S.notPromised.some(function (x) { return x !== n && x.g && x.g !== n.g && x.g.indexOf(core) > -1; });
+  });
+}
+function recapText() {
+  var g = seg();
+  var still = g ? g.seats.filter(function (x) { return !inArr(S.seatsTicked, x); }).map(function (x) { return seatOf(x).name; }) : [];
+  return [
+    'Call one | ' + segName() + ' | ' + fmtDate(today()),
+    'On the call: ' + joinOr(S.seatsTicked.map(function (x) { return seatOf(x).name; }), 'no seats ticked yet'),
+    'They said: ' + joinOr(S.cardsOpened.filter(function (id) { return !card(id).internal; }).map(function (id) { return '"' + card(id).q + '"'; }), 'no lines opened yet'),
+    'We asked: ' + (S.asksUsed.length ? S.asksUsed.join(' ') : 'nothing yet'),
+    'We did not promise: ' + joinOr(notShown().map(function (n) { return n.t; }), 'nothing yet'),
+    'Next step: ' + (S.nextStep || 'none yet'),
+    'Still open: ' + (g ? joinOr(still, 'every likely seat was on the call') : 'no segment picked') + '; founding-team answer needed: ' + joinOr(S.lockedOpened.map(function (id) { return id + ' "' + card(id).q + '"'; }), 'none')
+  ].join('\n');
+}
+function hasEP() { return S.cardsOpened.some(function (id) { return /^[EP]/.test(id); }); }
+function handoffText() {
+  var o = S.cardsOpened, paths = [], hooks = [];
+  o.forEach(function (id) { var c = card(id); if (c.path) paths.push(c.path); if (c.hooks) hooks.push(c.hooks); });
+  if (inArr(o, 'F2')) hooks.push('Payout Initiated, Payout Success');
+  var lane = 'Growth, unless above $750K a month, listed, or Series D or E';
+  var base = '____ per order';
+  if (inArr(o, 'F1')) {
+    var r = calcResult(UI.calc);
+    if (r.v && !isNaN(r.v.V)) lane = (r.v.V >= 750000 ? 'Enterprise' : 'Growth') + ' (from the F1 example volume)';
+    if (r.v && !isNaN(r.v.s0)) base = r.v.s0 + '% per order (F1 example input, replace with theirs)';
+  }
+  return [
+    'Engineering handoff | ' + fmtDate(today()),
+    'Merchant: ____ | Lane: ' + lane,
+    'Integration path: ' + joinOr(paths, '____'),
+    'Countries and methods: ____',
+    'Replace or alongside: ____',
+    'Webhooks needed: ' + joinOr(hooks, '____'),
+    'Success baseline and basis: ' + base,
+    'Sandbox requested: ____ (date)',
+    'NOT PROMISED: ' + notShown().map(function (n) { return n.t; }).join('; '),
+    'Their engineer: ____'
+  ].join('\n');
+}
+function productText() {
+  var seen = [], out = [];
+  notShown().forEach(function (n) { if (n.g && !inArr(seen, n.g)) { seen.push(n.g); out.push('Buyer pushed on: ' + n.g + ' (' + n.seg + ')'); } });
+  return out.join('\n');
+}
+function notPromisedOk(txt) {
+  var m = /^NOT PROMISED:[ \t]*(.*)$/m.exec(txt);
+  if (!m) return false;
+  var v = m[1].replace(/_+/g, '').trim();
+  return v.length > 0;
+}
+function kept(k, gen) { UI.gen[k] = gen; var e = UI.edits[k]; return e && e.base === gen ? e.val : gen; }
+function renderAfter() {
+  var ep = hasEP(), prod = kept('product', productText());
+  var h = '<p class="xk-lead"><b>Recap, handoff, product.</b> Built from this session. Edit any of it, then copy.</p><div class="xk-after">';
+  h += '<div class="xk-blk"><h3>1. CRM recap</h3><p class="xk-blk-d">The same format every time, so a Head of Sales can read 50 in one sitting.</p>' +
+    '<textarea id="xk-ta-recap" rows="8" aria-label="CRM recap" spellcheck="false">' + esc(kept('recap', recapText())) + '</textarea>' +
+    '<div class="xk-blk-foot"><button type="button" class="xk-copy" data-act="copy" data-k="recap">Copy</button></div></div>';
+  h += '<div class="xk-blk"><h3>2. Engineering handoff</h3>';
+  if (ep) {
+    h += '<p class="xk-blk-d">Goes to engineering before any technical call. NOT PROMISED is mandatory.</p>' +
+      '<textarea id="xk-ta-handoff" rows="10" aria-label="Engineering handoff" spellcheck="false">' + esc(kept('handoff', handoffText())) + '</textarea>' +
+      '<div class="xk-blk-foot"><button type="button" class="xk-copy" id="xk-copy-handoff" data-act="copy" data-k="handoff">Copy</button>' +
+      '<span class="xk-warn" id="xk-warn-handoff" hidden>The handoff cannot go out without a Not promised line.</span></div>';
+  } else {
+    h += '<p class="xk-blk-d">Appears once an engineer or product card (E1 to E5, P1, P2) is opened in During.</p>';
+  }
+  h += '</div>';
+  h += '<div class="xk-blk"><h3>3. For product</h3><p class="xk-blk-d">Keep only what the buyer raised. Goes to product every Friday.</p>' +
+    '<textarea id="xk-ta-product" rows="4" aria-label="For product" spellcheck="false" placeholder="Nothing yet. Open E1, P1 or P2 and the lines a buyer may push on land here.">' + esc(prod) + '</textarea>' +
+    '<div class="xk-blk-foot"><button type="button" class="xk-copy" id="xk-copy-product" data-act="copy" data-k="product"' + (prod.trim() ? '' : ' disabled') + '>Copy</button></div></div>';
+  h += '</div>';
+  $('#xk-v-after').innerHTML = h;
+  $$('#xk-v-after textarea').forEach(function (ta) { if (ta.scrollHeight > ta.clientHeight) ta.style.height = (ta.scrollHeight + 4) + 'px'; });
+  checkHandoff();
+}
+function checkHandoff() {
+  var ta = $('#xk-ta-handoff'); if (!ta) return;
+  var ok = notPromisedOk(ta.value);
+  $('#xk-copy-handoff').disabled = !ok;
+  $('#xk-warn-handoff').hidden = ok;
+}
+
+/* ---------- copy ---------- */
+function fallbackCopy(text, ta) {
+  var tmp = null, ok = false;
+  if (!ta) {
+    tmp = ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.left = '0'; ta.style.width = '1px'; ta.style.height = '1px'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+  }
+  try { ta.focus({ preventScroll: true }); } catch (e) {}
+  ta.select(); try { ta.setSelectionRange(0, ta.value.length); } catch (e) {}
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  if (tmp) document.body.removeChild(tmp);
+  return ok;
+}
+function copyText(text, btn, ta, stat) {
+  var label = btn.getAttribute('data-label') || btn.textContent;
+  btn.setAttribute('data-label', label);
+  var done = function (ok) {
+    btn.textContent = ok ? 'Copied' : 'Select and copy';
+    if (stat) stat.textContent = ok ? 'Copied. Nothing was sent.' : 'Copy was blocked here. Select the text and copy it.';
+    if (document.activeElement === document.body) { try { btn.focus({ preventScroll: true }); } catch (e) {} }
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { btn.textContent = label; if (stat) stat.textContent = ''; }, 2000);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallbackCopy(text, ta)); });
+  } else {
+    done(fallbackCopy(text, ta));
+  }
+}
+
+/* ---------- DRILL ---------- */
+function renderDrill() {
+  var d = UI.drill, n = DATA.DRILL.length, h = '<p class="xk-lead"><b>The bar.</b> Six buyer lines. Pick what you would say. 5 of 6 gets you to the live round.</p><div class="xk-drill" aria-live="polite">';
+  if (d.i >= n) {
+    var score = d.picks.filter(function (p, i) { return DATA.DRILL[i].c[p][1] === 'right'; }).length;
+    h += '<p class="xk-k">Done</p><p class="xk-score" id="xk-score" tabindex="-1">' + score + ' of 6. ' + (score >= 5 ? 'Through to the live round.' : 'Below the bar.') + '</p>' +
+      '<p class="xk-score-d">' + (score >= 5 ? "A mock call one, with one of our engineers as the buyer's engineer, scored on the same six checks. Pass both to go solo." : 'Shadow two more calls and retake.') + '</p>' +
+      '<p class="xk-k" style="margin-top:16px">What the drill checks</p><ol class="xk-checks">' +
+      DATA.DRILL.map(function (q) { return '<li><b>' + esc(q.who) + ':</b> ' + esc(q.chk) + '</li>'; }).join('') + '</ol>' +
+      '<button type="button" class="xk-btn" data-act="dretake">Retake the drill</button>';
+  } else {
+    var q = DATA.DRILL[d.i], picked = d.picks[d.i];
+    h += '<p class="xk-k">Question ' + (d.i + 1) + ' of 6 | ' + esc(q.who) + '</p><p class="xk-dq">"' + esc(q.q) + '"</p><div class="xk-choices">';
+    d.order[d.i].forEach(function (ci) {
+      var ch = q.c[ci], cls = '', tag = '';
+      if (picked !== undefined) {
+        if (ch[1] === 'right') { cls = ' is-right'; tag = '<span class="xk-choice-tag">' + (ci === picked ? 'Your pick. ' : '') + 'Right</span>'; }
+        else if (ci === picked) { cls = ' is-wrong'; tag = '<span class="xk-choice-tag">Your pick. ' + TAGS[ch[1]] + '</span>'; }
+      }
+      h += '<button type="button" class="xk-choice' + cls + '" data-act="dpick" data-k="' + ci + '"' + (picked !== undefined ? ' disabled' : '') + '>' + esc(ch[0]) + tag + '</button>';
+    });
+    h += '</div>';
+    if (picked !== undefined) {
+      var kind = q.c[picked][1];
+      h += '<p class="xk-fb ' + (kind === 'right' ? 'is-right' : 'is-wrong') + '">' + TAGS[kind] + ': ' + esc(q.chk) + '</p>' +
+        '<button type="button" class="xk-btn" id="xk-dnext" data-act="dnext">' + (d.i + 1 < n ? 'Next question' : 'See my score') + '</button>';
+    }
+  }
+  h += '</div>';
+  $('#xk-v-drill').innerHTML = h;
+}
+
+/* ---------- ask ---------- */
+function replyText() { return UI.ask.card ? 'Ketan, ' + UI.ask.card + '. ' + (UI.ask.mode === '20' ? '20 minutes works this week.' : 'Send me the draft.') : ''; }
+function syncAsk() {
+  $$('[data-act="askcard"]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === UI.ask.card ? 'true' : 'false'); });
+  $$('[data-act="askmode"]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-k') === UI.ask.mode ? 'true' : 'false'); });
+  $('#xk-reply').textContent = UI.ask.card ? replyText() : 'Pick a card to see your reply.';
+  $('#xk-askcopy').disabled = !UI.ask.card;
+}
+function fillWithMe(id) {
+  UI.ask.card = id; syncAsk();
+  showPane('story', { noScroll: true });
+  var chip = $('[data-act="askcard"][data-k="' + id + '"]');
+  $('#xk-ask').scrollIntoView({ block: 'start', behavior: 'auto' });
+  if (chip) { try { chip.focus({ preventScroll: true }); } catch (e) { chip.focus(); } }
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', function (e) {
+  var t = e.target.closest ? e.target.closest('[data-act]') : null;
+  if (!t || t.disabled) return;
+  var act = t.getAttribute('data-act'), k = t.getAttribute('data-k'), refocus = true;
+  switch (act) {
+    case 'tab': showPane(k, { noScroll: false }); refocus = false; break;
+    case 'openkit':
+      showPane('gl'); refocus = false;
+      var kh = $('#xk-kit-h'); try { kh.focus({ preventScroll: true }); } catch (x) { kh.focus(); }
+      break;
+    case 'mode': setMode(k); break;
+    case 'seg': S.segment = S.segment === k ? null : k; render(); break;
+    case 'seat':
+      if (inArr(S.seatsTicked, k)) {
+        S.seatsTicked = S.seatsTicked.filter(function (x) { return x !== k; });
+        if (UI.openCard && card(UI.openCard).seat === k) UI.openCard = null;
+      } else tickSeat(k);
+      render(); break;
+    case 'card':
+      if (!$('#pGl').hidden) { openCard(k); } else { showPane('gl', { keepHash: true, noScroll: true }); openCard(k); setHash('#card-' + k); }
+      refocus = false; break;
+    case 'fill': fillWithMe(k); refocus = false; break;
+    case 'call':
+      UI.callOpen = !UI.callOpen; t.setAttribute('aria-expanded', UI.callOpen ? 'true' : 'false');
+      $('#xk-turns').hidden = !UI.callOpen; refocus = false; break;
+    case 'copy':
+      var ta = $('#xk-ta-' + k); if (ta) copyText(ta.value, t, ta, null);
+      refocus = false; break;
+    case 'restart': fresh(); setMode('before'); refocus = false; break;
+    case 'dpick': if (UI.drill.picks[UI.drill.i] === undefined) { UI.drill.picks[UI.drill.i] = +k; renderDrill(); var nb = $('#xk-dnext'); if (nb) nb.focus(); } refocus = false; break;
+    case 'dnext':
+      UI.drill.i++; renderDrill(); refocus = false;
+      var f = $('#xk-score') || $('.xk-choice'); if (f) f.focus();
+      break;
+    case 'dretake': UI.drill = newDrill(); renderDrill(); refocus = false; var c1 = $('.xk-choice'); if (c1) c1.focus(); break;
+    case 'step':
+      var i = +k, was = UI.strip === i;
+      UI.strip = was ? null : i;
+      $$('.xk-step').forEach(function (b, j) {
+        var on = UI.strip === j, p = $('#xk-t' + j);
+        b.setAttribute('aria-expanded', on ? 'true' : 'false'); p.hidden = !on;
+        if (on && !p.firstChild) p.innerHTML = '<b>True by then</b>' + esc(b.getAttribute('data-t'));
+      });
+      refocus = false; break;
+    case 'askcard': UI.ask.card = k; syncAsk(); refocus = false; break;
+    case 'askmode': UI.ask.mode = k; syncAsk(); refocus = false; break;
+    case 'askcopy': copyText(replyText(), t, null, $('#xk-askstat')); refocus = false; break;
+  }
+  if (refocus) {
+    var n = $('[data-act="' + act + '"][data-k="' + k + '"]');
+    if (n && n !== document.activeElement) { try { n.focus({ preventScroll: true }); } catch (x) {} }
+  }
+});
+document.addEventListener('input', function (e) {
+  var t = e.target;
+  if (t.getAttribute && t.getAttribute('data-calc')) { UI.calc[t.getAttribute('data-calc')] = t.value; updateCalc(); }
+  else if (t.id && t.id.indexOf('xk-ta-') === 0) {
+    var ek = t.id.slice(6); UI.edits[ek] = { base: UI.gen[ek], val: t.value };
+    if (ek === 'handoff') checkHandoff();
+    else if (ek === 'product') { var b = $('#xk-copy-product'); if (b) b.disabled = !t.value.trim(); }
+  }
+});
+$('.xk-tabs').addEventListener('keydown', function (e) {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Home' && e.key !== 'End') return;
+  e.preventDefault();
+  var toGl = e.key === 'End' || ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !$('#pStory').hidden);
+  showPane(toGl ? 'gl' : 'story', { noScroll: true });
+  (toGl ? $('#tGl') : $('#tStory')).focus();
+});
+window.addEventListener('hashchange', route);
+
+syncAsk();
+render();
+route();
+})();
+</script>
 </body>
 </html>
