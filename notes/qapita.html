@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Qapita Pulley Desk</title>
+<meta name="description" content="Ketan Sharma's working desk for Qapita's Pulley campaign: every conversation logged once, priced at Qapita's published US rates, and given its next date, through Carta's year two.">
+<meta property="og:title" content="Qapita Pulley Desk">
+<meta property="og:description" content="Every Pulley conversation given its next date, through Carta's year two in late 2027.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f5f3ee;
+  --sheet: #ffffff;
+  --ink: #17191f;
+  --soft: #565b66;
+  --faint: #8a8f99;
+  --rule: #dedad0;
+  --accent: #0b6b63;
+  --accent-ink: #ffffff;
+  --accent-wash: #dff0ed;
+  --band-a: #eeebe3;
+  --band-b: #f7f5f0;
+  --c-open: #1f56d6;
+  --c-won: #157f3b;
+  --c-carta: #b45309;
+  --c-other: #7a3fd1;
+  --c-sheet: #6b7280;
+  --w-open: #e5ecfc;
+  --w-won: #e1f3e7;
+  --w-carta: #fbeedd;
+  --w-other: #efe7fb;
+  --w-sheet: #eceef1;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1114;
+    --sheet: #171a1f;
+    --ink: #eceae4;
+    --soft: #a7abb4;
+    --faint: #7c818b;
+    --rule: #2b2f37;
+    --accent: #4fc3b6;
+    --accent-ink: #0b1513;
+    --accent-wash: #12302d;
+    --band-a: #1c2026;
+    --band-b: #14171b;
+    --c-open: #86a8ff;
+    --c-won: #5fcf86;
+    --c-carta: #f0a04b;
+    --c-other: #b892ff;
+    --c-sheet: #9aa1ad;
+    --w-open: #18223d;
+    --w-won: #14291c;
+    --w-carta: #33230f;
+    --w-other: #261c3a;
+    --w-sheet: #22262d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1114;
+  --sheet: #171a1f;
+  --ink: #eceae4;
+  --soft: #a7abb4;
+  --faint: #7c818b;
+  --rule: #2b2f37;
+  --accent: #4fc3b6;
+  --accent-ink: #0b1513;
+  --accent-wash: #12302d;
+  --band-a: #1c2026;
+  --band-b: #14171b;
+  --c-open: #86a8ff;
+  --c-won: #5fcf86;
+  --c-carta: #f0a04b;
+  --c-other: #b892ff;
+  --c-sheet: #9aa1ad;
+  --w-open: #18223d;
+  --w-won: #14291c;
+  --w-carta: #33230f;
+  --w-other: #261c3a;
+  --w-sheet: #22262d;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.55; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; line-height: 1.12; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+button, input, select { font: inherit; color: inherit; }
+:where(a, button, input, select, summary, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.k { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--soft); font-weight: 500; line-height: 1.5; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+/* top */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 0; }
+.theme { border: 1px solid var(--rule); background: var(--sheet); border-radius: 999px; padding: 4px 12px; font-size: 0.78rem; cursor: pointer; color: var(--soft); }
+
+/* hero */
+.hero { padding: 26px 0 8px; }
+.hero h1 { font-size: clamp(1.75rem, 5.2vw, 3rem); max-width: 22ch; margin-top: 10px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lede { margin-top: 16px; max-width: 64ch; color: var(--soft); font-size: 1.04rem; }
+.lede b { color: var(--ink); font-weight: 600; }
+
+/* clocks */
+.clocks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 24px 0 8px; }
+.clock { background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 12px 11px; min-width: 0; }
+.clock .n { font-family: var(--font-display); font-size: clamp(1.9rem, 7vw, 2.5rem); line-height: 1; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.clock .n small { font-family: var(--font-body); font-size: 0.82rem; color: var(--soft); font-weight: 500; margin-left: 4px; }
+.clock .d { margin-top: 6px; font-size: 0.84rem; color: var(--soft); }
+.clock.last .n { color: var(--accent); }
+@media (min-width: 760px) { .clocks { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* sections */
+.sec { margin-top: 34px; }
+.sec > h2 { font-size: clamp(1.35rem, 3.6vw, 1.85rem); }
+.sec > .sub { margin-top: 8px; color: var(--soft); max-width: 66ch; }
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-radius: 14px; padding: 14px; margin-top: 14px; }
+
+/* window chips */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 5px 11px 5px 6px; font-size: 0.82rem; cursor: pointer; color: var(--ink); }
+.chip .num { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--band-a); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-wash); }
+.chip[aria-pressed="true"] .num { background: var(--accent); color: var(--accent-ink); }
+
+/* timeline */
+.tl { margin-top: 12px; position: relative; }
+.tl svg { display: block; width: 100%; height: auto; touch-action: pan-y; cursor: crosshair; user-select: none; -webkit-user-select: none; }
+.tl .band-0 { fill: var(--band-a); }
+.tl .band-1 { fill: var(--band-b); }
+.tl .band-sel { fill: var(--accent-wash); }
+.tl .band-top { stroke: var(--accent); stroke-width: 2; }
+.tl .wn circle { fill: var(--sheet); stroke: var(--rule); }
+.tl .wn.on circle { fill: var(--accent); stroke: var(--accent); }
+.tl .wn text { font-family: var(--font-mono); font-size: 10px; fill: var(--soft); }
+.tl .wn.on text { fill: var(--accent-ink); }
+.tl .axis { stroke: var(--soft); stroke-width: 1.2; }
+.tl .axis-c { stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 2 3; }
+.tl .tick { stroke: var(--faint); stroke-width: 1; }
+.tl .ml { font-family: var(--font-mono); font-size: 9.5px; fill: var(--soft); }
+.tl .yl { font-family: var(--font-mono); font-size: 9.5px; fill: var(--ink); font-weight: 500; }
+.tl .cmp { font-family: var(--font-body); font-size: 9.5px; fill: var(--faint); font-style: italic; }
+.tl .today { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; }
+.tl .today-l { font-family: var(--font-mono); font-size: 9px; fill: var(--ink); }
+.tl .scrub { stroke: var(--accent); stroke-width: 2; }
+.tl .knob { fill: var(--accent); stroke: var(--sheet); stroke-width: 2; }
+.tl .sq { stroke: var(--sheet); stroke-width: 1; cursor: pointer; }
+.tl .sq.sel { stroke: var(--ink); stroke-width: 2; }
+.sq-open { fill: var(--c-open); } .sq-won { fill: var(--c-won); } .sq-carta { fill: var(--c-carta); } .sq-other { fill: var(--c-other); } .sq-sheet { fill: var(--c-sheet); }
+.range { width: 100%; margin: 6px 0 0; accent-color: var(--accent); height: 28px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; font-size: 0.78rem; color: var(--soft); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+.legend i.sq-open { background: var(--c-open); } .legend i.sq-won { background: var(--c-won); } .legend i.sq-carta { background: var(--c-carta); } .legend i.sq-other { background: var(--c-other); } .legend i.sq-sheet { background: var(--c-sheet); }
+.legend i.dash { width: 14px; height: 0; border-top: 1.5px dashed var(--ink); border-radius: 0; }
+
+/* desk card */
+.card { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 16px; }
+.card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.card-head h3 { font-size: 1.3rem; }
+.card-head .when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--soft); }
+.count { margin-top: 6px; font-size: 0.88rem; color: var(--accent); font-weight: 600; }
+.dl { display: grid; gap: 10px; margin: 12px 0 0; }
+.dl div { display: grid; gap: 2px; }
+.dl dt { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--soft); }
+.dl dd { margin: 0; }
+.dl .line dd { font-family: var(--font-display); font-size: 1.08rem; line-height: 1.35; border-left: 3px solid var(--accent); padding-left: 10px; }
+.due h4 { margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--soft); font-weight: 500; }
+.due ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.due li { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; background: var(--paper); }
+.due li.hi { border-color: var(--ink); }
+.due li b { font-weight: 600; }
+.due li .m { color: var(--soft); }
+.due .none { color: var(--soft); font-size: 0.86rem; }
+@media (min-width: 860px) { .card { grid-template-columns: 1.35fr 1fr; align-items: start; } }
+
+/* ledger */
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tile { border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; background: var(--paper); min-width: 0; }
+.tile .v { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.1; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.tile .s { font-size: 0.8rem; color: var(--soft); margin-top: 3px; }
+.tile.hl .v { color: var(--accent); }
+@media (min-width: 760px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.rows { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "o x" "a a" "n n" "r p"; gap: 4px 12px; border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; background: var(--sheet); align-items: center; transition: box-shadow 0.25s; }
+.row.flash { box-shadow: 0 0 0 2px var(--accent); }
+.row .o { grid-area: o; }
+.row .a { grid-area: a; min-width: 0; }
+.row .a b { font-weight: 600; display: block; overflow-wrap: break-word; }
+.row .a span { font-size: 0.8rem; color: var(--soft); }
+.row .n { grid-area: n; font-size: 0.88rem; }
+.row .r { grid-area: r; font-size: 0.82rem; color: var(--soft); }
+.row .p { grid-area: p; font-family: var(--font-mono); font-size: 0.82rem; text-align: right; white-space: nowrap; }
+.row .p small { display: block; color: var(--soft); font-size: 0.7rem; }
+.row .x { grid-area: x; border: 0; background: none; color: var(--faint); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 4px 6px; border-radius: 6px; }
+.row .x:hover { color: var(--ink); background: var(--paper); }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; font-weight: 500; white-space: nowrap; }
+.t-open { background: var(--w-open); color: var(--c-open); }
+.t-won { background: var(--w-won); color: var(--c-won); }
+.t-carta { background: var(--w-carta); color: var(--c-carta); }
+.t-other { background: var(--w-other); color: var(--c-other); }
+.t-sheet { background: var(--w-sheet); color: var(--c-sheet); }
+.t-win { background: var(--accent); color: var(--accent-ink); }
+.ex { display: inline-block; white-space: nowrap; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500; color: var(--faint); margin-left: 8px; text-transform: uppercase; letter-spacing: 0.06em; vertical-align: 1px; }
+@media (min-width: 860px) {
+  .row { grid-template-columns: 92px minmax(0, 1.55fr) minmax(0, 1.45fr) minmax(0, 1.3fr) 108px 30px; grid-template-areas: "o a n r p x"; }
+}
+.more { margin-top: 10px; width: 100%; }
+.note { margin-top: 12px; font-size: 0.82rem; color: var(--soft); max-width: 78ch; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.btn { border: 1px solid var(--rule); background: var(--sheet); border-radius: 10px; padding: 8px 14px; cursor: pointer; font-size: 0.88rem; }
+.btn.pri { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+details.add { margin-top: 14px; border: 1px dashed var(--rule); border-radius: 12px; padding: 10px 12px; }
+details.add summary { cursor: pointer; font-weight: 600; }
+.form { display: grid; gap: 10px; margin-top: 12px; grid-template-columns: 1fr 1fr; }
+.form label { display: grid; gap: 4px; font-size: 0.8rem; color: var(--soft); min-width: 0; }
+.form .full { grid-column: 1 / -1; }
+.form input[type="text"], .form input[type="number"], .form select { width: 100%; border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; background: var(--paper); color: var(--ink); font-size: 1rem; min-height: 42px; }
+.form .ck { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 0.9rem; }
+.form .ck input { width: 18px; height: 18px; accent-color: var(--accent); }
+.form .err { color: var(--c-carta); font-size: 0.82rem; }
+@media (min-width: 760px) { .form { grid-template-columns: 2fr 1fr 1.4fr 1fr 1fr; align-items: end; } .form .full { grid-column: 1 / -1; } }
+
+/* rules */
+.rules { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: r; display: grid; gap: 10px; }
+.rules li { counter-increment: r; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+.rules li::before { content: counter(r); font-family: var(--font-display); font-size: 1.4rem; line-height: 1.1; color: var(--accent); }
+@media (min-width: 860px) { .rules { grid-template-columns: 1fr 1fr; gap: 14px 28px; } }
+
+/* me */
+.me { margin: 38px 0 0; padding: 18px; border-radius: 14px; background: var(--sheet); border: 1px solid var(--rule); }
+.me h2 { font-size: 1.3rem; }
+.me p { margin-top: 10px; max-width: 70ch; }
+.me .ask { font-family: var(--font-display); font-size: 1.18rem; line-height: 1.35; margin-top: 14px; }
+.me .sign { color: var(--soft); font-size: 0.9rem; }
+.foot { margin: 22px 0 40px; font-size: 0.78rem; color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="k">For Lakshman Gupta, Qapita</span>
+    <button class="theme" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="k">A working sales desk, built from Pulley's own shutdown FAQ</p>
+    <h1>Pulley hands Carta a file on every customer that opts in. <em>This desk writes Qapita's.</em></h1>
+    <p class="lede">Stakeholder count, plan, share classes, security types, subscription term: Pulley's FAQ says that is what it shares with Carta the moment a customer opts in, before anyone from Carta gets on a call. Qapita starts with none of it. Below is the desk I would set up and run for your US team: <b>every Pulley conversation logged once, priced at your published US rates, and given the next date that matters to it</b>, all the way to Carta's matched year running out in late 2027.</p>
+  </header>
+
+  <section class="clocks" aria-label="The dates that matter">
+    <div class="clock"><p class="k">Carta opt-in closes</p><p class="n" id="c1">&nbsp;</p><p class="d">30 Nov 2026</p></div>
+    <div class="clock"><p class="k">Pulley shuts down</p><p class="n" id="c2">&nbsp;</p><p class="d">8 Dec 2026</p></div>
+    <div class="clock"><p class="k">Pulley data access ends</p><p class="n" id="c3">&nbsp;</p><p class="d">31 Jan 2027</p></div>
+    <div class="clock last"><p class="k">Carta's matched year runs out</p><p class="n" id="c4">&nbsp;</p><p class="d">Sep to Dec 2027, a year after each signing</p></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-desk">
+    <h2 id="h-desk">One shutdown, five windows</h2>
+    <p class="sub">Drag from now to January 2028, or tap a window. The card shows what the desk does in that stretch. Each square is an account from the ledger below, sitting on the date that matters to it.</p>
+    <div class="panel">
+      <div class="chips" id="chips" role="group" aria-label="Windows"></div>
+      <div class="tl" id="tl"></div>
+      <label class="sr" for="range">Move through the dates</label>
+      <input class="range" id="range" type="range" min="0" max="1000" step="1" value="0">
+      <div class="legend" aria-hidden="true">
+        <span><i class="sq-open"></i>Open</span>
+        <span><i class="sq-won"></i>Won</span>
+        <span><i class="sq-carta"></i>Lost to Carta</span>
+        <span><i class="sq-other"></i>Moved elsewhere</span>
+        <span><i class="sq-sheet"></i>Spreadsheet or nothing</span>
+        <span><i class="dash"></i>Today</span>
+      </div>
+      <div class="card" id="card" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-ledger">
+    <h2 id="h-ledger">The ledger</h2>
+    <p class="sub">One row per Pulley conversation, written on the call. The desk computes the rest: the next date, when to re-open, and the price at your list.</p>
+    <div class="panel">
+      <div class="tiles" id="tiles"></div>
+      <ol class="rows" id="rows"></ol>
+      <button class="btn more" type="button" id="more" hidden></button>
+      <p class="note" id="exnote">These are example rows, not real accounts. Your team's own replace them. Anything added here stays in this browser only.</p>
+      <p class="note">List prices from your US pricing page as of 7 Oct 2026: Surge $1,600 a year for up to 40 stakeholders, then $40 each; Growth $3,000 for up to 50, then $60 each, with the 409A report included. Rows that use a 409A are priced on Growth, the rest on Surge, the first tier that lists migration support. Year one under your Pulley match can come in lower; list is what year two renews at.</p>
+      <details class="add" id="add">
+        <summary>Log a Pulley conversation</summary>
+        <p class="note">Your first row clears the examples.</p>
+        <form class="form" id="form" novalidate>
+          <label>Account<input type="text" id="f-d" maxlength="60" placeholder="Series A fintech, New York" autocomplete="off"></label>
+          <label>Stakeholders<input type="number" id="f-h" min="1" max="20000" inputmode="numeric" placeholder="45"></label>
+          <label>Where it stands
+            <select id="f-o">
+              <option value="open">Open, still deciding</option>
+              <option value="won">Won</option>
+              <option value="carta">Lost to Carta</option>
+              <option value="other">Moved elsewhere</option>
+              <option value="sheet">Spreadsheet or nothing</option>
+            </select>
+          </label>
+          <label id="f-ml"><span id="f-mlt">Month</span>
+            <select id="f-m"></select>
+          </label>
+          <label id="f-yl">Year
+            <select id="f-y"><option>2025</option><option selected>2026</option><option>2027</option></select>
+          </label>
+          <label class="ck full"><input type="checkbox" id="f-v" checked> Uses a 409A (price on Growth)</label>
+          <p class="err full" id="f-err" hidden></p>
+          <div class="full"><button class="btn pri" type="submit">Add to the ledger</button></div>
+        </form>
+      </details>
+      <div class="tools">
+        <button class="btn" type="button" id="reset">Reset to the example rows</button>
+        <button class="btn" type="button" id="clear">Clear the ledger</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-rules">
+    <h2 id="h-rules">How the desk runs</h2>
+    <ol class="rules">
+      <li><p>One record per Pulley conversation, written on the call, with the fields Pulley hands Carta at opt-in: stakeholders, plan, share classes, security types, subscription term.</p></li>
+      <li><p>No Pulley deal closes as lost without the month they signed elsewhere. A loss to Carta is a dated opportunity in late 2027, not a dead row.</p></li>
+      <li><p>Every row carries a next date. Monday's review covers only the rows due in the next 14 days, and each one leaves the meeting with a named owner.</p></li>
+      <li><p>Prices come off the published US page, never improvised on a call. Year two always goes in writing.</p></li>
+      <li><p>Every Pulley win is asked, once its first audit closes, to be the reference for September 2027.</p></li>
+      <li><p>The health check runs before the proposal, not after the signature. A clean export is the proof that we can move them.</p></li>
+    </ol>
+  </section>
+
+  <section class="me" aria-labelledby="h-me">
+    <h2 id="h-me">Who built this</h2>
+    <p>Ketan Sharma. Most recently founding Head of Sales at Craze (YC S22). At ZenAdmin, a Singapore company, I ran the commercial function and we took its GTM into Europe and North America, closing Remote, Multiplier, Omnipresent and Eventbrite. Before that I built Simplifai's APAC sales org, selling AI into banks and insurers, and earlier a 60+ person sales engine at Torqus.</p>
+    <p class="ask">I'd like to lead the sales team that runs this desk for Qapita in the US. If that is worth 20 minutes, reply to my email and I will work to your calendar.</p>
+    <p class="sign">Ketan Sharma, <a href="https://www.linkedin.com/in/ketan7/" target="_blank" rel="noopener">linkedin.com/in/ketan7</a></p>
+  </section>
+
+  <p class="foot">Dates and Carta's terms as Pulley publishes them in its shutdown FAQ. Qapita's offer and prices as published on qapita.com, 7 Oct 2026.</p>
+</div>
+
+<noscript><div class="wrap"><p class="note">This desk needs JavaScript for the timeline and the ledger.</p></div></noscript>
+
+<script>
+(function () {
+  "use strict";
+  var MS = 86400000;
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var MONL = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function D(y, m, d) { return new Date(y, m - 1, d); }
+  function addD(t, n) { return D(t.getFullYear(), t.getMonth() + 1, t.getDate() + n); }
+  function addM(t, n) { return D(t.getFullYear(), t.getMonth() + 1 + n, t.getDate()); }
+  function days(a, b) { return Math.round((b - a) / MS); }
+  function fmt(t) { return t.getDate() + " " + MON[t.getMonth()] + " " + t.getFullYear(); }
+  function fmtM(t) { return MON[t.getMonth()] + " " + t.getFullYear(); }
+  function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+
+  var OPT = D(2026, 11, 30), DARK = D(2026, 12, 8), DATA = D(2027, 1, 31), WALL = D(2027, 9, 15);
+  var T0 = D(2026, 10, 1), TA = D(2027, 2, 1), TB = D(2027, 9, 1), T1 = D(2028, 2, 1);
+  var FA = 0.42, FB = 0.6;
+  var n0 = new Date();
+  var NOW = D(n0.getFullYear(), n0.getMonth() + 1, n0.getDate());
+
+  function frac(t) {
+    t = +t;
+    if (t <= +T0) return 0;
+    if (t >= +T1) return 1;
+    if (t < +TA) return FA * (t - T0) / (TA - T0);
+    if (t < +TB) return FA + (FB - FA) * (t - TA) / (TB - TA);
+    return FB + (1 - FB) * (t - TB) / (T1 - TB);
+  }
+  function unfrac(f) {
+    f = Math.max(0, Math.min(1, f));
+    var t;
+    if (f < FA) t = +T0 + (TA - T0) * f / FA;
+    else if (f < FB) t = +TA + (TB - TA) * (f - FA) / (FB - FA);
+    else t = +TB + (T1 - TB) * (f - FB) / (1 - FB);
+    var d = new Date(t + MS / 2);
+    return D(d.getFullYear(), d.getMonth() + 1, d.getDate());
+  }
+
+  var WIN = [
+    { n: 1, chip: "Opt-in", s: T0, e: OPT, name: "Before the Carta opt-in closes", when: "Now to 30 Nov 2026",
+      who: "Pulley companies still deciding, opted-in ones included: Pulley’s FAQ says opting in commits them to nothing, and Carta’s agreement then gives them two weeks to sign. Then the people they ask: startup lawyers and fractional CFOs, who each had a Pulley program and now need a new default to recommend.",
+      line: "“Carta matches your Pulley price for one year. So do we, or lower, and our year two is already on our pricing page. Ask Carta for theirs in writing.”",
+      play: "Lead with the offer as you publish it (your Pulley price or Qapita’s rate, whichever is lower, and free migration) and run the health check on their export before they sign anything. Ask every open account one question: has Carta’s agreement arrived? Its two-week clock becomes that row’s deadline. Also calling them: Carta (year one matched, prepaid Pulley time credited) and EquityList (the rest of the Pulley term carried over, first 409A free).",
+      measure: "Pulley conversations logged each week, and the share with a decision date written down.",
+      owner: "The head of sales on the largest cap tables, with you in the room wherever a founder wants a founder. AEs on the rest, same script, same fields." },
+    { n: 2, chip: "Eight days", s: D(2026, 12, 1), e: DARK, name: "The eight days", when: "1 to 8 Dec 2026",
+      who: "Everyone who missed the opt-in. Carta can still sign them, but Pulley’s FAQ says without the pricing guarantee or Pulley’s help with the move. Plus the late opt-ins whose two weeks to sign Carta’s agreement are still running.",
+      line: "“Your Carta price match closed on 30 November. Ours is still open, and we can run the health check on your export today.”",
+      play: "A same-day desk: every inbound answered inside the hour, the health check run the same day, a migration slot booked before 8 December.",
+      measure: "Minutes to first reply. Migrations booked before Pulley shuts down.",
+      owner: "The whole team on rotation, onboarding included." },
+    { n: 3, chip: "Last access", s: D(2026, 12, 9), e: DATA, name: "The limited-access weeks", when: "9 Dec 2026 to 31 Jan 2027",
+      who: "Companies that left Pulley for a spreadsheet or for nothing (a former Pulley employee called spreadsheets the real competitor). And every December mover whose FY2026 audit now asks for stock comp expense from a brand new system of record.",
+      line: "“Your Pulley access ends on 31 January. Let’s get every grant and document out and checked before your auditor asks for them.”",
+      play: "Export rescue plus the health check for anyone still on Pulley’s limited access. For audited companies, ASC 718 reports off the live cap table. That is an Enterprise line on your US pricing, so every audited Pulley win is also the first upgrade conversation.",
+      measure: "Exports rescued before 31 January. Audited Pulley wins offered ASC 718.",
+      owner: "AEs with onboarding; finance-facing CSMs on the audit cases." },
+    { n: 4, chip: "Long middle", s: TA, e: D(2027, 8, 31), name: "The long middle", when: "Feb to Aug 2027",
+      who: "The spreadsheet group and the movers to smaller platforms. They come back when they raise or when a 409A falls due, usually every 12 months or after a round. From late May, the first Carta accounts reach 120 days before their anniversary.",
+      line: "“Your next 409A is due in March. Here is the cap table and the valuation together, at a published price.”",
+      play: "A watch list fed by funding news and the 409A dates in the ledger. Won Pulley accounts asked to be references once their first audit closes, because September’s pitch needs a company that already made the move.",
+      measure: "Re-opens per trigger. Pulley references signed by August.",
+      owner: "One AE owns the watch list; marketing owns the reference stories." },
+    { n: 5, chip: "Year two", s: TB, e: D(2027, 12, 31), name: "Year two on Carta", when: "Sep to Dec 2027",
+      who: "Every Pulley company that took Carta’s offer. Their contract started the day they signed, so year two arrives on the anniversary, at Carta’s own rates.",
+      line: "“Your first year on Carta ran at your old Pulley price. Here is year two on Qapita for your stakeholders, published, and a Pulley company that moved a year ago and has closed an audit with us.”",
+      play: "Re-open 120 days before each anniversary, so the decision lands before the renewal paperwork does. The ledger already holds the date, the stakeholder count and the price.",
+      measure: "Win-backs against anniversaries due. ARR re-opened at list.",
+      owner: "The AE pod, carrying the references from the long middle." }
+  ];
+  function winOf(t) {
+    for (var i = 0; i < WIN.length; i++) if (+t >= +WIN[i].s && +t <= +WIN[i].e) return WIN[i];
+    return +t < +T0 ? WIN[0] : WIN[4];
+  }
+
+  var OUT = {
+    open: { tag: "Open", cls: "open" },
+    won: { tag: "Won", cls: "won" },
+    carta: { tag: "Carta", cls: "carta" },
+    other: { tag: "Elsewhere", cls: "other" },
+    sheet: { tag: "Spreadsheet", cls: "sheet" }
+  };
+  var MLABEL = { won: "Won in", carta: "Signed with Carta in", other: "Moved in", sheet: "Last Pulley 409A in" };
+  var MLOW = { won: "won in", carta: "signed with Carta in", other: "moved in", sheet: "last Pulley 409A in" };
+
+  var EXAMPLES = [
+    { d: "Seed devtools, San Francisco", h: 22, o: "carta", y: 2026, m: 10, v: true },
+    { d: "Series A fintech, New York", h: 64, o: "carta", y: 2026, m: 11, v: true },
+    { d: "Seed AI infra, San Francisco", h: 31, o: "open", v: true },
+    { d: "Series A health, Boston", h: 88, o: "won", y: 2026, m: 10, v: true },
+    { d: "Pre-seed consumer, Los Angeles", h: 12, o: "sheet", y: 2026, m: 3, v: false },
+    { d: "Series B SaaS, Austin", h: 140, o: "carta", y: 2026, m: 12, v: true },
+    { d: "Seed climate, Seattle", h: 27, o: "other", y: 2026, m: 11, v: true },
+    { d: "Series A marketplace, New York", h: 52, o: "open", v: true },
+    { d: "Seed robotics, Bay Area", h: 41, o: "carta", y: 2026, m: 9, v: true },
+    { d: "Series A security, San Francisco", h: 73, o: "won", y: 2026, m: 11, v: true },
+    { d: "Seed fintech, Miami", h: 19, o: "carta", y: 2026, m: 11, v: false },
+    { d: "Series A devtools, New York", h: 58, o: "carta", y: 2026, m: 10, v: true }
+  ];
+  var KEY = "qapita-pulley-desk-v1";
+  var uid = 1;
+  function fromExamples() { return EXAMPLES.map(function (r) { var c = {}; for (var k in r) c[k] = r[k]; c.id = uid++; c.ex = true; return c; }); }
+  function clean(a) {
+    var out = [];
+    for (var i = 0; i < a.length && out.length < 200; i++) {
+      var r = a[i]; if (!r || typeof r !== "object") continue;
+      if (!OUT[r.o]) continue;
+      var h = parseInt(r.h, 10); if (!(h >= 1 && h <= 20000)) continue;
+      var c = { id: uid++, d: String(r.d || "Pulley account").slice(0, 60), h: h, o: r.o, v: !!r.v, ex: !!r.ex };
+      if (r.o !== "open") {
+        var y = parseInt(r.y, 10), m = parseInt(r.m, 10);
+        if (!(y >= 2024 && y <= 2028 && m >= 1 && m <= 12)) continue;
+        c.y = y; c.m = m;
+      }
+      out.push(c);
+    }
+    return out;
+  }
+  function load() {
+    try {
+      var s = window.localStorage.getItem(KEY);
+      if (s) { var a = JSON.parse(s); if (Array.isArray(a)) return clean(a); }
+    } catch (e) {}
+    return fromExamples();
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(rows.map(function (r) { return { d: r.d, h: r.h, o: r.o, y: r.y, m: r.m, v: r.v, ex: r.ex }; }))); } catch (e) {}
+  }
+
+  function price(r) {
+    var h = Math.max(1, r.h | 0);
+    if (r.v) return { plan: "Growth", usd: 3000 + 60 * Math.max(0, h - 50) };
+    return { plan: "Surge", usd: 1600 + 40 * Math.max(0, h - 40) };
+  }
+  function compute(r) {
+    var o = { p: price(r) };
+    if (r.o === "open") {
+      if (+NOW <= +OPT) { o.ev = OPT; o.el = "Decision before the Carta opt-in closes"; }
+      else if (+NOW <= +DARK) { o.ev = DARK; o.el = "Pulley shuts down"; }
+      else { o.ev = DATA; o.el = "Pulley access ends"; }
+      o.ro = NOW; o.rl = "Follow up this week";
+    } else if (r.o === "won") {
+      var wd = D(r.y, r.m, 15);
+      if (+wd < +D(2027, 1, 1)) { o.ev = D(2027, 1, 15); o.el = "ASC 718 offer for the FY2026 audit"; o.ro = D(2027, 4, 15); o.rl = "Reference ask once the audit closes"; }
+      else { o.ev = addM(wd, 3); o.el = "First quarter on Qapita"; o.ro = o.ev; o.rl = "Reference ask"; }
+    } else if (r.o === "carta") {
+      var an = addM(D(r.y, r.m, 15), 12);
+      o.ev = an; o.el = "Year two on Carta begins"; o.ro = addD(an, -120); o.rl = "Re-open with year two in writing";
+    } else if (r.o === "other") {
+      var an2 = addM(D(r.y, r.m, 15), 12);
+      o.ev = an2; o.el = "First renewal on the new platform (assumed annual)"; o.ro = addD(an2, -120); o.rl = "Re-open before that renewal";
+    } else {
+      var due = addM(D(r.y, r.m, 15), 12);
+      if (+NOW <= +DATA && +due > +DATA) { o.ev = DATA; o.el = "Pulley access ends: help get the history out"; }
+      else { o.ev = due; o.el = "409A falls due"; }
+      o.ro = addD(due, -60); o.rl = "Re-open before the 409A falls due (" + fmtM(due) + ")";
+    }
+    return o;
+  }
+
+  var rows = load();
+  var showAll = false;
+  var sel = +NOW < +T0 ? T0 : (+NOW > +T1 ? T1 : NOW);
+  var selRow = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var tl = $("tl"), range = $("range"), card = $("card"), chips = $("chips");
+
+  // clocks
+  function clock(id, target) {
+    var n = days(NOW, target), el = $(id);
+    if (n > 0) el.innerHTML = n + "<small>" + (n === 1 ? "day" : "days") + "</small>";
+    else if (n === 0) el.innerHTML = "Today";
+    else el.innerHTML = "Passed";
+  }
+  clock("c1", OPT); clock("c2", DARK); clock("c3", DATA);
+  (function () {
+    var n = days(NOW, WALL), el = $("c4");
+    if (n > 0) { var mo = Math.round(n / 30.44); el.innerHTML = (mo >= 2 ? "~" + mo + "<small>months</small>" : n + "<small>days</small>"); }
+    else if (+NOW <= +D(2027, 12, 31)) el.innerHTML = "Now";
+    else el.innerHTML = "Passed";
+  })();
+
+  // chips
+  chips.innerHTML = WIN.map(function (w) {
+    return '<button type="button" class="chip" data-w="' + w.n + '" aria-pressed="false"><span class="num">' + w.n + "</span>" + esc(w.chip) + "</button>";
+  }).join("");
+  chips.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-w]"); if (!b) return;
+    var w = WIN[+b.getAttribute("data-w") - 1];
+    var t = (+NOW >= +w.s && +NOW <= +w.e) ? NOW : (w.n === 5 ? WALL : w.s);
+    setSel(t, null);
+  });
+
+  // timeline
+  var W = 0, H = 0, AX = 0, SQ = 9, geom = [];
+  function drawTL() {
+    W = Math.max(280, Math.round(tl.clientWidth || 320));
+    var small = W < 560;
+    SQ = small ? 8 : 13;
+    H = small ? 168 : 196;
+    AX = H - 40;
+    var X = function (t) { return Math.round(frac(t) * (W - 2)) + 1; };
+    var cw = winOf(sel).n;
+    var s = '<svg id="svg" viewBox="0 0 ' + W + " " + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="Timeline from October 2026 to January 2028 with five windows and the ledger accounts placed on their key dates">';
+    WIN.forEach(function (w, i) {
+      var x1 = X(w.s), x2 = X(addD(w.e, 1));
+      s += '<rect data-w="' + w.n + '" class="' + (w.n === cw ? "band-sel" : "band-" + (i % 2)) + '" x="' + x1 + '" y="26" width="' + Math.max(2, x2 - x1) + '" height="' + (AX - 26) + '"/>';
+      if (w.n === cw) s += '<line class="band-top" x1="' + x1 + '" y1="26" x2="' + x2 + '" y2="26"/>';
+    });
+    WIN.forEach(function (w) {
+      var cx = (X(w.s) + X(addD(w.e, 1))) / 2;
+      s += '<g class="wn' + (w.n === cw ? " on" : "") + '" data-w="' + w.n + '"><circle cx="' + cx + '" cy="13" r="9"/><text x="' + cx + '" y="16.5" text-anchor="middle">' + w.n + "</text></g>";
+    });
+    // axis
+    s += '<line class="axis" x1="1" y1="' + AX + '" x2="' + X(TA) + '" y2="' + AX + '"/>';
+    s += '<line class="axis-c" x1="' + X(TA) + '" y1="' + AX + '" x2="' + X(TB) + '" y2="' + AX + '"/>';
+    s += '<line class="axis" x1="' + X(TB) + '" y1="' + AX + '" x2="' + (W - 1) + '" y2="' + AX + '"/>';
+    var bw = X(TB) - X(TA);
+    s += '<text class="cmp" x="' + (X(TA) + bw / 2 + (bw < 120 ? 8 : 0)) + '" y="' + (AX + 30) + '" text-anchor="middle">' + (bw < 120 ? "compressed" : "7 months, compressed") + "</text>";
+    for (var y = 2026, m = 10; y < 2028 || (y === 2028 && m <= 1); m++) {
+      if (m > 12) { m = 1; y++; }
+      if (y === 2028 && m > 1) break;
+      var a = D(y, m, 1), b = D(y, m + 1, 1), xa = X(a), xb = X(b), mid = (xa + xb) / 2;
+      s += '<line class="tick" x1="' + xa + '" y1="' + AX + '" x2="' + xa + '" y2="' + (AX + 5) + '"/>';
+      var pw = xb - xa, lab = pw >= 22 ? MON[m - 1] : MON[m - 1].charAt(0);
+      var show = pw >= 14 || (pw >= 7 && (m === 2 || m === 5 || m === 8));
+      if (show) s += '<text class="ml" x="' + mid + '" y="' + (AX + 16) + '" text-anchor="middle">' + lab + "</text>";
+      if (m === 1 || (y === 2026 && m === 10)) s += '<text class="yl" x="' + (xa + 2) + '" y="' + (AX + 30) + '">' + y + "</text>";
+    }
+    // today
+    if (+NOW >= +T0 && +NOW <= +T1) {
+      var xt = X(NOW);
+      s += '<line class="today" x1="' + xt + '" y1="30" x2="' + xt + '" y2="' + AX + '"/>';
+    }
+    // squares, stacked by pixel bucket
+    geom = [];
+    var stack = {};
+    var items = rows.map(function (r) { return { r: r, c: compute(r) }; }).sort(function (p, q) { return p.c.ev - q.c.ev; });
+    items.forEach(function (it) {
+      if (+it.c.ev < +T0 || +it.c.ev > +T1) return;
+      var x = X(it.c.ev), bk = Math.round(x / (SQ + 2));
+      var k = stack[bk] = (stack[bk] || 0) + 1;
+      var top = AX - 3 - k * (SQ + 2);
+      if (top < 30) return;
+      var cx = bk * (SQ + 2) - SQ / 2;
+      cx = Math.max(1, Math.min(W - SQ - 1, cx));
+      s += '<rect class="sq sq-' + OUT[it.r.o].cls + (selRow === it.r.id ? " sel" : "") + '" data-id="' + it.r.id + '" x="' + cx + '" y="' + top + '" width="' + SQ + '" height="' + SQ + '" rx="1.5" tabindex="0" role="button" aria-label="' + esc(it.r.d + ", " + it.c.el + ", " + fmt(it.c.ev)) + '"><title>' + esc(it.r.d + ": " + it.c.el + ", " + fmt(it.c.ev)) + "</title></rect>";
+    });
+    // scrub
+    var xs = X(sel);
+    s += '<line class="scrub" x1="' + xs + '" y1="24" x2="' + xs + '" y2="' + (AX + 2) + '"/>';
+    s += '<circle class="knob" cx="' + xs + '" cy="' + AX + '" r="5.5"/>';
+    if (+NOW >= +T0 && +NOW <= +T1) {
+      var xt2 = X(NOW), right = xt2 < W - 40;
+      s += '<text class="today-l" x="' + (right ? xt2 + 4 : xt2 - 4) + '" y="38" text-anchor="' + (right ? "start" : "end") + '">today</text>';
+    }
+    s += "</svg>";
+    tl.innerHTML = s;
+  }
+
+  function setSel(t, rowId) {
+    sel = t; selRow = rowId;
+    range.value = String(Math.round(frac(t) * 1000));
+    render();
+  }
+
+  // pointer scrubbing on the svg
+  var dragging = false;
+  function fromEvent(e) {
+    var svg = $("svg"); if (!svg) return;
+    var b = svg.getBoundingClientRect();
+    var f = (e.clientX - b.left) / b.width;
+    sel = unfrac(f); selRow = null;
+    range.value = String(Math.round(f * 1000));
+    render();
+  }
+  tl.addEventListener("pointerdown", function (e) {
+    var sq = e.target.closest && e.target.closest(".sq");
+    if (sq) return;
+    dragging = true;
+    try { tl.setPointerCapture(e.pointerId); } catch (x) {}
+    fromEvent(e);
+  });
+  tl.addEventListener("pointermove", function (e) { if (dragging) fromEvent(e); });
+  tl.addEventListener("pointerup", function () { dragging = false; });
+  tl.addEventListener("pointercancel", function () { dragging = false; });
+  function pickSquare(el, kb) {
+    var id = +el.getAttribute("data-id");
+    var r = rows.filter(function (x) { return x.id === id; })[0]; if (!r) return;
+    setSel(compute(r).ev, id);
+    var again = tl.querySelector('.sq[data-id="' + id + '"]');
+    if (again && kb) again.focus();
+    if (!document.querySelector('.row[data-id="' + id + '"]')) { showAll = true; renderLedger(); }
+    var li = document.querySelector('.row[data-id="' + id + '"]');
+    if (li) { li.classList.add("flash"); setTimeout(function () { li.classList.remove("flash"); }, 1400); }
+  }
+  tl.addEventListener("click", function (e) { var sq = e.target.closest && e.target.closest(".sq"); if (sq) pickSquare(sq); });
+  tl.addEventListener("keydown", function (e) {
+    var sq = e.target.closest && e.target.closest(".sq");
+    if (sq && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pickSquare(sq, true); }
+  });
+  range.addEventListener("input", function () { sel = unfrac(+range.value / 1000); selRow = null; render(); });
+
+  function inWin(t, w) { return +t >= +w.s && +t <= +w.e; }
+  function renderCard() {
+    var w = winOf(sel);
+    var cnt;
+    if (w.n === 1) { var a = days(sel, OPT); cnt = a > 0 ? plural(a, "day") + " until the Carta opt-in closes" : "The Carta opt-in closes today"; }
+    else if (w.n === 2) { var b = days(sel, DARK); cnt = b > 0 ? plural(b, "day") + " until Pulley shuts down" : "Pulley shuts down today"; }
+    else if (w.n === 3) { var c = days(sel, DATA); cnt = c > 0 ? plural(c, "day") + " until Pulley access ends" : "Pulley access ends today"; }
+    else if (w.n === 4) { var d = days(sel, WALL); cnt = "About " + plural(d, "day") + " until the first Carta anniversaries"; }
+    else cnt = +sel <= +D(2027, 12, 31) ? "Carta anniversaries land through December" : "The last matched years have run out";
+    var list = [];
+    rows.forEach(function (r) {
+      var c = compute(r);
+      if (inWin(c.ev, w)) list.push({ r: r, c: c, t: c.ev, what: c.el });
+      else if (r.o !== "open" && inWin(c.ro, w)) list.push({ r: r, c: c, t: c.ro, what: c.rl });
+    });
+    list.sort(function (p, q) { return p.t - q.t; });
+    var lis = list.map(function (it) {
+      return '<li class="' + (selRow === it.r.id ? "hi" : "") + '"><span class="tag t-' + OUT[it.r.o].cls + '">' + OUT[it.r.o].tag + "</span> <b>" + esc(it.r.d) + '</b> <span class="m">' + it.r.h + " stakeholders</span><br>" + esc(it.what) + ', <span class="m">' + fmt(it.t) + "</span> &middot; " + usd(it.c.p.usd) + " " + it.c.p.plan + "</li>";
+    }).join("");
+    var arr = list.reduce(function (s, it) { return s + it.c.p.usd; }, 0);
+    card.innerHTML =
+      '<div><div class="card-head"><span class="tag t-win">Window ' + w.n + "</span><h3>" + esc(w.name) + '</h3><span class="when">' + esc(w.when) + "</span></div>" +
+      '<p class="count">Selected ' + fmt(sel) + ". " + esc(cnt) + ".</p>" +
+      '<dl class="dl"><div><dt>Who we call</dt><dd>' + esc(w.who) + '</dd></div>' +
+      '<div class="line"><dt>The line</dt><dd>' + esc(w.line) + "</dd></div>" +
+      "<div><dt>The play</dt><dd>" + esc(w.play) + "</dd></div>" +
+      "<div><dt>What we measure</dt><dd>" + esc(w.measure) + "</dd></div>" +
+      "<div><dt>Who owns it</dt><dd>" + esc(w.owner) + "</dd></div></dl></div>" +
+      '<div class="due"><h4>From the ledger, in this window' + (list.length ? " &middot; " + usd(arr) + " at list" : "") + "</h4>" +
+      (list.length ? "<ul>" + lis + "</ul>" : '<p class="none">Nothing in the ledger lands here yet.</p>') + "</div>";
+    Array.prototype.forEach.call(chips.querySelectorAll(".chip"), function (b) { b.setAttribute("aria-pressed", String(+b.getAttribute("data-w") === w.n)); });
+  }
+
+  function renderLedger() {
+    var all = rows.map(function (r) { return { r: r, c: compute(r) }; }).sort(function (p, q) { return p.c.ev - q.c.ev; });
+    var LIM = 8, items = (showAll || all.length <= LIM) ? all : all.slice(0, LIM);
+    var more = $("more");
+    more.hidden = all.length <= LIM;
+    more.textContent = showAll ? "Show the first " + LIM : "Show all " + all.length + " rows";
+    more.setAttribute("aria-expanded", String(!!showAll));
+    $("rows").innerHTML = items.length ? items.map(function (it) {
+      var r = it.r, c = it.c;
+      return '<li class="row" data-id="' + r.id + '">' +
+        '<span class="o"><span class="tag t-' + OUT[r.o].cls + '">' + OUT[r.o].tag + "</span></span>" +
+        '<span class="a"><b>' + esc(r.d) + "</b><span>" + r.h + " stakeholders" + (r.o !== "open" ? ", " + esc(MLOW[r.o]) + " " + MON[r.m - 1] + " " + r.y : "") + (r.ex ? '<span class="ex">example</span>' : "") + "</span></span>" +
+        '<span class="n"><b>' + esc(c.el) + "</b>, " + fmt(c.ev) + "</span>" +
+        '<span class="r">Desk: ' + esc(c.rl) + (r.o === "open" ? "" : ", " + fmt(c.ro)) + "</span>" +
+        '<span class="p">' + usd(c.p.usd) + "<small>" + c.p.plan + " list / yr</small></span>" +
+        '<button class="x" type="button" data-del="' + r.id + '" aria-label="Remove ' + esc(r.d) + '">&times;</button>' +
+        "</li>";
+    }).join("") : '<li class="note">The ledger is empty. Log the first Pulley conversation below.</li>';
+    $("exnote").hidden = !rows.some(function (r) { return r.ex; });
+
+    var carta = rows.filter(function (r) { return r.o === "carta"; });
+    var wallRows = carta.filter(function (r) { var c = compute(r); return +c.ev >= +TB && +c.ev <= +D(2027, 12, 31); });
+    var wallArr = wallRows.reduce(function (s, r) { return s + price(r).usd; }, 0);
+    var open = rows.filter(function (r) { return r.o === "open"; }).length;
+    var won = rows.filter(function (r) { return r.o === "won"; }).length;
+    $("tiles").innerHTML =
+      '<div class="tile"><p class="k">Logged</p><p class="v">' + rows.length + '</p><p class="s">Pulley conversations, ' + won + " won</p></div>" +
+      '<div class="tile"><p class="k">Open</p><p class="v">' + open + '</p><p class="s">' + (+NOW <= +OPT ? "deciding before 30 Nov" : "still deciding") + "</p></div>" +
+      '<div class="tile"><p class="k">Lost to Carta</p><p class="v">' + carta.length + '</p><p class="s">every one with its signing month</p></div>' +
+      '<div class="tile hl"><p class="k">Year two on Carta</p><p class="v">' + usd(wallArr) + '</p><p class="s">' + plural(wallRows.length, "account") + " re-opening Sep to Dec 2027, at list</p></div>";
+  }
+
+  function render() { drawTL(); renderCard(); }
+  function renderAll() { renderLedger(); render(); }
+
+  $("rows").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-del]"); if (!b) return;
+    var id = +b.getAttribute("data-del");
+    rows = rows.filter(function (r) { return r.id !== id; });
+    if (selRow === id) selRow = null;
+    save(); renderAll();
+  });
+  $("more").addEventListener("click", function () { showAll = !showAll; renderLedger(); });
+  $("reset").addEventListener("click", function () { rows = fromExamples(); selRow = null; save(); renderAll(); });
+  $("clear").addEventListener("click", function () { rows = []; selRow = null; save(); renderAll(); $("add").open = true; });
+
+  // form
+  var fm = $("f-m");
+  fm.innerHTML = MONL.map(function (n, i) { return '<option value="' + (i + 1) + '">' + n + "</option>"; }).join("");
+  fm.value = String(NOW.getMonth() + 1);
+  var fy = $("f-y"); if (NOW.getFullYear() >= 2025 && NOW.getFullYear() <= 2027) fy.value = String(NOW.getFullYear());
+  function syncForm() {
+    var o = $("f-o").value;
+    $("f-ml").hidden = o === "open"; $("f-yl").hidden = o === "open";
+    if (o !== "open") $("f-mlt").textContent = MLABEL[o];
+  }
+  $("f-o").addEventListener("change", syncForm); syncForm();
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var d = $("f-d").value.trim(), h = parseInt($("f-h").value, 10), o = $("f-o").value, err = $("f-err");
+    if (!d) { err.textContent = "Give the account a name or a short description."; err.hidden = false; return; }
+    if (!(h >= 1 && h <= 20000)) { err.textContent = "Stakeholders should be a number from 1 to 20,000."; err.hidden = false; return; }
+    err.hidden = true;
+    var r = { id: uid++, d: d.slice(0, 60), h: h, o: o, v: $("f-v").checked, ex: false };
+    if (o !== "open") { r.y = +fy.value; r.m = +fm.value; }
+    rows = rows.filter(function (x) { return !x.ex; }).concat([r]);
+    save(); selRow = r.id;
+    sel = compute(r).ev;
+    if (+sel < +T0) sel = T0; if (+sel > +T1) sel = T1;
+    range.value = String(Math.round(frac(sel) * 1000));
+    renderAll();
+    $("f-d").value = ""; $("f-h").value = "";
+  });
+
+  // theme
+  var root = document.documentElement;
+  try { var th = window.localStorage.getItem("qapita-desk-theme"); if (th === "light" || th === "dark") root.setAttribute("data-theme", th); } catch (e) {}
+  function isDark() { var a = root.getAttribute("data-theme"); if (a) return a === "dark"; return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches); }
+  function themeLabel() { $("theme").textContent = isDark() ? "Light mode" : "Dark mode"; }
+  themeLabel();
+  $("theme").addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { window.localStorage.setItem("qapita-desk-theme", next); } catch (e) {}
+    themeLabel();
+  });
+
+  var rt = null;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(drawTL, 120); });
+  range.value = String(Math.round(frac(sel) * 1000));
+  renderAll();
+})();
+</script>
+</body>
+</html>

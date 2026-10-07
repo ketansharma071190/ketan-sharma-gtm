@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Live-By Desk</title>
+<meta name="description" content="Nine financial-services plays across Igloo's partners, dated backwards from the moments their users buy, and the signature-to-first-policy clock that decides which ones get caught.">
+<meta property="og:title" content="The Live-By Desk">
+<meta property="og:description" content="Igloo's financial-services partners, dated backwards from the moments their users buy.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #f2efe7;
+  --card: #fffdf8;
+  --ink: #13202a;
+  --soft: #56626c;
+  --faint: #8a949c;
+  --rule: #dcd6c9;
+  --rule-soft: #ebe6db;
+  --sea: #0e6c76;
+  --sea-wash: #d8ecea;
+  --ok: #1b7446;
+  --ok-wash: #dcefe2;
+  --tight: #9a5b00;
+  --tight-wash: #f7e8c8;
+  --miss: #b8361a;
+  --miss-wash: #f9e0d6;
+  --them: #3b5a86;
+  --us: #0e8a8f;
+  --ins: #8b4fa3;
+  --moment: rgba(14, 108, 118, 0.13);
+  --moment-edge: #0e6c76;
+  --past: rgba(19, 32, 42, 0.06);
+  --freeze: rgba(59, 90, 134, 0.16);
+  --sff: rgba(154, 91, 0, 0.16);
+  --shadow: 0 1px 2px rgba(19, 32, 42, 0.06), 0 8px 24px rgba(19, 32, 42, 0.06);
+  --fd: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --fb: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --fm: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d141a;
+    --card: #141e26;
+    --ink: #e5ebef;
+    --soft: #9ba8b2;
+    --faint: #6e7b86;
+    --rule: #26333d;
+    --rule-soft: #1d2830;
+    --sea: #5fc6cd;
+    --sea-wash: #123033;
+    --ok: #6fd49b;
+    --ok-wash: #12301f;
+    --tight: #f2c14e;
+    --tight-wash: #33290f;
+    --miss: #ff8d6a;
+    --miss-wash: #3a1d14;
+    --them: #8fb2e3;
+    --us: #5fc6cd;
+    --ins: #cf9ee6;
+    --moment: rgba(95, 198, 205, 0.14);
+    --moment-edge: #5fc6cd;
+    --past: rgba(229, 235, 239, 0.05);
+    --freeze: rgba(143, 178, 227, 0.16);
+    --sff: rgba(242, 193, 78, 0.16);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d141a;
+  --card: #141e26;
+  --ink: #e5ebef;
+  --soft: #9ba8b2;
+  --faint: #6e7b86;
+  --rule: #26333d;
+  --rule-soft: #1d2830;
+  --sea: #5fc6cd;
+  --sea-wash: #123033;
+  --ok: #6fd49b;
+  --ok-wash: #12301f;
+  --tight: #f2c14e;
+  --tight-wash: #33290f;
+  --miss: #ff8d6a;
+  --miss-wash: #3a1d14;
+  --them: #8fb2e3;
+  --us: #5fc6cd;
+  --ins: #cf9ee6;
+  --moment: rgba(95, 198, 205, 0.14);
+  --moment-edge: #5fc6cd;
+  --past: rgba(229, 235, 239, 0.05);
+  --freeze: rgba(143, 178, 227, 0.16);
+  --sff: rgba(242, 193, 78, 0.16);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--fb); font-size: 1rem; line-height: 1.55; overflow-wrap: break-word; }
+h1, h2, h3, h4, p { margin: 0; }
+a { color: var(--sea); text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+b, strong { font-weight: 600; }
+:where(a, button, summary, input):focus-visible { outline: 2px solid var(--sea); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.mono { font-family: var(--fm); font-feature-settings: "tnum" 1; }
+
+/* header */
+.top { padding-top: 28px; padding-bottom: 8px; }
+.kicker { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; font-family: var(--fm); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--soft); text-transform: uppercase; }
+h1 { font-family: var(--fd); font-weight: 400; font-size: clamp(2.3rem, 7.2vw, 4.4rem); line-height: 1.02; letter-spacing: -0.01em; margin-top: 18px; max-width: 15ch; text-wrap: balance; }
+h1 em { font-style: italic; color: var(--sea); }
+.lede { margin-top: 16px; max-width: 64ch; font-size: 1.0625rem; color: var(--soft); }
+.lede b { color: var(--ink); font-weight: 600; }
+
+.chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
+.chip { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; min-width: 0; }
+.chip .k { font-size: 0.72rem; color: var(--soft); line-height: 1.3; }
+.chip .v { font-family: var(--fm); font-size: 0.8rem; margin-top: 2px; }
+.chip .n { font-family: var(--fd); font-size: 1.9rem; line-height: 1; margin-top: 6px; }
+.chip .n small { font-family: var(--fb); font-size: 0.75rem; color: var(--soft); margin-left: 3px; }
+@media (max-width: 520px) {
+  .chips { grid-template-columns: 1fr; }
+  .chip { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; }
+  .chip .n { grid-row: 1 / span 2; grid-column: 2; margin: 0; font-size: 1.6rem; }
+}
+
+/* control bar */
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0 10px; margin-top: 18px; border-bottom: 1px solid var(--rule); }
+.bar-in { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.seg { display: inline-flex; background: var(--card); border: 1px solid var(--rule); border-radius: 999px; padding: 3px; gap: 2px; max-width: 100%; }
+.seg button { border: 0; background: transparent; border-radius: 999px; padding: 8px 14px; font-size: 0.875rem; font-weight: 500; cursor: pointer; color: var(--soft); white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--card); }
+.seg button:not([aria-pressed="true"]):hover { color: var(--ink); }
+.seg button.nudge { animation: nudge 1.8s ease-in-out 1s 3; }
+@keyframes nudge { 0%, 100% { box-shadow: 0 0 0 0 transparent; color: var(--soft); } 50% { box-shadow: 0 0 0 3px var(--sea-wash), inset 0 0 0 1px var(--sea); color: var(--sea); } }
+.metrics { display: flex; gap: 18px; flex-wrap: wrap; }
+.metric { display: flex; align-items: baseline; gap: 6px; }
+.metric .mv { font-family: var(--fd); font-size: 1.75rem; line-height: 1; transition: color .3s; }
+.metric .ml { font-size: 0.75rem; color: var(--soft); line-height: 1.25; max-width: 13ch; }
+.metric.bad .mv { color: var(--miss); }
+.metric.good .mv { color: var(--ok); }
+@media (max-width: 520px) {
+  .seg { width: 100%; }
+  .seg button { flex: 1; padding: 8px 6px; font-size: 0.8125rem; }
+  .metrics { width: 100%; justify-content: space-between; gap: 8px; }
+  .metric { flex-direction: column; gap: 2px; }
+  .metric .mv { font-size: 1.5rem; }
+  .metric .ml { font-size: 0.6875rem; }
+}
+.said { margin-top: 14px; font-size: 0.95rem; color: var(--soft); max-width: 70ch; min-height: 3em; }
+.said b { color: var(--ink); }
+
+/* desk */
+.desk { margin-top: 14px; background: var(--card); border: 1px solid var(--rule); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+.desk-head { padding: 12px 14px 8px; border-bottom: 1px solid var(--rule); background: var(--card); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.72rem; color: var(--soft); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 14px; height: 6px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.them { background: var(--them); } .sw.us { background: var(--us); } .sw.ins { background: var(--ins); }
+.sw.mom { background: var(--moment); border: 1px solid var(--moment-edge); height: 10px; }
+.sw.fz { background: repeating-linear-gradient(135deg, var(--freeze) 0 3px, transparent 3px 6px); height: 10px; border: 1px solid var(--rule); }
+.sw.sf { background: var(--sff); height: 10px; }
+.sw.be { width: 0; height: 12px; border-left: 2px dashed var(--ink); border-radius: 0; }
+.sw.td { width: 0; height: 12px; border-left: 2px solid var(--miss); border-radius: 0; }
+
+.grid-row { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 880px) { .grid-row { grid-template-columns: 292px 1fr; } }
+.axis { padding: 8px 14px 6px; border-bottom: 1px solid var(--rule-soft); }
+.axis .lbl { display: block; font-size: 0.72rem; color: var(--soft); margin-bottom: 6px; }
+@media (min-width: 880px) { .axis .lbl { align-self: end; margin-bottom: 0; } }
+.months { position: relative; height: 34px; }
+.months span { position: absolute; top: 0; font-family: var(--fm); font-size: 0.68rem; color: var(--soft); transform: translateX(2px); white-space: nowrap; }
+.months span.yr { color: var(--ink); font-weight: 600; }
+.months i { position: absolute; top: 18px; font-style: normal; font-family: var(--fm); font-size: 0.62rem; white-space: nowrap; transform: translateX(-50%); padding: 0 3px; border-radius: 3px; }
+.months i.t { color: var(--miss); }
+.months i.s { color: var(--tight); }
+.months i.b { color: var(--ink); }
+
+.row { border-bottom: 1px solid var(--rule-soft); }
+.row:last-child { border-bottom: 0; }
+.row-main { width: 100%; text-align: left; background: transparent; border: 0; padding: 12px 14px; cursor: pointer; display: grid; gap: 8px; align-items: center; }
+.row-main:hover { background: color-mix(in srgb, var(--sea-wash) 40%, transparent); }
+.row.open .row-main { background: color-mix(in srgb, var(--sea-wash) 55%, transparent); }
+.meta { display: block; min-width: 0; }
+.who { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.name { font-weight: 700; font-size: 1rem; }
+.mkt { font-family: var(--fm); font-size: 0.68rem; color: var(--soft); text-transform: uppercase; letter-spacing: 0.03em; }
+.play { display: block; font-size: 0.875rem; margin-top: 1px; }
+.mom { display: block; font-size: 0.78rem; color: var(--soft); margin-top: 1px; }
+.status { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-family: var(--fm); font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; transition: background .3s, color .3s; }
+.status.ok { background: var(--ok-wash); color: var(--ok); }
+.status.tight { background: var(--tight-wash); color: var(--tight); }
+.status.miss { background: var(--miss-wash); color: var(--miss); }
+.chev { display: none; }
+
+.track { position: relative; height: 46px; border-radius: 6px; overflow: hidden; background: color-mix(in srgb, var(--bg) 45%, transparent); }
+.track > span { position: absolute; display: block; }
+.t-past { top: 0; bottom: 0; left: 0; background: var(--past); }
+.t-sff { top: 0; bottom: 0; background: var(--sff); }
+.t-fz { top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--freeze) 0 3px, transparent 3px 7px); }
+.t-be { top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink); opacity: .55; }
+.t-today { top: 0; bottom: 0; width: 0; border-left: 2px solid var(--miss); }
+.t-mom { top: 0; bottom: 0; background: var(--moment); border-left: 2px solid var(--moment-edge); }
+.t-live { top: 2px; bottom: 2px; width: 0; border-left: 2px solid var(--ink); }
+.t-live::before { content: ""; position: absolute; top: -2px; left: -5px; border: 4px solid transparent; border-top: 5px solid var(--ink); }
+.t-g { height: 5px; border-radius: 3px; transition: left .7s cubic-bezier(.3,.7,.2,1), width .7s cubic-bezier(.3,.7,.2,1); min-width: 3px; }
+.t-g.them { background: var(--them); } .t-g.us { background: var(--us); } .t-g.ins { background: var(--ins); }
+.t-late { top: 0; bottom: 0; background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--miss) 22%, transparent) 0 4px, transparent 4px 8px); transition: left .7s, width .7s, opacity .4s; }
+
+.detail { padding: 4px 14px 18px; }
+.detail[hidden] { display: none; }
+.dgrid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 880px) { .dgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.dgrid h4, .gates h4, .open-line h4 { font-family: var(--fm); font-weight: 500; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--soft); margin-bottom: 4px; }
+.dgrid p { font-size: 0.9rem; }
+.gates { margin-top: 16px; }
+.gate { display: grid; grid-template-columns: 14px 1fr auto; column-gap: 10px; row-gap: 2px; padding: 9px 0; border-top: 1px solid var(--rule-soft); align-items: baseline; }
+.gate .sw { align-self: center; }
+.gate .gn { font-size: 0.9rem; font-weight: 600; }
+.gate .gd { font-family: var(--fm); font-size: 0.75rem; white-space: nowrap; color: var(--soft); }
+.gate .gd b { color: var(--ink); font-weight: 600; }
+.gate .gk { grid-column: 2 / 4; font-size: 0.82rem; color: var(--soft); }
+.gate .gk em { font-style: normal; color: var(--ink); }
+.gate .gw { font-family: var(--fm); font-size: 0.66rem; color: var(--soft); margin-left: 6px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+.open-line { margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--sea); background: var(--sea-wash); border-radius: 0 10px 10px 0; }
+.open-line p { font-family: var(--fd); font-size: 1.25rem; line-height: 1.35; }
+.hint { font-size: 0.8rem; color: var(--soft); margin-top: 10px; }
+
+/* starts histogram */
+.load { margin-top: 26px; display: grid; gap: 18px; grid-template-columns: 1fr; }
+@media (min-width: 880px) { .load { grid-template-columns: 1.1fr 1fr; align-items: end; } }
+.load h2, .runs h2, .clocks h2 { font-family: var(--fd); font-weight: 400; font-size: clamp(1.6rem, 4.6vw, 2.2rem); line-height: 1.1; }
+.load p { color: var(--soft); margin-top: 8px; max-width: 54ch; }
+.hist { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 14px 14px 10px; }
+.hist-bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; align-items: end; height: 132px; border-bottom: 1px solid var(--rule); }
+.hb { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+.hb .bar-v { width: 100%; max-width: 46px; border-radius: 6px 6px 0 0; background: var(--sea); transition: height .7s cubic-bezier(.3,.7,.2,1), background .3s; }
+.hb.q4 .bar-v { background: var(--ink); }
+.hb .c { font-family: var(--fm); font-size: 0.75rem; margin-bottom: 4px; }
+.hist-x { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 6px; }
+.hist-x span { text-align: center; font-family: var(--fm); font-size: 0.68rem; color: var(--soft); }
+.hist-note { font-size: 0.72rem; color: var(--soft); margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap; }
+.hist-note span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* runs */
+.runs { margin-top: 40px; }
+.runs .lede2 { color: var(--soft); margin-top: 8px; max-width: 62ch; }
+.runs .lede2 b { color: var(--ink); }
+.cards { display: grid; gap: 10px; grid-template-columns: 1fr; margin-top: 16px; }
+@media (min-width: 700px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 14px; }
+.card .no { font-family: var(--fm); font-size: 0.7rem; color: var(--sea); }
+.card h3 { font-family: var(--fb); font-size: 1rem; font-weight: 700; margin-top: 4px; }
+.card p { font-size: 0.875rem; color: var(--soft); margin-top: 6px; }
+.measures { margin-top: 12px; background: var(--ink); color: var(--card); border-radius: 14px; padding: 16px; display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .measures { grid-template-columns: 180px repeat(4, minmax(0, 1fr)); align-items: start; } }
+.measures .mh { font-family: var(--fm); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: .75; }
+.measures div:not(.mh) { font-size: 0.9rem; line-height: 1.4; padding-left: 10px; border-left: 2px solid color-mix(in srgb, var(--card) 35%, transparent); }
+
+/* clocks editor */
+.clocks { margin-top: 40px; }
+.clocks details { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; }
+.clocks summary { cursor: pointer; padding: 14px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.clocks summary::-webkit-details-marker { display: none; }
+.clocks summary .s2 { font-weight: 400; font-size: 0.82rem; color: var(--soft); }
+.clocks summary .pm { font-family: var(--fm); color: var(--sea); }
+.ed { padding: 0 16px 16px; display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 880px) { .ed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.edg h3 { font-size: 0.95rem; font-weight: 700; }
+.edg .who2 { font-size: 0.78rem; color: var(--soft); margin-top: 2px; }
+.edr { display: grid; grid-template-columns: 1fr 64px 64px; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--rule-soft); font-size: 0.84rem; }
+.edr.h { border-top: 0; font-family: var(--fm); font-size: 0.64rem; color: var(--soft); text-transform: uppercase; letter-spacing: 0.04em; }
+.edr input { width: 100%; font-family: var(--fm); font-size: 0.85rem; padding: 6px 6px; border: 1px solid var(--rule); border-radius: 8px; background: var(--bg); color: var(--ink); text-align: right; }
+.reset { margin: 0 16px 16px; border: 1px solid var(--rule); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 0.82rem; cursor: pointer; }
+
+/* footer */
+.foot { margin-top: 44px; padding-top: 26px; padding-bottom: 40px; border-top: 1px solid var(--rule); }
+.ask { font-family: var(--fd); font-size: clamp(1.5rem, 4.4vw, 2.1rem); line-height: 1.15; max-width: 30ch; }
+.foot p.cv { margin-top: 12px; color: var(--soft); max-width: 66ch; }
+.foot .sig { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 0.9rem; }
+.foot .fine { margin-top: 18px; font-size: 0.75rem; color: var(--faint); max-width: 72ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-g, .t-late, .hb .bar-v { transition: none; }
+  .seg button.nudge { animation: none; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="wrap top">
+    <div class="kicker"><span>For Raunak Mehta, Igloo</span><span>From Ketan Sharma, October 2026</span></div>
+    <h1>Embedded insurance sells on your <em>partners' calendars.</em></h1>
+    <p class="lede">12.12, the 13th-month pay, Tet, mudik, Songkran, the first week of rain. Below are <b>nine financial-services plays across Igloo's partners</b>, each dated backwards from the moment its users buy, and the <b>signature-to-first-policy clock</b> that decides which of them you catch.</p>
+    <div class="chips" id="chips"></div>
+  </header>
+
+  <div class="bar" id="bar">
+    <div class="wrap bar-in">
+      <div class="seg" role="group" aria-label="How the gates run">
+        <button type="button" id="m-serial" aria-pressed="true">One gate after another</button>
+        <button type="button" id="m-par" class="nudge" aria-pressed="false">In parallel, off a launch kit</button>
+      </div>
+      <div class="metrics" aria-live="polite">
+        <div class="metric" id="mt-miss"><span class="mv mono" id="v-miss">0</span><span class="ml">moments missed</span></div>
+        <div class="metric" id="mt-q4"><span class="mv mono" id="v-q4">0</span><span class="ml">plays that must start before 31 Dec</span></div>
+        <div class="metric" id="mt-slack"><span class="mv mono" id="v-slack">0</span><span class="ml">average days of slack</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap" aria-labelledby="desk-h">
+    <h2 id="desk-h" class="sr">The desk</h2>
+    <p class="said" id="said"></p>
+    <div class="desk">
+      <div class="desk-head">
+        <div class="legend">
+          <span><i class="sw them"></i>Partner's clock</span>
+          <span><i class="sw us"></i>Igloo's clock</span>
+          <span><i class="sw ins"></i>Insurer and regulator</span>
+          <span><i class="sw mom"></i>The moment</span>
+          <span><i class="sw sf"></i>SFF week</span>
+          <span><i class="sw be"></i>31 Dec, breakeven target</span>
+          <span><i class="sw fz"></i>Bank change freeze</span>
+          <span><i class="sw td"></i>Today</span>
+        </div>
+      </div>
+      <div class="axis grid-row">
+        <span class="lbl">Tap any row for the record, the play, each gate and the opening line</span>
+        <div class="months" id="months"></div>
+      </div>
+      <div id="rows"></div>
+    </div>
+    <p class="hint">Each bar is a gate, stacked by order. The black tick is the live-by date; the shaded band is the moment itself.</p>
+  </section>
+
+  <section class="wrap load" aria-labelledby="load-h">
+    <div>
+      <h2 id="load-h">When each play has to start</h2>
+      <p id="load-p">Run the gates one after another and the starts pile into the quarter you are spending at SFF and on the breakeven close. Run them side by side and the April and May plays start in February instead, after the year is closed.</p>
+      <p>Three plays, DANA, Akulaku and Skyro, land before 31 December on products that are already live: no new contract, only a slot and an offer. They are the only ones here that can still move this year's number.</p>
+    </div>
+    <div class="hist" role="img" aria-label="Number of plays that must start in each month" id="hist">
+      <div class="hist-bars" id="hist-bars"></div>
+      <div class="hist-x" id="hist-x"></div>
+      <div class="hist-note"><span><i class="dot" style="background:var(--ink)"></i>Q4 2026</span><span><i class="dot" style="background:var(--sea)"></i>2027</span></div>
+    </div>
+  </section>
+
+  <section class="wrap runs" aria-labelledby="runs-h">
+    <h2 id="runs-h">What runs the desk</h2>
+    <p class="lede2">Your stack takes a product launch from months to days. <b>What is left is the partner's clock, and moving that is a sales job.</b> This is the machine any partner manager on the team would run, not a one-person show.</p>
+    <div class="cards">
+      <div class="card"><div class="no">01</div><h3>Dated by their calendar</h3><p>Every partner row is dated by the moment its users buy. The start-by date falls out of the clock, so nobody asks when we can launch; the desk says when we must start.</p></div>
+      <div class="card"><div class="no">02</div><h3>Two owners, one date</h3><p>Every signature carries a first-policy date and two named owners, theirs and ours, on page one of the MOU. A signed partner without both is not counted as won.</p></div>
+      <div class="card"><div class="no">03</div><h3>A launch kit per market</h3><p>Built once, reused on every account: vendor-risk answers for that market's rules, a one-page term sheet with three commercial models, products already approved with insurers, a sandbox journey in the partner's colours on day one. That is what lets the gates run side by side.</p></div>
+      <div class="card"><div class="no">04</div><h3>Monday, then the QBR</h3><p>Monday covers every row with a start-by date inside 30 days and every gate that slipped. Each QBR opens with the partner's next moment and ends in a decision: the slot, the offer, the attach target. Not an activity recap.</p></div>
+    </div>
+    <div class="measures">
+      <div class="mh">What it reports every Monday</div>
+      <div>Days from signature to first policy, median and worst, by account</div>
+      <div>Moments caught and missed this quarter</div>
+      <div>Products live per partner</div>
+      <div>Attach rate in the 30 days around each moment</div>
+    </div>
+  </section>
+
+  <section class="wrap clocks" aria-labelledby="clocks-h">
+    <h2 id="clocks-h" class="sr">Edit the clocks</h2>
+    <details id="clocks">
+      <summary><span>Put in your own gate days <span class="s2">Every date on the desk re-computes.</span></span><span class="pm" aria-hidden="true">+</span></summary>
+      <div class="ed" id="ed"></div>
+      <button type="button" class="reset" id="reset">Back to my planning defaults</button>
+    </details>
+  </section>
+
+  <footer class="wrap foot">
+    <p class="ask">The role I am asking about: Regional Head of BD &amp; Partnerships, running this desk across your financial-services partners. Twenty minutes is enough to see if it fits.</p>
+    <p class="cv">I built Simplifai's APAC team selling AI into banks and insurers, Bajaj Allianz among them, and ran sales, marketing and customer success at ZenAdmin, a Singapore company, where Igloo was one of our customers.</p>
+    <div class="sig"><b>Ketan Sharma</b><span>Pune, available now, happy to relocate</span><a href="https://www.linkedin.com/in/ketan7" target="_blank" rel="noopener">LinkedIn</a></div>
+    <p class="fine">Partner facts come from Igloo's and its partners' public announcements. The nine plays are mine, not anything Igloo has announced, and the gate days are planning defaults you can replace above. Dates count from today, <span id="today-s"></span>.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+'use strict';
+var DAY = 864e5;
+function U(s) { var p = s.split('-'); return Date.UTC(+p[0], +p[1] - 1, +p[2]); }
+var NOW = new Date();
+var T = Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate());
+var AX0 = U('2026-10-01'), AX1 = U('2027-07-01');
+var FZ0 = U('2026-12-15'), FZ1 = U('2027-01-04');
+var SFF0 = U('2026-11-18'), SFF1 = U('2026-11-21');
+var BE = U('2026-12-31'), YE = U('2027-01-01');
+var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function fmt(t) { var d = new Date(t); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()]; }
+function fmtY(t) { var d = new Date(t); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+function pct(t) { var v = (t - AX0) / (AX1 - AX0) * 100; return Math.max(0, Math.min(100, v)); }
+function days(a, b) { return Math.round((b - a) / DAY); }
+function $(s, r) { return (r || document).querySelector(s); }
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+/* ---------- gate templates (planning defaults, editable) ---------- */
+var DEF = {
+  attach: {
+    title: 'Campaign on a live product',
+    used: 'DANA, Akulaku, Skyro, FE Credit, Kredivo',
+    gates: [
+      { id: 'a1', n: 'Offer and pricing agreed with the insurer', w: 'ins', s: 10, p: 5, deps: [], k: 'Offer menu pre-agreed with the insurer for each live product.' },
+      { id: 'a2', n: 'Creative and placement approved by the partner', w: 'them', s: 10, p: 7, deps: [], k: 'Placement mock-ups built in the partner\'s own design system.' },
+      { id: 'a3', n: 'Campaign slot in the partner\'s calendar', w: 'them', s: 14, p: 7, deps: ['a1', 'a2'], k: 'Slot requested at the QBR, against the moment\'s date.' }
+    ]
+  },
+  variant: {
+    title: 'New variant on live rails',
+    used: 'TrueMoney',
+    gates: [
+      { id: 'v1', n: 'Product addendum to the live contract', w: 'them', s: 21, p: 10, deps: [], k: 'Addendum template; the commercial model stays as it is.' },
+      { id: 'v2', n: 'Variant approved with insurer and regulator', w: 'ins', s: 60, p: 45, deps: [], k: 'Filing starts the day the partner says yes, not after the addendum is signed.' },
+      { id: 'v3', n: 'Configured on Turbo and built into the app', w: 'us', s: 21, p: 10, deps: [], k: 'Configured while the filing runs; the app reuses the live product\'s journey.' },
+      { id: 'v4', n: 'Launch slot and campaign', w: 'them', s: 21, p: 10, deps: ['v1', 'v2', 'v3'], k: 'Slot booked against the moment\'s date.' }
+    ]
+  },
+  newtype: {
+    title: 'New product type on live rails',
+    used: 'ZaloPay, GCash',
+    gates: [
+      { id: 'n1', n: 'Product addendum to the live contract', w: 'them', s: 21, p: 10, deps: [], k: 'Addendum template; the commercial model stays as it is.' },
+      { id: 'n2', n: 'New product type approved with insurer and regulator', w: 'ins', s: 90, p: 75, deps: [], k: 'Filing starts on the partner\'s yes, built from the DANA product already approved in Indonesia.' },
+      { id: 'n3', n: 'Rainfall data feed, configuration and in-app build', w: 'us', s: 21, p: 14, deps: [], k: 'Satellite feed for the new cities wired while the filing runs.' },
+      { id: 'n4', n: 'Launch slot and campaign', w: 'them', s: 21, p: 10, deps: ['n1', 'n2', 'n3'], k: 'Slot booked against the first week of rain.' }
+    ]
+  },
+  bank: {
+    title: 'New bank',
+    used: 'the bank you sign at SFF',
+    gates: [
+      { id: 'b1', n: 'Commercial terms and contract', w: 'them', s: 30, p: 14, deps: [], k: 'One-page term sheet with three commercial models to choose from.' },
+      { id: 'b2', n: 'Vendor risk and IT security review', w: 'them', s: 45, p: 21, deps: [], k: 'Answers pre-written for that market\'s rules and ready before SFF, not drafted after it.' },
+      { id: 'b3', n: 'Product approved with the insurer', w: 'ins', s: 30, p: 30, deps: [], k: 'Start from products already approved in the market; runs from signing day.' },
+      { id: 'b4', n: 'Integration and UAT in the bank\'s app', w: 'us', s: 35, p: 28, deps: ['b2'], fz: true, k: 'Sandbox journey in the bank\'s colours from day one, so UAT is review, not build.' },
+      { id: 'b5', n: 'Release train and in-app slot', w: 'them', s: 15, p: 10, deps: ['b1', 'b3', 'b4'], fz: true, k: 'Release slot booked at signing against the first-policy date.' }
+    ]
+  }
+};
+var TPL = JSON.parse(JSON.stringify(DEF));
+
+/* ---------- the nine plays ---------- */
+var ROWS = [
+  { name: 'DANA', mkt: 'Indonesia', kind: 'e-wallet', tpl: 'attach',
+    play: 'Rain Protection, switched on zone by zone', mom: 'Rainy season onset, Nov to Dec',
+    ms: '2026-11-15', me: '2027-02-28', live: '2026-11-15',
+    rec: 'DANA Rain Protection launched at the end of September 2026 at Rp500 a policy. It pays automatically when satellite data shows 2.5 mm of rain at the user\'s GPS location. It is the first parametric product in a line that began with gadget cover in October 2021; Xtra Protection, in 2025, was the fifth.',
+    why: 'BMKG expects most of Indonesia\'s season zones to turn wet in November and December this year, later than normal in about six zones out of ten, with the peak running from December to February.',
+    plan: 'Offer Rain Protection at payment on days the forecast says rain, and switch the push on region by region as each BMKG zone turns, instead of one national campaign.',
+    line: 'BMKG says most of the country gets its rain in November and December this year, later than usual. Let\'s push Rain Protection zone by zone as each one turns, right at the moment of payment.' },
+  { name: 'Akulaku', mkt: 'Indonesia', kind: 'paylater', tpl: 'attach',
+    play: 'Gadget Protection inside the 12.12 plan', mom: '12.12 Harbolnas, mid Dec',
+    ms: '2026-12-10', me: '2026-12-16', live: '2026-12-01',
+    rec: 'Gadget Protection, announced in February 2025: repair and replacement for devices bought on Akulaku, one year of cover, underwritten by Victoria Insurance.',
+    why: 'Harbolnas, Indonesia\'s national online shopping festival, peaks on 12.12; last year it ran 10 to 16 December. A financed phone or laptop is exactly the cart Gadget Protection was built for.',
+    plan: 'Write a Gadget Protection attach target into Akulaku\'s 12.12 plan and offer it on every financed device at checkout, with offer and placement agreed before the slot is booked.',
+    line: '12.12 is when your users finance their phones. Gadget Protection is already live with you, so let\'s put its attach rate into the 12.12 plan rather than read it in January.' },
+  { name: 'Skyro', mkt: 'Philippines', kind: 'consumer lender', tpl: 'attach',
+    play: 'Goods and Gadget Protection through the 13th-month window', mom: '13th-month pay, by 24 Dec',
+    ms: '2026-12-01', me: '2026-12-25', live: '2026-12-01',
+    rec: 'Gadget and Loan Protection (2024), Goods Protection (2025), and in August 2025 a fifth product, flood and fire cover, offered to 700,000+ active loan customers.',
+    why: 'Philippine law has the 13th-month pay out by 24 December, and Christmas installment buying runs through the same weeks.',
+    plan: 'Offer Goods and Gadget Protection on every December installment purchase, with an attach target per product agreed now and reviewed weekly through Christmas.',
+    line: 'Your customers get their 13th-month pay by 24 December and much of it goes on installments. Goods and Gadget Protection are already live with you; December is the month to make them attach.' },
+  { name: 'The bank you sign at SFF', mkt: 'Indonesia', kind: 'digital bank, scenario', tpl: 'bank', fixed: '2026-11-20',
+    play: 'Mudik travel and accident cover in the bank\'s app', mom: 'Lebaran, 10 and 11 Mar',
+    ms: '2027-01-14', me: '2027-03-11', live: '2027-02-15',
+    rec: 'A scenario, not a named account: an Indonesian digital bank MOU signed on the last day of SFF, 20 November 2026. Same MOU in both modes; only the way the five gates run changes.',
+    why: 'Lebaran 2027 falls on 10 and 11 March, and with Nyepi the break runs 6 to 15 March. KAI sells train tickets 45 days before departure and the travel window starts about ten days before Lebaran, so bookings open in mid January and cover needs to be in the app by mid February.',
+    plan: 'Travel and accident cover inside the bank\'s app for mudik, live by 15 February. Many banks freeze production changes over year end, so the work that can happen before the freeze has to.',
+    line: 'Before we sign, let\'s write the first-policy date into the MOU, 15 February, and put both our owners\' names on page one.', lineH: 'Line for the signing room' },
+  { name: 'FE Credit', mkt: 'Vietnam', kind: 'consumer finance', tpl: 'attach',
+    play: 'Damage cover through the pre-Tet phone weeks', mom: 'Tet, 6 Feb',
+    ms: '2027-01-10', me: '2027-02-06', live: '2027-01-10',
+    rec: 'Accidental and liquid damage cover sold with phone installment plans, announced with digital insurer OPES in April 2024.',
+    why: 'Tet falls on 6 February 2027. The weeks before it, when Tet bonuses are paid, are Vietnam\'s biggest shopping weeks of the year, new phones included.',
+    plan: 'Set an attach target for damage cover on every phone financed in the three weeks before Tet, with the offer agreed with OPES before the slot is booked.',
+    line: 'The weeks before Tet are when your customers buy phones with their bonus. Damage cover already sits in that plan; let\'s set the attach target for those three weeks now.' },
+  { name: 'Kredivo', mkt: 'Indonesia', kind: 'paylater', tpl: 'attach',
+    play: 'Travel Domestic at the mudik checkout', mom: 'Lebaran train tickets open, mid Jan',
+    ms: '2027-01-14', me: '2027-03-11', live: '2027-01-10',
+    rec: 'Travel Domestic, announced in February 2025, for a platform with 10 million+ users. Kredivo is also named as an Igloo Tech Solutions client.',
+    why: 'KAI opens Lebaran train tickets 45 days before departure. This year sales opened on 25 January for 11 March departures; with Lebaran on 10 and 11 March 2027, the first mudik bookings open in mid January.',
+    plan: 'Put Travel Domestic at the checkout for mudik tickets paid with Kredivo, live before sales open, with the attach target set for the 45-day booking window.',
+    line: 'Lebaran train tickets go on sale 45 days out, which puts the first mudik bookings in mid January. Travel Domestic is already live with you; let\'s be at that checkout the morning sales open.' },
+  { name: 'TrueMoney', mkt: 'Thailand', kind: 'e-wallet', tpl: 'variant',
+    play: 'A seven-day Songkran accident top-up', mom: 'Songkran\'s seven dangerous days, mid Apr',
+    ms: '2027-04-10', me: '2027-04-17', live: '2027-04-01',
+    rec: 'Critical illness, personal accident and hospital cover in the app since August 2024; cover for cars and motorcycles added in February 2025.',
+    why: 'Thailand counts road accidents through Songkran\'s seven dangerous days every year; in 2026 that ran 10 to 16 April, with motorcycles the biggest risk group.',
+    plan: 'A seven-day accident top-up for riders and drivers already covered in TrueMoney, filed as a variant of the live accident product.',
+    line: 'Your users already insure their bikes with us in TrueMoney. Songkran\'s seven days are when Thailand watches its roads hardest; let\'s sell the week, not just the year.' },
+  { name: 'ZaloPay', mkt: 'Vietnam', kind: 'e-wallet', tpl: 'newtype',
+    play: 'Rain cover on the DANA template', mom: 'Southern rains from May',
+    ms: '2027-05-01', me: '2027-07-01', live: '2027-05-01',
+    rec: 'Phone Screen Protection, announced April 2024, for 14 million+ regular users.',
+    why: 'Ho Chi Minh City\'s rainy season runs roughly May to November, and the afternoon downpours hit delivery riders, drivers and small sellers every week of it.',
+    plan: 'Rain cover built from DANA\'s: satellite rainfall plus GPS, paid without a claim form. A new product type in Vietnam, so the insurer and regulator filing is the long gate.',
+    line: 'Your users in Ho Chi Minh City lose income to rain from May. We launched Rain Protection with DANA at Rp500 a policy, paid by satellite and GPS; let\'s have it in ZaloPay before the first storm.' },
+  { name: 'GCash', mkt: 'Philippines', kind: 'e-wallet', tpl: 'newtype',
+    play: 'Rain cover before the habagat', mom: 'Rainy season declared, early June',
+    ms: '2027-05-29', me: '2027-07-01', live: '2027-05-15',
+    rec: 'Online shopping protection since September 2021, underwritten by PGA Sompo, covering purchases paid with GCash on marketplaces such as Lazada and Shopee.',
+    why: 'PAGASA declared the rainy season on 4 June this year and on 2 June last year, as the southwest monsoon set in.',
+    plan: 'The DANA template again, filed with a Philippine insurer and live before PAGASA\'s declaration rather than after it.',
+    line: 'When PAGASA declares the rainy season, every commuter in Metro Manila feels it the same morning. Rain cover that pays itself from satellite data belongs in GCash before that week.' }
+];
+
+var MODE = 'serial';
+
+/* ---------- scheduler ---------- */
+function inFz(t) { return t >= FZ0 && t <= FZ1; }
+function addD(t, n, fz) {
+  if (!fz) return t + n * DAY;
+  var left = n, x = t;
+  while (left > 0) { if (!inFz(x)) left--; x += DAY; }
+  return x;
+}
+function sched(gates, mode, start, fz) {
+  var st = {}, en = {}, prev = start, fin = start;
+  gates.forEach(function (g) {
+    var s0;
+    if (mode === 'serial') s0 = prev;
+    else { s0 = start; g.deps.forEach(function (d) { if (en[d] > s0) s0 = en[d]; }); }
+    var dur = Math.max(0, +(mode === 'serial' ? g.s : g.p) || 0);
+    var e = addD(s0, dur, fz && g.fz);
+    st[g.id] = s0; en[g.id] = e; prev = e; if (e > fin) fin = e;
+  });
+  return { st: st, en: en, fin: fin };
+}
+function compute(r) {
+  var gates = TPL[r.tpl].gates, live = U(r.live), out = { gates: gates };
+  if (r.fixed) {
+    var f = U(r.fixed), s = sched(gates, MODE, f, true);
+    out.start = f; out.sch = s; out.L = s.fin;
+    out.slack = days(s.fin, live);
+    out.cls = out.slack >= 0 ? 'ok' : 'miss';
+    out.txt = out.slack >= 0
+      ? 'Signed 20 Nov, live ' + fmt(s.fin) + ', ' + out.slack + ' days to spare'
+      : 'Signed 20 Nov, live ' + fmt(s.fin) + ', ' + (-out.slack) + ' days after its date';
+  } else {
+    var rel = sched(gates, MODE, 0, false), S = live - rel.fin;
+    var s2 = sched(gates, MODE, S, false);
+    out.start = S; out.sch = s2; out.L = live;
+    out.slack = days(T, S);
+    if (out.slack < 0) { out.cls = 'miss'; out.txt = 'Missed at this clock: needed to start ' + fmt(S); }
+    else if (out.slack === 0) { out.cls = 'tight'; out.txt = 'Start today'; }
+    else if (out.slack <= 14) { out.cls = 'tight'; out.txt = 'Start by ' + fmt(S) + ', ' + out.slack + ' days'; }
+    else { out.cls = 'ok'; out.txt = 'Start by ' + fmt(S) + ', ' + out.slack + ' days of slack'; }
+  }
+  return out;
+}
+
+/* ---------- static render ---------- */
+function decor() {
+  var h = '';
+  h += '<span class="t-past" style="width:' + pct(T) + '%"></span>';
+  h += '<span class="t-sff" style="left:' + pct(SFF0) + '%;width:' + (pct(SFF1) - pct(SFF0)) + '%"></span>';
+  h += '<span class="t-fz" style="left:' + pct(FZ0) + '%;width:' + (pct(FZ1 + DAY) - pct(FZ0)) + '%"></span>';
+  h += '<span class="t-be" style="left:' + pct(YE) + '%"></span>';
+  return h;
+}
+function renderMonths() {
+  var h = '';
+  for (var i = 0; i < 9; i++) {
+    var d = new Date(AX0); d.setUTCMonth(d.getUTCMonth() + i);
+    var t = d.getTime(), m = d.getUTCMonth();
+    var lab = MON[m];
+    h += '<span class="' + (m === 0 ? 'yr' : '') + '" style="left:' + pct(t) + '%">' + lab + '</span>';
+  }
+  if (T >= AX0 && T < AX1) h += '<i class="t" style="left:' + pct(T) + '%">Today</i>';
+  h += '<i class="s" style="left:' + pct(SFF0 + DAY) + '%">SFF</i>';
+  h += '<i class="b" style="left:' + pct(YE) + '%">31 Dec</i>';
+  $('#months').innerHTML = h;
+}
+function renderRows() {
+  var h = '';
+  ROWS.forEach(function (r, i) {
+    var gates = TPL[r.tpl].gates;
+    h += '<div class="row" id="row-' + i + '">';
+    h += '<button type="button" class="row-main grid-row" aria-expanded="false" aria-controls="det-' + i + '" data-i="' + i + '">';
+    h += '<span class="meta"><span class="who"><span class="name">' + esc(r.name) + '</span><span class="mkt">' + esc(r.mkt) + ', ' + esc(r.kind) + '</span></span>';
+    h += '<span class="play">' + esc(r.play) + '</span>';
+    h += '<span class="mom">Moment: ' + esc(r.mom) + '. Live by ' + fmt(U(r.live)) + '.</span>';
+    h += '<span class="status" id="st-' + i + '"></span></span>';
+    h += '<span class="track" aria-hidden="true">' + decor();
+    h += '<span class="t-mom" style="left:' + pct(U(r.ms)) + '%;width:' + Math.max(0.8, pct(U(r.me)) - pct(U(r.ms))) + '%"></span>';
+    h += '<span class="t-late" id="late-' + i + '"></span>';
+    gates.forEach(function (g, gi) {
+      h += '<span class="t-g ' + g.w + '" id="g-' + i + '-' + g.id + '" style="top:' + (6 + gi * 7) + 'px"></span>';
+    });
+    h += '<span class="t-live" style="left:' + pct(U(r.live)) + '%"></span>';
+    if (T >= AX0 && T < AX1) h += '<span class="t-today" style="left:' + pct(T) + '%"></span>';
+    h += '</span></button>';
+    h += '<div class="detail" id="det-' + i + '" hidden></div>';
+    h += '</div>';
+  });
+  $('#rows').innerHTML = h;
+}
+function detailHTML(r, c) {
+  var h = '<div class="dgrid">';
+  h += '<div><h4>On record</h4><p>' + esc(r.rec) + '</p></div>';
+  h += '<div><h4>The moment</h4><p>' + esc(r.why) + '</p></div>';
+  h += '<div><h4>The play</h4><p>' + esc(r.plan) + '</p></div></div>';
+  h += '<div class="gates"><h4>The gates: one after another, then in parallel</h4>';
+  c.gates.forEach(function (g) {
+    var a = MODE === 'serial' ? '<b>' + g.s + '</b> &rarr; ' + g.p : g.s + ' &rarr; <b>' + g.p + '</b>';
+    var who = g.w === 'them' ? 'partner' : (g.w === 'us' ? 'Igloo' : 'insurer');
+    var when = fmt(c.sch.st[g.id]) + ' to ' + fmt(c.sch.en[g.id]);
+    h += '<div class="gate"><i class="sw ' + g.w + '"></i><span class="gn">' + esc(g.n) + '<span class="gw">' + who + '</span></span><span class="gd">' + a + ' days</span>';
+    h += '<span class="gk"><em>' + when+'.</em> Kit: ' + esc(g.k) + '</span></div>';
+  });
+  h += '</div>';
+  h += '<div class="open-line"><h4>' + esc(r.lineH || 'Opening line for the account review') + '</h4><p>&ldquo;' + esc(r.line) + '&rdquo;</p></div>';
+  return h;
+}
+
+/* ---------- update ---------- */
+var LAST = [];
+function update() {
+  var miss = 0, q4 = 0, slackSum = 0, buckets = [0, 0, 0, 0, 0, 0];
+  LAST = ROWS.map(function (r, i) {
+    var c = compute(r);
+    var st = $('#st-' + i);
+    st.className = 'status ' + c.cls; st.textContent = c.txt;
+    c.gates.forEach(function (g) {
+      var el = $('#g-' + i + '-' + g.id);
+      if (!el) return;
+      var a = c.sch.st[g.id], b = c.sch.en[g.id];
+      el.style.left = pct(a) + '%';
+      el.style.width = Math.max(0, pct(b) - pct(a)) + '%';
+    });
+    var late = $('#late-' + i);
+    if (r.fixed && c.slack < 0) { late.style.left = pct(U(r.live)) + '%'; late.style.width = (pct(c.L) - pct(U(r.live))) + '%'; late.style.opacity = 1; }
+    else if (!r.fixed && c.slack < 0) { late.style.left = pct(c.start) + '%'; late.style.width = (pct(T) - pct(c.start)) + '%'; late.style.opacity = 1; }
+    else { late.style.opacity = 0; late.style.width = '0%'; }
+    if (c.cls === 'miss') miss++;
+    if (c.start < YE) q4++;
+    slackSum += c.slack;
+    var d = new Date(c.start), mi = (d.getUTCFullYear() - 2026) * 12 + d.getUTCMonth() - 9;
+    buckets[Math.max(0, Math.min(5, mi))]++;
+    var det = $('#det-' + i);
+    if (!det.hidden) det.innerHTML = detailHTML(r, c);
+    return c;
+  });
+  var avg = Math.round(slackSum / ROWS.length);
+  $('#v-miss').textContent = miss;
+  $('#mt-miss .ml').textContent = miss === 1 ? 'moment missed' : 'moments missed';
+  $('#v-q4').textContent = q4 + ' of ' + ROWS.length;
+  $('#v-slack').textContent = avg;
+  $('#mt-miss').className = 'metric ' + (miss ? 'bad' : 'good');
+  $('#mt-q4').className = 'metric ' + (q4 > 6 ? 'bad' : '');
+  $('#mt-slack').className = 'metric ' + (avg >= 45 ? 'good' : '');
+  var bank = LAST[3];
+  var said = MODE === 'serial'
+    ? '<b>One gate after another:</b> ' + q4 + ' of ' + ROWS.length + ' plays must start before 31 December, while you are at SFF and closing the year, and ' + (miss === 0 ? 'none misses its moment' : (miss === 1 ? 'one misses its moment' : (['two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][miss - 2] || miss) + ' miss their moments')) + '. The bank signed at SFF goes live ' + fmt(bank.L) + ', ' + (bank.slack < 0 ? 'after Lebaran.' : 'in time.')
+    : '<b>In parallel, off a launch kit:</b> ' + q4 + ' of ' + ROWS.length + ' plays start before 31 December and ' + (miss === 0 ? 'nothing misses' : (miss === 1 ? 'one still misses' : miss + ' still miss')) + '. The same SFF signature goes live ' + fmt(bank.L) + ', ' + (bank.slack >= 0 ? 'before mudik, even with the year-end change freeze.' : 'still late.') + ' Same signatures, a season apart.';
+  $('#said').innerHTML = said;
+  var bh = '', bx = '', labs = ['Oct', 'Nov', 'Dec', 'Jan 27', 'Feb', 'Mar+'];
+  buckets.forEach(function (n, k) {
+    bh += '<div class="hb' + (k < 3 ? ' q4' : '') + '"><span class="c">' + n + '</span><span class="bar-v" style="height:' + Math.round(n / ROWS.length * 100) + '%"></span></div>';
+    bx += '<span>' + labs[k] + '</span>';
+  });
+  $('#hist-bars').innerHTML = bh;
+  $('#hist-x').innerHTML = bx;
+  $('#hist').setAttribute('aria-label', 'Plays that must start each month: ' + labs.map(function (l, k) { return l + ' ' + buckets[k]; }).join(', '));
+}
+
+/* ---------- chips ---------- */
+function renderChips() {
+  function chip(k, v, t) {
+    var n = days(T, t);
+    var big = n > 0 ? n + '<small>days</small>' : (n === 0 ? 'today' : 'passed');
+    return '<div class="chip"><div class="k">' + k + '</div><div class="v">' + v + '</div><div class="n mono">' + big + '</div></div>';
+  }
+  $('#chips').innerHTML =
+    chip('Singapore FinTech Festival, the week bank MOUs get signed', '18 to 20 Nov', SFF0) +
+    chip('Your adjusted EBITDA breakeven target', '31 Dec 2026', BE) +
+    chip('Lebaran 2027, Indonesia\'s biggest travel week', '10 and 11 Mar', U('2027-03-10'));
+  $('#today-s').textContent = fmtY(T);
+}
+
+/* ---------- clocks editor ---------- */
+function renderEditor() {
+  var h = '';
+  Object.keys(TPL).forEach(function (key) {
+    var t = TPL[key];
+    h += '<div class="edg"><h3>' + esc(t.title) + '</h3><p class="who2">Used for ' + esc(t.used) + '</p>';
+    h += '<div class="edr h"><span>Gate</span><span>After</span><span>Parallel</span></div>';
+    t.gates.forEach(function (g, gi) {
+      h += '<div class="edr"><span>' + esc(g.n) + '</span>';
+      h += '<input type="number" inputmode="numeric" min="0" max="365" value="' + g.s + '" data-k="' + key + '" data-g="' + gi + '" data-f="s" aria-label="' + esc(g.n) + ', days one after another">';
+      h += '<input type="number" inputmode="numeric" min="0" max="365" value="' + g.p + '" data-k="' + key + '" data-g="' + gi + '" data-f="p" aria-label="' + esc(g.n) + ', days in parallel"></div>';
+    });
+    h += '</div>';
+  });
+  $('#ed').innerHTML = h;
+}
+
+/* ---------- events ---------- */
+function setMode(m) {
+  MODE = m;
+  $('#m-par').classList.remove('nudge');
+  $('#m-serial').setAttribute('aria-pressed', m === 'serial' ? 'true' : 'false');
+  $('#m-par').setAttribute('aria-pressed', m === 'par' ? 'true' : 'false');
+  update();
+}
+$('#m-serial').addEventListener('click', function () { setMode('serial'); });
+$('#m-par').addEventListener('click', function () { setMode('par'); });
+$('#rows').addEventListener('click', function (e) {
+  var b = e.target.closest('.row-main'); if (!b) return;
+  var i = +b.getAttribute('data-i'), det = $('#det-' + i), row = $('#row-' + i);
+  var open = det.hidden;
+  if (open) det.innerHTML = detailHTML(ROWS[i], LAST[i] || compute(ROWS[i]));
+  det.hidden = !open;
+  b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  row.classList.toggle('open', open);
+});
+$('#ed').addEventListener('input', function (e) {
+  var t = e.target; if (!t.matches('input')) return;
+  var v = Math.max(0, Math.min(365, parseInt(t.value, 10) || 0));
+  TPL[t.getAttribute('data-k')].gates[+t.getAttribute('data-g')][t.getAttribute('data-f')] = v;
+  update();
+});
+$('#reset').addEventListener('click', function () {
+  TPL = JSON.parse(JSON.stringify(DEF));
+  renderEditor(); update();
+});
+$('#clocks').addEventListener('toggle', function () {
+  $('#clocks .pm').textContent = this.open ? '−' : '+';
+});
+
+renderChips();
+renderMonths();
+renderRows();
+renderEditor();
+update();
+})();
+</script>
+</body>
+</html>
