@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>150 Partnership Map</title>
+<meta name="description" content="A broker-first partnership map for 150 in India: which group-health brokers and benefits platforms to walk into first, which insurers come second, what proof each one needs, and the math on how many engaged lives it takes to prove a claims drop.">
+<meta property="og:title" content="150 Partnership Map">
+<meta property="og:description" content="Brokers bring the cohort, the cohort brings the number, the number opens the insurer.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #f3f1ea;
+  --card: #ffffff;
+  --ink: #14202b;
+  --soft: #4f5d6a;
+  --faint: #7f8b96;
+  --rule: #dcd7cb;
+  --rule-soft: #ebe7de;
+  --accent: #0e6e5b;
+  --accent-ink: #ffffff;
+  --accent-wash: #dcefe8;
+  --w1: #2a56c9;
+  --w1-wash: #e3eafb;
+  --w2: #9a5400;
+  --w2-wash: #f8ead6;
+  --w3: #7438bd;
+  --w3-wash: #eee5fa;
+  --bad: #b23a1e;
+  --bad-wash: #f9e2da;
+  --bar: #c9c3b5;
+  --shadow: 0 1px 2px rgba(20,32,43,.06), 0 10px 28px rgba(20,32,43,.06);
+  --fd: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
+  --fb: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fm: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1418;
+    --card: #151d23;
+    --ink: #e6ecef;
+    --soft: #a2afb9;
+    --faint: #72808a;
+    --rule: #27333b;
+    --rule-soft: #1d272e;
+    --accent: #5fd0b5;
+    --accent-ink: #0b1a16;
+    --accent-wash: #12302a;
+    --w1: #93b2ff;
+    --w1-wash: #18243f;
+    --w2: #f1b45c;
+    --w2-wash: #33250f;
+    --w3: #c9a3f6;
+    --w3-wash: #2a1d3d;
+    --bad: #ff9478;
+    --bad-wash: #3a1c14;
+    --bar: #3a464f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1418;
+  --card: #151d23;
+  --ink: #e6ecef;
+  --soft: #a2afb9;
+  --faint: #72808a;
+  --rule: #27333b;
+  --rule-soft: #1d272e;
+  --accent: #5fd0b5;
+  --accent-ink: #0b1a16;
+  --accent-wash: #12302a;
+  --w1: #93b2ff;
+  --w1-wash: #18243f;
+  --w2: #f1b45c;
+  --w2-wash: #33250f;
+  --w3: #c9a3f6;
+  --w3-wash: #2a1d3d;
+  --bad: #ff9478;
+  --bad-wash: #3a1c14;
+  --bar: #3a464f;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.5 var(--fb);
+  overflow-wrap: break-word;
+}
+button, input { font: inherit; color: inherit; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* header */
+.top { padding: 22px 0 14px; }
+.kick { margin: 0 0 6px; font: 600 12px/1.3 var(--fm); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 0; font: 600 clamp(26px, 6.4vw, 40px)/1.08 var(--fd); letter-spacing: -.01em; }
+.lede { margin: 8px 0 0; max-width: 62ch; color: var(--soft); font-size: 15.5px; }
+.lede b { color: var(--ink); font-weight: 600; }
+
+/* board */
+.board { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding-bottom: 16px; }
+@media (min-width: 1000px) {
+  .board { grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .calc { position: sticky; top: 14px; }
+}
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow); padding: 16px; min-width: 0; }
+.card h2 { margin: 0; font: 600 19px/1.2 var(--fd); }
+.card .sub { margin: 3px 0 0; color: var(--soft); font-size: 13.5px; }
+
+/* ladder */
+.ladder { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; counter-reset: rung; }
+@media (min-width: 560px) { .ladder { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.ladder li { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 9px; background: var(--card); transition: background .2s, border-color .2s; min-width: 0; }
+.ladder .rn { font: 600 11px/1 var(--fm); color: var(--faint); letter-spacing: .04em; }
+.ladder .rt { display: block; margin-top: 4px; font-weight: 650; font-size: 13.5px; line-height: 1.2; }
+.ladder .rd { display: block; margin-top: 3px; color: var(--soft); font-size: 12px; line-height: 1.35; }
+.ladder li.on { background: var(--accent-wash); border-color: var(--accent); }
+.ladder li.on .rn { color: var(--accent); }
+
+.score { margin: 10px 0 0; font-size: 12.5px; color: var(--soft); line-height: 1.7; }
+.score b { color: var(--ink); font-weight: 650; }
+.score span { display: inline-block; padding: 0 7px; border-radius: 999px; background: var(--rule-soft); color: var(--ink); white-space: nowrap; line-height: 1.6; }
+.score i { font-style: normal; color: var(--faint); }
+
+/* waves */
+.waves { margin-top: 14px; display: grid; gap: 10px; }
+.wave { border-radius: 12px; padding: 10px 11px 11px; border: 1px solid var(--rule-soft); }
+.wave[data-w="1"] { background: var(--w1-wash); }
+.wave[data-w="2"] { background: var(--w2-wash); }
+.wave[data-w="3"] { background: var(--w3-wash); }
+.wh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.wtag { font: 700 11px/1.2 var(--fm); letter-spacing: .05em; text-transform: uppercase; }
+.wave[data-w="1"] .wtag { color: var(--w1); }
+.wave[data-w="2"] .wtag { color: var(--w2); }
+.wave[data-w="3"] .wtag { color: var(--w3); }
+.wt { font-weight: 650; font-size: 14.5px; }
+.wn { flex-basis: 100%; color: var(--soft); font-size: 12.5px; line-height: 1.35; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip {
+  appearance: none; cursor: pointer; border: 1px solid var(--rule); background: var(--card);
+  border-radius: 999px; padding: 6px 11px; font-size: 13.5px; font-weight: 600; line-height: 1.2;
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%; text-align: left;
+}
+.chip .ord { font: 600 11px/1 var(--fm); color: var(--faint); }
+.chip:hover { border-color: var(--soft); }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wave[data-w="1"] .chip[aria-pressed="true"] { background: var(--w1); border-color: var(--w1); color: var(--card); }
+.wave[data-w="2"] .chip[aria-pressed="true"] { background: var(--w2); border-color: var(--w2); color: var(--card); }
+.wave[data-w="3"] .chip[aria-pressed="true"] { background: var(--w3); border-color: var(--w3); color: var(--card); }
+.chip[aria-pressed="true"] .ord { color: inherit; opacity: .8; }
+
+/* detail */
+.det { margin-top: 12px; border: 1px solid var(--rule); border-radius: 12px; padding: 12px 13px; background: var(--card); }
+.dh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.dn { margin: 0; font: 600 18px/1.2 var(--fd); }
+.dk { color: var(--soft); font-size: 12.5px; }
+.pill { display: inline-block; font: 600 11px/1.2 var(--fm); padding: 3px 7px; border-radius: 999px; background: var(--accent-wash); color: var(--accent); letter-spacing: .03em; }
+.det dl { margin: 8px 0 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 7px; }
+@media (min-width: 620px) { .det dl { grid-template-columns: 110px minmax(0, 1fr); gap: 7px 12px; } }
+.det dt { font: 600 11px/1.5 var(--fm); text-transform: uppercase; letter-spacing: .05em; color: var(--faint); padding-top: 1px; }
+.det dd { margin: 0; font-size: 14px; }
+@media (max-width: 619px) { .det dd { margin-top: -5px; } }
+.rule { margin-top: 12px; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--rule-soft); border-radius: 0 10px 10px 0; font-size: 13.5px; color: var(--soft); }
+.rule b { color: var(--ink); }
+
+/* calculator */
+.seg { display: grid; grid-template-columns: 1fr 1fr; margin-top: 12px; border: 1px solid var(--rule); border-radius: 10px; padding: 3px; gap: 3px; background: var(--rule-soft); }
+.seg button { appearance: none; border: 0; background: transparent; border-radius: 8px; padding: 7px 6px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--soft); }
+.seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.segnote { margin: 6px 0 0; font-size: 12px; color: var(--faint); line-height: 1.4; }
+.knobs { margin: 14px 0 0; font-size: 13.5px; font-weight: 650; }
+.lg { font-weight: 500; color: var(--faint); font-size: 12px; }
+.ins { margin-top: 6px; display: grid; gap: 9px; }
+@media (min-width: 1000px) { .ins { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; } .in label { min-height: 2.9em; align-items: flex-end; } }
+.in label { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--soft); }
+.in label span:first-child { min-width: 0; }
+.in output { font: 600 13px/1.4 var(--fm); color: var(--ink); white-space: nowrap; }
+.in input[type="range"] { width: 100%; margin: 3px 0 0; accent-color: var(--accent); height: 22px; }
+.tiles { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tile { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.tile .tv { display: block; font: 650 19px/1.15 var(--fm); letter-spacing: -.01em; }
+.tile .tl { display: block; margin-top: 3px; font-size: 11.5px; color: var(--soft); line-height: 1.3; }
+.tile.key { background: var(--accent-wash); border-color: var(--accent); }
+.tile.key .tv { color: var(--accent); }
+.proof { margin-top: 12px; }
+.proof h3 { margin: 0 0 6px; font-size: 13.5px; font-weight: 650; }
+.br { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; margin-bottom: 7px; }
+.br .bl { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--soft); }
+.br .bl b { font: 600 12.5px/1.4 var(--fm); color: var(--ink); white-space: nowrap; }
+.track { position: relative; height: 10px; border-radius: 6px; background: var(--rule-soft); overflow: hidden; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: var(--bar); transition: width .25s; }
+.br.have .fill { background: var(--accent); }
+.br.claims .fill { background: var(--bad); }
+.br.bio .fill { background: var(--w1); }
+.axis { display: flex; justify-content: space-between; font: 500 10.5px/1 var(--fm); color: var(--faint); margin-top: 2px; }
+.verdict { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--rule-soft); font-size: 13.5px; }
+.verdict b { font-weight: 650; }
+details.how { margin-top: 10px; font-size: 12.5px; color: var(--soft); }
+details.how summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+details.how p { margin: 6px 0 0; }
+details.how code { font: 12px/1.4 var(--fm); color: var(--ink); }
+
+/* footer */
+.foot { padding: 4px 16px 30px; color: var(--soft); font-size: 13.5px; }
+.foot .ask { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); font-size: 14.5px; }
+.foot p { margin: 8px 0 0; max-width: 80ch; }
+.foot .fine { font-size: 12px; color: var(--faint); }
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <p class="kick">For Ajay Bulusu, 150</p>
+  <h1>The broker-first partnership map</h1>
+  <p class="lede"><b>Brokers bring the cohort. The cohort brings the number. The number opens the insurer.</b> Tap any name for why now, the proof they need to see, and the first ask.</p>
+</header>
+
+<main class="wrap board">
+  <section class="card map" aria-labelledby="map-h">
+    <h2 id="map-h">Who first, who second, what each one needs</h2>
+    <p class="sub">The proof ladder. Each target needs one rung; each wave earns the rung the next wave asks for.</p>
+    <ol class="ladder" id="ladder">
+      <li data-r="1"><span class="rn">RUNG 1</span><span class="rt">Activation</span><span class="rd">offered employees who finish bloodwork and are still wearing the band at day 30</span></li>
+      <li data-r="2"><span class="rn">RUNG 2</span><span class="rt">Biomarker shift</span><span class="rd">out of everything 150 measures, the ones an underwriter already reads: HbA1c, LDL, blood pressure, at 6 months</span></li>
+      <li data-r="3"><span class="rn">RUNG 3</span><span class="rt">Pooled claims</span><span class="rd">claim frequency, engaged vs matched, across several books</span></li>
+      <li data-r="4"><span class="rn">RUNG 4</span><span class="rt">Loss ratio</span><span class="rd">the only number an insurer's P&amp;L owner signs on</span></li>
+    </ol>
+    <p class="score"><b>The weekly scoreboard, per employer:</b> <span>offered</span> <i>&gt;</i> <span>enrolled</span> <i>&gt;</i> <span>bloodwork done</span> <i>&gt;</i> <span>band on at day 30</span> <i>&gt;</i> <span>flagged to a physician</span> <i>&gt;</i> <span>re-tested at 6 months</span>. Every conversation on this map is fed by these six numbers.</p>
+    <div class="waves" id="waves"></div>
+    <article class="det" id="det" aria-live="polite"></article>
+    <p class="rule" id="rule"><b>The rule that sets the order.</b> Under IRDAI's wellness framework, first set out in its circular of 4 Sep 2020 (IRDAI/HLT/REG/CIR/233/09/2020), insurers can reward wellness with renewal discounts, but the feature and its reward method have to be filed with the product and offered alike to similarly placed members. So 150 either rides a feature an insurer has already filed, or sits outside the policy as an employer-paid benefit that a broker places. The second route is open today, and it is where the data comes from.</p>
+  </section>
+
+  <section class="card calc" aria-labelledby="calc-h">
+    <h2 id="calc-h">The proof math</h2>
+    <p class="sub">What an insurer saves on one broker's cohort, and how many engaged lives it takes to prove it.</p>
+    <div class="seg" role="group" aria-label="Who 150 is offered to">
+      <button type="button" id="m-all" aria-pressed="true">Whole book</button>
+      <button type="button" id="m-hr" aria-pressed="false">High-risk slice</button>
+    </div>
+    <p class="segnote" id="segnote"></p>
+    <div class="tiles" id="tiles"></div>
+    <div class="proof">
+      <h3>Engaged lives needed to prove it in a year <span class="lg">(log scale)</span></h3>
+      <div id="bars"></div>
+      <div class="axis" aria-hidden="true"><span>10</span><span>100</span><span>1k</span><span>10k</span><span>1 lakh</span><span>10 lakh</span><span>1 cr</span></div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+    <h3 class="knobs">Move the assumptions</h3>
+    <div class="ins" id="ins"></div>
+    <details class="how" id="how">
+      <summary>How the math works, and what is assumed</summary>
+      <p><code>engaged = offered lives x engaged %</code>. Claims avoided a year <code>= engaged x baseline frequency x drop</code>; cost saved multiplies that by the average claim. Loss-ratio points <code>= cost saved / (covered lives x premium per life)</code>. "Claims savings can fund" <code>= frequency x drop x average claim</code>: the most an insurer could pay per engaged member a year out of the claims line alone and break even.</p>
+      <p>Proof sizes use a two-arm comparison (engaged vs matched non-engaged) at the usual 5% two-sided significance and 80% power. Claims: two-proportion formula on the annual claim rate. HbA1c: difference in means with a standard deviation of 1.0 point assumed.</p>
+      <p>Every slider default is a planning assumption, not a 150 or insurer figure. For scale: across all Indian health insurance in FY25, about 3.26 crore claims were settled for about Rs 94,248 crore (IRDAI annual report), roughly Rs 29,000 a claim. The high-risk slice is the 26.7% of Indian adults with diabetes (11.4%) or prediabetes (15.3%) in the ICMR-INDIAB study (Lancet Diabetes &amp; Endocrinology, 2023), assumed here to claim at twice the book's rate. Insured employees and their families ran higher in Loop's Workforce Health Index 2026, with 38.7% of HbA1c results in the prediabetes or diabetes range. A matched design that uses each member's prior-year claims trims the claims sample, but not by anything like the gap between the two bars.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="ask">The seat I am asking about: insurance partnerships and B2B2C at 150, when it opens. Twenty minutes before then is enough to test this map against what you already know.</p>
+  <p>I built Simplifai's APAC team selling AI into banks and private general and life insurers, and before that ran a 60+ person sales engine and a 15-city channel network at Torqus, which Dineout acquired. Ketan Sharma, Pune, available now, happy to be in Hyderabad.</p>
+  <p class="fine">Programme and market facts are from each company's own pages and published reports, checked 8 Oct 2026. The sequence, proofs and asks are mine, not anything 150, the brokers or the insurers have announced. Calculator defaults are assumptions; move them.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var WAVES = [
+    { w: 1, tag: "Wave 1, weeks 0 to 10", title: "Digital benefits platforms", note: "Fast yes, startup and mid-size books, tech-first HR buyers. Start in Hyderabad, where 150 is hiring and where Loop's 2026 index found the worst low-HDL rate of five metros. Earns rung 1." },
+    { w: 2, tag: "Wave 2, months 2 to 6", title: "Broking houses", note: "Big employer books under renewal pressure. They already run claims MIS and loss-ratio analysis for each client at renewal, so with consent the claims pool starts here. Earns rung 2." },
+    { w: 3, tag: "Wave 3, month 6 onward", title: "Insurers", note: "Walk in carrying the brokers' pooled number and ask for rungs 3 and 4, not belief. One exception can start earlier, because its filed reward grid already pays on markers." }
+  ];
+
+  var T = [
+    /* WAVE 1 */
+    { id: "loop", w: 1, name: "Loop", kind: "Digital benefits broker, 10 lakh+ lives", rung: 1,
+      why: "Loop crossed 10 lakh covered lives in January 2026, and its Workforce Health Index 2026 (out 28 Sep) found 25.4% of 7,088 HbA1c results in the prediabetes range and 13.3% in the diabetes range. Hyderabad had the worst low-HDL rate of five metros, 50.6%. Its own index is a list of exactly the people 150 is built for.",
+      proof: "Activation on the employees Loop's own check-ups flag: what share enrol, finish 150's bloodwork and are still wearing the band at day 30.",
+      ask: "Loop offers 150 to the employees its own check-ups flag, at two or three Hyderabad employers renewing this quarter: a lite tier (band, one panel, physician review for anyone flagged) with the full programme as the upgrade. 150 sends the scoreboard weekly.",
+      gate: "Day-30 activation clears the bar set together up front; Loop asks to run it across its Hyderabad book." },
+    { id: "plum", w: 1, name: "Plum", kind: "Digital benefits broker, 6,000+ companies", rung: 1,
+      why: "New money: a Rs 193 crore Series B led by Peak XV in March 2026, on 6,000+ companies and 6 lakh lives. Its own 2025 Employee Health Report found 71% of the workforce at moderate risk of chronic disease, yet only 20% of companies offer regular check-ups and only 38% of employees use them.",
+      proof: "Rung 1 measured against the gap Plum itself published: bloodwork completion well above its own 38% check-up usage.",
+      ask: "A 150 add-on in Plum's plan builder for three startup employers, priced per engaged member, with Plum owning the employer and the renewal.",
+      gate: "Completion beats Plum's 38% at all three; 150 becomes a standard add-on in its catalogue." },
+    { id: "paz", w: 1, name: "Pazcare", kind: "Digital benefits broker, 3,000+ companies", rung: 1,
+      why: "3,000+ companies and 14 lakh+ lives, and it is shipping engagement right now: PazGPT in April, Paz Claims AI in August, a Stepathon on 7 Oct 2026. 150 is how a step challenge turns into bloodwork and a physician.",
+      proof: "The challenge crowd converting into bloodwork and physician review, not just steps.",
+      ask: "Bolt 150 onto the end of the next Stepathon: every participant gets a bloodwork offer, and anyone flagged gets a physician.",
+      gate: "Challenge-to-bloodwork conversion holds across two employers." },
+    /* WAVE 2 */
+    { id: "prudent", w: 2, name: "Prudent", kind: "Indian broking house, Hyderabad office", rung: 2,
+      why: "Its Benefits Scorecard 2025-26 covered 3,900 organisations and 20 lakh claims: OPD uptake rose 35% in a year and the typical OPD limit moved from Rs 10,000 to Rs 15,000. Employers are already paying for care outside the hospital; 150 is a measured version of that spend.",
+      proof: "A 6-month biomarker read-out for one large employer, set against the OPD spend it sits beside.",
+      ask: "One employer of 3,000+ lives from its Hyderabad desk, renewing within two quarters, as a measured pilot. 150 carries the measurement; Prudent owns the read-out.",
+      gate: "The read-out goes into Prudent's renewal pack, and that client's claims MIS starts feeding the pool, with consent." },
+    { id: "wtw", w: 2, name: "WTW India", kind: "Global broking house, Hyderabad office", rung: 2,
+      why: "WTW's 2026 Global Medical Trends Survey projects India's gross medical trend at 12.9% for 2026, says fraud, waste and abuse has climbed into India's top three cost drivers, and names India as a market already using AI heavily in wellbeing programmes. 150 is an AI-run, physician-checked wellbeing programme.",
+      proof: "The 6-month biomarker read-out on physician-verified data, which matters to a broker that has just told employers that waste is a top-three driver.",
+      ask: "A pilot inside one tech or GCC employer due for renewal next cycle, scoped so its data can be pooled with other books later.",
+      gate: "WTW's health consultants accept the read-out as renewal evidence." },
+    { id: "aon", w: 2, name: "Aon India", kind: "Global broking house, Hyderabad office", rung: 2,
+      why: "Aon projects India's employee medical cost trend at 11.5% for 2026, against a global 9.8%, and names hypertension, high cholesterol and poor nutrition as the leading risk factors. Two of those, blood pressure and cholesterol, are exactly what a 6-month re-test shows moving.",
+      proof: "A biomarker read-out on exactly those risk factors (BP, LDL, HbA1c) at 6 months, framed as trend avoided per employee.",
+      ask: "One employer client of 3,000+ lives whose read-out lands before its renewal meeting. 150 carries the measurement cost.",
+      gate: "Two employers show the shift; Aon puts the read-out in its own renewal pack." },
+    { id: "marsh", w: 2, name: "Marsh (MMB)", kind: "Global broking house", rung: 2,
+      why: "Mercer Marsh Benefits' Health Trends 2026 puts India's medical trend at 9.9%, with cancer, circulatory and musculoskeletal conditions the top claims by cost. Circulatory risk is what BP and LDL move on.",
+      proof: "Rung 2 led by the circulatory markers, pooled across two or three of its clients so the later claims read has enough lives.",
+      ask: "A pooled pilot across two or three employer clients, designed from day one to feed rung 3.",
+      gate: "Its health and benefits team signs off the pooled design." },
+    { id: "howden", w: 2, name: "Howden India", kind: "Global broking house, Hyderabad office", rung: 2,
+      why: "A new Regional Employee Benefits Director for the Middle East, Africa and India took over in January 2026. A new benefits leader is looking for something fresh to bring to a first renewal cycle.",
+      proof: "Rung 1 and 2 results from the waves before it: a ready-made differentiator, not a science project.",
+      ask: "A first meeting built around the renewal differentiator, then one employer pilot.",
+      gate: "One pilot signed inside the cycle." },
+    /* WAVE 3 */
+    { id: "icici", w: 3, name: "ICICI Lombard", kind: "Private general insurer, large group-health book", rung: 3,
+      why: "Its own corporate case study describes a 5,000-employee IT client where 11% were diabetic, about 36% diabetic or pre-diabetic and over half had obesity, and a two-year programme to lower claims outgo. The case study publishes no outcome number. That gap is 150's opening.",
+      proof: "Pooled claim frequency, engaged vs matched, across the brokers' books, with the biomarker shift that explains it. Rung 3 first, then the loss-ratio translation for its group-health book.",
+      ask: "Run 150 as the measured arm inside one of its corporate wellness programmes for diabetic and pre-diabetic members, with aggregated claims shared back for the read-out.",
+      gate: "A claims read-out its group-health underwriters will price on at renewal." },
+    { id: "abhi", w: 3, name: "Aditya Birla Health", kind: "Standalone health insurer", rung: 2,
+      why: "Activity is already a currency here. HealthReturns pays back up to 100% of premium on Active Dayz and a Healthy Heart Score, and Activ One VYTL carries Chronic HealthReturns with a chronic management programme. Because its filed reward grid already pays on markers, this is the one insurer where rung 2 is enough to start.",
+      proof: "That 150's band and physician protocol move the inputs ABHI already scores (activity, heart-score markers) on chronic members, with data it can audit.",
+      ask: "A data pilot on a slice of Activ One VYTL chronic members: 150's tracked activity and lab results count toward the grid ABHI already filed. No new product filing.",
+      gate: "Shared members' scores move; ABHI opens a referral route both ways." },
+    { id: "niva", w: 3, name: "Niva Bupa", kind: "Standalone health insurer", rung: 3,
+      why: "ReAssure 2.0's Live Healthy benefit gives up to 30% off the renewal premium on step count. The insurer has already filed the idea that tracked behaviour earns money back, and the plan includes a health check-up from day one: the data loop exists, the physician layer is what 150 adds.",
+      proof: "The pooled claims read from the brokers' cohorts, plus step data from 150's band clean enough to count.",
+      ask: "Let 150-tracked activity count for Live Healthy, and offer 150 to ReAssure 2.0 policyholders who want the clinical layer: B2B2C through the insurer's own retail book.",
+      gate: "Data source accepted; renewal retention on shared members measured." },
+    { id: "tata", w: 3, name: "Tata AIA Life", kind: "Private life insurer", rung: 4,
+      why: "Its Vitality riders cut rider premiums by up to 30% from year two on Vitality wellness status, so a life insurer is already pricing tracked wellness. Life money moves on persistency and morbidity, slower than health claims.",
+      proof: "Engagement that lasts past year one, and the health insurers' loss-ratio numbers as outside proof. Last in line on purpose.",
+      ask: "Later, not now: a referral and data partnership for 150 members once two health insurers have priced the pooled number.",
+      gate: "Only after rung 4 exists with a health insurer." }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  /* ---------- map ---------- */
+  var sel = null;
+  function renderWaves() {
+    var html = "";
+    WAVES.forEach(function (wv) {
+      var n = 0;
+      html += '<section class="wave" data-w="' + wv.w + '"><div class="wh"><span class="wtag">' + esc(wv.tag) + '</span><span class="wt">' + esc(wv.title) + '</span><span class="wn">' + esc(wv.note) + '</span></div><div class="chips">';
+      T.forEach(function (t) {
+        if (t.w !== wv.w) return;
+        n++;
+        html += '<button type="button" class="chip" data-id="' + t.id + '" aria-pressed="false" aria-controls="det"><span class="ord">' + wv.w + '.' + n + '</span>' + esc(t.name) + '</button>';
+      });
+      html += '</div></section>';
+    });
+    $("waves").innerHTML = html;
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (b) {
+      b.addEventListener("click", function () { pick(b.getAttribute("data-id")); });
+    });
+  }
+  function pick(id) {
+    var t = null;
+    T.forEach(function (x) { if (x.id === id) t = x; });
+    if (!t) return;
+    sel = id;
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-id") === id ? "true" : "false");
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#ladder li"), function (li) {
+      li.classList.toggle("on", Number(li.getAttribute("data-r")) === t.rung);
+    });
+    var rungName = ["", "Activation", "Biomarker shift", "Pooled claims", "Loss ratio"][t.rung];
+    $("det").innerHTML =
+      '<div class="dh"><h3 class="dn">' + esc(t.name) + '</h3><span class="dk">' + esc(t.kind) + '</span><span class="pill">NEEDS RUNG ' + t.rung + ': ' + esc(rungName).toUpperCase() + '</span></div>' +
+      '<dl><dt>Why now</dt><dd>' + esc(t.why) + '</dd>' +
+      '<dt>Proof</dt><dd>' + esc(t.proof) + '</dd>' +
+      '<dt>First ask</dt><dd>' + esc(t.ask) + '</dd>' +
+      '<dt>Moves on when</dt><dd>' + esc(t.gate) + '</dd></dl>';
+  }
+
+  /* ---------- calculator ---------- */
+  var HR_SHARE = 0.267, HR_MULT = 2, SD_A1C = 1.0;
+  var Z2 = Math.pow(1.959964 + 0.841621, 2);
+  var IN = [
+    { k: "lives", label: "Covered lives in the broker's cohort", min: 1000, max: 200000, step: 1000, v: 20000, f: function (v) { return fmtInt(v); } },
+    { k: "act", label: "Engaged: finish bloodwork, keep the band on", min: 5, max: 80, step: 1, v: 30, f: function (v) { return v + "%"; } },
+    { k: "freq", label: "Hospital claims per 100 covered lives a year", min: 2, max: 20, step: 0.5, v: 6, f: function (v) { return v.toFixed(1); } },
+    { k: "drop", label: "Drop in claim frequency among the engaged", min: 2, max: 30, step: 1, v: 10, f: function (v) { return v + "%"; } },
+    { k: "claim", label: "Average claim", min: 10000, max: 150000, step: 5000, v: 40000, f: function (v) { return "Rs " + fmtInt(v); } },
+    { k: "prem", label: "Premium per covered life a year", min: 2000, max: 30000, step: 500, v: 6000, f: function (v) { return "Rs " + fmtInt(v); } },
+    { k: "a1c", label: "HbA1c drop on the engaged at 6 months", min: 0.1, max: 1, step: 0.05, v: 0.3, f: function (v) { return v.toFixed(2) + " pts"; } }
+  ];
+  var mode = "all";
+  var S = {};
+
+  function fmtInt(n) {
+    n = Math.round(n);
+    var s = String(Math.abs(n)), last3 = s.slice(-3), rest = s.slice(0, -3);
+    if (rest) last3 = "," + last3;
+    rest = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+    return (n < 0 ? "-" : "") + rest + last3;
+  }
+  function fmtRs(x) {
+    if (x >= 1e7) return "Rs " + (x / 1e7).toFixed(2) + " cr";
+    if (x >= 1e5) return "Rs " + (x / 1e5).toFixed(1) + " lakh";
+    return "Rs " + fmtInt(x);
+  }
+  function fmtN(x) {
+    if (!isFinite(x)) return "n/a";
+    if (x >= 1e7) return (x / 1e7).toFixed(1) + " crore";
+    if (x >= 1e5) return (x / 1e5).toFixed(1) + " lakh";
+    return fmtInt(x);
+  }
+  function nClaims(p1, r) {
+    var p2 = p1 * (1 - r), d = p1 - p2;
+    if (d <= 0) return Infinity;
+    return Math.ceil(Z2 * (p1 * (1 - p1) + p2 * (1 - p2)) / (d * d));
+  }
+  function nBio(delta, sd) { return Math.ceil(2 * Z2 * sd * sd / (delta * delta)); }
+
+  function renderInputs() {
+    var html = "";
+    IN.forEach(function (d) {
+      S[d.k] = d.v;
+      html += '<div class="in"><label for="i-' + d.k + '"><span>' + esc(d.label) + '</span><output id="o-' + d.k + '" for="i-' + d.k + '">' + esc(d.f(d.v)) + '</output></label>' +
+        '<input type="range" id="i-' + d.k + '" min="' + d.min + '" max="' + d.max + '" step="' + d.step + '" value="' + d.v + '"></div>';
+    });
+    $("ins").innerHTML = html;
+    IN.forEach(function (d) {
+      var el = $("i-" + d.k);
+      el.addEventListener("input", function () {
+        S[d.k] = Number(el.value);
+        $("o-" + d.k).textContent = d.f(S[d.k]);
+        calc();
+      });
+    });
+  }
+
+  function setMode(m) {
+    mode = m;
+    $("m-all").setAttribute("aria-pressed", m === "all" ? "true" : "false");
+    $("m-hr").setAttribute("aria-pressed", m === "hr" ? "true" : "false");
+    $("segnote").textContent = m === "all"
+      ? "Offered to every covered life in the cohort, at the book's claim rate."
+      : "Offered only to the 26.7% with diabetes or prediabetes (ICMR-INDIAB), assumed to claim at twice the book's rate.";
+    calc();
+  }
+
+  function pos(v) {
+    if (!isFinite(v)) return 100;
+    var p = (Math.log(Math.max(v, 10)) / Math.LN10 - 1) / 6 * 100;
+    return Math.max(1.5, Math.min(100, p));
+  }
+
+  function calc() {
+    var lives = S.lives, offered = mode === "all" ? lives : lives * HR_SHARE;
+    var engaged = Math.round(offered * S.act / 100);
+    var f = (S.freq / 100) * (mode === "all" ? 1 : HR_MULT);
+    var r = S.drop / 100;
+    var avoided = engaged * f * r;
+    var saved = avoided * S.claim;
+    var lrPts = saved / (lives * S.prem) * 100;
+    var perEngaged = f * r * S.claim;
+    var nc = nClaims(f, r);
+    var nb = nBio(S.a1c, SD_A1C);
+
+    $("tiles").innerHTML =
+      tile(avoided < 10 ? avoided.toFixed(1) : fmtInt(avoided), "hospital claims avoided a year") +
+      tile(fmtRs(saved), "claims cost saved a year") +
+      tile("-" + lrPts.toFixed(2) + " pts", "loss ratio on the whole book") +
+      tile(fmtRs(perEngaged), "what claims savings can fund per engaged member a year", true);
+
+    $("bars").innerHTML =
+      bar("have", "Engaged lives you have", engaged) +
+      bar("claims", "Needed per arm: claims drop", nc) +
+      bar("bio", "Needed per arm: HbA1c drop", nb);
+
+    var v;
+    if (engaged >= nc) {
+      v = "<b>This cohort can prove the claims drop on its own inside a year</b> (" + fmtN(nc) + " engaged per arm needed, " + fmtN(engaged) + " engaged here). Take it straight to an insurer.";
+    } else {
+      var x = nc / Math.max(engaged, 1);
+      v = "<b>The claims drop needs " + fmtN(nc) + " engaged lives per arm, " + (x >= 10 ? fmtInt(x) : x.toFixed(1)) + "x this cohort.</b> The HbA1c drop needs " + fmtN(nb) + ". So sell the first cohorts on biomarkers, and build the claims number by pooling books across a broker before it reaches an insurer.";
+    }
+    if (perEngaged < 1000) {
+      v += " And at " + fmtRs(perEngaged) + " per engaged member, the claims line alone will not pay for a physician-led programme: the employer's benefits budget pays first, which is another reason the broker comes first.";
+    }
+    $("verdict").innerHTML = v;
+  }
+  function tile(v, l, key) {
+    return '<div class="tile' + (key ? " key" : "") + '"><span class="tv">' + esc(v) + '</span><span class="tl">' + esc(l) + '</span></div>';
+  }
+  function bar(cls, label, val) {
+    return '<div class="br ' + cls + '"><div class="bl"><span>' + esc(label) + '</span><b>' + esc(fmtN(val)) + '</b></div><div class="track"><div class="fill" style="width:' + pos(val).toFixed(1) + '%"></div></div></div>';
+  }
+
+  renderWaves();
+  pick(T[0].id);
+  renderInputs();
+  $("m-all").addEventListener("click", function () { setMode("all"); });
+  $("m-hr").addEventListener("click", function () { setMode("hr"); });
+  setMode("all");
+})();
+</script>
+</body>
+</html>
