@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>IBOTIX: first 90 days</title>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with a sticky section bar; the job is "read" like a document (fields, values, confidence). */
+:root{
+  --bg:#F2F5F4; --surface:#FFFFFF; --surface-2:#E8EEEC; --ink:#13201F; --muted:#566563; --line:#D3DCDA;
+  --accent:#0E6B63; --accent-ink:#FFFFFF; --mark:#E9A91F; --mark-soft:rgba(233,169,31,.16);
+  --now:#1F7A4A; --next:#A76A0C; --later:#5E6875;
+  --f-display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1312; --surface:#121C1B; --surface-2:#182523; --ink:#E3ECEA; --muted:#93A5A2; --line:#24322F;
+  --accent:#4EC2B4; --accent-ink:#04201D; --mark:#F0BC4A; --mark-soft:rgba(240,188,74,.13);
+  --now:#5CC58C; --next:#E3AA4B; --later:#9AA4B0; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0C1312; --surface:#121C1B; --surface-2:#182523; --ink:#E3ECEA; --muted:#93A5A2; --line:#24322F;
+  --accent:#4EC2B4; --accent-ink:#04201D; --mark:#F0BC4A; --mark-soft:rgba(240,188,74,.13);
+  --now:#5CC58C; --next:#E3AA4B; --later:#9AA4B0; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6; -webkit-text-size-adjust:100%}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--surface)}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(30px, 6.4vw, 48px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(23px, 4.2vw, 30px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:18px; font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+.mono{font-family:var(--f-mono)}
+.muted{color:var(--muted)}
+
+/* sticky bar */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:500}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+.chips a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
+
+/* hero */
+.hero{padding-block:44px 28px; display:grid; gap:22px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+.docread{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; position:relative}
+.docread .hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:10px 14px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.docread .scan{position:absolute; left:0; right:0; height:46px; top:-46px; background:linear-gradient(180deg, transparent, var(--mark-soft), transparent); animation:scan 2.6s ease-in-out .4s 1 forwards; pointer-events:none}
+@keyframes scan{to{top:100%}}
+.rows{display:grid}
+.row{display:grid; grid-template-columns:132px 1fr auto; gap:12px; align-items:center; padding:11px 14px; border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.row .k{font-family:var(--f-mono); font-size:12.5px; color:var(--muted)}
+.row .v{min-width:0}
+.box{display:inline; padding:1px 5px; border:1.5px dashed var(--mark); background:var(--mark-soft); border-radius:4px; font-weight:600; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.conf{font-family:var(--f-mono); font-size:11px; padding:2px 7px; border-radius:999px; border:1px solid var(--line); color:var(--muted); white-space:nowrap}
+.conf.hi{color:var(--now); border-color:color-mix(in srgb, var(--now) 45%, transparent)}
+@media (max-width:560px){ .row{grid-template-columns:1fr auto; } .row .k{grid-column:1 / -1} }
+
+.phases{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.phase{all:unset; cursor:pointer; display:grid; gap:4px; padding:12px 14px; border-radius:var(--r); background:var(--surface-2); border:1px solid var(--line)}
+.phase:hover{border-color:var(--accent)}
+.phase:focus-visible{outline:2px solid var(--mark); outline-offset:2px}
+.phase b{font-family:var(--f-display); font-size:17px}
+.phase .d{font-family:var(--f-mono); font-size:11.5px; color:var(--accent)}
+.phase span{font-size:13.5px; color:var(--muted); line-height:1.45}
+@media (max-width:560px){ .phases{grid-template-columns:1fr} }
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:64px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent)}
+.field::before{content:"field: "; color:var(--muted)}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start}
+.fact h3{font-size:15.5px}
+.fact p{font-size:14.5px; color:var(--muted)}
+.src{font-family:var(--f-mono); font-size:11px; color:var(--muted); opacity:.85}
+.read{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.read h3{font-size:16px}
+.read ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.read li{max-width:68ch}
+
+/* segments */
+.toolbar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px}
+.toolbar .lbl{font-size:13px; color:var(--muted); margin-right:4px}
+.pill{font:inherit; font-size:13px; padding:6px 12px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.segs{display:grid; gap:10px}
+details.seg{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.seg[open]{border-color:color-mix(in srgb, var(--accent) 50%, var(--line))}
+.seg summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:1fr auto; gap:6px 12px; align-items:start}
+.seg summary::-webkit-details-marker{display:none}
+.seg .t{font-family:var(--f-display); font-weight:700; font-size:17px; min-width:0}
+.seg .t::before{content:"+"; display:inline-block; width:1.1em; font-family:var(--f-mono); font-weight:500; color:var(--accent)}
+.seg[open] .t::before{content:"\2212"}
+.seg .why{grid-column:1 / -1; font-size:14.5px; color:var(--muted)}
+.tags{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+.tag{font-family:var(--f-mono); font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); white-space:nowrap}
+.tag.now{color:var(--now); border-color:color-mix(in srgb, var(--now) 50%, transparent)}
+.tag.next{color:var(--next); border-color:color-mix(in srgb, var(--next) 50%, transparent)}
+.tag.later{color:var(--later)}
+.seg .body{padding:0 16px 16px; display:grid; gap:10px}
+.kv{display:grid; grid-template-columns:150px 1fr; gap:4px 14px; font-size:14.5px}
+.kv dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr} .kv dd{margin-bottom:8px} }
+.chev{width:18px; height:18px; transition:transform .2s; color:var(--muted)}
+details[open] .chev{transform:rotate(180deg)}
+.hint{font-size:13px; color:var(--muted); margin-top:8px}
+
+.sub{margin-top:30px; display:grid; gap:12px}
+.personas{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:10px}
+.persona{border:1px solid var(--line); border-radius:var(--r); padding:12px 14px; background:var(--surface); display:grid; gap:4px}
+.persona b{font-size:14.5px}
+.persona span{font-size:14px; color:var(--muted)}
+.partners{display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden}
+.partner{display:grid; grid-template-columns:190px 1fr; gap:6px 14px; padding:12px 14px; border-bottom:1px solid var(--line); font-size:14.5px}
+.partner:last-child{border-bottom:0}
+.partner b{font-size:14.5px}
+.partner span{color:var(--muted)}
+@media (max-width:560px){ .partner{grid-template-columns:1fr} }
+
+/* motion */
+.frame{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px; display:grid; gap:10px}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:500; line-height:1.4; max-width:60ch}
+.steps{counter-reset:s; display:grid; gap:10px; margin:0; padding:0; list-style:none}
+.steps li{counter-increment:s; display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:start}
+.steps li::before{content:counter(s); font-family:var(--f-mono); font-size:13px; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--surface-2); color:var(--accent); border:1px solid var(--line)}
+.rules{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:10px}
+.rule{border-left:3px solid var(--mark); padding:4px 12px; font-size:14.5px}
+
+/* calculator */
+.calc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.calc .top{padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:baseline}
+.calc .top b{font-family:var(--f-display); font-size:17px}
+.inputs{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:12px 16px; padding:16px}
+.inp{display:grid; gap:5px}
+.inp label{font-size:13px; color:var(--muted)}
+.inp .ctl{display:flex; align-items:center; border:1px solid var(--line); border-radius:8px; background:var(--bg); overflow:hidden}
+.inp input{font:inherit; font-family:var(--f-mono); font-size:15px; width:100%; min-width:0; border:0; background:transparent; color:var(--ink); padding:8px 10px}
+.inp .u{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding:0 10px; white-space:nowrap}
+.outwrap{overflow-x:auto; border-top:1px solid var(--line)}
+table.out{width:100%; border-collapse:collapse; font-size:14.5px; min-width:440px}
+table.out th, table.out td{padding:10px 16px; text-align:right; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums}
+table.out th:first-child, table.out td:first-child{text-align:left}
+table.out thead th{font-size:12.5px; color:var(--muted); font-weight:500}
+table.out thead th.b{color:var(--accent)}
+table.out td.b{font-weight:600}
+table.out tr:last-child td{border-bottom:0}
+.calc .note{padding:12px 16px; background:var(--surface-2); font-size:13.5px; color:var(--muted)}
+.calc .note b{color:var(--ink)}
+.big{font-family:var(--f-display); font-weight:800}
+
+/* tabs */
+.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto}
+.tab{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tab b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tab small{font-family:var(--f-mono); font-size:11.5px}
+.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.panel{display:grid; grid-template-columns:1.25fr 1fr; gap:14px}
+@media (max-width:660px){ .panel{grid-template-columns:1fr} }
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.col.see{background:var(--surface-2)}
+.col h3{font-size:15px; font-family:var(--f-mono); font-weight:500; color:var(--muted)}
+.col ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15px}
+
+/* team */
+.stages{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+@media (max-width:700px){ .stages{grid-template-columns:1fr} }
+.stage{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:8px; align-content:start}
+.stage .when{font-family:var(--f-mono); font-size:12px; color:var(--accent)}
+.stage ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:14.5px}
+.metrics{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:8px}
+.metric{display:flex; gap:10px; align-items:flex-start; font-size:14.5px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
+.metric i{font-style:normal; font-family:var(--f-mono); font-size:11px; color:var(--accent); padding-top:3px; white-space:nowrap}
+.rhythm{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px}
+@media (max-width:700px){ .rhythm{grid-template-columns:repeat(2, minmax(0,1fr))} }
+.rh{padding:12px 14px; border-radius:var(--r); background:var(--surface-2); display:grid; gap:4px}
+.rh b{font-family:var(--f-display); font-size:15px}
+.rh span{font-size:13.5px; color:var(--muted)}
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:200px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:19px}
+.pc .co span{font-size:13px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:8px; grid-column:1 / -1}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:4px 9px; border-radius:6px; background:var(--mark-soft); border:1px dashed var(--mark); max-width:100%}
+.pc > *{min-width:0}
+
+/* asks and questions */
+.asks{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .asks{grid-template-columns:1fr} }
+.ask{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:4px}
+.ask b{font-size:15px}
+.ask span{font-size:14px; color:var(--muted)}
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:15px}
+.qs li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:3px}
+.end{padding-block:40px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.end p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· plan for IBOTIX</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#understand">Context</a>
+      <a href="#revenue">Revenue map</a>
+      <a href="#motion">Motion</a>
+      <a href="#math">Pipeline math</a>
+      <a href="#days">90 days</a>
+      <a href="#team">Team</a>
+      <a href="#proof">Proof</a>
+      <a href="#need">From you</a>
+      <a href="#weekone">Week one</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Sales Leader · a working plan by Ketan Sharma</div>
+    <h1>Make DocForensics revenue repeat, without you in every deal.</h1>
+    <p class="lede">IBOTIX has a product that reads real business documents, and customers in healthcare, manufacturing and insurance. This is how I would build the sales engine around it in the first 90 days. <strong>I built it from public information, so it is a draft.</strong> I would rewrite it after week one, with your real numbers.</p>
+
+    <div class="docread" aria-label="The seat, read like a document">
+      <div class="scan" aria-hidden="true"></div>
+      <div class="hd"><span>input: sales_leader_seat.txt</span><span>fields extracted: 5</span></div>
+      <div class="rows">
+        <div class="row"><span class="k">the_job</span><span class="v"><span class="box">Repeatable DocForensics revenue</span> in India, the US and the Middle East</span><span class="conf">my read</span></div>
+        <div class="row"><span class="k">lead_with</span><span class="v"><span class="box">DocForensics</span>, the other products when a customer asks</span><span class="conf hi">JD: IDP</span></div>
+        <div class="row"><span class="k">first_sectors</span><span class="v"><span class="box">India BFSI</span> and <span class="box">India healthcare</span></span><span class="conf">to test</span></div>
+        <div class="row"><span class="k">fastest_doors</span><span class="v"><span class="box">Your customers, partners and network</span></span><span class="conf">my method</span></div>
+        <div class="row"><span class="k">first_90_days</span><span class="v"><span class="box">Learn, build, prove</span></span><span class="conf">plan</span></div>
+      </div>
+    </div>
+
+    <div class="phases" role="group" aria-label="The 90 days at a glance">
+      <button class="phase" type="button" data-go="t1"><span class="d">Days 1 to 30</span><b>Learn</b><span>The product, the last 20 deals, a real pipeline.</span></button>
+      <button class="phase" type="button" data-go="t2"><span class="d">Days 31 to 60</span><b>Build</b><span>Playbook, references, first hires, a partner play.</span></button>
+      <button class="phase" type="button" data-go="t3"><span class="d">Days 61 to 90</span><b>Prove</b><span>Pilots to paid, a forecast you can trust, a 12-month plan.</span></button>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section id="understand">
+    <div class="sh">
+      <span class="field">context</span>
+      <h2>What I understand about IBOTIX</h2>
+      <p>From your site, your partner listings and your press. Where I am guessing, I say so.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>Where you come from</h3><p>Founded in 2021, now based in Greater Noida West. RPA and automation delivery on UiPath, Automation Anywhere, Blue Prism and Power Automate, plus managed services and Bot-as-a-Service.</p><span class="src">Creatio partner listing</span></div>
+      <div class="fact"><h3>Where you are going</h3><p>An AI products-only company. Your April 2026 release states that plan directly.</p><span class="src">April 2026 release</span></div>
+      <div class="fact"><h3>The lead product</h3><p>DocForensics reads invoices, contracts, KYC, claims, POs, ID and loan documents without templates. It checks them with confidence scores, business rules, duplicate detection and human review, then pushes the data into ERP, CRM, HRMS and finance systems by API, connectors or RPA. Cloud, on-premise or API-first.</p><span class="src">ibotix.ai</span></div>
+      <div class="fact"><h3>Around it</h3><p>AI Contact Center, IBOTIX Hire, Vision AI for CCTV and an AI campaign generator.</p><span class="src">ibotix.ai</span></div>
+      <div class="fact"><h3>Who you work with</h3><p>Your logo wall: healthcare (Yatharth, Sarvodaya, Saral Diagnostics, Practo), manufacturers (DENSO, APL Apollo, Trident, Intex), an insurer (HDFC ERGO), real estate (BPTP), consumer brands (Wakefit, WOW Skin Science), and Team Computers, International Schools Partnership and MOL Group.</p><span class="src">ibotix.ai homepage</span></div>
+      <div class="fact"><h3>How you sell</h3><p>Credit-based plans (Demo, Pro, Elite), all through Contact Sales. Partners include Creatio and FutureAge AI. Offices listed in Greater Noida, Bengaluru, the US and the Middle East.</p><span class="src">ibotix.ai, Dec 2025 release</span></div>
+    </div>
+    <div class="read">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>The product exists and works on real documents. Sales can build on that.</li>
+        <li>If a good share of revenue still comes from RPA and project work, which is my guess, then moving to licences changes how deals are sold, priced, renewed and expanded. The sales engine has to change with it.</li>
+        <li>With five products and one sales team, I would lead with DocForensics everywhere and bring the others in when a customer asks for them.</li>
+        <li>Your RPA depth is a real edge in India. Many core and legacy systems here have no APIs. A document tool that can also do the last step into those systems with a bot solves the whole job. I saw this first hand at Kotak.</li>
+        <li>The logo wall is the best sales asset you have. Turning five of those logos into references will move the win rate more than any amount of outbound.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="revenue">
+    <div class="sh">
+      <span class="field">revenue_map</span>
+      <h2>Where the revenue is likely to come from</h2>
+      <p>Six segments, in the order I would work them. Open one to see the documents, the buyers, the wedge and the door in. India's IDP market is estimated at USD 80 million (2024, IMARC) to USD 126 million (2025, Grand View Research), with both expecting growth of about 36 to 37 percent a year.</p>
+    </div>
+
+    <div class="toolbar" role="group" aria-label="Filter by geography">
+      <span class="lbl">Show</span>
+      <button class="pill" type="button" data-geo="all" aria-pressed="true">All</button>
+      <button class="pill" type="button" data-geo="in" aria-pressed="false">India</button>
+      <button class="pill" type="button" data-geo="us" aria-pressed="false">US</button>
+      <button class="pill" type="button" data-geo="me" aria-pressed="false">Middle East</button>
+    </div>
+
+    <div class="segs" id="segs">
+      <details class="seg" data-geo="in" open>
+        <summary>
+          <span class="t">India BFSI: insurers, lenders, brokers</span>
+          <span class="tags"><span class="tag now">start now</span><span class="tag">India</span></span>
+          <span class="why">High document volume, strict audit needs, and the world I sold into at Simplifai.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>documents</dt><dd>Claims files, KYC, loan and account-opening forms, policy documents.</dd>
+          <dt>champion</dt><dd>Head of operations or head of claims. An innovation or digital team often runs the pilot.</dd>
+          <dt>signers</dt><dd>COO, CIO or CTO for security and integration, CFO, procurement and risk.</dd>
+          <dt>wedge</dt><dd>One intake desk where people retype documents today: claims intake, KYC checks or loan file checks. The business case is hours saved and turnaround time.</dd>
+          <dt>door in</dt><dd>HDFC ERGO on your wall, any RPA customers you already have in BFSI, and the UiPath and Blue Prism partner networks.</dd>
+          <dt>must prove</dt><dd>On-premise or private cloud, security review, audit trail. DocForensics already offers on-premise and audit logs.</dd>
+        </dl></div>
+      </details>
+
+      <details class="seg" data-geo="in">
+        <summary>
+          <span class="t">India healthcare: hospital chains and diagnostics</span>
+          <span class="tags"><span class="tag now">start now</span><span class="tag">India</span></span>
+          <span class="why">Four healthcare logos on your wall already. Paper-heavy, and money waits on paperwork.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>documents</dt><dd>Insurance and TPA claim files, admission and discharge papers, lab reports, supplier invoices.</dd>
+          <dt>champion</dt><dd>Head of billing or revenue cycle.</dd>
+          <dt>signers</dt><dd>COO, CFO, group CIO.</dd>
+          <dt>wedge</dt><dd>Cashless claim paperwork, where errors and delays hold up money the hospital is owed. This is my hypothesis, to check with your hospital customers in week one.</dd>
+          <dt>door in</dt><dd>Yatharth, Sarvodaya, Saral Diagnostics and Practo. Hospital COOs and CFOs know each other, so one strong reference in NCR travels.</dd>
+          <dt>must prove</dt><dd>Accuracy on scanned and handwritten documents. Your human-review step matters here.</dd>
+        </dl></div>
+      </details>
+
+      <details class="seg" data-geo="in">
+        <summary>
+          <span class="t">India manufacturing and large enterprises</span>
+          <span class="tags"><span class="tag next">next</span><span class="tag">India</span></span>
+          <span class="why">Every finance team matches invoices by hand somewhere. Easy to measure, easy to repeat.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>documents</dt><dd>Supplier invoices, purchase orders, goods receipts, vendor onboarding papers.</dd>
+          <dt>champion</dt><dd>Financial controller or head of shared services.</dd>
+          <dt>signers</dt><dd>CFO, CIO.</dd>
+          <dt>wedge</dt><dd>Matching invoices to POs and receipts in accounts payable.</dd>
+          <dt>door in</dt><dd>DENSO, APL Apollo, Trident and Intex on your wall; ERP and Creatio partners.</dd>
+          <dt>must prove</dt><dd>A clean push into the ERP they already run.</dd>
+        </dl></div>
+      </details>
+
+      <details class="seg" data-geo="us">
+        <summary>
+          <span class="t">US companies with operations run from India</span>
+          <span class="tags"><span class="tag next">next</span><span class="tag">US</span></span>
+          <span class="why">The shortest path to US revenue I can see from Greater Noida. My hypothesis.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>who</dt><dd>US companies whose document work already runs from India, in their own capability centres or through BPM providers.</dd>
+          <dt>champion</dt><dd>The India head of operations for that process.</dd>
+          <dt>signers</dt><dd>The India centre head, then the US process owner and US procurement.</dd>
+          <dt>wedge</dt><dd>One process people in India already do by hand, sold on turnaround, accuracy and cost.</dd>
+          <dt>door in</dt><dd>Capability centres in NCR and Bengaluru, near both your offices. Same time zone for the champion, a US contract at the end.</dd>
+          <dt>must prove</dt><dd>SOC 2 and how US data is handled. Your site lists SOC 2.</dd>
+        </dl></div>
+      </details>
+
+      <details class="seg" data-geo="me">
+        <summary>
+          <span class="t">Middle East: banks, insurers and large groups</span>
+          <span class="tags"><span class="tag next">next</span><span class="tag">UAE, Saudi Arabia</span></span>
+          <span class="why">Document-heavy, and you already have an entity there.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>documents</dt><dd>Arabic and English in the same file: KYC, trade documents, claims.</dd>
+          <dt>champion</dt><dd>Head of operations.</dd>
+          <dt>signers</dt><dd>COO, CIO. On-premise is often a must (my assumption, to test).</dd>
+          <dt>door in</dt><dd>IBOTIX Middle East, regional system integrators, and the FutureAge AI network.</dd>
+          <dt>must prove</dt><dd>Arabic extraction accuracy. That is on my week-one list.</dd>
+        </dl></div>
+      </details>
+
+      <details class="seg" data-geo="us">
+        <summary>
+          <span class="t">US direct: mid-market insurers, lenders, logistics</span>
+          <span class="tags"><span class="tag later">later</span><span class="tag">US</span></span>
+          <span class="why">Big prize, crowded field. Go once India references and a US partner are in place.</span>
+        </summary>
+        <div class="body"><dl class="kv">
+          <dt>who</dt><dd>Mid-market firms buying their first IDP tool.</dd>
+          <dt>we meet</dt><dd>ABBYY, UiPath Document Understanding, Microsoft, Hyperscience, Rossum.</dd>
+          <dt>door in</dt><dd>References from the India-run segment, and the RPA partner networks in the US.</dd>
+          <dt>my history</dt><dd>At ZenAdmin we moved the motion from Southeast Asia to the US and Europe and sold to them from India, on their hours.</dd>
+        </dl></div>
+      </details>
+    </div>
+    <p class="hint">In India we will also meet Newgen, Datamatics, AutomationEdge, Docsumo, Nanonets and, in KYC, Signzy. The lost-deal review in week one tells us who we lose to and why.</p>
+
+    <div class="sub">
+      <h3>Who I would sell to, and what each one needs to hear</h3>
+      <div class="personas">
+        <div class="persona"><b>COO or head of operations</b><span>Your team stops retyping and starts reviewing. Turnaround, backlog, volume per person.</span></div>
+        <div class="persona"><b>Process owner: claims, billing, AP</b><span>The champion. Fewer errors, faster cycle, less chasing.</span></div>
+        <div class="persona"><b>CFO or financial controller</b><span>Cost per document, payback period, an audit trail.</span></div>
+        <div class="persona"><b>CIO or CTO</b><span>Security, cloud or on-premise, and how it reaches systems with no APIs.</span></div>
+        <div class="persona"><b>Procurement and risk</b><span>Vendor checks, ISO 27001, SOC 2, data handling.</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>The partner channel</h3>
+      <div class="partners">
+        <div class="partner"><b>Creatio</b><span>You are a technology partner. Ask for joint accounts where a Creatio rollout needs documents read on the way in.</span></div>
+        <div class="partner"><b>UiPath, Automation Anywhere, Blue Prism, Power Automate</b><span>You deliver on all four. Their customers already automate processes and still need documents read. DocForensics sits at the front of those bots.</span></div>
+        <div class="partner"><b>FutureAge AI</b><span>Co-creation and global reach since December 2025. I would ask for the first two accounts they can open, with names and dates.</span></div>
+        <div class="partner"><b>Amity Venture Capitalists</b><span>Your investor's portfolio and network: warm doors for the first customers in a sector.</span></div>
+        <div class="partner"><b>System integrators and BPM firms</b><span>Firms that process documents for their clients can run DocForensics inside their own service. My hypothesis, to test.</span></div>
+        <div class="partner"><b>Your existing customers</b><span>RPA and services customers with a document step are the shortest path to licence revenue.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="motion">
+    <div class="sh">
+      <span class="field">motion</span>
+      <h2>The motion I would run</h2>
+      <p>Founder-led today, repeatable by day 90, partner-led plus direct after that.</p>
+    </div>
+
+    <div class="frame">
+      <span class="eyebrow">My framework: the path of least friction</span>
+      <p class="quote">Every deal has two hurdles: the friction of changing how people work, and the threshold to sign, meaning effort, risk, approvals and cost.</p>
+      <p>For the first 10 to 15 DocForensics customers in a sector, I go where both are lowest: customers who already trust you, accounts a partner already holds, your investors' network and yours. I check the path is real, land the first logos there, and then build the repeatable motion from what those deals teach us. The same rule works inside each deal: find the route with the fewest approvals and the clearest owner, or create one.</p>
+      <p>The other half is what I call the promised land. A head of operations buys when they can see their team after the change: reviewing exceptions instead of typing. To learn that picture fast, I sit with your delivery and customer success teams, because that is where it already lives.</p>
+    </div>
+
+    <div class="sub">
+      <h3>From founder-led to repeatable</h3>
+      <ol class="steps">
+        <li><span><b>We sell together first.</b> You are on the early deals as the executive sponsor. Early enterprise deals are signed on the founder's word.</span></li>
+        <li><span><b>I close some deals too, to learn.</b> How customers describe the problem, where the product wins and where it struggles, whether the story holds in front of a CFO.</span></li>
+        <li><span><b>I write it down as I go.</b> Talk track, demo, pilot plan, business case, objections, pricing. One playbook per sector.</span></li>
+        <li><span><b>We hire against the playbook.</b> New sellers get a sector, a named account list and a playbook that has already worked.</span></li>
+        <li><span><b>Partners get the same playbook</b>, in a shorter version, with joint account plans.</span></li>
+      </ol>
+    </div>
+
+    <div class="sub">
+      <h3>Pilot rules, from my own deals</h3>
+      <div class="rules">
+        <div class="rule">Written success criteria before any pilot starts.</div>
+        <div class="rule">A named person who signs if we hit them.</div>
+        <div class="rule">Procurement, legal, IT security and finance in the loop from week one.</div>
+        <div class="rule">Map the real buying committee in person, beyond LinkedIn.</div>
+      </div>
+      <p class="hint">At Kotak, putting everything in writing and keeping everyone in the loop is how a vendor with no ISO certificate got through a bank's onboarding. I have also lost a deal because the real deciders never showed up on our account map. Both lessons are in these four rules.</p>
+    </div>
+  </section>
+
+  <!-- 3b calculator -->
+  <section id="math">
+    <div class="sh">
+      <span class="field">pipeline_math</span>
+      <h2>Pipeline math, kept simple</h2>
+      <p>Work back from a target to the meetings and sellers it needs. Every input below is an example, so change any of them. I would replace them all with your real numbers in week one.</p>
+    </div>
+
+    <div class="calc">
+      <div class="top"><b>Example inputs</b><span class="src">assumptions, not IBOTIX figures</span></div>
+      <div class="inputs">
+        <div class="inp"><label for="c-target">New annual revenue target</label><div class="ctl"><input id="c-target" type="number" inputmode="decimal" min="0.1" step="0.5" value="5"><span class="u">₹ crore</span></div></div>
+        <div class="inp"><label for="c-deal">Average first-year deal</label><div class="ctl"><input id="c-deal" type="number" inputmode="decimal" min="1" step="1" value="25"><span class="u">₹ lakh</span></div></div>
+        <div class="inp"><label for="c-qual">First meetings that become real opportunities</label><div class="ctl"><input id="c-qual" type="number" inputmode="decimal" min="1" max="100" step="1" value="30"><span class="u">%</span></div></div>
+        <div class="inp"><label for="c-cycle">Sales cycle</label><div class="ctl"><input id="c-cycle" type="number" inputmode="decimal" min="1" max="11" step="1" value="5"><span class="u">months</span></div></div>
+        <div class="inp"><label for="c-mps">First meetings one seller runs a week</label><div class="ctl"><input id="c-mps" type="number" inputmode="decimal" min="1" step="1" value="5"><span class="u">per week</span></div></div>
+        <div class="inp"><label for="c-wa">Win rate with no references yet</label><div class="ctl"><input id="c-wa" type="number" inputmode="decimal" min="1" max="100" step="1" value="10"><span class="u">%</span></div></div>
+        <div class="inp"><label for="c-wb">Win rate with references in that sector</label><div class="ctl"><input id="c-wb" type="number" inputmode="decimal" min="1" max="100" step="1" value="30"><span class="u">%</span></div></div>
+      </div>
+      <div class="outwrap">
+        <table class="out" aria-live="polite">
+          <thead><tr><th>What it takes</th><th>No references</th><th class="b">With references</th></tr></thead>
+          <tbody>
+            <tr><td>Deals to win</td><td id="o-deals-a">20</td><td class="b" id="o-deals-b">20</td></tr>
+            <tr><td>Real opportunities needed</td><td id="o-opps-a">200</td><td class="b" id="o-opps-b">67</td></tr>
+            <tr><td>Pipeline value needed</td><td id="o-pipe-a">₹50.0 Cr</td><td class="b" id="o-pipe-b">₹16.8 Cr</td></tr>
+            <tr><td>First meetings needed</td><td id="o-meet-a">667</td><td class="b" id="o-meet-b">224</td></tr>
+            <tr><td>First meetings a week</td><td id="o-mpw-a">22.0</td><td class="b" id="o-mpw-b">7.4</td></tr>
+            <tr><td>Sellers at that pace</td><td id="o-sel-a">5</td><td class="b" id="o-sel-b">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" id="c-note">Deals only close this year if they start in the first <b id="o-window">7 months</b>, so every first meeting has to happen inside that window. My rule of thumb: with no references you close about 1 in 10; with references, about 3 in 10. <b>At the win rates above, references cut the first meetings needed from <span id="o-ra">667</span> to <span id="o-rb">224</span>.</b> That is why the first 90 days are about turning customers into references.</div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="days">
+    <div class="sh">
+      <span class="field">first_90_days</span>
+      <h2>30, 60, 90 days</h2>
+      <p>What I would do, and what you would see by the end of each block.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Learn</b></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Build</b></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Prove</b></button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Run DocForensics myself on real documents from two sectors, and sit with delivery and customer success.</li>
+        <li>Read the last 20 deals, won and lost, and call five customers myself.</li>
+        <li>Rebuild the pipeline with real stages and an honest close date on every deal.</li>
+        <li>Get the revenue split: licences and credits, RPA and project work, renewals.</li>
+        <li>Meet Creatio, FutureAge AI and the RPA partner teams.</li>
+        <li>Sit in on your live deals.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 30</h3><ul>
+        <li>Two sectors chosen, with the reasons on one page.</li>
+        <li>A clean pipeline and a first forecast you can check.</li>
+        <li>30 named target accounts per sector, with the buyers mapped.</li>
+        <li>Five customers who could become references.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Write the playbook per sector: the problem in their words, the demo, the pilot plan, the business case, the objections.</li>
+        <li>Turn two or three customers into case studies with numbers they will sign off.</li>
+        <li>Start outbound into the named accounts, and one partner play with joint account plans.</li>
+        <li>Hire against the plan, starting with an AE in the lead sector and a presales engineer for pilots, or redeploy people who are already here.</li>
+        <li>Start the weekly rhythm: pipeline review, deal reviews, forecast.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 60</h3><ul>
+        <li>Pilots running with written success criteria and a named signer.</li>
+        <li>Pipeline you can read by sector and by source: direct, partner, existing customer.</li>
+        <li>The first partner-sourced opportunities.</li>
+        <li>The first case studies in the hands of the sales team.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Convert pilots to paid licences.</li>
+        <li>Close the first deals from the new motion, with me in the room and the sellers running the calls.</li>
+        <li>Set pricing from evidence: what customers paid and what they pushed back on.</li>
+        <li>Choose the route into the US and the Middle East: direct, partner, or through India-run operations.</li>
+        <li>Write the 12-month plan: targets by sector, hiring, partner goals.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 90</h3><ul>
+        <li>The first DocForensics licences closed through the playbook.</li>
+        <li>A forecast that lands inside a range we agree.</li>
+        <li>A 12-month revenue and hiring plan you can take to your investors.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="team">
+    <div class="sh">
+      <span class="field">team</span>
+      <h2>The team and the operating rhythm</h2>
+      <p>Hire in the order the playbook allows. The exact shape depends on who sells today, which I would learn in week one.</p>
+    </div>
+    <div class="stages">
+      <div class="stage"><span class="when">Now to day 90</span><b>Prove the playbook</b><ul>
+        <li>Work with whoever sells today.</li>
+        <li>Add one AE in the lead sector.</li>
+        <li>One presales or solutions engineer. IDP deals are won in the pilot.</li>
+        <li>Test outsourced outbound before hiring SDRs in-house. I set up and trained one at a BPO in Delhi NCR for Torqus.</li>
+      </ul></div>
+      <div class="stage"><span class="when">Months 4 to 9</span><b>Pods per sector</b><ul>
+        <li>An AE pod per sector with shared presales.</li>
+        <li>A partner manager for Creatio and the RPA networks.</li>
+        <li>Customer success owns renewals and credit top-ups.</li>
+      </ul></div>
+      <div class="stage"><span class="when">Months 10 to 18</span><b>New regions</b><ul>
+        <li>Leads for the US and the Middle East, hired once a playbook has worked in India.</li>
+        <li>Channel partners signed in each region.</li>
+      </ul></div>
+    </div>
+
+    <div class="sub">
+      <h3>What I would track every week</h3>
+      <div class="metrics">
+        <div class="metric"><i>pipeline</i><span>New real opportunities, count and value, by sector and source</span></div>
+        <div class="metric"><i>coverage</i><span>Pipeline against the quarter's target</span></div>
+        <div class="metric"><i>pilots</i><span>Pilots running, days in pilot, pilot-to-paid rate</span></div>
+        <div class="metric"><i>wins</i><span>Win rate and cycle length by sector</span></div>
+        <div class="metric"><i>deal size</i><span>Average first-year deal</span></div>
+        <div class="metric"><i>usage</i><span>Credit use per customer, the early sign of expansion or churn</span></div>
+        <div class="metric"><i>partners</i><span>Partner-sourced pipeline and wins</span></div>
+        <div class="metric"><i>conversion</i><span>Licence revenue from existing RPA and services customers</span></div>
+        <div class="metric"><i>forecast</i><span>Forecast against actual</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>The rhythm</h3>
+      <div class="rhythm">
+        <div class="rh"><b>Monday</b><span>Pipeline review with every seller, 30 minutes.</span></div>
+        <div class="rh"><b>Thursday</b><span>Deal reviews on the top ten deals.</span></div>
+        <div class="rh"><b>Monthly</b><span>Forecast with you.</span></div>
+        <div class="rh"><b>Quarterly</b><span>Plan with you and the leadership team.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="proof">
+    <div class="sh">
+      <span class="field">proof</span>
+      <h2>Proof I have done this</h2>
+      <p>Three places where I built the sales team and the way it sells.</p>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norway AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <ul>
+          <li>Built APAC sales from no team to 15 reps, selling AI to banks, brokers and insurers: Kotak Mahindra, HDFC Mutual Fund, Bajaj Allianz, Upstox.</li>
+          <li>At Kotak we read customer emails and the documents attached to them, with OCR plus our NLP. Core banking had no APIs, so we used RPA on Blue Prism to finish the job inside it. Across BFSI we connected to core banking and legacy systems with Blue Prism and UiPath, and charged for RPA as part of our services.</li>
+          <li>Kotak grew from the first 8,000 emails to about 42,000. I called it a digital employee back then. Today it is IDP plus agents.</li>
+        </ul>
+        <div class="nums"><span class="num">$1M ARR in the first 12 months</span><span class="num">$1.7M ARR when I left</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <ul>
+          <li>Owned sales, marketing and customer success. Started from 11 beta customers and no revenue, and built the team to 15.</li>
+          <li>Southeast Asia gave us small deals, so we moved the motion to the US and Europe and sold from India, on their hours. We signed Remote, Omnipresent and Eventbrite.</li>
+        </ul>
+        <div class="nums"><span class="num">$200K+ ARR</span><span class="num">Average deal about $13K, up from $4K to $5K</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Inside and Channel Sales · acquired by Dineout</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <ul>
+          <li>Built a 60+ seat sales engine: about 40 on-roll, half closers and half lead generation, plus an outsourced outbound team I set up and trained at a BPO in Delhi NCR, two months on site.</li>
+          <li>Ran a channel network across 15 cities.</li>
+        </ul>
+        <div class="nums"><span class="num">60+ seats</span><span class="num">15-city channel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="need">
+    <div class="sh">
+      <span class="field">asks</span>
+      <h2>What I would need from you in the first 90 days</h2>
+    </div>
+    <div class="asks">
+      <div class="ask"><b>Two hours a week</b><span>One deal review and one decision slot, for 90 days. After that you get the time back.</span></div>
+      <div class="ask"><b>You on the first deals</b><span>As executive sponsor on the first five to ten. Buyers want to hear from the founder on the first ones.</span></div>
+      <div class="ask"><b>Open numbers</b><span>Revenue by product, the pipeline, pricing history and the lost deals.</span></div>
+      <div class="ask"><b>Pilot support</b><span>Time from your CTO's team, and a named presales person.</span></div>
+      <div class="ask"><b>Your introductions</b><span>To Creatio, FutureAge AI and Amity, from you.</span></div>
+      <div class="ask"><b>Pricing room</b><span>A range we agree, so every discount does not come back to your desk.</span></div>
+      <div class="ask"><b>Hiring inside a budget</b><span>The right to hire against the plan within an agreed number.</span></div>
+      <div class="ask"><b>One rule on focus</b><span>DocForensics leads. The other products follow when a customer asks.</span></div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="weekone">
+    <div class="sh">
+      <span class="field">week_one</span>
+      <h2>Questions I would want answered in week one</h2>
+    </div>
+    <ol class="qs">
+      <li>How does revenue split today between licences and credits, RPA and project work, and renewals?</li>
+      <li>Which customers run DocForensics in production, and which of them would take a call from a prospect?</li>
+      <li>How is DocForensics priced in practice: per user, per credit or per document? What does a typical first-year deal look like?</li>
+      <li>What happened in the last ten pilots? How many became paid, and why did the others stop?</li>
+      <li>Who sells today, and what does each person own?</li>
+      <li>Where do the US and the Middle East stand: customers, pipeline, people?</li>
+      <li>What revenue target have you and your investors agreed for the next 12 months?</li>
+      <li>What is working with Creatio and FutureAge AI so far?</li>
+      <li>Which competitor do we meet most, and why do we lose when we lose?</li>
+      <li>How well does DocForensics handle Arabic and handwritten documents today, and how often do customers ask for on-premise?</li>
+    </ol>
+  </section>
+
+  <footer class="end">
+    <h2>That is the draft.</h2>
+    <p>Most of it should change after week one, once I see the real numbers. The method stays: pick the wedge where friction is lowest, turn customers into references, write down what works, then hire.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  // geography filter
+  var pills = document.querySelectorAll('.pill[data-geo]');
+  var segs = document.querySelectorAll('#segs .seg');
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      var g = p.getAttribute('data-geo');
+      pills.forEach(function(x){ x.setAttribute('aria-pressed', x === p ? 'true' : 'false'); });
+      segs.forEach(function(s){ s.hidden = !(g === 'all' || s.getAttribute('data-geo') === g); });
+    });
+  });
+
+  // tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    try { localStorage.setItem('ibx-tab', id); } catch(e) {}
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  try { var saved = localStorage.getItem('ibx-tab'); if (saved && document.getElementById(saved)) selectTab(saved); } catch(e) {}
+  document.querySelectorAll('.phase[data-go]').forEach(function(b){
+    b.addEventListener('click', function(){
+      selectTab(b.getAttribute('data-go'));
+      document.getElementById('days').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+  });
+
+  // calculator
+  function v(id){ var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : NaN; }
+  function fmt(n, d){ return n.toLocaleString('en-IN', {minimumFractionDigits:d, maximumFractionDigits:d}); }
+  function set(id, t){ document.getElementById(id).textContent = t; }
+  function calc(){
+    var target = v('c-target'), deal = v('c-deal'), qual = v('c-qual'), cycle = v('c-cycle'), mps = v('c-mps'), wa = v('c-wa'), wb = v('c-wb');
+    var ok = target > 0 && deal > 0 && qual > 0 && qual <= 100 && cycle >= 1 && cycle <= 11 && mps > 0 && wa > 0 && wa <= 100 && wb > 0 && wb <= 100;
+    var ids = ['deals','opps','pipe','meet','mpw','sel'];
+    if (!ok){ ids.forEach(function(k){ set('o-'+k+'-a','check inputs'); set('o-'+k+'-b','check inputs'); }); set('o-ra','?'); set('o-rb','?'); return; }
+    var deals = Math.ceil(target * 100 / deal);
+    var months = 12 - cycle, weeks = months * 52 / 12;
+    set('o-window', months + (months === 1 ? ' month' : ' months'));
+    [['a', wa], ['b', wb]].forEach(function(pair){
+      var s = pair[0], pct = pair[1];
+      var opps = Math.ceil(deals * 100 / pct - 1e-9);
+      var meet = Math.ceil(opps * 100 / qual - 1e-9);
+      var mpw = meet / weeks;
+      var sellers = Math.ceil(mpw / mps);
+      set('o-deals-'+s, fmt(deals,0));
+      set('o-opps-'+s, fmt(opps,0));
+      set('o-pipe-'+s, '₹' + fmt(opps * deal / 100, 1) + ' Cr');
+      set('o-meet-'+s, fmt(meet,0));
+      set(s === 'a' ? 'o-ra' : 'o-rb', fmt(meet,0));
+      set('o-mpw-'+s, fmt(mpw,1));
+      set('o-sel-'+s, fmt(sellers,0));
+    });
+  }
+  document.querySelectorAll('.calc input').forEach(function(i){ i.addEventListener('input', calc); });
+  calc();
+
+  // section highlight in the bar
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on && a.scrollIntoView) { var bar = a.parentNode; bar.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
