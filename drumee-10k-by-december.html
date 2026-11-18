@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drumee: 10K by December</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column under a sticky section bar; every money figure is set in mono, like a cash ledger. */
+:root{
+  --bg:#F1F3F6; --surface:#FFFFFF; --surface-2:#E7EBF1; --ink:#111827; --muted:#566074; --line:#D5DBE4;
+  --accent:#2443C4; --accent-ink:#FFFFFF; --accent-soft:rgba(36,67,196,.10);
+  --cash:#0F6B40; --cash-soft:rgba(15,107,64,.11);
+  --q1:#865000; --q1-soft:rgba(134,80,0,.11);
+  --enable:#56627A; --enable-soft:rgba(86,98,122,.14);
+  --warn:#B42318;
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1119; --surface:#141A25; --surface-2:#1A2230; --ink:#E7EBF3; --muted:#98A2B6; --line:#273041;
+  --accent:#8EA6FF; --accent-ink:#0B1433; --accent-soft:rgba(142,166,255,.14);
+  --cash:#55C690; --cash-soft:rgba(85,198,144,.14);
+  --q1:#E7AA52; --q1-soft:rgba(231,170,82,.14);
+  --enable:#A3AEC2; --enable-soft:rgba(163,174,194,.14);
+  --warn:#FF8A7A; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0D1119; --surface:#141A25; --surface-2:#1A2230; --ink:#E7EBF3; --muted:#98A2B6; --line:#273041;
+  --accent:#8EA6FF; --accent-ink:#0B1433; --accent-soft:rgba(142,166,255,.14);
+  --cash:#55C690; --cash-soft:rgba(85,198,144,.14);
+  --q1:#E7AA52; --q1-soft:rgba(231,170,82,.14);
+  --enable:#A3AEC2; --enable-soft:rgba(163,174,194,.14);
+  --warn:#FF8A7A; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6; -webkit-text-size-adjust:100%}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--surface)}
+.wrap{max-width:860px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(30px, 6.2vw, 50px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(23px, 4.2vw, 31px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+b, strong{font-weight:600}
+.mono, .money{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+.money{white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* sticky bar */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+
+/* hero */
+.hero{padding-block:44px 30px; display:grid; gap:20px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:64ch}
+.lede strong{color:var(--ink)}
+.window{display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; font-family:var(--f-mono); font-size:13px; color:var(--muted)}
+.window .left{color:var(--ink); background:var(--cash-soft); border:1px solid color-mix(in srgb, var(--cash) 40%, transparent); padding:3px 10px; border-radius:999px}
+.answer{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.answer .hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:10px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.arow{display:grid; grid-template-columns:150px minmax(0,1fr) auto; gap:6px 14px; align-items:baseline; padding:12px 16px; border-bottom:1px dashed var(--line); text-decoration:none; color:var(--ink)}
+.arow:last-child{border-bottom:0}
+.arow:hover{background:var(--accent-soft)}
+.arow .k{font-family:var(--f-mono); font-size:12.5px; color:var(--muted)}
+.arow .v{min-width:0}
+.arow .go{font-family:var(--f-mono); font-size:11.5px; color:var(--accent); white-space:nowrap}
+@media (max-width:600px){ .arow{grid-template-columns:minmax(0,1fr) auto} .arow .k{grid-column:1 / -1} }
+
+/* sections */
+section{padding-block:44px; border-top:1px solid var(--line); scroll-margin-top:64px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:66ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.sub{margin-top:28px; display:grid; gap:12px}
+.note{font-size:13.5px; color:var(--muted)}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted)}
+.tag{display:inline-block; font-family:var(--f-mono); font-style:normal; font-size:11px; line-height:1.4; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.dec{color:var(--cash); background:var(--cash-soft); border-color:color-mix(in srgb, var(--cash) 40%, transparent)}
+.tag.q1{color:var(--q1); background:var(--q1-soft); border-color:color-mix(in srgb, var(--q1) 40%, transparent)}
+.tag.en{color:var(--enable); background:var(--enable-soft); border-color:color-mix(in srgb, var(--enable) 40%, transparent)}
+.tag.as{color:var(--q1); border-style:dashed}
+
+/* 1: definition */
+.def{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:640px){ .def{grid-template-columns:1fr} }
+.defcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px; align-content:start; min-width:0}
+.defcol.alt{background:var(--surface-2)}
+.defcol ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:15px}
+
+/* 1: accounts needed chart */
+.need{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; gap:14px}
+.need-hd{display:flex; justify-content:space-between; gap:8px 14px; flex-wrap:wrap; align-items:baseline}
+.nrow{display:grid; gap:5px}
+.nrow .nl{display:flex; justify-content:space-between; gap:12px; font-size:14.5px}
+.nrow .nl span:first-child{min-width:0}
+.nrow .nl b{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+.track{position:relative; height:10px; border-radius:5px; background:var(--surface-2)}
+.track > i{position:absolute; left:0; top:0; bottom:0; border-radius:5px; background:var(--muted); min-width:4px}
+.track > i.in{background:var(--cash)}
+.track::after{content:""; position:absolute; top:-4px; bottom:-4px; left:14.49%; border-left:2px dashed var(--ink); opacity:.55}
+.so{background:var(--surface-2); border-radius:var(--r); padding:14px 16px; font-size:15.5px}
+
+/* 1: calculator */
+.calc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; margin-top:16px}
+.calc-hd{padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center}
+.calc-hd b{font-family:var(--f-display); font-size:18px}
+.segc{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--bg)}
+.segc button{border:0; background:transparent; padding:6px 12px; font-size:13px; cursor:pointer; color:var(--muted)}
+.segc button[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+.presets{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line)}
+.presets .lbl{font-size:13px; color:var(--muted)}
+.pill{font-size:13px; padding:6px 12px; border-radius:999px; border:1px solid var(--line); background:var(--surface); cursor:pointer}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.crow{display:grid; grid-template-columns:minmax(0,1fr) auto 96px; gap:8px 14px; align-items:center; padding:12px 16px; border-bottom:1px solid var(--line)}
+@media (max-width:540px){ .crow{grid-template-columns:auto minmax(0,1fr)} .crow .cl{grid-column:1 / -1} }
+.cl{display:grid; gap:2px; min-width:0}
+.cl b{font-size:15px}
+.cl .cp{font-family:var(--f-mono); font-size:12.5px; color:var(--muted)}
+.cl .np{display:inline-flex; align-items:center; gap:4px}
+.cl .np input{width:78px; font:inherit; font-family:var(--f-mono); font-size:12.5px; padding:2px 6px; border:1px dashed var(--q1); border-radius:6px; background:var(--q1-soft); color:var(--ink)}
+.stepper{display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg)}
+.stepper button{width:36px; height:36px; border:0; background:transparent; cursor:pointer; display:grid; place-items:center; color:var(--ink)}
+.stepper button:hover{background:var(--accent-soft)}
+.stepper svg{width:14px; height:14px}
+.stepper input{width:58px; height:36px; border:0; border-left:1px solid var(--line); border-right:1px solid var(--line); text-align:center; font:inherit; font-family:var(--f-mono); font-size:15px; background:var(--surface); color:var(--ink); -moz-appearance:textfield; appearance:textfield}
+.stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0}
+.csub{font-family:var(--f-mono); font-variant-numeric:tabular-nums; text-align:right; font-size:15px}
+.ctot{padding:18px 16px; display:grid; gap:12px; background:var(--surface-2)}
+.ct-main{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap}
+.ct-main .k{font-size:14px; color:var(--muted)}
+.big{font-family:var(--f-display); font-weight:800; font-size:clamp(30px, 7vw, 42px); font-variant-numeric:tabular-nums; letter-spacing:-.01em}
+.meter{position:relative; height:14px; border-radius:7px; background:var(--surface); border:1px solid var(--line); margin-top:16px}
+.meter > i{position:absolute; left:0; top:0; bottom:0; border-radius:7px; background:var(--cash); transition:width .25s ease}
+.meter > em{position:absolute; top:-18px; left:66.67%; transform:translateX(-50%); font-style:normal; font-family:var(--f-mono); font-size:11px; color:var(--muted); white-space:nowrap}
+.meter::after{content:""; position:absolute; top:-5px; bottom:-5px; left:66.67%; border-left:2px solid var(--ink)}
+.ct-row{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+.ct-row > div{display:grid; gap:2px; min-width:0}
+.ct-row .k{font-size:12.5px; color:var(--muted)}
+.ct-row b{font-family:var(--f-mono); font-variant-numeric:tabular-nums; font-size:16px}
+.say{font-size:15px}
+
+/* 2: bets ledger */
+.legend{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px}
+.ledger{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.lg-hd{display:flex; justify-content:space-between; gap:10px; padding:10px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.lg-row{display:grid; grid-template-columns:44px 22px minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px 16px; border-bottom:1px dashed var(--line); cursor:pointer; position:relative}
+.lg-row:last-of-type{border-bottom:0}
+.lg-row input{position:absolute; opacity:0; width:1px; height:1px}
+.sw{width:40px; height:24px; border-radius:12px; background:var(--surface-2); border:1px solid var(--line); position:relative; transition:background .2s}
+.sw::after{content:""; position:absolute; top:3px; left:3px; width:16px; height:16px; border-radius:50%; background:var(--muted); transition:transform .2s, background .2s}
+.lg-row input:checked + .sw{background:var(--cash-soft); border-color:var(--cash)}
+.lg-row input:checked + .sw::after{transform:translateX(16px); background:var(--cash)}
+.lg-row input:focus-visible + .sw{outline:2px solid var(--accent); outline-offset:2px}
+.lg-n{font-family:var(--f-mono); font-size:13px; color:var(--muted)}
+.lg-name{min-width:0; font-size:15px}
+.lg-name .tag{margin-left:4px}
+.lg-v{display:grid; justify-items:end; gap:0}
+.lg-v b{font-family:var(--f-mono); font-variant-numeric:tabular-nums; font-size:15px}
+.lg-v small{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); white-space:nowrap}
+.lg-row.off .lg-name, .lg-row.off .lg-v{opacity:.45; text-decoration:line-through}
+@media (max-width:480px){ .lg-row{grid-template-columns:44px minmax(0,1fr) auto} .lg-n{display:none} }
+.tot{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:12px}
+.tc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:12px 14px; display:grid; gap:6px; min-width:0}
+.tc .k{font-size:12.5px; color:var(--muted); font-family:var(--f-mono); text-transform:uppercase; letter-spacing:.05em}
+.tc b{font-family:var(--f-display); font-weight:800; font-size:clamp(19px, 4.6vw, 28px); font-variant-numeric:tabular-nums}
+.tc .bar2{height:8px; border-radius:4px; background:var(--surface-2); overflow:hidden}
+.tc .bar2 i{display:block; height:100%; background:var(--cash); border-radius:4px; transition:width .25s ease}
+.tc small{font-family:var(--f-mono); font-size:11.5px; color:var(--muted)}
+.tc.mid{border-color:var(--cash)}
+.bsay{margin-top:12px; font-size:15px; max-width:70ch}
+.bpres{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; align-items:center}
+.bpres .lbl{font-size:13px; color:var(--muted)}
+
+/* 2: bet cards */
+.bets{display:grid; gap:10px; margin-top:26px}
+details.bet{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.bet[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.bet summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:30px minmax(0,1fr); gap:4px 10px; align-items:start}
+.bet summary::-webkit-details-marker{display:none}
+.bn{font-family:var(--f-mono); font-size:13px; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; background:var(--surface-2); color:var(--accent); border:1px solid var(--line)}
+.bt{font-family:var(--f-display); font-weight:700; font-size:17.5px; min-width:0}
+.bm{grid-column:2; display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center; font-size:13px; color:var(--muted)}
+.bm .mono{font-size:12.5px}
+.open-hint{grid-column:2; font-size:12.5px; color:var(--accent)}
+details[open] .open-hint{display:none}
+.kv{display:grid; grid-template-columns:130px minmax(0,1fr); gap:6px 16px; padding:0 16px 16px 56px; margin:0; font-size:15px}
+.kv dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv dd{margin:0; min-width:0}
+.kv dd ul, .kv dd ol{margin:4px 0 0; padding-left:18px; display:grid; gap:4px}
+.kv dt.kill{color:var(--warn)}
+@media (max-width:600px){ .kv{grid-template-columns:1fr; padding:0 16px 16px} .kv dd{margin-bottom:8px} }
+
+/* 3: priority */
+.pri{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; gap:12px}
+.prow{display:grid; gap:5px}
+.prow .pl{display:flex; justify-content:space-between; gap:12px; font-size:14.5px}
+.prow .pl span:first-child{min-width:0}
+.prow .pl .who2{color:var(--muted)}
+.prow .pl b{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+.ptrack{height:12px; border-radius:6px; background:var(--surface-2)}
+.ptrack i{display:block; height:100%; border-radius:6px; min-width:4px}
+.ptrack i.dec{background:var(--cash)} .ptrack i.en{background:var(--enable)} .ptrack i.q1{background:var(--q1)}
+.axis{display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:11.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:8px}
+.frame{background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px; margin-top:14px}
+.frame p{max-width:68ch}
+.parked{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:640px){ .parked{grid-template-columns:1fr} }
+.pk{border:1px solid var(--line); border-radius:var(--r); padding:12px 14px; background:var(--surface); display:grid; gap:3px; align-content:start; font-size:14.5px}
+.pk b{font-size:15px}
+.pk span{color:var(--muted)}
+
+/* 4: weeks */
+.count{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; margin-bottom:12px}
+.count .big{font-size:clamp(28px, 6vw, 38px)}
+.strip-wrap{position:relative; padding-top:22px}
+.strip{display:flex; gap:3px; height:40px}
+.wk{flex:1 1 0; border:1px solid var(--line); background:var(--surface); border-radius:6px; font-family:var(--f-mono); font-size:12px; color:var(--muted); cursor:pointer; padding:0; min-width:0}
+.wk[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.today{position:absolute; top:4px; bottom:-4px; border-left:2px solid var(--warn); pointer-events:none}
+.today span{position:absolute; top:-6px; left:4px; font-family:var(--f-mono); font-size:11px; color:var(--warn); white-space:nowrap}
+.marks{position:relative; height:26px; margin-top:6px}
+.mk{position:absolute; top:2px; transform:translateX(-50%); width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--bg); font-family:var(--f-mono); font-size:11px; display:grid; place-items:center}
+.kd{list-style:none; margin:4px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:6px 16px; font-size:13.5px}
+.kd li{display:flex; gap:6px; align-items:center}
+.kd i{font-style:normal; width:18px; height:18px; border-radius:50%; background:var(--ink); color:var(--bg); font-family:var(--f-mono); font-size:10.5px; display:grid; place-items:center; flex:none}
+.wtabs{display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:6px; margin-top:20px}
+@media (max-width:640px){ .wtabs{grid-template-columns:repeat(3, minmax(0,1fr))} }
+.wtab{border:1px solid var(--line); background:var(--surface); border-radius:8px; padding:8px 10px; cursor:pointer; text-align:left; display:grid; gap:1px; min-width:0}
+.wtab small{font-family:var(--f-mono); font-size:11px; color:var(--muted)}
+.wtab b{font-family:var(--f-display); font-size:15px}
+.wtab[aria-selected="true"]{border-color:var(--accent); background:var(--accent-soft)}
+.wpanel{display:grid; grid-template-columns:1.4fr 1fr; gap:12px; margin-top:12px}
+@media (max-width:680px){ .wpanel{grid-template-columns:1fr} }
+.wcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.wcol.chk{background:var(--surface-2)}
+.wcol h3{font-size:16px}
+.wcol .wh{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.todo{list-style:none; margin:0; padding:0; display:grid; gap:9px; font-size:15px}
+.todo li{display:grid; gap:3px}
+.own{display:flex; flex-wrap:wrap; gap:4px}
+.own span{font-family:var(--f-mono); font-size:11px; padding:1px 7px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+.own span.me{color:var(--accent); border-color:color-mix(in srgb, var(--accent) 45%, transparent)}
+.chk ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:15px}
+.score{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px}
+.sc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:5px; align-content:start}
+.sc .n{font-family:var(--f-mono); font-size:12px; color:var(--accent)}
+.sc b{font-size:15.5px}
+.sc span{font-size:14px; color:var(--muted)}
+.sc .t{color:var(--ink)}
+
+/* 5: product */
+.firsthour{display:inline-flex; gap:8px; align-items:center; font-family:var(--f-mono); font-size:12px; padding:4px 10px; border-radius:999px; border:1px dashed var(--q1); color:var(--q1); background:var(--q1-soft); justify-self:start}
+.checks{list-style:none; margin:0; padding:0; counter-reset:c; display:grid; gap:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.checks li{counter-increment:c; display:grid; grid-template-columns:32px minmax(0,1.2fr) minmax(0,1fr); gap:6px 14px; padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px}
+.checks li:last-child{border-bottom:0}
+.checks li::before{content:counter(c); font-family:var(--f-mono); font-size:12.5px; color:var(--accent); padding-top:2px}
+.checks .why{color:var(--muted); font-size:14px}
+@media (max-width:600px){ .checks li{grid-template-columns:28px minmax(0,1fr)} .checks .why{grid-column:2} }
+.out3{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+@media (max-width:600px){ .out3{grid-template-columns:1fr} }
+.o3{border:1px dashed var(--line); border-radius:var(--r); padding:12px 14px; font-size:14.5px; display:grid; gap:2px}
+.o3 b{font-size:15px}
+.o3 span{color:var(--muted)}
+
+/* 6: proof */
+.proof{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:680px){ .proof{grid-template-columns:1fr} }
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; gap:8px; align-content:start; min-width:0}
+.pc .co{display:flex; justify-content:space-between; gap:4px 10px; flex-wrap:wrap; align-items:baseline}
+.pc .co b{font-family:var(--f-display); font-size:19px}
+.pc .co span{font-family:var(--f-mono); font-size:11.5px; color:var(--muted)}
+.pc .role{font-size:13.5px; color:var(--muted)}
+.pc p{font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:6px}
+.num{font-family:var(--f-mono); font-size:12px; padding:3px 8px; border-radius:6px; background:var(--cash-soft); border:1px solid color-mix(in srgb, var(--cash) 35%, transparent); max-width:100%}
+.tilt{font-size:14px; color:var(--accent)}
+.pc.lead{grid-column:1 / -1}
+.also{margin-top:12px; font-size:15px; color:var(--muted); max-width:72ch}
+.also b{color:var(--ink)}
+
+/* 7: questions */
+.qs{list-style:none; margin:0; padding:0; counter-reset:q; display:grid; gap:10px}
+.qs li{counter-increment:q; display:grid; grid-template-columns:36px minmax(0,1fr); gap:4px 10px; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+.qs li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:13px; color:var(--accent); padding-top:2px}
+.qs b{font-size:16px}
+.qs span{grid-column:2; color:var(--muted); font-size:14.5px}
+.act{margin-top:16px; background:var(--ink); color:var(--bg); border-radius:var(--r); padding:20px 20px; display:grid; gap:10px}
+.act h3{font-size:20px}
+.act ul{margin:0; padding-left:18px; display:grid; gap:6px}
+.act p{opacity:.85}
+.end{padding-block:36px 64px; border-top:1px solid var(--line); display:grid; gap:14px}
+.contact{display:flex; flex-wrap:wrap; gap:8px 20px; font-family:var(--f-mono); font-size:14px}
+.contact span{user-select:all}
+details.srcs{border:1px solid var(--line); border-radius:var(--r); background:var(--surface); padding:12px 16px}
+details.srcs summary{cursor:pointer; font-size:14px; color:var(--muted)}
+details.srcs ul{margin:10px 0 0; padding-left:18px; display:grid; gap:5px; font-size:13.5px; color:var(--muted)}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>for Drumee</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#number">The number</a>
+      <a href="#bets">Bets</a>
+      <a href="#priority">Priority</a>
+      <a href="#weeks">Six weeks</a>
+      <a href="#product">Product</a>
+      <a href="#proof">Why me</a>
+      <a href="#questions">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Answer to Iris Le · Global SaaS Sales Director · 18 Nov 2026</div>
+    <h1>How I would get Drumee to $10,000 by 31 December</h1>
+    <p class="lede">There are 44 days. In that window the fastest cash comes from <strong>people who already know Drumee</strong>: teams that took the $1 Team month, active free workspaces, self-hosters and demo bookers. Annual prepay from them, plus one Sovereign Node deal, carries the number. Outbound and one partner start in week one and mostly pay in Q1.</p>
+    <div class="window"><span>17 Nov to 31 Dec 2026</span><span class="left" id="daysleft">44 days left</span></div>
+
+    <div class="answer" aria-label="The answer in five lines">
+      <div class="hd"><span>The answer in five lines</span><span>tap a line to jump</span></div>
+      <a class="arow" href="#number"><span class="k">the number</span><span class="v">$10,000 cash collected by 31 Dec from organisations on Team, Business or Sovereign Node.</span><span class="go">1</span></a>
+      <a class="arow" href="#number"><span class="k">what carries it</span><span class="v">Annual prepay at today's prices, <span class="money">$174</span> Team and <span class="money">$594</span> Business, plus one Node first year.</span><span class="go">1</span></a>
+      <a class="arow" href="#bets"><span class="k">the tests</span><span class="v">Eight bets, each with a test, a target and a kill rule. Five aim at December cash, one fixes the funnel, two build Q1.</span><span class="go">2</span></a>
+      <a class="arow" href="#priority"><span class="k">the order</span><span class="v">Expected cash per day of work. People who already know Drumee come first.</span><span class="go">3</span></a>
+      <a class="arow" href="#weeks"><span class="k">the action</span><span class="v">Dated weeks with owners, five numbers every Monday, and a first step within 48 hours.</span><span class="go">4</span></a>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section id="number">
+    <div class="sh">
+      <span class="field">1 · the number</span>
+      <h2>$10,000 by 31 December takes annual prepay</h2>
+      <p>How I read the target, and the arithmetic every bet below rests on. Drumee prices are from drumee.com/pricing on 17 November.</p>
+    </div>
+
+    <div class="def">
+      <div class="defcol">
+        <h3>How I read it</h3>
+        <p><b>Cash collected</b> between 17 November and 31 December from organisations on Team, Business or Sovereign Node. It is the strictest reading, so I plan to it.</p>
+        <ul>
+          <li>A team moving from monthly to annual counts.</li>
+          <li>Pro, at $5 a month, is a personal plan, so I leave it out.</li>
+          <li>Amounts before Stripe fees and VAT.</li>
+        </ul>
+        <p class="note">These three are my assumptions. Question 1 at the end checks them.</p>
+      </div>
+      <div class="defcol alt">
+        <h3>What I report beside it</h3>
+        <ul>
+          <li><b>Bookings:</b> signed orders, so a Node signed in late December and invoiced in January still shows.</li>
+          <li><b>New ARR:</b> monthly plans counted × 12.</li>
+        </ul>
+        <p>If you count bookings or new ARR, the target gets easier. The first two weeks of the plan stay the same.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="need" role="figure" aria-label="Accounts needed for 10,000 dollars cash by 31 December, one offer at a time">
+        <div class="need-hd"><h3>Accounts needed for $10,000 cash by 31 December</h3><span class="src">one offer at a time</span></div>
+        <div class="nrow"><div class="nl"><span>Sovereign Node, first year prepaid at <span class="money">$5,988</span>*</span><b>2</b></div><div class="track"><i class="in" style="width:0.58%"></i></div></div>
+        <div class="nrow"><div class="nl"><span>Business yearly at <span class="money">$594</span></span><b>17</b></div><div class="track"><i class="in" style="width:4.93%"></i></div></div>
+        <div class="nrow"><div class="nl"><span>Business monthly, signed by 30 Nov (<span class="money">$198</span> by 31 Dec)</span><b>51</b></div><div class="track"><i style="width:14.78%"></i></div></div>
+        <div class="nrow"><div class="nl"><span>Team yearly at <span class="money">$174</span></span><b>58</b></div><div class="track"><i style="width:16.81%"></i></div></div>
+        <div class="nrow"><div class="nl"><span>Team monthly, signed by 30 Nov (<span class="money">$58</span> by 31 Dec)</span><b>173</b></div><div class="track"><i style="width:50.14%"></i></div></div>
+        <div class="nrow"><div class="nl"><span>Team monthly, signed in December (<span class="money">$29</span> by 31 Dec)</span><b>345</b></div><div class="track"><i style="width:100%"></i></div></div>
+        <p class="note">Dashed line: 50, about the 50+ teams Drumee reports today. Green bars need fewer accounts than that. *Node is priced by quote. <span class="money">$5,988</span> is the last floor you published, <span class="money">$499</span> a month, and I use it here as an assumption. A $1 Team month signed in December brings $1 by 31 December.</p>
+      </div>
+      <p class="so">Monthly plans need 51 to 345 paying teams, against the 50+ teams Drumee reports in total. Annual prepay at today's prices needs 58 Team or 17 Business accounts, and one Node year covers about 60% of the target. So the plan is annual prepay plus one Node deal. Build your own mix below.</p>
+    </div>
+
+    <div class="calc" id="calc">
+      <div class="calc-hd">
+        <b>Build a mix</b>
+        <div class="segc" role="group" aria-label="Yearly prices">
+          <button type="button" id="basis-promo" data-basis="promo" aria-pressed="true">Today's yearly prices</button>
+          <button type="button" id="basis-list" data-basis="list" aria-pressed="false">Regular yearly prices</button>
+        </div>
+      </div>
+      <div class="presets" role="group" aria-label="Example mixes">
+        <span class="lbl">Try</span>
+        <button type="button" class="pill" id="mix-sales" data-mix="sales" aria-pressed="true">With one Node</button>
+        <button type="button" class="pill" id="mix-nonode" data-mix="nonode" aria-pressed="false">No Node</button>
+        <button type="button" class="pill" id="mix-self" data-mix="self" aria-pressed="false">Self-serve only</button>
+        <button type="button" class="pill" id="mix-monthly" data-mix="monthly" aria-pressed="false">Monthly only</button>
+        <button type="button" class="pill" id="mix-clear" data-mix="clear" aria-pressed="false">Clear</button>
+      </div>
+
+      <div class="crow">
+        <div class="cl"><b>Team yearly</b><span class="cp" id="p-team">$174 each by 31 Dec</span></div>
+        <div class="stepper"><button type="button" data-k="team" data-d="-1" aria-label="One fewer Team yearly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-team" type="number" inputmode="numeric" min="0" step="1" value="6" aria-label="Team yearly accounts"><button type="button" data-k="team" data-d="1" aria-label="One more Team yearly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-team">$1,044</div>
+      </div>
+      <div class="crow">
+        <div class="cl"><b>Business yearly</b><span class="cp" id="p-biz">$594 each by 31 Dec</span></div>
+        <div class="stepper"><button type="button" data-k="biz" data-d="-1" aria-label="One fewer Business yearly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-biz" type="number" inputmode="numeric" min="0" step="1" value="5" aria-label="Business yearly accounts"><button type="button" data-k="biz" data-d="1" aria-label="One more Business yearly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-biz">$2,970</div>
+      </div>
+      <div class="crow">
+        <div class="cl"><b>Sovereign Node, first year prepaid</b><span class="cp np"><label for="np">price, my assumption: $</label><input id="np" type="number" inputmode="numeric" min="0" step="1" value="5988"></span></div>
+        <div class="stepper"><button type="button" data-k="node" data-d="-1" aria-label="One fewer Node"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-node" type="number" inputmode="numeric" min="0" step="1" value="1" aria-label="Sovereign Node deals"><button type="button" data-k="node" data-d="1" aria-label="One more Node"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-node">$5,988</div>
+      </div>
+      <div class="crow">
+        <div class="cl"><b>Business monthly, signed by 30 Nov</b><span class="cp">$198 each by 31 Dec (two charges)</span></div>
+        <div class="stepper"><button type="button" data-k="bmN" data-d="-1" aria-label="One fewer Business monthly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-bmN" type="number" inputmode="numeric" min="0" step="1" value="0" aria-label="Business monthly accounts signed by 30 November"><button type="button" data-k="bmN" data-d="1" aria-label="One more Business monthly"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-bmN">$0</div>
+      </div>
+      <div class="crow">
+        <div class="cl"><b>Team monthly, signed by 30 Nov</b><span class="cp">$58 each by 31 Dec (two charges)</span></div>
+        <div class="stepper"><button type="button" data-k="tmN" data-d="-1" aria-label="One fewer Team monthly signed by 30 November"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-tmN" type="number" inputmode="numeric" min="0" step="1" value="0" aria-label="Team monthly accounts signed by 30 November"><button type="button" data-k="tmN" data-d="1" aria-label="One more Team monthly signed by 30 November"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-tmN">$0</div>
+      </div>
+      <div class="crow">
+        <div class="cl"><b>Team monthly, signed in December</b><span class="cp">$29 each by 31 Dec</span></div>
+        <div class="stepper"><button type="button" data-k="tmD" data-d="-1" aria-label="One fewer Team monthly signed in December"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="q-tmD" type="number" inputmode="numeric" min="0" step="1" value="0" aria-label="Team monthly accounts signed in December"><button type="button" data-k="tmD" data-d="1" aria-label="One more Team monthly signed in December"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M7 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+        <div class="csub" id="s-tmD">$0</div>
+      </div>
+
+      <div class="ctot" aria-live="polite">
+        <div class="ct-main"><span class="k">Cash collected by 31 Dec</span><span class="big" id="t-cash">$10,002</span></div>
+        <div class="meter" aria-hidden="true"><i id="t-fill" style="width:66.7%"></i><em>$10,000</em></div>
+        <div class="ct-row">
+          <div><span class="k">Against $10,000</span><b id="t-gap">+$2</b></div>
+          <div><span class="k">Paying organisations</span><b id="t-orgs">12</b></div>
+          <div><span class="k">New ARR</span><b id="t-arr">$10,002</b></div>
+        </div>
+        <p class="say" id="t-say">Clears $10,000 with 12 paying organisations.</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:10px">Regular yearly prices are ten months of the monthly price: <span class="money">$290</span> Team and <span class="money">$990</span> Business. <span class="money">$174</span> and <span class="money">$594</span> are today's campaign prices, and I assume they hold through December. New ARR counts yearly plans at the price paid and monthly plans × 12.</p>
+  </section>
+
+  <!-- 2 -->
+  <section id="bets">
+    <div class="sh">
+      <span class="field">2 · the bets</span>
+      <h2>Eight bets. Five aim at December cash.</h2>
+      <p>Ranked by expected cash by 31 December per day of work. Every conversion rate is my assumption until I see your numbers, and every bet has a kill rule. Switch bets off to see what is left.</p>
+    </div>
+    <div class="legend"><span class="tag dec">December cash</span><span class="tag en">Enabler</span><span class="tag q1">Q1 pipeline</span><span class="tag as">my assumption</span></div>
+
+    <div class="ledger" id="ledger">
+      <div class="lg-hd"><span>Bet, ranked</span><span>Mid case by 31 Dec</span></div>
+      <label class="lg-row" data-low="500" data-mid="2100" data-high="6100"><input type="checkbox" id="b1" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">1</span><span class="lg-name">$1-month teams switch to annual <span class="tag dec">Dec</span></span><span class="lg-v"><b>$2,100</b><small>$500 to $6,100</small></span></label>
+      <label class="lg-row" data-low="900" data-mid="2100" data-high="3600"><input type="checkbox" id="b2" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">2</span><span class="lg-name">Annual lock for active workspaces <span class="tag dec">Dec</span></span><span class="lg-v"><b>$2,100</b><small>$900 to $3,600</small></span></label>
+      <label class="lg-row" data-low="300" data-mid="800" data-high="1500"><input type="checkbox" id="b3" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">3</span><span class="lg-name">Funnel fixes in week one <span class="tag en">Enabler</span></span><span class="lg-v"><b>$800</b><small>$300 to $1,500</small></span></label>
+      <label class="lg-row" data-low="0" data-mid="2500" data-high="12000"><input type="checkbox" id="b4" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">4</span><span class="lg-name">Sovereign Node Year-One package <span class="tag dec">Dec</span></span><span class="lg-v"><b>$2,500</b><small>$0 to $12,000</small></span></label>
+      <label class="lg-row" data-low="500" data-mid="1500" data-high="3000"><input type="checkbox" id="b5" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">5</span><span class="lg-name">Year-end offer and switcher launch <span class="tag dec">Dec</span></span><span class="lg-v"><b>$1,500</b><small>$500 to $3,000</small></span></label>
+      <label class="lg-row" data-low="0" data-mid="500" data-high="1200"><input type="checkbox" id="b6" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">6</span><span class="lg-name">Referral reward on paid annual <span class="tag dec">Dec</span></span><span class="lg-v"><b>$500</b><small>$0 to $1,200</small></span></label>
+      <label class="lg-row" data-low="600" data-mid="1500" data-high="2400"><input type="checkbox" id="b7" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">7</span><span class="lg-name">Outbound on a compliance trigger <span class="tag q1">Q1</span></span><span class="lg-v"><b>$1,500</b><small>$600 to $2,400</small></span></label>
+      <label class="lg-row" data-low="0" data-mid="700" data-high="4750"><input type="checkbox" id="b8" checked><span class="sw" aria-hidden="true"></span><span class="lg-n">8</span><span class="lg-name">One partner prepays a 10-pack <span class="tag q1">Q1</span></span><span class="lg-v"><b>$700</b><small>$0 to $4,750</small></span></label>
+    </div>
+
+    <div class="tot" aria-live="polite">
+      <div class="tc"><span class="k">Low</span><b id="lo">$2,800</b><span class="bar2"><i id="lo-b" style="width:28%"></i></span><small id="lo-p">28% of $10,000</small></div>
+      <div class="tc mid"><span class="k">Mid</span><b id="mi">$11,700</b><span class="bar2"><i id="mi-b" style="width:100%"></i></span><small id="mi-p">117% of $10,000</small></div>
+      <div class="tc"><span class="k">High</span><b id="hi">$34,550</b><span class="bar2"><i id="hi-b" style="width:100%"></i></span><small id="hi-p">346% of $10,000</small></div>
+    </div>
+    <p class="bsay" id="b-say">Mid case $11,700 clears $10,000. The bets overlap, since one team can show up in two of them, so I plan to $10,000 and treat the rest as cushion. Low case $2,800 assumes every rate at the bottom of its range.</p>
+    <div class="bpres" role="group" aria-label="Bet sets">
+      <span class="lbl">Try</span>
+      <button type="button" class="pill" id="set-all" data-set="1,2,3,4,5,6,7,8" aria-pressed="true">All eight</button>
+      <button type="button" class="pill" id="set-dec" data-set="1,2,3,4,5,6" aria-pressed="false">December bets only</button>
+      <button type="button" class="pill" id="set-nonode" data-set="1,2,3,5,6,7,8" aria-pressed="false">Without the Node</button>
+    </div>
+
+    <div class="bets">
+      <details class="bet" id="bet1" open>
+        <summary><span class="bn">1</span><span class="bt">Teams on the $1 month switch to annual before their first renewal</span><span class="bm"><span class="tag dec">December cash</span><span class="mono">mid $2,100 · 2 days · about $1,050 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>A team that entered a card for the $1 month has already shown it will pay. Offered 12 months for $174, six months at the monthly price, between day 20 and day 28, a real share prepays.</dd>
+          <dt>Test, 2 days</dt><dd>Pull the $1 cohort from Stripe. Send one email and an in-app banner with the one-click yearly checkout. Offer Business yearly at $594 to teams with 7 or more members. I write a personal note to the 10 most active teams.</dd>
+          <dt>Target</dt><dd>20% or more of the cohort on annual before their renewal.</dd>
+          <dt class="kill">Kill</dt><dd>Under 5% after 20 sends.</dd>
+          <dt>Math</dt><dd>Cohort size is the unknown. Your LinkedIn copy caps the offer at the first 100 startups. 20 to 100 teams × 15 to 35% × $174 = <span class="money">$522</span> to <span class="money">$6,090</span>. Mid: 50 teams × 25%, about 12 teams × $174 = <span class="money">$2,088</span>.</dd>
+          <dt>Timing</dt><dd>Each renewal falls 30 days after sign-up, so they land between about 29 November and 30 December, inside the window. I would let the $1 offer end on 30 November as planned, because a $1 sign-up in December is $1 of cash by 31 December. December's offer is annual only.</dd>
+          <dt>Cost, owner</dt><dd>Time only. Me, with growth for the email and banner.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet2">
+        <summary><span class="bn">2</span><span class="bt">Founding-customer annual lock for active workspaces</span><span class="bm"><span class="tag dec">December cash</span><span class="mono">mid $2,100 · 6 days · about $350 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>The active part of the 50+ teams and 2,000+ beta users Drumee reports will prepay a year if a person asks, with a founding-customer offer: a price lock (my assumption: two years at today's yearly price), free migration help, and an invoice dated before 31 December.</dd>
+          <dt>Test, 6 days</dt><dd>Rank workspaces by activity (uploads, members, use in the last 7 days) and by what each team answered at sign-up: team size, industry, and security or cost as the main challenge. I write to or call the top 30, with the CEO or CTO on the larger teams.</dd>
+          <dt>Target</dt><dd>8 or more meetings from 30 contacts. 3 or more paid in the first week.</dd>
+          <dt class="kill">Kill</dt><dd>30 contacts and nobody paid.</dd>
+          <dt>Math</dt><dd>30 to 50 contacted × 10 to 25% = 3 to 12 deals. At an average of $300 (70% Team at $174, 30% Business at $594), that is <span class="money">$900</span> to <span class="money">$3,600</span>, mid about <span class="money">$2,100</span>. A team already paying monthly adds $145 of cash: $174 less the $29 it would pay in December anyway.</dd>
+          <dt>Why it works</dt><dd>A team prepays when it can picture its next year on the product. The teams already using Drumee are where that picture is clearest, and their words become the copy for bets 5 and 7.</dd>
+          <dt>Cost, owner</dt><dd>The price lock, and a few hours of migration help per team. Me.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet3">
+        <summary><span class="bn">3</span><span class="bt">Funnel fixes in week one</span><span class="bm"><span class="tag en">Enabler</span><span class="mono">mid $800, indirect · 2.5 days · about $320 a day</span></span><span class="open-hint">Open for the five fixes</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>A few small leaks cost conversion on every self-serve bet, and each is a day's work or less. These are the five from the public site that touch December cash.</dd>
+          <dt>The fixes</dt><dd><ol>
+            <li>Point the homepage "Start free" at sign-up. Today it opens sign-in.</li>
+            <li>Make plan limits match everywhere. The pricing page and the app's public code differ on Free storage (5 GB and 25 GB) and Pro seats (3 and 5).</li>
+            <li>Open the pricing toggle on yearly.</li>
+            <li>Show a "from" price for Sovereign Node, so buyers can qualify themselves.</li>
+            <li>Say in one place where SaaS data is hosted and which law applies. The privacy text names French law, the terms name Swiss law, and the testimonial videos load from an AWS bucket. A buyer's security reviewer will ask about all of it, so one clear page also speeds up bet 4.</li>
+          </ol></dd>
+          <dt>Test</dt><dd>Ship the fixes, then compare 7 days before and after in GA4, which already tracks the funnel.</dd>
+          <dt>Target</dt><dd>Higher landing to sign-up, sign-up to verified, and pricing to checkout.</dd>
+          <dt class="kill">Kill</dt><dd>Any fix that needs more than a day waits for January.</dd>
+          <dt>Math</dt><dd>Indirect. My assumption is <span class="money">$300</span> to <span class="money">$1,500</span> more through the other bets.</dd>
+          <dt>Cost, owner</dt><dd>2.5 days. Growth and dev, with the list agreed with Iris.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet4">
+        <summary><span class="bn">4</span><span class="bt">Sovereign Node Year-One: a fixed first-year package</span><span class="bm"><span class="tag dec">December cash, the swing</span><span class="mono">mid $2,500 · 12 days · about $210 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>Teams that already self-host Drumee, or booked a demo, will sign a fixed-price, fixed-scope first year faster than a custom enterprise deal: install, SLA, support and SDK, prepaid.</dd>
+          <dt>Test, weeks 1 to 2</dt><dd>Package "Sovereign Node Year-One" at <span class="money">$4,990</span> to <span class="money">$5,988</span> prepaid. That price is my assumption, anchored on your last published floor of $499 a month, Nextcloud's enterprise minimum of about €7,100 a year, and Seafile support at $2,500 to $6,000 a year. Contact the 18 self-hosted deployments and everyone who booked a demo in the last 90 days. Aim for 5 discovery calls.</dd>
+          <dt>Target</dt><dd>5 discovery calls and 2 proposals by Friday 4 December. 1 signature by Friday 18 December in Europe, or by 31 December in Asia.</dd>
+          <dt class="kill">Kill</dt><dd>No proposal out by 8 December. The days go back to bet 2.</dd>
+          <dt>Math</dt><dd>A 30 to 50% chance of at least one close (my estimate) at $5,000 to $6,000 gives <span class="money">$1,500</span> to <span class="money">$3,000</span> expected. I use $2,500. Range $0 to $12,000, for two deals. One Node is 50 to 60% of the target on its own.</dd>
+          <dt>Risk</dt><dd>Enterprise cycles run long (Nextcloud describes several months), and a first Node buyer has no other customer to call. A fixed scope and a one-page security and data-location note are how I would shorten it.</dd>
+          <dt>Cost, owner</dt><dd>Install and support time, priced into the package. Me, with the CTO on technical calls and the CEO signing off the price.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet5">
+        <summary><span class="bn">5</span><span class="bt">Year-end annual offer and a switcher launch</span><span class="bm"><span class="tag dec">December cash</span><span class="mono">mid $1,500 · 9 days plus $300 · about $170 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>One dated offer, "Prepay 2027 by 31 December, invoice dated 2026", plus switcher pages timed to the new version, brings self-serve annual buyers. The pitch is concrete: a 20-person team pays about $1,680 a year on Google Workspace Starter or Microsoft 365 Basic, and $594 on Drumee Business at today's price.</dd>
+          <dt>Who</dt><dd>ownCloud users after the Kiteworks deal, Lark and ClickUp teams, and Microsoft 365 teams facing the July 2026 renewal price rise.</dd>
+          <dt>Channels</dt><dd>Product Hunt relaunch, Show HN, r/selfhosted, AlternativeTo, awesome-selfhosted, and a small paid-search test on switcher keywords.</dd>
+          <dt>Test, weeks 2 to 3</dt><dd>Offer live on Black Friday, 27 November. One landing page, one Stripe yearly link, one community launch, and $300 on 10 switcher keywords (my budget assumption).</dd>
+          <dt>Target</dt><dd>Sign-ups a day, pricing to checkout rate, and under $150 of paid search to win each annual Team.</dd>
+          <dt class="kill">Kill</dt><dd>Paid search stops once an annual Team costs more than $150 to win, since it brings $174 in its first year.</dd>
+          <dt>Math</dt><dd><span class="money">$500</span> to <span class="money">$3,000</span>, mid $1,500. Founders report $1,000 to $3,000 in a launch's first week. I discount that because earlier Drumee launches were quiet.</dd>
+          <dt>Cost, owner</dt><dd>$300 and 9 days. Iris and growth. I write the offer and the switcher pages with you.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet6">
+        <summary><span class="bn">6</span><span class="bt">Referral reward, paid only on paid annual</span><span class="bm"><span class="tag dec">December cash</span><span class="mono">mid $500 · 3 days · about $170 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>Your referral codes already track each referred sign-up by stage, and the person who refers sees no reward yet. A reward paid only when the referred team buys annual turns users and the community into a lead source.</dd>
+          <dt>Reward</dt><dd>2 free months, or 20 to 30% of the first payment. Infomaniak pays its affiliates 25 to 50%.</dd>
+          <dt>Test, 3 days</dt><dd>Announce it in Telegram (14,642 members) and Discord (1,850), and to paying users. Track it with the existing ?ref= code.</dd>
+          <dt>Target</dt><dd>Paid annual referrals within 14 days.</dd>
+          <dt class="kill">Kill</dt><dd>Fewer than 2 in 14 days.</dd>
+          <dt>Guardrail</dt><dd>Reward on paid annual only, so it cannot be farmed. The communities give reach; the buyer is a team lead with a card.</dd>
+          <dt>Math</dt><dd><span class="money">$0</span> to <span class="money">$1,200</span> net of rewards, mid $500.</dd>
+          <dt>Cost, owner</dt><dd>The reward, paid only on cash received. Iris.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet7">
+        <summary><span class="bn">7</span><span class="bt">Outbound on a dated compliance trigger</span><span class="bm"><span class="tag q1">Q1 pipeline, some December cash</span><span class="mono">mid $1,500 · 15 days · about $100 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Who</dt><dd><ol>
+            <li>Vietnamese data processors (IT outsourcers, BPOs, agencies) and FDI firms. They fall outside the PDPL postponement for small firms.</li>
+            <li>Swiss and EU professional firms of 10 to 50 people: law firms, fiduciaries, clinics and agencies that hold client data.</li>
+          </ol></dd>
+          <dt>Hypothesis</dt><dd>A dated trigger gets meetings that close to Business yearly in 2 to 4 weeks, with the odd Node. The triggers: Vietnam's PDPL, in force since 1 January 2026, treats data on a foreign cloud as a cross-border transfer that needs an impact assessment filed within 60 days, with fines up to 5% of the previous year's revenue. Then the Microsoft 365 renewal price rise, and the Zurich data protection officer's position against US clouds for professional-secrecy data in public bodies.</dd>
+          <dt>Test</dt><dd>Week 1: the first 150 hand-picked accounts, 75 in Vietnam and 75 in Switzerland and the EU. Week 3: three emails plus LinkedIn to all 150. Week 4: a second 150 in the segments that reply. The offer is a 20-minute "where does your data live" check.</dd>
+          <dt>Target</dt><dd>5% or more replies. 6 or more meetings from the first 150. The first Business yearly within 14 days of the first send.</dd>
+          <dt class="kill">Kill</dt><dd>Any segment under 2% replies.</dd>
+          <dt>Math</dt><dd>300 accounts by 14 December, in two waves of 150. × 3 to 5% meetings = 9 to 15 meetings. × 15 to 25% close = 1 to 4 Business yearly = <span class="money">$594</span> to <span class="money">$2,376</span>. Mid $1,500.</dd>
+          <dt>Why now</dt><dd>Its main value is the Q1 pipeline, the first repeatable pipeline this role exists to build. Vietnamese buyers withhold about 5% tax on payments to a foreign supplier and expect a VND invoice, which question 3 covers.</dd>
+          <dt>Cost, owner</dt><dd>15 days. Me.</dd>
+        </dl>
+      </details>
+
+      <details class="bet" id="bet8">
+        <summary><span class="bn">8</span><span class="bt">One partner prepays a 10-pack</span><span class="bm"><span class="tag q1">Q1 pipeline</span><span class="mono">mid $700 · 10 days · about $70 a day</span></span><span class="open-hint">Open for the test, target, kill rule and math</span></summary>
+        <dl class="kv">
+          <dt>Hypothesis</dt><dd>A partner that wants a sovereign product before its competitors will prepay a 10-pack of Business yearly at a 20% partner margin.</dd>
+          <dt>Who</dt><dd>A Vietnamese host that already resells Google Workspace or Microsoft 365 in VND (Tenten, Vinahost, Mat Bao, Nhan Hoa, PA Vietnam, BizFly), or a Swiss or EU managed service provider.</dd>
+          <dt>Test</dt><dd>10 partner conversations in 2 weeks. The offer: the pack, a co-branded landing page and shared leads.</dd>
+          <dt>Target</dt><dd>1 signed pack by Friday 18 December, or 2 partners in the Q1 pipeline.</dd>
+          <dt class="kill">Kill</dt><dd>No partner asks for a proposal after 10 conversations.</dd>
+          <dt>Math</dt><dd>One pack = 10 × $594 × 0.8 = <span class="money">$4,752</span>. At a 10 to 20% chance, <span class="money">$475</span> to <span class="money">$950</span> expected. I use $700.</dd>
+          <dt>Cost, owner</dt><dd>20% margin on the pack. Me, with the CEO signing.</dd>
+        </dl>
+      </details>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="priority">
+    <div class="sh">
+      <span class="field">3 · the order</span>
+      <h2>How I choose: cash per day of work, closest people first</h2>
+      <p>Each bet gets one number: expected cash by 31 December divided by the days of work it takes. Sorted that way, the list follows how well the buyer already knows Drumee.</p>
+    </div>
+    <div class="pri" role="figure" aria-label="Expected cash per day of work, by bet">
+      <div class="prow"><div class="pl"><span>1 · <span class="who2">already gave a card for $1</span></span><b>about $1,050 a day</b></div><div class="ptrack"><i class="dec" style="width:100%"></i></div></div>
+      <div class="prow"><div class="pl"><span>2 · <span class="who2">already use Drumee</span></span><b>about $350</b></div><div class="ptrack"><i class="dec" style="width:33.3%"></i></div></div>
+      <div class="prow"><div class="pl"><span>3 · <span class="who2">already on your site</span></span><b>about $320</b></div><div class="ptrack"><i class="en" style="width:30.5%"></i></div></div>
+      <div class="prow"><div class="pl"><span>4 · <span class="who2">already self-host, or booked a demo</span></span><b>about $210</b></div><div class="ptrack"><i class="dec" style="width:19.8%"></i></div></div>
+      <div class="prow"><div class="pl"><span>5 · <span class="who2">know the category</span></span><b>about $170</b></div><div class="ptrack"><i class="dec" style="width:15.9%"></i></div></div>
+      <div class="prow"><div class="pl"><span>6 · <span class="who2">friends of users</span></span><b>about $170</b></div><div class="ptrack"><i class="dec" style="width:15.9%"></i></div></div>
+      <div class="prow"><div class="pl"><span>7 · <span class="who2">new to Drumee</span></span><b>about $100</b></div><div class="ptrack"><i class="q1" style="width:9.5%"></i></div></div>
+      <div class="prow"><div class="pl"><span>8 · <span class="who2">a partner's customers</span></span><b>about $70</b></div><div class="ptrack"><i class="q1" style="width:6.7%"></i></div></div>
+      <div class="axis"><span>closest to Drumee</span><span>expected cash by 31 Dec per day of work</span></div>
+    </div>
+    <div class="frame">
+      <p><b>I call this the path of least friction.</b> For the first customers, start where switching costs the buyer least and saying yes takes the fewest steps. Land them there, then build the repeatable motion from what those deals teach us. The same rule runs inside each deal: find the route with the fewest approvals and a clear owner, or create one.</p>
+      <p>It also tells me what to stop when time runs short. If week two shows the base is smaller than I hope, the days move to the Node and the launch, in that order.</p>
+      <p>One check on my own time: the bets I own add up to about 45 days of work, and the window has about 30 working days. So growth builds the outbound list and the partner shortlist, and every kill rule hands its days to the bet with the best cash per day so far.</p>
+    </div>
+
+    <div class="sub">
+      <h3>Parked until January</h3>
+      <div class="parked">
+        <div class="pk"><b>Lifetime-deal sites</b><span>Payouts arrive about 60 days after month end, so December sales pay in March 2027. A lifetime code also sits badly beside an enterprise sovereign offer.</span></div>
+        <div class="pk"><b>Public sector, education, subsidy schemes</b><span>Buying cycles of months to years. Worth a plan in Q1, with a reference in hand.</span></div>
+        <div class="pk"><b>A European MSP channel</b><span>60 to 120 days to a first deal. Bet 8 opens the first conversation; the channel is a Q1 build.</span></div>
+        <div class="pk"><b>New $1 or monthly-first offers in December</b><span>Each brings $1 or $29 of cash by 31 December. December's offers are annual.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="weeks">
+    <div class="sh">
+      <span class="field">4 · the action</span>
+      <h2>Six weeks, with owners and dates</h2>
+      <p>Weeks run Tuesday to Monday, so each one closes on the Monday scoreboard. Tap a week.</p>
+    </div>
+
+    <div class="count"><span class="big mono" id="dl-big">44</span><span class="muted" id="dl-txt">days from 17 November to 31 December</span></div>
+    <div class="strip-wrap">
+      <div class="strip" role="group" aria-label="Weeks">
+        <button type="button" class="wk" style="flex-grow:7" data-w="w1" aria-pressed="true">W1</button>
+        <button type="button" class="wk" style="flex-grow:7" data-w="w2" aria-pressed="false">W2</button>
+        <button type="button" class="wk" style="flex-grow:7" data-w="w3" aria-pressed="false">W3</button>
+        <button type="button" class="wk" style="flex-grow:7" data-w="w4" aria-pressed="false">W4</button>
+        <button type="button" class="wk" style="flex-grow:7" data-w="w5" aria-pressed="false">W5</button>
+        <button type="button" class="wk" style="flex-grow:10" data-w="w6" aria-pressed="false">W6</button>
+      </div>
+      <div class="today" id="today" hidden><span>today</span></div>
+    </div>
+    <div class="marks" aria-hidden="true">
+      <span class="mk" data-day="10">1</span><span class="mk" data-day="13">2</span><span class="mk" data-day="17">3</span><span class="mk" data-day="31">4</span><span class="mk" data-day="44">5</span>
+    </div>
+    <ul class="kd">
+      <li><i>1</i>27 Nov, Black Friday</li>
+      <li><i>2</i>30 Nov 23:59 CET, the $1 Team month ends</li>
+      <li><i>3</i>4 Dec, Node proposals out</li>
+      <li><i>4</i>18 Dec, last European closes before the holiday quiet (my assumption)</li>
+      <li><i>5</i>31 Dec, invoices dated 2026</li>
+    </ul>
+
+    <div class="wtabs" role="tablist" aria-label="Week by week">
+      <button type="button" class="wtab" role="tab" id="t-w1" aria-controls="w1" aria-selected="true"><small>17 to 23 Nov</small><b>Set up</b></button>
+      <button type="button" class="wtab" role="tab" id="t-w2" aria-controls="w2" aria-selected="false" tabindex="-1"><small>24 to 30 Nov</small><b>Deadlines</b></button>
+      <button type="button" class="wtab" role="tab" id="t-w3" aria-controls="w3" aria-selected="false" tabindex="-1"><small>1 to 7 Dec</small><b>Launch</b></button>
+      <button type="button" class="wtab" role="tab" id="t-w4" aria-controls="w4" aria-selected="false" tabindex="-1"><small>8 to 14 Dec</small><b>Cut</b></button>
+      <button type="button" class="wtab" role="tab" id="t-w5" aria-controls="w5" aria-selected="false" tabindex="-1"><small>15 to 21 Dec</small><b>Europe</b></button>
+      <button type="button" class="wtab" role="tab" id="t-w6" aria-controls="w6" aria-selected="false" tabindex="-1"><small>22 to 31 Dec</small><b>Asia</b></button>
+    </div>
+
+    <div class="wpanel" role="tabpanel" id="w1" aria-labelledby="t-w1">
+      <div class="wcol"><span class="wh">W1 · 17 to 23 Nov</span><h3>Set up and start the fastest cash</h3><ul class="todo">
+        <li>Agree what counts as the $10,000 and how we report it.<span class="own"><span class="me">Me</span><span>Iris</span><span>CEO</span></span></li>
+        <li>Pull Stripe, workspace activity, the $1 cohort, the 18 self-hosted deployments and the last 90 days of demo bookings.<span class="own"><span class="me">Me</span><span>Dev</span></span></li>
+        <li>Ship the funnel fixes.<span class="own"><span>Growth</span><span>Dev</span></span></li>
+        <li>$1 cohort to annual: email, banner, 10 personal notes.<span class="own"><span class="me">Me</span><span>Growth</span></span></li>
+        <li>Package Node Year-One and set its price.<span class="own"><span class="me">Me</span><span>CEO</span></span></li>
+        <li>Build the first 150 outbound accounts.<span class="own"><span>Growth</span><span class="me">Me</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">Monday 23 Nov</span><ul>
+        <li>Definition agreed.</li><li>$1 cohort offer live.</li><li>Node package priced.</li><li>Fixes shipped.</li>
+      </ul></div>
+    </div>
+    <div class="wpanel" role="tabpanel" id="w2" aria-labelledby="t-w2" hidden>
+      <div class="wcol"><span class="wh">W2 · 24 to 30 Nov</span><h3>Black Friday and the $1 deadline</h3><ul class="todo">
+        <li>27 Nov: the year-end annual offer goes live.<span class="own"><span>Iris</span><span>Growth</span></span></li>
+        <li>Calls to the top 30 workspaces for the annual lock.<span class="own"><span class="me">Me</span></span></li>
+        <li>Node discovery calls, aiming for 5.<span class="own"><span class="me">Me</span><span>CTO</span></span></li>
+        <li>Referral reward live in Telegram, Discord and to paying users.<span class="own"><span>Iris</span></span></li>
+        <li>30 Nov, 23:59 CET: the $1 Team month ends.<span class="own"><span>Growth</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">Monday 30 Nov</span><ul>
+        <li>First annual payments in.</li><li>3 or more paid from existing workspaces.</li><li>Node calls booked.</li>
+      </ul></div>
+    </div>
+    <div class="wpanel" role="tabpanel" id="w3" aria-labelledby="t-w3" hidden>
+      <div class="wcol"><span class="wh">W3 · 1 to 7 Dec</span><h3>Launch week</h3><ul class="todo">
+        <li>Switcher launch: Product Hunt, Show HN, r/selfhosted, AlternativeTo.<span class="own"><span>Iris</span><span>Growth</span></span></li>
+        <li>$300 paid-search test on 10 switcher keywords.<span class="own"><span>Growth</span></span></li>
+        <li>Outbound wave 1: 150 accounts, three emails plus LinkedIn.<span class="own"><span class="me">Me</span></span></li>
+        <li>2 Node proposals out by Fri 4 Dec.<span class="own"><span class="me">Me</span></span></li>
+        <li>Annual offer at every $1 Team renewal.<span class="own"><span>Growth</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">Monday 7 Dec</span><ul>
+        <li>Launch numbers read.</li><li>Reply rate per outbound segment.</li><li>Proposals out.</li>
+      </ul></div>
+    </div>
+    <div class="wpanel" role="tabpanel" id="w4" aria-labelledby="t-w4" hidden>
+      <div class="wcol"><span class="wh">W4 · 8 to 14 Dec</span><h3>Keep what works, stop the rest</h3><ul class="todo">
+        <li>8 Dec: Node check. No proposal out means the days go to bet 2.<span class="own"><span class="me">Me</span></span></li>
+        <li>Every bet judged on its kill rule. Paid search stays only while an annual Team costs under $150 to win.<span class="own"><span class="me">Me</span><span>Iris</span></span></li>
+        <li>Partner conversations, 10 across two weeks, from a shortlist growth builds.<span class="own"><span class="me">Me</span><span>Growth</span></span></li>
+        <li>Outbound wave 2: 150 more accounts in the segments above 2% replies.<span class="own"><span class="me">Me</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">Monday 14 Dec</span><ul>
+        <li>A short list of what is working.</li><li>Everything else stopped.</li>
+      </ul></div>
+    </div>
+    <div class="wpanel" role="tabpanel" id="w5" aria-labelledby="t-w5" hidden>
+      <div class="wcol"><span class="wh">W5 · 15 to 21 Dec</span><h3>Close Europe</h3><ul class="todo">
+        <li>Close European and Swiss deals before the holiday quiet, which I expect from about 19 Dec.<span class="own"><span class="me">Me</span></span></li>
+        <li>Node signature target for Europe: Fri 18 Dec.<span class="own"><span class="me">Me</span><span>CEO</span></span></li>
+        <li>Partner pack deadline: Fri 18 Dec.<span class="own"><span class="me">Me</span></span></li>
+        <li>Last call to active workspaces: annual, with an invoice dated 2026.<span class="own"><span class="me">Me</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">Monday 21 Dec</span><ul>
+        <li>European deals closed, or moved to January with a date.</li>
+      </ul></div>
+    </div>
+    <div class="wpanel" role="tabpanel" id="w6" aria-labelledby="t-w6" hidden>
+      <div class="wcol"><span class="wh">W6 · 22 to 31 Dec</span><h3>Close Asia, invoice by 31 December</h3><ul class="todo">
+        <li>Vietnam and Asia closes, with invoices dated by 31 Dec.<span class="own"><span class="me">Me</span></span></li>
+        <li>The last $1 Team renewals, through 30 Dec.<span class="own"><span>Growth</span></span></li>
+        <li>Q1 pipeline review: every open deal with a next step and a date.<span class="own"><span class="me">Me</span></span></li>
+        <li>January plan. Tet falls on 6 Feb 2027, so Vietnamese January budgets come first.<span class="own"><span class="me">Me</span><span>Iris</span></span></li>
+      </ul></div>
+      <div class="wcol chk"><span class="wh">31 Dec</span><ul>
+        <li>$10,000 cash collected.</li><li>A written playbook of what worked.</li><li>A Q1 pipeline with dates.</li>
+      </ul></div>
+    </div>
+
+    <div class="sub">
+      <h3>The scoreboard: five numbers every Monday</h3>
+      <div class="score">
+        <div class="sc"><span class="n">1</span><b>Cash collected</b><span class="t">Against $10,000, with bookings and new ARR beside it.</span><span>Below plan two Mondays running: days move to the bet with the best cash per day so far.</span></div>
+        <div class="sc"><span class="n">2</span><b>Annual conversions, by source</b><span class="t">$1 cohort 20% or more before renewal.</span><span>Shows which door is paying: cohort, workspaces, referral or launch.</span></div>
+        <div class="sc"><span class="n">3</span><b>Node pipeline</b><span class="t">5 calls and 2 proposals by 4 Dec, 1 signature by 18 Dec.</span><span>The single biggest swing, so it gets its own line.</span></div>
+        <div class="sc"><span class="n">4</span><b>Self-serve funnel</b><span class="t">Sign-up starts, pricing to checkout, under $150 to win each annual Team.</span><span>Tells us whether the fixes and the launch are working.</span></div>
+        <div class="sc"><span class="n">5</span><b>Q1 pipeline</b><span class="t">6 or more meetings from the first 150 outbound accounts.</span><span>The repeatable pipeline this role is for, built while December closes.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="product">
+    <div class="sh">
+      <span class="firsthour">First-hour plan</span>
+      <span class="field">5 · the product</span>
+      <h2>What I want to see in the product first</h2>
+      <p>I am signing up through the link you sent and will go at least as far as a workspace with a file in it. These are the things I will time and note, in order, and why each one matters for December. My notes from that hour will replace this section.</p>
+    </div>
+    <ol class="checks">
+      <li><span>Open drumee.com in a private window. Seconds until I can say what it is; where "Start free" takes me; which pricing toggle is on.</span><span class="why">Every self-serve bet starts on this page.</span></li>
+      <li><span>Sign up. Time to finish the form, and which sign-in options are offered.</span><span class="why">Fewer steps, more trials in launch week.</span></li>
+      <li><span>The verification email. Minutes until it arrives, and whether it lands in spam.</span><span class="why">The account waits on this click. A slow email loses launch-day sign-ups.</span></li>
+      <li><span>The onboarding questions. Time the whole wizard and note each question.</span><span class="why">Team size, industry and main challenge are how I would rank workspaces for bet 2.</span></li>
+      <li><span>First value. Create a workspace, upload a file, chat in the folder, add a task, open the Gantt and calendar views. Minutes from sign-up to the moment it clicks.</span><span class="why">Time to value decides who prepays $174 for a year.</span></li>
+      <li><span>Sharing. Send a secure link to my second address. Does the other person need an account to reply? Expiry, password and revoke options.</span><span class="why">Every share is an invitation to a new team. This is the growth loop.</span></li>
+      <li><span>A meeting. Start one and check the Free plan's limit.</span><span class="why">A clear limit is an honest reason to upgrade.</span></li>
+      <li><span>Billing. Do in-app plans and prices match the public page? USD or EUR? Any upgrade nudge? Go to checkout and stop before the card.</span><span class="why">The one-click yearly checkout drives bets 1, 2 and 5.</span></li>
+      <li><span>Referral. Find my own code and see whether a reward is shown.</span><span class="why">Bet 6 starts here.</span></li>
+      <li><span>The sovereign path. Follow "Contact sales" from pricing, and look for a data-location statement in the app.</span><span class="why">A Node buyer's security reviewer asks this on the first call.</span></li>
+      <li><span>Mobile. Install the Android app, sign in, compare.</span><span class="why">The apps are new (Android 30 Oct, iOS 5 Nov). I want to know if a team can run on them.</span></li>
+      <li><span>The version. Note the version shown and any banner about the new one.</span><span class="why">Bet 5's launch is timed to it.</span></li>
+    </ol>
+    <div class="sub">
+      <h3>What comes out of the hour</h3>
+      <div class="out3">
+        <div class="o3"><b>Three best moments</b><span>The lines for the switcher pages and outbound.</span></div>
+        <div class="o3"><b>Three worst friction points</b><span>Each with a screenshot and a one-line fix, added to bet 3.</span></div>
+        <div class="o3"><b>Minutes to value</b><span>One number to beat in every launch.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="proof">
+    <div class="sh">
+      <span class="field">6 · why me</span>
+      <h2>Why I can run this</h2>
+      <p>Three places, each close to a part of this plan.</p>
+    </div>
+    <div class="proof">
+      <div class="pc lead">
+        <div class="co"><b>ZenAdmin</b><span>Aug 2022 to Nov 2023</span></div>
+        <span class="role">Commercial Director · Singapore</span>
+        <p>We started with 11 beta customers and no revenue. Southeast Asia gave us $4K to $5K deals, so we moved the motion to the US and Europe, sold from India on their hours, and signed Remote, Omnipresent and Eventbrite.</p>
+        <div class="nums"><span class="num">$200K+ ARR</span><span class="num">average deal about $13K</span></div>
+        <span class="tilt">Like Drumee now: a team in Asia selling to buyers in Europe.</span>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Craze (YC S22)</b><span>Apr 2025 to Mar 2026</span></div>
+        <span class="role">Head of Sales, founding team</span>
+        <p>There was no sales team before me. We signed companies of 5 to 10 people, the size of a Drumee Team plan.</p>
+        <div class="nums"><span class="num">70+ logos</span></div>
+        <span class="tilt">Close to bets 1, 2 and 5: small teams deciding fast.</span>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Apr 2017 to Jul 2020</span></div>
+        <span class="role">Inside and Channel Sales · acquired by Dineout</span>
+        <p>A 60+ seat sales engine for restaurant software: about 40 on-roll, plus an outbound team I set up and trained at a BPO in Delhi NCR, two months on site.</p>
+        <div class="nums"><span class="num">60+ seats</span><span class="num">15-city channel</span></div>
+        <span class="tilt">Close to bets 7 and 8: many small accounts, through people and partners.</span>
+      </div>
+    </div>
+    <p class="also"><b>And at Simplifai</b> (Head of Sales APAC, 2020 to 2022) we started selling AI to Indian banks and insurers before we had an ISO certificate, and grew to <span class="money">$1.7M ARR</span>. A first Node buyer asks the same trust questions.</p>
+  </section>
+
+  <!-- 7 -->
+  <section id="questions">
+    <div class="sh">
+      <span class="field">7 · from you</span>
+      <h2>Three questions only you can answer</h2>
+    </div>
+    <ol class="qs">
+      <li><b>What counts?</b><span>Cash collected by 31 December, or signed bookings, or new ARR? Do upgrades and renewals by existing customers count?</span></li>
+      <li><b>Where do we start?</b><span>How many paying workspaces today, on which plans, monthly or annual? How many teams took the $1 Team month? Is there open Node pipeline, including the 18 self-hosted deployments?</span></li>
+      <li><b>What can I move?</b><span>Can I set offers, such as an annual price lock or a fixed Node Year-One price? Is there an ad or tool budget? Can Drumee invoice by bank transfer, and in VND for Vietnamese buyers?</span></li>
+    </ol>
+    <div class="act">
+      <h3>If you share those three answers, I will send back week one with real numbers in it, within 48 hours:</h3>
+      <ul>
+        <li>the $1 Team annual email and in-app banner,</li>
+        <li>the founding-customer annual lock offer, with the first message,</li>
+        <li>a one-page Node Year-One package, ready for pricing sign-off.</li>
+      </ul>
+      <p>Then we start the Monday scoreboard.</p>
+    </div>
+  </section>
+
+  <footer class="end">
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+    <details class="srcs">
+      <summary>Where the numbers come from</summary>
+      <ul>
+        <li>Drumee plans, prices and the $1 Team terms: drumee.com/pricing and drumee.com/team-1usd, read on 17 Nov 2026.</li>
+        <li>Teams, beta users and self-hosted deployments: drumee.com. "First 100 startups": Drumee's LinkedIn page. Referral stages and sign-up questions: Drumee's public GitHub.</li>
+        <li>Competitor prices: Google Workspace, Microsoft 365, Nextcloud, Seafile and Infomaniak pricing pages.</li>
+        <li>Vietnam PDPL: Law 91/2025/QH15 with Decree 356/2025. Withholding: PwC tax summaries. Zurich: the data protection officer's position, as reported by Mondaq.</li>
+        <li>Lifetime-deal payouts: AppSumo's partner payment policy. Launch results: founder posts on Indie Hackers.</li>
+        <li>Every conversion rate and the Node price on this page are my assumptions.</li>
+      </ul>
+    </details>
+  </footer>
+</main>
+
+<script>
+(function(){
+  function money(n){ var s = Math.round(Math.abs(n)).toLocaleString('en-US'); return (n < 0 ? '-$' : '$') + s; }
+  function $(id){ return document.getElementById(id); }
+
+  /* days left */
+  function dayIndex(d){ return Math.round((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(2026, 10, 17)) / 86400000); }
+  var idx = dayIndex(new Date());
+  var left = 44 - idx;
+  if (idx >= 0 && idx <= 44){
+    $('daysleft').textContent = left === 0 ? 'last day' : left + (left === 1 ? ' day left' : ' days left');
+    $('dl-big').textContent = left;
+    $('dl-txt').textContent = left === 0 ? 'Last day of the window' : (left === 1 ? 'day left to 31 December' : 'days left to 31 December');
+    var t = $('today'); t.style.left = ((idx + 0.5) / 45 * 100) + '%'; t.hidden = false;
+  } else if (idx > 44){
+    $('daysleft').textContent = 'window closed';
+    $('dl-txt').textContent = 'days in the window, 17 November to 31 December';
+  }
+  document.querySelectorAll('.mk').forEach(function(m){
+    var d = parseFloat(m.getAttribute('data-day'));
+    m.style.left = Math.min(97, Math.max(3, (d + 0.5) / 45 * 100)) + '%';
+  });
+
+  /* calculator */
+  var basis = 'promo';
+  var KEYS = ['team','biz','node','bmN','tmN','tmD'];
+  function nodePrice(){ var v = parseFloat($('np').value); return isFinite(v) && v >= 0 ? v : 0; }
+  function cash(k){
+    if (k === 'team') return basis === 'promo' ? 174 : 290;
+    if (k === 'biz') return basis === 'promo' ? 594 : 990;
+    if (k === 'node') return nodePrice();
+    return {bmN:198, tmN:58, tmD:29}[k];
+  }
+  function arr(k){ return (k === 'team' || k === 'biz' || k === 'node') ? cash(k) : {bmN:1188, tmN:348, tmD:348}[k]; }
+  function qty(k){ var v = parseInt($('q-' + k).value, 10); return isFinite(v) && v > 0 ? v : 0; }
+  function calc(){
+    var total = 0, orgs = 0, a = 0;
+    KEYS.forEach(function(k){
+      var q = qty(k), c = cash(k);
+      total += q * c; orgs += q; a += q * arr(k);
+      $('s-' + k).textContent = money(q * c);
+    });
+    $('p-team').textContent = money(cash('team')) + ' each by 31 Dec';
+    $('p-biz').textContent = money(cash('biz')) + ' each by 31 Dec';
+    $('t-cash').textContent = money(total);
+    $('t-fill').style.width = Math.min(100, total / 15000 * 100) + '%';
+    var gap = total - 10000;
+    $('t-gap').textContent = (gap >= 0 ? '+' : '') + money(gap);
+    $('t-gap').style.color = gap >= 0 ? 'var(--cash)' : 'var(--warn)';
+    $('t-orgs').textContent = orgs.toLocaleString('en-US');
+    $('t-arr').textContent = money(a);
+    var say;
+    if (total === 0) say = 'Add accounts above, or pick a mix.';
+    else if (gap >= 0) say = 'Clears $10,000 with ' + orgs.toLocaleString('en-US') + ' paying organisation' + (orgs === 1 ? '' : 's') + '.';
+    else {
+      var short = -gap, teams = Math.ceil(short / cash('team'));
+      say = 'Short by ' + money(short) + '. That is ' + teams + ' more Team yearly account' + (teams === 1 ? '' : 's');
+      say += (nodePrice() >= short ? ', or one Node.' : '.');
+    }
+    if (qty('tmD') + qty('tmN') + qty('bmN') > 50) say += ' Drumee reports 50+ teams in total today.';
+    $('t-say').textContent = say;
+  }
+  var MIX = {
+    sales: {team:6, biz:5, node:1, bmN:0, tmN:0, tmD:0},
+    nonode: {team:24, biz:10, node:0, bmN:0, tmN:0, tmD:0},
+    self: {team:58, biz:0, node:0, bmN:0, tmN:0, tmD:0},
+    monthly: {team:0, biz:0, node:0, bmN:0, tmN:0, tmD:345},
+    clear: {team:0, biz:0, node:0, bmN:0, tmN:0, tmD:0}
+  };
+  var mixBtns = document.querySelectorAll('[data-mix]');
+  function markMix(name){ mixBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-mix') === name ? 'true' : 'false'); }); }
+  mixBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var m = MIX[b.getAttribute('data-mix')];
+      KEYS.forEach(function(k){ $('q-' + k).value = m[k]; });
+      markMix(b.getAttribute('data-mix')); calc();
+    });
+  });
+  document.querySelectorAll('.stepper button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var k = b.getAttribute('data-k'), d = parseInt(b.getAttribute('data-d'), 10);
+      $('q-' + k).value = Math.max(0, qty(k) + d);
+      markMix(''); calc();
+    });
+  });
+  KEYS.forEach(function(k){ $('q-' + k).addEventListener('input', function(){ markMix(''); calc(); }); });
+  $('np').addEventListener('input', calc);
+  document.querySelectorAll('[data-basis]').forEach(function(b){
+    b.addEventListener('click', function(){
+      basis = b.getAttribute('data-basis');
+      document.querySelectorAll('[data-basis]').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      calc();
+    });
+  });
+  calc();
+
+  /* bets */
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.lg-row'));
+  var setBtns = document.querySelectorAll('[data-set]');
+  function bets(){
+    var lo = 0, mi = 0, hi = 0;
+    rows.forEach(function(r){
+      var on = r.querySelector('input').checked;
+      r.classList.toggle('off', !on);
+      if (on){ lo += +r.getAttribute('data-low'); mi += +r.getAttribute('data-mid'); hi += +r.getAttribute('data-high'); }
+    });
+    [['lo', lo], ['mi', mi], ['hi', hi]].forEach(function(p){
+      $(p[0]).textContent = money(p[1]);
+      $(p[0] + '-b').style.width = Math.min(100, p[1] / 100) + '%';
+      $(p[0] + '-p').textContent = Math.round(p[1] / 100) + '% of $10,000';
+    });
+    var nodeOn = $('b4').checked, s;
+    if (mi === 0) s = 'No bets on. Switch some back on.';
+    else if (mi >= 10000) s = 'Mid case ' + money(mi) + ' clears $10,000. The bets overlap, since one team can show up in two of them, so I plan to $10,000 and treat the rest as cushion.';
+    else s = 'Mid case ' + money(mi) + ' is ' + money(10000 - mi) + ' short of $10,000.' + (nodeOn ? '' : ' The Node deal is the single biggest swing: one signature is 50 to 60% of the target.');
+    if (mi > 0) s += ' Low case ' + money(lo) + ' assumes every rate at the bottom of its range.';
+    $('b-say').textContent = s;
+    var on = rows.map(function(r, i){ return r.querySelector('input').checked ? (i + 1) : 0; }).filter(Boolean).join(',');
+    setBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set') === on ? 'true' : 'false'); });
+  }
+  rows.forEach(function(r){ r.querySelector('input').addEventListener('change', bets); });
+  setBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var want = b.getAttribute('data-set').split(',');
+      rows.forEach(function(r, i){ r.querySelector('input').checked = want.indexOf(String(i + 1)) !== -1; });
+      bets();
+    });
+  });
+  bets();
+
+  /* weeks */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.wtab'));
+  var wks = document.querySelectorAll('.wk');
+  function pick(w, focus){
+    tabs.forEach(function(t){
+      var on = t.getAttribute('aria-controls') === w;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      $(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    wks.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-w') === w ? 'true' : 'false'); });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ pick(t.getAttribute('aria-controls')); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        pick(tabs[n].getAttribute('aria-controls'), true); e.preventDefault();
+      }
+    });
+  });
+  wks.forEach(function(b){ b.addEventListener('click', function(){ pick(b.getAttribute('data-w')); }); });
+  var starts = [0, 7, 14, 21, 28, 35];
+  if (idx >= 0 && idx <= 44){
+    var w = 1; starts.forEach(function(s, i){ if (idx >= s) w = i + 1; });
+    pick('w' + w);
+  }
+
+  /* section highlight */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on){ a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
