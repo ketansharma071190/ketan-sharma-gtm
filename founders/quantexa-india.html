@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantexa: India after the score</title>
+<meta name="description" content="A working draft by Ketan Sharma on opening India for Quantexa: RBI's 1 January 2027 fraud rules, the first 10 banks, and the first 90 days.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* One reading column, sticky section bar. The hero card follows scam money through an Indian bank and marks the step where Quantexa acts. */
+:root{
+  --bg:#F5F4F0; --surface:#FFFFFF; --surface-2:#ECEAE4; --ink:#14181C; --muted:#596067; --line:#D9D6CE;
+  --accent:#0B6B5D; --accent-ink:#FFFFFF; --accent-soft:rgba(11,107,93,.09);
+  --amber:#8F5300; --amber-soft:rgba(143,83,0,.09);
+  --f-display:"Manrope", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E1214; --surface:#151B1E; --surface-2:#1C2427; --ink:#E7ECEA; --muted:#9BA7A5; --line:#2A3436;
+  --accent:#4FD1B5; --accent-ink:#04201A; --accent-soft:rgba(79,209,181,.12);
+  --amber:#F0B05A; --amber-soft:rgba(240,176,90,.12);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0E1214; --surface:#151B1E; --surface-2:#1C2427; --ink:#E7ECEA; --muted:#9BA7A5; --line:#2A3436;
+  --accent:#4FD1B5; --accent-ink:#04201A; --accent-soft:rgba(79,209,181,.12);
+  --amber:#F0B05A; --amber-soft:rgba(240,176,90,.12);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.55; -webkit-text-size-adjust:100%}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(28px, 6vw, 44px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(22px, 4vw, 30px); font-weight:800; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.nw{white-space:nowrap}
+
+/* sticky bar */
+.qbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.qbar .wrap{display:flex; align-items:center; gap:14px; padding-top:10px; padding-bottom:10px}
+.qwho{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.qwho span{color:var(--muted); font-weight:600}
+.qchips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.qchips::-webkit-scrollbar{display:none}
+.qchips a{flex:none; font-size:13px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.qchips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:520px){ .qwho span{display:none} }
+
+/* hero */
+.hero{padding-top:40px; padding-bottom:32px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18.5px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+/* money path card */
+.path{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.path-hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.path-hd b{color:var(--ink); font-weight:500}
+.psteps{list-style:none; margin:0; padding:6px 0; counter-reset:ps}
+.pstep{counter-increment:ps; display:grid; grid-template-columns:44px minmax(0,1fr); gap:2px 10px; padding:11px 16px 11px 10px; position:relative}
+.pstep::before{content:counter(ps); grid-row:1 / span 2; justify-self:center; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); color:var(--muted); border:1px solid var(--line); position:relative; z-index:1}
+.pstep::after{content:""; position:absolute; left:31px; top:40px; bottom:-11px; width:2px; background:var(--line)}
+.pstep:last-child::after{display:none}
+.pstep .pw{font-weight:600}
+.pstep .pw small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; letter-spacing:.03em; text-transform:uppercase}
+.pstep .pa{font-size:15.5px; color:var(--muted); min-width:0}
+.pstep .pa b{color:var(--ink); font-weight:600}
+.pstep.qx{background:var(--accent-soft)}
+.pstep.qx::before{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.pstep.qx .pw{color:var(--accent)}
+.path-ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:14px; color:var(--muted)}
+
+/* sections */
+section{padding-top:40px; padding-bottom:40px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:64ch}
+.kicker{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.05em; text-transform:uppercase}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); line-height:1.5}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--amber); border-color:color-mix(in srgb, var(--amber) 45%, transparent); background:var(--amber-soft)}
+.tag.check{color:var(--accent); border-color:color-mix(in srgb, var(--accent) 45%, transparent); background:var(--accent-soft)}
+
+/* clock */
+.clock{list-style:none; margin:0; padding:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden}
+.clock>li{display:grid; grid-template-columns:120px minmax(0,1fr); gap:4px 16px; padding:13px 16px; border-bottom:1px solid var(--line)}
+.clock>li:last-child{border-bottom:0}
+.clock .cd{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:3px}
+.clock .ce{min-width:0; display:grid; gap:4px}
+.clock .ce p{font-size:16px}
+.clock>li.key{background:var(--accent-soft)}
+.clock>li.key .cd{color:var(--accent); font-weight:500}
+@media (max-width:560px){ .clock>li{grid-template-columns:minmax(0,1fr)} }
+
+/* refund calculator */
+.calc{margin-top:16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:12px}
+.calc-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap}
+.calc-top label{font-family:var(--f-display); font-weight:700; font-size:16px}
+.calc-amt{font-family:var(--f-mono); font-size:20px; font-weight:500; white-space:nowrap}
+.calc input[type=range]{width:100%; accent-color:var(--accent)}
+.splitbar{display:flex; height:16px; border-radius:6px; overflow:hidden; background:var(--surface-2); border:1px solid var(--line)}
+.splitbar>span{display:block; height:100%; transition:width .25s ease}
+.sb-rbi{background:color-mix(in srgb, var(--ink) 55%, var(--surface))}
+.sb-cust{background:var(--amber)}
+.sb-ben{background:var(--accent)}
+.sb-self{background:transparent}
+.splitrows{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .splitrows{grid-template-columns:repeat(2, minmax(0,1fr))} }
+.srow{display:grid; gap:2px; min-width:0}
+.srow .sk{font-size:13.5px; color:var(--muted); display:flex; align-items:center; gap:6px}
+.srow .sk i{width:10px; height:10px; border-radius:2px; display:inline-block; flex:none}
+.srow .sv{font-family:var(--f-mono); font-size:16px; white-space:nowrap}
+.srow.ben .sv{color:var(--accent); font-weight:500}
+.calc-note{font-size:14.5px; color:var(--muted)}
+.honest{margin-top:16px; padding:14px 16px; border-left:3px solid var(--amber); background:var(--amber-soft); border-radius:0 var(--r) var(--r) 0; font-size:16px}
+
+/* facts */
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:640px){ .facts{grid-template-columns:minmax(0,1fr)} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start; min-width:0}
+.fact h3{font-size:15.5px}
+.fact p{font-size:15.5px; color:var(--muted)}
+.fact p b{color:var(--ink); font-weight:600}
+.reads{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.reads h3{font-size:16.5px}
+.reads ol{margin:0; padding-left:20px; display:grid; gap:9px}
+.reads li{max-width:68ch}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.door>summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; align-items:start}
+.door>summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px; white-space:nowrap}
+.door .dt{font-family:var(--f-display); font-weight:700; font-size:17px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted)}
+.banks{grid-column:2; display:flex; flex-wrap:wrap; gap:6px; margin-top:4px}
+.banks>span{font-size:13px; padding:3px 9px; border-radius:999px; background:var(--surface-2); border:1px solid var(--line); white-space:nowrap}
+.door .dopen{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--accent)}
+.door[open] .dopen{display:none}
+@media (max-width:560px){ .door>summary{grid-template-columns:minmax(0,1fr)} .door .dwhy, .banks, .door .dopen{grid-column:1} }
+.dbody{padding:0 16px 16px; display:grid; gap:10px}
+.kv{display:grid; grid-template-columns:120px minmax(0,1fr); gap:6px 14px; font-size:15.5px; margin:0}
+.kv>dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv>dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:minmax(0,1fr); gap:2px} .kv>dd{margin-bottom:8px} }
+.aside{font-size:15px; color:var(--muted); border-top:1px dashed var(--line); padding-top:10px}
+
+/* tabs */
+.qtabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.qtabs::-webkit-scrollbar{display:none}
+.qtab{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.qtab b{font-family:var(--f-display); font-size:16.5px; color:inherit}
+.qtab small{font-family:var(--f-mono); font-size:11.5px}
+.qtab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.qpanel{display:grid; grid-template-columns:1.2fr 1fr; gap:14px}
+.qpanel[hidden]{display:none}
+@media (max-width:660px){ .qpanel{grid-template-columns:minmax(0,1fr)} }
+.qcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.qcol.see{background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 30%, var(--line))}
+.qcol h3{font-size:12px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.qcol.see h3{color:var(--accent)}
+.qcol ul{margin:0; padding-left:18px; display:grid; gap:7px; font-size:15.5px}
+
+/* hires */
+.hires{list-style:none; margin:0; padding:0; display:grid; gap:10px; counter-reset:hr}
+.hires>li{counter-increment:hr; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 14px}
+.hires>li::before{content:counter(hr); grid-row:1 / span 2; font-family:var(--f-display); font-weight:800; font-size:24px; color:var(--accent); line-height:1}
+.hires .hw{font-weight:600; display:flex; gap:8px; flex-wrap:wrap; align-items:baseline}
+.hires .hw small{font-family:var(--f-mono); font-size:12px; color:var(--muted); font-weight:400}
+.hires .hy{font-size:15.5px; color:var(--muted)}
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:8px; min-width:0}
+.pcard-hd{display:flex; justify-content:space-between; gap:6px 14px; flex-wrap:wrap; align-items:baseline}
+.pcard-hd h3{font-size:18px}
+.pcard-hd .pr{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.pcard p{font-size:16px}
+.pcard .pm{color:var(--muted); font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:2px}
+.nums>span{font-family:var(--f-mono); font-size:13px; white-space:nowrap}
+.nums>span b{font-family:var(--f-display); font-size:19px; font-weight:800; color:var(--accent); margin-right:4px}
+.plain{font-size:16px; color:var(--muted); margin-top:12px; max-width:68ch}
+
+/* questions */
+.qs{margin:0; padding-left:22px; display:grid; gap:12px; font-size:17px}
+.qs li{max-width:66ch}
+.close{margin-top:28px; padding:18px; border-radius:var(--r); border:1.5px solid var(--accent); display:grid; gap:10px}
+.close p{font-size:16.5px}
+.contact{display:flex; flex-wrap:wrap; gap:8px 20px; font-family:var(--f-mono); font-size:14px}
+.contact a{color:var(--ink)}
+footer{padding-top:28px; padding-bottom:48px; color:var(--muted); font-size:13.5px}
+</style>
+</head>
+<body>
+
+<nav class="qbar" aria-label="Sections">
+  <div class="wrap">
+    <div class="qwho">Ketan Sharma <span>· India for Quantexa</span></div>
+    <div class="qchips">
+      <a href="#rule">The rule</a>
+      <a href="#asia">Your Asia</a>
+      <a href="#ten">First 10 banks</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hiring</a>
+      <a href="#me">Why me</a>
+      <a href="#ask">Questions</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">A working draft for Shaun Mathieson and Vishal Marria · November 2026</div>
+    <h1>India built the mule score. Each bank still owns what happens after it.</h1>
+    <p class="lede">This is how I would open India for Quantexa from your Singapore hub. I built it from public sources and from two years selling AI into Indian banks and insurers. <strong>Where I am guessing, I say so.</strong></p>
+
+    <div class="path" role="figure" aria-label="Where scam money goes in an Indian bank, and where Quantexa acts">
+      <div class="path-hd"><b>One scam payment, step by step</b><span>from 1 January 2027</span></div>
+      <ol class="psteps">
+        <li class="pstep">
+          <div class="pw">The payment <small>customer's bank</small></div>
+          <div class="pa">A customer is pushed into paying, often by a fake officer on a video call. From 1 January 2027 a payment made by <b>granting approval under coercion or duress</b> counts as fraud, and the bank has to prove the customer was negligent before it refuses to pay back.</div>
+        </li>
+        <li class="pstep">
+          <div class="pw">The money lands <small>receiving bank</small></div>
+          <div class="pa">It reaches a mule account at another bank. RBI's MuleHunter.AI gives that account a probability score. It was live in <b>26&nbsp;banks on 31 March 2026</b>, with 4 more underway. For small refunds, this receiving bank now pays a share.</div>
+        </li>
+        <li class="pstep qx">
+          <div class="pw">After the score <small>Quantexa's step</small></div>
+          <div class="pa">RBI's own report says what happens next is decided by each bank's internal assessment and due diligence. That is where one flagged account has to be linked to the customers, devices, addresses and payments around it. It is the kind of linking Quantexa already does in financial crime for Standard Chartered and HSBC.</div>
+        </li>
+        <li class="pstep">
+          <div class="pw">The refund claim <small>both banks</small></div>
+          <div class="pa">To refuse a claim, the bank needs evidence of negligence. A clear picture of the mule ring helps it decide fast, pay where it must, and defend a refusal where it can. <span class="tag guess">my read</span></div>
+        </li>
+      </ol>
+      <div class="path-ft">Sources: <a href="https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13543&amp;Mode=0" target="_blank" rel="noopener">RBI Commercial Banks Third Amendment Directions, 24 Jun 2026</a> · <a href="https://www.rbi.org.in/Scripts/AnnualReportPublications.aspx?Id=1466" target="_blank" rel="noopener">RBI Annual Report 2025-26, ch. VI, para VI.57</a></div>
+    </div>
+  </header>
+
+  <section id="rule">
+    <div class="sh">
+      <div class="kicker">Why India, why now</div>
+      <h2>The clock is already running</h2>
+      <p>Every figure is dated and sourced. Rupee figures stay in rupees: 1 crore is 10 million, 1 lakh is 100,000.</p>
+    </div>
+    <ol class="clock">
+      <li>
+        <div class="cd">Calendar 2025</div>
+        <div class="ce"><p>Indians reported losing Rs&nbsp;22,495 crore to cyber fraud, most of it to investment scams.</p><div class="src">MHA data, as reported by <a href="https://theprint.in/india/cybercrime-saw-24-spike-in-2025-indians-lost-rs-22495-crore-mainly-in-investment-scams/2859930" target="_blank" rel="noopener">ThePrint</a></div></div>
+      </li>
+      <li>
+        <div class="cd">FY 2025-26</div>
+        <div class="ce"><p>Banks reported 10,114 frauds of Rs&nbsp;1&nbsp;lakh or more, worth Rs&nbsp;48,021 crore, against 23,722 worth Rs&nbsp;32,803 crore the year before. Rs&nbsp;30,199 crore of that is 314 older cases re-reported after a Supreme Court ruling. Loans carry 85% of the amount, and public sector banks 74.5%.</p><div class="src"><a href="https://www.rbi.org.in/Scripts/AnnualReportPublications.aspx?Id=1466" target="_blank" rel="noopener">RBI Annual Report 2025-26, Tables VI.2 and VI.3 with their notes</a></div></div>
+      </li>
+      <li>
+        <div class="cd">31 Mar 2026</div>
+        <div class="ce"><p>MuleHunter.AI is live in 26&nbsp;banks, with 4 more underway. RBI's Digital Payment Intelligence Platform has 7&nbsp;banks in its first pilot phase: a shared registry of reported fraud, with real-time risk scores planned for phase two.</p><div class="src"><a href="https://www.rbi.org.in/Scripts/AnnualReportPublications.aspx?Id=1466" target="_blank" rel="noopener">RBI Annual Report 2025-26, paras VI.57 and VI.66</a></div></div>
+      </li>
+      <li>
+        <div class="cd">24 Jun 2026</div>
+        <div class="ce"><p>RBI issues amendment directions for commercial banks and six other kinds of bank, replacing the old rules on customer liability in digital transactions.</p><div class="src"><a href="https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63011" target="_blank" rel="noopener">RBI press release 2026-2027/533</a></div></div>
+      </li>
+      <li class="key">
+        <div class="cd">1 Jan 2027</div>
+        <div class="ce"><p>The rules apply. Coerced payments count as fraudulent. The burden of proving customer liability sits with the bank. Zero liability for third-party breaches reported within 5&nbsp;calendar days.</p><div class="src"><a href="https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13543&amp;Mode=0" target="_blank" rel="noopener">RBI/2026-27/167, paras 4(15A), 76K and 76M</a></div></div>
+      </li>
+      <li class="key">
+        <div class="cd">Through 2027</div>
+        <div class="ce"><p>For one year, a person who loses up to Rs&nbsp;50,000 and is found careless can still get 85% back, capped at Rs&nbsp;25,000, once in a lifetime, if they report to the 1930 helpline or the national cybercrime portal and to the bank within 5&nbsp;days. RBI pays 65%. The customer's bank pays 10%. The bank where the money first landed pays 10%.</p><div class="src"><a href="https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13543&amp;Mode=0" target="_blank" rel="noopener">RBI/2026-27/167, paras 76N, 76T and 76U</a></div></div>
+      </li>
+    </ol>
+
+    <div class="calc" aria-labelledby="calc-l">
+      <div class="calc-top">
+        <label id="calc-l" for="loss">Who pays for one small refund</label>
+        <span class="calc-amt" id="lossOut">Rs&nbsp;40,000</span>
+      </div>
+      <input type="range" id="loss" min="1000" max="60000" step="500" value="40000" aria-describedby="calcNote">
+      <div class="splitbar" aria-hidden="true">
+        <span class="sb-rbi" id="bRbi"></span><span class="sb-cust" id="bCust"></span><span class="sb-ben" id="bBen"></span><span class="sb-self" id="bSelf"></span>
+      </div>
+      <div class="splitrows" aria-live="polite">
+        <div class="srow"><span class="sk"><i class="sb-rbi"></i>RBI</span><span class="sv" id="vRbi"></span></div>
+        <div class="srow"><span class="sk"><i class="sb-cust"></i>Customer's bank</span><span class="sv" id="vCust"></span></div>
+        <div class="srow ben"><span class="sk"><i class="sb-ben"></i>Receiving bank</span><span class="sv" id="vBen"></span></div>
+        <div class="srow"><span class="sk"><i style="border:1px solid var(--line)"></i>Not covered by the scheme</span><span class="sv" id="vSelf"></span></div>
+      </div>
+      <p class="calc-note" id="calcNote">Domestic case where the bank finds the customer negligent, nothing recovered. Drag the amount.</p>
+    </div>
+
+    <p class="honest">I would not oversell this. The receiving bank's share is at most Rs&nbsp;2,941 a case, and the scheme lasts one year. The bigger change is the burden of proof on coerced payments. Refusing a large digital-arrest claim now takes evidence the bank has to build, and nobody knows yet how banks will argue it.</p>
+  </section>
+
+  <section id="asia">
+    <div class="sh">
+      <div class="kicker">What I understand</div>
+      <h2>Quantexa in Asia, as I read it from outside</h2>
+      <p>From your site, your releases and the press. You know all of this better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <h3>What you sell</h3>
+        <p>A Decision Intelligence platform: entity resolution, network graphs and AI on top, for AML, KYC, fraud, risk and customer intelligence. Hybrid, cloud or on-premise.</p>
+        <div class="src"><a href="https://www.quantexa.com/platform" target="_blank" rel="noopener">quantexa.com/platform</a></div>
+      </div>
+      <div class="fact">
+        <h3>How it is bought</h3>
+        <p>An annual subscription with a multi-year first term. Either a <b>Platform Suite</b>, which does not usually cap users, data or transactions, or a narrower <b>Business Purpose Solution</b>.</p>
+        <div class="src"><a href="https://assets.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/documents/703515/390975911953678-pricing-document-2026-01-29-1236.pdf" target="_blank" rel="noopener">Quantexa G-Cloud 15 pricing document, Jan 2026</a></div>
+      </div>
+      <div class="fact">
+        <h3>Where you are as a company</h3>
+        <p>A $175M Series F at $2.6B in March 2025, after passing $100M ARR. Revenue of £126M in the year to March 2025, up 49%, with the loss halved.</p>
+        <div class="src"><a href="https://techcrunch.com/2025/03/04/quantexa-nabs-175m-at-a-2-6b-valuation-to-double-down-on-data-analytics-for-ai/" target="_blank" rel="noopener">TechCrunch, 4 Mar 2025</a> · <a href="https://otpp.com/en-ca/about-us/news-and-insights/2025/quantexa-completes-175million-usd-investment-round-led-by-tvg/" target="_blank" rel="noopener">OTPP release</a> · <a href="https://tech.eu/2026/01/08/ai-unicorn-quantexa-reports-revenue-boost-as-losses-halve/" target="_blank" rel="noopener">Tech.eu, 8 Jan 2026</a></div>
+      </div>
+      <div class="fact">
+        <h3>Asia so far</h3>
+        <p>Singapore HQ since November 2023, with Tokyo, Melbourne, Sydney and Malaysia. In 2023 Vishal spoke of 90% revenue growth and an APAC team nearly tripled since the Series D. Your site credits Shaun with taking APAC from one person to about 100.</p>
+        <div class="src"><a href="https://www.quantexa.com/press/asia-pacific-headquarters/" target="_blank" rel="noopener">Quantexa release, 7 Nov 2023</a> · <a href="https://www.quantexa.com/author/shaun" target="_blank" rel="noopener">quantexa.com</a></div>
+      </div>
+      <div class="fact">
+        <h3>Customers and partners in the region</h3>
+        <p>Standard Chartered since 2018. HSBC's contextual AML monitoring, built with Quantexa and live in the UK and Hong Kong by September 2019. A Big 4 Australian bank and an insurer. NTT Data Luweave, your 2026 APAC partner of the year, for Japan. Your Accenture partnership covers North America, the UK, Europe and the Middle East.</p>
+        <div class="src"><a href="https://www.quantexa.com/press/hsbc-introduces-financial-crime-detection-systems/" target="_blank" rel="noopener">HSBC, Sep 2019</a> · <a href="https://jobs.ashbyhq.com/quantexa/ea744fb5-e7b3-4a48-b727-49c7d5597924" target="_blank" rel="noopener">Sydney role</a> · <a href="https://www.aap.com.au/aapreleases/globenewswire1001167705/" target="_blank" rel="noopener">QuanCon, 3 Mar 2026</a> · <a href="https://www.quantexa.com/blog/how-quantexa-accenture-are-helping-enterprises-close-the-ai-transformation-gap/" target="_blank" rel="noopener">Accenture</a></div>
+      </div>
+      <div class="fact">
+        <h3>Hiring today, and India</h3>
+        <p>FS sellers in <a href="https://www.mycareersfuture.gov.sg/job/consulting/fsi-sales-director-south-east-asia-quantexa-3842ac3663158d8be073d233f87e1297" target="_blank" rel="noopener">Singapore</a>, <a href="https://jobs.ashbyhq.com/quantexa/0de928b5-1e7b-49f3-88f8-678242e21f3d" target="_blank" rel="noopener">Tokyo</a> and <a href="https://jobs.ashbyhq.com/quantexa/ea744fb5-e7b3-4a48-b727-49c7d5597924" target="_blank" rel="noopener">Sydney</a>, and a <a href="https://jobs.ashbyhq.com/quantexa/d5714beb-0905-41d5-955b-cd21755cc194" target="_blank" rel="noopener">Public Sector Sales Director in Australia</a> posted on 19 November. <b>None of your 51&nbsp;open roles is in India</b>, and I found no Indian office, customer or partner in public. That comes from searching, so treat it as a lead.</p>
+        <div class="src"><a href="https://jobs.ashbyhq.com/quantexa" target="_blank" rel="noopener">jobs.ashbyhq.com/quantexa</a>, read 19 Nov 2026</div>
+      </div>
+    </div>
+
+    <div class="reads">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>India can start from Singapore with one person on the ground in Mumbai, where most of these banks have their head offices. No new office in year one. <span class="tag guess">my read</span></li>
+        <li>The fastest first door is a bank that already runs Quantexa elsewhere. Standard Chartered and HSBC both have large India books. Stretching a contract you already have beats opening a new logo. <span class="tag check">to check</span></li>
+        <li>RBI's own tools are a reason to buy. MuleHunter.AI hands banks a score, and the payment intelligence platform plans one per transaction. The bank still needs the network around the account to act on it, and from 1 January it carries the cost of getting it wrong.</li>
+        <li>Your licensing fits a land-and-expand path: mule detection as a Business Purpose Solution first, the Platform Suite once KYC and lending teams want the same resolved entities. <span class="tag guess">my read</span></li>
+        <li>Every Indian bank will ask where the data sits before anything else. On-premise or an Indian cloud region has to be on page one of every proposal.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="ten">
+    <div class="sh">
+      <div class="kicker">First doors</div>
+      <h2>The first 10 banks</h2>
+      <p>Examples to test, in the order I would go. The right people in each account are part of the first month's work.</p>
+    </div>
+    <div class="doors">
+      <details class="door" open>
+        <summary>
+          <span class="dn">01 · 2 banks</span>
+          <span class="dt">Where you already are</span>
+          <span class="dwhy">Global customers with big India books. A contract to stretch, not a logo to win.</span>
+          <span class="banks"><span>Standard Chartered India</span><span>HSBC India</span></span>
+          <span class="dopen">open</span>
+        </summary>
+        <div class="dbody">
+          <dl class="kv">
+            <dt>why first</dt><dd>Both run Quantexa for financial crime at group level. Their India teams face the same 1 January rules as every Indian bank.</dd>
+            <dt>who we meet</dt><dd>India heads of financial crime compliance and fraud risk, with the global sponsor in Singapore or Hong Kong in the room.</dd>
+            <dt>pilot</dt><dd>Mule detection on money coming into the India book through UPI and IMPS.</dd>
+            <dt>to check</dt><dd>Whether India is already in scope of either contract, and how their India data is hosted today. <span class="tag check">to check</span></dd>
+          </dl>
+        </div>
+      </details>
+
+      <details class="door">
+        <summary>
+          <span class="dn">02 · 4 banks</span>
+          <span class="dt">Large private banks, the receiving side</span>
+          <span class="dwhy">Private banks reported 39% of all fraud cases in 2025-26. My guess is they also receive a large share of the mule money.</span>
+          <span class="banks"><span>HDFC Bank</span><span>ICICI Bank</span><span>Axis Bank</span><span>Kotak Mahindra Bank</span></span>
+          <span class="dopen">open</span>
+        </summary>
+        <div class="dbody">
+          <dl class="kv">
+            <dt>champion</dt><dd>Head of Fraud Risk Management.</dd>
+            <dt>signers</dt><dd>Chief Risk Officer, the principal officer for AML, CTO and CISO, procurement. <span class="tag guess">titles vary</span></dd>
+            <dt>pilot</dt><dd>Take the accounts MuleHunter.AI flags, resolve them against the bank's own customers, devices and addresses, and count the linked accounts the score did not flag.</dd>
+            <dt>why yes</dt><dd>From 1 January a mule found early saves both the paying bank and the receiving bank money, and gives the fraud team evidence for every refused claim.</dd>
+            <dt>must prove</dt><dd>India hosting, a clean security review, and that it works beside the fraud platforms they already run.</dd>
+          </dl>
+          <p class="aside">Kotak was our first large BFSI customer at Simplifai, so I have been through its vendor process.</p>
+        </div>
+      </details>
+
+      <details class="door">
+        <summary>
+          <span class="dn">03 · 4 banks</span>
+          <span class="dt">Public sector banks, where the money is</span>
+          <span class="dwhy">74.5% of the fraud amount in 2025-26: Rs&nbsp;35,709 crore across 5,418 cases.</span>
+          <span class="banks"><span>State Bank of India</span><span>Bank of Baroda</span><span>Punjab National Bank</span><span>Canara Bank</span></span>
+          <span class="dopen">open</span>
+        </summary>
+        <div class="dbody">
+          <dl class="kv">
+            <dt>why</dt><dd>Fewer, larger frauds. Across all banks, 85% of the 2025-26 fraud amount was in loans, where resolved networks of borrowers, guarantors and related companies matter more than any single score. By RBI's own notes, at least half of the public sector amount is older cases re-reported, so the live number is smaller than the headline.</dd>
+            <dt>who we meet</dt><dd>The general manager for fraud risk, the early warning signals team, the Chief Risk Officer, the CTO. <span class="tag guess">titles vary</span></dd>
+            <dt>route</dt><dd>Public tenders, usually with an integrator or a Big 4 firm as prime. <span class="tag guess">guess</span></dd>
+            <dt>when</dt><dd>Start the conversations in month one. Expect a decision in year one, not in 90 days.</dd>
+          </dl>
+          <p class="aside">Many of the people who decide here are not on LinkedIn. We lost a deal at TVS Credit for exactly that reason. Since then I map the buying committee in person, at the head office.</p>
+        </div>
+      </details>
+
+      <details class="door">
+        <summary>
+          <span class="dn">+ partners</span>
+          <span class="dt">Who carries us into the tenders</span>
+          <span class="dwhy">For public sector banks and for scale, after the first result exists.</span>
+          <span class="dopen">open</span>
+        </summary>
+        <div class="dbody">
+          <dl class="kv">
+            <dt>Big 4</dt><dd>Deloitte (Americas), PwC (EMEA) and KPMG (innovation) won your 2026 partner awards. All three run large forensic and risk practices in India. <span class="tag check">to check if their India arms work with you</span></dd>
+            <dt>cloud</dt><dd>A cloud with Indian regions for hosting. Microsoft is the obvious first call, given Quantexa Unify for Microsoft Fabric, generally available since November 2025. <span class="tag guess">guess</span></dd>
+            <dt>delivery</dt><dd>Partner-led delivery until there are three Indian customers. Your own team stays on product and the hardest accounts.</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <div class="kicker">First 90 days</div>
+      <h2>Turn one pilot into a reference</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="qtabs" role="tablist" aria-label="First 90 days">
+      <button class="qtab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><b>Days 1 to 30</b><small>Map and line up</small></button>
+      <button class="qtab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><b>Days 31 to 60</b><small>Agree the pilots</small></button>
+      <button class="qtab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><b>Days 61 to 90</b><small>Run and show</small></button>
+    </div>
+    <div class="qpanel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="qcol">
+        <h3>What I do</h3>
+        <ul>
+          <li>Learn the platform and the Standard Chartered story with your Singapore team.</li>
+          <li>Get three answers on paper: whether the Standard Chartered and HSBC contracts reach India, how we host for an Indian bank, and which partner fronts public sector tenders.</li>
+          <li>Map the 10 banks' buying committees, in person in Mumbai.</li>
+          <li>Hold 15 first meetings with fraud and AML heads.</li>
+        </ul>
+      </div>
+      <div class="qcol see">
+        <h3>What you see by day 30</h3>
+        <ul>
+          <li>Ten account maps with named people and who really signs.</li>
+          <li>The India scope answer for your two global banks.</li>
+          <li>One page on which two banks go first, and why.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="qpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div class="qcol">
+        <h3>What I do</h3>
+        <ul>
+          <li>Write pilot plans with the first two banks: linked mule accounts found beyond the flags, time to close a case, false positives, and who signs if we hit them.</li>
+          <li>Bring procurement, legal, IT security and finance in from the first week.</li>
+          <li>Agree terms with one partner for public sector access.</li>
+          <li>Keep the next four banks warm with what we are learning.</li>
+        </ul>
+      </div>
+      <div class="qcol see">
+        <h3>What you see by day 60</h3>
+        <ul>
+          <li>Two pilots agreed in writing with a named signer, or a clear no and the reason.</li>
+          <li>A weekly one-page note: meetings, stage, next step, by bank.</li>
+          <li>Partner terms ready to sign.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="qpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div class="qcol">
+        <h3>What I do</h3>
+        <ul>
+          <li>Run the first pilot on an agreed slice of data, with a review every two weeks.</li>
+          <li>Write the result up with the bank's sign-off so the next bank can read it.</li>
+          <li>Take it to the receiving-side banks and the first public sector bank.</li>
+          <li>Write the 12-month India plan: revenue, cost, hires, and when India pays its way.</li>
+        </ul>
+      </div>
+      <div class="qcol see">
+        <h3>What you see by day 90</h3>
+        <ul>
+          <li>Early numbers from one Indian bank that the next one will believe.</li>
+          <li>A pipeline you can read by group: your banks, private, public.</li>
+          <li>A clear call on whether India earns a second hire.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="honest">No Indian bank signs a platform licence inside 90 days. The honest day-90 result is a pilot running against written goals, a named signer, and early numbers we can show the next bank.</p>
+  </section>
+
+  <section id="hire">
+    <div class="sh">
+      <div class="kicker">Who to hire</div>
+      <h2>In this order, and no faster</h2>
+      <p>Each hire waits for the proof that makes it pay. <span class="tag guess">my read</span></p>
+    </div>
+    <ol class="hires">
+      <li><div class="hw">India lead <small>month 0 · Mumbai, reports to the APAC RVP</small></div><div class="hy">Sells, maps the accounts and runs the partners. That is the role this page is about.</div></li>
+      <li><div class="hw">Solution engineer with Indian bank fraud experience <small>month 2 to 3</small></div><div class="hy">Borrow Singapore's time until the first pilot is signed, then hire someone who has sat in an Indian bank's fraud unit.</div></li>
+      <li><div class="hw">Alliances manager <small>month 4 to 6</small></div><div class="hy">Once a Big 4 or integrator partner has a live deal with us, not before.</div></li>
+      <li><div class="hw">Second account director for public sector banks <small>after the first result</small></div><div class="hy">Tender cycles are long. This seat earns its keep once a reference exists.</div></li>
+    </ol>
+  </section>
+
+  <section id="me">
+    <div class="sh">
+      <div class="kicker">Why me</div>
+      <h2>I have sold AI into Indian banks and insurers from nothing</h2>
+    </div>
+    <div class="proof">
+      <div class="pcard">
+        <div class="pcard-hd"><h3>Simplifai</h3><span class="pr">Head of Sales APAC · Norwegian AI SaaS · Jul 2020 to Jun 2022</span></div>
+        <p>Built APAC sales from no team to 15 reps, selling AI to Indian banks, fund houses, brokers and insurers: Kotak Mahindra, HDFC Mutual Fund, Bajaj Allianz, Upstox. PLDT in the Philippines.</p>
+        <p class="pm">At Kotak we had no ISO certificate. We still got through the bank's vendor onboarding by putting everything in writing and keeping procurement, legal and finance in the loop.</p>
+        <div class="nums"><span><b>$1M</b>ARR in the first 12 months</span><span><b>$1.7M</b>ARR when I left</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-hd"><h3>ZenAdmin</h3><span class="pr">Commercial Director · Singapore · Aug 2022 to Nov 2023</span></div>
+        <p>Ran sales, marketing and customer success for a Singapore company, from India. We started from 11 beta customers and no revenue, then moved selling from Southeast Asia to the US and Europe, where the average deal was about 3x. Customers included Temasek, Igloo and Sleek in Singapore, and Remote, Deel and Eventbrite.</p>
+        <div class="nums"><span><b>$200K+</b>ARR</span><span><b>~20%</b>month on month</span><span><b>104%</b>NRR</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-hd"><h3>Torqus</h3><span class="pr">Inside and channel sales · India · Apr 2017 to Jul 2020</span></div>
+        <p>Built a 60+ seat inside and channel sales team and a channel network across 15 Indian cities.</p>
+      </div>
+    </div>
+    <p class="plain">Most recently I was the founding Head of Sales at Craze, a YC S22 company: 70+ logos. I live in Pune and will move to Mumbai, Singapore or wherever the role sits. Singapore would need an Employment Pass.</p>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <div class="kicker">From you</div>
+      <h2>Three questions I would ask first</h2>
+    </div>
+    <ol class="qs">
+      <li>Do the Standard Chartered or HSBC contracts reach their India books today?</li>
+      <li>Has any Indian bank, or RBI's innovation hub, come to you since MuleHunter.AI went live?</li>
+      <li>What would India need to show by month six for you to fund a second hire?</li>
+    </ol>
+    <div class="close">
+      <p>That is the draft. Most of it should change after one conversation with your numbers. The method stays: start where you already are, prove one bank, put everything in writing, then hire.</p>
+      <div class="contact"><strong>Ketan Sharma</strong><a href="tel:+919899380222">+91 98993 80222</a><a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a></div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">Built from public sources, read on 19 November 2026. Bank names in the first 10 are examples, not claims about their plans. RBI annual report figures read from the report's chapter VI.</div>
+</footer>
+
+<script>
+(function(){
+  /* refund split calculator, from RBI/2026-27/167 para 76T, domestic case */
+  var r = document.getElementById('loss');
+  var fmt = function(n){ return 'Rs\u00a0' + Math.round(n).toLocaleString('en-IN'); };
+  var el = function(id){ return document.getElementById(id); };
+  function calc(){
+    var L = +r.value, rbi=0, cust=0, ben=0, note;
+    if (L > 50000){
+      note = 'Above Rs\u00a050,000 the small-value scheme does not apply. The normal liability rules decide, with the burden of proof on the bank.';
+    } else if (L < 29412){
+      rbi = .65*L; cust = .10*L; ben = .10*L;
+      note = 'Below Rs\u00a029,412 the victim gets 85% back: RBI 65%, the customer’s bank 10%, the receiving bank 10%.';
+    } else {
+      rbi = 19118; cust = 2941; ben = 2941;
+      note = 'From Rs\u00a029,412 to Rs\u00a050,000 the refund is capped at Rs\u00a025,000, in fixed shares.';
+    }
+    var self = L - rbi - cust - ben;
+    el('lossOut').textContent = fmt(L);
+    el('vRbi').textContent = fmt(rbi); el('vCust').textContent = fmt(cust);
+    el('vBen').textContent = fmt(ben); el('vSelf').textContent = fmt(self);
+    el('bRbi').style.width = (rbi/L*100)+'%'; el('bCust').style.width = (cust/L*100)+'%';
+    el('bBen').style.width = (ben/L*100)+'%'; el('bSelf').style.width = (self/L*100)+'%';
+    el('calcNote').textContent = note + ' Assumes a domestic case, customer found negligent, nothing recovered.';
+  }
+  r.addEventListener('input', calc); calc();
+
+  /* tabs */
+  var tabs = [].slice.call(document.querySelectorAll('.qtab'));
+  function show(t){
+    tabs.forEach(function(x){
+      var on = x === t;
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ show(t); });
+    t.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d){ var n = tabs[(i + d + tabs.length) % tabs.length]; show(n); n.focus(); e.preventDefault(); }
+    });
+  });
+
+  /* section chips follow the scroll */
+  var links = [].slice.call(document.querySelectorAll('.qchips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + e.target.id;
+            a.classList.toggle('on', on);
+            if (on){ var c = a.parentNode, l = a.offsetLeft - c.offsetLeft; if (l < c.scrollLeft || l + a.offsetWidth > c.scrollLeft + c.clientWidth){ c.scrollLeft = Math.max(0, l - 16); } }
+          });
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

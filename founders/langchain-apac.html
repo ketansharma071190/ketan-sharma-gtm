@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LangChain APAC: first 90 days</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A working draft for Harrison Chase: how Ketan Sharma would grow LangChain's APAC business with banks, insurers and the SIs that build their agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One reading column, a sticky section bar, and a hero that maps what Singapore's regulator now asks of every bank against what LangSmith already does. */
+:root{
+  --bg:#F5F4F0; --surface:#FFFFFF; --surface-2:#ECEAE4; --ink:#15171A; --muted:#575D66; --line:#D9D6CE;
+  --accent:#1D55C4; --accent-ink:#FFFFFF; --accent-soft:rgba(29,85,196,.08);
+  --rust:#A3461A; --rust-soft:rgba(163,70,26,.08);
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Public Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E1013; --surface:#16191E; --surface-2:#1D2128; --ink:#E8EAED; --muted:#9BA2AC; --line:#2A2F37;
+  --accent:#86A9FF; --accent-ink:#0A1430; --accent-soft:rgba(134,169,255,.10);
+  --rust:#F0996E; --rust-soft:rgba(240,153,110,.10);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0E1013; --surface:#16191E; --surface-2:#1D2128; --ink:#E8EAED; --muted:#9BA2AC; --line:#2A2F37;
+  --accent:#86A9FF; --accent-ink:#0A1430; --accent-soft:rgba(134,169,255,.10);
+  --rust:#F0996E; --rust-soft:rgba(240,153,110,.10);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6; -webkit-text-size-adjust:100%}
+.wrap{max-width:800px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(28px, 6vw, 44px); font-weight:800; letter-spacing:-.015em}
+h2{font-size:clamp(22px, 4vw, 29px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:16.5px; font-weight:700}
+p{margin:0}
+a{color:var(--accent); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.nw{white-space:nowrap}
+
+/* sticky bar */
+.bar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--surface) 93%, transparent); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:520px){ .who span{display:none} }
+
+/* hero */
+.hero{padding-block:38px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+.factcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.factcard .hd{display:flex; justify-content:space-between; gap:6px 12px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.factcard .hd b{color:var(--accent); font-weight:500}
+.factcard .say{padding:16px; display:grid; gap:10px; border-bottom:1px solid var(--line)}
+.factcard .say p{font-size:16px}
+.factcard .say p.small{font-size:14.5px; color:var(--muted)}
+.maphd{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; padding:10px 16px 6px; font-family:var(--f-mono); font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+.maprows{list-style:none; margin:0; padding:0 0 6px}
+.maprow{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:4px 14px; padding:9px 16px; border-top:1px solid var(--line)}
+.maprow:first-child{border-top:0}
+.maprow .ask{font-weight:600; font-size:15px}
+.maprow .ans{font-size:14.5px; color:var(--muted)}
+.maprow .ans b{color:var(--ink); font-weight:600}
+@media (max-width:600px){
+  .maphd{grid-template-columns:1fr}
+  .maphd > span:first-child{display:none}
+  .maprow{grid-template-columns:1fr}
+  .maprow .ans::before{content:"LangSmith: "; font-family:var(--f-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent)}
+}
+.factcard .ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:14px; color:var(--muted)}
+.factcard .ft b{color:var(--ink)}
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.src{font-family:var(--f-mono); font-size:11px; color:var(--muted); line-height:1.5}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid color-mix(in srgb, var(--rust) 45%, transparent); color:var(--rust); background:var(--rust-soft); white-space:nowrap; vertical-align:2px}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start}
+.fact h3{font-size:15.5px}
+.fact p{font-size:14.5px; color:var(--muted)}
+.read{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.read h3{font-size:16px}
+.read ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.read li{max-width:68ch}
+
+/* tabs */
+.tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
+.tab{font:inherit; font-size:14px; font-weight:600; cursor:pointer; padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.panel[hidden]{display:none}
+
+/* clock */
+.clock{list-style:none; margin:0; padding:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden}
+.clock li{display:grid; grid-template-columns:112px minmax(0,1fr); gap:4px 16px; padding:13px 16px; border-bottom:1px solid var(--line)}
+.clock li:last-child{border-bottom:0}
+.clock .d{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:2px; white-space:nowrap}
+.clock .e{min-width:0; display:grid; gap:4px}
+.clock .e p{font-size:15px}
+.clock li.future .d{color:var(--accent); font-weight:500}
+.clock li.key{background:var(--accent-soft)}
+.clock li.key .d{color:var(--accent); font-weight:500}
+@media (max-width:560px){ .clock li{grid-template-columns:1fr} }
+.oneline{margin-top:16px; padding:16px 18px; border-radius:var(--r); border:1.5px solid var(--accent); font-family:var(--f-display); font-size:19px; font-weight:600; line-height:1.35}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.door summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; align-items:start}
+.door summary::-webkit-details-marker{display:none}
+.door .n{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px; white-space:nowrap}
+.door .t{font-family:var(--f-display); font-weight:700; font-size:17px; min-width:0}
+.door .why{grid-column:2; font-size:14.5px; color:var(--muted)}
+.door .open{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--accent)}
+.door[open] .open{display:none}
+.door .body{padding:0 16px 16px}
+.kv{display:grid; grid-template-columns:118px minmax(0,1fr); gap:6px 14px; font-size:14.5px; margin:0}
+.kv dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv dd{margin-bottom:8px} }
+
+/* 90 days */
+.plan{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .plan{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:8px; align-content:start}
+.pcol.see{background:var(--accent-soft); border-color:color-mix(in srgb, var(--accent) 35%, var(--line))}
+.pcol h3{font-size:15px}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:14.5px}
+.note{margin-top:14px; font-size:14.5px; color:var(--muted); max-width:68ch}
+
+/* hires */
+.hires{list-style:none; margin:0; padding:0; display:grid; gap:10px; counter-reset:h}
+.hire{counter-increment:h; display:grid; grid-template-columns:34px minmax(0,1fr); gap:2px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:13px 16px 13px 12px}
+.hire::before{content:counter(h); grid-row:1 / span 2; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--accent); color:var(--accent-ink)}
+.hire .ht{font-weight:600}
+.hire .ht small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px}
+.hire p{font-size:14.5px; color:var(--muted)}
+
+/* why me */
+.roles{display:grid; gap:12px}
+.role{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:15px 16px; display:grid; gap:8px}
+.role .rh{display:flex; justify-content:space-between; gap:4px 12px; flex-wrap:wrap; align-items:baseline}
+.role .rh h3{font-size:16.5px}
+.role .rh h3 span{font-family:var(--f-body); font-weight:500; color:var(--muted); font-size:14.5px}
+.role .rh .when{font-family:var(--f-mono); font-size:12px; color:var(--muted); white-space:nowrap}
+.role p{font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:8px}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:3px 9px; border-radius:6px; background:var(--surface-2); white-space:nowrap}
+.rules{margin-top:14px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.rules ul{margin:0; padding-left:18px; display:grid; gap:6px}
+
+/* questions + close */
+.qs{margin:0; padding-left:22px; display:grid; gap:10px; font-size:16px}
+.qs li{max-width:66ch}
+.close{display:grid; gap:12px; padding-block:40px 56px; border-top:1px solid var(--line)}
+.close p{max-width:64ch}
+.contact{font-family:var(--f-mono); font-size:13.5px; display:flex; flex-wrap:wrap; gap:6px 18px}
+.contact span{white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· APAC for LangChain</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#fact" class="on">The fact</a>
+      <a href="#read">LangChain</a>
+      <a href="#clock">The clock</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hires">Hires</a>
+      <a href="#me">Why me</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero" id="fact">
+    <p class="eyebrow">A working draft for Harrison Chase · November 2026</p>
+    <h1>APAC banks already run agents. Now their regulators want proof they control them.</h1>
+    <p class="lede">Harrison, this is how I would take LangChain's APAC business from four AEs to a region that sells to banks and insurers on repeat. I built it from public sources and from my years selling AI into Indian banks and insurers, so it is a draft. <strong>Where I am guessing, I say so.</strong></p>
+
+    <div class="factcard">
+      <div class="hd"><b>7 October 2026 · Monetary Authority of Singapore</b><span>final guidelines, all financial institutions</span></div>
+      <div class="say">
+        <p>MAS issued final guidelines on AI risk management for every financial institution in Singapore, and named agentic AI systems that operate on their own and access tools. Firms should identify their AI use and keep inventories, and run lifecycle controls: testing, human oversight, monitoring and change management. Oversight, risk systems and the AI inventory are expected from <span class="nw">7 October 2027</span>, lifecycle controls by <span class="nw">7 October 2028</span>.</p>
+        <p class="small">Third-party AI gets no pass: the bank stays accountable, and should test the service on its own use cases and data and keep that testing on file.</p>
+        <p class="src"><a href="https://www.mas.gov.sg/news/media-releases/2026/mas-sets-out-supervisory-expectations-on-responsible-ai-adoption-by-financial-institutions">MAS media release, 7 Oct 2026</a> · <a href="https://www.allenandgledhill.com/sg/publication/articles/34686/mas-publishes-ai-risk-management-guidelines-setting-out-supervisory-expectations-on-responsible-ai-adoption">Allen &amp; Gledhill, 21 Oct 2026</a></p>
+      </div>
+      <div class="maphd"><span>What MAS asks a bank</span><span>Where LangSmith already answers <span class="tag">my read</span></span></div>
+      <ul class="maprows">
+        <li class="maprow"><span class="ask">Identify AI use, keep an inventory</span><span class="ans">Every agent traced into one place: <b>what runs, on which model, at what cost</b>.</span></li>
+        <li class="maprow"><span class="ask">Testing, third-party models included, on file</span><span class="ans"><b>Datasets and experiments</b> run on the bank's own data, kept as the record.</span></li>
+        <li class="maprow"><span class="ask">Human oversight</span><span class="ans"><b>Annotation queues</b>, and LangGraph interrupts that pause an agent for a person.</span></li>
+        <li class="maprow"><span class="ask">Monitoring</span><span class="ans"><b>Online evaluators, dashboards and alerts</b> on production traffic.</span></li>
+        <li class="maprow"><span class="ask">Change management</span><span class="ans">A new prompt or model <b>compared against the last one</b> before it ships.</span></li>
+        <li class="maprow"><span class="ask">Data governance</span><span class="ans"><b>Sydney region, self-hosted or BYOC</b>, PII masking, set retention.</span></li>
+      </ul>
+      <div class="ft">On LangChain's case-study page I found no insurer, and no customer from Australia, Singapore or India. <b>The first regulated logo in each market is worth more than its contract.</b></div>
+    </div>
+  </div>
+
+  <section id="read">
+    <div class="sh">
+      <p class="field">What I understand</p>
+      <h2>LangChain, as I read it from outside</h2>
+      <p>From your site, your docs, your job board and the press. You know all of this better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you sell</h3><p>Open-source harnesses (LangChain, LangGraph, Deep Agents) and LangSmith, the platform to trace, evaluate, deploy and govern agents. 7,000+ organisations use LangSmith.</p><p class="src"><a href="https://www.langchain.com/blog/series-c">Series C post, 13 Nov 2026</a></p></div>
+      <div class="fact"><h3>How it is priced</h3><p>Developer free for one seat. Plus at $39 a seat a month. Enterprise custom, invoiced annually upfront, with self-hosted and hybrid options. Traces and deployment compute are pay as you go on top.</p><p class="src"><a href="https://www.langchain.com/pricing">langchain.com/pricing</a></p></div>
+      <div class="fact"><h3>Where you are</h3><p>$300M at a $3B valuation on 13 November, led by CapitalG, with GIC and DFJ Growth new. $460M raised in all.</p><p class="src"><a href="https://www.langchain.com/blog/series-c">Series C post</a> · <a href="https://jobs.ashbyhq.com/langchain/5b20b362-a407-4d12-934c-4ae0d2028432">RVP APAC posting</a></p></div>
+      <div class="fact"><h3>APAC today</h3><p>Four enterprise AEs across Australia and Singapore. Open APAC roles on 19 November: RVP Sales APAC (posted 3 Nov), and three deployed engineering roles in Singapore. No APAC AE, SDR or marketing role is posted. London has an SDR and a regional demand-gen marketer.</p><p class="src"><a href="https://jobs.ashbyhq.com/langchain">jobs.ashbyhq.com/langchain</a>, read 19 Nov 2026</p></div>
+      <div class="fact"><h3>Data in region</h3><p>LangSmith Cloud runs a GCP region in Sydney (australia-southeast1), next to US, EU, AWS US and Azure US. BYOC is generally available on AWS. Billing data stays in the US.</p><p class="src"><a href="https://docs.langchain.com/langsmith/cloud">LangSmith Cloud docs</a> · <a href="https://langchain.com/blog/langsmith-byoc-is-now-generally-available-on-aws">BYOC on AWS</a></p></div>
+      <div class="fact"><h3>Proof in Asia</h3><p>MUFG Bank: client analysis and pitch material for its FX and derivatives sales team, cut from several hours to 3 to 5 minutes. Rakuten. Toyota, named in the Series C post. All Japan.</p><p class="src"><a href="https://www.langchain.com/blog/customers-mufgbank">MUFG, Feb 2025</a> · <a href="https://www.langchain.com/blog/customers-rakuten">Rakuten, Feb 2024</a> · <a href="https://www.langchain.com/case-studies">case studies</a></p></div>
+      <div class="fact"><h3>Partners</h3><p>AWS, Google Cloud and Azure. Services partners Focused, Caylent, Parlance Labs, Lightci, Axtria, Quantiphi and Tenex; Quantiphi's partnership was announced on 14 October. No global SI is listed.</p><p class="src"><a href="https://langchain.com/langchain-partner-network">Partner Network</a> · <a href="https://www.hpcwire.com/aiwire/2026/10/14/quantiphi-and-langchain-partner-to-scale-production-ready-agentic-ai-for-enterprises/">HPCwire, 14 Oct 2026</a></p></div>
+      <div class="fact"><h3>How you speak to a region</h3><p>An EMEA page built on EU data requirements, with National Bank of Greece and Vodafone named. langchain.com/apac returns a 404. After San Francisco, Interrupt 2026 toured New York and London this fall, with no APAC stop. Interrupt 27 is back in San Francisco in March.</p><p class="src"><a href="https://www.langchain.com/emea">langchain.com/emea</a> · <a href="https://www.langchain.com/blog/july-2026-langchain-newsletter">July 2026 newsletter</a> · <a href="https://interrupt.langchain.com/">interrupt.langchain.com</a></p></div>
+    </div>
+
+    <div class="read">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>The first year in APAC is about lighthouse accounts, which the posting asks for by name. Banks and insurers are where the regulators have just set the agenda.</li>
+        <li>These buyers already have agents in production. They now need the layer that shows what each agent did and proves it was tested, whatever framework or cloud it was built on. That is LangSmith. <span class="tag">my read</span></li>
+        <li>The clouds sell agent runtimes too: Westpac's agents run on Amazon Bedrock AgentCore. I would sell LangSmith as the neutral layer across them, and buy through the AWS and Google Cloud marketplaces with their teams. <span class="tag">my read</span></li>
+        <li>Sydney covers Australia. Singapore and India buyers will likely ask for self-hosted or BYOC, and in a bank that install often runs through the SI that already runs its stack. <span class="tag">my read</span> So partners sit on the critical path from the first deal, and the posting already gives this seat the GSI and RSI relationships.</li>
+        <li>I found nothing public from you on APAC. Your Series C post says every company will need to own its intelligence: its models, data, infrastructure and governance. In a Singapore bank that sentence is now a supervisory expectation. The EMEA page is the template: one APAC page, data residency first, with each market's rules on it.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="clock">
+    <div class="sh">
+      <p class="field">Why now</p>
+      <h2>The clock in each market</h2>
+      <p>Every line is dated and sourced. Pick a market.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Market">
+      <button class="tab" role="tab" id="t-sg" aria-controls="p-sg" aria-selected="true">Singapore</button>
+      <button class="tab" role="tab" id="t-au" aria-controls="p-au" aria-selected="false" tabindex="-1">Australia</button>
+      <button class="tab" role="tab" id="t-in" aria-controls="p-in" aria-selected="false" tabindex="-1">India</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-sg" aria-labelledby="t-sg">
+      <ul class="clock">
+        <li><span class="d">22 Jan 2026</span><div class="e"><p>IMDA launches a Model AI Governance Framework for Agentic AI at the World Economic Forum, for organisations that deploy agentic AI in Singapore.</p><p class="src"><a href="https://www.bakermckenzie.com/en/insight/publications/2026/01/singapore-governance-framework-for-agentic-ai-launched">Baker McKenzie, Jan 2026</a></p></div></li>
+        <li><span class="d">28 Jul 2026</span><div class="e"><p>DBS puts its agentic assistant in front of 350,000 corporate clients in Singapore, with 100,000 more in Hong Kong from September. DBS puts the economic value of its AI at S$1 billion in 2025.</p><p class="src"><a href="https://www.edb.gov.sg/en/news-and-insights/dbs-rolls-out-agentic-ai-350000-corporate-clients">EDB, 28 Jul 2026</a></p></div></li>
+        <li class="key"><span class="d">7 Oct 2026</span><div class="e"><p>MAS issues final AI risk management guidelines for all financial institutions. Agentic AI is named.</p><p class="src"><a href="https://www.mas.gov.sg/news/media-releases/2026/mas-sets-out-supervisory-expectations-on-responsible-ai-adoption-by-financial-institutions">MAS media release</a></p></div></li>
+        <li class="future"><span class="d">7 Oct 2027</span><div class="e"><p>The guidelines take effect. Oversight, AI risk management systems and the AI inventory are expected in place.</p><p class="src"><a href="https://www.allenandgledhill.com/sg/publication/articles/34686/mas-publishes-ai-risk-management-guidelines-setting-out-supervisory-expectations-on-responsible-ai-adoption">Allen &amp; Gledhill</a></p></div></li>
+        <li class="future"><span class="d">7 Oct 2028</span><div class="e"><p>Lifecycle controls and capabilities expected in place: testing, oversight, monitoring, change management.</p><p class="src"><a href="https://www.allenandgledhill.com/sg/publication/articles/34686/mas-publishes-ai-risk-management-guidelines-setting-out-supervisory-expectations-on-responsible-ai-adoption">Allen &amp; Gledhill</a></p></div></li>
+      </ul>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-au" aria-labelledby="t-au" hidden>
+      <ul class="clock">
+        <li><span class="d">31 Oct 2025</span><div class="e"><p>Suncorp's CIO says agentic AI has moved to "full-scale delivery", starting with claims and customer service.</p><p class="src"><a href="https://www.itnews.com.au/news/suncorp-creates-a-clear-execution-roadmap-for-agentic-ai-621445">iTnews, 31 Oct 2025</a></p></div></li>
+        <li><span class="d">4 Aug 2026</span><div class="e"><p>Westpac runs five agents on Amazon Bedrock AgentCore in home loans and cards: 32,000 payslips a week. A new agent now ships in four to six weeks, down from six months.</p><p class="src"><a href="https://www.itnews.com.au/news/westpac-plugs-five-aws-ai-agents-into-core-lending-processes-627914">iTnews, 4 Aug 2026</a></p></div></li>
+        <li class="key"><span class="d">9 Nov 2026</span><div class="e"><p>Presenting full-year results, ANZ's CEO says the bank is implementing an "enterprise AI control plane" for visibility, governance and control across users, models, agents, tools, costs and platforms. The software behind it is not disclosed. Telstra built its own with Accenture's help.</p><p class="src"><a href="https://www.itnews.com.au/news/anz-stands-up-an-enterprise-ai-control-plane-630221">iTnews, 9 Nov 2026</a></p></div></li>
+        <li class="future"><span class="d">10 Dec 2026</span><div class="e"><p>Privacy policies must disclose decisions made or substantially helped by a computer program that could significantly affect a person (new APPs 1.7 to 1.9). Third-party software counts.</p><p class="src"><a href="https://piperalderman.com.au/insight/when-the-machine-decides-is-your-privacy-policy-compliant-with-new-automated-decision-making-transparency-requirements/">Piper Alderman, 20 Oct 2026</a></p></div></li>
+      </ul>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-in" aria-labelledby="t-in" hidden>
+      <ul class="clock">
+        <li><span class="d">13 Aug 2025</span><div class="e"><p>RBI's FREE-AI committee report recommends board-approved AI policies, AI inventories, incident reporting and audit processes for regulated entities. A report of recommendations, not directions.</p><p class="src"><a href="https://www.khaitanco.com/sites/default/files/2025-08/Ergo%20-%20FREE%20AI%20Framework%20-%2028%20Augusut%202025.pdf">Khaitan &amp; Co, Aug 2025</a></p></div></li>
+        <li><span class="d">17 Feb 2026</span><div class="e"><p>Infosys partners with Anthropic to build agents for banking, telecom and manufacturing on its Topaz platform. Indian SIs are packaging agents for the banks they already run.</p><p class="src"><a href="https://techcrunch.com/2026/02/17/as-ai-jitters-rattle-it-stocks-infosys-partners-with-anthropic-to-build-enterprise-grade-ai-agents/">TechCrunch, 17 Feb 2026</a></p></div></li>
+        <li class="key"><span class="d">15 Oct 2026</span><div class="e"><p>CERT-In issues a critical advisory: AI agents under evaluation reached live systems of Indian organisations, and none of the organisations detected it themselves. It asks for live monitoring of agents, runs stopped when they exceed scope, and tamper-resistant logs. BFSI is named.</p><p class="src"><a href="https://inc42.com/buzz/cert-in-flags-unauthorised-ai-agent-access-to-indian-organisations-systems/">Inc42, 16 Oct 2026</a></p></div></li>
+      </ul>
+    </div>
+
+    <p class="oneline">Across the region, regulators are starting to ask banks the question LangSmith answers: what did the agent do, and how do you know it was tested?</p>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <p class="field">First doors</p>
+      <h2>Who I would go to first</h2>
+      <p>In order. Account names are examples to test against your current pipeline, which I have not seen.</p>
+    </div>
+    <div class="doors">
+      <details class="door">
+        <summary><span class="n">01</span><span class="t">Australian banks' AI platform teams</span><span class="why">Agents in production, and a control gap their CEOs now name in public.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>examples</dt><dd>ANZ, Westpac, Commonwealth Bank, NAB.</dd>
+          <dt>champion</dt><dd>Head of the AI or agent platform team.</dd>
+          <dt>signers</dt><dd>CIO, CRO, CISO, procurement.</dd>
+          <dt>pilot</dt><dd>Trace and evaluate two or three agents that are already live, in the Sydney region, against written success criteria.</dd>
+          <dt>why yes</dt><dd>ANZ is building a control plane now. Westpac ships a new agent every four to six weeks, and each one needs a test gate before release.</dd>
+          <dt>must prove</dt><dd>A clean vendor risk and security review, data in Australia, and that it works next to Bedrock and their own stack.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">02</span><span class="t">Singapore banks</span><span class="why">MAS gave them less than eleven months to put AI oversight and risk systems in place.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>examples</dt><dd>DBS, OCBC, UOB, and the Singapore hubs of global banks.</dd>
+          <dt>champion</dt><dd>Head of AI or data platform. Model risk is the second voice.</dd>
+          <dt>signers</dt><dd>CRO, CIO, CISO.</dd>
+          <dt>pilot</dt><dd>Self-hosted or BYOC LangSmith on one live agent, with the inventory and test record written under MAS's own headings.</dd>
+          <dt>why yes</dt><dd>It turns a supervisory expectation into a running system before the deadline.</dd>
+          <dt>must prove</dt><dd>Where the data sits, and how LangChain fits MAS's outsourcing and third-party rules.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">03</span><span class="t">Insurers</span><span class="why">Claims and service agents are going live, and LangChain shows no insurer story yet.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>examples</dt><dd>Suncorp, IAG, QBE in Australia. Great Eastern, AIA, Prudential in Singapore.</dd>
+          <dt>champion</dt><dd>Head of claims transformation, or the AI platform lead.</dd>
+          <dt>pilot</dt><dd>Evaluate a claims-lodgement agent on real claim documents, with a person reviewing the hard cases in an annotation queue.</dd>
+          <dt>why yes</dt><dd>Australia's automated-decision disclosure starts on 10 December, and claims decisions affect people.</dd>
+          <dt>for you</dt><dd>The first insurer reference helps every insurer deal LangChain runs, in the US too.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">04</span><span class="t">The SIs that build these agents</span><span class="why">They own the build at most banks. One practice lead can carry LangSmith into five accounts.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>examples</dt><dd>Accenture, which helped build Telstra's control plane. Quantiphi, already a partner. Infosys, TCS, Wipro, HCLTech. Regional builders such as NCS in Singapore and Mantel Group in Australia. <span class="tag">fit to test</span></dd>
+          <dt>offer</dt><dd>LangSmith as the tracing and evaluation layer in their agent practice, their engineers trained, and joint account plans on ten named banks.</dd>
+          <dt>for them</dt><dd>Services margin on evaluation, self-hosting and MAS readiness work.</dd>
+          <dt>must agree</dt><dd>Who does which services work, since LangChain is hiring its own deployed architects in Singapore.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">05</span><span class="t">AWS and Google Cloud, in region</span><span class="why">The agents already run on their clouds. Their account teams sit inside every bank above.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>facts</dt><dd>Westpac built on Bedrock AgentCore. LangSmith BYOC is generally available on AWS, the Sydney region runs on Google Cloud, and LangSmith is sold in both marketplaces. On Google Cloud, LangChain says the purchase counts toward the customer's committed spend.<br><span class="src"><a href="https://www.langchain.com/blog/aws-marketplace-july-2025-announce">AWS Marketplace, Jul 2025</a> · <a href="https://www.langchain.com/blog/langsmith-is-now-available-in-google-cloud-marketplace">Google Cloud Marketplace, Feb 2026</a></span></dd>
+          <dt>offer</dt><dd>Co-sell on named accounts, and a marketplace purchase the bank draws down against its cloud commitment. <span class="tag">my read for AWS</span></dd>
+          <dt>rhythm</dt><dd>A quarterly review with each cloud's APAC partner team.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">06</span><span class="t">India, through the SIs first</span><span class="why">CERT-In has made the case. The SI bench that serves APAC banks sits here too.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>who</dt><dd>Large private banks and private insurers, reached first through the Indian SIs that already run their technology.</dd>
+          <dt>must prove</dt><dd>Self-hosted inside the bank, logs kept in India.</dd>
+          <dt>when</dt><dd>Year two, unless an SI brings a deal forward. <span class="tag">my read</span></dd>
+          <dt>my edge</dt><dd>I have sold AI to these buyers before, and I know how their procurement, legal and IT security reviews run.</dd>
+        </dl></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <p class="field">First 90 days</p>
+      <h2>From four AEs to a region you can forecast</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Phase">
+      <button class="tab" role="tab" id="t-d1" aria-controls="p-d1" aria-selected="true">Days 1 to 30</button>
+      <button class="tab" role="tab" id="t-d2" aria-controls="p-d2" aria-selected="false" tabindex="-1">Days 31 to 60</button>
+      <button class="tab" role="tab" id="t-d3" aria-controls="p-d3" aria-selected="false" tabindex="-1">Days 61 to 90</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-d1" aria-labelledby="t-d1">
+      <div class="plan">
+        <div class="pcol"><h3>Inherit and inspect</h3><ul>
+          <li>One-on-ones with the four AEs. Walk every open deal and agree forecast categories with the Global VP of Sales.</li>
+          <li>Sit in on customer calls in Sydney and Singapore, and spend a day with the deployed engineers.</li>
+          <li>Build the account map: 40 named banks, insurers and large enterprises across Australia and Singapore, plus ten SIs.</li>
+          <li>Meet the AWS and Google Cloud partner teams in region, and three SI practice leads.</li>
+          <li>Draft the APAC page and a one-page MAS answer with your legal and security teams.</li>
+        </ul></div>
+        <div class="pcol see"><h3>What you see by day 30</h3><ul>
+          <li>A forecast by AE you can believe, with the deals I would drop and why.</li>
+          <li>Three named lighthouse targets and the reasons.</li>
+          <li>The partner shortlist and an H1 hiring plan.</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-d2" aria-labelledby="t-d2" hidden>
+      <div class="plan">
+        <div class="pcol"><h3>Lighthouses in writing</h3><ul>
+          <li>Agree pilots with two lighthouse accounts: written success criteria, a named signer, procurement and security in from week one.</li>
+          <li>Sign a joint plan with one global SI and one regional SI on named accounts.</li>
+          <li>Open the first two roles and run structured hiring with the talent team.</li>
+          <li>Weekly pipeline review and deal coaching become the team's rhythm.</li>
+        </ul></div>
+        <div class="pcol see"><h3>What you see by day 60</h3><ul>
+          <li>Two pilots agreed in writing, or a clear no and the reason.</li>
+          <li>Partner-sourced pipeline tracked as its own line.</li>
+          <li>Candidates in final rounds.</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-d3" aria-labelledby="t-d3" hidden>
+      <div class="plan">
+        <div class="pcol"><h3>First proof</h3><ul>
+          <li>Run the pilots against their goals, with a review every two weeks.</li>
+          <li>Write the first result up with the customer's sign-off, so the next bank will believe it.</li>
+          <li>First joint review with each partner.</li>
+          <li>The H1 plan for APAC: number, headcount and partner pipeline, by sub-region.</li>
+        </ul></div>
+        <div class="pcol see"><h3>What you see by day 90</h3><ul>
+          <li>Early numbers from one regulated account, in writing.</li>
+          <li>Partner-sourced pipeline as a share of all APAC pipeline.</li>
+          <li>An H1 plan with each hire tied to the number.</li>
+        </ul></div>
+      </div>
+    </div>
+    <p class="note">A big bank will not sign a year's contract inside 90 days. The honest day-90 result is pilots running against written goals with named signers, and a forecast you can trust. That is how we did it at Simplifai.</p>
+  </section>
+
+  <section id="hires">
+    <div class="sh">
+      <p class="field">Who to hire</p>
+      <h2>In this order</h2>
+      <p>The order is my read from outside. Your pipeline decides the timing.</p>
+    </div>
+    <ol class="hires">
+      <li class="hire"><span class="ht">Partner manager, SIs and clouds <small>month 1 to 2</small></span><p>Singapore and India deals will run through partners, and the posting already puts the GSI and RSI relationships on this seat.</p></li>
+      <li class="hire"><span class="ht">Two enterprise AEs for financial services <small>month 2 to 3</small></span><p>One in Sydney, one in Singapore. Banks and insurers buy through long committee cycles, and specialists shorten them.</p></li>
+      <li class="hire"><span class="ht">One SDR covering both hubs <small>month 3</small></span><p>APAC has none posted today. London has one.</p></li>
+      <li class="hire"><span class="ht">A first-line manager from inside <small>H1</small></span><p>When the team passes six, promote the strongest of the four AEs. It keeps the people who already know the accounts.</p></li>
+      <li class="hire"><span class="ht">A field marketer for APAC <small>H1</small></span><p>Events with AWS, Google Cloud and the SIs, and later an Interrupt day in Sydney or Singapore.</p></li>
+    </ol>
+  </section>
+
+  <section id="me">
+    <div class="sh">
+      <p class="field">Why me</p>
+      <h2>I have sold AI into banks and insurers, and built the layer this seat needs</h2>
+      <p>Most recently I set up sales at Craze, a YC company, from no team; we signed 70+ logos. Before that:</p>
+    </div>
+    <div class="roles">
+      <div class="role">
+        <div class="rh"><h3>Simplifai <span>Head of Sales APAC · Norwegian AI SaaS</span></h3><span class="when">Jul 2020 to Jun 2022</span></div>
+        <p>Built APAC sales from no team to 15 reps, selling AI to Indian banks, fund houses, brokers and insurers: Kotak Mahindra, HDFC Mutual Fund, Upstox, Bajaj Allianz. Nobody in India knew the company and we had no ISO certificate. At Kotak the work grew from the first 8,000 emails to about 42,000, and we ran the workflow end to end on Blue Prism RPA because the core banking system had no APIs. I called it a digital employee back then. Today it would be an agent.</p>
+        <div class="nums"><span class="num">$1M ARR in 12 months</span><span class="num">$1.7M ARR when I left</span></div>
+      </div>
+      <div class="role">
+        <div class="rh"><h3>Torqus <span>Inside and Channel Sales · India</span></h3><span class="when">Apr 2017 to Jul 2020</span></div>
+        <p>Built a 60+ seat sales engine, about 40 on-roll plus an outsourced outbound team I set up and trained, and a channel network across 15 cities. Managers, rhythm and partners: the same layer this seat has to build on top of four AEs.</p>
+        <div class="nums"><span class="num">60+ seats</span><span class="num">15-city channel</span></div>
+      </div>
+      <div class="role">
+        <div class="rh"><h3>ZenAdmin <span>Commercial Director · Singapore</span></h3><span class="when">Aug 2022 to Nov 2023</span></div>
+        <p>Ran sales, marketing and customer success. We started from 11 beta customers and no revenue, then moved our selling from Southeast Asia to the US and Europe, and the average deal grew about 3x. Customers included Remote, Deel, Eventbrite, Temasek, Igloo, Sleek and Omnipresent.</p>
+        <div class="nums"><span class="num">$200K+ ARR</span><span class="num">104% NRR</span><span class="num">~20% MoM</span></div>
+      </div>
+    </div>
+    <div class="rules">
+      <h3>How I sell to a bank</h3>
+      <ul>
+        <li>Written success criteria before any pilot, and a named person who signs if we hit them.</li>
+        <li>Procurement, legal, risk and security in the loop from week one.</li>
+        <li>The buying committee mapped in person. We lost TVS Credit at Simplifai because the people who really decided were not on LinkedIn and never showed up on our account map.</li>
+        <li>You in the first meeting with each lighthouse account's top person. I run everything after it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <p class="field">From you</p>
+      <h2>Three questions I would ask you first</h2>
+    </div>
+    <ol class="qs">
+      <li>Which three sub-regions make up the APAC number, and does Japan, where MUFG, Rakuten and Toyota already are, sit inside it?</li>
+      <li>How much of the four AEs' pipeline is banks and insurers today, and how many of those deals need self-hosted or BYOC?</li>
+      <li>Who should own Accenture and the Indian SIs in APAC: this seat, or a global alliances team?</li>
+    </ol>
+  </section>
+
+  <div class="close">
+    <h2>That is the draft.</h2>
+    <p>Most of it should change after week one, once I see the real pipeline. The method stays the same: start where the regulators have just set the agenda, put every pilot in writing, bring the SIs in from the first deal, then hire.</p>
+    <p class="muted" style="color:var(--muted); font-size:14.5px">I am based in Pune and will relocate to Sydney or Singapore. Singapore would need an Employment Pass, Australia a work visa.</p>
+    <p class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span><a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a></span></p>
+  </div>
+
+</div>
+</main>
+
+<script>
+(function(){
+  function wireTabs(list, key){
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('.tab'));
+    function select(id, focus){
+      tabs.forEach(function(t){
+        var on = t.id === id;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if (p) p.hidden = !on;
+        if (on && focus) t.focus();
+      });
+      try { localStorage.setItem(key, id); } catch(e) {}
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ select(t.id); });
+      t.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+          var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+          select(tabs[n].id, true); e.preventDefault();
+        }
+      });
+    });
+    try { var saved = localStorage.getItem(key); if (saved && document.getElementById(saved) && list.contains(document.getElementById(saved))) select(saved); } catch(e) {}
+  }
+  var lists = document.querySelectorAll('[role="tablist"]');
+  Array.prototype.forEach.call(lists, function(l, i){ wireTabs(l, 'lc-apac-tab-' + i); });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('#fact, main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

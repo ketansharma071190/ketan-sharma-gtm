@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profound: APAC, then India</title>
+<meta name="description" content="A working draft by Ketan Sharma for James Cadwallader: how to build Profound's Asia Pacific business from Singapore, and where India comes in.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* One reading column, sticky section bar. A switch in the hero adds or removes the India layer everywhere on the page. */
+:root{
+  --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#EFECE5; --ink:#16181D; --muted:#5A616C; --line:#DDD8CE;
+  --accent:#0E6B63; --accent-ink:#FFFFFF; --accent-soft:rgba(14,107,99,.09);
+  --india:#A84C0C; --india-ink:#FFFFFF; --india-soft:rgba(168,76,12,.09);
+  --f-display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F1214; --surface:#171B1E; --surface-2:#1E2327; --ink:#E8EAED; --muted:#9AA3AD; --line:#2A3036;
+  --accent:#4FC1B5; --accent-ink:#06201D; --accent-soft:rgba(79,193,181,.12);
+  --india:#F0954E; --india-ink:#2A1203; --india-soft:rgba(240,149,78,.13);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0F1214; --surface:#171B1E; --surface-2:#1E2327; --ink:#E8EAED; --muted:#9AA3AD; --line:#2A3036;
+  --accent:#4FC1B5; --accent-ink:#06201D; --accent-soft:rgba(79,193,181,.12);
+  --india:#F0954E; --india-ink:#2A1203; --india-soft:rgba(240,149,78,.13);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16.5px; line-height:1.58; -webkit-text-size-adjust:100%}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.12; text-wrap:balance; margin:0}
+h1{font-size:clamp(30px, 6.4vw, 48px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(23px, 4.2vw, 30px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--accent); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.nw{white-space:nowrap}
+
+/* sticky bar */
+.bar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:13px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:480px){ .who span{display:none} }
+
+/* hero */
+.hero{padding-block:38px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18.5px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+.seg{display:inline-flex; gap:4px; padding:4px; border:1px solid var(--line); border-radius:999px; background:var(--surface); justify-self:start; flex-wrap:wrap}
+.seg button{font:inherit; font-size:14px; border:0; background:none; color:var(--muted); padding:6px 14px; border-radius:999px; cursor:pointer; white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+.seg-note{font-size:13.5px; color:var(--muted); margin-top:-8px}
+
+/* timeline */
+.tl{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.tl-hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.tl-hd b{color:var(--ink); font-weight:500}
+.tl ol{list-style:none; margin:0; padding:4px 0}
+.tl li{display:grid; grid-template-columns:96px 1fr; gap:4px 14px; padding:11px 16px; border-bottom:1px dashed var(--line)}
+.tl li:last-child{border-bottom:0}
+.tl .d{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:3px; white-space:nowrap}
+.tl .e{min-width:0; display:grid; gap:3px}
+.tl .e p{font-size:15.5px}
+.tl li.pf .d{color:var(--accent)}
+.tl li.key{background:var(--india-soft)}
+.tl li.key .d{color:var(--india); font-weight:500}
+.tl-ft{padding:13px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:15px}
+.tl-ft b{font-weight:600}
+@media (max-width:520px){ .tl li{grid-template-columns:1fr} }
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); line-height:1.5}
+.src a{color:var(--muted)}
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:20px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.05em; text-transform:uppercase}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--accent); border-color:color-mix(in srgb, var(--accent) 45%, transparent); background:var(--accent-soft)}
+.tag.ind{color:var(--india); border-color:color-mix(in srgb, var(--india) 45%, transparent); background:var(--india-soft)}
+.tag.posted{color:var(--ink)}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:13px 15px; display:grid; gap:5px; align-content:start}
+.fact h3{font-size:15px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.03em; text-transform:uppercase}
+.fact p{font-size:15px}
+.readout{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.readout ol{margin:0; padding-left:20px; display:grid; gap:9px}
+.readout li{max-width:70ch}
+.readout li.in{color:var(--ink)}
+.readout li.in::marker{color:var(--india)}
+
+/* tabs */
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:9px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tab b{font-family:var(--f-display); font-size:17px; color:inherit; white-space:nowrap}
+.tab small{font-family:var(--f-mono); font-size:11.5px; white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.tab.in[aria-selected="true"]{border-bottom-color:var(--india)}
+
+/* door groups */
+.groups{display:grid; gap:10px}
+.grp{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; grid-template-columns:52px 1fr; gap:4px 14px}
+.grp > *{min-width:0}
+.grp .ct{grid-row:1 / span 3; font-family:var(--f-display); font-weight:800; font-size:30px; line-height:1; color:var(--accent)}
+.grp .gt{font-weight:600; font-size:16.5px}
+.grp .ex{font-size:15px}
+.grp .ex em{font-style:normal; font-family:var(--f-mono); font-size:11.5px; color:var(--muted); margin-right:6px; letter-spacing:.03em; text-transform:uppercase}
+.grp .dr{font-size:14.5px; color:var(--muted)}
+.grp.ingrp{border-color:color-mix(in srgb, var(--india) 40%, var(--line)); background:linear-gradient(var(--india-soft), var(--india-soft)), var(--surface)}
+.grp.ingrp .ct{color:var(--india)}
+.note{margin-top:14px; font-size:14.5px; color:var(--muted); max-width:70ch}
+.note b{color:var(--ink); font-weight:600}
+
+/* 90 days */
+.panel{display:grid; grid-template-columns:1.25fr 1fr; gap:12px}
+@media (max-width:660px){ .panel{grid-template-columns:1fr} }
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:15px 16px; display:grid; gap:10px; align-content:start; min-width:0}
+.col.see{background:var(--surface-2)}
+.col h3{font-size:12px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.col ul{margin:0; padding-left:18px; display:grid; gap:7px; font-size:15.5px}
+.col li.in::marker{color:var(--india)}
+.col li.in{color:var(--ink)}
+.col li.in .tag{margin-left:4px}
+
+/* hiring */
+.hires{list-style:none; margin:0; padding:0; display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden; counter-reset:h}
+.hires > li{counter-increment:h; display:grid; grid-template-columns:34px 1fr; gap:2px 12px; padding:12px 16px; border-bottom:1px solid var(--line)}
+.hires > li:last-child{border-bottom:0}
+.hires > li::before{content:counter(h); grid-row:1 / span 2; font-family:var(--f-mono); font-size:13px; color:var(--accent); padding-top:2px}
+.hires .ht{font-weight:600}
+.hires .hw{font-size:14.5px; color:var(--muted); grid-column:2}
+.hires > li.in{background:var(--india-soft)}
+.hires > li.in::before{color:var(--india)}
+
+/* proof */
+.proof{display:grid; gap:10px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:15px 17px; display:grid; grid-template-columns:180px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:19px}
+.pc .co span{font-size:13.5px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc .why{display:grid; gap:7px; font-size:15.5px}
+.pc .why .lead{font-weight:600}
+.nums{display:flex; flex-wrap:wrap; gap:7px; grid-column:1 / -1}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:3px 9px; border-radius:6px; background:var(--accent-soft); border:1px solid color-mix(in srgb, var(--accent) 30%, transparent); white-space:nowrap}
+
+/* questions */
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:16px}
+.qs li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:3px}
+.qs li span{min-width:0}
+.end{padding-block:40px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.end p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+
+/* India layer off */
+body.no-india .in{display:none!important}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· APAC for Profound</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#read">My read</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hires">Hiring</a>
+      <a href="#why">Why me</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A working draft for James Cadwallader · Nov 2026</div>
+    <h1>The day after you named Singapore, OpenAI said India is now ChatGPT's biggest market.</h1>
+    <p class="lede">James, this is how I would build Asia Pacific for Profound from Singapore, and where India comes in once SEA, Japan and ANZ are moving. It is built from public sources, so it is a draft. <strong>Where I am guessing, I say so.</strong></p>
+
+    <div class="seg" role="group" aria-label="Show the plan with or without India">
+      <button type="button" id="seg-on" aria-pressed="true">Your plan + India</button>
+      <button type="button" id="seg-off" aria-pressed="false">Your plan as announced</button>
+    </div>
+    <p class="seg-note">The switch adds or removes the India layer across the whole page.</p>
+
+    <div class="tl" aria-label="Dated timeline">
+      <div class="tl-hd"><b>Ten weeks in AI answers, India and Profound</b><span>from public sources</span></div>
+      <ol>
+        <li class="in"><span class="d">27 Aug 2026</span><span class="e"><p>OpenAI rolls out ChatGPT ads in India for Free and Go users. WPP and Omnicom are its first agency partners there, and 50+ brands are due to go live that week.</p><span class="src"><a href="https://www.outlookbusiness.com/corporate/openai-rolls-out-chatgpt-ads-in-india-its-second-largest-market">Outlook Business</a></span></span></li>
+        <li class="in"><span class="d">3 Sep 2026</span><span class="e"><p>Honasa says Mamaearth is the first Indian advertiser on ChatGPT, placed through Criteo.</p><span class="src"><a href="https://india.entrepreneur.com/?p=99295">Entrepreneur India</a></span></span></li>
+        <li class="pf"><span class="d">15 Sep 2026</span><span class="e"><p>Profound raises a $180M Series D at $1.8B, co-led by Sequoia and Kleiner Perkins.</p><span class="src"><a href="https://www.tryprofound.com/newsroom/profound-raises-usd180m-series-d-at-usd1-8b-valuation-to-build-the-ai-platform-for-marketing-teams">Profound newsroom</a></span></span></li>
+        <li class="pf"><span class="d">2 Nov 2026</span><span class="e"><p>Profound names Singapore its Asia Pacific HQ, for Southeast Asia, Japan, Australia and New Zealand.</p><span class="src"><a href="https://www.tryprofound.com/newsroom/profound-establishes-singapore-as-asia-pacific-headquarters-as-ai-becomes-the-new-front-door-for-brands">Profound newsroom</a></span></span></li>
+        <li class="key"><span class="d">3 Nov 2026</span><span class="e"><p><b>OpenAI's India MD says India is ChatGPT's largest market by weekly users</b>, with users doubled since January. OpenAI has also signed Razorpay to help Indian brands advertise, with Tanishq, Fastrack, Traya, Tata Neu, Shaadi.com and Axis Max Life among the early brands.</p><span class="src"><a href="https://inc42.com/buzz/india-becomes-chatgpts-largest-market-globally-user-base-doubles-since-january/">Inc42, citing The Economic Times</a> · company figures, no new user count given</span></span></li>
+      </ol>
+      <div class="tl-ft">OpenAI says ads sit apart from the answer and do not change it. <b>So Indian brands now pay for the slot under the answer, and the answer itself still has to be earned.</b> That is the part Profound measures and moves.</div>
+    </div>
+  </header>
+
+  <section id="read">
+    <div class="sh">
+      <span class="field">My read</span>
+      <h2>Profound's APAC, as I read it from outside</h2>
+      <p>Six facts from your own site and job board, and what I take from them.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you sell</h3><p>How a brand shows up across up to 10 answer engines, then agents that act on it. Enterprise pricing only since Starter and Growth were retired in September.</p><span class="src"><a href="https://www.tryprofound.com/pricing">tryprofound.com/pricing</a></span></div>
+      <div class="fact"><h3>Who buys</h3><p>1,000+ enterprise brands and over a third of the Fortune 100.</p><span class="src"><a href="https://www.tryprofound.com/newsroom/profound-raises-usd180m-series-d-at-usd1-8b-valuation-to-build-the-ai-platform-for-marketing-teams">Series D release, 15 Sep 2026</a></span></div>
+      <div class="fact"><h3>The APAC plan</h3><p>A CBD office in Q4 and 15+ roles in 12 months, a GM for Asia Pacific among them. New York people move out for a year.</p><span class="src"><a href="https://www.tryprofound.com/newsroom/profound-establishes-singapore-as-asia-pacific-headquarters-as-ai-becomes-the-new-front-door-for-brands">Profound release, 2 Nov 2026</a></span></div>
+      <div class="fact"><h3>Already in the room</h3><p>At Zero Click Sydney, Atlassian, Virgin Australia and ahm with TBWA talked about work done in Profound. Standard Chartered, Unilever, L'Oréal, DHL Express, Singtel and iQuanti were on the Singapore stage.</p><span class="src"><a href="https://www.tryprofound.com/blog/zero-click-sydney-2026-recap">Sydney recap</a> · <a href="https://www.tryprofound.com/newsroom/profounds-zero-click-world-tour-convenes-nearly-2000-marketing-leaders-in-london-sydney-and-singapore-to-explore-ais-impact-on-marketing">tour release, 11 Nov 2026</a></span></div>
+      <div class="fact"><h3>On the board today</h3><p>Singapore is listed on 8 roles: two AE roles, two account manager roles, solutions, engagement, GTM associate, field marketing. The GM role is in the release and still to be posted.</p><span class="src"><a href="https://jobs.ashbyhq.com/Profound">jobs.ashbyhq.com/Profound</a>, checked 19 Nov 2026</span></div>
+      <div class="fact"><h3>The London precedent</h3><p>Announced in October 2025 as "a founding team", opening that November. About 75 of your roughly 400 people sit there now.</p><span class="src"><a href="https://tryprofound.com/blog/profound-opens-a-london-office">Profound blog, updated 9 Nov 2026</a></span></div>
+    </div>
+    <div class="readout">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>Singapore can follow the London path: a founding team, events first, then field. London grew to about 75 people in roughly a year. <span class="tag guess">my read</span></li>
+        <li>Agencies carry more of the load in Asia. Regional brands buy search and media through networks, and those networks already sell AI answers. Two of your eight Singapore roles are agency roles, so I think you see it too. <span class="tag guess">guess on the share</span></li>
+        <li>Enterprise-only pricing makes APAC a named-account game from day one. Thirty brands and ten agencies is a list one GM can know personally.</li>
+        <li>Answers change by country. In Sydney, Princess Polly's Destiny Flaherty made the point that one prompt gives different answers in the US, the UK and Australia. Local prompt sets are the first product ask.</li>
+        <li class="in">India runs well from Singapore. The same regional teams and agency networks often cover it, so India can start as a list and a test, with no office. <span class="tag ind">India</span> <span class="tag guess">my read</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <span class="field">First doors</span>
+      <h2>The first 30 brands and 10 agencies</h2>
+      <p>Names are examples from public sources. I have not checked which are already customers through a US or UK contract; that is week one.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="First doors">
+      <button class="tab" role="tab" id="d1" aria-controls="dp1" aria-selected="true" type="button"><small>APAC</small><b>30 brands</b></button>
+      <button class="tab" role="tab" id="d2" aria-controls="dp2" aria-selected="false" tabindex="-1" type="button"><small>APAC</small><b>10 agencies</b></button>
+      <button class="tab in" role="tab" id="d3" aria-controls="dp3" aria-selected="false" tabindex="-1" type="button"><small>Next</small><b>India</b></button>
+    </div>
+
+    <div class="groups" role="tabpanel" id="dp1" aria-labelledby="d1">
+      <div class="grp"><span class="ct">9</span><span class="gt">Already in the room</span><span class="ex"><em>e.g.</em>Atlassian, Virgin Australia, ahm, Princess Polly, Standard Chartered, Unilever, L'Oréal, DHL Express, Singtel</span><span class="dr">Grow the ones already working in Profound into regional contracts. Convert the rest while Zero Click is fresh.</span></div>
+      <div class="grp"><span class="ct">6</span><span class="gt">Your global customers' APAC teams</span><span class="ex"><em>e.g.</em>Estée Lauder, MongoDB, Zoom, Campari, ServiceNow</span><span class="dr">The US or UK champion introduces the APAC marketing head. Same product, new budget. <span class="tag guess">which run APAC from Singapore</span></span></div>
+      <div class="grp"><span class="ct">6</span><span class="gt">SEA digital natives</span><span class="ex"><em>e.g.</em>Grab, Shopee, Lazada, Traveloka, Agoda, Carousell</span><span class="dr">Travel and marketplaces lose the most when an answer names a rival. Your own data on Singapore users' ChatGPT and Gemini conversations shows the share spent researching, comparing or buying up 23% from January to September.</span></div>
+      <div class="grp"><span class="ct">5</span><span class="gt">Banks and insurers</span><span class="ex"><em>e.g.</em>DBS, OCBC, UOB, AIA, Prudential</span><span class="dr">"Best travel card" and "best health cover" are AI questions now. Marketing and compliance both want to know what AI says about their products. This is where I sold AI at Simplifai. <span class="tag guess">my read</span></span></div>
+      <div class="grp"><span class="ct">4</span><span class="gt">Japan, through a partner</span><span class="ex"><em>e.g.</em>Rakuten, Uniqlo, Shiseido, Sony</span><span class="dr">Global marketing teams that work in English, with a Japanese agency partner for the rest. <span class="tag guess">guess on route</span></span></div>
+    </div>
+
+    <div class="groups" role="tabpanel" id="dp2" aria-labelledby="d2" hidden>
+      <div class="grp"><span class="ct">5</span><span class="gt">Holding networks in Singapore</span><span class="ex"><em>e.g.</em>WPP, Omnicom (TBWA, OMD), Publicis, Dentsu, Havas</span><span class="dr">One regional AI search lead per network. One pilot each across three client brands, success criteria in writing. <span class="in">WPP and Omnicom are also OpenAI's first ad agency partners in India, so their clients will ask about the answer next.</span></span></div>
+      <div class="grp"><span class="ct">1</span><span class="gt">iQuanti</span><span class="ex"><em>why</em>Your partner since Nov 2025, on the Singapore stage, with offices in Singapore and Bangalore</span><span class="dr">The first APAC agency case study<span class="in">, and the bridge into India</span>.</span></div>
+      <div class="grp"><span class="ct">1</span><span class="gt">Accenture Song</span><span class="ex"><em>why</em>On your London stage</span><span class="dr">Brings the transformation budget, beyond the search budget. <span class="tag guess">guess on APAC appetite</span></span></div>
+      <div class="grp"><span class="ct">1</span><span class="gt">Archetype</span><span class="ex"><em>why</em>APAC B2B PR agency already selling AI visibility</span><span class="dr">Tech brands across the region, where PR and AI answers meet. <span class="src"><a href="https://apac.archetype.co/ai-visibility-services">apac.archetype.co</a></span></span></div>
+      <div class="grp"><span class="ct">2</span><span class="gt">Independent search agencies</span><span class="ex"><em>where</em>One in Singapore, one in Sydney</span><span class="dr">Picked in month one by who already sells answer-engine work and needs the data underneath it.</span></div>
+    </div>
+
+    <div class="groups in" role="tabpanel" id="dp3" aria-labelledby="d3" hidden>
+      <div class="grp ingrp"><span class="ct">7</span><span class="gt">Brands already advertising on ChatGPT</span><span class="ex"><em>e.g.</em>Tanishq, Fastrack, Traya, Tata Neu, Shaadi.com, Axis Max Life, Mamaearth</span><span class="dr">They are in the ad slot under the answer. Profound shows them the answer itself.</span></div>
+      <div class="grp ingrp"><span class="ct">1</span><span class="gt">Flipkart</span><span class="ex"><em>why</em>Walmart is a named Profound customer and owns most of Flipkart</span><span class="dr">A door through an existing relationship. <span class="tag guess">to test</span></span></div>
+      <div class="grp ingrp"><span class="ct">2</span><span class="gt">A private bank and an insurer</span><span class="ex"><em>why</em>Where I sold AI for two years</span><span class="dr">Card and policy questions are moving into chat. I know how these committees buy.</span></div>
+      <div class="grp ingrp"><span class="ct">3</span><span class="gt">Agencies</span><span class="ex"><em>e.g.</em>WPP and Omnicom in India, iQuanti in Bangalore</span><span class="dr">The networks selling ChatGPT ads to Indian brands, plus your partner already on the ground.</span></div>
+      <p class="note"><b>How I would run it:</b> from Singapore, with no office in year one. Hindi and Hinglish prompts are the product question. Writesonic already sells a GEO platform built for Indian enterprises, startups and agencies (<a href="https://www.crnasia.com/india/news-network/news/writesonic-launches-geo-platform-to-boost-ai-search-visibility">CRN Asia</a>), and Indian budgets run smaller, so agency bundles across several brands will matter. <span class="tag guess">guess on pricing</span></p>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>From a list to signed logos</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Know the room</b></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Put it in writing</b></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Signed and shown</b></button>
+    </div>
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Get certified through Profound University and sit with the New York team moving to Singapore.</li>
+        <li>Name the 30 brands and 10 agencies, each with an owner and a next step.</li>
+        <li>Hold 25 first meetings, starting with the Zero Click Sydney and Singapore guests.</li>
+        <li>Agree the agency model with your partnerships team: who holds the licence, who resells.</li>
+        <li>Close the first two hires from the roles already posted.</li>
+        <li class="in">Ten calls with Indian brands already buying ChatGPT ads, and with WPP and Omnicom India. <span class="tag ind">India</span></li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 30</h3><ul>
+        <li>The 30 and 10 list, with owners.</li>
+        <li>Notes from 25 meetings, in the buyers' own words.</li>
+        <li>Two offers accepted.</li>
+        <li class="in">A one-page India read: go, wait, or no. <span class="tag ind">India</span></li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Proposals to 8 brands, each built on that brand's own answer-engine picture.</li>
+        <li>Three agency pilots, each across three client brands, with success criteria in writing.</li>
+        <li>A first dinner in Singapore and one in Sydney with the Field Marketer.</li>
+        <li>Local prompt sets for Singapore, Australia and Japan agreed with product.</li>
+        <li class="in">Two Indian pilots, one brand and one agency, run from Singapore. <span class="tag ind">India</span></li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 60</h3><ul>
+        <li>Pipeline you can read by country, segment and agency.</li>
+        <li>Three agency pilots agreed in writing.</li>
+        <li>A one-page note from me every week.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Close the first APAC logos and the first agency contract.</li>
+        <li>Write the first APAC case study with the customer's sign-off, ready for Zero Click 2027.</li>
+        <li>Build the 12-month APAC plan: the number, the headcount, and when Sydney and Tokyo get people.</li>
+        <li class="in">Decide India with you: a named first account, or a date to look again. <span class="tag ind">India</span></li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 90</h3><ul>
+        <li>First signed APAC logos and one agency contract.</li>
+        <li>A case study you can put on stage.</li>
+        <li>A 12-month plan with the number and the hires.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>Big APAC brands sign slower than US mid-market.</b> Day 90 is first logos, agency pilots running, and a pipeline that makes the 12-month number believable.</p>
+  </section>
+
+  <section id="hires">
+    <div class="sh">
+      <span class="field">Hiring</span>
+      <h2>Who I would hire, in order</h2>
+      <p>Most of these are already on your board. This is the order I would fill them in.</p>
+    </div>
+    <ol class="hires">
+      <li><span class="ht">Two Enterprise AEs, Singapore <span class="tag posted">posted</span></span><span class="hw">One for regional HQs and SEA digital brands, one for banks, insurers and telcos.</span></li>
+      <li><span class="ht">Agency AE <span class="tag posted">posted</span></span><span class="hw">In month one, because every agency brings several brands with it.</span></li>
+      <li><span class="ht">Solutions Consultant <span class="tag posted">posted</span></span><span class="hw">Local demos need local prompts and local answers.</span></li>
+      <li><span class="ht">Field Marketer <span class="tag posted">posted</span></span><span class="hw">Zero Click APAC 2027, and a dinner series in Singapore and Sydney.</span></li>
+      <li><span class="ht">Engagement Manager and Agency AM <span class="tag posted">posted</span></span><span class="hw">Before the fifth logo, so renewal work starts at signing.</span></li>
+      <li><span class="ht">GTM Associates <span class="tag posted">posted</span></span><span class="hw">Account research and first meetings for the AEs.</span></li>
+      <li><span class="ht">An AE in Sydney</span><span class="hw">When ANZ pipeline reaches a number we agree.</span></li>
+      <li><span class="ht">Japan</span><span class="hw">A Japanese agency partner first, a bilingual lead in year two. <span class="tag guess">guess</span></span></li>
+      <li class="in"><span class="ht">An AE in Mumbai <span class="tag ind">India</span></span><span class="hw">When three Indian brands or two agencies are paying. Until then India runs from Singapore.</span></li>
+    </ol>
+  </section>
+
+  <section id="why">
+    <div class="sh">
+      <span class="field">Why me</span>
+      <h2>I have sat in your buyer's chair</h2>
+      <p>Three things from my career that matter for this seat.</p>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <div class="why">
+          <p class="lead">I ran marketing as well as sales and customer success.</p>
+          <p>We overhauled the brand and the go-to-market, and website traffic and inbound moved with it. That is your buyer's job, and how they get judged. We started from 11 beta customers, moved selling from SEA to the US and Europe, and signed Remote, Omnipresent, Eventbrite and Temasek.</p>
+        </div>
+        <div class="nums"><span class="num">website traffic +1,200%</span><span class="num">inbound leads +440%</span><span class="num">$200K+ ARR</span><span class="num">104% NRR</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <div class="why">
+          <p class="lead">A foreign AI company nobody in Asia knew. I built APAC sales from no team to 15 reps.</p>
+          <p>We sold to Kotak Mahindra, HDFC Mutual Fund, Bajaj Allianz and Upstox in India, and PLDT in the Philippines.</p>
+        </div>
+        <div class="nums"><span class="num">$1M ARR in the first 12 months</span><span class="num">$1.7M ARR when I left</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Inside and Channel Sales · India</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <div class="why">
+          <p class="lead">A 60+ seat inside and channel team, and a channel network across 15 cities.</p>
+          <p>It is how I think about agencies: a channel sells for you once it can win with you.</p>
+        </div>
+      </div>
+      <p class="note">Most recently I was founding Head of Sales at Craze (YC S22), where we signed 70+ logos.</p>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <span class="field">Questions</span>
+      <h2>Three things I would ask you first</h2>
+    </div>
+    <ol class="qs">
+      <li><span>Is India outside the APAC remit by choice for now, or still open?</span></li>
+      <li><span>Do agencies hold their own Profound licence and resell it, or do brands sign and agencies run the work?</span></li>
+      <li><span>On day one, does the GM own all of APAC's number, or Singapore and SEA first, with ANZ and Japan joining later?</span></li>
+    </ol>
+  </section>
+
+  <footer class="end">
+    <h2>That is the draft.</h2>
+    <p>Most of it should change after a week inside, once I see your real numbers. The method stays: a founding team in Singapore, agencies as the multiplier, named accounts, everything in writing.</p>
+    <p class="note">I am in Pune today and ready to move to Singapore. I would need an Employment Pass.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  function store(k, v){ try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch(e) { return null; } }
+
+  // tab sets
+  function wireTabs(list, key){
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    function visible(){ return tabs.filter(function(t){ return t.offsetParent !== null || getComputedStyle(t).display !== 'none'; }); }
+    function select(id, focus){
+      tabs.forEach(function(t){
+        var on = t.id === id;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        if (on && focus) t.focus();
+      });
+      store(key, id);
+    }
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ select(t.id); });
+      t.addEventListener('keydown', function(e){
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var vis = visible(); var i = vis.indexOf(t);
+        var n = (i + (e.key === 'ArrowRight' ? 1 : vis.length - 1)) % vis.length;
+        select(vis[n].id, true); e.preventDefault();
+      });
+    });
+    var saved = store(key);
+    if (saved && document.getElementById(saved) && list.contains(document.getElementById(saved))) select(saved);
+    return { select: select, tabs: tabs };
+  }
+  var lists = document.querySelectorAll('.tabs');
+  var doorTabs = wireTabs(lists[0], 'pf-doors');
+  wireTabs(lists[1], 'pf-days');
+
+  // India layer
+  var on = document.getElementById('seg-on'), off = document.getElementById('seg-off');
+  function setIndia(show){
+    document.body.classList.toggle('no-india', !show);
+    on.setAttribute('aria-pressed', show ? 'true' : 'false');
+    off.setAttribute('aria-pressed', show ? 'false' : 'true');
+    if (!show && document.getElementById('d3').getAttribute('aria-selected') === 'true') doorTabs.select('d1');
+    store('pf-india', show ? '1' : '0');
+  }
+  on.addEventListener('click', function(){ setIndia(true); });
+  off.addEventListener('click', function(){ setIndia(false); });
+  if (store('pf-india') === '0') setIndia(false);
+
+  // section chips
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        links.forEach(function(a){
+          var hit = a.getAttribute('href') === '#' + en.target.id;
+          a.classList.toggle('on', hit);
+          if (hit) a.parentNode.scrollLeft = a.offsetLeft - 16;
+        });
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
