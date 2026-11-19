@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apate: India, first 90 days</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with a sticky section bar. The hero is a map of a scam, step by step, showing where Apate acts and where Indian tools act today. */
+:root{
+  --bg:#F4F5F7; --surface:#FFFFFF; --surface-2:#E9ECF0; --ink:#11161D; --muted:#58626F; --line:#D8DDE4;
+  --accent:#B93D0B; --accent-ink:#FFFFFF; --accent-soft:rgba(185,61,11,.09); --navy:#1F3B86; --navy-soft:rgba(31,59,134,.08);
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1116; --surface:#151B23; --surface-2:#1B232D; --ink:#E6EAF0; --muted:#98A3B1; --line:#27303C;
+  --accent:#F2814A; --accent-ink:#1A0A02; --accent-soft:rgba(242,129,74,.12); --navy:#93ABFF; --navy-soft:rgba(147,171,255,.10);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0D1116; --surface:#151B23; --surface-2:#1B232D; --ink:#E6EAF0; --muted:#98A3B1; --line:#27303C;
+  --accent:#F2814A; --accent-ink:#1A0A02; --accent-soft:rgba(242,129,74,.12); --navy:#93ABFF; --navy-soft:rgba(147,171,255,.10);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6; -webkit-text-size-adjust:100%}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--surface)}
+.wrap{max-width:800px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(29px, 6.2vw, 46px); font-weight:800; letter-spacing:-.015em}
+h2{font-size:clamp(22px, 4vw, 29px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--navy)}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* sticky bar */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:color-mix(in srgb, var(--surface) 93%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+
+/* hero */
+.hero{padding-block:40px 30px; display:grid; gap:20px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+/* scam map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.map .hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.map .hd b{color:var(--ink); font-weight:500}
+.steps{list-style:none; margin:0; padding:6px 0; counter-reset:st}
+.step{counter-increment:st; display:grid; grid-template-columns:44px 1fr; gap:0 10px; padding:10px 16px 10px 10px; position:relative}
+.step::before{content:counter(st); grid-row:1 / span 2; align-self:start; justify-self:center; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); color:var(--muted); border:1px solid var(--line); position:relative; z-index:1}
+.step::after{content:""; position:absolute; left:31px; top:38px; bottom:-10px; width:2px; background:var(--line)}
+.step:last-child::after{display:none}
+.step .what{font-weight:600}
+.step .what small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; letter-spacing:.03em; text-transform:uppercase}
+.step .acts{font-size:14.5px; color:var(--muted); min-width:0}
+.step .acts b{color:var(--ink); font-weight:600}
+.step.apate{background:var(--accent-soft)}
+.step.apate::before{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.step.apate .acts b{color:var(--accent)}
+.map .ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:14px; color:var(--muted)}
+.map .ft b{color:var(--ink)}
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:64px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start}
+.fact h3{font-size:15.5px}
+.fact p{font-size:14.5px; color:var(--muted)}
+.src{font-family:var(--f-mono); font-size:11px; color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--navy); border-color:color-mix(in srgb, var(--navy) 45%, transparent); background:var(--navy-soft)}
+.read{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.read h3{font-size:16px}
+.read ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.read li{max-width:68ch}
+
+/* clock */
+.clock{list-style:none; margin:0; padding:0; display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden}
+.clock li{display:grid; grid-template-columns:118px 1fr; gap:4px 16px; padding:13px 16px; border-bottom:1px solid var(--line)}
+.clock li:last-child{border-bottom:0}
+.clock .d{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:2px}
+.clock .e{min-width:0; display:grid; gap:4px}
+.clock .e p{font-size:15px}
+.clock li.future .d{color:var(--accent); font-weight:500}
+.clock li.key{background:var(--accent-soft)}
+.clock li.key .d{color:var(--accent); font-weight:500}
+@media (max-width:560px){ .clock li{grid-template-columns:1fr} }
+.oneline{margin-top:16px; padding:16px 18px; border-radius:var(--r); border:1.5px solid var(--accent); font-family:var(--f-display); font-size:19px; font-weight:600; line-height:1.35}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.door summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start}
+.door summary::-webkit-details-marker{display:none}
+.door .n{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px; white-space:nowrap}
+.door .t{font-family:var(--f-display); font-weight:700; font-size:17px; min-width:0}
+.door .why{grid-column:2; font-size:14.5px; color:var(--muted)}
+.door .open{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--navy)}
+.door[open] .open{display:none}
+.door .body{padding:0 16px 16px; display:grid; gap:10px}
+.kv{display:grid; grid-template-columns:128px 1fr; gap:6px 14px; font-size:14.5px; margin:0}
+.kv dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv dd{margin-bottom:8px} }
+
+/* tabs */
+.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto}
+.tab{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tab b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tab small{font-family:var(--f-mono); font-size:11.5px}
+.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.panel{display:grid; grid-template-columns:1.25fr 1fr; gap:14px}
+@media (max-width:660px){ .panel{grid-template-columns:1fr} }
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.col.see{background:var(--surface-2)}
+.col h3{font-size:12.5px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
+.col ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15px}
+.note{margin-top:14px; font-size:14.5px; color:var(--muted); max-width:68ch}
+.note b{color:var(--ink)}
+
+/* selling */
+.rules{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:10px}
+.rule{border-left:3px solid var(--accent); padding:4px 12px; font-size:15px}
+.pageone{margin-top:22px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.pageone .hd{padding:11px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.pageone .hd b{color:var(--ink); font-weight:500}
+.pageone dl{margin:0; display:grid}
+.pageone .r{display:grid; grid-template-columns:150px 1fr; gap:4px 14px; padding:11px 16px; border-bottom:1px dashed var(--line); font-size:14.5px}
+.pageone .r:last-child{border-bottom:0}
+.pageone dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:2px}
+.pageone dd{margin:0; min-width:0}
+@media (max-width:560px){ .pageone .r{grid-template-columns:1fr} }
+.proof{display:grid; gap:12px; margin-top:22px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:190px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:19px}
+.pc .co span{font-size:13px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:8px; grid-column:1 / -1}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:4px 9px; border-radius:6px; background:var(--navy-soft); border:1px solid color-mix(in srgb, var(--navy) 30%, transparent)}
+
+/* asks and questions */
+.asks{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .asks{grid-template-columns:1fr} }
+.ask{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:4px; align-content:start}
+.ask b{font-size:15px}
+.ask span{font-size:14px; color:var(--muted)}
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:15px}
+.qs li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:3px}
+.qs li span{min-width:0}
+.end{padding-block:40px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.end p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· India for Apate</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#understand">Apate</a>
+      <a href="#now">Why now</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#sell">How I sell</a>
+      <a href="#need">From you</a>
+      <a href="#weekone">Week one</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A working draft for Dali Kaafar · 20 Nov 2026</div>
+    <h1>Start India the way Apate works at home: one bank and one telco.</h1>
+    <p class="lede">Dali, this is how I would start India for Apate without taking anything away from the US. I built it from public sources and from my years selling AI into Indian banks, so it is a draft. <strong>Where I am guessing, I say so.</strong></p>
+
+    <div class="map" aria-label="Where each tool acts in a scam">
+      <div class="hd"><b>Where each tool acts in an Indian scam</b><span>my map, from public sources</span></div>
+      <ol class="steps">
+        <li class="step"><span class="what">The hook <small>call, SMS, WhatsApp</small></span><span class="acts"><b>Telco spam filters, caller name display, Truecaller.</b> They block or warn.</span></li>
+        <li class="step apate"><span class="what">The conversation <small>hours or days</small></span><span class="acts"><b>Apate.</b> An agent plays the victim and keeps the scammer busy.</span></li>
+        <li class="step apate"><span class="what">Where to pay <small>mule account, UPI ID, wallet</small></span><span class="acts"><b>Apate.</b> The details are captured before anyone pays.</span></li>
+        <li class="step"><span class="what">The payment</span><span class="acts"><b>Bank checks pass</b>, because the victim approves the payment with their own PIN or OTP. Behaviour tools such as BioCatch may flag a coached session.</span></li>
+        <li class="step"><span class="what">The money lands</span><span class="acts"><b>MuleHunter.AI and the bank's own monitoring</b> watch the receiving account.</span></li>
+        <li class="step"><span class="what">The complaint</span><span class="acts"><b>The NCRP portal, I4C's Suspect Registry</b>, and from 1 January 2027 the bank's refund case.</span></li>
+      </ol>
+      <div class="ft">From 1 January the last step costs the bank more: <b>payments a customer was coerced into now count as fraud, and the bank has to prove the customer was negligent</b> before it refuses to pay back. Steps 2 and 3 are where that cost can be cut, and nobody I found in India works there today. That comes from searching, so treat it as a lead.</div>
+    </div>
+  </header>
+
+  <section id="understand">
+    <div class="sh">
+      <span class="field">What I understand</span>
+      <h2>Apate, as I read it from outside</h2>
+      <p>From your site, the press and your releases. You know all of this better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you do</h3><p>AI agents that pose as scam victims on calls and chats, keep scammers talking, and pull out the bank accounts, wallets, phone numbers and links they use.</p><span class="src">apate.ai · TechCrunch, 14 Oct 2026</span></div>
+      <div class="fact"><h3>How it reaches scammers</h3><p>Telcos divert scam calls to Apate Voice over standard VoIP links. Apate Text works WhatsApp, Telegram and more. Insights delivers what the agents find, in real time, to banks, telcos and others.</p><span class="src">apate.ai</span></div>
+      <div class="fact"><h3>A bank and a telco</h3><p>CommBank, your first customer, feeds what the bots find into its scam controls. TPG has diverted nearly 590,000 calls to your agents. Since September, Mobileum offers the agents to telcos through its own platform.</p><span class="src">CommBank newsroom, Jun 2025 · Forbes Australia · TechCrunch, 14 Oct 2026 · TelecomTV, 23 Sep 2026</span></div>
+      <div class="fact"><h3>Where you are going</h3><p>The August round came with a move to Delaware. The plans it names are North America and a London office, and the tech team stays in Sydney.</p><span class="src">Apate release, 31 Aug 2026</span></div>
+      <div class="fact"><h3>India today</h3><p>No customer, office or partner in public, though your AFR BOSS post says you are scaling across the UK, Europe and Asia. Your agents already see India: in July they found brokers soliciting verified Indian bank accounts, offering up to 5 percent of the scam money passing through, paid in USDT.</p><span class="src">apate.ai blog · Cointelegraph, 19 Aug 2026</span></div>
+      <div class="fact"><h3>How you deploy</h3><p>On-premise, private cloud or hybrid, on the major clouds. For an Indian bank, where the data sits is usually the first question.</p><span class="src">apate.ai</span></div>
+    </div>
+    <div class="read">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>India should copy what already works in Australia instead of inventing a new motion: one bank that uses the intelligence and one telco that diverts calls.</li>
+        <li>India should not take people or money from the US push. It can start lean, with one person on the ground here and the product team in Sydney. <span class="tag guess">my read</span></li>
+        <li>Investment fraud is three quarters of the money Indians lose, and much of it recruits through WhatsApp and Telegram groups. That points at Apate Text first, with Voice when a telco is ready. <span class="tag guess">guess on the channel mix</span></li>
+        <li>Indian buyers will compare you with what they already have: MuleHunter.AI, the Department of Telecom's fraud risk scores, telco spam filters. The pitch has to show the step where you act and they do not, which is before the money moves.</li>
+        <li>"Where does the data sit?" will be the first question from every bank and telco. It belongs on page one of every proposal.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="sh">
+      <span class="field">Why India, why now</span>
+      <h2>The clock is already running</h2>
+      <p>Every figure is dated and sourced. Rupee figures stay in rupees; 1 crore is 10 million, 1 lakh is 100,000.</p>
+    </div>
+    <ol class="clock">
+      <li><span class="d">Calendar 2025</span><span class="e"><p>Indians lost <b>Rs 22,495 crore</b> to cyber fraud across 28.15 lakh complaints. 76 percent of the money went to investment fraud. At about Rs 88 to the dollar that is roughly US$2.5 billion.</p><span class="src">MHA data, ThePrint, 21 Feb 2026 · dollar figure is my conversion</span></span></li>
+      <li><span class="d">By 31 Jan 2026</span><span class="e"><p>I4C's Suspect Registry had shared 27.37 lakh first-layer mule accounts with banks and payment firms.</p><span class="src">Home Ministry reply in Parliament, Mar 2026, as reported</span></span></li>
+      <li><span class="d">Mar 2026</span><span class="e"><p>MuleHunter.AI, from the RBI Innovation Hub, is live in 26 banks, with 4 more onboarding.</p><span class="src">RBI Annual Report, via Zigram</span></span></li>
+      <li><span class="d">Jun 2026</span><span class="e"><p>RBI issues new directions on fraudulent electronic banking transactions.</p><span class="src">ELP law-firm alert, Jun 2026</span></span></li>
+      <li><span class="d">18 Sep 2026</span><span class="e"><p>TRAI notifies rules that make telcos act on AI-flagged spam without waiting for complaints. Flagged call details go to the caller's telco within 2 hours. The rules phase in over the following one to three months.</p><span class="src">Upstox · Free Press Journal · Fox Mandal</span></span></li>
+      <li><span class="d">1 Nov 2026</span><span class="e"><p>The Department of Telecom has ordered Airtel, Jio, Vi and BSNL to show the caller's registered name (CNAP) from this date.</p><span class="src">Inc42</span></span></li>
+      <li class="key"><span class="d">1 Jan 2027</span><span class="e"><p><b>RBI's revised rules apply.</b> Payments a customer makes "under coercion, intimidation or duress" now count as fraudulent transactions, and the bank must prove customer negligence before it refuses to pay back. Zero liability where the bank was negligent, or for third-party breaches reported within 5 calendar days. For one year, a victim of a small fraud, up to Rs 50,000, can get 85 percent back once, capped at Rs 25,000, shared by RBI, the customer's bank and the bank that received the money.</p><span class="src">ELP law-firm note on the RBI Third Amendment Directions, Jun 2026</span></span></li>
+      <li class="future"><span class="d">About May 2027</span><span class="e"><p>Most obligations under India's data protection rules (DPDP) apply, including the rules on sending data abroad.</p><span class="src">AZB Partners · SCC Online</span></span></li>
+    </ol>
+    <p class="oneline">From January the bank pays for more of the scams it could not see coming. Your agents are inside those scams before the money moves.</p>
+    <p class="note">I would not oversell this. Banks already had to prove customer fault on unauthorised payments. What is new is that coerced payments now count too, and the payout scheme is small and lasts one year. Nobody knows yet how banks will argue negligence on large digital-arrest losses.</p>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <span class="field">First doors</span>
+      <h2>Who I would go to first</h2>
+      <p>In order. Titles are the usual ones in Indian banks and telcos; the right person in each account is part of the first month's work.</p>
+    </div>
+    <div class="doors">
+      <details class="door" open>
+        <summary><span class="n">01</span><span class="t">A large private bank's fraud team</span><span class="why">The bank that pays when coerced payments start counting as fraud. Your CommBank story, in India.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>champion</dt><dd>Head of Fraud Risk Management.</dd>
+          <dt>signers</dt><dd>Chief Risk Officer, the CIO and CISO for security, procurement. A Chief Digital Officer often sponsors. <span class="tag guess">guess on sponsor</span></dd>
+          <dt>pilot</dt><dd>90 days of Apate Text in investment-scam groups. Accounts and UPI IDs go into the bank's early-warning system. We measure accounts flagged before any complaint names them.</dd>
+          <dt>why yes</dt><dd>From 1 January a mule account found early saves the paying bank and the receiving bank money.</dd>
+          <dt>must prove</dt><dd>Data hosted in India, a clean security review, and how the intelligence enters systems they already run.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">02</span><span class="t">Mid-sized private banks and small finance banks</span><span class="why">Same problem, smaller committee, fewer in-house fraud teams. My next two or three logos.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>champion</dt><dd>Head of Fraud or Head of Operations.</dd>
+          <dt>signers</dt><dd>CRO, CTO, CFO.</dd>
+          <dt>why</dt><dd>They carry the same new rules with fewer people to build their own answer. They decide faster once one larger bank has a result. <span class="tag guess">my read</span></dd>
+          <dt>route</dt><dd>The first bank's result, shown in person.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">03</span><span class="t">One telco: Vi or Airtel</span><span class="why">Your TPG story, in India. TRAI now expects telcos to act on what their AI flags.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>champion</dt><dd>Head of Fraud Management or Revenue Assurance.</dd>
+          <dt>signers</dt><dd>CTO, CISO, regulatory affairs.</dd>
+          <dt>pilot</dt><dd>Route a slice of flagged scam calls to Apate Voice, and hand what the agents find to the partner bank.</dd>
+          <dt>why now</dt><dd>The September TRAI rules and caller name display. Their filters block calls today; Apate turns a blocked call into intelligence.</dd>
+          <dt>route</dt><dd>Direct, or through Mobileum if it works with Indian operators. <span class="tag guess">to check</span></dd>
+          <dt>must prove</dt><dd>That diverting and recording scam calls is allowed under Indian telecom rules. This needs a legal opinion before any pilot. <span class="tag guess">my assumption</span></dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">04</span><span class="t">RBI Innovation Hub and I4C</span><span class="why">One integration reaches 26 or more banks. Slow and little cash, but a lot of trust.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>who</dt><dd>The RBI Innovation Hub runs MuleHunter.AI. I4C, under the Home Ministry, runs the Suspect Registry and the complaint portal.</dd>
+          <dt>offer</dt><dd>Apate's accounts, wallets and numbers as a new input that comes from the scammer, before any victim reports.</dd>
+          <dt>route</dt><dd>The Australia and India cyber partnership, through DFAT and the High Commission. <span class="tag guess">to test</span></dd>
+          <dt>when</dt><dd>Start the conversation in month one. Expect results in year one, not in 90 days.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">05</span><span class="t">UPI apps: PhonePe first, then Paytm</span><span class="why">Scammers hand out UPI IDs before anyone pays. That is exactly what the agents capture.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>champion</dt><dd>Chief Risk Officer or Head of Trust and Safety.</dd>
+          <dt>size</dt><dd>12.64 lakh UPI fraud cases and Rs 981 crore in FY25. <span class="src">Finance Ministry reply in the Lok Sabha, 15 Dec 2025</span></dd>
+          <dt>why</dt><dd>The government's fraud risk score works mostly from numbers people have already reported. <span class="tag guess">my read</span> Apate finds the UPI ID while the scam is still running.</dd>
+          <dt>must prove</dt><dd>India hosting for anything near transaction data.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="n">06</span><span class="t">A channel partner, later</span><span class="why">For bank tenders and scale, after the first result exists.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>who</dt><dd>A cloud partner team that sells into Indian banks, or an integrator with a bank fraud practice. <span class="tag guess">fit to test</span></dd>
+          <dt>why</dt><dd>Large Indian banks often buy through tenders and approved vendors. A partner gets us onto those lists.</dd>
+        </dl></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>Turn one pilot into a reference</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Learn and line up</b></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Agree the pilot</b></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Run it and show it</b></button>
+    </div>
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Learn the product with your Sydney team, and test the agents in Hindi and Hinglish on real scam scripts.</li>
+        <li>Get two answers on paper: India hosting, and the legal view on diverting and recording calls.</li>
+        <li>Build a list of 30 named accounts: large banks, mid-sized banks, two telcos, two UPI apps.</li>
+        <li>Hold 15 first meetings with fraud heads, most of them in person in Mumbai.</li>
+        <li>Open the RBI Innovation Hub and I4C conversations.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 30</h3><ul>
+        <li>One bank and one telco chosen, with the reasons on one page.</li>
+        <li>The hosting and legal answers.</li>
+        <li>Notes from 15 meetings: what Indian buyers say, in their words.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Write the pilot plan with the bank: success criteria, timeline, who signs if we hit them.</li>
+        <li>Take it through procurement, legal, IT security and finance from the first week.</li>
+        <li>Start the bank pilot on Apate Text. Start the telco pilot if the legal answer allows it.</li>
+        <li>Keep the next three banks warm with what we are learning.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 60</h3><ul>
+        <li>A pilot agreed in writing with a named signer, or a clear no and the reason.</li>
+        <li>A short weekly note: accounts found, accounts the bank had not seen.</li>
+        <li>A pipeline you can read by bank, telco and UPI app.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Run the pilot against its written goals, with a review every two weeks.</li>
+        <li>Write the result up with the bank's sign-off, so we can show it to the next bank.</li>
+        <li>Take it to the mid-sized banks and to the second telco.</li>
+        <li>Write the 12-month India plan: revenue, cost, hiring, and when India pays its way.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 90</h3><ul>
+        <li>Early numbers from one Indian bank that the next bank will believe.</li>
+        <li>Two or three follow-on conversations using them.</li>
+        <li>A clear call on whether India earns a second person.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>A big Indian bank will not sign a year's contract inside 90 days.</b> The realistic day-90 result is a pilot running against written goals, a named signer, and early numbers we can show the next bank. That is how we did it at Simplifai.</p>
+  </section>
+
+  <section id="sell">
+    <div class="sh">
+      <span class="field">How I sell</span>
+      <h2>How I would sell it</h2>
+      <p>Rules I took from deals we won and one we lost.</p>
+    </div>
+    <div class="rules">
+      <div class="rule">Written success criteria before any pilot starts, and a named person who signs if we hit them.</div>
+      <div class="rule">Procurement, legal, IT security and finance in the loop from week one.</div>
+      <div class="rule">Data localisation answered on page one, before anyone has to ask.</div>
+      <div class="rule">Map the real buying committee in person, beyond LinkedIn.</div>
+      <div class="rule">You on the first meeting with each bank's top person. I run everything after it.</div>
+    </div>
+    <p class="note">At Kotak we had no ISO certificate. Putting everything in writing and keeping procurement, legal and finance in the loop is how an unknown vendor got through a bank's onboarding. We also lost a deal at TVS Credit because the people who really decided were not on LinkedIn and never showed up on our account map. Since then I map the committee in person.</p>
+
+    <div class="pageone" aria-label="Page one of an Apate India proposal">
+      <div class="hd"><b>Page one of every Apate India proposal</b><span>draft, to fill in with your team</span></div>
+      <dl>
+        <div class="r"><dt>where data lives</dt><dd>An India cloud region or on-premise at the bank. Never abroad without the bank's written approval.</dd></div>
+        <div class="r"><dt>what we hold</dt><dd>Mostly data about scammers: accounts, numbers, links, scripts. Little or no data about the bank's own customers. <span class="tag guess">to confirm with your team</span></dd></div>
+        <div class="r"><dt>how long</dt><dd>A retention period agreed in the contract.</dd></div>
+        <div class="r"><dt>who sees it</dt><dd>Named roles at the bank and at Apate, with access logs.</dd></div>
+        <div class="r"><dt>rules we meet</dt><dd>RBI's rule that payment data stays in India, where it applies. CERT-In: incidents reported within 6 hours, logs kept 180 days in India. DPDP as it phases in from 2027.</dd></div>
+      </dl>
+    </div>
+
+    <div class="proof">
+      <p class="note">Most recently I set up sales at Craze, a YC company, from no team. Before that:</p>
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <ul>
+          <li>Ran sales, marketing and customer success for a Singapore company, from India. We started from 11 beta customers and no revenue.</li>
+          <li>Moved our selling to the US and Europe. We signed Remote, Omnipresent and Eventbrite.</li>
+        </ul>
+        <div class="nums"><span class="num">$200K+ ARR</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <ul>
+          <li>Built APAC sales from no team to 15 reps, selling AI to Indian banks, brokers and insurers: Kotak Mahindra, HDFC Mutual Fund, Bajaj Allianz, Upstox.</li>
+          <li>Nobody in India knew the company. At Kotak the work grew from the first 8,000 emails to about 42,000. I called it a digital employee back then.</li>
+        </ul>
+        <div class="nums"><span class="num">$1M ARR in the first 12 months</span><span class="num">$1.7M ARR when I left</span></div>
+      </div>
+      <p class="note">Before Simplifai I built a 60+ seat inside and channel sales team at Torqus in India.</p>
+    </div>
+  </section>
+
+  <section id="need">
+    <div class="sh">
+      <span class="field">From you</span>
+      <h2>What I would need from you</h2>
+    </div>
+    <div class="asks">
+      <div class="ask"><b>An hour a week with you</b><span>For the first 90 days, and your call on who I work with day to day.</span></div>
+      <div class="ask"><b>A product contact in Sydney</b><span>For the Hindi and Hinglish agents and the India hosting setup.</span></div>
+      <div class="ask"><b>The CommBank and TPG story</b><span>Permission to tell it to Indian buyers, and a reference call when a bank is close.</span></div>
+      <div class="ask"><b>A small pilot budget</b><span>India hosting, and a legal opinion on call diversion.</span></div>
+      <div class="ask"><b>Day-90 goals in writing</b><span>So we both know what good looks like before we start.</span></div>
+    </div>
+  </section>
+
+  <section id="weekone">
+    <div class="sh">
+      <span class="field">Week one</span>
+      <h2>Five questions I would ask in week one</h2>
+    </div>
+    <ol class="qs">
+      <li><span>Has any Indian bank, telco or partner, Mobileum included, asked about Apate yet?</span></li>
+      <li><span>How well do the agents hold a conversation in Hindi and Hinglish today, and in which other Indian languages?</span></li>
+      <li><span>What does call diversion need technically, and has anyone looked at Indian rules on diverting and recording calls?</span></li>
+      <li><span>What did CommBank and TPG need to see before they signed, and how long did it take?</span></li>
+      <li><span>What would make India worth a second person by month six?</span></li>
+    </ol>
+  </section>
+
+  <footer class="end">
+    <h2>That is the draft.</h2>
+    <p>Most of it should change after week one, once I see your real numbers. The method stays the same: copy what works in Sydney, start with one bank and one telco, put everything in writing, then hire.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+    try { localStorage.setItem('apate-tab', id); } catch(e) {}
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  try { var saved = localStorage.getItem('apate-tab'); if (saved && document.getElementById(saved)) selectTab(saved); } catch(e) {}
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
