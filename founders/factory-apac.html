@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Factory in India: the audit file</title>
+<meta name="description" content="A working draft by Ketan Sharma for Matan Grinberg: India's CERT-In published AI security auditing guidelines with an agentic AI section on 4 Nov 2026, Droids already document most of the controls, and how India opens beside Factory's APAC team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F4F1; --surface:#FFFFFF; --surface-2:#E8EAE5; --ink:#141714; --muted:#565D57; --line:#D5D9D2;
+  --accent:#0E6E55; --accent-ink:#FFFFFF; --accent-soft:rgba(14,110,85,.09);
+  --plum:#6A3C98; --plum-soft:rgba(106,60,152,.08); --warn:#9A5B00; --warn-soft:rgba(154,91,0,.09);
+  --f-display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Sans 3",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E110F; --surface:#161A17; --surface-2:#1D221E; --ink:#E5EAE5; --muted:#9BA59D; --line:#2A312C;
+  --accent:#53D1A6; --accent-ink:#06140F; --accent-soft:rgba(83,209,166,.11);
+  --plum:#C3A3EE; --plum-soft:rgba(195,163,238,.10); --warn:#F0B456; --warn-soft:rgba(240,180,86,.10);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0E110F; --surface:#161A17; --surface-2:#1D221E; --ink:#E5EAE5; --muted:#9BA59D; --line:#2A312C;
+  --accent:#53D1A6; --accent-ink:#06140F; --accent-soft:rgba(83,209,166,.11);
+  --plum:#C3A3EE; --plum-soft:rgba(195,163,238,.10); --warn:#F0B456; --warn-soft:rgba(240,180,86,.10);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.6; -webkit-text-size-adjust:100%; overflow-x:hidden}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(28px, 6vw, 42px); font-weight:700; letter-spacing:-.02em}
+h2{font-size:clamp(22px, 4vw, 29px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:600}
+p{margin:0}
+a{color:var(--plum); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+.topbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:500}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:13px; text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:520px){ .who span{display:none} }
+
+.hero{padding-block:38px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18.5px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+/* the hero instrument: clause by clause */
+.audit{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.audit-hd{display:flex; justify-content:space-between; gap:8px 14px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.audit-hd b{color:var(--ink); font-weight:500}
+.audit-cols{display:grid; grid-template-columns:1fr 1fr 92px; gap:14px; padding:8px 16px; font-family:var(--f-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--surface-2); border-bottom:1px solid var(--line)}
+.audit-list{list-style:none; margin:0; padding:0}
+.audit-list > li{display:grid; grid-template-columns:1fr 1fr 92px; gap:6px 14px; padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; align-items:start}
+.audit-list > li:last-child{border-bottom:0}
+.audit-list .ask{min-width:0}
+.audit-list .has{min-width:0; color:var(--muted)}
+.audit-list .has a{font-family:var(--f-mono); font-size:11.5px}
+.st{font-family:var(--f-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; padding:3px 7px; border-radius:5px; text-align:center; white-space:nowrap; justify-self:start}
+.st.ok{color:var(--accent); background:var(--accent-soft)}
+.st.chk{color:var(--warn); background:var(--warn-soft)}
+.mlab{display:none; font-family:var(--f-mono); font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+@media (max-width:600px){
+  .audit-cols{display:none}
+  .audit-list > li{grid-template-columns:1fr}
+  .mlab{display:block}
+}
+.audit-ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:15px; color:var(--muted)}
+.audit-ft b{color:var(--ink)}
+.meaning{display:grid; gap:10px; padding:16px 18px; border-radius:var(--r); border:1.5px solid var(--accent); background:var(--accent-soft)}
+.meaning h3{font-size:16px}
+.meaning p{font-size:16px}
+
+section{padding-block:38px; border-top:1px solid var(--line); scroll-margin-top:58px}
+.sh{display:grid; gap:8px; margin-bottom:20px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--plum); border-color:color-mix(in srgb, var(--plum) 45%, transparent); background:var(--plum-soft)}
+
+.map{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px}
+@media (max-width:700px){ .map{grid-template-columns:1fr} }
+.cell{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:8px; align-content:start; min-width:0}
+.cell .k{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.cell h3{font-size:16px}
+.cell ul{margin:0; padding-left:18px; display:grid; gap:7px; font-size:15px}
+.cell.gap{border-style:dashed; border-color:color-mix(in srgb, var(--plum) 55%, var(--line)); background:var(--plum-soft)}
+.read{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:8px}
+.read p{max-width:68ch}
+
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 50%, var(--line))}
+.door > summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start}
+.door > summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px}
+.door .dt{font-family:var(--f-display); font-weight:600; font-size:17px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted)}
+.door .dopen{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--plum)}
+.door[open] .dopen{display:none}
+.door .dbody{padding:0 16px 16px; display:grid; gap:8px; font-size:15.5px}
+.kv{display:grid; grid-template-columns:110px 1fr; gap:6px 14px; margin:0}
+.kv > dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv > dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv > dd{margin-bottom:8px} }
+
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabbtn{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tabbtn b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tabbtn small{font-family:var(--f-mono); font-size:11.5px}
+.tabbtn[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.tabpanel{display:grid; grid-template-columns:1.2fr 1fr; gap:12px}
+.tabpanel[hidden]{display:none}
+@media (max-width:660px){ .tabpanel{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.pcol.see{background:var(--surface-2)}
+.pcol h3{font-size:12px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15.5px}
+
+.hires{list-style:none; margin:0; padding:0; display:grid; gap:10px; counter-reset:h}
+.hires li{counter-increment:h; display:grid; grid-template-columns:34px 1fr; gap:4px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px}
+.hires li::before{content:counter(h); font-family:var(--f-display); font-weight:700; font-size:20px; color:var(--accent); grid-row:span 2}
+.hires h3{font-size:16.5px}
+.hires p{font-size:15.5px; color:var(--muted)}
+
+.proof{display:grid; gap:10px}
+.pf{display:grid; grid-template-columns:150px 1fr; gap:4px 16px; padding:14px 0; border-bottom:1px solid var(--line)}
+.pf:last-child{border-bottom:0}
+.pf .co{font-family:var(--f-display); font-weight:600; font-size:16px}
+.pf .co small{display:block; font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted)}
+.pf p{font-size:16px}
+@media (max-width:560px){ .pf{grid-template-columns:1fr} }
+
+.qs{margin:0; padding-left:22px; display:grid; gap:14px}
+.qs li{max-width:66ch}
+.qs li::marker{font-family:var(--f-display); font-weight:700; color:var(--accent)}
+.qs li span{display:block; color:var(--muted); font-size:15px; margin-top:2px}
+
+.end{padding-block:36px 56px; border-top:1px solid var(--line); display:grid; gap:12px}
+.contact{font-family:var(--f-mono); font-size:14px; display:flex; flex-wrap:wrap; gap:6px 18px}
+.contact a{color:var(--ink)}
+.fine{font-size:13.5px; color:var(--muted); max-width:70ch}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>for Factory</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#fact" class="on">The fact</a>
+      <a href="#read">Read from outside</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hires</a>
+      <a href="#why">Proof</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="hero" id="fact">
+  <p class="eyebrow">For Matan Grinberg &middot; Factory &middot; draft, 24 Nov 2026</p>
+  <h1>On 4 November India wrote an audit checklist for AI agents. Droids already cover most of it.</h1>
+  <p class="lede">CERT-In, India's national cyber agency, published its <strong>AI Security Auditing Guidelines v1.0</strong> dated 4 Nov 2026. Section 9.7 is about agentic AI, and it reads like a spec sheet for what an Indian bank's auditor can now ask of Droids. <a href="https://www.cert-in.org.in/PDF/AI_Security_Auditing_Guidelines.pdf">CERT-In, PDF, p.66</a></p>
+
+  <div class="audit" role="region" aria-label="CERT-In section 9.7 against Factory controls">
+    <div class="audit-hd"><span><b>CERT-In 9.7, Agentic AI Security</b></span><span>against Factory's public docs, read 24 Nov</span></div>
+    <div class="audit-cols" aria-hidden="true"><span>What 9.7 asks</span><span>What Factory documents</span><span>Status</span></div>
+    <ul class="audit-list">
+      <li>
+        <div class="ask"><span class="mlab">9.7 asks</span>Each agent has a documented identity, approved tools and permission limits, under least privilege.</div>
+        <div class="has"><span class="mlab">Factory has</span>Agent Profiles with service accounts, plus allow / ask / block permission rules. <a href="https://docs.factory.com/enterprise/agent-profiles.md">agent-profiles</a> <a href="https://docs.factory.com/autonomy-and-safety/permission-rules.md">permission-rules</a></div>
+        <span class="st ok">Documented</span>
+      </li>
+      <li>
+        <div class="ask"><span class="mlab">9.7 asks</span>Consequential actions go through a human approval gate.</div>
+        <div class="has"><span class="mlab">Factory has</span>For matching shell commands, an <code>ask</code> rule requires approval even at High autonomy, and <code>block</code> holds even when prompts are skipped. <a href="https://docs.factory.com/autonomy-and-safety/permission-rules.md">permission-rules</a></div>
+        <span class="st ok">Documented</span>
+      </li>
+      <li>
+        <div class="ask"><span class="mlab">9.7 asks</span>Tool calls, approvals and outputs are logged well enough to rebuild the execution chain.</div>
+        <div class="has"><span class="mlab">Factory has</span>OTEL metrics on tool and MCP tool calls, tagged with session and user ids, in the customer's own collectors, plus opt-in session content traces and an org audit log. Whether approvals land in the same trail I would confirm. <a href="https://docs.factory.com/enterprise/compliance-audit-and-monitoring.md">compliance-audit</a></div>
+        <span class="st chk">Mostly</span>
+      </li>
+      <li>
+        <div class="ask"><span class="mlab">9.7 asks</span>An approved inventory of permitted MCP and tool connections.</div>
+        <div class="has"><span class="mlab">Factory has</span>Org-level <code>mcpPolicy</code> allowlist, so users only reach vetted servers. <a href="https://docs.factory.com/harness/mcp.md">mcp</a></div>
+        <span class="st ok">Documented</span>
+      </li>
+      <li>
+        <div class="ask"><span class="mlab">9.7 asks</span>High-risk agents support emergency stop, credential revocation and rollback.</div>
+        <div class="has"><span class="mlab">Factory has</span>API key creation, rotation and deletion are in the audit log. <a href="https://docs.factory.com/enterprise/audit-log.md">audit-log</a> A single stop-and-roll-back control I could not confirm from public docs.</div>
+        <span class="st chk">To check</span>
+      </li>
+    </ul>
+    <div class="audit-ft">The weight is in the tiering. At Tier 2 the guidelines call for an <b>independent audit by a CERT-In empanelled auditor at least annually</b>, with periodic or continuous independent audit at Tiers 3 and 4, and an agent that "initiates consequential or semi-autonomous actions" scores High on autonomy. <a href="https://www.cert-in.org.in/PDF/AI_Security_Auditing_Guidelines.pdf">CERT-In, Table 11, pp.24 to 25</a> It is a guideline with no stated start date, not a statute, <a href="https://teamleaseregtech.com/updates/article/61100/cert-in-ai-security-auditing-guidelines-framework/">as TeamLease RegTech notes</a>. But it gives India's auditors a checklist to work from.</div>
+  </div>
+
+  <div class="meaning">
+    <h3>What it means for Factory</h3>
+    <p>Indian buyers of coding agents just got a national audit checklist, and the framework lines up with ISO/IEC 42001, which Factory already holds. The vendor that walks into a bank's risk committee with section 9.7 already answered, control by control, can shorten its security review. From public sources I could not see who carries that file into Indian banks, insurers and engineering centres for Factory. That is the job I would want to take on, beside your APAC team.</p>
+  </div>
+</div>
+
+<section id="read">
+  <div class="sh">
+    <p class="field">02 &middot; How I read it from outside</p>
+    <h2>APAC has leaders. In India, the public trail shows a partner.</h2>
+    <p>Everything below is public. Where I am inferring, it says GUESS.</p>
+  </div>
+  <div class="map">
+    <div class="cell">
+      <span class="k">How you sell</span>
+      <h3>Top-down enterprise, with engineers in the room</h3>
+      <ul>
+        <li>CRO Marcello Gallo since 8 Jun 2026. <a class="src" href="https://factory.ai/news/marcello-gallo-cro">factory.ai</a></li>
+        <li>Members of Deployed Staff deliver migrations and refactors in customer codebases. <a class="src" href="https://jobs.ashbyhq.com/factory/0f7a3636-1592-4bbd-8a99-50e2b0b45945">JD</a></li>
+        <li>USD 100M Partner Network, leading with consulting and SI partners, 19 Aug 2026. <a class="src" href="https://factory.ai/news/factory-partner-network">factory.ai</a></li>
+      </ul>
+    </div>
+    <div class="cell">
+      <span class="k">APAC today</span>
+      <h3>Sydney and Tokyo, with a sales org behind them</h3>
+      <ul>
+        <li>Sydney office, 10 Jun 2026. <a class="src" href="https://factory.ai/news/factory-sydney">factory.ai</a></li>
+        <li>Tokyo, 31 Aug 2026, with Seiji Sasaki as President and GM of Japan. <a class="src" href="https://factory.ai/news/factory-japan">factory.ai</a></li>
+        <li>The 28 Oct APAC GTM ops role partners "the sales leaders running our APAC sales organization", across Enterprise, Mid-Market and BDR. <a class="src" href="https://jobs.ashbyhq.com/factory/3d3ce7db-3dde-42f0-b213-52277165ad0c">JD</a></li>
+      </ul>
+    </div>
+    <div class="cell gap">
+      <span class="k">India today</span>
+      <h3>A strong supply side, no named demand side</h3>
+      <ul>
+        <li>Wipro partnership and Wipro Ventures investment, 28 Jan 2026; rollout to tens of thousands of Wipro engineers. <a class="src" href="https://factory.ai/news/wipro">factory.ai</a></li>
+        <li>Wipro case study, 12 Nov 2026. <a class="src" href="https://factory.ai/case-studies/wipro">factory.ai</a></li>
+        <li>Infosys picked Cognition's Devin on 7 Jan 2026, starting in its financial services practice. <a class="src" href="https://cognition.ai/blog/infosys-cognition">cognition.ai</a></li>
+        <li>No India office, India role or named India lead that I could find. <span class="tag guess">GUESS</span> India is covered from Sydney or through Wipro.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="read">
+    <p><b>What that tells me.</b> From outside, Factory's public India story is mostly about engineers delivering for clients worldwide. The Indian buyers themselves, the private banks, insurers, brokers and the engineering centres of global firms, now have the CERT-In checklist to audit against, and I could not find in public who at Factory they would call. I would not touch the Sydney or Tokyo leaders' patch. I would open India beside them, inside the same APAC forecast and cadence.</p>
+  </div>
+</section>
+
+<section id="doors">
+  <div class="sh">
+    <p class="field">03 &middot; First doors</p>
+    <h2>Three doors, all opened by the same audit file</h2>
+    <p>Tap a door for who, why now, and what I would bring.</p>
+  </div>
+  <div class="doors">
+    <details class="door" open>
+      <summary><span class="dn">01</span><span class="dt">India engineering centres of accounts you already have</span><span class="dwhy">Expansion is faster than a new logo, and the security file transfers.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>The India teams of the global customers on your site. <span class="tag guess">GUESS</span> Several of them run large engineering centres in India; I would confirm the list with your account owners before calling anyone.</dd>
+          <dt>Why now</dt><dd>Indian centres running Tier 2 and up systems can be audited against 9.7 locally even when the HQ contract is signed in the US.</dd>
+          <dt>Bring</dt><dd>The 9.7 mapping above, finished with your security team, plus a Deployed Staff pilot scoped to one centre.</dd>
+        </dl>
+      </div>
+    </details>
+    <details class="door">
+      <summary><span class="dn">02</span><span class="dt">Private banks, insurers and capital-markets brokers</span><span class="dwhy">The most audited buyers in India, and the ones air-gapped Droids were built for.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>Engineering and risk heads at private-sector banks, private insurers and brokers. This is the buyer I sold AI into from 2020 to 2022.</dd>
+          <dt>Why now</dt><dd>Section 9.7 gives their auditors one list to work from, and Factory already runs on-premises and fully air-gapped. <a class="src" href="https://factory.ai/news/5-billion-valuation">factory.ai</a></dd>
+          <dt>Bring</dt><dd>A CERT-In evidence pack, a deployment option that keeps code and inference inside India, and a risk-committee deck written in their language.</dd>
+        </dl>
+      </div>
+    </details>
+    <details class="door">
+      <summary><span class="dn">03</span><span class="dt">Wipro's India BFSI clients, sold together</span><span class="dwhy">Wipro said it will offer Factory-enabled solutions in banking. India is where that is easiest to prove.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>Joint pursuits with Wipro's banking and financial services practice in India. <a class="src" href="https://factory.ai/news/wipro">factory.ai</a></dd>
+          <dt>Why now</dt><dd>Infosys has already put Devin into its financial services practice, so the same Indian bank may hear about both agents from two SIs in the same quarter.</dd>
+          <dt>Bring</dt><dd>Clear rules of engagement agreed with you first: which deals are Wipro-led, which are direct, and how both count.</dd>
+        </dl>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="days">
+  <div class="sh">
+    <p class="field">04 &middot; 30 / 60 / 90</p>
+    <h2>India inside the APAC plan, not beside it</h2>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Plan by phase">
+    <button class="tabbtn" role="tab" id="t1" aria-controls="p1" aria-selected="true"><b>Days 1 to 30</b><small>the file and the list</small></button>
+    <button class="tabbtn" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><b>Days 31 to 60</b><small>reviews and a pilot</small></button>
+    <button class="tabbtn" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><b>Days 61 to 90</b><small>a number in the forecast</small></button>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p1" aria-labelledby="t1">
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Finish the 9.7 mapping with your security team, including the one open row, and turn it into a short India evidence pack.</li>
+      <li>Build a named list of about 40 accounts across the three doors, with an owner on each.</li>
+      <li>Agree India coverage rules with the APAC sales leaders and the Wipro alliance team.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>The pack, reviewed by security.</li>
+      <li>The account list and the coverage rules in writing.</li>
+      <li>First ten meetings on the calendar.</li>
+    </ul></div>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Take three to five buyers through security review using the pack, and log what each one still asked for.</li>
+      <li>Run one joint pursuit with Wipro on an Indian BFSI account.</li>
+      <li>Scope the first paid pilot with Deployed Staff.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>Pipeline by door in the APAC weekly review.</li>
+      <li>Security review time, before and after the pack.</li>
+      <li>A pilot scope with success criteria the customer signed.</li>
+    </ul></div>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Convert the first pilot or close the first India contract.</li>
+      <li>Put an India line into the APAC forecast that I am willing to defend.</li>
+      <li>Bring you a hiring plan built on what the first 90 days showed.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>India as a forecast line, not an anecdote.</li>
+      <li>One reference an Indian bank or centre will take a call on.</li>
+      <li>A yes or no on the first two hires.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="hire">
+  <div class="sh">
+    <p class="field">05 &middot; Who to hire, in order</p>
+    <h2>Engineer first, because the audit is technical</h2>
+  </div>
+  <ol class="hires">
+    <li><h3>A Member of Deployed Staff based in India</h3><p>Today the role lists Singapore and Australia, not India. Indian banks want the person who answers 9.7 in the room, in their time zone.</p></li>
+    <li><h3>An enterprise AE for BFSI, Mumbai</h3><p>Once the pack shortens reviews, one closer who knows how Indian risk committees decide.</p></li>
+    <li><h3>An SI partner manager</h3><p>Runs the Wipro partnership day to day and decides, with you, whether other Indian SIs come in.</p></li>
+    <li><h3>A BDR, last</h3><p>Only after the doors show which titles answer.</p></li>
+  </ol>
+</section>
+
+<section id="why">
+  <div class="sh">
+    <p class="field">06 &middot; Why me</p>
+    <h2>I have sold AI into Indian banks, and run a foreign company's region from India</h2>
+  </div>
+  <div class="proof">
+    <div class="pf"><div class="co">Simplifai<small>Head of Sales APAC, 2020 to 2022</small></div><p>Norwegian AI SaaS sold into banks, brokers and private insurers. We built APAC from 0 to 15 reps, reached $1M ARR in the first 12 months and grew it to $1.7M. Our largest, Upstox, was $210K TCV.</p></div>
+    <div class="pf"><div class="co">ZenAdmin<small>Commercial Director, 2022 to 2023</small></div><p>A Singapore company run from India. We built the commercial function from scratch to 15 people and sold to Remote, Multiplier, Omnipresent, Eventbrite and Temasek at 104% NRR.</p></div>
+    <div class="pf"><div class="co">Torqus<small>Inside and Channel Sales, 2017 to 2020</small></div><p>A 60+ seat sales engine and a 15-city channel network in India. Partners that sell beside you is a motion I have run, not read about.</p></div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="sh">
+    <p class="field">07 &middot; Three questions I would ask first</p>
+    <h2>Only you can answer these</h2>
+  </div>
+  <ol class="qs">
+    <li>When an Indian bank or engineering centre asks for Droids today, who picks it up today: Sydney, Wipro, or someone else?<span>And how much India demand has arrived without anyone asking for it?</span></li>
+    <li>In India, is Wipro a channel to sell beside, or a relationship to protect?<span>Where you draw that line decides whether door three exists.</span></li>
+    <li>Would you run Factory Private or air-gapped for an Indian bank with inference inside India, and on whose models?<span>That answer sets how far the CERT-In file can go.</span></li>
+  </ol>
+</section>
+
+<div class="end">
+  <h2>That is the draft. Twenty minutes would tell me what I got wrong.</h2>
+  <p class="contact"><span>Ketan Sharma</span><span>Pune, India</span><a href="tel:+919899380222">+91 98993 80222</a><a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a></p>
+  <p class="fine">Built from public sources opened on 24 Nov 2026. Each fact links to its source; anything inferred is marked GUESS. Nothing here comes from inside Factory.</p>
+</div>
+
+</main>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabbtn'));
+  function sel(t){
+    tabs.forEach(function(b){
+      var on=b===t; b.setAttribute('aria-selected',on?'true':'false'); b.tabIndex=on?0:-1;
+      var p=document.getElementById(b.getAttribute('aria-controls')); if(p){p.hidden=!on;}
+    });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){sel(b);});
+    b.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight'){n=tabs[(i+1)%tabs.length];}
+      if(e.key==='ArrowLeft'){n=tabs[(i-1+tabs.length)%tabs.length];}
+      if(n){e.preventDefault(); sel(n); n.focus();}
+    });
+  });
+  var links=[].slice.call(document.querySelectorAll('.chips a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    ids.forEach(function(id){var el=document.getElementById(id); if(el){io.observe(el);}});
+  }
+})();
+</script>
+</body>
+</html>
