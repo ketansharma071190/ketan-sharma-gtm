@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apate in India: the plan</title>
+<meta name="description" content="How Ketan Sharma would open India for Apate: sourced India data, the first ten accounts and the first 90 days.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F4F5F7; --surface:#FFFFFF; --surface-2:#E9ECF0; --ink:#11161D; --muted:#58626F; --line:#D8DDE4;
+  --accent:#B93D0B; --accent-ink:#FFFFFF; --accent-soft:rgba(185,61,11,.09); --navy:#1F3B86; --navy-soft:rgba(31,59,134,.08);
+  --bar:#1F3B86;
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1116; --surface:#151B23; --surface-2:#1B232D; --ink:#E6EAF0; --muted:#98A3B1; --line:#27303C;
+  --accent:#F2814A; --accent-ink:#1A0A02; --accent-soft:rgba(242,129,74,.12); --navy:#93ABFF; --navy-soft:rgba(147,171,255,.10);
+  --bar:#7F9BFF;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0D1116; --surface:#151B23; --surface-2:#1B232D; --ink:#E6EAF0; --muted:#98A3B1; --line:#27303C;
+  --accent:#F2814A; --accent-ink:#1A0A02; --accent-soft:rgba(242,129,74,.12); --navy:#93ABFF; --navy-soft:rgba(147,171,255,.10);
+  --bar:#7F9BFF;
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6; -webkit-text-size-adjust:100%}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.15; text-wrap:balance; margin:0}
+h1{font-size:clamp(28px, 6vw, 44px); font-weight:800; letter-spacing:-.015em}
+h2{font-size:clamp(22px, 4vw, 29px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--navy); text-underline-offset:2px}
+b,strong{font-weight:600}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.src{font-family:var(--f-mono); font-size:11px; line-height:1.5; color:var(--muted)}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; white-space:nowrap; vertical-align:2px; color:var(--navy); border:1px solid color-mix(in srgb, var(--navy) 45%, transparent); background:var(--navy-soft)}
+
+/* sticky bar */
+.bar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--surface) 93%, transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+@media (max-width:480px){ .who span{display:none} }
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+
+/* hero */
+.hero{padding-block:40px 34px; display:grid; gap:20px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:64ch}
+.lede strong{color:var(--ink)}
+.five{background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.five h3{font-family:var(--f-mono); font-size:12px; font-weight:500; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.five ol{margin:0; padding-left:20px; display:grid; gap:7px}
+.five li{max-width:70ch}
+.kpis{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px}
+@media (max-width:760px){ .kpis{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:520px){ .kpis{grid-template-columns:1fr} }
+.kpi{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 14px 12px; display:grid; gap:6px; align-content:start; min-width:0}
+.kpi .v{font-family:var(--f-display); font-weight:800; font-size:clamp(23px, 3.6vw, 30px); line-height:1.05; letter-spacing:-.01em}
+.kpi .v.hot{color:var(--accent)}
+.kpi p{font-size:13.5px; color:var(--muted); line-height:1.45}
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:66ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.sub{font-family:var(--f-display); font-size:19px; font-weight:700; margin:30px 0 12px}
+.note{margin-top:14px; font-size:14.5px; color:var(--muted); max-width:70ch}
+.note b{color:var(--ink)}
+.oneline{margin-top:16px; padding:16px 18px; border-radius:var(--r); border:1.5px solid var(--accent); font-family:var(--f-display); font-size:19px; font-weight:600; line-height:1.35}
+
+/* chart */
+.chart{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 16px 14px; display:grid; gap:14px; position:relative}
+.chart figcaption{display:grid; gap:4px}
+.chart figcaption b{font-family:var(--f-display); font-size:17px; font-weight:700}
+.chart figcaption span{font-size:14px; color:var(--muted)}
+.rows{display:grid; gap:12px}
+.row{display:grid; grid-template-columns:150px 1fr; gap:4px 12px; align-items:center; border-radius:6px; outline-offset:3px; cursor:default}
+@media (max-width:560px){ .row{grid-template-columns:1fr} }
+.row .lab{font-size:14px; min-width:0}
+.row .lab small{display:block; font-family:var(--f-mono); font-size:11px; color:var(--muted)}
+.track{display:flex; align-items:center; gap:10px; min-width:0}
+.fill{height:14px; border-radius:0 4px 4px 0; background:var(--bar); min-width:3px; flex:none}
+.row:hover .fill, .row:focus-visible .fill{filter:brightness(1.15)}
+.val{font-family:var(--f-mono); font-size:13px; white-space:nowrap}
+.val.hot{color:var(--accent); font-weight:500}
+.tip{position:absolute; z-index:3; pointer-events:none; background:var(--ink); color:var(--bg); font-size:12.5px; line-height:1.4; padding:6px 9px; border-radius:6px; max-width:240px; opacity:0; transition:opacity .12s}
+.tip.on{opacity:1}
+
+/* fact cards */
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start; min-width:0}
+.fact h3{font-size:15.5px}
+.fact p{font-size:14.5px; color:var(--muted)}
+.fact p b{color:var(--ink)}
+.fact.wide{grid-column:1 / -1}
+
+/* table */
+.tbl{width:100%; border-collapse:collapse; font-size:14.5px}
+.tbl th,.tbl td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line)}
+.tbl th{font-family:var(--f-mono); font-size:11.5px; font-weight:500; color:var(--muted); text-transform:uppercase; letter-spacing:.04em}
+.tbl td.n{font-family:var(--f-mono); font-size:13.5px; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+
+/* clock */
+.clock{list-style:none; margin:0; padding:0; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); overflow:hidden}
+.clock li{display:grid; grid-template-columns:112px 1fr; gap:4px 16px; padding:13px 16px; border-bottom:1px solid var(--line)}
+.clock li:last-child{border-bottom:0}
+.clock .d{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:2px}
+.clock .e{min-width:0; display:grid; gap:4px}
+.clock .e p{font-size:15px}
+.clock li.future .d{color:var(--accent); font-weight:500}
+.clock li.key{background:var(--accent-soft)}
+.clock li.key .d{color:var(--accent); font-weight:500}
+@media (max-width:560px){ .clock li{grid-template-columns:1fr} }
+
+/* scam map */
+.map{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.map .hd{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.map .hd b{color:var(--ink); font-weight:500}
+.steps{list-style:none; margin:0; padding:6px 0; counter-reset:st}
+.step{counter-increment:st; display:grid; grid-template-columns:44px 1fr; gap:0 10px; padding:10px 16px 10px 10px; position:relative}
+.step::before{content:counter(st); grid-row:1 / span 2; align-self:start; justify-self:center; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); color:var(--muted); border:1px solid var(--line); position:relative; z-index:1}
+.step::after{content:""; position:absolute; left:31px; top:38px; bottom:-10px; width:2px; background:var(--line)}
+.step:last-child::after{display:none}
+.step .what{font-weight:600}
+.step .what small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; letter-spacing:.03em; text-transform:uppercase}
+.step .acts{font-size:14.5px; color:var(--muted); min-width:0}
+.step .acts b{color:var(--ink)}
+.step.apate{background:var(--accent-soft)}
+.step.apate::before{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.step.apate .acts b{color:var(--accent)}
+.map .ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:14px; color:var(--muted)}
+.map .ft b{color:var(--ink)}
+.why3{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:16px}
+@media (max-width:760px){ .why3{grid-template-columns:1fr} }
+
+/* accounts */
+.accts{display:grid; gap:10px}
+details.acct{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.acct[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.acct summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start}
+.acct summary::-webkit-details-marker{display:none}
+.acct .n{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px; white-space:nowrap}
+.acct .t{font-family:var(--f-display); font-weight:700; font-size:17px; min-width:0}
+.acct .why{grid-column:2; font-size:14.5px; color:var(--muted)}
+.acct .open{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--navy)}
+.acct[open] .open{display:none}
+.acct .body{padding:0 16px 16px; display:grid; gap:10px}
+.kv{display:grid; grid-template-columns:118px 1fr; gap:6px 14px; font-size:14.5px; margin:0}
+.kv dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv dd{margin-bottom:8px} }
+.doors{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .doors{grid-template-columns:1fr} }
+
+/* tabs */
+.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tab b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tab small{font-family:var(--f-mono); font-size:11.5px}
+.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.panel{display:grid; grid-template-columns:1.25fr 1fr; gap:14px}
+.panel[hidden]{display:none}
+@media (max-width:660px){ .panel{grid-template-columns:1fr} }
+.col{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.col.see{background:var(--surface-2)}
+.col h3{font-size:12.5px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
+.col ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15px}
+
+.takes{margin-top:22px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+@media (max-width:620px){ .takes{grid-template-columns:1fr} }
+.take{border-left:3px solid var(--accent); padding:4px 12px; font-size:15px}
+.take b{display:block}
+.take span{color:var(--muted); font-size:14px}
+
+.pageone{margin-top:22px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.pageone .hd{padding:11px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.pageone .hd b{color:var(--ink); font-weight:500}
+.pageone dl{margin:0; display:grid}
+.pageone .r{display:grid; grid-template-columns:140px 1fr; gap:4px 14px; padding:11px 16px; border-bottom:1px dashed var(--line); font-size:14.5px}
+.pageone .r:last-child{border-bottom:0}
+.pageone dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:2px}
+.pageone dd{margin:0; min-width:0}
+@media (max-width:560px){ .pageone .r{grid-template-columns:1fr} }
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:190px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:19px; font-weight:700}
+.pc .co span{font-size:13px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:15px}
+.nums{display:flex; flex-wrap:wrap; gap:8px; grid-column:1 / -1}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:4px 9px; border-radius:6px; background:var(--navy-soft); border:1px solid color-mix(in srgb, var(--navy) 30%, transparent)}
+
+.end{padding-block:40px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.end p{max-width:64ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· Apate in India</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#now">India now</a>
+      <a href="#why">Why Apate</a>
+      <a href="#ten">First 10</a>
+      <a href="#days">90 days</a>
+      <a href="#apac">With Sam</a>
+      <a href="#me">About me</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Apate in India: the plan · for Dali Kaafar · 25 Nov 2026</div>
+    <h1>India is making banks pay for mule accounts. Apate finds them before the money moves.</h1>
+    <p class="lede">Dali, my first note to you in October was about India's 1 January rule: from then, a payment a customer is coerced into counts as fraud, and the bank that received the money pays a share of the refund. On Friday you asked how I'd open India for Apate and what it would take, so here it is, <strong>with the numbers behind it.</strong></p>
+
+    <div class="five">
+      <h3>The plan in five lines</h3>
+      <ol>
+        <li>Turn the warmest bank from your first conversations with Indian banks into a pilot with written success criteria and a named signer, and make it India's first reference.</li>
+        <li>Pair it with one telco, Airtel, so India has both halves Apate already has in Australia, a telco and a bank: Airtel diverts scam calls to the agents, and the pilot bank acts on what they find.</li>
+        <li>Go next to the banks India has already ordered to pay for mule accounts: Yes Bank, IndusInd, Axis and ICICI.</li>
+        <li>Answer where the data sits on page one of every proposal, and start procurement and security in week one, not after the pilot.</li>
+        <li>Run India from India, inside Sam's APAC team. Singapore keeps its accounts.</li>
+      </ol>
+    </div>
+
+    <div class="kpis" aria-label="India in four numbers">
+      <div class="kpi"><span class="v">Rs 10,179 cr</span><p>reported lost to financial cyber fraud in India from January to June 2026, across 12.71 lakh complaints.</p><span class="src"><a href="https://www.outlookmoney.com/news/cyber-fraud-complaints-continue-to-rise-maharashtra-records-highest-losses" target="_blank" rel="noopener">MHA data, Outlook Money, 15 Jul 2026</a></span></div>
+      <div class="kpi"><span class="v hot">0.4%</span><p>of the money reported lost from FY24 to FY26 that was refunded: Rs 206 crore out of Rs 56,087 crore.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB, 22 Jul 2026</a> · % is my arithmetic</span></div>
+      <div class="kpi"><span class="v">32.08 lakh</span><p>first-layer mule accounts in the government's Suspect Registry by 30 June 2026.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB, 22 Jul 2026</a></span></div>
+      <div class="kpi"><span class="v">1 Jan 2027</span><p>RBI's new rules apply: a coerced payment counts as fraud, and the bank carries the burden of proof.</p><span class="src"><a href="https://www.medianama.com/2026/06/223-rbi-final-amendment-directions-limiting-customer-liability-digital-transactions-effect-2027/" target="_blank" rel="noopener">RBI directions, 24 Jun 2026</a></span></div>
+    </div>
+  </header>
+
+  <section id="now">
+    <div class="sh">
+      <span class="field">India now</span>
+      <h2>The data points you asked for</h2>
+      <p>Every figure is dated and linked. 1 crore is 10 million and 1 lakh is 100,000. Rs 1,000 crore is roughly US$114 million at Rs 88 to the dollar (my conversion).</p>
+    </div>
+
+    <figure class="chart" id="flow">
+      <figcaption><b>Once the money moves, almost none of it comes back</b><span>Financial cyber fraud reported in India over three financial years, FY24 to FY26, 53.88 lakh complaints</span></figcaption>
+      <div class="rows">
+        <div class="row" tabindex="0" data-tip="Rs 56,087 crore reported lost on the national portal, FY2023-24 to FY2025-26">
+          <span class="lab">Reported lost</span>
+          <span class="track"><span class="fill" style="width:calc((100% - 170px) * 1)"></span><span class="val">Rs 56,087 cr</span></span>
+        </div>
+        <div class="row" tabindex="0" data-tip="Rs 9,079 crore put on hold (lien) in the receiving accounts: 16.2 percent of what was reported">
+          <span class="lab">Put on hold <small>lien in the receiving account</small></span>
+          <span class="track"><span class="fill" style="width:calc((100% - 170px) * .162)"></span><span class="val">Rs 9,079 cr · 16%</span></span>
+        </div>
+        <div class="row" tabindex="0" data-tip="Rs 206 crore refunded to victims: 0.37 percent of what was reported">
+          <span class="lab">Refunded to victims</span>
+          <span class="track"><span class="fill" style="width:calc((100% - 170px) * .0037)"></span><span class="val hot">Rs 206 cr · 0.4%</span></span>
+        </div>
+      </div>
+      <span class="src">Home Ministry written reply, <a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB, 22 Jul 2026</a> · percentages are my arithmetic</span>
+      <div class="tip" role="status" aria-live="polite"></div>
+    </figure>
+    <p class="note">Holds are getting better. Of the <b>Rs 10,179 crore</b> reported lost from January to June 2026, <b>Rs 2,969 crore (29 percent)</b> was put on hold. Maharashtra lost the most, Rs 1,638 crore, and Uttar Pradesh filed the most complaints, 1.85 lakh. A hold still isn't a refund. <span class="src"><a href="https://www.outlookmoney.com/news/cyber-fraud-complaints-continue-to-rise-maharashtra-records-highest-losses" target="_blank" rel="noopener">Outlook Money, 15 Jul 2026</a> · <a href="https://anantamias.com/current-affairs/cyber-fraud-complaints-12-7-lakh-six-months/" target="_blank" rel="noopener">breakdown</a></span></p>
+
+    <h3 class="sub">Mule accounts</h3>
+    <div class="facts">
+      <div class="fact"><h3>32.08 lakh known mule accounts, over 90,000 more a month</h3><p>By 30 June 2026 the Suspect Registry run by I4C, the Home Ministry's cybercrime centre, had shared <b>32.08 lakh first-layer mule accounts</b> (the account a victim's money lands in first) with banks and payment firms, and they had declined <b>Rs 25,698 crore</b> of transactions using it. On 31 January it stood at over 27 lakh.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB, 22 Jul 2026</a> · 31 Jan figure: Rajya Sabha reply, <a href="https://theindianawaaz.com/govt-saves-over-%e2%82%b98600-crore-in-cyber-fraud-cases-minister/" target="_blank" rel="noopener">The Indian Awaaz, 12 Mar 2026</a> · monthly rate is my arithmetic</span></div>
+      <div class="fact"><h3>MuleHunter.AI is live in 26 banks</h3><p>RBI's own model, built by the RBI Innovation Hub, finds <b>about 20,000 mule accounts a month</b>, the RBI Governor said. Under a 12 May 2026 agreement, I4C is to feed its Suspect Registry into it.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2244478" target="_blank" rel="noopener">PIB, 24 Mar 2026</a> · <a href="https://www.freepressjournal.in/business/ai-enabled-tool-mule-hunter-detecting-20000-mule-accounts-every-month-rbi-governor" target="_blank" rel="noopener">Free Press Journal, 21 Nov 2025</a> · <a href="https://www.policyedge.in/p/i4c-and-rbih-partner-to-use-ai-for-detecting-mule-accounts-and-financial-fraud" target="_blank" rel="noopener">PolicyEdge</a></span></div>
+      <div class="fact"><h3>Scammers now talk the victim through the payment</h3><p>BioCatch's India report: text-message scams up <b>146 percent</b>, fraudsters leaning more on live phone calls to guide victims through transactions, and mules recruited through fake job offers and social media.</p><span class="src"><a href="https://www.businesstoday.in/industry/banks/story/what-a-new-report-says-about-indias-digital-banking-frauds-545803-2026-07-28" target="_blank" rel="noopener">Business Today, 28 Jul 2026</a></span></div>
+      <div class="fact"><h3>NPCI wants AI on mules too</h3><p>NPCI's CEO Dilip Asbe in June said AI should be used "to find fraud, and to find mules". And your own agents already see Indian accounts: in July they found brokers soliciting verified Indian bank accounts, offering up to 5 percent of the scam money, paid in USDT.</p><span class="src"><a href="https://thenextweb.com/news/india-upi-npci-ai-billion-daily-transactions" target="_blank" rel="noopener">The Next Web, 28 Jun 2026</a> · <a href="https://cointelegraph.com/magazine/fake-ai-victims-are-scam-baiting-600000-fraudsters-every-month" target="_blank" rel="noopener">Cointelegraph, 19 Aug 2026</a></span></div>
+    </div>
+
+    <h3 class="sub">Digital arrest, the scam the new rules name</h3>
+    <div class="fact">
+      <table class="tbl">
+        <thead><tr><th>Period</th><th>Complaints</th><th>Lost</th></tr></thead>
+        <tbody>
+          <tr><td>2024</td><td class="n">1,23,672</td><td class="n">Rs 1,935 cr</td></tr>
+          <tr><td>2025</td><td class="n">58,239</td><td class="n">Rs 1,211 cr</td></tr>
+          <tr><td>Jan to Aug 2026</td><td class="n">21,900+</td><td class="n">Rs 647 cr+</td></tr>
+        </tbody>
+      </table>
+      <p>Falling, but still Rs 647 crore in eight months, and these are coerced payments, exactly what RBI's January rules now count as fraud. Across all cyber fraud, the Money Restoration Portal launched in April has restored Rs 332.7 crore so far, Rs 112.96 crore of it returned by banks.</p>
+      <span class="src">Home Ministry and I4C filings in the Supreme Court; the 2026 figures are from the status report filed 7 Oct 2026, <a href="https://www.freepressjournal.in/tech/digital-arrest-fraud-over-21900-complaints-involving-647-crore-registered-in-2026-centre-tells-supreme-court" target="_blank" rel="noopener">Free Press Journal, 23 Oct 2026</a></span>
+    </div>
+
+    <h3 class="sub">The bank that received the money is already paying</h3>
+    <div class="fact">
+      <p>In a <b>Rs 22.92 crore</b> digital-arrest case, an RBI Ombudsman order of 25 February 2026 told five receiving banks to compensate the victim, <b>Rs 1.31 crore</b> between them. <b>Yes Bank</b> was told to pay the most, 7.5 percent of what reached it, for additional lapses in monitoring dormant or mule accounts. <b>Axis, City Union, ICICI and IndusInd</b> were told to pay 5 percent each. The victim's own bank was not at fault.</p>
+      <span class="src"><a href="https://businesstoday.in/personal-finance/banking/story/rbi-orders-banks-to-compensate-victim-in-rs-2292-cr-digital-arrest-fraud-case-report-526890-2026-04-22" target="_blank" rel="noopener">Business Today, 22 Apr 2026</a></span>
+    </div>
+
+    <h3 class="sub">The clock</h3>
+    <ol class="clock">
+      <li><span class="d">24 Jun 2026</span><span class="e"><p>RBI issues its customer-liability directions. From 1 January 2027 a payment the customer was coerced into counts as fraudulent, and the bank carries the burden of proof. They cover commercial, small finance, payments, regional rural and co-operative banks. Not NBFCs.</p><span class="src"><a href="https://www.corplawupdates.in/updates/rbi-fraudulent-ebt-customer-protection-compensation-directions" target="_blank" rel="noopener">CorpLawUpdates</a> · <a href="https://www.medianama.com/2026/06/223-rbi-final-amendment-directions-limiting-customer-liability-digital-transactions-effect-2027/" target="_blank" rel="noopener">MediaNama, 25 Jun 2026</a></span></span></li>
+      <li><span class="d">31 Jul 2026</span><span class="e"><p>RBI's fraud risk directions for commercial banks take effect at once: an early warning system for non-credit transactions, monitoring in or near real time, and vigilance "specifically" on non-KYC and money mule accounts. An official of at least General Manager rank must own fraud monitoring.</p><span class="src"><a href="https://rbi.org.in/scripts/BS_ViewMasDirections.aspx?id=13641" target="_blank" rel="noopener">RBI Fraud Risk Management Directions, 2026</a></span></span></li>
+      <li><span class="d">4 Aug 2026</span><span class="e"><p>The Supreme Court tells RBI to set a standard procedure for banks on cyber fraud and mule accounts within four weeks, and asks for a committee to look at victim compensation and shared liability.</p><span class="src"><a href="https://www.business-standard.com/india-news/sc-asks-rbi-to-frame-uniform-protocol-for-banks-dealing-with-cyber-fraud-126080401471_1.html" target="_blank" rel="noopener">Business Standard</a></span></span></li>
+      <li><span class="d">11 Sep 2026</span><span class="e"><p>RBI's draft KYC amendment proposes a temporary debit hold, up to 60 days, on suspected mule transactions of Rs 1,000 or more.</p><span class="src"><a href="https://rbidocs.rbi.org.in/rdocs/Content/PDFs/DRAFT11092026FD8132390DB514C7487703CBF7A704007.PDF" target="_blank" rel="noopener">RBI draft</a> · <a href="https://www.dsci.in/content/brief-draft-rbi-kyc-amendment-directions-2026" target="_blank" rel="noopener">DSCI brief</a></span></span></li>
+      <li><span class="d">18 Sep 2026</span><span class="e"><p>TRAI's spam-rule amendment: telcos must run AI detection on spam calls and messages, and pass each flag to the sender's operator within 2 hours. It phases in at 30, 60 and 90 days.</p><span class="src"><a href="https://foxmandal.in/news/trai-tightens-anti-spam-rules-with-ai-based-detection/" target="_blank" rel="noopener">Fox Mandal, 30 Sep 2026</a></span></span></li>
+      <li><span class="d">29 Oct 2026</span><span class="e"><p>The Supreme Court says RBI's new rules must make a bank compensate at least the amount lost where its due diligence failed, and a judge on the bench spoke of strict liability. Banks are to hold transactions that don't fit an account's history. RBI has to notify the mule rules by 30 November and bring them into force by 31 December 2026.</p><span class="src"><a href="https://www.medianama.com/2026/10/223-sc-rbi-banks-compensate-digital-arrest-victims/" target="_blank" rel="noopener">MediaNama, 30 Oct 2026</a></span></span></li>
+      <li class="future"><span class="d">31 Dec 2026</span><span class="e"><p>Court deadline for the mule-account hold rules to be in force.</p></span></li>
+      <li class="key"><span class="d">1 Jan 2027</span><span class="e"><p><b>The customer-liability directions apply.</b> For one year, a customer who loses up to Rs 50,000 gets 85 percent back, capped at Rs 25,000, once. Below Rs 29,412, RBI pays 65 percent of the loss, the customer's bank 10 and the bank that received the money 10.</p><span class="src"><a href="https://www.corplawupdates.in/updates/rbi-fraudulent-ebt-customer-protection-compensation-directions" target="_blank" rel="noopener">CorpLawUpdates</a> · <a href="https://www.medianama.com/2026/06/223-rbi-final-amendment-directions-limiting-customer-liability-digital-transactions-effect-2027/" target="_blank" rel="noopener">MediaNama</a></span></span></li>
+      <li class="future"><span class="d">Jan to Mar 2027</span><span class="e"><p>Indian banks set budgets for the financial year that starts on 1 April. <span class="tag">my read</span></p></span></li>
+      <li class="future"><span class="d">May 2027</span><span class="e"><p>Full obligations under India's data protection law (DPDP) apply, including the rules on sending data abroad.</p><span class="src"><a href="https://www.azbpartners.com/bank/indias-digital-personal-data-protection-act-phased-rollout-and-key-compliance-milestones/" target="_blank" rel="noopener">AZB Partners</a></span></span></li>
+    </ol>
+    <p class="oneline">From January a mule account costs the bank that holds it. The cheapest one is the account found before any money lands in it.</p>
+  </section>
+
+  <section id="why">
+    <div class="sh">
+      <span class="field">Why Apate wins there</span>
+      <h2>India's tools find a mule account after money reaches it</h2>
+      <p>India's tools are good at freezing and tracing. Every one of them learns about a mule account from money that already moved or a complaint already filed. Apate is in the conversation.</p>
+    </div>
+
+    <div class="map" aria-label="Where each tool acts in an Indian scam">
+      <div class="hd"><b>Where each tool acts in an Indian scam</b><span>my map, from public sources</span></div>
+      <ol class="steps">
+        <li class="step"><span class="what">The hook <small>call, SMS, WhatsApp</small></span><span class="acts"><b>Telco spam filters, TRAI's new AI flagging, Truecaller.</b> They block or warn.</span></li>
+        <li class="step apate"><span class="what">The conversation <small>minutes to days</small></span><span class="acts"><b>Apate.</b> An agent plays the victim and keeps the scammer busy.</span></li>
+        <li class="step apate"><span class="what">Where to pay <small>account, UPI ID, wallet</small></span><span class="acts"><b>Apate.</b> The scammer hands over the details before anyone pays.</span></li>
+        <li class="step"><span class="what">The payment</span><span class="acts"><b>Bank checks pass</b>, because the victim approves it with their own PIN or OTP. Airtel's OTP alert, DoT's risk score on reported phone numbers and behaviour tools such as BioCatch may catch a coached session.</span></li>
+        <li class="step"><span class="what">The money lands</span><span class="acts"><b>MuleHunter.AI and the bank's own monitoring</b> watch the receiving account.</span></li>
+        <li class="step"><span class="what">The complaint</span><span class="acts"><b>The 1930 helpline, the national portal, I4C's Suspect Registry.</b> A hold, and rarely a refund.</span></li>
+      </ol>
+      <div class="ft">Steps 2 and 3 are the only ones that surface the receiving account <b>before the money moves</b>. I found nobody in India working there today.</div>
+    </div>
+
+    <div class="why3">
+      <div class="fact"><h3>Before the money moves</h3><p>Of Rs 56,087 crore reported, Rs 206 crore came back. The Department of Telecom says its fraud risk indicator had prevented <b>Rs 5,043.73 crore</b> of suspected losses between its May 2025 launch and August 2026, but it scores phone numbers already reported. Apate gets the account, UPI ID or wallet from the scammer before a real victim pays into it.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB</a> · <a href="https://www.businessworld.in/article/dot-s-fri-prevents-rs-5-043-cr-in-suspected-fraud-losses-622740" target="_blank" rel="noopener">BW Businessworld</a>, DoT's own figure</span></div>
+      <div class="fact"><h3>It feeds what banks already run</h3><p>RBI's July directions tell banks to watch mule accounts specifically, in or near real time. Apate's feed is the outside signal for exactly that. It goes into a bank's own engine or a fraud hub as one more input, so nobody has to rip anything out.</p><span class="src"><a href="https://rbi.org.in/scripts/BS_ViewMasDirections.aspx?id=13641" target="_blank" rel="noopener">RBI directions, paras 23 to 25</a></span></div>
+      <div class="fact"><h3>It fits the new liability</h3><p>The receiving bank pays a share from January, the Ombudsman is already ordering it, and the Supreme Court has talked about strict liability. The proposed debit hold needs grounds to suspect an account. An account the scammer gave Apate's agent as the place to send money is about as good as grounds get. <span class="tag">my read</span></p><span class="src">sources in the clock above</span></div>
+    </div>
+    <p class="note">The two companies closest to Apate abroad, <a href="https://www.netcraft.com/solutions/by-service/conversational-scam-intelligence" target="_blank" rel="noopener">Netcraft</a> with its text personas and <a href="https://www.recordedfuture.com/blog/recorded-future-money-mule-intelligence-cybera" target="_blank" rel="noopener">Cybera</a>, sold through Mastercard-owned Recorded Future since February, have no India presence I could find. In India I found hackathon builds and nothing commercial. <b>The space is open now.</b></p>
+  </section>
+
+  <section id="ten">
+    <div class="sh">
+      <span class="field">First ten accounts</span>
+      <h2>Who I go to, in this order</h2>
+      <p>Each one has a dated reason to talk now. Named people come from public filings and press. RBI's July directions put an official of at least General Manager rank in charge of fraud monitoring at every commercial bank, so that person is the champion I look for, and the CRO signs. Titles marked <span class="tag">my read</span> get confirmed in month one.</p>
+    </div>
+    <div class="accts">
+      <details class="acct" open>
+        <summary><span class="n">01</span><span class="t">The warmest bank from your first conversations in India</span><span class="why">The fastest reference India will get.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>It has already heard from Apate, and from 1 January a payment its customer is coerced into counts as fraud under the RBI directions.</dd>
+          <dt>buyer</dt><dd>Your first contact there as champion, the fraud-monitoring GM alongside, the CRO to sign.</dd>
+          <dt>what I do</dt><dd>Turn that first conversation into a pilot with written success criteria and a named signer. Procurement, legal and information security start the same week. The result becomes India's first reference.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">02</span><span class="t">Bharti Airtel, with Airtel Payments Bank</span><span class="why">The first telco, and a telco and a bank inside one group.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>On 11 Feb 2026 Airtel launched a network-level AI alert that checks with the customer before delivering a bank OTP during a risky call, and its India CEO Shashwat Sharma pitched Airtel as the safe network. TRAI's September rule now requires AI flagging of spam. Airtel Payments Bank had about 5,000 mule accounts in I4C's 2024 data. <span class="src"><a href="https://www.deccanherald.com/technology/artificial-intelligence/airtel-brings-ai-powered-otp-fraud-detection-feature-in-india-3894450" target="_blank" rel="noopener">Deccan Herald</a> · <a href="https://www.crnasia.com/india/news/2026/airtel-embeds-ai-at-network-layer-to-curb-otp-led-banking-fraud" target="_blank" rel="noopener">CRN Asia</a> · <a href="https://www.business-standard.com/india-news/centre-freezes-450-000-mule-bank-accounts-used-in-cyber-fraud-schemes-124111200320_1.html" target="_blank" rel="noopener">Business Standard, Nov 2024</a></span></dd>
+          <dt>buyer</dt><dd>Head of Fraud Management and Revenue Assurance, or the CISO. <span class="tag">my read</span></dd>
+          <dt>the pitch</dt><dd>Airtel already flags the risky call. Apate turns a flagged call into intelligence: divert a slice to Apate Voice, and send what the agents get to the pilot bank and to Airtel Payments Bank.</dd>
+          <dt>route</dt><dd>Direct, and through Mobileum if it already works with Airtel. I found no confirmed Mobileum contract with an Indian operator.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">03</span><span class="t">Yes Bank</span><span class="why">Drew the highest rate in the February Ombudsman order, for lapses on mule accounts.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>Told to pay 7.5 percent of what reached it in the 25 Feb 2026 Ombudsman order, higher than the other four, for additional lapses in monitoring dormant or mule accounts. <span class="src"><a href="https://businesstoday.in/personal-finance/banking/story/rbi-orders-banks-to-compensate-victim-in-rs-2292-cr-digital-arrest-fraud-case-report-526890-2026-04-22" target="_blank" rel="noopener">Business Today, 22 Apr 2026</a></span></dd>
+          <dt>buyer</dt><dd>CRO S. Anantharaman, in post since 1 Apr 2026, previously Group CRO at Jio Financial Services and CRO at Bank of Baroda. Fraud risk is among his listed areas. <span class="src"><a href="https://www.freepressjournal.in/business/yes-bank-appoints-s-anantharaman-as-chief-risk-officer-effective-april-1-2026" target="_blank" rel="noopener">Free Press Journal, 1 Apr 2026</a></span></dd>
+          <dt>the pitch</dt><dd>Mule accounts named by the scammer before a rupee lands in them.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">04</span><span class="t">IndusInd Bank</span><span class="why">Named in the same order, with a CRO in his first year.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>Told to pay 5 percent of what reached it in the 25 Feb 2026 Ombudsman order.</dd>
+          <dt>buyer</dt><dd>CRO Saurav Saha, in post since 24 Feb 2026, previously Head of Financial Risk Management at HDFC Bank. <span class="src"><a href="https://nsearchives.nseindia.com/corporate/INDUSINDBK3_24022026161051_SEAppointmentOfSMP24022026.pdf" target="_blank" rel="noopener">NSE filing, 24 Feb 2026</a></span></dd>
+          <dt>the pitch</dt><dd>A new CRO building his stack, with an Ombudsman order on file. <span class="tag">my read</span></dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">05</span><span class="t">Axis Bank</span><span class="why">Named in the order, and a police case over a mule account this July.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>Told to pay 5 percent in the February order. In July 2026 Mumbai cyber police registered an FIR over an Axis account that received Rs 20.97 lakh across five fraud cases. <span class="src"><a href="https://www.freepressjournal.in/mumbai/mumbai-police-register-fir-after-tracing-axis-bank-mule-account-linked-to-2097-lakh-cyber-fraud-funds" target="_blank" rel="noopener">Free Press Journal</a></span></dd>
+          <dt>buyer</dt><dd>Head of Fraud Risk Management, the CRO to sign. <span class="tag">my read</span></dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">06</span><span class="t">ICICI Bank</span><span class="why">Named in the order as a receiving bank.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>Told to pay 5 percent of what reached it in the 25 Feb 2026 Ombudsman order.</dd>
+          <dt>buyer</dt><dd>Head of Fraud Risk Management, the CRO to sign. <span class="tag">my read</span></dd>
+          <dt>the pitch</dt><dd>Same as Yes Bank: the receiving bank is now on the hook, and Apate names the account before it receives.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">07</span><span class="t">Kotak Mahindra Bank</span><span class="why">Mule-account arrests in June, and a bank where I've run an AI proof of concept before.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>In June 2026 Durg police arrested 15 people for running mule accounts at Kotak, acting on Samanvaya portal data. Kotak was one of the five banks named in I4C's 2024 mule-account data, with about 6,000. <span class="src"><a href="https://www.thehitavada.com//Encyc/2026/6/14/15-arrested-for-mule-accounts-operation-in-durg-city-.html" target="_blank" rel="noopener">The Hitavada, 14 Jun 2026</a> · <a href="https://www.business-standard.com/india-news/centre-freezes-450-000-mule-bank-accounts-used-in-cyber-fraud-schemes-124111200320_1.html" target="_blank" rel="noopener">Business Standard, Nov 2024</a></span></dd>
+          <dt>buyer</dt><dd>CRO and Head of Fraud Risk. <span class="tag">my read</span></dd>
+          <dt>me</dt><dd>At Simplifai we ran a digital-employee proof of concept with Kotak.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">08</span><span class="t">State Bank of India</span><span class="why">After a breach, its chairman wants AI to fight AI risk, and SBI is working on a sandbox to test AI tools.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>After data of 3,897 customers turned up on the dark web, Chairman C.S. Setty said SBI is stepping up with AI-powered tools and is working with other players on a sandbox to test AI tools before production. SBI also holds half of IDPIC, the payments intelligence company, with Bank of Baroda holding the other half. <span class="src"><a href="https://www.businesstoday.in/technology/news/story/sbis-cyber-wake-up-call-after-data-breach-fight-ai-with-ai-565464-2026-11-03" target="_blank" rel="noopener">Business Today, 3 Nov 2026</a> · <a href="https://www.angelone.in/news/stocks/sbi-to-acquire-50-percent-stake-in-idpic-to-boost-digital-payment-security" target="_blank" rel="noopener">Angel One</a></span></dd>
+          <dt>buyer</dt><dd>Deputy MD and CRO, or the Chief General Manager for fraud risk. <span class="tag">my read</span></dd>
+          <dt>the pitch</dt><dd>Into the sandbox first, then production.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">09</span><span class="t">HDFC Bank</span><span class="why">Built its own mule engine this year. Apate feeds it what it can't see.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>In early July 2026 HDFC confirmed an in-house real-time fraud engine aimed at mule activity on UPI and cards, built by a team of 150 to 200 over about 18 months. Group Head IT and CIO Ramesh Lakshminarayanan is quoted. <span class="src"><a href="https://startupfeed.in/hdfc-bank-ai-neev-fraud-detection-system/" target="_blank" rel="noopener">StartupFeed</a></span></dd>
+          <dt>buyer</dt><dd>The CIO's team with the head of fraud risk. <span class="tag">my read</span></dd>
+          <dt>the pitch</dt><dd>HDFC sees its own transactions. Apate sees the scammer. The feed goes into the engine they built.</dd>
+        </dl></div>
+      </details>
+      <details class="acct">
+        <summary><span class="n">10</span><span class="t">Vodafone Idea (Vi)</span><span class="why">The second telco, already running Vi Protect against spam and scams.</span><span class="open">open</span></summary>
+        <div class="body"><dl class="kv">
+          <dt>why now</dt><dd>TRAI's 18 Sep 2026 rule on top of Vi Protect, launched at India Mobile Congress in October 2025, which Vi says has flagged more than 600 million communications. CTO Jagbir Singh called protecting customers from fraud a priority in November 2025. <span class="src"><a href="https://www.digit.in/news/telecom/imc-2025-vodafone-idea-launches-ai-powered-vi-protect-to-tackle-spam-calls-messages.html" target="_blank" rel="noopener">Digit</a> · <a href="https://telecomtalk.info/vodafone-idea-plans-to-extend-5g-coverage/1001385/" target="_blank" rel="noopener">TelecomTalk, 6 Nov 2025</a></span></dd>
+          <dt>buyer</dt><dd>CTO Jagbir Singh, or the CISO.</dd>
+          <dt>the pitch</dt><dd>Vi Protect blocks. Apate turns what it blocks into accounts a bank can act on. <span class="tag">my read</span></dd>
+        </dl></div>
+      </details>
+    </div>
+    <p class="note">If that first bank is already one of these, <b>City Union Bank</b> takes its slot: it was the fifth bank in the February order, and a mid-sized bank decides faster <span class="tag">my read</span>. Next in line are <b>Punjab National Bank</b> and <b>Bank of Baroda</b>. NBFCs come later, because the January directions don't cover them.</p>
+
+    <h3 class="sub">Doors that open many accounts at once</h3>
+    <div class="doors">
+      <div class="fact"><h3>NPCI</h3><p>Asbe's line on finding mules. Apate's UPI ID capture goes to where UPI fraud gets decided.</p><span class="src"><a href="https://thenextweb.com/news/india-upi-npci-ai-billion-daily-transactions" target="_blank" rel="noopener">The Next Web</a></span></div>
+      <div class="fact"><h3>RBI Innovation Hub and I4C</h3><p>MuleHunter.AI runs in 26 banks. I4C's Cyber Fraud Mitigation Centre puts banks, payment firms, telcos and police in one room. One integration, many banks. Slow and little cash, a lot of trust.</p><span class="src"><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287674" target="_blank" rel="noopener">PIB, 22 Jul 2026</a></span></div>
+      <div class="fact"><h3>IDPIC</h3><p>The Indian Digital Payment Intelligence Corporation, owned half each by SBI and Bank of Baroda. MD and CEO K. Satyanarayana Raju, former MD and CEO of Canara Bank, in post since February 2026.</p><span class="src"><a href="https://www.prnewswire.com/in/news-releases/idpic-appoints-k-s-raju-as-md--ceo-to-strengthen-digital-payment-fraud-intelligence-302739247.html" target="_blank" rel="noopener">PR Newswire, 10 Apr 2026</a> · <a href="https://www.angelone.in/news/stocks/sbi-to-acquire-50-percent-stake-in-idpic-to-boost-digital-payment-security" target="_blank" rel="noopener">Angel One</a></span></div>
+      <div class="fact"><h3>Clari5 (Perfios)</h3><p>Says its Intelligence Hub already pulls in I4C's Suspect Registry. A ready channel into banks for Apate's feed. <span class="tag">my read on fit</span></p><span class="src"><a href="https://www.clari5.com/?p=50800" target="_blank" rel="noopener">Clari5</a></span></div>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>One bank, one telco, then the reference</h2>
+      <p>What I do, and what you and Sam see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Set up the pair</b></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Run the pilot</b></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Make the reference</b></button>
+    </div>
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Week one with the Sydney team, on Sydney hours: the product, where each Indian bank conversation stands, and how CommBank and TPG were sold.</li>
+        <li>Week one at the first bank: procurement, legal and information security start now, not after the pilot. Their vendor questionnaire is answered before they send it.</li>
+        <li>Write page one (below) and get your security lead to sign it off.</li>
+        <li>Get a written legal opinion on diverting and recording scam calls in India before any telco pilot.</li>
+        <li>Test the agents in Hindi and Hinglish on the scripts Indians actually hear: the fake police call behind digital arrest, investment groups on WhatsApp and Telegram, fake KYC updates.</li>
+        <li>Agree the pilot's success criteria in writing: accounts, UPI IDs and wallets surfaced, how many the bank had not already flagged, rupees held on them. A named signer, and what happens when we hit them.</li>
+        <li>First meetings at Airtel, Yes Bank, IndusInd and Axis.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 30</h3><ul>
+        <li>The first bank's pilot on paper, with written success criteria and a named signer.</li>
+        <li>Page one, signed off.</li>
+        <li>The legal view on call diversion.</li>
+        <li>A named champion and signer at all ten accounts.</li>
+        <li>The Airtel pilot shape on paper.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Run the bank pilot against its written criteria, with a weekly note to the bank and to you.</li>
+        <li>Sign Airtel for a diversion pilot on a slice of flagged scam calls, with what the agents get going to the pilot bank.</li>
+        <li>Take the pilot's early numbers to Yes Bank, IndusInd and Axis, where the Ombudsman order makes it their problem too.</li>
+        <li>Open RBIH and I4C, and Clari5 as a channel.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 60</h3><ul>
+        <li>Weekly numbers: accounts surfaced, how many the bank hadn't flagged, rupees held.</li>
+        <li>The Airtel pilot signed, with its own success criteria.</li>
+        <li>Two more banks with pilot proposals on the table.</li>
+        <li>One pipeline, inside Sam's forecast.</li>
+      </ul></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
+      <div class="col"><h3>What I do</h3><ul>
+        <li>Write up the pilot result against the written criteria, with the bank's sign-off.</li>
+        <li>Send the commercial proposal. Procurement and security are already done, so the contract is the only open item.</li>
+        <li>Line up the bank's fraud head for reference calls with the next two banks.</li>
+        <li>Airtel live: a telco diverting and a bank acting on what the agents find, in India.</li>
+        <li>Write India's 2027 plan: accounts, revenue, the next hire, and when India pays for itself, timed for the April budget cycle.</li>
+      </ul></div>
+      <div class="col see"><h3>What you see by day 90</h3><ul>
+        <li>India's first reference, with numbers the next bank will believe.</li>
+        <li>A telco and a bank working with Apate in India.</li>
+        <li>Three or more banks in pilot or proposal.</li>
+        <li>The 2027 India plan.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>Big Indian banks don't sign a full-year contract inside 90 days.</b> Day 90 is a reference with numbers, a contract in procurement, and the next banks lined up.</p>
+
+    <h3 class="sub">What it takes from Apate</h3>
+    <div class="takes">
+      <div class="take"><b>One person in India from day one</b><span>Me, running India and reporting into Sam.</span></div>
+      <div class="take"><b>A Sydney product contact, a few hours a week</b><span>For the Hindi and Hinglish agents and the India hosting setup.</span></div>
+      <div class="take"><b>Hosting in India</b><span>An Indian cloud region, or on the bank's premises.</span></div>
+      <div class="take"><b>One legal opinion</b><span>On diverting and recording scam calls, before the telco pilot.</span></div>
+      <div class="take"><b>You or Sam in the first CRO meeting</b><span>At each bank. I run everything after it.</span></div>
+      <div class="take"><b>The next hire: a solutions engineer</b><span>Once two pilots are live. No office in the first six months.</span></div>
+    </div>
+
+    <div class="pageone" aria-label="Page one of an Apate India proposal">
+      <div class="hd"><b>Page one of every Apate India proposal</b><span>where the data sits, before anyone asks</span></div>
+      <dl>
+        <div class="r"><dt>where data lives</dt><dd>An Indian cloud region, or on the bank's premises. Nothing leaves India without the bank's written approval.</dd></div>
+        <div class="r"><dt>what we hold</dt><dd>Data about scammers: accounts, numbers, links, scripts. Little or nothing about the bank's own customers. <span class="tag">to confirm with your team</span></dd></div>
+        <div class="r"><dt>how long</dt><dd>A retention period written into the contract.</dd></div>
+        <div class="r"><dt>who sees it</dt><dd>Named roles at the bank and at Apate, with access logs.</dd></div>
+        <div class="r"><dt>rules we meet</dt><dd>RBI's rule that payment data stays in India, where it applies. CERT-In: incidents reported within 6 hours, logs kept 180 days in India. DPDP obligations from May 2027. <span class="src"><a href="https://rbi.org.in/Scripts/FAQView.aspx?Id=130" target="_blank" rel="noopener">RBI</a> · <a href="https://www.azbpartners.com/bank/cert-in-directions/" target="_blank" rel="noopener">AZB on CERT-In</a></span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="apac">
+    <div class="sh">
+      <span class="field">India inside APAC</span>
+      <h2>How India plugs into Sam's team and Singapore</h2>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>Run from India, inside APAC</h3><p>India is run from India and reports into Sam Rahmanian as part of APAC. One pipeline and one forecast, on Sam's cadence.</p></div>
+      <div class="fact"><h3>Singapore keeps its accounts</h3><p>Nothing moves out of the Singapore AEs' book. Where a group spans both countries, the account stays with whoever owns the parent relationship, and I support it on the ground in India.</p></div>
+      <div class="fact"><h3>The hours work</h3><p>India is 2.5 hours behind Singapore and 5.5 behind Sydney in the Australian summer. My morning is Sydney's afternoon, and most of the Singapore day overlaps with mine.</p></div>
+      <div class="fact"><h3>One playbook, both ways</h3><p>One security pack, one deck, one set of references. A Singapore bank win helps in Mumbai. And Indian mule accounts are traded across borders, as your agents saw in July, so what India surfaces is useful to Singapore's clients too. <span class="tag">my read</span></p></div>
+    </div>
+  </section>
+
+  <section id="me">
+    <div class="sh">
+      <span class="field">What I bring</span>
+      <h2>I sell to banks, and I build the teams that sell</h2>
+      <p>Most recently I was Head of Sales on the founding team at Craze (YC S22), Apr 2025 to Mar 2026. Before that:</p>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore company, run from India</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <ul>
+          <li>Owned sales, marketing and customer success, and built the function to 15 people, starting from beta customers and no revenue.</li>
+          <li>Sold from India into Southeast Asia, the US and Europe. We signed Remote, Omnipresent, Eventbrite and Temasek.</li>
+        </ul>
+        <div class="nums"><span class="num">$200K+ ARR</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI company</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <ul>
+          <li>Built APAC sales from 0 to 15 reps, selling AI to Indian banks, brokers and insurers when nobody here knew the name.</li>
+          <li>Bajaj Allianz, Upstox (our standout deal, $210K TCV), and a digital-employee proof of concept with Kotak Mahindra.</li>
+        </ul>
+        <div class="nums"><span class="num">$1M ARR in the first 12 months</span><span class="num">$1.7M ARR when I left</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Manager, Inside and Channel Sales · acquired by Dineout</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <ul>
+          <li>Built a 60+ seat sales engine in India: about 40 on-roll plus an outsourced outbound team, and a 15-city channel network.</li>
+        </ul>
+        <div class="nums"><span class="num">60+ seats</span><span class="num">15 cities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="end">
+    <h2>That's the plan.</h2>
+    <p>It's built on public numbers. With Apate's own data the account list gets sharper. The plan stays the same: one bank, one telco, everything in writing, then hire.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a><a href="https://www.linkedin.com/in/ketan7" target="_blank" rel="noopener">linkedin.com/in/ketan7</a></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  // 30/60/90 tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+      if (on && focus) t.focus();
+    });
+    try { localStorage.setItem('apate-plan-tab', id); } catch(e) {}
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  try { var saved = localStorage.getItem('apate-plan-tab'); if (saved && document.getElementById(saved)) selectTab(saved); } catch(e) {}
+
+  // chart tooltip
+  var fig = document.getElementById('flow');
+  var tip = fig ? fig.querySelector('.tip') : null;
+  if (fig && tip){
+    var rows = Array.prototype.slice.call(fig.querySelectorAll('.row'));
+    function show(r){
+      tip.textContent = r.getAttribute('data-tip');
+      var fb = fig.getBoundingClientRect(), rb = r.getBoundingClientRect();
+      var top = rb.top - fb.top - tip.offsetHeight - 6;
+      if (top < 4) top = rb.bottom - fb.top + 6;
+      var left = Math.min(Math.max(8, rb.left - fb.left), fb.width - tip.offsetWidth - 8);
+      tip.style.top = top + 'px'; tip.style.left = left + 'px';
+      tip.classList.add('on');
+    }
+    function hide(){ tip.classList.remove('on'); }
+    rows.forEach(function(r){
+      r.addEventListener('mouseenter', function(){ show(r); });
+      r.addEventListener('mouseleave', hide);
+      r.addEventListener('focus', function(){ show(r); });
+      r.addEventListener('blur', hide);
+    });
+  }
+
+  // section chips
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
