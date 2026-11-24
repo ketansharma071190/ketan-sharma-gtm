@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MinIO India: first 90 days</title>
+<meta name="description" content="A working draft by Ketan Sharma for AB Periasamy: how MinIO could sell into India, starting with the GPU clouds bidding for C-DAC's IndiaAI compute empanelment, where every cluster needs an object store.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* One column. The hero is a cluster spec: compute, network, storage, with the object store lit, then the tender's clock. */
+:root{
+  --bg:#F7F5F2; --surface:#FFFFFF; --surface-2:#EEEAE4; --ink:#17151A; --muted:#5E5A63; --line:#DDD7CF;
+  --red:#B4233F; --red-ink:#FFFFFF; --red-soft:rgba(180,35,63,.08); --teal:#0F6B6B; --teal-soft:rgba(15,107,107,.09);
+  --f-display:"Sora", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#111014; --surface:#19171D; --surface-2:#221F27; --ink:#ECE9EF; --muted:#A39EAA; --line:#2E2A34;
+  --red:#F2667F; --red-ink:#1C0509; --red-soft:rgba(242,102,127,.12); --teal:#5CC8C2; --teal-soft:rgba(92,200,194,.10);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#111014; --surface:#19171D; --surface-2:#221F27; --ink:#ECE9EF; --muted:#A39EAA; --line:#2E2A34;
+  --red:#F2667F; --red-ink:#1C0509; --red-soft:rgba(242,102,127,.12); --teal:#5CC8C2; --teal-soft:rgba(92,200,194,.10);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.6; -webkit-text-size-adjust:100%; overflow-x:hidden}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.18; margin:0; text-wrap:balance}
+h1{font-size:clamp(27px, 5.8vw, 42px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(21px, 3.8vw, 28px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:16.5px; font-weight:700}
+p{margin:0}
+a{color:var(--teal); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); overflow-wrap:anywhere}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid color-mix(in srgb, var(--teal) 45%, transparent); color:var(--teal); background:var(--teal-soft); white-space:nowrap; vertical-align:2px}
+
+/* top bar */
+.topbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--red-ink); background:var(--red); border-color:var(--red)}
+@media (max-width:520px){ .who span{display:none} }
+
+/* hero */
+.hero{padding-block:36px 28px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--red)}
+.lede{font-size:18.5px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+.spec{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.spec-hd{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.spec-hd b{color:var(--ink); font-weight:500}
+.stack{padding:16px; display:grid; gap:8px}
+.layer{display:grid; grid-template-columns:118px 1fr; gap:4px 14px; align-items:start; padding:11px 14px; border-radius:9px; border:1px solid var(--line); background:var(--surface-2)}
+.layer > *{min-width:0}
+.layer .ln{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:2px}
+.layer p{font-size:15px}
+.layer.lit{background:var(--red-soft); border-color:color-mix(in srgb, var(--red) 55%, var(--line)); animation:pulse 2.4s ease-in-out 1}
+.layer.lit .ln{color:var(--red); font-weight:500}
+.layer q{font-style:italic; quotes:"\201C" "\201D"}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--red) 35%, transparent)} 100%{box-shadow:0 0 0 12px transparent}}
+@media (max-width:560px){ .layer{grid-template-columns:1fr} }
+
+.clock{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.clock > li{display:grid; grid-template-columns:118px 1fr; gap:2px 14px; padding:11px 16px; border-bottom:1px solid var(--line); font-size:15px}
+.clock > li > *{min-width:0}
+.clock .when{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:2px}
+.clock li.now{background:var(--red-soft)}
+.clock li.now .when{color:var(--red); font-weight:500}
+@media (max-width:560px){ .clock > li{grid-template-columns:1fr} }
+.spec-ft{padding:13px 16px; background:var(--surface-2); font-size:15px; color:var(--muted)}
+.spec-ft b{color:var(--ink)}
+
+/* sections */
+section{padding-block:38px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:20px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--red); letter-spacing:.05em; text-transform:uppercase}
+.note{margin-top:14px; font-size:15px; color:var(--muted); max-width:68ch}
+.note b{color:var(--ink)}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:640px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start; min-width:0}
+.fact p{font-size:15px; color:var(--muted)}
+.read{margin-top:16px; border-left:3px solid var(--red); padding:4px 0 4px 16px; display:grid; gap:10px}
+.read ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.read li{max-width:68ch}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--red) 45%, var(--line))}
+.door > summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px}
+.door > summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--red); padding-top:4px}
+.door .dt{font-family:var(--f-display); font-weight:700; font-size:16.5px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted); min-width:0}
+.door .dbody{padding:0 16px 16px}
+.kv{display:grid; grid-template-columns:110px 1fr; gap:6px 14px; font-size:15px; margin:0}
+.kv > dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv > dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv > dd{margin-bottom:8px} }
+
+/* plan */
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabbtn{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tabbtn b{font-family:var(--f-display); font-size:16px; color:inherit}
+.tabbtn small{font-family:var(--f-mono); font-size:11.5px}
+.tabbtn[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--red)}
+.tabpanel{display:grid; grid-template-columns:1.2fr 1fr; gap:12px}
+.tabpanel[hidden]{display:none}
+@media (max-width:660px){ .tabpanel{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.pcol.see{background:var(--surface-2)}
+.pcol h3{font-family:var(--f-mono); font-size:12px; font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15.5px}
+
+/* hiring */
+.ladder{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.rung{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; grid-template-columns:42px 1fr; gap:4px 12px}
+.rung > *{min-width:0}
+.rung .rn{grid-row:1 / span 2; width:32px; height:32px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); border:1px solid var(--line); color:var(--muted)}
+.rung.now .rn{background:var(--red); color:var(--red-ink); border-color:var(--red)}
+.rung .rt{font-family:var(--f-display); font-weight:700; font-size:16px}
+.rung .rt small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; text-transform:uppercase; letter-spacing:.03em}
+.rung .rs{font-size:15px; color:var(--muted)}
+.rung .rs b{color:var(--ink); font-weight:600}
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:180px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:18px}
+.pc .co span{font-size:13.5px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc p{font-size:15.5px}
+
+/* questions, end */
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs > li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:15.5px}
+.qs > li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--red); padding-top:3px}
+.qs > li > span{min-width:0}
+.endnote{padding-block:38px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.endnote p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· India for MinIO</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#read">MinIO</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hiring order</a>
+      <a href="#why">Why me</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A working draft for AB Periasamy · 24 November 2026</div>
+    <h1>India just wrote an object store into its GPU tender. The sizing is still blank.</h1>
+    <p class="lede">AB, on 20 November C-DAC issued the final RFE to empanel the clouds that will run up to 10,000 GPUs for the IndiaAI Mission. Every cluster must have access to an object store, and everything, control plane included, must stay in India. <strong>Bids close on 4 December. How much storage, and how fast, is left to Stage 2.</strong> Below is how I would sell MinIO into that, and into the rest of India. Where I am guessing, I say so.</p>
+
+    <div class="spec" aria-label="What the RFE asks of every cluster">
+      <div class="spec-hd"><b>C-DAC/GPU/01/2026 · what every cluster must have</b><span>final RFE, 20 Nov 2026</span></div>
+      <div class="stack">
+        <div class="layer"><span class="ln">Compute</span><p>Up to 10,000 AI compute units (GPUs or equivalent) in clusters of 4,000, 1,000 or 512, for five years, for ministries, academia, startups and industry.</p></div>
+        <div class="layer"><span class="ln">Network</span><p>A networking layer for training and inference, with per-tenant micro-segmentation.</p></div>
+        <div class="layer lit"><span class="ln">Storage, 4.1(1)(c)</span><p><q>Cluster shall have access to the parallel file systems and object store for training and inferencing AI workload management.</q> It should scale linearly as nodes are added.</p></div>
+        <div class="layer lit"><span class="ln">Sovereignty, 4.5</span><p>Data plane and control plane, data, metadata, logs, backups and DR <q>remain within the sovereign territory of India.</q></p></div>
+      </div>
+      <ol class="clock">
+        <li><span class="when">7 Oct 2026</span><span>RFE published on India's central procurement portal.</span></li>
+        <li><span class="when">19 Nov 2026</span><span>C-DAC answers bidders' questions. Asked for object-storage capacity, IOPS and data-protection numbers per cluster, it replied: <q>Will be suitably addressed in Stage-2.</q> Immutable backups and DR got the same answer.</span></li>
+        <li><span class="when">20 Nov 2026</span><span>Final RFE issued. The storage clause stands as written.</span></li>
+        <li class="now"><span class="when">4 Dec 2026</span><span><b>Stage-1 bids close, 3:30 pm IST.</b> Bids open 5 December. Four date corrigenda so far.</span></li>
+        <li><span class="when">Stage 2</span><span>Capacities, throughput and the technical parameters are fixed per procurement round, for empaneled clouds only.</span></li>
+      </ol>
+      <div class="spec-ft">Sources, opened 24 Nov 2026 on the Central Public Procurement Portal (eprocure.gov.in), Tender ID 2026_DIT_929273_1, ref C-DAC/GPU/01/2026: the tender page, the corrigendum history, the pre-bid replies (Technical corrigendum, 19 Nov) and the final RFE (Technical corrigendum_2, 20 Nov). The portal's tender links expire with each session, so to find it: open <a href="https://eprocure.gov.in/eprocure/app?page=FrontEndTendersByOrganisation&amp;service=page">Tenders by Organisation</a>, choose Department of Electronics and Information Technology (DeitY), then look for the tender ID. It is not on cdac.in's tenders page. <b>Whoever is in the room before Stage 2 helps write what "object store" means in rupees and terabytes.</b> MinIO has no one in India whose job that is today.</div>
+    </div>
+  </header>
+
+  <section id="read">
+    <div class="sh">
+      <span class="field">What I understand</span>
+      <h2>MinIO in India, read from outside</h2>
+      <p>From your site, your job board and the tender papers. You know all of it better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you sell</h3><p>AIStor: S3-compatible, Iceberg-native object storage, now with Tables and Memory, plus MemKV, a separate context store for inference, which you say drives GPU use above 95 percent and cuts cost per token by about half.</p><span class="src"><a href="https://www.min.io/pricing">min.io/pricing</a> · <a href="https://www.min.io/press/minio-marks-two-years-of-aistor-with-innovation-enterprise-ai-momentum-and-global-partnerships">press, 18 Nov 2026</a></span></div>
+      <div class="fact"><h3>How it is priced</h3><p>Free single node; Enterprise Lite for self-supporting teams under 400 TiB; Enterprise with 24/7 direct-to-engineer support and an SLA under 4 hours. MemKV is priced on the customer's inference infrastructure.</p><span class="src"><a href="https://www.min.io/pricing">min.io/pricing</a></span></div>
+      <div class="fact"><h3>How you sell</h3><p>Full-cycle technical selling, MEDDPICC, deals of $50K to $300K and up, moving toward a hybrid of product-led and sales-driven. RVP seats for US East, US West and UK/EU were all posted on 5 November; none for Asia.</p><span class="src"><a href="https://job-boards.greenhouse.io/minio/jobs/5474963008">India RSM post</a> · <a href="https://boards-api.greenhouse.io/v1/boards/minio/jobs">Greenhouse board, 24 Nov</a></span></div>
+      <div class="fact"><h3>India today</h3><p>Three open field roles: a Regional Sales Manager in Mumbai (posted 6 Nov), a Field CTO (20 Aug) and a Field Architect (28 Jul) in Bengaluru. No India or APAC sales head on the board, and none I could find announced. Earlier posts for an Enterprise AE, India and a Partner Manager, India (APJ scope) are closed; I can't see whether they were filled.</p><span class="src"><a href="https://boards-api.greenhouse.io/v1/boards/minio/jobs">Greenhouse board, 24 Nov</a></span></div>
+      <div class="fact"><h3>The template you already have</h3><p>Saudi Arabia: on 31 Aug 2026 HUMAIN, a PIF company, announced a strategic partnership with MinIO to build an AI data fabric, and the board carries a Field Architect, an SRE and a senior engineer in Riyadh. That is a sovereign AI program with a local team.</p><span class="src"><a href="https://www.min.io/press/humain-and-minio-announce-strategic-partnership-to-build-ai-data-fabric">min.io press</a> · <a href="https://boards-api.greenhouse.io/v1/boards/minio/jobs">Greenhouse board</a></span></div>
+      <div class="fact"><h3>Who else is in India's GPU rooms</h3><p>DDN put EXAScaler under 8,000 B200 GPUs at Yotta (15 Oct 2025), the parallel file system side. E2E Networks lists MinIO on its partner page. Google asked C-DAC to add managed services, PFS storage among them, to the architecture; C-DAC replied "As per RFE".</p><span class="src"><a href="https://www.ddn.com/press-releases/ddn-and-yotta-power-sovereign-ai-for-india-with-multi-million-dollar-exascaler-deployment/">DDN, 15 Oct 2025</a> · <a href="https://www.e2enetworks.com/partners/minio">e2enetworks.com</a> · CPPP pre-bid replies, 19 Nov</span></div>
+    </div>
+    <div class="read">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>The RFE names two storage layers. The parallel file system has a known India incumbent. The object store has none I can see, and the clause is written so it scales with every node added.</li>
+        <li>The sovereignty clause puts the control plane in India too. Self-hosted software clears that; a storage service run from abroad has to explain itself. <span class="tag">my read</span></li>
+        <li>India has field engineers and a seller coming, and, as far as I can see from outside, nobody who owns the number, the partners or the government calendar. Riyadh shows what a sovereign program looks like when someone does.</li>
+        <li>The bidders are few and named. This is an account plan of about ten logos, not a market to blanket.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <span class="field">First doors</span>
+      <h2>Where I would start</h2>
+      <p>In order. Names come from the companies that put questions to C-DAC, as printed in its 19 November replies.</p>
+    </div>
+    <div class="doors">
+      <details class="door" open>
+        <summary><span class="dn">01</span><span class="dt">The IndiaAI GPU clouds, before Stage 2</span><span class="dwhy">Each one has to give every cluster access to an object store, inside India, and nobody has told them how big yet.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>who</dt><dd>Among the companies named in C-DAC's replies: Yotta, Neysa, NeevCloud, Netweb India, Tata Communications, RailTel, HFCL, Locuz, and one listed as RIL. <span class="tag">RIL as Reliance is my reading</span></dd>
+          <dt>offer</dt><dd>AIStor as the per-cluster object store, a reference design sized per 512, 1,000 and 4,000 units, and MemKV for the inference tenants, where the cost per token decides who wins work.</dd>
+          <dt>champion</dt><dd>The CTO or head of platform writing the Stage-2 response. The promoter signs.</dd>
+          <dt>timing</dt><dd>Now to the opening of Stage 2. After that, specs are frozen into each round.</dd>
+        </dl><p class="note">Source: CPPP, Tender ID 2026_DIT_929273_1, pre-bid clarifications published 19 Nov 2026.</p></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">02</span><span class="dt">E2E Networks and the clouds already serving IndiaAI</span><span class="dwhy">E2E already lists MinIO as a partner. The question is what is paid and what is community.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>step</dt><dd>Map what runs AIStor Enterprise versus the free build across India's GPU clouds, then convert the largest community users first. <span class="tag">I can't see your data</span></dd>
+          <dt>why</dt><dd>A paying Indian reference is the first thing a Stage-2 bidder will ask for.</dd>
+        </dl><p class="note">Source: <a href="https://www.e2enetworks.com/partners/minio">e2enetworks.com/partners/minio</a></p></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">03</span><span class="dt">Banks, brokers and insurers with data that cannot leave</span><span class="dwhy">The deals your RSM post describes: technical, $50K to $300K, security and procurement in the loop.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>offer</dt><dd>An on-prem lakehouse on AIStor Tables, queried from Databricks through OpenSharing without copying data out.</dd>
+          <dt>why me</dt><dd>We sold AI into Indian banks, brokers and insurers for two years. I know how their security reviews and procurement run.</dd>
+          <dt>watch</dt><dd>Long cycles. These fill the pipeline for quarters three and four, not the first 90 days. <span class="tag">my read</span></dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">04</span><span class="dt">Indian system integrators</span><span class="dwhy">You already hire a Field Architect for global system integrators in the US. India is where most of their delivery sits.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>route</dt><dd>Their data and AI infrastructure practices, with one joint reference design for sovereign GPU clusters. <span class="tag">guess at structure</span></dd>
+        </dl><p class="note">Source: <a href="https://boards-api.greenhouse.io/v1/boards/minio/jobs">Greenhouse board</a>, Field Architect, Global System Integrators.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>One India plan, with the tender at its centre</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tabbtn" role="tab" id="tb1" aria-controls="tp1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Get in the room</b></button>
+      <button class="tabbtn" role="tab" id="tb2" aria-controls="tp2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Shape Stage 2</b></button>
+      <button class="tabbtn" role="tab" id="tb3" aria-controls="tp3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Make it repeat</b></button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp1" aria-labelledby="tb1">
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Sit with the Field CTO and Field Architect in Bengaluru. Agree who covers the GPU clouds, who covers BFSI.</li>
+        <li>Meet the platform heads at the empaneled bidders, starting with the ones that already run MinIO in any form.</li>
+        <li>Build the sizing sheet per 512, 1,000 and 4,000 unit cluster with your field team.</li>
+        <li>Pull every Indian account and community signal you have into one list in Salesforce.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 30</h3><ul>
+        <li>A one-page India coverage map.</li>
+        <li>Meetings held with at least six of the bidders, with notes in their words.</li>
+        <li>The sizing sheet, reviewed by your architects.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp2" aria-labelledby="tb2" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Run proofs of value on one or two bidders' clusters, MemKV included where they host inference.</li>
+        <li>Put rupee pricing and a channel route in front of procurement teams. <span class="tag">to check how you bill India</span></li>
+        <li>Work the first BFSI accounts with the RSM, MEDDPICC from day one.</li>
+        <li>Write the specs for the next two hires.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 60</h3><ul>
+        <li>Two proofs of value live, with numbers.</li>
+        <li>A pipeline by segment you can forecast from.</li>
+        <li>Two job posts ready.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp3" aria-labelledby="tb3" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Take the first GPU cloud from proof to an Enterprise order, timed to its Stage-2 bid.</li>
+        <li>Write the India playbook so the RSM and the next hire start from it.</li>
+        <li>Write the 12-month India plan: revenue, cost, hiring, partners.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 90</h3><ul>
+        <li>One signed or committed GPU cloud, with a named signer.</li>
+        <li>A forecast you can hold me to.</li>
+        <li>A 12-month plan on one page.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>The tender sets the pace, not my calendar.</b> If Stage 2 slips, the BFSI and integrator doors carry the quarter.</p>
+  </section>
+
+  <section id="hire">
+    <div class="sh">
+      <span class="field">Hiring order</span>
+      <h2>Who comes after the RSM</h2>
+      <p>Each hire has the signal that would trigger it.</p>
+    </div>
+    <ol class="ladder">
+      <li class="rung now"><span class="rn">1</span><span class="rt">An India sales lead who sells first <small>now</small></span><span class="rs">Owns the number, the bidders, the integrators and the government calendar, and carries deals personally for two quarters. <b>This is the role I am proposing.</b></span></li>
+      <li class="rung"><span class="rn">2</span><span class="rt">The Mumbai RSM <small>already posted</small></span><span class="rs"><b>Focus:</b> commercial and mid-market, as your post describes. I would point it at BFSI first.</span></li>
+      <li class="rung"><span class="rn">3</span><span class="rt">A partner manager for India <small>month 3 or 4</small></span><span class="rs"><b>Signal:</b> two or more GPU clouds or integrators want to resell or bundle AIStor. If your earlier Partner Manager, India post was filled, this rung is already done.</span></li>
+      <li class="rung"><span class="rn">4</span><span class="rt">A second field architect <small>when proofs queue</small></span><span class="rs"><b>Signal:</b> proofs of value wait more than two weeks for an architect.</span></li>
+      <li class="rung"><span class="rn">5</span><span class="rt">A BDR on India hours <small>month 6</small></span><span class="rs"><b>Signal:</b> Indian inbound and free-tier upgrades outrun what the RSM can answer. Your BDRs today sit in the US and Europe. <span class="tag">timing is a guess</span></span></li>
+    </ol>
+  </section>
+
+  <section id="why">
+    <div class="sh">
+      <span class="field">Why me</span>
+      <h2>I have built a region from India before</h2>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <p>Built APAC from no team to 15 reps for a company new to the region, selling AI into Indian banks, brokers and insurers: Kotak Mahindra, Bajaj Allianz, Upstox. Typical deal about $150K TCV, Upstox $210K, the band your RSM post describes. $1M ARR in the first 12 months, $1.7M when I left.</p>
+      </div>
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <p>Built sales, marketing and success from scratch to 15 people for a Singapore company, run from India. We closed Remote, Multiplier, Temasek, Eventbrite and Igloo, at 104 percent net revenue retention. Expansion is how capacity-priced software grows.</p>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Inside and Channel Sales · Pune</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <p>A 60+ person sales engine and a channel network across 15 Indian cities. I know how to make partners sell in India, which is how most of these GPU clouds and integrators will buy.</p>
+      </div>
+      <p class="note">Most recently founding Head of Sales at Craze (YC S22): 70+ logos. I am in Pune and available now.</p>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <span class="field">For you</span>
+      <h2>Three questions I would ask first</h2>
+    </div>
+    <ol class="qs">
+      <li><span>Who owns India's number today, and does the Mumbai RSM report into the US, into EMEA, or to you?</span></li>
+      <li><span>Which of the IndiaAI bidders already run MinIO, paid or community, and what have they told you about it?</span></li>
+      <li><span>Would you go after India's sovereign AI program the way you went after HUMAIN, as a co-build partner, or sell licences through the clouds and integrators?</span></li>
+    </ol>
+  </section>
+
+  <footer class="endnote">
+    <h2>That is the draft.</h2>
+    <p>Most of it changes once I see your Indian accounts. The method stays: be in the room before Stage 2, win one GPU cloud as the reference, and hire on signals.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbtn'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

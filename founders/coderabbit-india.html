@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CodeRabbit India: a working draft</title>
+<meta name="description" content="A working draft by Ketan Sharma for Harjot Gill: SEBI's 5 May 2026 circular asks every Indian market entity to document, impact-analyse, review and test every system change. How CodeRabbit sells into that, and how APAC's founding team gets run from India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* The hero is a review thread: SEBI's change-management line as the "diff", CodeRabbit's products as the review comments on it. */
+:root{
+  --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#ECE8DF; --ink:#16140F; --muted:#5D584D; --line:#DDD7CA;
+  --teal:#0D6B62; --teal-soft:rgba(13,107,98,.09); --amber:#A6520A; --amber-soft:rgba(166,82,10,.10);
+  --add:#1F7A3A; --add-bg:rgba(31,122,58,.08); --del:#A02C2C; --del-bg:rgba(160,44,44,.07);
+  --on-teal:#FFFFFF;
+  --f-display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12110E; --surface:#1A1915; --surface-2:#23211C; --ink:#ECE8DF; --muted:#A39D90; --line:#33302A;
+  --teal:#4FC3B3; --teal-soft:rgba(79,195,179,.11); --amber:#F0A257; --amber-soft:rgba(240,162,87,.12);
+  --add:#6CCF8A; --add-bg:rgba(108,207,138,.09); --del:#F08A8A; --del-bg:rgba(240,138,138,.08);
+  --on-teal:#0B1F1C; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#12110E; --surface:#1A1915; --surface-2:#23211C; --ink:#ECE8DF; --muted:#A39D90; --line:#33302A;
+  --teal:#4FC3B3; --teal-soft:rgba(79,195,179,.11); --amber:#F0A257; --amber-soft:rgba(240,162,87,.12);
+  --add:#6CCF8A; --add-bg:rgba(108,207,138,.09); --del:#F08A8A; --del-bg:rgba(240,138,138,.08);
+  --on-teal:#0B1F1C; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.6; -webkit-text-size-adjust:100%}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display); line-height:1.12; text-wrap:balance; margin:0}
+h1{font-size:clamp(30px, 6.4vw, 46px); font-weight:800; letter-spacing:-.02em}
+h2{font-size:clamp(23px, 4.2vw, 30px); font-weight:700; letter-spacing:-.01em}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--teal); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); overflow-wrap:anywhere}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--amber); border-color:color-mix(in srgb, var(--amber) 45%, transparent); background:var(--amber-soft)}
+
+/* top bar */
+.topbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-family:var(--f-display); font-weight:700; font-size:14.5px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:600}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:13px; text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--on-teal); background:var(--teal); border-color:var(--teal)}
+@media (max-width:520px){ .who span{display:none} }
+
+/* hero */
+.hero{padding-block:38px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--amber)}
+.lede{font-size:18.5px; color:var(--muted); max-width:62ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+/* review thread */
+.pr{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.pr-hd{display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 12px; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.pr-hd b{color:var(--ink); font-weight:500}
+.pr-hd span{overflow-wrap:anywhere; min-width:0}
+.diff{margin:0; padding:10px 0; list-style:none; font-family:var(--f-mono); font-size:13px; line-height:1.55}
+.diff li{display:grid; grid-template-columns:28px 1fr; padding:3px 16px 3px 0}
+.diff li::before{content:attr(data-s); text-align:center; color:var(--muted)}
+.diff li.del{background:var(--del-bg)} .diff li.del::before{color:var(--del)}
+.diff li.add{background:var(--add-bg)} .diff li.add::before{color:var(--add)}
+.diff li span{min-width:0; overflow-wrap:anywhere}
+.diff li.ctx span{color:var(--muted)}
+.cmts{border-top:1px solid var(--line); display:grid}
+.cmt{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; padding:12px 16px; border-bottom:1px solid var(--line)}
+.cmt:last-child{border-bottom:0}
+.cmt .q{font-family:var(--f-mono); font-size:12px; color:var(--teal); padding-top:3px; white-space:nowrap}
+.cmt .a{min-width:0; display:grid; gap:2px}
+.cmt .a b{font-weight:600}
+.cmt .a span{color:var(--muted); font-size:15.5px}
+@media (max-width:560px){ .cmt{grid-template-columns:1fr} }
+.pr-ft{padding:13px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:15.5px; display:grid; gap:6px}
+.pr-ft b{color:var(--ink)}
+.oneline{padding:16px 18px; border-radius:var(--r); border:1.5px solid var(--teal); background:var(--teal-soft); font-family:var(--f-display); font-size:19px; font-weight:600; line-height:1.35}
+
+/* sections */
+section{padding-block:40px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:22px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--amber); letter-spacing:.05em; text-transform:uppercase}
+.note{margin-top:14px; font-size:15px; color:var(--muted); max-width:68ch}
+.note b{color:var(--ink)}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start; min-width:0}
+.fact h3{font-size:15.5px}
+.fact p{font-size:15px; color:var(--muted)}
+.readbox{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.readbox ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.readbox li{max-width:68ch}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--teal) 50%, var(--line))}
+.door > summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start}
+.door > summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--teal); padding-top:5px; white-space:nowrap}
+.door .dt{font-family:var(--f-display); font-weight:700; font-size:17.5px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted)}
+.door .dopen{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--amber)}
+.door[open] .dopen{display:none}
+.door .dbody{padding:0 16px 16px}
+.kv{display:grid; grid-template-columns:120px 1fr; gap:6px 14px; font-size:15px; margin:0}
+.kv > dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv > dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv > dd{margin-bottom:8px} }
+
+/* tabs */
+.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabbtn{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tabbtn b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tabbtn small{font-family:var(--f-mono); font-size:11.5px}
+.tabbtn[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--teal)}
+.tabpanel{display:grid; grid-template-columns:1.25fr 1fr; gap:14px}
+.tabpanel[hidden]{display:none}
+@media (max-width:660px){ .tabpanel{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.pcol.see{background:var(--surface-2)}
+.pcol h3{font-size:12.5px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.04em; text-transform:uppercase}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15.5px}
+
+/* hiring */
+.posted{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px}
+.posted span{font-family:var(--f-mono); font-size:12px; padding:4px 9px; border-radius:6px; background:var(--surface); border:1px solid var(--line); color:var(--muted)}
+.ladder{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.rung{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; grid-template-columns:44px 1fr; gap:6px 12px}
+.rung > *{min-width:0}
+.rung .rn{grid-row:1 / span 2; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); border:1px solid var(--line); color:var(--muted)}
+.rung.now .rn{background:var(--teal); color:var(--on-teal); border-color:var(--teal)}
+.rung .rt{font-family:var(--f-display); font-weight:700; font-size:16.5px}
+.rung .rt small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; letter-spacing:.03em; text-transform:uppercase; white-space:nowrap}
+.rung .rsig{font-size:15px; color:var(--muted)}
+.rung .rsig b{color:var(--ink); font-weight:600}
+.notyet{margin-top:12px; border-left:3px solid var(--amber); padding:6px 12px; font-size:15px; color:var(--muted); max-width:68ch}
+.notyet b{color:var(--ink)}
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:190px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:19px}
+.pc .co span{font-size:13.5px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc p.line{font-size:15.5px}
+.nums{display:flex; flex-wrap:wrap; gap:8px; grid-column:1 / -1}
+.num{font-family:var(--f-mono); font-size:12.5px; padding:4px 9px; border-radius:6px; background:var(--teal-soft); border:1px solid color-mix(in srgb, var(--teal) 30%, transparent); white-space:nowrap}
+
+/* questions, end */
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs > li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:15.5px}
+.qs > li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--amber); padding-top:3px}
+.qs > li > span{min-width:0}
+.endnote{padding-block:40px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.endnote p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· India and APAC for CodeRabbit</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#read">CodeRabbit</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hiring order</a>
+      <a href="#why">Why me</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A working draft for Harjot Gill · 24 November 2026</div>
+    <h1>India's market regulator has already written your pitch.</h1>
+    <p class="lede">Harjot, on 5 May 2026 SEBI sent a circular, framed as an advisory on AI vulnerability tools, to every class of entity it regulates: brokers, mutual funds, exchanges, depositories, clearing corporations, portfolio managers. Annexure A, point 4, reads like a spec for Agentic Change Management. <strong>Here is the line, reviewed the way your product would review it.</strong></p>
+
+    <div class="pr" aria-label="SEBI circular, reviewed">
+      <div class="pr-hd"><b>SEBI circular, 05.05.2026, Annexure A</b><span>HO/13/19/12(1)2026-ITD-1_CIMGI/10873/2026</span></div>
+      <ol class="diff">
+        <li class="ctx" data-s=" "><span>4. Change Management:</span></li>
+        <li class="add" data-s="+"><span>Any change in the systems (including minor changes) should encompass full documentation, thorough impact analysis, structured review, rigorous testing and secure deployment</span></li>
+        <li class="ctx" data-s=" "><span>...</span></li>
+        <li class="add" data-s="+"><span>10. ... all REs need to prepare a long-term plan for usage of AI in detection and autonomous/agentic mitigation ... continuous vulnerability management using AI tools.</span></li>
+      </ol>
+      <div class="cmts">
+        <div class="cmt"><span class="q">full documentation</span><span class="a"><b>CodeRabbit Explain</b><span>explains and documents every change.</span></span></div>
+        <div class="cmt"><span class="q">impact analysis</span><span class="a"><b>Blast Radius Audit, Architecture Impact</b><span>affected components, dependencies, systemic consequences of a PR.</span></span></div>
+        <div class="cmt"><span class="q">structured review</span><span class="a"><b>CodeRabbit Review, pre-merge checks</b><span>every PR, before merge, against the team's own standards.</span></span></div>
+        <div class="cmt"><span class="q">rigorous testing</span><span class="a"><b>Automated test generation</b><span>on Team and above.</span></span></div>
+        <div class="cmt"><span class="q">point 10, AI tools</span><span class="a"><b>CodeRabbit Secure, Deep Scan</b><span>continuous security monitoring of every repo and PR, graded by exploitability.</span></span></div>
+      </div>
+      <div class="pr-ft">
+        <span>"Including minor changes" is the phrase that matters. No human team reviews every minor change at agent speed. A layer that is not the agent that wrote the code can, and leaves a record.</span>
+        <span class="src">Sources: <a href="https://www.sebi.gov.in/sebi_data/attachdocs/may-2026/1777992004516.pdf">SEBI circular PDF, 5 May 2026</a> (addressees on page 1, Annexure A points 3, 4 and 10) · <a href="https://www.coderabbit.ai/pricing">coderabbit.ai/pricing</a></span>
+      </div>
+    </div>
+    <p class="oneline">So in India's capital markets, CodeRabbit is not only a developer productivity buy. It is evidence for a SEBI line, and the buyer who signs is the CISO and the IT committee, not only the head of engineering.</p>
+  </header>
+
+  <section id="read">
+    <div class="sh">
+      <span class="field">What I understand</span>
+      <h2>CodeRabbit, read from outside</h2>
+      <p>From your site, your docs, your job board and the press. You know all of it better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you sell</h3><p>The governance and control layer for agentic software development: Review, Triage, Explain and Secure. Nearly 20,000 customers, over 2 million reviews a week.</p><span class="src"><a href="https://jobs.ashbyhq.com/coderabbit/3fb70e6b-412c-4e06-a729-70fa13862f7c">your India AE post, 11 Nov 2026</a></span></div>
+      <div class="fact"><h3>Scale and money</h3><p>Past $100M ARR on 12 Nov, ten times in just over a year. A $143M Series C at $1.5B on 12 Aug, led by Atomico and Smash Capital.</p><span class="src"><a href="https://www.coderabbit.ai/newsroom/coderabbit-tops-100m-arr-governance-agentic-software-development">newsroom, 12 Nov 2026</a> · <a href="https://www.coderabbit.ai/newsroom">newsroom, 12 Aug 2026</a></span></div>
+      <div class="fact"><h3>How it is priced</h3><p>Essentials $24, Team $48, Advanced $72 per user a month, then Enterprise with SSO, audit logs and custom deployment. Self-hosted for Enterprise customers with 500 or more seats. Also bought through marketplaces, Claude Marketplace since 27 May.</p><span class="src"><a href="https://www.coderabbit.ai/pricing">pricing</a> · <a href="https://docs.coderabbit.ai/self-hosted/overview">self-hosted docs</a> · <a href="https://www.coderabbit.ai/newsroom/coderabbit-joins-claude-marketplace">newsroom</a></span></div>
+      <div class="fact"><h3>India today</h3><p>Swiggy is a public case study: 900+ developers, 70 percent faster merges, one of two human reviewers replaced. Engineering roles are open in Bengaluru. A Director and Country Manager, Sales, India was announced in August 2025, and I assume he is still in the seat. <span class="tag guess">not confirmed since Aug 2025</span></p><span class="src"><a href="https://www.coderabbit.ai/case-studies/how-coderabbit-is-helping-swiggy-ship-faster">Swiggy case study</a> · <a href="https://www.cxodigitalpulse.com/nithin-kunimmal-appointed-director-country-manager-sales-india-at-coderabbit/">CXO Digital Pulse, 4 Aug 2025</a></span></div>
+      <div class="fact"><h3>APAC this month</h3><p>Eight sales seats posted since 3 Nov: founding AEs for Japan (Enterprise and Commercial) and Korea, Enterprise and Commercial AEs for ANZ, an Enterprise AE for India, an SDR and an SDR manager in Sydney. No APAC sales head on the board.</p><span class="src"><a href="https://jobs.ashbyhq.com/coderabbit">jobs.ashbyhq.com/coderabbit</a>, checked 24 Nov 2026</span></div>
+      <div class="fact"><h3>Regulated proof you already have</h3><p>EarnIn, a US regulated fintech, chose to buy over build: 5,000+ merged PRs with a consistent first pass, 60 percent acceptance across 8,000+ comments.</p><span class="src"><a href="https://www.coderabbit.ai/case-studies/earnin-scales-regulated-code-review-with-coderabbit-after-choosing-buy-over-build">EarnIn case study</a></span></div>
+    </div>
+    <div class="readbox">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>APAC is being stood up in one month, in five countries, by AEs who each own a list. Someone has to hold one coverage plan, one forecast and one regulated-industry story across them. I cannot see who does that today. <span class="tag guess">can't see your org chart</span></li>
+        <li>India already has a country lead and an Enterprise AE seat. What I would add sits beside them: the regulated book, run as its own motion, because the buyer, the cycle and the proof are different.</li>
+        <li>Swiggy proves the developer case in India. SEBI's circular gives the compliance case a date and a page number. Most Indian brokers and fund houses will read it as a security ask; the pitch is that review of every change is the control.</li>
+        <li>Banks follow the same logic. RBI's consolidated directions for commercial banks, issued 31 July 2026, require secure coding practices and a robust change management process for every application change. Banks are slower; I would put them in year two. <span class="src"><a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13643&amp;Mode=0">RBI Directions, 31 Jul 2026, paras 80, 83, 98</a></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <span class="field">First doors</span>
+      <h2>Where I would start</h2>
+      <p>In order. The real list comes from your seat data in month one: which SEBI and RBI regulated teams already pay you on Essentials or Team.</p>
+    </div>
+    <div class="doors">
+      <details class="door" open>
+        <summary><span class="dn">01</span><span class="dt">App-first brokers and wealth platforms</span><span class="dwhy">They write their own trading and onboarding software, ship often, and got SEBI's circular in May.</span><span class="dopen">open</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>who</dt><dd>SEBI-registered stock brokers, depository participants and investment platforms with in-house engineering teams. We sold AI into Upstox at Simplifai, so I know how these teams buy.</dd>
+          <dt>offer</dt><dd>A one-page SEBI change pack: Annexure A point 4 mapped to Review, Explain, Blast Radius and tests; point 10 mapped to Secure and Deep Scan; the review trail exported as audit evidence.</dd>
+          <dt>champion</dt><dd>CTO or head of platform. The CISO co-signs, and point 10 sends the decision to the IT committee.</dd>
+          <dt>must prove</dt><dd>Where code goes. Self-hosted starts at 500 seats; below that, the cloud answer has to satisfy their CSCRF assessment. <span class="tag guess">to check with your security team</span></dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">02</span><span class="dt">Software vendors empanelled with exchanges and depositories</span><span class="dwhy">Point 3 of the same annexure: exchanges and depositories "shall direct their empaneled application vendors" to assess AI-led vulnerability risk and act on it.</span><span class="dopen">open</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>why</dt><dd>These vendors ship the off-the-shelf software many brokers run. One vendor that reviews every change with CodeRabbit puts the control into hundreds of member firms at once.</dd>
+          <dt>route</dt><dd>The exchanges' empanelment lists, then each vendor's head of engineering. <span class="tag guess">list size unverified</span></dd>
+          <dt>offer</dt><dd>Deep Scan on their main product first, then Secure and Review on every release.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">03</span><span class="dt">Indian consumer internet at Swiggy's scale</span><span class="dwhy">The developer case is already proven here. Swiggy's VP Platform Engineering: AI code generation "also increased risk".</span><span class="dopen">open</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>who</dt><dd>Engineering organisations of 500+ developers in Bengaluru, Gurugram and Pune: commerce, mobility, fintech.</dd>
+          <dt>trigger</dt><dd>Seats climbing on self-serve plans, a request for SSO or audit logs, or a second org. <span class="tag guess">my pick of triggers</span></dd>
+          <dt>proof</dt><dd>The Swiggy numbers, told by Swiggy's own engineers where they will.</dd>
+        </dl><p class="note">Source: <a href="https://www.coderabbit.ai/case-studies/how-coderabbit-is-helping-swiggy-ship-faster">Swiggy case study</a></p></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">04</span><span class="dt">Banks and insurers, year two</span><span class="dwhy">RBI's 31 July directions ask for the same controls. I sold AI to Indian banks and insurers for two years, and these cycles run long.</span><span class="dopen">open</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>start with</dt><dd>Private banks' digital and platform teams, and insurers that build in-house.</dd>
+          <dt>needs</dt><dd>Self-hosted, a named reference from door 01, and patience. These deals rarely close inside two quarters.</dd>
+        </dl></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>One APAC operating plan, with regulated India inside it</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tabbtn" role="tab" id="tb1" aria-controls="tp1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Learn the book</b></button>
+      <button class="tabbtn" role="tab" id="tb2" aria-controls="tp2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Run the proofs</b></button>
+      <button class="tabbtn" role="tab" id="tb3" aria-controls="tp3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Make it repeat</b></button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp1" aria-labelledby="tb1">
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Sit with the India country lead and the new APAC AEs. Agree who covers what, and where regulated accounts sit.</li>
+        <li>Pull every Indian org on Essentials, Team and Advanced. Flag the SEBI and RBI regulated ones by name.</li>
+        <li>Write the SEBI change pack with your security and legal teams.</li>
+        <li>Meet 20 Indian engineering and security leaders, most of them in person in Mumbai and Bengaluru.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 30</h3><ul>
+        <li>A one-page APAC coverage map.</li>
+        <li>India's regulated top 50, each with seats, plan and owner.</li>
+        <li>The SEBI pack, approved by your legal team.</li>
+        <li>Notes from 20 conversations, in their words.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp2" aria-labelledby="tb2" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Run proofs of value in 8 to 10 regulated accounts, measured on acceptance rate and merge time, Swiggy style.</li>
+        <li>Open three empanelled vendors with a Deep Scan on their main product.</li>
+        <li>Run one weekly pipeline review across the APAC AEs.</li>
+        <li>Write the spec for an India solutions engineer.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 60</h3><ul>
+        <li>Pipeline by country and segment, in Salesforce.</li>
+        <li>Proof results you can quote.</li>
+        <li>First upgrades from Team and Advanced to Enterprise.</li>
+        <li>A job post ready to go.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp3" aria-labelledby="tb3" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Take the first SEBI-regulated Enterprise deal into procurement, CISO and IT committee in from week one.</li>
+        <li>Write the regulated-India playbook so the next AE starts from it.</li>
+        <li>Forecast APAC by country, and write the 12-month plan.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 90</h3><ul>
+        <li>A forecast you can hold me to.</li>
+        <li>One regulated Enterprise deal in procurement, with a named signer.</li>
+        <li>A 12-month plan: revenue, cost, hiring.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>Upgrades can land inside 90 days. A regulated Enterprise contract usually will not.</b> The day-90 test is a deal in procurement with a named signer.</p>
+  </section>
+
+  <section id="hire">
+    <div class="sh">
+      <span class="field">Hiring order</span>
+      <h2>Who I would hire after this month's posts</h2>
+      <p>Each hire comes with the signal that would trigger it.</p>
+    </div>
+    <div class="posted" aria-label="Already posted">
+      <span>AE Enterprise India</span><span>Founding AE Japan x2</span><span>Founding AE Korea</span><span>AE ANZ x2</span><span>SDR APAC</span><span>SDR Manager APAC</span>
+    </div>
+    <ol class="ladder">
+      <li class="rung now"><span class="rn">1</span><span class="rt">A lead for APAC enterprise who carries regulated India <small>now</small></span><span class="rsig">Coverage, forecast and the regulated motion across the region, and sells India's BFSI book himself for two quarters. <b>This is the role I am proposing.</b></span></li>
+      <li class="rung"><span class="rn">2</span><span class="rt">An India solutions engineer with a security background <small>month 3</small></span><span class="rsig"><b>Signal:</b> proofs of value wait more than a week for a technical owner, or CISOs ask questions the AE cannot answer.</span></li>
+      <li class="rung"><span class="rn">3</span><span class="rt">An India Commercial AE <small>month 4 or 5</small></span><span class="rsig"><b>Signal:</b> self-serve Indian orgs past 50 seats outnumber what the Enterprise AE can call. Japan and ANZ already have a Commercial seat. <span class="tag guess">timing is a guess</span></span></li>
+      <li class="rung"><span class="rn">4</span><span class="rt">Two SDRs in Bengaluru, under the Sydney manager <small>month 5</small></span><span class="rsig"><b>Signal:</b> Indian free and open-source users convert to meetings faster than the Sydney team can work in IST.</span></li>
+    </ol>
+    <p class="notyet"><b>What I would leave out for now: a separate BFSI vertical team.</b> Not until two regulated logos close and the playbook works without me in the room.</p>
+  </section>
+
+  <section id="why">
+    <div class="sh">
+      <span class="field">Why me</span>
+      <h2>I have sold AI into Indian finance, and built a region from India</h2>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <p class="line">Sold AI into Indian banks, brokers and private insurers, Upstox and Bajaj Allianz among them, through proofs of concept and ROI cases. Built APAC from no team to 15 reps.</p>
+        <div class="nums"><span class="num">$1M ARR in 12 months</span><span class="num">$1.7M when I left</span><span class="num">Upstox $210K TCV</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <p class="line">Ran sales, marketing and customer success for a Singapore company, from India, and built it from scratch to 15 people. We signed Remote, Multiplier, Temasek, Sleek and Igloo.</p>
+        <div class="nums"><span class="num">$200K+ ARR</span><span class="num">104% NRR</span></div>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Inside and Channel Sales · Pune</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <p class="line">Built a 60+ seat inside sales engine and a 15-city channel network. The SDR and Commercial layer you are building in APAC is the part I have run at volume.</p>
+        <div class="nums"><span class="num">60+ seats</span><span class="num">15 cities</span></div>
+      </div>
+      <p class="note">Most recently I set up sales at Craze (YC S22) as founding Head of Sales: 70+ logos. I live in Pune and I am available now.</p>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <span class="field">For you</span>
+      <h2>Three questions I would ask first</h2>
+    </div>
+    <ol class="qs">
+      <li><span>Who owns the APAC number today, and where does India's regulated book sit between your India country lead and the team you are hiring this month?</span></li>
+      <li><span>Do you want the review trail sold as audit evidence to a regulator, or does that create a promise you would rather not make? It decides how loud the SEBI story gets.</span></li>
+      <li><span>Would you take self-hosted below 500 seats for a regulated Indian account that will grow into it, or is that line fixed?</span></li>
+    </ol>
+  </section>
+
+  <footer class="endnote">
+    <h2>That is the draft.</h2>
+    <p>Most of it changes once I see your seat data. The method stays: the developer case is proven in India, SEBI has dated the compliance case, and APAC's founding team needs one plan that holds both.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbtn'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
