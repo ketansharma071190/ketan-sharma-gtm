@@ -299,6 +299,17 @@ var T = (function () {
 .tile .ft{display:flex; justify-content:space-between; align-items:center; gap:6px}
 .tile .ft::after{content:"\2192"; font-family:var(--f-mono); color:var(--accent)}
 .tile.plan{background:var(--accent-soft); border-color:transparent}
+.tile.wide{grid-column:1 / -1; min-height:0; grid-template-columns:4.5rem minmax(0,1fr) auto; grid-template-rows:auto; align-items:center; gap:6px 14px; background:var(--surface)}
+.tile.wide .ft::after{margin-left:6px}
+@media (max-width:640px){ .tile.wide{grid-template-columns:minmax(0,1fr) auto} .tile.wide .n{grid-column:1 / -1} }
+.eflow{list-style:none; padding:0; display:flex; flex-wrap:wrap; align-items:center; gap:10px; font:500 14px/1 var(--f-mono); color:var(--ink)}
+.eflow li{display:flex; align-items:center; gap:10px}
+.eflow span{padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--bg); white-space:nowrap}
+.eflow li:not(:last-child)::after{content:"\2192"; color:var(--accent)}
+.eflow li.eol::after{visibility:hidden}
+.a7 .pg{font-weight:600; color:var(--accent); text-decoration:none; white-space:nowrap}
+.a7 .pg::after{content:" \2192"; font-family:var(--f-mono)}
+.a7 .pg:hover{text-decoration:underline}
 @media (max-width:640px){ .tile{min-height:136px; padding:12px} .tile .tt span{font-size:13px} }
 
 .d90{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; border-top:2px solid var(--ink)}
@@ -346,10 +357,10 @@ var T = (function () {
       <div>
         <p class="glab">Open on their numbers</p>
         <ul class="a7">
-          <li><span class="nm">Mahindra &amp; Mahindra</span><span class="why"><b class="nw">Rs 2,239 cr</b> in supplier finance, up 63% in a year.</span></li>
+          <li><span class="nm">Mahindra &amp; Mahindra</span><span class="why"><b class="nw">Rs 2,239 cr</b> in supplier finance, up 63% in a year. <a class="pg" href="tasconnect-india/account-mahindra.html">Open its page</a></span></li>
           <li><span class="nm">Maruti Suzuki</span><span class="why"><b class="nw">Rs 76,838 cr</b> invested. Payable days 57 to 61.</span></li>
           <li><span class="nm">Hero MotoCorp</span><span class="why">Payable days <b>77 to 88</b> in a year.</span></li>
-          <li><span class="nm">Bajaj Auto</span><span class="why"><b class="nw">Rs 30,113 cr</b> invested, <span class="nw">Rs 73 cr</span> borrowed.</span></li>
+          <li><span class="nm">Bajaj Auto</span><span class="why">Surplus funds above <b class="nw">Rs 18,000 cr</b>, almost no debt.</span></li>
         </ul>
       </div>
       <div>
@@ -405,6 +416,7 @@ var T = (function () {
       <a class="tile" href="tasconnect-india/pipeline.html"><span class="n">10</span><span class="tt"><b>Pipeline and cadence</b><span>Funnel by tier, capacity, rhythm</span></span><span class="ft"><span class="chip draft">First draft</span></span></a>
       <a class="tile" href="tasconnect-india/first-90-days.html"><span class="n">11</span><span class="tt"><b>First 90 days</b><span>Three lanes, dated milestones</span></span><span class="ft"><span class="chip ok">Filled</span></span></a>
       <a class="tile plan" href="tasconnect-india/plan.html"><span class="n">Plan</span><span class="tt"><b>The signed plan</b><span>Seven deals, by quarter</span></span><span class="ft"><span class="chip">USD 2.5M</span></span></a>
+      <a class="tile wide" href="tasconnect-india/engine.html"><span class="n">Engine</span><span class="tt"><b>How I run it</b><span>Research, CRM, a page per reader, prep, the Monday forecast</span></span><span class="ft"><span class="chip">Live example</span></span></a>
     </nav>
     <p class="cap">First draft: built on public data, to finish with yours. We build on these together.</p>
   </div>
@@ -423,7 +435,22 @@ var T = (function () {
   </div>
 </section>
 
-<section class="screen alt" aria-labelledby="h6">
+<section class="screen alt" aria-labelledby="h-eng">
+  <div class="wrap">
+    <p class="eyebrow">How I run it</p>
+    <h2 class="big" id="h-eng">People take the calls. The engine does the rest.</h2>
+    <ol class="eflow" aria-label="The engine">
+      <li><span>Research</span></li><li><span>CRM</span></li><li><span>A page per reader</span></li><li><span>Prep</span></li><li><span>Signed forecast</span></li>
+    </ol>
+    <a class="strip" href="tasconnect-india/account-mahindra.html" aria-label="Live example: the Mahindra and Mahindra CFO page, built from its FY26 filings. Open it.">
+      <span class="t"><b>Mahindra &amp; Mahindra, the CFO page</b><span>Built from its FY26 filings. Change the numbers, switch the reader.</span></span>
+      <span class="go">Open the example</span>
+    </a>
+    <a class="open" href="tasconnect-india/engine.html">How I run it</a>
+  </div>
+</section>
+
+<section class="screen" aria-labelledby="h6">
   <div class="wrap">
     <p class="eyebrow">For our third call</p>
     <h2 class="big" id="h6">Two answers sharpen all of it.</h2>
@@ -442,6 +469,17 @@ var T = (function () {
 </main>
 
 <script>
+(function () {
+  // The engine steps wrap on a phone: hide the arrow on the last step of each line, so no arrow points off the edge.
+  var steps = T.$$('.eflow li');
+  function eol() {
+    steps.forEach(function (li) { li.classList.toggle('eol', false); });
+    steps.forEach(function (li, i) { var nx = steps[i + 1]; if (nx && nx.offsetTop > li.offsetTop + 4) li.classList.toggle('eol', true); });
+  }
+  eol();
+  var et; window.addEventListener('resize', function () { clearTimeout(et); et = setTimeout(eol, 100); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(eol);
+})();
 (function () {
   var apr = T.$('#c-apr'), svg = T.$('#nl');
   if (!apr) return;

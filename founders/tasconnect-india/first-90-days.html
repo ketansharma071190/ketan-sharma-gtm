@@ -275,6 +275,8 @@ var T = (function () {
 .ask .seg button{padding:5px 9px; font-size:12.5px}
 @media (max-width:640px){ .ask{grid-template-columns:2rem minmax(0,1fr)} .ask .seg{grid-column:2} }
 .impact{display:grid; gap:6px}
+.row-open{display:flex; flex-wrap:wrap; align-items:center; gap:10px 20px}
+.row-open a.small{font-weight:600}
 </style>
 
 <section class="hero">
@@ -306,14 +308,15 @@ var T = (function () {
 
 <section class="blk" aria-labelledby="h-eng">
   <h2 id="h-eng">The account engine, live by day 30</h2>
-  <p>Built with Claude Code in the first month, so sellers spend their time in conversations and everything around a meeting is already done. It is what lets one person work about 40 accounts a quarter.</p>
+  <p>Built in the first month, so sellers spend their time in conversations and everything around a meeting is already done. It is what lets Ketan work about 40 accounts a quarter on his own.</p>
   <div class="grid2">
     <div class="card"><span class="eyebrow">1 &middot; Research</span><h3>Every account read from its own filings</h3><p class="small muted">The supplier finance note, the MSMED table, cash against borrowings, payable days, dealer receivables, group links. Scored for tier and friction before anyone writes to it.</p></div>
-    <div class="card"><span class="eyebrow">2 &middot; CRM</span><h3>Filled without typing</h3><p class="small muted">Contacts placed on the committee map by desk, stage evidence logged from each meeting, the next step dated.</p></div>
+    <div class="card"><span class="eyebrow">2 &middot; CRM</span><h3>Filled for a person to check</h3><p class="small muted">Contacts placed on the committee map by desk, stage evidence logged from each meeting, the next step dated.</p></div>
     <div class="card"><span class="eyebrow">3 &middot; A page per account</span><h3>Their numbers, editable, for each reader</h3><p class="small muted">The CFO gets the case on his figures, the treasurer the bank view, procurement the supplier waves. Sent the same day as the meeting, like the account and CFO pages in this playbook.</p></div>
     <div class="card"><span class="eyebrow">4 &middot; The rhythm</span><h3>Prep and reporting drafted for review</h3><p class="small muted">Call prep before every meeting, the recap after it, and the Monday one-pager from the CRM. A person checks each one before it goes.</p></div>
   </div>
   <p class="small muted"><b>What it reads:</b> public filings and registry data, plus your CRM, inside your data policy and on tools your security team approves. Client data never goes into a model your security team has not cleared. It needs ask 20: a CRM seat, the call-recording consent policy, and a sandbox.</p>
+  <div class="row-open"><a class="open" href="engine.html">How I run it</a><a class="small" href="account-mahindra.html">See the Mahindra example</a></div>
 </section>
 
 <section class="blk" aria-labelledby="h-asks">
