@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pricing logic · TASConnect India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the front is short screens on a 1040px column, one idea each; detail pages are a 760px reading
+   column where tables, diagrams and calculators may run to 1040px inside their own scroll box.
+   Ledger red marks limits (the 45-day line, a blocked term). Ink blue is the one accent. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EAEEF4; --ink:#0E1522; --muted:#586375; --line:#D9DFE8; --track:#E3E8EF;
+  --accent:#1F47C9; --accent-soft:#E3E9FA; --red:#B42318; --red-soft:#FBE7E4;
+  --good:#0B7A53; --good-soft:#DDF1E7; --amber:#975705; --amber-soft:#FAECD6;
+  --f-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 var(--f-body)}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+table{font:inherit; color:inherit; border-collapse:collapse}
+button,input,select,textarea{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.num,.tbl td{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* type */
+.eyebrow{font:500 12.5px/1.3 var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display); font-stretch:92%; text-wrap:balance}
+.mega{font-size:clamp(42px,8.6vw,100px); font-weight:650; line-height:.96; letter-spacing:-.03em; word-spacing:.06em}
+.mega .soft{color:var(--muted); font-weight:520}
+h2.big{font-size:clamp(30px,5.4vw,56px); font-weight:640; line-height:1.02; letter-spacing:-.022em; word-spacing:.05em}
+.lede{font-size:clamp(18px,2.3vw,21px); line-height:1.45; max-width:44ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.cap{font:12.5px/1.45 var(--f-mono); letter-spacing:.02em; color:var(--muted)}
+p{max-width:66ch}
+b,strong{font-weight:600}
+
+/* chips and tags */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; font:500 12px/1 var(--f-mono); letter-spacing:.02em; padding:5px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.o{background:transparent; border:1px solid var(--line); color:var(--muted)}
+.chip.draft{background:var(--amber-soft); color:var(--amber)}
+.chip.ok{background:var(--good-soft); color:var(--good)}
+.chip.lim{background:var(--red-soft); color:var(--red)}
+.tag{font:11.5px/1 var(--f-mono); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 6px; white-space:nowrap; vertical-align:2px}
+
+/* buttons */
+.open{display:inline-flex; align-items:center; gap:10px; justify-self:start; font:600 15px/1 var(--f-body); color:var(--accent); text-decoration:none; padding:12px 18px; border:1.5px solid var(--accent); border-radius:999px; background:transparent}
+.open::after{content:"\2192"; font-family:var(--f-mono)}
+.open:hover{background:var(--accent-soft)}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:14px; line-height:1.2; color:var(--ink)}
+.seg button:hover,.btn:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.sm{padding:6px 10px; font-size:13px}
+
+/* front screens */
+.screen{border-top:1px solid var(--line)}
+.screen:first-child{border-top:0}
+.screen.alt{background:var(--surface)}
+.screen>.wrap{padding-block:clamp(48px,8vw,96px); display:grid; gap:clamp(18px,3vw,28px)}
+
+/* detail chrome */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+body.detail::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
+.topin{display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.back{font:600 14.5px/1 var(--f-body); text-decoration:none; color:var(--ink); display:inline-flex; gap:8px; align-items:center}
+.back::before{content:"\2190"; font-family:var(--f-mono); color:var(--accent)}
+.back:hover{color:var(--accent)}
+.sec{font:12px/1 var(--f-mono); color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.page{padding-block:clamp(28px,5vw,48px) 24px; display:grid; gap:0}
+.hero{display:grid; gap:14px; padding-bottom:clamp(22px,4vw,34px)}
+.hero h1{font-size:clamp(32px,6vw,58px); font-weight:640; line-height:1.04; letter-spacing:-.022em; word-spacing:.05em; max-width:20ch}
+.blk{display:grid; gap:14px; padding-block:clamp(24px,4vw,36px); border-top:1px solid var(--line); min-width:0}
+.blk>h2{font-size:clamp(22px,3.2vw,30px); font-weight:630; line-height:1.1; letter-spacing:-.02em}
+.blk h3{font-size:18px; font-weight:620; letter-spacing:-.01em; line-height:1.25}
+.blk>p,.blk>ul,.blk>ol{max-width:66ch}
+.draftbar{background:var(--amber-soft); border-radius:12px; padding:14px 16px; display:grid; gap:6px; max-width:760px}
+.draftbar .lab{font:500 12px/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--amber)}
+.pn{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-block:28px 8px; border-top:1px solid var(--line)}
+.pn a{display:grid; gap:4px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:var(--ink); background:var(--surface); min-width:0}
+.pn a:hover{border-color:var(--accent)}
+.pn small{font:11.5px/1 var(--f-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.pn span{font-weight:600}
+.pn .next{text-align:right}
+.foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:16px 40px; font-size:13.5px; color:var(--muted)}
+
+/* lists */
+.ticks{list-style:none; padding:0; display:grid; gap:8px}
+.ticks li{position:relative; padding-left:20px}
+.ticks li::before{content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.ticks.red li::before{background:var(--red)}
+.steps{padding-left:1.4em; display:grid; gap:8px}
+.steps li::marker{font:500 13px var(--f-mono); color:var(--accent)}
+dl.kv{display:grid; grid-template-columns:minmax(0,9.5rem) minmax(0,1fr); gap:8px 16px}
+dl.kv dt{font:12.5px/1.5 var(--f-mono); color:var(--muted); padding-top:2px}
+@media (max-width:560px){ dl.kv{grid-template-columns:1fr; gap:2px} dl.kv dd{padding-bottom:8px} }
+
+/* surfaces */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:grid; gap:10px; min-width:0; align-content:start}
+.screen.alt .card{background:var(--bg)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:820px){ .grid3{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .grid2,.grid3{grid-template-columns:1fr} }
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-width:100%}
+.tbl{width:100%; min-width:600px; font-size:14.5px; line-height:1.45}
+.tbl.w8{min-width:820px}
+.tbl th,.tbl td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+.tbl th{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl td b{font-weight:600}
+.tbl tr.hl td{background:var(--accent-soft)}
+.svgbox{max-width:100%; min-width:0}
+.svgbox svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--f-mono)}
+
+/* expanders */
+details.xp{border-top:1px solid var(--line)}
+details.xp:last-of-type{border-bottom:1px solid var(--line)}
+details.xp>summary{list-style:none; cursor:pointer; display:flex; gap:14px; align-items:baseline; padding:14px 2px}
+details.xp>summary::-webkit-details-marker{display:none}
+details.xp>summary .st{flex:1; min-width:0; display:grid; gap:2px}
+details.xp>summary .st b{font-weight:600}
+details.xp>summary .st span{color:var(--muted); font-size:14.5px}
+details.xp>summary::after{content:"+"; font:400 20px/1 var(--f-mono); color:var(--accent)}
+details.xp[open]>summary::after{content:"\2212"}
+details.xp>.xb{padding:0 2px 18px; display:grid; gap:10px}
+
+/* inputs and outputs */
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.f{display:grid; gap:5px; font-size:13.5px; color:var(--muted); min-width:0}
+.f input,.f select{width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums}
+.f input:focus,.f select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.sl{display:grid; gap:6px}
+.sl label{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-weight:500; font-size:15px}
+.sl output{font:620 19px/1 var(--f-display); font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--accent); height:28px; margin:0}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.kpi{display:grid; gap:4px; padding:12px 14px; border-radius:12px; background:var(--sunk); min-width:0}
+.kpi .k{font:11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.kpi .v{font:640 clamp(21px,3vw,27px)/1.05 var(--f-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px; color:var(--muted)}
+.kpi.hi{background:var(--accent-soft)}
+.kpi.hi .v{color:var(--accent)}
+.flags{list-style:none; padding:0; display:grid; gap:6px}
+.flags li{font-size:14.5px; padding:9px 12px; border-radius:10px; background:var(--amber-soft); color:var(--ink)}
+.flags li.lim{background:var(--red-soft)}
+.flags li.ok{background:var(--good-soft)}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:560; line-height:1.3; letter-spacing:-.01em}
+
+@media (max-width:560px){ .pn{grid-template-columns:1fr} .pn .next{text-align:left} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+<script>
+/* Shared helpers: Indian number formats, segmented buttons, safe per-browser storage. */
+var T = (function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function inr(x, dp) {
+    dp = dp || 0;
+    return Number(x).toLocaleString('en-IN', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  // Rupees held in crore. Under 1 crore it reads in lakh.
+  function cr(x) {
+    if (!isFinite(x)) return 'n/a';
+    var neg = x < 0, a = Math.abs(x), s;
+    if (a < 1) s = 'Rs ' + inr(a * 100, a * 100 < 10 ? 1 : 0) + ' lakh';
+    else s = 'Rs ' + inr(a, a < 10 ? 2 : (a < 100 ? 1 : 0)) + ' crore';
+    s = s.replace(/\.0+ /, ' ').replace(/(\.\d*?)0+ /, '$1 ');
+    return (neg ? 'less ' : '') + s;
+  }
+  function pct(x, dp) {
+    if (!isFinite(x)) return 'n/a';
+    var v = (x * 100).toFixed(dp === undefined ? 1 : dp);
+    return v.replace(/\.0+$/, '') + '%';
+  }
+  function usdm(x) { var v = Math.round(x / 10000) / 100; var s = String(v); return 'USD ' + (s.indexOf('.') < 0 ? s + '.0' : s) + 'M'; }
+  function seg(el, cb) {
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || !el.contains(b)) return;
+      $$('button', el).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute('data-v'), b);
+    });
+  }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1600); } };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } catch (e) { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  // Draws an SVG at the real width of its box, so text stays readable on a phone and nothing scrolls sideways.
+  // draw(svg, width) adds the marks and returns the height it used. Redraws when the width changes.
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, txt) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+  function fit(svg, draw) {
+    var last = -1;
+    function go(force) {
+      var box = svg.parentNode, w = Math.floor(box.getBoundingClientRect().width || box.clientWidth || 0);
+      if (w < 200) w = Math.max(w, 280);
+      if (!force && w === last) return; last = w;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var h = draw(svg, w);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    go(true);
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { go(false); }, 120); });
+    return function () { go(true); };
+  }
+  return { $: $, $$: $$, inr: inr, cr: cr, pct: pct, usdm: usdm, seg: seg, store: store, copy: copy, el: el, fit: fit };
+})();
+</script>
+</head>
+<body class="detail">
+<header class="top"><div class="wrap topin"><a class="back" href="../tasconnect-india.html">India playbook</a><span class="sec">Section 06 of 11</span></div></header>
+<main class="wrap page">
+<style>
+.bench text{font-size:11px; fill:var(--muted)}
+.bench .nm{font:600 12px var(--f-body); fill:var(--ink)}
+.rules{counter-reset:r; list-style:none; padding:0; display:grid; gap:0; border-top:1px solid var(--line)}
+.rules li{display:grid; grid-template-columns:2rem minmax(0,1fr); gap:10px; padding:12px 0; border-bottom:1px solid var(--line)}
+.rules li::before{counter-increment:r; content:counter(r); font:600 13px var(--f-mono); color:var(--accent); padding-top:2px}
+.rules b{display:block}
+</style>
+
+<section class="hero">
+  <p class="eyebrow">06 &middot; Pricing logic</p>
+  <h1>Price against what one bank's free portal cannot do.</h1>
+  <p class="lede">The shape of a price, the Indian benchmarks around it, and the rules for quoting. No figure here is a TASConnect price.</p>
+  <div class="chips"><span class="chip draft">First draft</span></div>
+</section>
+
+<div class="draftbar"><span class="lab">First draft &middot; we build this together</span><p class="small">Built on public benchmarks and labelled assumptions. Three signed programs' commercial shape, the list and the floor replace every assumption below.</p></div>
+
+<section class="blk" aria-labelledby="h-pub">
+  <h2 id="h-pub">What is public</h2>
+  <ul class="ticks">
+    <li>A subscription plus a per-transaction charge, paid by the bank, the corporate, or both. No sign-up cost for SMEs.</li>
+    <li>No rate card is published anywhere.</li>
+    <li>Suppliers pay no platform fee at the global peers (C2FO, Taulia, PrimeRevenue).</li>
+  </ul>
+</section>
+
+<section class="blk" aria-labelledby="h-bench">
+  <h2 id="h-bench">Indian benchmarks, in basis points</h2>
+  <div class="svgbox"><svg class="bench" id="bench" role="img" aria-label="Indian platform fees in basis points"></svg></div>
+  <ul class="ticks small">
+    <li>Bank-side platforms charge banks 3 to 8 bps of disbursals, about 7 on average. Some large banks prefer a one-time licence.</li>
+    <li>A large public bank's white-label tender priced a licence, customisation, and annual support capped at 20% of the licence a year.</li>
+    <li>TReDS charges registration of a few thousand rupees to Rs 50,000 a year, plus 25 to 30 bps a year on transactions.</li>
+    <li>In the brief, discounting alone breaks even at about 12.7 bps of what is paid early. The whole case, with the bank-funded terms and the interest avoided, breaks even at about 55 bps.</li>
+  </ul>
+</section>
+
+<section class="blk" aria-labelledby="h-shape">
+  <h2 id="h-shape">The shape of a program price</h2>
+  <p>Subscription plus a volume fee on what is financed. Pick a case or type your own; all three are assumptions.</p>
+  <div class="seg" id="case" role="group" aria-label="Price case"><button type="button" data-v="low" aria-pressed="false">Low</button><button type="button" data-v="base" aria-pressed="true">Base</button><button type="button" data-v="high" aria-pressed="false">High</button></div>
+  <div class="fields">
+    <label class="f">Subscription, USD k a year<input id="p-sub" type="number" value="90" step="5" inputmode="numeric"></label>
+    <label class="f">Volume fee, bps<input id="p-bps" type="number" value="5" step="0.5" inputmode="decimal"></label>
+    <label class="f">Financed a year, USD M<input id="p-vol" type="number" value="120" step="10" inputmode="numeric"></label>
+    <label class="f">Setup, USD k once<input id="p-set" type="number" value="25" step="5" inputmode="numeric"></label>
+  </div>
+  <div class="kpis" aria-live="polite">
+    <div class="kpi hi"><span class="k">First-year ACV</span><span class="v" id="p-acv">USD 150k</span><span class="s">subscription plus volume fees</span></div>
+    <div class="kpi"><span class="k">Volume fees</span><span class="v" id="p-vf">USD 60k</span><span class="s" id="p-share">40% of the ACV</span></div>
+    <div class="kpi"><span class="k">Setup</span><span class="v" id="p-so">USD 25k</span><span class="s">counted apart</span></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><span class="eyebrow">Anchor program</span><b style="font:640 22px var(--f-display)">About USD 0.5M a year</b><p class="small muted">About Rs 15,000 crore of spend and 2,000 suppliers: about Rs 4.5 crore a year, Rs 1.5 crore from the corporate and Rs 3 crore from the banks, plus setup.</p></div>
+    <div class="card"><span class="eyebrow">Mid-size program</span><b style="font:640 22px var(--f-display)">USD 0.15M to 0.3M a year</b><p class="small muted">The Base case above is a mid-size program.</p></div>
+  </div>
+  <p class="small">The plan's seven deals average about USD 357k: four anchor programs at USD 0.4M to 0.5M (Hero, Bajaj, M&amp;M, Maruti) and three mid-size at USD 0.2M to 0.25M (Lenovo India, Syngenta India, one open deal). Your answer on what a typical program signs for replaces all three figures.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-val">
+  <h2 id="h-val">The value ceiling, checked</h2>
+  <p>In the 2,000-supplier brief the corporate keeps about Rs 8.9 crore a year in the strict view, before any fee: Rs 1.2 crore from discounting on its own cash, Rs 7.1 crore from longer terms its banks fund, and Rs 0.6 crore of late-payment interest avoided. Against today's liquid fund it keeps Rs 10.1 crore.</p>
+  <p><b>So a corporate-paid fee of Rs 1 to 2 crore a year fits either view, with room.</b> Discounting alone carries only Rs 1.2 crore in the strict view, so where the corporate funds with factoring, lead with the bank-funded line and let the banks' volume fee carry more of the price.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-rules">
+  <h2 id="h-rules">Six rules for quoting</h2>
+  <ol class="rules">
+    <li><span><b>No price in the first meeting.</b>Price after scoping, once the CFO has seen the value on his own numbers.</span></li>
+    <li><span><b>Price against what a single bank's portal cannot do.</b>Several banks competing on one screen, own-cash discounting where the corporate earns the discount, one data set for the Ind AS 7 note and the 45-day rule. Never price against software cost.</span></li>
+    <li><span><b>Suppliers are free.</b></span></li>
+    <li><span><b>Banks pay a volume fee where they fund.</b>Who pays what is decided per program.</span></li>
+    <li><span><b>No rebates.</b>Platform fees shared back to the buyer push programs toward debt classification. A rival's "information-access fees" to buyers made the Wall Street Journal in 2022.</span></li>
+    <li><span><b>Multi-year terms, with the expansion entities named in the order form.</b></span></li>
+  </ol>
+</section>
+
+<section class="blk" aria-labelledby="h-count">
+  <h2 id="h-count">How a deal counts toward the plan</h2>
+  <p>Signed ACV is the first-year subscription plus contracted or committed year-one volume fees. Setup counts separately.</p>
+  <p class="muted">Open: whether bank-paid fees under a bank participant agreement count toward the corporate deal's ACV.</p>
+  <p class="quote">For our call: what does a typical program sign for?</p>
+</section>
+
+<script>
+(function () {
+  var B = [['Bank-side platforms', 3, 8, 7], ['Implied Indian platform take', 7, 15, null], ['TReDS transactions, a year', 25, 30, null], ['Break-even, discounting alone', 12.7, 12.7, 12.7]];
+  T.fit(T.$('#bench'), function (g, w) {
+    var wide = w >= 560, LW = wide ? 200 : 0, x0 = LW + 4, x1 = w - 52, PX = (x1 - x0) / 32, RH = wide ? 38 : 46, top = 26;
+    var n = B.length, bottom = top + n * RH;
+    for (var t = 0; t <= 30; t += 5) {
+      g.appendChild(T.el('line', { x1: x0 + t * PX, y1: top - 10, x2: x0 + t * PX, y2: bottom - 10, stroke: 'var(--line)' }));
+      g.appendChild(T.el('text', { x: x0 + t * PX, y: bottom + 6, 'text-anchor': 'middle' }, t + (t === 30 ? ' bps' : '')));
+    }
+    B.forEach(function (b, i) {
+      var y = top + i * RH, by = wide ? y : y + 14, last = i === n - 1, wdt = Math.max(4, (b[2] - b[1]) * PX);
+      g.appendChild(T.el('text', { x: wide ? 0 : x0, y: wide ? y + 5 : y + 2, 'class': 'nm' }, b[0]));
+      g.appendChild(T.el('rect', { x: x0 + b[1] * PX - (wdt === 4 ? 2 : 0), y: by - 6, width: wdt, height: 14, rx: 7, fill: last ? 'var(--red)' : 'var(--accent)', opacity: last ? 1 : 0.8 }));
+      if (b[3] != null && !last) g.appendChild(T.el('circle', { cx: x0 + b[3] * PX, cy: by + 1, r: 4, fill: 'var(--surface)', stroke: 'var(--ink)', 'stroke-width': 1.5 }));
+      g.appendChild(T.el('text', { x: x0 + b[2] * PX + 8, y: by + 5 }, b[1] === b[2] ? b[1] + ' bps' : b[1] + ' to ' + b[2]));
+    });
+    return bottom + 14;
+  });
+  var C = { low: [50, 3, 50, 25], base: [90, 5, 120, 25], high: [150, 8, 250, 25] };
+  var ids = ['#p-sub', '#p-bps', '#p-vol', '#p-set'];
+  function n(id) { var v = parseFloat(T.$(id).value); return isFinite(v) ? v : 0; }
+  function k(x) { return x >= 1000 ? 'USD ' + (x / 1000).toFixed(2).replace(/0$/, '') + 'M' : 'USD ' + Math.round(x) + 'k'; }
+  function render() {
+    var sub = n('#p-sub'), bps = n('#p-bps'), vol = n('#p-vol'), set = n('#p-set');
+    var vf = vol * 1000 * bps / 10000, acv = sub + vf;
+    T.$('#p-acv').textContent = k(acv); T.$('#p-vf').textContent = k(vf); T.$('#p-so').textContent = k(set);
+    T.$('#p-share').textContent = acv > 0 ? Math.round(vf / acv * 100) + '% of the ACV' : '';
+  }
+  T.seg(T.$('#case'), function (v) { C[v].forEach(function (x, i) { T.$(ids[i]).value = x; }); render(); });
+  ids.forEach(function (id) { T.$(id).addEventListener('input', render); });
+  render();
+})();
+</script>
+
+</main>
+<nav class="pn wrap" aria-label="Sections"><a class="prev" href="pilot.html"><small>Previous</small><span>05 Pilot design</span></a><a class="next" href="objections.html"><small>Next</small><span>07 Objections</span></a></nav>
+<footer class="foot wrap"><a href="../tasconnect-india.html">Back to the India playbook</a><span>Draft for our third call, 25 Nov 2026</span></footer>
+</body>
+</html>

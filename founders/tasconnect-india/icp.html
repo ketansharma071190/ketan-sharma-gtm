@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Who we sell to · TASConnect India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the front is short screens on a 1040px column, one idea each; detail pages are a 760px reading
+   column where tables, diagrams and calculators may run to 1040px inside their own scroll box.
+   Ledger red marks limits (the 45-day line, a blocked term). Ink blue is the one accent. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EAEEF4; --ink:#0E1522; --muted:#586375; --line:#D9DFE8; --track:#E3E8EF;
+  --accent:#1F47C9; --accent-soft:#E3E9FA; --red:#B42318; --red-soft:#FBE7E4;
+  --good:#0B7A53; --good-soft:#DDF1E7; --amber:#975705; --amber-soft:#FAECD6;
+  --f-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 var(--f-body)}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+table{font:inherit; color:inherit; border-collapse:collapse}
+button,input,select,textarea{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.num,.tbl td{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* type */
+.eyebrow{font:500 12.5px/1.3 var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display); font-stretch:92%; text-wrap:balance}
+.mega{font-size:clamp(42px,8.6vw,100px); font-weight:650; line-height:.96; letter-spacing:-.03em; word-spacing:.06em}
+.mega .soft{color:var(--muted); font-weight:520}
+h2.big{font-size:clamp(30px,5.4vw,56px); font-weight:640; line-height:1.02; letter-spacing:-.022em; word-spacing:.05em}
+.lede{font-size:clamp(18px,2.3vw,21px); line-height:1.45; max-width:44ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.cap{font:12.5px/1.45 var(--f-mono); letter-spacing:.02em; color:var(--muted)}
+p{max-width:66ch}
+b,strong{font-weight:600}
+
+/* chips and tags */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; font:500 12px/1 var(--f-mono); letter-spacing:.02em; padding:5px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.o{background:transparent; border:1px solid var(--line); color:var(--muted)}
+.chip.draft{background:var(--amber-soft); color:var(--amber)}
+.chip.ok{background:var(--good-soft); color:var(--good)}
+.chip.lim{background:var(--red-soft); color:var(--red)}
+.tag{font:11.5px/1 var(--f-mono); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 6px; white-space:nowrap; vertical-align:2px}
+
+/* buttons */
+.open{display:inline-flex; align-items:center; gap:10px; justify-self:start; font:600 15px/1 var(--f-body); color:var(--accent); text-decoration:none; padding:12px 18px; border:1.5px solid var(--accent); border-radius:999px; background:transparent}
+.open::after{content:"\2192"; font-family:var(--f-mono)}
+.open:hover{background:var(--accent-soft)}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:14px; line-height:1.2; color:var(--ink)}
+.seg button:hover,.btn:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.sm{padding:6px 10px; font-size:13px}
+
+/* front screens */
+.screen{border-top:1px solid var(--line)}
+.screen:first-child{border-top:0}
+.screen.alt{background:var(--surface)}
+.screen>.wrap{padding-block:clamp(48px,8vw,96px); display:grid; gap:clamp(18px,3vw,28px)}
+
+/* detail chrome */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+body.detail::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
+.topin{display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.back{font:600 14.5px/1 var(--f-body); text-decoration:none; color:var(--ink); display:inline-flex; gap:8px; align-items:center}
+.back::before{content:"\2190"; font-family:var(--f-mono); color:var(--accent)}
+.back:hover{color:var(--accent)}
+.sec{font:12px/1 var(--f-mono); color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.page{padding-block:clamp(28px,5vw,48px) 24px; display:grid; gap:0}
+.hero{display:grid; gap:14px; padding-bottom:clamp(22px,4vw,34px)}
+.hero h1{font-size:clamp(32px,6vw,58px); font-weight:640; line-height:1.04; letter-spacing:-.022em; word-spacing:.05em; max-width:20ch}
+.blk{display:grid; gap:14px; padding-block:clamp(24px,4vw,36px); border-top:1px solid var(--line); min-width:0}
+.blk>h2{font-size:clamp(22px,3.2vw,30px); font-weight:630; line-height:1.1; letter-spacing:-.02em}
+.blk h3{font-size:18px; font-weight:620; letter-spacing:-.01em; line-height:1.25}
+.blk>p,.blk>ul,.blk>ol{max-width:66ch}
+.draftbar{background:var(--amber-soft); border-radius:12px; padding:14px 16px; display:grid; gap:6px; max-width:760px}
+.draftbar .lab{font:500 12px/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--amber)}
+.pn{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-block:28px 8px; border-top:1px solid var(--line)}
+.pn a{display:grid; gap:4px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:var(--ink); background:var(--surface); min-width:0}
+.pn a:hover{border-color:var(--accent)}
+.pn small{font:11.5px/1 var(--f-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.pn span{font-weight:600}
+.pn .next{text-align:right}
+.foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:16px 40px; font-size:13.5px; color:var(--muted)}
+
+/* lists */
+.ticks{list-style:none; padding:0; display:grid; gap:8px}
+.ticks li{position:relative; padding-left:20px}
+.ticks li::before{content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.ticks.red li::before{background:var(--red)}
+.steps{padding-left:1.4em; display:grid; gap:8px}
+.steps li::marker{font:500 13px var(--f-mono); color:var(--accent)}
+dl.kv{display:grid; grid-template-columns:minmax(0,9.5rem) minmax(0,1fr); gap:8px 16px}
+dl.kv dt{font:12.5px/1.5 var(--f-mono); color:var(--muted); padding-top:2px}
+@media (max-width:560px){ dl.kv{grid-template-columns:1fr; gap:2px} dl.kv dd{padding-bottom:8px} }
+
+/* surfaces */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:grid; gap:10px; min-width:0; align-content:start}
+.screen.alt .card{background:var(--bg)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:820px){ .grid3{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .grid2,.grid3{grid-template-columns:1fr} }
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-width:100%}
+.tbl{width:100%; min-width:600px; font-size:14.5px; line-height:1.45}
+.tbl.w8{min-width:820px}
+.tbl th,.tbl td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+.tbl th{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl td b{font-weight:600}
+.tbl tr.hl td{background:var(--accent-soft)}
+.svgbox{max-width:100%; min-width:0}
+.svgbox svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--f-mono)}
+
+/* expanders */
+details.xp{border-top:1px solid var(--line)}
+details.xp:last-of-type{border-bottom:1px solid var(--line)}
+details.xp>summary{list-style:none; cursor:pointer; display:flex; gap:14px; align-items:baseline; padding:14px 2px}
+details.xp>summary::-webkit-details-marker{display:none}
+details.xp>summary .st{flex:1; min-width:0; display:grid; gap:2px}
+details.xp>summary .st b{font-weight:600}
+details.xp>summary .st span{color:var(--muted); font-size:14.5px}
+details.xp>summary::after{content:"+"; font:400 20px/1 var(--f-mono); color:var(--accent)}
+details.xp[open]>summary::after{content:"\2212"}
+details.xp>.xb{padding:0 2px 18px; display:grid; gap:10px}
+
+/* inputs and outputs */
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.f{display:grid; gap:5px; font-size:13.5px; color:var(--muted); min-width:0}
+.f input,.f select{width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums}
+.f input:focus,.f select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.sl{display:grid; gap:6px}
+.sl label{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-weight:500; font-size:15px}
+.sl output{font:620 19px/1 var(--f-display); font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--accent); height:28px; margin:0}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.kpi{display:grid; gap:4px; padding:12px 14px; border-radius:12px; background:var(--sunk); min-width:0}
+.kpi .k{font:11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.kpi .v{font:640 clamp(21px,3vw,27px)/1.05 var(--f-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px; color:var(--muted)}
+.kpi.hi{background:var(--accent-soft)}
+.kpi.hi .v{color:var(--accent)}
+.flags{list-style:none; padding:0; display:grid; gap:6px}
+.flags li{font-size:14.5px; padding:9px 12px; border-radius:10px; background:var(--amber-soft); color:var(--ink)}
+.flags li.lim{background:var(--red-soft)}
+.flags li.ok{background:var(--good-soft)}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:560; line-height:1.3; letter-spacing:-.01em}
+
+@media (max-width:560px){ .pn{grid-template-columns:1fr} .pn .next{text-align:left} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+<script>
+/* Shared helpers: Indian number formats, segmented buttons, safe per-browser storage. */
+var T = (function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function inr(x, dp) {
+    dp = dp || 0;
+    return Number(x).toLocaleString('en-IN', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  // Rupees held in crore. Under 1 crore it reads in lakh.
+  function cr(x) {
+    if (!isFinite(x)) return 'n/a';
+    var neg = x < 0, a = Math.abs(x), s;
+    if (a < 1) s = 'Rs ' + inr(a * 100, a * 100 < 10 ? 1 : 0) + ' lakh';
+    else s = 'Rs ' + inr(a, a < 10 ? 2 : (a < 100 ? 1 : 0)) + ' crore';
+    s = s.replace(/\.0+ /, ' ').replace(/(\.\d*?)0+ /, '$1 ');
+    return (neg ? 'less ' : '') + s;
+  }
+  function pct(x, dp) {
+    if (!isFinite(x)) return 'n/a';
+    var v = (x * 100).toFixed(dp === undefined ? 1 : dp);
+    return v.replace(/\.0+$/, '') + '%';
+  }
+  function usdm(x) { var v = Math.round(x / 10000) / 100; var s = String(v); return 'USD ' + (s.indexOf('.') < 0 ? s + '.0' : s) + 'M'; }
+  function seg(el, cb) {
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || !el.contains(b)) return;
+      $$('button', el).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute('data-v'), b);
+    });
+  }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1600); } };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } catch (e) { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  // Draws an SVG at the real width of its box, so text stays readable on a phone and nothing scrolls sideways.
+  // draw(svg, width) adds the marks and returns the height it used. Redraws when the width changes.
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, txt) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+  function fit(svg, draw) {
+    var last = -1;
+    function go(force) {
+      var box = svg.parentNode, w = Math.floor(box.getBoundingClientRect().width || box.clientWidth || 0);
+      if (w < 200) w = Math.max(w, 280);
+      if (!force && w === last) return; last = w;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var h = draw(svg, w);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    go(true);
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { go(false); }, 120); });
+    return function () { go(true); };
+  }
+  return { $: $, $$: $$, inr: inr, cr: cr, pct: pct, usdm: usdm, seg: seg, store: store, copy: copy, el: el, fit: fit };
+})();
+</script>
+</head>
+<body class="detail">
+<header class="top"><div class="wrap topin"><a class="back" href="../tasconnect-india.html">India playbook</a><span class="sec">Section 01 of 11</span></div></header>
+<main class="wrap page">
+<style>
+.ff{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.35fr); gap:20px; align-items:start}
+@media (max-width:820px){ .ff{grid-template-columns:1fr} }
+.rank{list-style:none; padding:0; border-top:1px solid var(--line)}
+.rank li{display:grid; grid-template-columns:1.6rem minmax(0,1fr) auto; gap:4px 10px; align-items:start; padding:10px 0; border-bottom:1px solid var(--line); font-size:14.5px}
+.rank .c{font:600 12.5px var(--f-mono); color:var(--accent); padding-top:2px}
+.rank .s{font:620 18px var(--f-display); font-variant-numeric:tabular-nums}
+.rank li.out .c,.rank li.out .s{color:var(--red)}
+.rank li.moved{background:var(--accent-soft)}
+.mt{display:grid; grid-template-columns:5.6rem minmax(0,1fr); gap:2px 8px; align-items:center; margin-top:6px; font:11.5px var(--f-mono); color:var(--muted)}
+.mt .b{height:7px; border-radius:4px; background:var(--track); position:relative; overflow:hidden}
+.mt .b i{position:absolute; inset:0 auto 0 0; background:var(--accent); border-radius:4px; transition:width .3s ease}
+.mt .b.t i{background:var(--amber)}
+.levers{display:grid; gap:8px}
+.lev{display:flex; gap:10px; align-items:flex-start; font-size:14.5px; cursor:pointer}
+.lev input{margin-top:4px; accent-color:var(--accent); width:17px; height:17px; flex:none}
+.lev small{display:block; color:var(--muted); font-size:13px}
+.neg{display:grid; gap:8px}
+.verdict{font:600 15px var(--f-body); padding:10px 14px; border-radius:10px; justify-self:start}
+.verdict.go{background:var(--good-soft); color:var(--good)}
+.verdict.no{background:var(--red-soft); color:var(--red)}
+.counts{display:grid; gap:8px}
+.cbar{display:flex; height:16px; border-radius:999px; overflow:hidden; background:var(--track)}
+.cbar i{display:block; height:100%}
+.cleg{display:flex; flex-wrap:wrap; gap:6px 18px; font-size:14px; color:var(--muted)}
+.cleg b{color:var(--ink); font-variant-numeric:tabular-nums}
+.sw{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:0}
+</style>
+
+<section class="hero">
+  <p class="eyebrow">01 &middot; Who we sell to</p>
+  <h1>Private manufacturers with long supplier tails, and a reason this year.</h1>
+  <p class="lede">A tight ICP, three tiers, and a friction score that decides which account gets worked first.</p>
+  <div class="chips"><span class="chip ok">Filled</span><span class="chip o">Scores are editable assumptions</span></div>
+</section>
+
+<section class="blk" aria-labelledby="h-icp">
+  <h2 id="h-icp">The ICP in one line</h2>
+  <p class="quote">Private Indian corporates and MNC subsidiaries in India, over Rs 2,000 crore in sales, with 500+ suppliers or dealers. Manufacturing-led.</p>
+  <div class="chips"><span class="chip o">Autos and components</span><span class="chip o">Electronics and durables</span><span class="chip o">Agri inputs</span><span class="chip o">FMCG</span><span class="chip o">Paints and building materials</span></div>
+  <div class="grid3">
+    <div class="card"><span class="chip lim" style="justify-self:start">Out</span><h3>PSUs and CPSEs</h3><p class="small muted">Buying is tender-led. CPSEs must also settle MSME invoices through TReDS since 30 Jun 2026.</p></div>
+    <div class="card"><span class="chip draft" style="justify-self:start">Later</span><h3>Telecom</h3><p class="small muted">One close there needs a much bigger pipeline than a manufacturer does.</p></div>
+    <div class="card"><span class="chip ok" style="justify-self:start">Funder</span><h3>Group NBFCs</h3><p class="small muted">Bring the group's own NBFC onto the platform as one of the funders: Mahindra Finance at M&amp;M, Hero FinCorp at Hero, Bajaj Auto Credit at Bajaj.</p></div>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-sig">
+  <h2 id="h-sig">Their FY26 annual report qualifies them</h2>
+  <p>FY26 is the first year these notes sit side by side in every listed report. Read four notes and the account is scored before the first email.</p>
+  <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>Signal in the report</th><th>What it means</th><th>Lead with</th></tr></thead>
+      <tbody>
+        <tr><td><b>Supplier finance note</b> (Ind AS 7) with amounts already paid by several banks</td><td>A program exists and is spread across funders</td><td>Multi-bank payables on one platform</td></tr>
+        <tr><td><b>MSMED table</b> with principal paid to micro and small suppliers after the due date</td><td>The 45-day rule is already biting</td><td>Own-cash early payment</td></tr>
+        <tr><td><b>Large investments, low borrowings</b></td><td>Cash earning a liquid-fund rate</td><td>Dynamic discounting</td></tr>
+        <tr><td><b>Payable days rising</b> year on year</td><td>Suppliers are carrying the corporate</td><td>Discounting or bank-funded early pay</td></tr>
+        <tr><td><b>Large dealer receivables</b></td><td>The corporate funds its channel</td><td>Distributor financing</td></tr>
+        <tr><td><b>Parent group already on TASConnect</b></td><td>The paper exists</td><td>Expansion, start inside</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-tier">
+  <h2 id="h-tier">Three tiers, and who works each</h2>
+  <div class="grid3">
+    <div class="card"><span class="eyebrow">Tier 1 &middot; White-glove</span><h3>Ketan, in person</h3><ul class="ticks small"><li>India entities of groups live on TASConnect: Lenovo, Syngenta</li><li>Deals open in the India pipeline today</li><li>Corporates a bank RM or partner introduces</li></ul></div>
+    <div class="card"><span class="eyebrow">Tier 2 &middot; Trigger-led</span><h3>Outbound on their own numbers</h3><ul class="ticks small"><li>M&amp;M, Maruti Suzuki, Hero MotoCorp, Bajaj Auto, Asian Paints</li><li>Then the wider named list, 25 accounts</li><li>Each opens on one figure from its report</li></ul></div>
+    <div class="card"><span class="eyebrow">Tier 3 &middot; Nurture</span><h3>Fit, but no live signal</h3><ul class="ticks small"><li>They get a point of view, not a meeting ask</li><li>The 45-day rule at year-end, the supplier finance note in year two</li><li>Promoted to Tier 2 when a signal shows</li></ul></div>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-ff">
+  <h2 id="h-ff">Work the easiest first</h2>
+  <p>Eight kinds of account, each scored 1 to 5 on how hard it is to switch and how hard it is to get a signature. Lower is easier. Turn on a move and watch which accounts get easier.</p>
+  <div class="ff">
+    <div class="levers" id="levers">
+      <label class="lev"><input type="checkbox" id="lv-own" data-k="own"><span><b>Start on their own cash</b><small>No bank sanction to wait for. Easier to sign for multi-bank SAP accounts, factoring accounts and one-bank portal users.</small></span></label>
+      <label class="lev"><input type="checkbox" id="lv-paper" data-k="paper"><span><b>Reuse the parent's paper</b><small>Easier to sign for the India entity of a group already live.</small></span></label>
+      <label class="lev"><input type="checkbox" id="lv-rm" data-k="rm"><span><b>A bank RM introduces us</b><small>Easier to switch for multi-bank, cash-rich and factoring accounts.</small></span></label>
+      <label class="lev"><input type="checkbox" id="lv-sap" data-k="sap"><span><b>A partner already in their SAP finance</b><small>Easier to switch for multi-bank SAP accounts.</small></span></label>
+      <label class="lev"><input type="checkbox" id="lv-pov" data-k="pov"><span><b>Send a point of view first</b><small>A little easier to switch for every outbound account.</small></span></label>
+    </div>
+    <ol class="rank" id="rank" aria-live="polite"></ol>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-neg">
+  <h2 id="h-neg">Five signs it is "nurture, not now"</h2>
+  <p>Tick any one and the account leaves the active list until something changes.</p>
+  <div class="neg" id="neg">
+    <label class="lev"><input type="checkbox" id="ng1"><span>Content with one bank's free portal</span></label>
+    <label class="lev"><input type="checkbox" id="ng2"><span>Suppliers almost all served by TReDS, and nothing else wanted</span></label>
+    <label class="lev"><input type="checkbox" id="ng3"><span>No surplus cash, no bank appetite, no multi-bank pain</span></label>
+    <label class="lev"><input type="checkbox" id="ng4"><span>Wants an open-ended pilot with no success criteria</span></label>
+    <label class="lev"><input type="checkbox" id="ng5"><span>Nobody inside owns it after two meetings</span></label>
+  </div>
+  <span class="verdict go" id="verdict" aria-live="polite">Active: keep working it</span>
+</section>
+
+<section class="blk" aria-labelledby="h-cnt">
+  <h2 id="h-cnt">146 accounts to work for 2027</h2>
+  <div class="counts">
+    <div class="cbar" role="img" aria-label="32 named today, 16 warm accounts to name with you, 98 cold accounts still to name"><i style="width:21.9%; background:var(--accent)"></i><i style="width:11%; background:var(--good)"></i><i style="width:67.1%; background:var(--accent-soft)"></i></div>
+    <div class="cleg"><span><span class="sw" style="background:var(--accent)"></span><b>32</b> named today (7 first, 25 next)</span><span><span class="sw" style="background:var(--good)"></span><b>16</b> warm, to name with you</span><span><span class="sw" style="background:var(--accent-soft)"></span><b>98</b> cold, still to name from the ICP build</span></div>
+  </div>
+  <p class="small muted">Warm accounts sign about 1 in 6, cold ones about 1 in 32. Three warm signings need 18 warm accounts; four cold signings need 128. The cold list is built from listed-company filings plus MNC subsidiaries' registry filings, filtered by the signals above.</p>
+</section>
+
+<script>
+(function () {
+  var A = [
+    { id: 'group', n: 'India entity of a group live elsewhere', r: 'Account manager introduces', f: 1, t: 2, tier: '1' },
+    { id: 'open', n: 'Deal open in your India pipeline', r: 'Take it over', f: 2, t: 2, tier: '1' },
+    { id: 'bankc', n: 'Client of a bank that refers', r: 'Bank RM introduces', f: 2, t: 3, tier: '1' },
+    { id: 'sap', n: 'SAP-run, several banks, late small-supplier payments', r: 'Partner or point of view', f: 3, t: 3, tier: '2' },
+    { id: 'cash', n: 'Cash-rich, long small-supplier tail', r: 'Own-cash discounting first', f: 3, t: 2, tier: '2' },
+    { id: 'fact', n: 'Factors receivables, holds a surplus', r: 'CFO conversation', f: 3, t: 3, tier: '2' },
+    { id: 'portal', n: 'Content on one bank\'s free portal', r: 'Nurture', f: 5, t: 4, tier: '3' },
+    { id: 'treds', n: 'Small-supplier base all on TReDS, no surplus', r: 'Not now', f: 4, t: 5, tier: 'out' }
+  ];
+  var L = { own: { k: 't', d: 1, on: ['sap', 'fact', 'portal'] }, paper: { k: 't', d: 1, on: ['group'] }, rm: { k: 'f', d: 1, on: ['sap', 'cash', 'fact'] }, sap: { k: 'f', d: 1, on: ['sap'] }, pov: { k: 'f', d: 0.5, on: ['sap', 'cash', 'fact', 'portal'] } };
+  var TIER = { '1': 'tier 1, warm', '2': 'tier 2, outbound', '3': 'tier 3, nurture', out: 'out' };
+  function score() {
+    var on = T.$$('#levers input').filter(function (x) { return x.checked; }).map(function (x) { return x.getAttribute('data-k'); });
+    var S = A.map(function (a) {
+      var f = a.f, t = a.t;
+      on.forEach(function (k) { var l = L[k]; if (l.on.indexOf(a.id) >= 0) { if (l.k === 'f') f -= l.d; else t -= l.d; } });
+      f = Math.max(1, f); t = Math.max(1, t);
+      return { a: a, f: f, t: t, moved: f !== a.f || t !== a.t };
+    });
+    S.sort(function (p, q) { return (p.f + p.t) - (q.f + q.t) || p.f - q.f; });
+    T.$('#rank').innerHTML = S.map(function (s, i) {
+      return '<li class="' + (s.a.tier === 'out' ? 'out' : '') + (s.moved ? ' moved' : '') + '"><span class="c">' + (i + 1) + '</span><span>' + s.a.n + '<br><span class="muted small">' + s.a.r + ', ' + TIER[s.a.tier] + '</span>' +
+        '<span class="mt"><span>To switch ' + String(s.f).replace('.5', '&frac12;') + '</span><span class="b"><i style="width:' + (s.f / 5 * 100) + '%"></i></span><span>To sign ' + String(s.t).replace('.5', '&frac12;') + '</span><span class="b t"><i style="width:' + (s.t / 5 * 100) + '%"></i></span></span></span>' +
+        '<span class="s">' + String(s.f + s.t).replace('.5', '&frac12;') + '</span></li>';
+    }).join('');
+  }
+  T.$$('#levers input').forEach(function (x) { x.addEventListener('change', score); });
+  score();
+  var negs = T.$$('#neg input');
+  function verdict() {
+    var any = negs.some(function (x) { return x.checked; });
+    var v = T.$('#verdict');
+    v.className = 'verdict ' + (any ? 'no' : 'go');
+    v.textContent = any ? 'Nurture, not now: send a point of view, revisit next quarter' : 'Active: keep working it';
+  }
+  negs.forEach(function (x) { x.addEventListener('change', verdict); });
+  verdict();
+})();
+</script>
+
+</main>
+<nav class="pn wrap" aria-label="Sections"><a class="prev" href="../tasconnect-india.html"><small>Previous</small><span>India playbook</span></a><a class="next" href="accounts.html"><small>Next</small><span>02 Seven accounts</span></a></nav>
+<footer class="foot wrap"><a href="../tasconnect-india.html">Back to the India playbook</a><span>Draft for our third call, 25 Nov 2026</span></footer>
+</body>
+</html>

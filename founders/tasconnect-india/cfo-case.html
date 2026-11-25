@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The CFO case · TASConnect India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the front is short screens on a 1040px column, one idea each; detail pages are a 760px reading
+   column where tables, diagrams and calculators may run to 1040px inside their own scroll box.
+   Ledger red marks limits (the 45-day line, a blocked term). Ink blue is the one accent. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EAEEF4; --ink:#0E1522; --muted:#586375; --line:#D9DFE8; --track:#E3E8EF;
+  --accent:#1F47C9; --accent-soft:#E3E9FA; --red:#B42318; --red-soft:#FBE7E4;
+  --good:#0B7A53; --good-soft:#DDF1E7; --amber:#975705; --amber-soft:#FAECD6;
+  --f-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 var(--f-body)}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+table{font:inherit; color:inherit; border-collapse:collapse}
+button,input,select,textarea{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.num,.tbl td{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* type */
+.eyebrow{font:500 12.5px/1.3 var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display); font-stretch:92%; text-wrap:balance}
+.mega{font-size:clamp(42px,8.6vw,100px); font-weight:650; line-height:.96; letter-spacing:-.03em; word-spacing:.06em}
+.mega .soft{color:var(--muted); font-weight:520}
+h2.big{font-size:clamp(30px,5.4vw,56px); font-weight:640; line-height:1.02; letter-spacing:-.022em; word-spacing:.05em}
+.lede{font-size:clamp(18px,2.3vw,21px); line-height:1.45; max-width:44ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.cap{font:12.5px/1.45 var(--f-mono); letter-spacing:.02em; color:var(--muted)}
+p{max-width:66ch}
+b,strong{font-weight:600}
+
+/* chips and tags */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; font:500 12px/1 var(--f-mono); letter-spacing:.02em; padding:5px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.o{background:transparent; border:1px solid var(--line); color:var(--muted)}
+.chip.draft{background:var(--amber-soft); color:var(--amber)}
+.chip.ok{background:var(--good-soft); color:var(--good)}
+.chip.lim{background:var(--red-soft); color:var(--red)}
+.tag{font:11.5px/1 var(--f-mono); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 6px; white-space:nowrap; vertical-align:2px}
+
+/* buttons */
+.open{display:inline-flex; align-items:center; gap:10px; justify-self:start; font:600 15px/1 var(--f-body); color:var(--accent); text-decoration:none; padding:12px 18px; border:1.5px solid var(--accent); border-radius:999px; background:transparent}
+.open::after{content:"\2192"; font-family:var(--f-mono)}
+.open:hover{background:var(--accent-soft)}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:14px; line-height:1.2; color:var(--ink)}
+.seg button:hover,.btn:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.sm{padding:6px 10px; font-size:13px}
+
+/* front screens */
+.screen{border-top:1px solid var(--line)}
+.screen:first-child{border-top:0}
+.screen.alt{background:var(--surface)}
+.screen>.wrap{padding-block:clamp(48px,8vw,96px); display:grid; gap:clamp(18px,3vw,28px)}
+
+/* detail chrome */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+body.detail::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
+.topin{display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.back{font:600 14.5px/1 var(--f-body); text-decoration:none; color:var(--ink); display:inline-flex; gap:8px; align-items:center}
+.back::before{content:"\2190"; font-family:var(--f-mono); color:var(--accent)}
+.back:hover{color:var(--accent)}
+.sec{font:12px/1 var(--f-mono); color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.page{padding-block:clamp(28px,5vw,48px) 24px; display:grid; gap:0}
+.hero{display:grid; gap:14px; padding-bottom:clamp(22px,4vw,34px)}
+.hero h1{font-size:clamp(32px,6vw,58px); font-weight:640; line-height:1.04; letter-spacing:-.022em; word-spacing:.05em; max-width:20ch}
+.blk{display:grid; gap:14px; padding-block:clamp(24px,4vw,36px); border-top:1px solid var(--line); min-width:0}
+.blk>h2{font-size:clamp(22px,3.2vw,30px); font-weight:630; line-height:1.1; letter-spacing:-.02em}
+.blk h3{font-size:18px; font-weight:620; letter-spacing:-.01em; line-height:1.25}
+.blk>p,.blk>ul,.blk>ol{max-width:66ch}
+.draftbar{background:var(--amber-soft); border-radius:12px; padding:14px 16px; display:grid; gap:6px; max-width:760px}
+.draftbar .lab{font:500 12px/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--amber)}
+.pn{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-block:28px 8px; border-top:1px solid var(--line)}
+.pn a{display:grid; gap:4px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:var(--ink); background:var(--surface); min-width:0}
+.pn a:hover{border-color:var(--accent)}
+.pn small{font:11.5px/1 var(--f-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.pn span{font-weight:600}
+.pn .next{text-align:right}
+.foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:16px 40px; font-size:13.5px; color:var(--muted)}
+
+/* lists */
+.ticks{list-style:none; padding:0; display:grid; gap:8px}
+.ticks li{position:relative; padding-left:20px}
+.ticks li::before{content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.ticks.red li::before{background:var(--red)}
+.steps{padding-left:1.4em; display:grid; gap:8px}
+.steps li::marker{font:500 13px var(--f-mono); color:var(--accent)}
+dl.kv{display:grid; grid-template-columns:minmax(0,9.5rem) minmax(0,1fr); gap:8px 16px}
+dl.kv dt{font:12.5px/1.5 var(--f-mono); color:var(--muted); padding-top:2px}
+@media (max-width:560px){ dl.kv{grid-template-columns:1fr; gap:2px} dl.kv dd{padding-bottom:8px} }
+
+/* surfaces */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:grid; gap:10px; min-width:0; align-content:start}
+.screen.alt .card{background:var(--bg)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:820px){ .grid3{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .grid2,.grid3{grid-template-columns:1fr} }
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-width:100%}
+.tbl{width:100%; min-width:600px; font-size:14.5px; line-height:1.45}
+.tbl.w8{min-width:820px}
+.tbl th,.tbl td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+.tbl th{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl td b{font-weight:600}
+.tbl tr.hl td{background:var(--accent-soft)}
+.svgbox{max-width:100%; min-width:0}
+.svgbox svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--f-mono)}
+
+/* expanders */
+details.xp{border-top:1px solid var(--line)}
+details.xp:last-of-type{border-bottom:1px solid var(--line)}
+details.xp>summary{list-style:none; cursor:pointer; display:flex; gap:14px; align-items:baseline; padding:14px 2px}
+details.xp>summary::-webkit-details-marker{display:none}
+details.xp>summary .st{flex:1; min-width:0; display:grid; gap:2px}
+details.xp>summary .st b{font-weight:600}
+details.xp>summary .st span{color:var(--muted); font-size:14.5px}
+details.xp>summary::after{content:"+"; font:400 20px/1 var(--f-mono); color:var(--accent)}
+details.xp[open]>summary::after{content:"\2212"}
+details.xp>.xb{padding:0 2px 18px; display:grid; gap:10px}
+
+/* inputs and outputs */
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.f{display:grid; gap:5px; font-size:13.5px; color:var(--muted); min-width:0}
+.f input,.f select{width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums}
+.f input:focus,.f select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.sl{display:grid; gap:6px}
+.sl label{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-weight:500; font-size:15px}
+.sl output{font:620 19px/1 var(--f-display); font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--accent); height:28px; margin:0}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.kpi{display:grid; gap:4px; padding:12px 14px; border-radius:12px; background:var(--sunk); min-width:0}
+.kpi .k{font:11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.kpi .v{font:640 clamp(21px,3vw,27px)/1.05 var(--f-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px; color:var(--muted)}
+.kpi.hi{background:var(--accent-soft)}
+.kpi.hi .v{color:var(--accent)}
+.flags{list-style:none; padding:0; display:grid; gap:6px}
+.flags li{font-size:14.5px; padding:9px 12px; border-radius:10px; background:var(--amber-soft); color:var(--ink)}
+.flags li.lim{background:var(--red-soft)}
+.flags li.ok{background:var(--good-soft)}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:560; line-height:1.3; letter-spacing:-.01em}
+
+@media (max-width:560px){ .pn{grid-template-columns:1fr} .pn .next{text-align:left} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+<script>
+/* Shared helpers: Indian number formats, segmented buttons, safe per-browser storage. */
+var T = (function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function inr(x, dp) {
+    dp = dp || 0;
+    return Number(x).toLocaleString('en-IN', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  // Rupees held in crore. Under 1 crore it reads in lakh.
+  function cr(x) {
+    if (!isFinite(x)) return 'n/a';
+    var neg = x < 0, a = Math.abs(x), s;
+    if (a < 1) s = 'Rs ' + inr(a * 100, a * 100 < 10 ? 1 : 0) + ' lakh';
+    else s = 'Rs ' + inr(a, a < 10 ? 2 : (a < 100 ? 1 : 0)) + ' crore';
+    s = s.replace(/\.0+ /, ' ').replace(/(\.\d*?)0+ /, '$1 ');
+    return (neg ? 'less ' : '') + s;
+  }
+  function pct(x, dp) {
+    if (!isFinite(x)) return 'n/a';
+    var v = (x * 100).toFixed(dp === undefined ? 1 : dp);
+    return v.replace(/\.0+$/, '') + '%';
+  }
+  function usdm(x) { var v = Math.round(x / 10000) / 100; var s = String(v); return 'USD ' + (s.indexOf('.') < 0 ? s + '.0' : s) + 'M'; }
+  function seg(el, cb) {
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || !el.contains(b)) return;
+      $$('button', el).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute('data-v'), b);
+    });
+  }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1600); } };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } catch (e) { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  // Draws an SVG at the real width of its box, so text stays readable on a phone and nothing scrolls sideways.
+  // draw(svg, width) adds the marks and returns the height it used. Redraws when the width changes.
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, txt) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+  function fit(svg, draw) {
+    var last = -1;
+    function go(force) {
+      var box = svg.parentNode, w = Math.floor(box.getBoundingClientRect().width || box.clientWidth || 0);
+      if (w < 200) w = Math.max(w, 280);
+      if (!force && w === last) return; last = w;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var h = draw(svg, w);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    go(true);
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { go(false); }, 120); });
+    return function () { go(true); };
+  }
+  return { $: $, $$: $$, inr: inr, cr: cr, pct: pct, usdm: usdm, seg: seg, store: store, copy: copy, el: el, fit: fit };
+})();
+</script>
+</head>
+<body class="detail">
+<header class="top"><div class="wrap topin"><a class="back" href="../tasconnect-india.html">India playbook</a><span class="sec">Section 04 of 11</span></div></header>
+<main class="wrap page">
+<style>
+.lines{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+@media (max-width:640px){ .lines{grid-template-columns:1fr} }
+.lines .card .n{font:500 12.5px var(--f-mono); color:var(--accent)}
+.lines .card.cost .n{color:var(--muted)}
+.fx{font:13.5px/1.5 var(--f-mono); background:var(--sunk); border-radius:8px; padding:8px 10px; overflow-x:auto; white-space:nowrap}
+.calcbox{display:grid; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:clamp(14px,3vw,24px); min-width:0}
+.row2{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center}
+.row2 .lab{font:500 12px var(--f-mono); color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.answer{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(16px,3vw,32px); align-items:start}
+@media (max-width:760px){ .answer{grid-template-columns:1fr} }
+.big1{display:grid; gap:4px}
+.big1 .k{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.big1 .v{font:650 clamp(48px,9vw,80px)/.95 var(--f-display); letter-spacing:-.045em; color:var(--accent); font-variant-numeric:tabular-nums}
+.big1 .v.neg{color:var(--red)}
+.big1 .s{font-size:14.5px; color:var(--muted)}
+.stack{display:flex; height:12px; border-radius:999px; overflow:hidden; background:var(--track); margin-top:10px}
+.stack i{display:block; height:100%; transition:width .3s ease}
+.lns{list-style:none; padding:0; border-top:1px solid var(--line)}
+.lns li{display:grid; grid-template-columns:12px minmax(0,1fr) auto; gap:4px 10px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--line)}
+.lns .sw{width:10px; height:10px; border-radius:3px; align-self:center}
+.lns b{font:620 18px var(--f-display); font-variant-numeric:tabular-nums}
+.lns small{grid-column:2 / 4; color:var(--muted); font-size:13px}
+.segs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+@media (max-width:900px){ .segs{grid-template-columns:1fr} }
+.sg{border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; gap:10px; background:var(--bg); min-width:0}
+.sg header{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.sg header b{font:620 17px var(--f-display)}
+.sg .fields{grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+.sg .f{font-size:12px}
+.sg .f input{padding:7px 8px; font-size:14.5px}
+.sg .res{font-size:14px; color:var(--muted)}
+.sg .res b{color:var(--ink); font-variant-numeric:tabular-nums}
+.grp{font:500 12px var(--f-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent)}
+.proof{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px}
+@media (max-width:700px){ .proof{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.waves{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; border:1px solid var(--line); border-radius:14px; overflow:hidden}
+.waves div{padding:14px; display:grid; gap:6px; border-right:1px solid var(--line); background:var(--surface)}
+.waves div:last-child{border-right:0}
+.waves .w{font:500 12px var(--f-mono); color:var(--accent); text-transform:uppercase; letter-spacing:.06em}
+.waves b{font:620 19px var(--f-display)}
+@media (max-width:640px){ .waves{grid-template-columns:1fr} .waves div{border-right:0; border-bottom:1px solid var(--line)} .waves div:last-child{border-bottom:0} }
+.hidefact [data-fact]{display:none}
+</style>
+
+<section class="hero">
+  <p class="eyebrow">04 &middot; The CFO case</p>
+  <h1>On your 2,000-supplier brief: about Rs 8.9 crore a year.</h1>
+  <p class="lede">Three lines add up to it, before the platform fee. The CFO types his own figures and the total moves.</p>
+  <div class="chips"><span class="chip ok">Filled</span><span class="chip o">Example figures are illustrative</span></div>
+</section>
+
+<section class="blk" aria-labelledby="h-calc">
+  <h2 id="h-calc">The answer first</h2>
+  <div class="calcbox" id="calc">
+    <div class="row2"><span class="lab">Cash from</span>
+      <div class="seg" id="src" role="group" aria-label="Source of cash"><button type="button" data-v="fact" aria-pressed="true">Factored receivables</button><button type="button" data-v="own" aria-pressed="false">Own surplus</button></div>
+    </div>
+    <div class="row2" id="lensrow"><span class="lab">View</span>
+      <div class="seg" id="lens" role="group" aria-label="View"><button type="button" data-v="strict" aria-pressed="true">Strict: cash costs what factoring costs</button><button type="button" data-v="today" aria-pressed="false">Against today: surplus in a liquid fund</button></div>
+    </div>
+    <div class="answer" aria-live="polite">
+      <div class="big1">
+        <span class="k" id="k-totl">A year, before the platform fee</span>
+        <span class="v" id="k-tot">Rs 8.9 cr</span>
+        <span class="s" id="k-tots">strict view, after the team's time</span>
+        <div class="stack" aria-hidden="true"><i id="st1" style="background:var(--accent)"></i><i id="st2" style="background:var(--good)"></i><i id="st3" style="background:var(--amber)"></i></div>
+      </div>
+      <ul class="lns">
+        <li><span class="sw" style="background:var(--accent)"></span><span>Discounting on mid and small suppliers, from your cash</span><b id="k-l1">Rs 1.2 cr</b><small id="k-l1s">Rs 985 cr paid early a year at 10.9%, after a Rs 0.4 cr team</small></li>
+        <li><span class="sw" style="background:var(--good)"></span><span>Longer terms on strategic suppliers, your banks fund them</span><b id="k-l2">Rs 7.1 cr</b><small id="k-l2s">Rs 86 cr freed once, 75 to 90 days, valued at 8.25%</small></li>
+        <li><span class="sw" style="background:var(--amber)"></span><span>Small suppliers inside 45 days, interest avoided</span><b id="k-l3">Rs 0.6 cr</b><small id="k-l3s">On Rs 40 cr paid 30 days late today, at 17.25%</small></li>
+      </ul>
+    </div>
+    <div class="kpis">
+      <div class="kpi hi"><span class="k">Break-even fee</span><span class="v" id="k-bef">Rs 8.9 cr</span><span class="s" id="k-befs">a year, about 55 bps of invoices paid early</span></div>
+      <div class="kpi"><span class="k">Your cash out, rolling</span><span class="v" id="k-dep">Rs 98 cr</span><span class="s" id="k-face">pays Rs 985 cr early a year</span></div>
+      <div class="kpi"><span class="k">Banks pay early</span><span class="v" id="k-bank">Rs 630 cr</span><span class="s">a year, none of your cash</span></div>
+      <div class="kpi" data-fact><span class="k">Discounting stops paying</span><span class="v" id="k-stop">9.39%</span><span class="s">factoring rate, after the team</span></div>
+      <div class="kpi"><span class="k">Pilot, 20 on own cash</span><span class="v" id="k-pil">Rs 1.7 cr</span><span class="s">of cash, rolling</span></div>
+    </div>
+    <p class="small muted" id="floorline">Your cash costs 8.93% all-in. With 10% of it idle, the floor is 9.2%: offers below it go to your banks.</p>
+    <ul class="flags" id="flags" aria-live="polite"></ul>
+
+    <details class="xp" id="assume"><summary><span class="st"><b>Change the assumptions</b><span>The brief's cash, rates, suppliers and terms</span></span></summary><div class="xb">
+      <p class="grp">Cash and rates</p>
+      <div class="fields">
+        <label class="f" data-fact>Factoring rate, % a year<input id="i-fr" type="number" step="0.05" value="8.25" inputmode="decimal"></label>
+        <label class="f" data-fact>Factoring fee, % once<input id="i-fee" type="number" step="0.01" value="0.10" inputmode="decimal"></label>
+        <label class="f" data-fact>Receivable tenor, days<input id="i-ten" type="number" step="5" value="60" inputmode="numeric"></label>
+        <label class="f" data-fact>Advance, %<input id="i-adv" type="number" step="5" value="90" inputmode="numeric"></label>
+        <label class="f" data-fact>Factored cash idle, %<input id="i-idle" type="number" step="1" value="10" inputmode="numeric"></label>
+        <label class="f">Liquid fund earns, % a year<input id="i-liq" type="number" step="0.1" value="6.4" inputmode="decimal"></label>
+        <label class="f">Treasury hurdle, % a year<input id="i-hur" type="number" step="0.1" value="0" inputmode="decimal"></label>
+        <label class="f">Cash committed, cap, Rs cr<input id="i-cap" type="number" step="10" value="150" inputmode="numeric"></label>
+        <label class="f">Team cost, Rs cr a year<input id="i-team" type="number" step="0.05" value="0.40" inputmode="decimal"></label>
+      </div>
+      <p class="grp">Bank route, below the floor</p>
+      <div class="fields">
+        <label class="f">Bank route<select id="i-bank"><option value="1" selected>On: banks fund below the floor</option><option value="0">Off: normal terms</option></select></label>
+        <label class="f">Bank-funded suppliers move to, days<input id="i-t1" type="number" step="5" value="90" inputmode="numeric"></label>
+        <label class="f">Bank rate at your rating, %<input id="i-br" type="number" step="0.05" value="8" inputmode="decimal"></label>
+        <label class="f">Bank pays on day<input id="i-pd" type="number" step="1" value="10" inputmode="numeric"></label>
+      </div>
+      <p class="grp">Small suppliers today</p>
+      <div class="fields">
+        <label class="f">Paid past 45 days, Rs cr a year<input id="i-late" type="number" step="5" value="40" inputmode="numeric"></label>
+        <label class="f">Days late, average<input id="i-lated" type="number" step="5" value="30" inputmode="numeric"></label>
+        <label class="f">RBI bank rate, %<input id="i-brate" type="number" step="0.25" value="5.75" inputmode="decimal"></label>
+      </div>
+      <p class="grp">Three supplier groups</p>
+      <div class="segs" id="segs"></div>
+      <div class="row2"><button type="button" class="btn" id="reset">Back to the brief</button><span class="cap">Supplier counts, spend and rates are illustrative until the CFO replaces them.</span></div>
+    </div></details>
+    <details class="xp"><summary><span class="st"><b>Take-up sensitivity</b><span>The same case at a quarter to one and a half times the take-up</span></span></summary><div class="xb">
+      <div class="scroll"><table class="tbl" id="sens"><thead><tr><th>Take-up</th><th class="r">Your cash out</th><th class="r">Strict total</th><th class="r">Against today</th></tr></thead><tbody></tbody></table></div>
+      <p class="small muted">Stop new offers and the cash comes back within one cycle, about 40 days here. Doing nothing: a Rs 200 crore factored surplus parked in a liquid fund costs about Rs 5 crore a year more than it earns.</p>
+    </div></details>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-lines">
+  <h2 id="h-lines">Where each line comes from</h2>
+  <div class="lines">
+    <div class="card"><span class="n">1 &middot; Discount earned, own cash</span><h3>Your cash pays suppliers early and earns the discount.</h3><p class="fx">return = d / (1 &minus; d) &times; 365 / days early</p><p class="small muted">1% for 30 days is 12.3% a year. 0.75% is 9.2%. 0.5% is 6.1%. Only offers above the floor use your cash.</p></div>
+    <div class="card"><span class="n">2 &middot; Days payable, bank-funded</span><h3>Banks pay strategic suppliers early at your rating. You pay on the later date.</h3><p class="fx">cash freed = enrolled spend &times; extra days / 365</p><p class="small muted">Non-MSE suppliers only. The supplier is no worse off when the bank's rate beats its own money (worked below). Keep terms near market norms: the Ind AS 7 note shows them either way.</p></div>
+    <div class="card"><span class="n">3 &middot; Compliance and controls</span><h3>Small suppliers paid inside 45 days, and one source for the note.</h3><p class="small muted">Late MSE dues carry interest at 3 times the bank rate, compounded monthly: 17.25% nominal at a 5.75% bank rate, about 18.7% effective, and not deductible. 43B(h) moves the deduction to the year of payment. Credit notes offset automatically.</p></div>
+    <div class="card"><span class="n">Also &middot; Supplier cost of funds</span><h3>The supplier swaps its own borrowing rate for yours, or takes a discount it chooses.</h3><p class="small muted">Supplier resilience and, over time, better prices. Never promise price, so it stays out of the total.</p></div>
+    <div class="card cost" style="grid-column:1/-1"><span class="n">Cost line</span><h3>The platform fee stays blank until we quote it.</h3><p class="small muted">Every figure reads "before the platform fee". The team's time is an input. The break-even fee is the total, so the price is set against value.</p></div>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-c">
+  <h2 id="h-c">Line 2, worked: is the strategic supplier worse off?</h2>
+  <p>Terms move from 75 to 90 days. The bank pays on day 10 at your rating, so the supplier carries its own money for those 10 days and the bank's for the rest. Change any figure.</p>
+  <div class="fields">
+    <label class="f">Enrolled non-MSE spend, Rs cr<input id="c-sp" type="number" value="2100" step="100" inputmode="numeric"></label>
+    <label class="f">Terms today, days<input id="c-t0" type="number" value="75" step="5" inputmode="numeric"></label>
+    <label class="f">New terms, days<input id="c-t1" type="number" value="90" step="5" inputmode="numeric"></label>
+    <label class="f">Your cost of funds, %<input id="c-cof" type="number" value="8.25" step="0.05" inputmode="decimal"></label>
+    <label class="f">Bank rate at your rating, %<input id="c-br" type="number" value="8" step="0.05" inputmode="decimal"></label>
+    <label class="f">Bank pays on day<input id="c-pd" type="number" value="10" step="1" inputmode="numeric"></label>
+    <label class="f">Supplier's own money, %<input id="c-sr" type="number" value="10" step="0.25" inputmode="decimal"></label>
+  </div>
+  <div class="kpis" aria-live="polite">
+    <div class="kpi"><span class="k">Cash freed, once</span><span class="v" id="c-o1">Rs 86.3 cr</span></div>
+    <div class="kpi"><span class="k">Worth a year</span><span class="v" id="c-o2">Rs 7.1 cr</span></div>
+    <div class="kpi"><span class="k">Supplier's cost, via your bank</span><span class="v" id="c-o3">2.03%</span><span class="s" id="c-o3s">1.75% to the bank, 0.27% its own money to day 10</span></div>
+    <div class="kpi"><span class="k">Supplier's cost, waiting today</span><span class="v" id="c-o4">2.05%</span><span class="s" id="c-o4s">its own money for 75 days</span></div>
+    <div class="kpi hi"><span class="k">The supplier</span><span class="v" id="c-o5">No worse off</span><span class="s" id="c-o6">0.03% better, via your bank</span></div>
+  </div>
+  <ul class="flags" id="c-flags"></ul>
+  <p class="small muted">Enrolled spend: Rs 7,000 crore of strategic spend, 60% eligible, half of that onboarded. The auditor and the rating analyst look at stretched terms. Say "your auditor's call". Never promise an accounting outcome.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-inv">
+  <h2 id="h-inv">Line 1, worked: one invoice, start to finish</h2>
+  <p>A Rs 10 lakh invoice from a small supplier, paid 30 days early at 12% a year, from factored cash.</p>
+  <div class="proof">
+    <div class="kpi"><span class="k">Supplier gets, day 15</span><span class="v">Rs 9,90,233</span></div>
+    <div class="kpi"><span class="k">Corporate keeps</span><span class="v">Rs 9,767</span></div>
+    <div class="kpi"><span class="k">Factored cash costs</span><span class="v">Rs 7,265</span></div>
+    <div class="kpi hi"><span class="k">Stays with the corporate</span><span class="v">Rs 2,502</span></div>
+  </div>
+  <details class="xp"><summary><span class="st"><b>The simple own-cash version</b><span>A Rs 200 crore pool, 0.75% for 30 days, no factoring</span></span></summary><div class="xb">
+    <ul class="ticks"><li>0.75% for 30 days is 9.2% a year on the cash used.</li><li>The pool turns about 12 times: about Rs 2,452 crore paid early, Rs 18.4 crore earned.</li><li>The liquid fund at 6.4% would earn Rs 12.8 crore. The gain is about Rs 5.6 crore a year, before the fee.</li></ul>
+    <p class="small muted">It suits a cash-rich corporate with no factoring: Maruti, Bajaj, Hero.</p>
+  </div></details>
+</section>
+
+<section class="blk" aria-labelledby="h-quote">
+  <h2 id="h-quote">What to quote in a CFO room</h2>
+  <ul class="ticks">
+    <li><b>Quote</b> the India electronics case: about 8 to 10% a year on surplus cash, suppliers' receivable cycle about 25 days shorter, 10,000+ open invoices a day.</li>
+    <li><b>Explain</b> why the brief shows 10.9%, above that band: this cash costs 8.93%, so only the higher offers use it.</li>
+    <li><b>Lead with the total</b>, then the line that fits the account: line 1 for cash-rich, line 2 for multi-bank, line 3 for a late MSMED table.</li>
+  </ul>
+</section>
+
+<section class="blk" aria-labelledby="h-chg">
+  <h2 id="h-chg">Bringing 2,000 suppliers across</h2>
+  <p>The second half of the brief. Run it in waves. The corporate's real job is approving invoices fast.</p>
+  <div class="waves">
+    <div><span class="w">Pilot</span><b>30 suppliers</b><span class="small muted">20 on own cash, 10 bank-funded, on the longest terms</span></div>
+    <div><span class="w">Wave 2</span><b>Top 20 to 30% of spend</b><span class="small muted">Where most of the value sits</span></div>
+    <div><span class="w">Wave 3</span><b>The long tail</b><span class="small muted">Self-serve sign-up, in their language</span></div>
+  </div>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th>Why suppliers drop off</th><th>What we design in</th></tr></thead>
+    <tbody>
+      <tr><td><b>KYC friction</b>, the top hurdle</td><td>Procurement sends the letter, the supplier signs up online in a few clicks, KYB runs in the background through Chekk. A DBS India program cut onboarding to three days with a two-page agreement and KYC from SAP.</td></tr>
+      <tr><td><b>Fear the discount becomes the price</b></td><td>Early pay is offered invoice by invoice, at the supplier's choice, and never written into terms.</td></tr>
+      <tr><td><b>"It is a loan"</b></td><td>It is the supplier's own invoice paid early. No credit line, no new borrowing on their books.</td></tr>
+      <tr><td><b>Language</b></td><td>Letters, help and the helpdesk in Hindi and the main regional languages for MSME tiers.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<script>
+(function () {
+  var DEF = [
+    { n: 'Strategic', sup: 200, spend: 7000, terms: 75, days: 45, apr: 9.0, alt: 10, elig: 60, onb: 50, take: 30, mse: false },
+    { n: 'Mid-tier', sup: 600, spend: 2200, terms: 60, days: 40, apr: 10.5, alt: 11, elig: 80, onb: 70, take: 55, mse: false },
+    { n: 'Small', sup: 1200, spend: 800, terms: 45, days: 30, apr: 12, alt: 13.5, elig: 80, onb: 60, take: 80, mse: true }
+  ];
+  var FIELDS = [['sup', 'Suppliers', 10], ['spend', 'Spend, Rs cr', 100], ['terms', 'Terms, days', 5], ['days', 'Days early', 5], ['apr', 'Offer, % a yr', 0.25], ['alt', 'Their money, %', 0.25], ['elig', 'Eligible, %', 5], ['onb', 'Onboarded, %', 5], ['take', 'Take rate, %', 5]];
+  var GLOBAL = { '#i-fr': 8.25, '#i-fee': '0.10', '#i-ten': 60, '#i-adv': 90, '#i-idle': 10, '#i-liq': 6.4, '#i-hur': 0, '#i-cap': 150, '#i-team': '0.40', '#i-t1': 90, '#i-br': 8, '#i-pd': 10, '#i-late': 40, '#i-lated': 30, '#i-brate': 5.75 };
+  var S, src = 'fact', lens = 'strict', PILOT = 20;
+  var segs = T.$('#segs');
+  function buildSegs() {
+    segs.innerHTML = S.map(function (s, i) {
+      return '<div class="sg"><header><b>' + s.n + '</b><span class="chip" id="rt' + i + '">Own cash</span></header><div class="fields">' +
+        FIELDS.map(function (f) { return '<label class="f">' + f[1] + '<input type="number" inputmode="decimal" step="' + f[2] + '" id="s' + i + f[0] + '" data-i="' + i + '" data-k="' + f[0] + '" value="' + s[f[0]] + '"></label>'; }).join('') +
+        '</div><p class="res" id="res' + i + '"></p></div>';
+    }).join('');
+    T.$$('input', segs).forEach(function (x) { x.addEventListener('input', function () { var v = parseFloat(x.value); S[+x.getAttribute('data-i')][x.getAttribute('data-k')] = isFinite(v) ? v : 0; render(); }); });
+  }
+  function num(id) { var v = parseFloat(T.$(id).value); return isFinite(v) ? v : 0; }
+  function inputs() {
+    return { fr: num('#i-fr') / 100, fee: num('#i-fee') / 100, ten: Math.max(1, num('#i-ten')), adv: Math.max(0.01, num('#i-adv') / 100), idle: Math.min(0.9, Math.max(0, num('#i-idle') / 100)), liq: num('#i-liq') / 100, hur: num('#i-hur') / 100, cap: num('#i-cap'), team: num('#i-team'), bank: T.$('#i-bank').value === '1',
+      t1: num('#i-t1'), br: num('#i-br') / 100, pd: Math.max(0, num('#i-pd')), late: num('#i-late'), lateDays: num('#i-lated'), bankRate: num('#i-brate') / 100 };
+  }
+  // The whole case: discounting from own cash above the floor, bank-funded longer terms below it, and late-payment interest avoided.
+  function model(I, mult, frOverride) {
+    mult = mult == null ? 1 : mult;
+    if (frOverride != null) { var J = {}; for (var q in I) J[q] = I[q]; J.fr = frOverride; I = J; }
+    var fact = src === 'fact';
+    var allIn = fact ? I.fr + I.fee * 365 / (I.adv * I.ten) : I.liq;
+    var idle = fact ? I.idle : 0;
+    var floor = Math.max(allIn + idle / (1 - idle) * (allIn - I.liq), I.hur);
+    var L = fact ? lens : 'today';
+    var termsRate = L === 'strict' ? I.fr : I.liq;
+    var rows = S.map(function (s) {
+      var t = Math.max(1, Math.min(s.days, s.terms - 2)), apr = s.apr / 100;
+      var x = apr * t / 365, d = x / (1 + x);
+      var onb = Math.min(1, (s.onb / 100) * mult);
+      var face = Math.max(0, s.spend * (s.elig / 100) * Math.min(1, onb * (s.take / 100)));
+      var route = apr >= floor ? 'cash' : (I.bank ? 'bank' : 'terms');
+      var r = { s: s, t: t, d: d, face: face, route: route, dep: face * (1 - d) * t / 365, inc: face * d, onbN: Math.round(s.sup * s.onb / 100), freed: 0, termsVal: 0, ext: 0 };
+      if (route === 'bank') {
+        r.enrolled = s.spend * (s.elig / 100) * onb;
+        r.ext = s.mse ? 0 : Math.max(0, I.t1 - s.terms);
+        r.freed = r.enrolled * r.ext / 365;
+        r.termsVal = r.freed * termsRate;
+        var own = s.alt / 100, newT = s.terms + r.ext;
+        r.viaBank = I.br * Math.max(0, newT - I.pd) / 365 + own * Math.min(I.pd, newT) / 365;
+        r.wait = own * s.terms / 365;
+      }
+      return r;
+    });
+    var left = Math.max(0, I.cap) / 1.3, capped = false;
+    rows.filter(function (r) { return r.route === 'cash'; }).sort(function (a, b) { return b.s.apr - a.s.apr; }).forEach(function (r) {
+      if (r.dep > left) { var k = left > 0 ? left / r.dep : 0; r.dep *= k; r.inc *= k; r.face *= k; capped = true; }
+      left -= r.dep;
+    });
+    var D = 0, inc = 0, face = 0, bankFace = 0, onbN = 0, freed = 0, termsVal = 0;
+    rows.forEach(function (r) {
+      if (r.route === 'cash') { D += r.dep; inc += r.inc; face += r.face; onbN += r.onbN; }
+      else if (r.route === 'bank') { bankFace += r.face; freed += r.freed; termsVal += r.termsVal; }
+    });
+    var idleCash = D / (1 - idle) - D;
+    var strict = inc - D * allIn - idleCash * (allIn - I.liq), today = inc - D * I.liq;
+    var disc = (L === 'strict' ? strict : today) - I.team;
+    var r3 = 3 * I.bankRate;
+    var comp = Math.max(0, I.late) * (Math.pow(1 + r3 / 12, Math.max(0, I.lateDays) * 12 / 365) - 1);
+    return { allIn: allIn, idle: idle, floor: floor, L: L, rows: rows, D: D, inc: inc, face: face, bankFace: bankFace, onbN: onbN, capped: capped,
+      disc: disc, freed: freed, termsVal: termsVal, termsRate: termsRate, comp: comp, r3: r3, total: disc + termsVal + comp, ret: D > 0 ? inc / D : NaN };
+  }
+  function solve(f, lo, hi) { var flo = f(lo), fhi = f(hi); if (!(flo > 0) || fhi > 0) return NaN; for (var i = 0; i < 60; i++) { var mid = (lo + hi) / 2; if (f(mid) > 0) lo = mid; else hi = mid; } return (lo + hi) / 2; }
+  function fmt(x) { return T.cr(x).replace(' crore', ' cr'); }
+  function signed(x) { return x < 0 ? 'minus ' + fmt(-x) : fmt(x); }
+  // headline figures: one decimal in crore, as on the front page
+  function c1(x) { var a = Math.abs(x); return (x < 0 ? 'minus ' : '') + 'Rs ' + T.inr(a, a < 100 ? 1 : 0) + ' cr'; }
+  function render() {
+    var I = inputs(), M = model(I, 1);
+    T.$('#calc').classList.toggle('hidefact', src !== 'fact');
+    T.$('#lensrow').hidden = src !== 'fact';
+    var view = src === 'fact' ? (M.L === 'strict' ? 'strict view' : 'against today') : 'own surplus, against the liquid fund';
+    // headline
+    var tot = T.$('#k-tot');
+    tot.textContent = c1(Math.abs(M.total));
+    tot.className = 'v' + (M.total < 0 ? ' neg' : '');
+    T.$('#k-totl').textContent = M.total < 0 ? 'Costs more than it earns, a year' : 'A year, before the platform fee';
+    T.$('#k-tots').textContent = view + ', after the team\'s time';
+    var parts = [Math.max(0, M.disc), Math.max(0, M.termsVal), Math.max(0, M.comp)], sum = parts[0] + parts[1] + parts[2] || 1;
+    ['#st1', '#st2', '#st3'].forEach(function (id, i) { T.$(id).style.width = (parts[i] / sum * 100).toFixed(2) + '%'; });
+    T.$('#k-l1').textContent = c1(M.disc);
+    T.$('#k-l1s').textContent = M.D > 0 ? fmt(M.face) + ' paid early a year at ' + T.pct(M.ret, 1) + ', after a ' + fmt(I.team) + ' team' : 'No offer clears the floor, so no cash goes out';
+    T.$('#k-l2').textContent = c1(M.termsVal);
+    var ext = M.rows.filter(function (r) { return r.route === 'bank' && r.ext > 0; });
+    T.$('#k-l2s').textContent = ext.length ? fmt(M.freed) + ' freed once, ' + ext.map(function (r) { return r.s.terms + ' to ' + (r.s.terms + r.ext); }).join(', ') + ' days, valued at ' + T.pct(M.termsRate, 2)
+      : (src === 'own' ? 'Your own surplus clears every offer, so no group needs the banks' : 'No group sits under the floor on the bank route');
+    T.$('#k-l3').textContent = c1(M.comp);
+    T.$('#k-l3s').textContent = 'On ' + fmt(I.late) + ' paid ' + I.lateDays + ' days late today, at ' + T.pct(M.r3, 2);
+    // kpis
+    var paid = M.face + M.bankFace;
+    T.$('#k-bef').textContent = M.total > 0 ? c1(M.total) : 'none';
+    T.$('#k-befs').textContent = M.total > 0 && paid > 0 ? 'a year, about ' + Math.round(M.total / paid * 10000) + ' bps of invoices paid early' : 'the case does not pay on these figures';
+    T.$('#k-dep').textContent = fmt(M.D);
+    T.$('#k-face').textContent = 'pays ' + fmt(M.face) + ' early a year';
+    T.$('#k-bank').textContent = fmt(M.bankFace);
+    if (src === 'fact') {
+      var keep = lens; lens = 'strict';
+      var st = solve(function (fr) { return model(I, 1, fr).disc; }, 0, 0.3);
+      lens = keep;
+      T.$('#k-stop').textContent = isFinite(st) ? T.pct(st, 2) : 'n/a';
+    }
+    T.$('#k-pil').textContent = M.onbN > 0 ? fmt(PILOT * M.D / M.onbN) : 'n/a';
+    T.$('#floorline').textContent = src === 'fact'
+      ? 'Your cash costs ' + T.pct(M.allIn, 2) + ' all-in. With ' + T.pct(M.idle, 0) + ' of it idle, the floor is ' + T.pct(M.floor, 1) + ': offers below it go to your banks.'
+      : 'Your surplus earns ' + T.pct(I.liq, 1) + ' today. The floor is ' + T.pct(M.floor, 1) + ': offers below it go to your banks.';
+    // groups
+    M.rows.forEach(function (r, i) {
+      var c = T.$('#rt' + i); c.textContent = r.route === 'cash' ? 'Own cash' : (r.route === 'bank' ? 'Your banks' : 'Normal terms');
+      c.className = 'chip' + (r.route === 'cash' ? '' : ' o');
+      T.$('#res' + i).innerHTML = r.route === 'cash'
+        ? 'Discount ' + T.pct(r.d, 2) + '. <b>' + fmt(r.face) + '</b> paid early a year, <b>' + fmt(r.dep) + '</b> out, <b>' + fmt(r.inc) + '</b> earned. Paid on day ' + (r.s.terms - r.t) + ' of ' + r.s.terms + '.'
+        : (r.route === 'bank' ? '<b>' + fmt(r.face) + '</b> a year paid early by your banks at your rating. Terms ' + r.s.terms + (r.ext ? ' to ' + (r.s.terms + r.ext) : '') + ' days. None of your cash.' : 'Under the floor and no bank route: stays on normal terms.');
+    });
+    var F = [];
+    M.rows.forEach(function (r) {
+      if (r.s.mse && r.s.terms > 45) F.push(['lim', r.s.n + ': blocked. Micro and small suppliers cap at 45 days.']);
+      if (r.s.apr >= r.s.alt) F.push(['', r.s.n + ': the offer is at or above their own money (' + r.s.alt + '%). Expect little take-up.']);
+      if (r.route === 'bank' && r.ext > 0) {
+        var dlt = r.wait - r.viaBank;
+        F.push([dlt >= -0.0002 ? 'ok' : 'lim', r.s.n + ' via your bank: ' + T.pct(r.viaBank, 2) + ' against ' + T.pct(r.wait, 2) + ' waiting ' + r.s.terms + ' days today. ' + (dlt >= -0.0002 ? 'No worse off.' : 'Worse off: shorten the new terms or lower the bank rate.')]);
+      }
+      if (r.route === 'bank' && r.s.mse) F.push(['lim', r.s.n + ': on the bank route, but micro and small terms stay at 45 days.']);
+    });
+    if (I.t1 > 120) F.push(['lim', 'Terms past 120 days look like borrowing to an auditor. Keep them near market norms.']);
+    if (src === 'fact' && M.ret > 0.10) F.push(['', T.pct(M.ret, 1) + ' sits above the 8 to 10% your India client earns on surplus. This cash costs ' + T.pct(M.allIn, 2) + ', so only the higher offers use it.']);
+    if (src === 'fact' && I.idle > 0.25) F.push(['', 'More than a quarter of the factored cash sits idle. Factor on need.']);
+    if (M.capped) F.push(['', 'Demand is above the cash committed. The cap fills the best-paying suppliers first.']);
+    T.$('#flags').innerHTML = F.map(function (f) { return '<li class="' + f[0] + '">' + f[1] + '</li>'; }).join('');
+    // sensitivity
+    var keepL = lens;
+    T.$('#sens tbody').innerHTML = [0.25, 0.5, 0.75, 1, 1.25, 1.5].map(function (m) {
+      lens = 'strict'; var a = model(I, m); lens = 'today'; var b = model(I, m); lens = keepL;
+      return '<tr' + (m === 1 ? ' class="hl"' : '') + '><td>' + (m * 100) + '% of plan</td><td class="r">' + fmt(a.D) + '</td><td class="r">' + (src === 'fact' ? signed(a.total) : 'n/a') + '</td><td class="r">' + signed(b.total) + '</td></tr>';
+    }).join('');
+  }
+  function reset() {
+    S = DEF.map(function (s) { var o = {}; for (var k in s) o[k] = s[k]; return o; });
+    for (var k in GLOBAL) T.$(k).value = GLOBAL[k];
+    T.$('#i-bank').value = '1';
+    buildSegs(); render();
+  }
+  T.$$('#assume .fields > label input, #assume .fields > label select').forEach(function (x) { if (!x.hasAttribute('data-i')) { x.addEventListener('input', render); x.addEventListener('change', render); } });
+  T.seg(T.$('#src'), function (v) { src = v; render(); });
+  T.seg(T.$('#lens'), function (v) { lens = v; render(); });
+  T.$('#reset').addEventListener('click', reset);
+  reset();
+
+  // Line 2, worked
+  function c() {
+    var sp = num('#c-sp'), t0 = num('#c-t0'), t1 = num('#c-t1'), cof = num('#c-cof') / 100, br = num('#c-br') / 100, pd = Math.max(0, num('#c-pd')), sr = num('#c-sr') / 100;
+    var freed = sp * Math.max(0, t1 - t0) / 365;
+    T.$('#c-o1').textContent = T.cr(freed);
+    T.$('#c-o2').textContent = T.cr(freed * cof);
+    var bankPart = br * Math.max(0, t1 - pd) / 365, ownPart = sr * Math.min(pd, t1) / 365, viaBank = bankPart + ownPart, wait = sr * t0 / 365;
+    T.$('#c-o3').textContent = T.pct(viaBank, 2);
+    T.$('#c-o3s').textContent = T.pct(bankPart, 2) + ' to the bank, ' + T.pct(ownPart, 2) + ' its own money to day ' + pd;
+    T.$('#c-o4').textContent = T.pct(wait, 2);
+    T.$('#c-o4s').textContent = 'its own money for ' + t0 + ' days';
+    var diff = wait - viaBank, o5 = T.$('#c-o5');
+    if (diff >= 0) { o5.textContent = 'No worse off'; T.$('#c-o6').textContent = T.pct(diff, 2) + ' better, via your bank'; }
+    else if (diff > -0.0005) { o5.textContent = 'About even'; T.$('#c-o6').textContent = T.pct(-diff, 2) + ' worse: close to neutral'; }
+    else { o5.textContent = 'Worse off'; T.$('#c-o6').textContent = 'by ' + T.pct(-diff, 2) + ': shorten the new terms'; }
+    var fl = ['<li class="lim">Non-MSE suppliers only. Micro and small stay at 45 days or less.</li>'];
+    if (t1 > 120) fl.push('<li>Terms past 120 days look like borrowing to an auditor. Keep them near market norms.</li>');
+    if (br >= sr) fl.push('<li class="lim">The bank rate is not below the supplier\'s own money, so longer terms only cost the supplier.</li>');
+    T.$('#c-flags').innerHTML = fl.join('');
+  }
+  T.$$('[id^="c-"]').filter(function (x) { return x.tagName === 'INPUT'; }).forEach(function (x) { x.addEventListener('input', c); });
+  c();
+})();
+</script>
+
+</main>
+<nav class="pn wrap" aria-label="Sections"><a class="prev" href="buyers.html"><small>Previous</small><span>03 Who signs</span></a><a class="next" href="pilot.html"><small>Next</small><span>05 Pilot design</span></a></nav>
+<footer class="foot wrap"><a href="../tasconnect-india.html">Back to the India playbook</a><span>Draft for our third call, 25 Nov 2026</span></footer>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First 90 days · TASConnect India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the front is short screens on a 1040px column, one idea each; detail pages are a 760px reading
+   column where tables, diagrams and calculators may run to 1040px inside their own scroll box.
+   Ledger red marks limits (the 45-day line, a blocked term). Ink blue is the one accent. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EAEEF4; --ink:#0E1522; --muted:#586375; --line:#D9DFE8; --track:#E3E8EF;
+  --accent:#1F47C9; --accent-soft:#E3E9FA; --red:#B42318; --red-soft:#FBE7E4;
+  --good:#0B7A53; --good-soft:#DDF1E7; --amber:#975705; --amber-soft:#FAECD6;
+  --f-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 var(--f-body)}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+table{font:inherit; color:inherit; border-collapse:collapse}
+button,input,select,textarea{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.num,.tbl td{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* type */
+.eyebrow{font:500 12.5px/1.3 var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display); font-stretch:92%; text-wrap:balance}
+.mega{font-size:clamp(42px,8.6vw,100px); font-weight:650; line-height:.96; letter-spacing:-.03em; word-spacing:.06em}
+.mega .soft{color:var(--muted); font-weight:520}
+h2.big{font-size:clamp(30px,5.4vw,56px); font-weight:640; line-height:1.02; letter-spacing:-.022em; word-spacing:.05em}
+.lede{font-size:clamp(18px,2.3vw,21px); line-height:1.45; max-width:44ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.cap{font:12.5px/1.45 var(--f-mono); letter-spacing:.02em; color:var(--muted)}
+p{max-width:66ch}
+b,strong{font-weight:600}
+
+/* chips and tags */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; font:500 12px/1 var(--f-mono); letter-spacing:.02em; padding:5px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.o{background:transparent; border:1px solid var(--line); color:var(--muted)}
+.chip.draft{background:var(--amber-soft); color:var(--amber)}
+.chip.ok{background:var(--good-soft); color:var(--good)}
+.chip.lim{background:var(--red-soft); color:var(--red)}
+.tag{font:11.5px/1 var(--f-mono); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 6px; white-space:nowrap; vertical-align:2px}
+
+/* buttons */
+.open{display:inline-flex; align-items:center; gap:10px; justify-self:start; font:600 15px/1 var(--f-body); color:var(--accent); text-decoration:none; padding:12px 18px; border:1.5px solid var(--accent); border-radius:999px; background:transparent}
+.open::after{content:"\2192"; font-family:var(--f-mono)}
+.open:hover{background:var(--accent-soft)}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:14px; line-height:1.2; color:var(--ink)}
+.seg button:hover,.btn:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.sm{padding:6px 10px; font-size:13px}
+
+/* front screens */
+.screen{border-top:1px solid var(--line)}
+.screen:first-child{border-top:0}
+.screen.alt{background:var(--surface)}
+.screen>.wrap{padding-block:clamp(48px,8vw,96px); display:grid; gap:clamp(18px,3vw,28px)}
+
+/* detail chrome */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+body.detail::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
+.topin{display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.back{font:600 14.5px/1 var(--f-body); text-decoration:none; color:var(--ink); display:inline-flex; gap:8px; align-items:center}
+.back::before{content:"\2190"; font-family:var(--f-mono); color:var(--accent)}
+.back:hover{color:var(--accent)}
+.sec{font:12px/1 var(--f-mono); color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.page{padding-block:clamp(28px,5vw,48px) 24px; display:grid; gap:0}
+.hero{display:grid; gap:14px; padding-bottom:clamp(22px,4vw,34px)}
+.hero h1{font-size:clamp(32px,6vw,58px); font-weight:640; line-height:1.04; letter-spacing:-.022em; word-spacing:.05em; max-width:20ch}
+.blk{display:grid; gap:14px; padding-block:clamp(24px,4vw,36px); border-top:1px solid var(--line); min-width:0}
+.blk>h2{font-size:clamp(22px,3.2vw,30px); font-weight:630; line-height:1.1; letter-spacing:-.02em}
+.blk h3{font-size:18px; font-weight:620; letter-spacing:-.01em; line-height:1.25}
+.blk>p,.blk>ul,.blk>ol{max-width:66ch}
+.draftbar{background:var(--amber-soft); border-radius:12px; padding:14px 16px; display:grid; gap:6px; max-width:760px}
+.draftbar .lab{font:500 12px/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--amber)}
+.pn{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-block:28px 8px; border-top:1px solid var(--line)}
+.pn a{display:grid; gap:4px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:var(--ink); background:var(--surface); min-width:0}
+.pn a:hover{border-color:var(--accent)}
+.pn small{font:11.5px/1 var(--f-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.pn span{font-weight:600}
+.pn .next{text-align:right}
+.foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:16px 40px; font-size:13.5px; color:var(--muted)}
+
+/* lists */
+.ticks{list-style:none; padding:0; display:grid; gap:8px}
+.ticks li{position:relative; padding-left:20px}
+.ticks li::before{content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.ticks.red li::before{background:var(--red)}
+.steps{padding-left:1.4em; display:grid; gap:8px}
+.steps li::marker{font:500 13px var(--f-mono); color:var(--accent)}
+dl.kv{display:grid; grid-template-columns:minmax(0,9.5rem) minmax(0,1fr); gap:8px 16px}
+dl.kv dt{font:12.5px/1.5 var(--f-mono); color:var(--muted); padding-top:2px}
+@media (max-width:560px){ dl.kv{grid-template-columns:1fr; gap:2px} dl.kv dd{padding-bottom:8px} }
+
+/* surfaces */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:grid; gap:10px; min-width:0; align-content:start}
+.screen.alt .card{background:var(--bg)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:820px){ .grid3{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .grid2,.grid3{grid-template-columns:1fr} }
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-width:100%}
+.tbl{width:100%; min-width:600px; font-size:14.5px; line-height:1.45}
+.tbl.w8{min-width:820px}
+.tbl th,.tbl td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+.tbl th{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl td b{font-weight:600}
+.tbl tr.hl td{background:var(--accent-soft)}
+.svgbox{max-width:100%; min-width:0}
+.svgbox svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--f-mono)}
+
+/* expanders */
+details.xp{border-top:1px solid var(--line)}
+details.xp:last-of-type{border-bottom:1px solid var(--line)}
+details.xp>summary{list-style:none; cursor:pointer; display:flex; gap:14px; align-items:baseline; padding:14px 2px}
+details.xp>summary::-webkit-details-marker{display:none}
+details.xp>summary .st{flex:1; min-width:0; display:grid; gap:2px}
+details.xp>summary .st b{font-weight:600}
+details.xp>summary .st span{color:var(--muted); font-size:14.5px}
+details.xp>summary::after{content:"+"; font:400 20px/1 var(--f-mono); color:var(--accent)}
+details.xp[open]>summary::after{content:"\2212"}
+details.xp>.xb{padding:0 2px 18px; display:grid; gap:10px}
+
+/* inputs and outputs */
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.f{display:grid; gap:5px; font-size:13.5px; color:var(--muted); min-width:0}
+.f input,.f select{width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums}
+.f input:focus,.f select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.sl{display:grid; gap:6px}
+.sl label{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-weight:500; font-size:15px}
+.sl output{font:620 19px/1 var(--f-display); font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--accent); height:28px; margin:0}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.kpi{display:grid; gap:4px; padding:12px 14px; border-radius:12px; background:var(--sunk); min-width:0}
+.kpi .k{font:11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.kpi .v{font:640 clamp(21px,3vw,27px)/1.05 var(--f-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px; color:var(--muted)}
+.kpi.hi{background:var(--accent-soft)}
+.kpi.hi .v{color:var(--accent)}
+.flags{list-style:none; padding:0; display:grid; gap:6px}
+.flags li{font-size:14.5px; padding:9px 12px; border-radius:10px; background:var(--amber-soft); color:var(--ink)}
+.flags li.lim{background:var(--red-soft)}
+.flags li.ok{background:var(--good-soft)}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:560; line-height:1.3; letter-spacing:-.01em}
+
+@media (max-width:560px){ .pn{grid-template-columns:1fr} .pn .next{text-align:left} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+<script>
+/* Shared helpers: Indian number formats, segmented buttons, safe per-browser storage. */
+var T = (function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function inr(x, dp) {
+    dp = dp || 0;
+    return Number(x).toLocaleString('en-IN', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  // Rupees held in crore. Under 1 crore it reads in lakh.
+  function cr(x) {
+    if (!isFinite(x)) return 'n/a';
+    var neg = x < 0, a = Math.abs(x), s;
+    if (a < 1) s = 'Rs ' + inr(a * 100, a * 100 < 10 ? 1 : 0) + ' lakh';
+    else s = 'Rs ' + inr(a, a < 10 ? 2 : (a < 100 ? 1 : 0)) + ' crore';
+    s = s.replace(/\.0+ /, ' ').replace(/(\.\d*?)0+ /, '$1 ');
+    return (neg ? 'less ' : '') + s;
+  }
+  function pct(x, dp) {
+    if (!isFinite(x)) return 'n/a';
+    var v = (x * 100).toFixed(dp === undefined ? 1 : dp);
+    return v.replace(/\.0+$/, '') + '%';
+  }
+  function usdm(x) { var v = Math.round(x / 10000) / 100; var s = String(v); return 'USD ' + (s.indexOf('.') < 0 ? s + '.0' : s) + 'M'; }
+  function seg(el, cb) {
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || !el.contains(b)) return;
+      $$('button', el).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute('data-v'), b);
+    });
+  }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1600); } };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } catch (e) { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  // Draws an SVG at the real width of its box, so text stays readable on a phone and nothing scrolls sideways.
+  // draw(svg, width) adds the marks and returns the height it used. Redraws when the width changes.
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, txt) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+  function fit(svg, draw) {
+    var last = -1;
+    function go(force) {
+      var box = svg.parentNode, w = Math.floor(box.getBoundingClientRect().width || box.clientWidth || 0);
+      if (w < 200) w = Math.max(w, 280);
+      if (!force && w === last) return; last = w;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var h = draw(svg, w);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    go(true);
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { go(false); }, 120); });
+    return function () { go(true); };
+  }
+  return { $: $, $$: $$, inr: inr, cr: cr, pct: pct, usdm: usdm, seg: seg, store: store, copy: copy, el: el, fit: fit };
+})();
+</script>
+</head>
+<body class="detail">
+<header class="top"><div class="wrap topin"><a class="back" href="../tasconnect-india.html">India playbook</a><span class="sec">Section 11 of 11</span></div></header>
+<main class="wrap page">
+<style>
+.scrub{display:grid; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:clamp(14px,3vw,22px)}
+.scrub .wk{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:6px 14px}
+.scrub .wk b{font:640 clamp(24px,3.6vw,32px)/1 var(--f-display); letter-spacing:-.02em}
+.phases{display:grid; grid-template-columns:2fr 2fr 4fr 5fr; gap:4px}
+.phases span{height:8px; border-radius:4px; background:var(--track)}
+.phases span.on{background:var(--accent)}
+.phases span.done{background:var(--accent-soft)}
+.lanes4{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+@media (max-width:640px){ .lanes4{grid-template-columns:1fr} }
+.lanes4 .card{background:var(--bg)}
+.lanes4 .card.ship{grid-column:1/-1; background:var(--accent-soft); border-color:transparent}
+.lanes4 .lab{font:500 11.5px var(--f-mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent)}
+.ms{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:700px){ .ms{grid-template-columns:1fr} }
+.ms .k{font:640 30px/1 var(--f-display); letter-spacing:-.02em}
+.asks{display:grid; gap:18px}
+.askg h3{font:620 16px var(--f-display); padding-bottom:6px}
+.ask{display:grid; grid-template-columns:2rem minmax(0,1fr) auto; gap:4px 12px; align-items:start; padding:11px 0; border-top:1px solid var(--line)}
+.ask .n{font:600 13px var(--f-mono); color:var(--accent); padding-top:2px}
+.ask b{font-weight:600}
+.ask .u{font-size:14px; color:var(--muted)}
+.ask .seg button{padding:5px 9px; font-size:12.5px}
+@media (max-width:640px){ .ask{grid-template-columns:2rem minmax(0,1fr)} .ask .seg{grid-column:2} }
+.impact{display:grid; gap:6px}
+</style>
+
+<section class="hero">
+  <p class="eyebrow">11 &middot; First 90 days</p>
+  <h1>Three lanes from week one, and a dated milestone every 30 days.</h1>
+  <p class="lede">Pipeline, learning and channels run in parallel from the first Monday. Every week also ships something into the playbook.</p>
+  <div class="chips"><span class="chip ok">Filled</span><span class="chip o">Day one: Mon 4 Jan 2027, or earlier</span><span class="chip o">Base: Mumbai</span></div>
+</section>
+
+<section class="blk" aria-labelledby="h-wk">
+  <h2 id="h-wk">Walk it week by week</h2>
+  <div class="scrub">
+    <div class="wk"><b id="w-lab">Week 1</b><span class="cap" id="w-date">from Mon 4 Jan 2027 &middot; weeks 1 to 2</span></div>
+    <input type="range" id="w" min="1" max="13" value="1" step="1" aria-label="Week">
+    <div class="phases" aria-hidden="true"><span data-p="0"></span><span data-p="1"></span><span data-p="2"></span><span data-p="3"></span></div>
+    <div class="lanes4" id="lanes" aria-live="polite"></div>
+  </div>
+  <p class="small muted">Day one can move earlier: Ketan is available immediately, so a week 0 in December is open if you want it.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-ms">
+  <h2 id="h-ms">What you will see</h2>
+  <div class="ms">
+    <div class="card"><span class="k">Day 30</span><span class="cap">3 Feb 2027</span><ul class="ticks small"><li>Every open India deal re-qualified, each with an evaluation plan</li><li>The Q1 deal named, with its paper in motion</li><li>The account engine live for the named list</li><li>Pages built for the seven on their own filings</li><li>AE offer out, if agreed</li></ul></div>
+    <div class="card"><span class="k">Day 60</span><span class="cap">5 Mar 2027</span><ul class="ticks small"><li>The first business case on a corporate's own numbers</li><li>Four Q2 pilots scoped, each with success criteria and a named signer</li><li>Presales time lined up for those four</li></ul></div>
+    <div class="card"><span class="k">Day 90</span><span class="cap">4 Apr 2027</span><ul class="ticks small"><li><b>Q1 deal signed by 31 Mar 2027</b> (USD 0.25M)</li><li>The four Q2 pilots in setup: InfoSec, legal, the ERP link</li><li>Hero MotoCorp and Bajaj Auto, the Q3 deals, in first meetings</li><li>Playbook v1, used by one other seller</li></ul></div>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-eng">
+  <h2 id="h-eng">The account engine, live by day 30</h2>
+  <p>Built with Claude Code in the first month, so sellers spend their time in conversations and everything around a meeting is already done. It is what lets one person work about 40 accounts a quarter.</p>
+  <div class="grid2">
+    <div class="card"><span class="eyebrow">1 &middot; Research</span><h3>Every account read from its own filings</h3><p class="small muted">The supplier finance note, the MSMED table, cash against borrowings, payable days, dealer receivables, group links. Scored for tier and friction before anyone writes to it.</p></div>
+    <div class="card"><span class="eyebrow">2 &middot; CRM</span><h3>Filled without typing</h3><p class="small muted">Contacts placed on the committee map by desk, stage evidence logged from each meeting, the next step dated.</p></div>
+    <div class="card"><span class="eyebrow">3 &middot; A page per account</span><h3>Their numbers, editable, for each reader</h3><p class="small muted">The CFO gets the case on his figures, the treasurer the bank view, procurement the supplier waves. Sent the same day as the meeting, like the account and CFO pages in this playbook.</p></div>
+    <div class="card"><span class="eyebrow">4 &middot; The rhythm</span><h3>Prep and reporting drafted for review</h3><p class="small muted">Call prep before every meeting, the recap after it, and the Monday one-pager from the CRM. A person checks each one before it goes.</p></div>
+  </div>
+  <p class="small muted"><b>What it reads:</b> public filings and registry data, plus your CRM, inside your data policy and on tools your security team approves. Client data never goes into a model your security team has not cleared. It needs ask 20: a CRM seat, the call-recording consent policy, and a sandbox.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-asks">
+  <h2 id="h-asks">What it needs from the team</h2>
+  <p>Each ask with what it unlocks. Mark each one; the two that change capacity show their effect below. Marks stay in this browser.</p>
+  <div class="asks" id="asks"></div>
+  <div class="impact" id="impact" aria-live="polite"></div>
+</section>
+
+<section class="blk" aria-labelledby="h-back">
+  <h2 id="h-back">What comes back</h2>
+  <ul class="ticks">
+    <li>The Monday one-pager, every week, by 9am Singapore time.</li>
+    <li>A playbook version every two weeks.</li>
+    <li>An honest status on every deal at day 30, 60 and 90.</li>
+  </ul>
+  <p class="small muted">People are added on pipeline triggers, never on the calendar: the AE from Q2, when the cold cohorts need more accounts worked than one person covers; presales support for four pilots at a time, rising to six in Q4.</p>
+</section>
+
+<script>
+(function () {
+  var P = [
+    { w: [1, 2], pipe: 'Take over every open India deal, with an evaluation plan for each. Name the Q1 deal: Lenovo India, or the most advanced deal open today. Lenovo and Syngenta India status with the group account owners.', learn: 'Sit in on account-manager calls with three live clients. Ride along on every open deal.', chan: 'The white-label bank: stage, owner, next step.', ship: 'The week-one data list answered. What good looks like for each buyer, version one.' },
+    { w: [3, 4], pipe: 'Pages for the seven on their own filings. The cold list worked from week three: about 32 accounts this quarter for the Q3 signings.', learn: 'Product deep dive: ERP link, supplier onboarding, funder setup, security pack. The test: a CFO first meeting with no engineer in the room.', chan: 'Partner routes into SAP finance mapped, xSuite India first. The bank referral script.', ship: 'Committee map, discovery card and objection library live. The account engine running: research, CRM fill and a page per account.' },
+    { w: [5, 8], pipe: 'The first business case on a corporate\'s own numbers. The four Q2 pilots scoped: Syngenta India, one open deal and two more, each with success criteria and a named signer.', learn: 'Teach-back to you: the India pitch in 30 minutes. Roleplays against a CFO, a treasurer and a procurement head.', chan: 'One joint account named with a partner. The bank: a proposal, or parked with the reason.', ship: 'Playbook v0.5 to every seller. The Monday one-pager running.' },
+    { w: [9, 13], pipe: 'The Q1 deal signed by 31 Mar (USD 0.25M). The four Q2 pilots in setup: InfoSec, legal and the ERP link. First meetings at Hero MotoCorp and Bajaj Auto, the Q3 deals.', learn: 'Runs any first call alone: funding routes, security, the ERP link, the rules.', chan: 'One bank or partner route bringing deals.', ship: 'Playbook v1, used by one other seller.' }
+  ];
+  var r = T.$('#w'), start = new Date(2027, 0, 4);
+  function d(dt) { return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+  function show() {
+    var w = +r.value, i = P.findIndex(function (p) { return w >= p.w[0] && w <= p.w[1]; }), p = P[i];
+    var dt = new Date(start.getTime() + (w - 1) * 7 * 864e5);
+    T.$('#w-lab').textContent = 'Week ' + w;
+    T.$('#w-date').textContent = 'from Mon ' + d(dt) + ' · weeks ' + p.w[0] + ' to ' + p.w[1];
+    T.$$('.phases span').forEach(function (s, k) { s.className = k === i ? 'on' : (k < i ? 'done' : ''); });
+    T.$('#lanes').innerHTML = [['Pipeline', p.pipe], ['Learning', p.learn], ['Channels', p.chan]].map(function (l) { return '<div class="card"><span class="lab">' + l[0] + '</span><p class="small">' + l[1] + '</p></div>'; }).join('') +
+      '<div class="card ship"><span class="lab">Ships to the playbook</span><p class="small">' + p.ship + '</p></div>';
+  }
+  r.addEventListener('input', show); show();
+
+  var A = [
+    ['Decide, this month', [
+      [1, 'The plan basis: signed ACV, confirmed in writing', 'The bar everyone measures against'],
+      [2, 'Pricing room: list, floor, and who approves exceptions inside a delegated band', 'Deals that do not wait on Singapore'],
+      [3, 'Open the India AE role now', 'An AE in seat by Q2, when the cold cohorts outgrow one person', 'ae'],
+      [4, 'Pilot policy: free or paid, order form at pilot start, fee from go-live', 'Rollout as a scope change, not a new procurement']]],
+    ['Data, week one', [
+      [5, 'The India pipeline by stage, with owners', 'The Q1 and Q2 signings'],
+      [6, 'Global clients with Indian entities not yet live, and whether the parent contract extends', 'The start-inside list'],
+      [7, 'The commercial shape of three signed programs', 'Replaces every assumed price'],
+      [8, 'Anything already contracted for India in 2027', 'The real starting line'],
+      [9, 'Win and loss reasons, and cycle lengths so far', 'Real funnel rates'],
+      [10, 'The white-label POC: stage, owner, what the bank pays', 'The bank lane'],
+      [11, 'Which case studies and references can be named in India', 'Proof in the room']]],
+    ['People', [
+      [12, 'Account managers: about two hours a week each, for three weeks', 'The client-calls half of the learning lane'],
+      [13, 'Presales: support for four pilots at a time from Q1, six from Q4, until India presales joins', 'The Q2 to Q4 signings', 'pre'],
+      [14, 'Product: one first-call session a week for three weeks, plus the security pack', 'CFO meetings with no engineer in the room'],
+      [15, 'Implementation: someone who can scope an SAP link on a follow-up call', 'The second meeting'],
+      [16, 'A turnaround commitment on InfoSec and legal packs for India deals', 'Packs out in week one of every deal']]],
+    ['Access', [
+      [17, 'Introductions from Singapore and Malaysia account managers to the India side of their clients', 'Tier 1 meetings'],
+      [18, 'The owner of partner relationships: xSuite, NEC, Chekk', 'The partner lane'],
+      [19, 'The bank channel owner', 'Bank referrals from Q3']]],
+    ['Tools', [
+      [20, 'A CRM seat with the India pipeline, the call-recording consent policy, and a sandbox for the playbook and its AI copilot', 'The Monday one-pager from real data']]]
+  ];
+  var ST = ['Open', 'Agreed', 'Not now'], state = {};
+  A.forEach(function (g) { g[1].forEach(function (a) { var v = T.store.get('tas3-ask-' + a[0]); state[a[0]] = v ? +v : 0; }); });
+  T.$('#asks').innerHTML = A.map(function (g) {
+    return '<div class="askg"><h3>' + g[0] + '</h3>' + g[1].map(function (a) {
+      return '<div class="ask"><span class="n">' + a[0] + '</span><span><b>' + a[1] + '</b><br><span class="u">Unlocks: ' + a[2] + '</span></span><div class="seg" data-a="' + a[0] + '" role="group" aria-label="Ask ' + a[0] + '">' +
+        ST.map(function (s, i) { return '<button type="button" data-v="' + i + '" aria-pressed="' + (state[a[0]] === i) + '">' + s + '</button>'; }).join('') + '</div></div>';
+    }).join('') + '</div>';
+  }).join('');
+  function impact() {
+    var out = [];
+    if (state[3] === 2) out.push('<li class="lim">AE not now: 24, 40 and 56 accounts a quarter go unworked in Q2, Q3 and Q4. The cold cohorts thin first, which puts the Q3 and Q4 signings, USD 1.8M of the plan, at risk.</li>');
+    else if (state[3] === 1) out.push('<li class="ok">AE agreed: the Q2 to Q4 gap of 24, 40 and 56 accounts is covered, with bank and partner referrals on top.</li>');
+    if (state[13] === 2) out.push('<li class="lim">Presales not now: four pilots at a time from Q1, and six in Q4, run without support. Setup slows first, and setup is what moves a signing a quarter.</li>');
+    else if (state[13] === 1) out.push('<li class="ok">Presales agreed: four pilots at a time from Q1, six from Q4.</li>');
+    T.$('#impact').innerHTML = out.length ? '<ul class="flags">' + out.join('') + '</ul>' : '<p class="small muted">Asks 3 and 13 change the capacity numbers. Mark them to see how.</p>';
+  }
+  T.$$('#asks .seg').forEach(function (s) { var k = +s.getAttribute('data-a'); T.seg(s, function (v) { state[k] = +v; T.store.set('tas3-ask-' + k, v); impact(); }); });
+  impact();
+})();
+</script>
+
+</main>
+<nav class="pn wrap" aria-label="Sections"><a class="prev" href="pipeline.html"><small>Previous</small><span>10 Pipeline and cadence</span></a><a class="next" href="plan.html"><small>Next</small><span>The signed plan</span></a></nav>
+<footer class="foot wrap"><a href="../tasconnect-india.html">Back to the India playbook</a><span>Draft for our third call, 25 Nov 2026</span></footer>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pipeline and cadence · TASConnect India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the front is short screens on a 1040px column, one idea each; detail pages are a 760px reading
+   column where tables, diagrams and calculators may run to 1040px inside their own scroll box.
+   Ledger red marks limits (the 45-day line, a blocked term). Ink blue is the one accent. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EAEEF4; --ink:#0E1522; --muted:#586375; --line:#D9DFE8; --track:#E3E8EF;
+  --accent:#1F47C9; --accent-soft:#E3E9FA; --red:#B42318; --red-soft:#FBE7E4;
+  --good:#0B7A53; --good-soft:#DDF1E7; --amber:#975705; --amber-soft:#FAECD6;
+  --f-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0B1018; --surface:#121A27; --sunk:#0F1622; --ink:#E7EBF2; --muted:#9AA4B5; --line:#243043; --track:#1B2434;
+  --accent:#86A6FF; --accent-soft:#18233D; --red:#FF8B7B; --red-soft:#381916;
+  --good:#56D3A5; --good-soft:#0F281F; --amber:#F1B75F; --amber-soft:#2D2313; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 var(--f-body)}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+table{font:inherit; color:inherit; border-collapse:collapse}
+button,input,select,textarea{font:inherit; color:inherit}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.num,.tbl td{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.wrap{max-width:1040px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* type */
+.eyebrow{font:500 12.5px/1.3 var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+h1,h2,h3{font-family:var(--f-display); font-stretch:92%; text-wrap:balance}
+.mega{font-size:clamp(42px,8.6vw,100px); font-weight:650; line-height:.96; letter-spacing:-.03em; word-spacing:.06em}
+.mega .soft{color:var(--muted); font-weight:520}
+h2.big{font-size:clamp(30px,5.4vw,56px); font-weight:640; line-height:1.02; letter-spacing:-.022em; word-spacing:.05em}
+.lede{font-size:clamp(18px,2.3vw,21px); line-height:1.45; max-width:44ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.cap{font:12.5px/1.45 var(--f-mono); letter-spacing:.02em; color:var(--muted)}
+p{max-width:66ch}
+b,strong{font-weight:600}
+
+/* chips and tags */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:6px; font:500 12px/1 var(--f-mono); letter-spacing:.02em; padding:5px 9px; border-radius:999px; background:var(--accent-soft); color:var(--accent); white-space:nowrap}
+.chip.o{background:transparent; border:1px solid var(--line); color:var(--muted)}
+.chip.draft{background:var(--amber-soft); color:var(--amber)}
+.chip.ok{background:var(--good-soft); color:var(--good)}
+.chip.lim{background:var(--red-soft); color:var(--red)}
+.tag{font:11.5px/1 var(--f-mono); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 6px; white-space:nowrap; vertical-align:2px}
+
+/* buttons */
+.open{display:inline-flex; align-items:center; gap:10px; justify-self:start; font:600 15px/1 var(--f-body); color:var(--accent); text-decoration:none; padding:12px 18px; border:1.5px solid var(--accent); border-radius:999px; background:transparent}
+.open::after{content:"\2192"; font-family:var(--f-mono)}
+.open:hover{background:var(--accent-soft)}
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button,.btn{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:8px 13px; cursor:pointer; font-size:14px; line-height:1.2; color:var(--ink)}
+.seg button:hover,.btn:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.btn.sm{padding:6px 10px; font-size:13px}
+
+/* front screens */
+.screen{border-top:1px solid var(--line)}
+.screen:first-child{border-top:0}
+.screen.alt{background:var(--surface)}
+.screen>.wrap{padding-block:clamp(48px,8vw,96px); display:grid; gap:clamp(18px,3vw,28px)}
+
+/* detail chrome */
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+body.detail::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg)}
+.topin{display:flex; justify-content:space-between; align-items:center; gap:12px; padding-block:12px}
+.back{font:600 14.5px/1 var(--f-body); text-decoration:none; color:var(--ink); display:inline-flex; gap:8px; align-items:center}
+.back::before{content:"\2190"; font-family:var(--f-mono); color:var(--accent)}
+.back:hover{color:var(--accent)}
+.sec{font:12px/1 var(--f-mono); color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.page{padding-block:clamp(28px,5vw,48px) 24px; display:grid; gap:0}
+.hero{display:grid; gap:14px; padding-bottom:clamp(22px,4vw,34px)}
+.hero h1{font-size:clamp(32px,6vw,58px); font-weight:640; line-height:1.04; letter-spacing:-.022em; word-spacing:.05em; max-width:20ch}
+.blk{display:grid; gap:14px; padding-block:clamp(24px,4vw,36px); border-top:1px solid var(--line); min-width:0}
+.blk>h2{font-size:clamp(22px,3.2vw,30px); font-weight:630; line-height:1.1; letter-spacing:-.02em}
+.blk h3{font-size:18px; font-weight:620; letter-spacing:-.01em; line-height:1.25}
+.blk>p,.blk>ul,.blk>ol{max-width:66ch}
+.draftbar{background:var(--amber-soft); border-radius:12px; padding:14px 16px; display:grid; gap:6px; max-width:760px}
+.draftbar .lab{font:500 12px/1.2 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--amber)}
+.pn{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-block:28px 8px; border-top:1px solid var(--line)}
+.pn a{display:grid; gap:4px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:var(--ink); background:var(--surface); min-width:0}
+.pn a:hover{border-color:var(--accent)}
+.pn small{font:11.5px/1 var(--f-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.pn span{font-weight:600}
+.pn .next{text-align:right}
+.foot{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; padding-block:16px 40px; font-size:13.5px; color:var(--muted)}
+
+/* lists */
+.ticks{list-style:none; padding:0; display:grid; gap:8px}
+.ticks li{position:relative; padding-left:20px}
+.ticks li::before{content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.ticks.red li::before{background:var(--red)}
+.steps{padding-left:1.4em; display:grid; gap:8px}
+.steps li::marker{font:500 13px var(--f-mono); color:var(--accent)}
+dl.kv{display:grid; grid-template-columns:minmax(0,9.5rem) minmax(0,1fr); gap:8px 16px}
+dl.kv dt{font:12.5px/1.5 var(--f-mono); color:var(--muted); padding-top:2px}
+@media (max-width:560px){ dl.kv{grid-template-columns:1fr; gap:2px} dl.kv dd{padding-bottom:8px} }
+
+/* surfaces */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:grid; gap:10px; min-width:0; align-content:start}
+.screen.alt .card{background:var(--bg)}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+@media (max-width:820px){ .grid3{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .grid2,.grid3{grid-template-columns:1fr} }
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface); max-width:100%}
+.tbl{width:100%; min-width:600px; font-size:14.5px; line-height:1.45}
+.tbl.w8{min-width:820px}
+.tbl th,.tbl td{padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+.tbl th{font:500 11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--sunk)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl td b{font-weight:600}
+.tbl tr.hl td{background:var(--accent-soft)}
+.svgbox{max-width:100%; min-width:0}
+.svgbox svg{display:block; width:100%; height:auto}
+svg text{font-family:var(--f-mono)}
+
+/* expanders */
+details.xp{border-top:1px solid var(--line)}
+details.xp:last-of-type{border-bottom:1px solid var(--line)}
+details.xp>summary{list-style:none; cursor:pointer; display:flex; gap:14px; align-items:baseline; padding:14px 2px}
+details.xp>summary::-webkit-details-marker{display:none}
+details.xp>summary .st{flex:1; min-width:0; display:grid; gap:2px}
+details.xp>summary .st b{font-weight:600}
+details.xp>summary .st span{color:var(--muted); font-size:14.5px}
+details.xp>summary::after{content:"+"; font:400 20px/1 var(--f-mono); color:var(--accent)}
+details.xp[open]>summary::after{content:"\2212"}
+details.xp>.xb{padding:0 2px 18px; display:grid; gap:10px}
+
+/* inputs and outputs */
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+.f{display:grid; gap:5px; font-size:13.5px; color:var(--muted); min-width:0}
+.f input,.f select{width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums}
+.f input:focus,.f select:focus{border-color:var(--accent); outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.sl{display:grid; gap:6px}
+.sl label{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-weight:500; font-size:15px}
+.sl output{font:620 19px/1 var(--f-display); font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--accent); height:28px; margin:0}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.kpi{display:grid; gap:4px; padding:12px 14px; border-radius:12px; background:var(--sunk); min-width:0}
+.kpi .k{font:11.5px/1.3 var(--f-mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.kpi .v{font:640 clamp(21px,3vw,27px)/1.05 var(--f-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px; color:var(--muted)}
+.kpi.hi{background:var(--accent-soft)}
+.kpi.hi .v{color:var(--accent)}
+.flags{list-style:none; padding:0; display:grid; gap:6px}
+.flags li{font-size:14.5px; padding:9px 12px; border-radius:10px; background:var(--amber-soft); color:var(--ink)}
+.flags li.lim{background:var(--red-soft)}
+.flags li.ok{background:var(--good-soft)}
+.quote{font-family:var(--f-display); font-size:19px; font-weight:560; line-height:1.3; letter-spacing:-.01em}
+
+@media (max-width:560px){ .pn{grid-template-columns:1fr} .pn .next{text-align:left} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+<script>
+/* Shared helpers: Indian number formats, segmented buttons, safe per-browser storage. */
+var T = (function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function inr(x, dp) {
+    dp = dp || 0;
+    return Number(x).toLocaleString('en-IN', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  }
+  // Rupees held in crore. Under 1 crore it reads in lakh.
+  function cr(x) {
+    if (!isFinite(x)) return 'n/a';
+    var neg = x < 0, a = Math.abs(x), s;
+    if (a < 1) s = 'Rs ' + inr(a * 100, a * 100 < 10 ? 1 : 0) + ' lakh';
+    else s = 'Rs ' + inr(a, a < 10 ? 2 : (a < 100 ? 1 : 0)) + ' crore';
+    s = s.replace(/\.0+ /, ' ').replace(/(\.\d*?)0+ /, '$1 ');
+    return (neg ? 'less ' : '') + s;
+  }
+  function pct(x, dp) {
+    if (!isFinite(x)) return 'n/a';
+    var v = (x * 100).toFixed(dp === undefined ? 1 : dp);
+    return v.replace(/\.0+$/, '') + '%';
+  }
+  function usdm(x) { var v = Math.round(x / 10000) / 100; var s = String(v); return 'USD ' + (s.indexOf('.') < 0 ? s + '.0' : s) + 'M'; }
+  function seg(el, cb) {
+    if (!el) return;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || !el.contains(b)) return;
+      $$('button', el).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute('data-v'), b);
+    });
+  }
+  var store = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1600); } };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } catch (e) { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  // Draws an SVG at the real width of its box, so text stays readable on a phone and nothing scrolls sideways.
+  // draw(svg, width) adds the marks and returns the height it used. Redraws when the width changes.
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, txt) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+  function fit(svg, draw) {
+    var last = -1;
+    function go(force) {
+      var box = svg.parentNode, w = Math.floor(box.getBoundingClientRect().width || box.clientWidth || 0);
+      if (w < 200) w = Math.max(w, 280);
+      if (!force && w === last) return; last = w;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var h = draw(svg, w);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    go(true);
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { go(false); }, 120); });
+    return function () { go(true); };
+  }
+  return { $: $, $$: $$, inr: inr, cr: cr, pct: pct, usdm: usdm, seg: seg, store: store, copy: copy, el: el, fit: fit };
+})();
+</script>
+</head>
+<body class="detail">
+<header class="top"><div class="wrap topin"><a class="back" href="../tasconnect-india.html">India playbook</a><span class="sec">Section 10 of 11</span></div></header>
+<main class="wrap page">
+<style>
+.funnel{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; align-items:stretch}
+.funnel div{display:grid; gap:4px; padding:14px 12px; border-left:1px solid var(--line); position:relative}
+.funnel div:first-child{border-left:0}
+.funnel .v{font:640 clamp(26px,4vw,36px)/1 var(--f-display); font-variant-numeric:tabular-nums}
+.funnel .k{font-size:14px; color:var(--muted)}
+.funnel .rate{font:600 12.5px var(--f-mono); color:var(--accent)}
+@media (max-width:560px){ .funnel{grid-template-columns:1fr 1fr} .funnel div:nth-child(3){border-left:0} }
+#lag text,#cap text{font:11px var(--f-mono); fill:var(--muted)}
+#lag .q,#cap .q{fill:var(--ink); font-weight:500}
+.stages{list-style:none; padding:0; display:grid; gap:0; border-top:1px solid var(--line)}
+.stages li{display:grid; grid-template-columns:2.4rem minmax(0,11rem) minmax(0,1fr); gap:4px 14px; padding:11px 0; border-bottom:1px solid var(--line); align-items:baseline}
+.stages .n{font:600 13px var(--f-mono); color:var(--accent)}
+.stages b{font-weight:600}
+.stages span.e{color:var(--muted); font-size:14.5px}
+.stages li.cnt{background:var(--accent-soft)}
+@media (max-width:600px){ .stages li{grid-template-columns:2.4rem minmax(0,1fr)} .stages span.e{grid-column:2} }
+.qc{display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px; align-items:start}
+@media (max-width:820px){ .qc{grid-template-columns:1fr} }
+.qf{list-style:none; padding:0; display:grid; gap:6px}
+.qf li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+.qf li span{font-size:14.5px}
+.qf button{min-width:6.6rem; border:1px solid var(--line); border-radius:999px; padding:6px 10px; font:500 12.5px var(--f-mono); cursor:pointer; background:var(--bg); color:var(--muted)}
+.qf button[data-s="1"]{background:var(--amber-soft); color:var(--amber); border-color:transparent}
+.qf button[data-s="2"]{background:var(--good-soft); color:var(--good); border-color:transparent}
+.rec{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; display:grid; gap:10px}
+.rec .st{font:640 24px/1.15 var(--f-display); letter-spacing:-.015em}
+</style>
+
+<section class="hero">
+  <p class="eyebrow">10 &middot; Pipeline and cadence</p>
+  <h1>Warm deals sign Q1 and Q2. The cold list signs Q3 and Q4.</h1>
+  <p class="lede">The funnel behind the plan, split by tier, the timing it forces, the capacity it needs, and the evidence that moves a deal from one stage to the next.</p>
+  <div class="chips"><span class="chip draft">First draft</span></div>
+</section>
+
+<div class="draftbar"><span class="lab">First draft &middot; we build this together</span><p class="small">The conversion rates are plan assumptions, split by how an account starts. Your India win and loss reasons and cycle lengths set the real ones.</p></div>
+
+<section class="blk" aria-labelledby="h-fun">
+  <h2 id="h-fun">The funnel, per signing, by tier</h2>
+  <div class="seg" id="tier" role="group" aria-label="Tier"><button type="button" data-v="1" aria-pressed="false">Tier 1, warm</button><button type="button" data-v="2" aria-pressed="true">Tier 2, cold</button></div>
+  <div class="funnel" id="funnel" aria-live="polite"></div>
+  <p class="small muted" id="tiernote"></p>
+  <details class="xp"><summary><span class="st"><b>The four 2027 cohorts</b><span>What each quarter's signings need</span></span></summary><div class="xb">
+    <div class="scroll"><table class="tbl"><thead><tr><th>Signs in</th><th>Tier</th><th class="r">Accounts</th><th class="r">First meetings</th><th class="r">Pilots</th><th class="r">Signed</th><th class="r">Signed ACV</th><th>The plan deals</th></tr></thead><tbody>
+      <tr><td>Q1 2027</td><td>Warm</td><td class="r">6</td><td class="r">4</td><td class="r">2</td><td class="r">1</td><td class="r">USD 0.25M</td><td>Lenovo India</td></tr>
+      <tr><td>Q2 2027</td><td>Warm</td><td class="r">12</td><td class="r">8</td><td class="r">4</td><td class="r">2</td><td class="r">USD 0.45M</td><td>Syngenta India, one deal open today</td></tr>
+      <tr><td>Q3 2027</td><td>Cold</td><td class="r">64</td><td class="r">16</td><td class="r">4</td><td class="r">2</td><td class="r">USD 0.8M</td><td>Hero MotoCorp, Bajaj Auto</td></tr>
+      <tr><td>Q4 2027</td><td>Cold</td><td class="r">64</td><td class="r">16</td><td class="r">4</td><td class="r">2</td><td class="r">USD 1.0M</td><td>Mahindra &amp; Mahindra, Maruti Suzuki</td></tr>
+      <tr class="hl"><td><b>2027</b></td><td></td><td class="r"><b>146</b></td><td class="r"><b>44</b></td><td class="r"><b>14</b></td><td class="r"><b>7</b></td><td class="r"><b>USD 2.5M</b></td><td></td></tr>
+    </tbody></table></div>
+  </div></details>
+</section>
+
+<section class="blk" aria-labelledby="h-lag">
+  <h2 id="h-lag">A cohort is worked in the two quarters before it signs</h2>
+  <p>So the Q1 and Q2 cohorts are already being worked today, by your team. The cold cohorts start on day one and carry Q3 and Q4.</p>
+  <div class="svgbox"><svg id="lag" role="img" aria-label="When each cohort is worked, against when it signs"></svg></div>
+</section>
+
+<section class="blk" aria-labelledby="h-cap">
+  <h2 id="h-cap">Capacity: accounts run out before meetings do</h2>
+  <p>First meetings stay at 12 to 24 a quarter, inside one person all year. Accounts worked do not: with the account engine doing research, pages and CRM, Ketan covers about 40 a quarter. The gap from Q2 is the trigger for one AE, plus bank and partner referrals.</p>
+  <div class="svgbox"><svg id="cap" role="img" aria-label="Accounts worked per quarter against one person's capacity, with first meetings held"></svg></div>
+  <p class="small muted">Scoped pilots in flight: 4 a quarter from Q1, 6 in Q4. That is the presales trigger.</p>
+</section>
+
+<section class="blk" aria-labelledby="h-stg">
+  <h2 id="h-stg">Stages, and the evidence that moves a deal</h2>
+  <ol class="stages">
+    <li><span class="n">0</span><b>Target</b><span class="e">Tier, trigger, at least three roles named</span></li>
+    <li><span class="n">1</span><b>First meeting</b><span class="e">The pain in their words</span></li>
+    <li><span class="n">2</span><b>Qualified</b><span class="e">CFO or treasurer confirms an outcome, a route and a time frame</span></li>
+    <li><span class="n">3</span><b>Evaluation plan</b><span class="e">Agreed in writing; InfoSec and legal packs sent</span></li>
+    <li><span class="n">4</span><b>Business case</b><span class="e">On their own data, owned by the treasurer</span></li>
+    <li><span class="n">5</span><b>Paper</b><span class="e">Legal, procurement and InfoSec cleared</span></li>
+    <li class="cnt"><span class="n">6</span><b>Signed</b><span class="e">Counts toward the plan's signed ACV</span></li>
+    <li><span class="n">7</span><b>Live</b><span class="e">First early-paid or financed invoice</span></li>
+    <li><span class="n">8</span><b>Expanding</b><span class="e">Next entity or wave named, referral asked</span></li>
+  </ol>
+</section>
+
+<section class="blk" aria-labelledby="h-qc">
+  <h2 id="h-qc">The qualification card</h2>
+  <p>Ten fields. Tap a field to move it from unknown to partial to confirmed; the card recommends the stage. Loaded with an example deal.</p>
+  <div class="qc">
+    <ul class="qf" id="qf"></ul>
+    <div class="rec" aria-live="polite"><span class="eyebrow">Recommendation</span><span class="st" id="q-st">Qualified</span><div id="q-miss"></div><button type="button" class="btn sm" id="q-reset" style="justify-self:start">Back to the example</button></div>
+  </div>
+</section>
+
+<section class="blk" aria-labelledby="h-2nd">
+  <h2 id="h-2nd">Getting the second meeting</h2>
+  <ul class="ticks">
+    <li>Leave something they need to correct: their own numbers on their own page.</li>
+    <li>Agree the next meeting and who comes to it, in the room.</li>
+    <li>Send the recap and the page the same day, and the written success sheet within three working days.</li>
+    <li>The second meeting is where they bring the right numbers and usually one more person. Ask: &ldquo;Who else should see this before we meet again?&rdquo;</li>
+  </ul>
+</section>
+
+<section class="blk" aria-labelledby="h-cad">
+  <h2 id="h-cad">The rhythm</h2>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th>When</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td><b>Monday, 9am SGT</b></td><td>A one-page note to Singapore, drafted from the CRM: what moved, what didn't, one change to test this week.</td></tr>
+      <tr><td><b>Every week</b></td><td>A floor of live CFO and treasurer conversations, counted apart from research.</td></tr>
+      <tr><td><b>Every account</b></td><td>Tier, coverage score from the committee map, and stage evidence.</td></tr>
+      <tr><td><b>Every two weeks</b></td><td>A new playbook version, with what the field changed in it.</td></tr>
+      <tr><td><b>Monthly, with you</b></td><td>Pipeline review: stage, evidence, blockers.</td></tr>
+      <tr><td><b>Quarterly</b></td><td>Signed ACV against the plan, and pilot coverage for the next quarter.</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="ticks"><li>Scoped pilots in flight stay at least twice next quarter's signings.</li><li>First meetings: at least four per cold pilot, two per warm one.</li></ul>
+</section>
+
+<script>
+(function () {
+  // funnel by tier
+  var TIERS = {
+    1: { r: ['2 in 3 meet', '1 in 2 pilot', '1 in 2 sign'], n: [6, 4, 2, 1], note: 'Warm: group clients\' India entities, deals open in your India pipeline, bank and partner introductions. They start with an owner and a reason.' },
+    2: { r: ['1 in 4 meet', '1 in 4 pilot', '1 in 2 sign'], n: [32, 8, 2, 1], note: 'Cold: named ICP accounts, each opened on one figure from its own report. Lower rates, so four cold signings need 128 accounts worked.' }
+  };
+  function funnel(t) {
+    var T1 = TIERS[t], K = ['accounts worked', 'first meetings', 'pilots scoped', 'signed deal'];
+    T.$('#funnel').innerHTML = T1.n.map(function (v, i) { return '<div><span class="v">' + v + '</span><span class="k">' + K[i] + '</span><span class="rate">' + (T1.r[i] || 'order form at pilot start') + '</span></div>'; }).join('');
+    T.$('#tiernote').textContent = T1.note;
+  }
+  T.seg(T.$('#tier'), funnel); funnel('2');
+  // timing: each cohort worked in the two quarters before it signs
+  var Q = ['Q3 26', 'Q4 26', 'Q1 27', 'Q2 27', 'Q3 27', 'Q4 27'];
+  T.fit(T.$('#lag'), function (s, w) {
+    var wide = w >= 560, LW = wide ? 120 : 0, x0 = LW, W = (w - x0 - 2) / 6, top = 24, RH = wide ? 30 : 40;
+    Q.forEach(function (q, i) { s.appendChild(T.el('text', { x: x0 + i * W + W / 2, y: 14, 'text-anchor': 'middle', 'class': 'q' }, q)); s.appendChild(T.el('line', { x1: x0 + i * W, y1: top, x2: x0 + i * W, y2: top + 4 * RH + 6, stroke: 'var(--line)' })); });
+    var nowX = x0 + 1 * W + W * 0.62;
+    s.appendChild(T.el('rect', { x: x0, y: top, width: nowX - x0, height: 4 * RH + 6, fill: 'var(--sunk)' }));
+    s.appendChild(T.el('line', { x1: nowX, y1: top, x2: nowX, y2: top + 4 * RH + 6, stroke: 'var(--red)', 'stroke-dasharray': '3 3', 'stroke-width': 1.5 }));
+    s.appendChild(T.el('text', { x: nowX + 4, y: top + 4 * RH + 20, fill: 'var(--red)' }, 'Today'));
+    ['Q1 cohort, warm', 'Q2 cohort, warm', 'Q3 cohort, cold', 'Q4 cohort, cold'].forEach(function (c, i) {
+      var y = top + 6 + i * RH, by = wide ? y : y + 14;
+      s.appendChild(T.el('text', { x: wide ? 0 : 2, y: wide ? y + 12 : y + 8, 'class': 'q' }, c));
+      s.appendChild(T.el('rect', { x: x0 + i * W + 3, y: by, width: 2 * W - 6, height: 16, rx: 5, fill: 'var(--accent-soft)', stroke: 'var(--accent)' }));
+      s.appendChild(T.el('text', { x: x0 + i * W + W, y: by + 12, 'text-anchor': 'middle' }, 'worked'));
+      s.appendChild(T.el('rect', { x: x0 + (i + 2) * W + 3, y: by, width: W - 6, height: 16, rx: 5, fill: i < 2 ? 'var(--good)' : 'var(--accent)' }));
+      s.appendChild(T.el('text', { x: x0 + (i + 2) * W + W / 2, y: by + 12, 'text-anchor': 'middle', fill: 'var(--bg)' }, 'signs'));
+    });
+    return top + 4 * RH + 26;
+  });
+  // capacity
+  var worked = [38, 64, 80, 96], meets = [12, 16, 20, 24], CAP = 40;
+  T.fit(T.$('#cap'), function (s, w) {
+    var x0 = 34, x1 = w - 4, base = 200, sc = 1.7, cw = (x1 - x0) / 4, bw = Math.min(64, cw * 0.55);
+    for (var v = 0; v <= 100; v += 20) { s.appendChild(T.el('line', { x1: x0, y1: base - v * sc, x2: x1, y2: base - v * sc, stroke: 'var(--line)' })); s.appendChild(T.el('text', { x: x0 - 6, y: base - v * sc + 4, 'text-anchor': 'end' }, v)); }
+    worked.forEach(function (h, i) {
+      var x = x0 + i * cw + (cw - bw) / 2, mine = Math.min(h, CAP), gap = Math.max(0, h - CAP);
+      s.appendChild(T.el('rect', { x: x, y: base - mine * sc, width: bw, height: mine * sc, fill: 'var(--accent)' }));
+      if (gap) s.appendChild(T.el('rect', { x: x, y: base - h * sc, width: bw, height: gap * sc, fill: 'var(--amber)' }));
+      s.appendChild(T.el('text', { x: x + bw / 2, y: base - h * sc - 6, 'text-anchor': 'middle', 'class': 'q' }, h + (gap ? ' (+' + gap + ')' : '')));
+      s.appendChild(T.el('circle', { cx: x + bw / 2, cy: base - meets[i] * sc, r: 4.5, fill: 'var(--surface)', stroke: 'var(--ink)', 'stroke-width': 1.5 }));
+      s.appendChild(T.el('text', { x: x + bw / 2, y: base + 18, 'text-anchor': 'middle', 'class': 'q' }, 'Q' + (i + 1) + (w >= 460 ? ' 2027' : '')));
+    });
+    s.appendChild(T.el('line', { x1: x0, y1: base - CAP * sc, x2: x1, y2: base - CAP * sc, stroke: 'var(--red)', 'stroke-width': 1.5, 'stroke-dasharray': '4 3' }));
+    s.appendChild(T.el('text', { x: x0 + 4, y: base - CAP * sc - 6, fill: 'var(--red)' }, 'Ketan, about 40'));
+    var ly = 226;
+    s.appendChild(T.el('rect', { x: x0, y: ly, width: 10, height: 10, fill: 'var(--amber)' }));
+    s.appendChild(T.el('text', { x: x0 + 15, y: ly + 9 }, w >= 460 ? 'Accounts from one AE plus referrals' : 'From one AE plus referrals'));
+    s.appendChild(T.el('circle', { cx: x0 + 5, cy: ly + 24, r: 4.5, fill: 'var(--surface)', stroke: 'var(--ink)', 'stroke-width': 1.5 }));
+    s.appendChild(T.el('text', { x: x0 + 15, y: ly + 28 }, 'First meetings held'));
+    return ly + 36;
+  });
+  // qualification card
+  var F = ['Outcome in their words', 'Economic buyer engaged', 'Champion', 'Pain with a date', 'Route chosen: own cash, bank, both', 'Decision process and paper known', 'ERP owner named', 'Funding confirmed: cash or bank limits', 'Status quo named', 'Committee coverage'];
+  var DEMO = [2, 2, 1, 2, 2, 1, 0, 0, 1, 0], S = DEMO.slice(), LAB = ['Unknown', 'Partial', 'Confirmed'];
+  var STAGES = [
+    { n: 'Qualified', need: [[0, 2], [1, 1], [3, 2], [4, 1]] },
+    { n: 'Evaluation plan agreed', need: [[1, 2], [2, 2], [5, 2], [6, 1], [9, 2]] },
+    { n: 'Business case', need: [[4, 2], [6, 2], [7, 2], [8, 2]] }
+  ];
+  var qf = T.$('#qf');
+  function render() {
+    qf.innerHTML = F.map(function (f, i) { return '<li><span>' + (i + 1) + '. ' + f + '</span><button type="button" data-i="' + i + '" data-s="' + S[i] + '" aria-label="' + f + ': ' + LAB[S[i]] + '">' + LAB[S[i]] + '</button></li>'; }).join('');
+    var at = 'First meeting', next = null;
+    for (var k = 0; k < STAGES.length; k++) {
+      var ok = STAGES[k].need.every(function (p) { return S[p[0]] >= p[1]; });
+      if (ok) at = STAGES[k].n; else { next = STAGES[k]; break; }
+    }
+    T.$('#q-st').textContent = 'Stage: ' + at;
+    T.$('#q-miss').innerHTML = next ? '<p class="small muted">Missing for ' + next.n.toLowerCase() + ':</p><ul class="ticks small">' + next.need.filter(function (p) { return S[p[0]] < p[1]; }).map(function (p) { return '<li>' + F[p[0]] + (p[1] === 2 ? ', confirmed' : ', at least partial') + '</li>'; }).join('') + '</ul>' : '<p class="small">Ready for paper: legal, procurement and InfoSec.</p>';
+  }
+  qf.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; var i = +b.getAttribute('data-i'); S[i] = (S[i] + 1) % 3; render(); var nb = qf.querySelector('[data-i="' + i + '"]'); if (nb) nb.focus(); });
+  T.$('#q-reset').addEventListener('click', function () { S = DEMO.slice(); render(); });
+  render();
+})();
+</script>
+
+</main>
+<nav class="pn wrap" aria-label="Sections"><a class="prev" href="why-now.html"><small>Previous</small><span>09 Why now</span></a><a class="next" href="first-90-days.html"><small>Next</small><span>11 First 90 days</span></a></nav>
+<footer class="foot wrap"><a href="../tasconnect-india.html">Back to the India playbook</a><span>Draft for our third call, 25 Nov 2026</span></footer>
+</body>
+</html>
