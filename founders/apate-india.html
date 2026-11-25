@@ -6,56 +6,67 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Apate in India: why now, who buys first, nine accounts and the first 90 days.">
+<meta name="description" content="Apate in India: why now, where Apate acts, who buys and signs, the first pilot, the first 90 days and what it takes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a keynote on a phone. One idea per screen, one centred column, big type, numbers drawn to scale, detail behind a tap. */
+/* Layout: a keynote on a phone. The front is one idea per screen, each ending in an Open. Detail pages are one readable column; tables stack on phones, drawings sit in their own boxes. */
 :root {
   --bg: #FAFAFC;
   --band: #EFF1F5;
+  --card: #FFFFFF;
   --ink: #0D0F14;
   --muted: #5C6371;
   --line: #DCE0E7;
   --apate: #2B53EE;
   --on-apate: #FFFFFF;
+  --soft: #E4EAFE;
   --loss: #D2412A;
   --close-bg: #0D0F14;
   --close-fg: #F3F4F7;
   --close-muted: #A3A9B5;
+  --shadow: rgba(13, 15, 20, 0.08);
   --font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --font-text: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0B0C10;
     --band: #15171D;
+    --card: #111319;
     --ink: #F2F3F6;
     --muted: #9BA1AE;
     --line: #2A2E38;
     --apate: #7E98FF;
     --on-apate: #0B0C10;
+    --soft: #1B2342;
     --loss: #FF6E52;
     --close-bg: #15171D;
     --close-fg: #F2F3F6;
     --close-muted: #9BA1AE;
+    --shadow: rgba(0, 0, 0, 0.4);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0B0C10;
   --band: #15171D;
+  --card: #111319;
   --ink: #F2F3F6;
   --muted: #9BA1AE;
   --line: #2A2E38;
   --apate: #7E98FF;
   --on-apate: #0B0C10;
+  --soft: #1B2342;
   --loss: #FF6E52;
   --close-bg: #15171D;
   --close-fg: #F2F3F6;
   --close-muted: #9BA1AE;
+  --shadow: rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
 
@@ -66,87 +77,50 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-text);
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 17px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 main { overflow-x: clip; }
+a { color: var(--apate); text-underline-offset: 3px; }
+b, strong { font-weight: 600; }
+p { margin: 0; }
 
-.s { padding-block: clamp(72px, 15vw, 136px); }
-.s.band { background: var(--band); }
 .in {
   max-width: 800px;
   margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-
 .eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--muted);
 }
-h2 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(32px, 7.4vw, 58px);
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-  max-width: 17ch;
-}
-.sub {
-  margin: 16px 0 0;
-  font-size: clamp(18px, 2.6vw, 22px);
-  line-height: 1.35;
-  color: var(--muted);
-  max-width: 34ch;
-  text-wrap: balance;
-}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
 
-/* Hero */
-.mega {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(104px, 31vw, 224px);
-  line-height: 0.88;
-  letter-spacing: -0.055em;
+/* The Open control: the one obvious way into the depth */
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--apate);
+  color: var(--on-apate);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  max-width: 100%;
 }
-.lead {
-  margin: 22px 0 0;
-  font-size: clamp(21px, 3.4vw, 30px);
-  line-height: 1.28;
-  font-weight: 500;
-  max-width: 24ch;
-  text-wrap: balance;
-}
-.bars { margin-top: 52px; display: grid; gap: 20px; max-width: 640px; }
-.bar .top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  font-size: 15px;
-}
-.bar .top b { font-weight: 600; }
-.bar .top span { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
-.track {
-  margin-top: 8px;
-  height: 14px;
-  border-radius: 7px;
-  background: var(--line);
-  overflow: hidden;
-}
-.fill { display: block; height: 100%; width: var(--w); min-width: 3px; border-radius: 7px; }
-.fill.lost { background: var(--loss); }
-.fill.held { background: var(--muted); }
-.fill.back { background: var(--ink); }
+.open .arr { flex: none; transition: transform 0.2s ease; }
+.open:hover .arr { transform: translateX(4px); }
 
 /* Expanders */
 details > summary { list-style: none; cursor: pointer; }
@@ -158,7 +132,6 @@ details > summary::-webkit-details-marker { display: none; }
   border-radius: 50%;
   border: 1.5px solid var(--line);
   position: relative;
-  margin-top: 2px;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .plus::before, .plus::after {
@@ -175,328 +148,189 @@ details > summary::-webkit-details-marker { display: none; }
 details[open] > summary .plus { transform: rotate(45deg); border-color: var(--apate); }
 summary:hover .plus { border-color: var(--apate); }
 
-/* Why now: the clock */
-.clock { list-style: none; margin: 44px 0 0; padding: 0; position: relative; }
-.clock::before {
+.bill { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--loss); vertical-align: 0.12em; flex: none; }
+
+/* Detail pages */
+body.detail::before {
   content: "";
-  position: absolute;
-  left: 6px;
-  top: 26px;
-  bottom: 26px;
-  width: 2px;
-  background: var(--line);
-}
-.clock li { position: relative; padding-left: 34px; }
-.clock li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 21px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
   background: var(--bg);
-  border: 2px solid var(--muted);
 }
-.clock li.key::before { background: var(--apate); border-color: var(--apate); }
-.clock summary, .clock .hd { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; }
-.clock time {
-  display: block;
-  font-size: 13px;
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.top .in { display: flex; align-items: center; gap: 14px; padding-block: 6px; }
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
   font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back:hover { color: var(--apate); }
+.pnav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 24px 0 0; }
+.pnav a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.pnav a:hover { color: var(--ink); }
+.pnav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+.dh { padding-block: 44px 36px; }
+.dh h1 {
+  font-weight: 700;
+  font-size: clamp(32px, 6.6vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+.lede { margin-top: 16px; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.ds { padding-block: 40px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.ds h2 {
+  font-weight: 700;
+  font-size: clamp(25px, 4.6vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+.ds h3 { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.005em; }
+.ds p { margin-top: 14px; max-width: 62ch; }
+.ds .muted, .muted { color: var(--muted); }
+.ds ul.plain { margin: 16px 0 0; padding-left: 1.1em; max-width: 62ch; display: grid; gap: 8px; }
+.read { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); }
+.so { display: block; margin-top: 8px; font-weight: 600; color: var(--apate); max-width: 56ch; }
+
+/* Worked example and draft notes */
+.callout { margin-top: 24px; padding: 20px; border-radius: 18px; background: var(--band); max-width: 680px; }
+.callout .k { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.callout p { margin-top: 8px; }
+.callout p:first-of-type { margin-top: 0; }
+.draft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1.5px dashed var(--apate);
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 640px;
+}
+.draft b { color: var(--apate); white-space: nowrap; }
+
+/* Tables: real tables on wide screens, labelled stacks on phones */
+.tbl { margin-top: 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+td:first-child { font-weight: 600; }
+td .muted { display: block; font-weight: 400; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 620px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  table.stack td { border: 0; padding: 3px 0; }
+  table.stack td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  table.stack td:first-child { font-size: 17px; }
+  .num { white-space: normal; }
+}
+
+/* Arrival from a link on the front page */
+.hit { scroll-margin-top: 72px; }
+.hit:target { animation: hitflash 2.4s ease-out 1; }
+@keyframes hitflash { 0% { background: var(--soft); } 100% { background: transparent; } }
+
+/* Inline drawings: every label is at least 13 viewBox units, so 12px or more on a 375px phone */
+.fig { margin-top: 26px; max-width: 520px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg text { font-family: var(--font-text); }
+.f-apate { fill: var(--apate); } .f-soft { fill: var(--soft); } .f-band { fill: var(--band); } .f-line { fill: var(--line); }
+.f-muted { fill: var(--muted); } .f-bg { fill: var(--bg); } .f-loss { fill: var(--loss); } .f-card { fill: var(--card); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-apate { fill: var(--apate); } .t-on { fill: var(--on-apate); } .t-loss { fill: var(--loss); }
+.s-line { stroke: var(--line); fill: none; } .s-muted { stroke: var(--muted); fill: none; } .s-apate { stroke: var(--apate); fill: none; } .s-loss { stroke: var(--loss); fill: none; }
+.k-line { stroke: var(--line); stroke-width: 1.5; } .k-apate { stroke: var(--apate); stroke-width: 1.5; } .k-muted { stroke: var(--muted); stroke-width: 1.5; }
+.figcap { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 56ch; }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; max-width: 60ch; }
+.legend li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.a { background: var(--apate); } .dot.m { border: 2px solid var(--muted); } .dot.l { background: var(--loss); }
+
+/* Owner and status tags */
+.tg {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-.clock li.key time { color: var(--apate); }
-.clock .what {
-  display: block;
-  margin-top: 4px;
-  font-family: var(--font-display);
-  font-size: clamp(20px, 3.4vw, 26px);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.clock .so {
-  display: block;
-  margin-top: 6px;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--apate);
-  max-width: 34ch;
-}
-.clock details p, .accts .body {
-  margin: 0 0 18px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--muted);
-  max-width: 54ch;
-}
-
-/* Where Apate acts: the chain */
-.chain { list-style: none; margin: 44px 0 0; padding: 0; }
-.chain li { position: relative; }
-.chain li::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--line);
-}
-.chain li:first-child::before { top: 26px; }
-.chain li:last-child::before { bottom: auto; height: 26px; }
-.step { display: grid; grid-template-columns: 26px 1fr; column-gap: 18px; padding: 14px 0; }
-.node {
-  position: relative;
-  z-index: 1;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--band);
-  border: 2px solid var(--muted);
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-.step.apate .node { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
-.step .n {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-size: clamp(20px, 3.4vw, 26px);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.step.apate .n { color: var(--apate); }
-.pill {
-  font-family: var(--font-text);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--apate);
-  color: var(--on-apate);
-}
-.step .who { margin: 4px 0 0; font-size: 16px; line-height: 1.45; color: var(--muted); max-width: 46ch; }
-.money {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0 10px 44px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--loss);
-}
-.money::after { content: ""; flex: 1; border-top: 2px dashed var(--loss); }
-
-/* Who buys first */
-.icp { list-style: none; margin: 44px 0 0; padding: 0; }
-.icp li {
-  display: grid;
-  grid-template-columns: 76px 1fr;
-  column-gap: 16px;
-  row-gap: 4px;
-  padding: 18px 0;
-  border-top: 1px solid var(--line);
-}
-.icp li:last-child { border-bottom: 1px solid var(--line); }
-.tag {
-  grid-row: span 2;
-  align-self: start;
-  justify-self: start;
-  margin-top: 3px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 3px 8px;
   border-radius: 999px;
   border: 1.5px solid var(--line);
   color: var(--muted);
+  white-space: nowrap;
 }
-.icp .first .tag { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
-.icp .next .tag { border-color: var(--apate); color: var(--apate); }
-.icp .skip .tag { border-color: var(--loss); color: var(--loss); }
-.icp b {
-  font-family: var(--font-display);
-  font-size: clamp(20px, 3.2vw, 24px);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  min-width: 0;
-}
-.icp .why { font-size: 16px; line-height: 1.45; color: var(--muted); min-width: 0; }
-.icp .skip b { color: var(--muted); }
+.tg.a { border-color: var(--apate); color: var(--apate); }
+.tg.l { border-color: var(--loss); color: var(--loss); }
+.tg.f { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
 
-/* First accounts */
-.accts { list-style: none; margin: 44px 0 0; padding: 0; }
-.accts li { border-top: 1px solid var(--line); }
-.accts li:last-child { border-bottom: 1px solid var(--line); }
-.accts summary, .accts .hd {
-  display: grid;
-  grid-template-columns: 34px 1fr 26px;
-  column-gap: 12px;
-  row-gap: 4px;
-  padding: 16px 0;
-  align-items: start;
-}
-.accts .num {
-  padding-top: 5px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-.accts .nm {
-  font-family: var(--font-display);
-  font-size: clamp(20px, 3.2vw, 24px);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  min-width: 0;
-}
-.accts .ln { grid-column: 2; font-size: 16px; line-height: 1.45; color: var(--muted); min-width: 0; }
-.accts .plus { grid-column: 3; grid-row: 1; }
-.accts .lead-acct .num, .accts .lead-acct .nm { color: var(--apate); }
-.accts .body { padding-left: 46px; }
-.legend { margin: 20px 0 0; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--muted); }
-.bill { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--loss); margin-left: 10px; vertical-align: 0.12em; flex: none; }
-.legend .bill { margin-left: 0; }
-.aside { margin: 24px 0 0; font-size: 16px; color: var(--muted); max-width: 52ch; }
-.aside b { color: var(--ink); font-weight: 600; }
-
-/* First 90 days */
-.days { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.days li { background: var(--bg); border-radius: 22px; padding: 26px; min-width: 0; }
-.days .dl {
+/* Next page card */
+.next {
   display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
+  margin-block: 8px 56px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: var(--band);
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 680px;
 }
-.days .d {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(56px, 10vw, 76px);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  color: var(--apate);
-  font-variant-numeric: tabular-nums;
-}
-.days p { margin: 14px 0 0; font-size: 18px; line-height: 1.38; }
+.next small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.next b { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; font-family: var(--font-display); font-size: clamp(22px, 4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.next:hover b { color: var(--apate); }
 
-/* 2027: banks on signed annual contracts, drawn to scale (bar height = count / 4) */
-.qtr { margin-top: 52px; max-width: 520px; }
-.qtr .cap {
-  margin: 0 0 18px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.qbars {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  align-items: end;
-  height: 196px;
-  border-bottom: 2px solid var(--line);
-}
-.qbars li { display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; height: 100%; min-width: 0; }
-.qbars .v {
-  display: block;
-  text-align: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(28px, 6vw, 40px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--apate);
-  font-variant-numeric: tabular-nums;
-  margin-bottom: 8px;
-}
-.qbars .b { display: block; height: calc(var(--n) / 4 * 140px); background: var(--apate); border-radius: 10px 10px 0 0; }
-.qlab {
-  list-style: none;
-  margin: 10px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-}
-
-.takes { margin-top: 52px; }
-.takes .cap {
-  margin: 0 0 14px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.takes ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-.takes li {
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-  font-family: var(--font-display);
-  font-size: clamp(20px, 3.2vw, 24px);
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-.takes li:last-child { border-bottom: 1px solid var(--line); }
-
-/* Close */
-.close { background: var(--close-bg); color: var(--close-fg); }
+/* Contact band, shared by every page */
+.close { background: var(--close-bg); color: var(--close-fg); padding-block: clamp(56px, 12vw, 112px); }
 .close .line {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(34px, 7.8vw, 62px);
-  line-height: 1.04;
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.05;
   letter-spacing: -0.025em;
   max-width: 15ch;
   text-wrap: balance;
 }
-.contact { margin-top: 44px; display: grid; gap: 14px; font-size: 18px; }
+.close.small .line { font-size: clamp(24px, 5vw, 36px); max-width: 22ch; }
+.contact { margin-top: 36px; display: grid; gap: 14px; font-size: 18px; }
 .contact .who-am-i { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
 .contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
-.contact a {
-  color: inherit;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-  font-variant-numeric: tabular-nums;
-  user-select: all;
-}
+.contact a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; user-select: all; }
 .cp {
-  font: 600 13px/1 var(--font-text);
-  padding: 8px 14px;
+  font: 600 14px/1 var(--font-text);
+  min-height: 40px;
+  padding: 8px 16px;
   border-radius: 999px;
   border: 1px solid var(--close-muted);
   background: transparent;
@@ -506,208 +340,259 @@ summary:hover .plus { border-color: var(--apate); }
 .cp:hover { border-color: var(--close-fg); }
 
 :focus-visible { outline: 2px solid var(--apate); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+.s { padding-block: clamp(64px, 13vw, 128px); }
+.s.band { background: var(--band); }
+h2 {
+  font-weight: 700;
+  font-size: clamp(32px, 7.2vw, 56px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  max-width: 17ch;
+}
+.sub { margin-top: 16px; font-size: clamp(18px, 2.6vw, 22px); line-height: 1.38; color: var(--muted); max-width: 36ch; text-wrap: balance; }
+
+/* Hero */
+.mega { font-family: var(--font-display); font-weight: 800; font-size: clamp(104px, 31vw, 224px); line-height: 0.88; letter-spacing: -0.055em; }
+.lead { margin-top: 22px; font-size: clamp(21px, 3.4vw, 30px); line-height: 1.28; font-weight: 500; max-width: 24ch; text-wrap: balance; }
+.bars { margin-top: 48px; display: grid; gap: 20px; max-width: 640px; }
+.bar .top2 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; }
+.bar .top2 span { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.track { margin-top: 8px; height: 14px; border-radius: 7px; background: var(--line); overflow: hidden; }
+.fill { display: block; height: 100%; width: var(--w); min-width: 3px; border-radius: 7px; }
+.fill.lost { background: var(--loss); } .fill.held { background: var(--muted); } .fill.back { background: var(--ink); }
+
+/* Why now */
+.clock { list-style: none; margin: 40px 0 0; padding: 0; position: relative; display: grid; gap: 0; }
+.clock::before { content: ""; position: absolute; left: 6px; top: 24px; bottom: 30px; width: 2px; background: var(--line); }
+.clock li { position: relative; }
+.clock li > a { display: block; padding: 13px 0 13px 34px; color: inherit; text-decoration: none; }
+.clock li > a:hover .what { color: var(--apate); }
+.clock li::before { content: ""; position: absolute; left: 0; top: 19px; width: 14px; height: 14px; border-radius: 50%; background: var(--band); border: 2px solid var(--muted); }
+.clock li.key::before { background: var(--apate); border-color: var(--apate); }
+.clock time { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.clock li.key time { color: var(--apate); }
+.clock .what { display: block; margin-top: 4px; transition: color 0.15s ease; font-family: var(--font-display); font-size: clamp(20px, 3.4vw, 26px); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; max-width: 30ch; }
+.clock .so { font-size: 17px; }
+
+/* Where Apate acts */
+.chain { list-style: none; margin: 40px 0 0; padding: 0; }
+.chain li { position: relative; }
+.chain li.step::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+.chain li.step:first-child::before { top: 24px; }
+.chain li.step:last-child::before { bottom: auto; height: 24px; }
+.step > a { display: grid; grid-template-columns: 26px 1fr auto; column-gap: 18px; align-items: center; padding: 11px 0; min-height: 48px; color: inherit; text-decoration: none; }
+.step .go { color: var(--muted); font-size: 18px; transition: transform 0.2s ease; }
+.step > a:hover .go { transform: translateX(3px); color: var(--apate); }
+.step > a:hover .n { color: var(--apate); }
+.node { position: relative; z-index: 1; width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.step.apate .node { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+.step .n { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-display); font-size: clamp(20px, 3.4vw, 26px); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; min-width: 0; }
+.step.apate .n { color: var(--apate); }
+.pill { font-family: var(--font-text); font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; background: var(--apate); color: var(--on-apate); }
+.money { padding: 12px 0 12px 44px; }
+.money .ml { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--loss); }
+.money .ml::after { content: ""; flex: 1; border-top: 2px dashed var(--loss); }
+.money .mn { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+
+/* Who buys */
+.ladder { list-style: none; margin: 40px 0 0; padding: 0; max-width: 620px; }
+.ladder li { display: grid; grid-template-columns: 124px 1fr; gap: 14px; align-items: baseline; padding: 15px 0; border-top: 1px solid var(--line); }
+.ladder li:last-child { border-bottom: 1px solid var(--line); }
+.ladder b { font-family: var(--font-display); font-size: clamp(20px, 3.4vw, 25px); font-weight: 700; letter-spacing: -0.01em; }
+.ladder span { font-size: 17px; line-height: 1.4; color: var(--muted); min-width: 0; }
+.ladder .buy b { color: var(--apate); }
+.ladder .buy span { color: var(--ink); font-weight: 600; }
+.ladder .gate b { color: var(--loss); }
+.ladder .dim b { color: var(--muted); }
+.ladder .ally b { color: var(--ink); }
+.cap { margin-top: 40px; font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.banks { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 640px; }
+.banks a { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 8px 14px; border-radius: 999px; background: var(--bg); border: 1.5px solid var(--line); color: var(--ink); font-size: 15px; font-weight: 600; text-decoration: none; transition: border-color 0.15s ease; }
+.banks a:hover { border-color: var(--apate); }
+.banks .warm a { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+.legend1 { margin-top: 14px; flex-wrap: wrap; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--muted); }
+
+/* Pilot */
+.three { list-style: none; margin: 40px 0 0; padding: 0; max-width: 640px; }
+.three { display: grid; grid-template-columns: max-content minmax(0, 1fr); }
+.three li { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; gap: 16px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--line); }
+.three li:last-child { border-bottom: 1px solid var(--line); }
+.three .w { font-family: var(--font-display); font-weight: 800; font-size: clamp(24px, 5vw, 34px); letter-spacing: -0.03em; color: var(--apate); line-height: 1; }
+.three span:last-child { font-size: 18px; line-height: 1.4; font-weight: 500; min-width: 0; }
+
+/* First 90 days */
+.days { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.days > li { background: var(--bg); border-radius: 22px; padding: 22px 22px 24px; min-width: 0; }
+.days .dl { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.days .dt { display: block; margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.days .d { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(52px, 9vw, 68px); line-height: 1; letter-spacing: -0.045em; color: var(--apate); font-variant-numeric: tabular-nums; }
+.days ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.days ul li { font-size: 16px; line-height: 1.4; padding-left: 14px; position: relative; }
+.days ul li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+.days ul li.sig { font-weight: 600; }
+.days ul li.sig::before { background: var(--apate); }
+
+/* The ask */
+.takes { list-style: none; margin: 40px 0 0; padding: 0; max-width: 640px; }
+.takes li { padding: 15px 0; border-top: 1px solid var(--line); font-family: var(--font-display); font-size: clamp(20px, 3.2vw, 24px); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+.takes li:last-child { border-bottom: 1px solid var(--line); }
 
 @media (max-width: 680px) {
   .days { grid-template-columns: minmax(0, 1fr); }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; }
+@media (max-width: 380px) {
+  .ladder li { grid-template-columns: 112px 1fr; }
 }
 </style>
 </head>
-<body>
+<body class="front">
+
 <main>
-
-  <section class="s" id="problem" aria-label="The problem">
-    <div class="in">
-      <p class="eyebrow">Apate in India · 25 Nov 2026</p>
-      <p class="mega">0.4%</p>
-      <p class="lead">of the money Indians reported lost to cyber fraud in three years came back.</p>
-      <div class="bars" role="img" aria-label="Lost about US$6 billion. Frozen about US$1 billion. Came back about US$22 million.">
-        <div class="bar">
-          <div class="top"><b>Lost</b><span>US$6bn</span></div>
-          <div class="track"><span class="fill lost" style="--w: 100%"></span></div>
-        </div>
-        <div class="bar">
-          <div class="top"><b>Frozen</b><span>about US$1bn</span></div>
-          <div class="track"><span class="fill held" style="--w: 16.19%"></span></div>
-        </div>
-        <div class="bar">
-          <div class="top"><b>Came back</b><span>about US$22m</span></div>
-          <div class="track"><span class="fill back" style="--w: 0.37%"></span></div>
-        </div>
-      </div>
+<section class="s" id="problem" aria-label="The problem">
+  <div class="in">
+    <p class="eyebrow">Apate in India · 25 Nov 2026</p>
+    <p class="mega">0.4%</p>
+    <p class="lead">of the money Indians reported lost to cyber fraud in three years came back.</p>
+    <div class="bars" role="img" aria-label="Lost about US$6 billion. Frozen about US$1 billion. Came back about US$22 million.">
+      <div class="bar"><div class="top2"><b>Lost</b><span>US$6bn</span></div><div class="track"><span class="fill lost" style="--w: 100%"></span></div></div>
+      <div class="bar"><div class="top2"><b>Frozen</b><span>about US$1bn</span></div><div class="track"><span class="fill held" style="--w: 16.19%"></span></div></div>
+      <div class="bar"><div class="top2"><b>Came back</b><span>about US$22m</span></div><div class="track"><span class="fill back" style="--w: 0.37%"></span></div></div>
     </div>
-  </section>
+    <a class="open" href="apate-india/why-now.html#numbers">Open the numbers <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-  <section class="s band" id="now" aria-labelledby="now-h">
-    <div class="in">
-      <p class="eyebrow">Why now</p>
-      <h2 id="now-h">India now bills the bank that took the scam money.</h2>
-      <ol class="clock">
-        <li>
-          <details>
-            <summary><span><time>25 Feb 2026</time><span class="what">The Ombudsman makes five receiving banks pay a scam victim.</span></span><span class="plus" aria-hidden="true"></span></summary>
-            <p>A Rs 22.9 cr digital-arrest case. Yes Bank got the top rate, 7.5%, for mule-account lapses. The other four, 5%.</p>
-          </details>
-        </li>
-        <li>
-          <details>
-            <summary><span><time>29 Oct 2026</time><span class="what">Supreme Court: a bank that fails due diligence must repay the full loss.</span></span><span class="plus" aria-hidden="true"></span></summary>
-            <p>RBI's mule-hold rules are due by 31 Dec. Its draft allows a 60-day debit hold.</p>
-          </details>
-        </li>
-        <li class="key">
-          <details>
-            <summary><span><time>1 Jan 2027</time><span class="what">Banks repay scam victims. The receiving bank shares the bill.</span></span><span class="plus" aria-hidden="true"></span></summary>
-            <p>Victims get 85% back, up to Rs 25,000. Under Rs 29,412 the split is RBI 65%, the customer's bank 10%, the receiving bank 10%. The bank carries the burden of proof.</p>
-          </details>
-        </li>
-        <li class="key">
-          <div class="hd"><span><time>Jan to Mar 2027</time><span class="what">Banks set next year's budgets.</span><span class="so">Sign by March and it's FY28. Wait to end-2027 and it's FY29.</span></span></div>
-        </li>
-      </ol>
-    </div>
-  </section>
+<section class="s band" id="now" aria-labelledby="now-h">
+  <div class="in">
+    <p class="eyebrow">Why now</p>
+    <h2 id="now-h">India now bills the bank that took the scam money.</h2>
+    <ol class="clock">
+      <li><a href="apate-india/why-now.html#feb-order"><time>25 Feb 2026</time><span class="what">The Ombudsman bills five receiving banks for one scam.</span></a></li>
+      <li><a href="apate-india/why-now.html#court"><time>29 Oct 2026</time><span class="what">Supreme Court: where a bank's due diligence failed, it repays at least the full loss.</span></a></li>
+      <li><a href="apate-india/why-now.html#jan-rules"><time>1 Jan 2027</time><span class="what">The receiving bank pays 10% of every small-case payout.</span></a></li>
+      <li class="key"><a href="apate-india/why-now.html#budgets"><time>Jan to Mar 2027</time><span class="what">Banks set FY28 budgets.</span><span class="so">Sign by March and it's FY28. Wait to end-2027 and it's FY29.</span></a></li>
+    </ol>
+    <a class="open" href="apate-india/why-now.html">Open the liability clock <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-  <section class="s" id="where" aria-labelledby="where-h">
-    <div class="in">
-      <p class="eyebrow">Where Apate acts</p>
-      <h2 id="where-h">Apate gets the mule account before the money moves.</h2>
-      <ol class="chain">
-        <li class="step"><span class="node">1</span><div><div class="n">The hook</div><p class="who">Telco filters try to block it.</p></div></li>
-        <li class="step apate"><span class="node">2</span><div><div class="n">The conversation <span class="pill">Apate</span></div></div></li>
-        <li class="step apate"><span class="node">3</span><div><div class="n">Where to pay <span class="pill">Apate</span></div><p class="who">Your agents found brokers paying up to 5% for Indian accounts.</p></div></li>
-        <li class="money" aria-label="The money moves here">The money moves</li>
-        <li class="step"><span class="node">4</span><div><div class="n">The payment</div><p class="who">The victim's own PIN. Bank checks pass.</p></div></li>
-        <li class="step"><span class="node">5</span><div><div class="n">The money lands</div><p class="who">RBI's MuleHunter.AI watches the account.</p></div></li>
-        <li class="step"><span class="node">6</span><div><div class="n">The complaint</div><p class="who">The 1930 helpline. 0.4% comes back.</p></div></li>
-      </ol>
-    </div>
-  </section>
+<section class="s" id="where" aria-labelledby="where-h">
+  <div class="in">
+    <p class="eyebrow">Where Apate acts</p>
+    <h2 id="where-h">Apate gets the mule account before the money moves.</h2>
+    <ol class="chain">
+      <li class="step"><a href="apate-india/how-it-works.html#step-1"><span class="node">1</span><span class="n">The hook</span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+      <li class="step apate"><a href="apate-india/how-it-works.html#step-2"><span class="node">2</span><span class="n">The conversation <span class="pill">Apate</span></span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+      <li class="step apate"><a href="apate-india/how-it-works.html#step-3"><span class="node">3</span><span class="n">Where to pay <span class="pill">Apate</span></span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+      <li class="money" aria-label="The money moves. India's mule-account tools start here."><span class="ml">The money moves</span><span class="mn">India's mule-account tools start here.</span></li>
+      <li class="step"><a href="apate-india/how-it-works.html#step-4"><span class="node">4</span><span class="n">The payment</span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+      <li class="step"><a href="apate-india/how-it-works.html#step-5"><span class="node">5</span><span class="n">The money lands</span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+      <li class="step"><a href="apate-india/how-it-works.html#step-6"><span class="node">6</span><span class="n">The complaint</span><span class="go" aria-hidden="true">&rsaquo;</span></a></li>
+    </ol>
+    <a class="open" href="apate-india/how-it-works.html">Open a digital arrest, step by step <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-  <section class="s band" id="icp" aria-labelledby="icp-h">
-    <div class="in">
-      <p class="eyebrow">Who buys first</p>
-      <h2 id="icp-h">Private banks.</h2>
-      <p class="sub">Quick to buy, and already being billed for mule accounts.</p>
-      <ul class="icp">
-        <li class="first"><span class="tag">First</span><b>Private banks</b><span class="why">All five billed in February.</span></li>
-        <li class="next"><span class="tag">Next</span><b>Small finance and payments banks</b><span class="why">Same January rules.</span></li>
-        <li class="later"><span class="tag">Later</span><b>Telcos</b><span class="why">Far bigger pipeline per close.</span></li>
-        <li class="later"><span class="tag">Later</span><b>NBFCs and UPI apps</b><span class="why">Outside the January rules.</span></li>
-        <li class="skip"><span class="tag">Skip</span><b>State banks: SBI, PNB, Bank of Baroda</b><span class="why">Too slow to buy.</span></li>
-      </ul>
-    </div>
-  </section>
+<section class="s band" id="buyers" aria-labelledby="buy-h">
+  <div class="in">
+    <p class="eyebrow">Who buys</p>
+    <h2 id="buy-h">The fraud head buys. The CISO can stop it.</h2>
+    <ul class="ladder">
+      <li class="buy"><b>Fraud head</b><span>Buys, and owns the result.</span></li>
+      <li><b>CRO</b><span>Opens the door. Signs above the fraud head's limit.</span></li>
+      <li class="ally"><b>Compliance</b><span>Backs it. Owns the mule rule and the holds.</span></li>
+      <li class="gate"><b>CISO</b><span>Can stop it at security review.</span></li>
+      <li class="dim"><b>CFO</b><span>Sets the yearly budget. Never sees a pilot.</span></li>
+    </ul>
+    <p class="cap">Twelve banks first. No state banks.</p>
+    <ul class="banks">
+      <li class="warm"><a href="apate-india/accounts.html#warm">Your warmest Indian bank</a></li>
+      <li><a href="apate-india/accounts.html#yes">Yes <span class="bill" role="img" aria-label="billed in February"></span></a></li>
+      <li><a href="apate-india/accounts.html#indusind">IndusInd <span class="bill" role="img" aria-label="billed in February"></span></a></li>
+      <li><a href="apate-india/accounts.html#axis">Axis <span class="bill" role="img" aria-label="billed in February"></span></a></li>
+      <li><a href="apate-india/accounts.html#icici">ICICI <span class="bill" role="img" aria-label="billed in February"></span></a></li>
+      <li><a href="apate-india/accounts.html#city-union">City Union <span class="bill" role="img" aria-label="billed in February"></span></a></li>
+      <li><a href="apate-india/accounts.html#hdfc">HDFC</a></li>
+      <li><a href="apate-india/accounts.html#kotak">Kotak</a></li>
+      <li><a href="apate-india/accounts.html#federal">Federal</a></li>
+      <li><a href="apate-india/accounts.html#rbl">RBL</a></li>
+      <li><a href="apate-india/accounts.html#idfc-first">IDFC First</a></li>
+      <li><a href="apate-india/accounts.html#airtel">Airtel Payments Bank</a></li>
+    </ul>
+    <p class="legend1"><span class="bill" aria-hidden="true"></span>Billed in February. Tap any bank.</p>
+    <a class="open" href="apate-india/accounts.html">Open the buyer map, bank by bank <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-  <section class="s" id="accounts" aria-labelledby="acct-h">
-    <div class="in">
-      <p class="eyebrow">First accounts</p>
-      <h2 id="acct-h">Nine accounts, in this order.</h2>
-      <p class="legend"><span class="bill" aria-hidden="true"></span>Billed in February</p>
-      <ol class="accts">
-        <li class="lead-acct">
-          <div class="hd"><span class="num">01</span><span class="nm">Your warmest Indian bank</span><span class="ln">Paid, then India's first reference.</span></div>
-        </li>
-        <li><details>
-          <summary><span class="num">02</span><span class="nm">Yes Bank<span class="bill" role="img" aria-label="billed in February"></span></span><span class="plus" aria-hidden="true"></span><span class="ln">Top rate, for mule-account lapses.</span></summary>
-          <p class="body">CRO S. Anantharaman, since April 2026. Before that, Group CRO at Jio Financial Services.</p>
-        </details></li>
-        <li><details>
-          <summary><span class="num">03</span><span class="nm">IndusInd Bank<span class="bill" role="img" aria-label="billed in February"></span></span><span class="plus" aria-hidden="true"></span><span class="ln">CRO in his first year.</span></summary>
-          <p class="body">CRO Saurav Saha, since February 2026. Before that, head of financial risk management at HDFC Bank.</p>
-        </details></li>
-        <li><details>
-          <summary><span class="num">04</span><span class="nm">Axis Bank<span class="bill" role="img" aria-label="billed in February"></span></span><span class="plus" aria-hidden="true"></span><span class="ln">A mule-account police case in July.</span></summary>
-          <p class="body">One account took Rs 20.97 lakh from five fraud cases.</p>
-        </details></li>
-        <li>
-          <div class="hd"><span class="num">05</span><span class="nm">ICICI Bank<span class="bill" role="img" aria-label="billed in February"></span></span></div>
-        </li>
-        <li><details>
-          <summary><span class="num">06</span><span class="nm">HDFC Bank</span><span class="plus" aria-hidden="true"></span><span class="ln">Own mule engine. Apate feeds it what it can't see.</span></summary>
-          <p class="body">Real time, on UPI and cards, confirmed in July.</p>
-        </details></li>
-        <li><details>
-          <summary><span class="num">07</span><span class="nm">Kotak Mahindra Bank</span><span class="plus" aria-hidden="true"></span><span class="ln">6,000 mule accounts in I4C's 2024 count. Arrests in June.</span></summary>
-          <p class="body">Police in Durg arrested 15 Kotak account holders who rented out their accounts.</p>
-        </details></li>
-        <li>
-          <div class="hd"><span class="num">08</span><span class="nm">City Union Bank<span class="bill" role="img" aria-label="billed in February"></span></span><span class="ln">Mid-sized, decides faster.</span></div>
-        </li>
-        <li><details>
-          <summary><span class="num">09</span><span class="nm">Airtel Payments Bank</span><span class="plus" aria-hidden="true"></span><span class="ln">A payments bank inside a telco. The way into Airtel.</span></summary>
-          <p class="body">About 5,000 mule accounts in I4C's 2024 count, and covered by the January rules.</p>
-        </details></li>
-      </ol>
-      <p class="aside"><b>Shortcut to many banks:</b> Clari5, already plugged into I4C's Suspect Registry.</p>
-    </div>
-  </section>
+<section class="s" id="pilot" aria-labelledby="pilot-h">
+  <div class="in">
+    <p class="eyebrow">The first pilot</p>
+    <h2 id="pilot-h">Eight weeks of lists. No integration. Four numbers.</h2>
+    <p class="sub">The bank passes Apate the scammer numbers its customers report. Apate's agents work them and send back a daily list of the accounts they name.</p>
+    <ul class="three">
+      <li><span class="w">New</span><span>Mule accounts its own tools had not flagged.</span></li>
+      <li><span class="w">Early</span><span>Days of warning before the first complaint.</span></li>
+      <li><span class="w">Held</span><span>Rupees frozen on accounts Apate named first.</span></li>
+      <li><span class="w">Reported</span><span>Accounts at other banks, sent to the national portal.</span></li>
+    </ul>
+    <a class="open" href="apate-india/pilot.html">Open the pilot playbook <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-  <section class="s band" id="days" aria-labelledby="days-h">
-    <div class="in">
-      <p class="eyebrow">First 90 days</p>
-      <h2 id="days-h">Three signatures.</h2>
-      <ol class="days">
-        <li><span class="dl">Day</span><span class="d">30</span><p>The first bank signs success criteria and a price.</p></li>
-        <li><span class="dl">Day</span><span class="d">60</span><p>A second bank signs a paid pilot.</p></li>
-        <li><span class="dl">Day</span><span class="d">90</span><p>The first bank signs the annual contract.</p></li>
-      </ol>
+<section class="s band" id="days" aria-labelledby="days-h">
+  <div class="in">
+    <p class="eyebrow">First 90 days</p>
+    <h2 id="days-h">Start in December. First contract before 31 March.</h2>
+    <ol class="days">
+      <li><span class="dl">Day</span><span class="d">30</span><span class="dt">5 January</span>
+        <ul><li class="sig">Your warmest bank signs a paid pilot by 18 December.</li><li>Its first daily list on 4 January.</li><li>India hosting live.</li></ul></li>
+      <li><span class="dl">Day</span><span class="d">60</span><span class="dt">4 February</span>
+        <ul><li>Weekly hit reports from pilot 1.</li><li>First meetings held at all eleven.</li><li>Apate in the FY28 budget asks.</li></ul></li>
+      <li><span class="dl">Day</span><span class="d">90</span><span class="dt">6 March</span>
+        <ul><li class="sig">Readout done on 5 March. Contract in signature.</li><li class="sig">A bank billed in February signs pilot 2.</li><li>Three to four banks next.</li></ul></li>
+    </ol>
+    <a class="open" href="apate-india/plan-90.html">Open the 90-day plan <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 
-      <div class="qtr">
-        <p class="cap">2027: banks on signed annual contracts</p>
-        <ol class="qbars" role="img" aria-label="Banks on signed annual contracts, cumulative, 2027: Q1 1, Q2 2, Q3 3, Q4 4.">
-          <li><span class="v">1</span><span class="b" style="--n: 1"></span></li>
-          <li><span class="v">2</span><span class="b" style="--n: 2"></span></li>
-          <li><span class="v">3</span><span class="b" style="--n: 3"></span></li>
-          <li><span class="v">4</span><span class="b" style="--n: 4"></span></li>
-        </ol>
-        <ol class="qlab" aria-hidden="true"><li>Q1</li><li>Q2</li><li>Q3</li><li>Q4</li></ol>
-      </div>
-
-      <div class="takes">
-        <p class="cap">What it takes from Apate</p>
-        <ul>
-          <li>India hosting.</li>
-          <li>You or Sam at each first CRO meeting.</li>
-          <li>One solutions engineer after the second pilot.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="s close" id="contact" aria-label="Contact">
-    <div class="in">
-      <p class="line">I sell to banks and build teams that sell.</p>
-      <div class="contact">
-        <span class="who-am-i">Ketan Sharma</span>
-        <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
-        <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
-      </div>
-    </div>
-  </section>
-
+<section class="s" id="ask" aria-labelledby="ask-h">
+  <div class="in">
+    <p class="eyebrow">What it takes</p>
+    <h2 id="ask-h">Four things from Apate.</h2>
+    <ul class="takes">
+      <li>India hosting, and a security pack mapped to RBI's rules.</li>
+      <li>Hindi personas on Indian scam scripts.</li>
+      <li>You or Sam in the first meeting with each CRO.</li>
+      <li>One solutions engineer after pilot 2.</li>
+    </ul>
+    <a class="open" href="apate-india/ask.html">Open the full ask <span class="arr" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
 </main>
-
+<section class="close" aria-label="Contact"><div class="in">
+  <p class="line">I sell to banks and build teams that sell.</p>
+  <div class="contact">
+    <span class="who-am-i">Ketan Sharma</span>
+    <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
+    <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
+  </div>
+</div></section>
 <script>
 (function () {
   var buttons = document.querySelectorAll('.cp');
   Array.prototype.forEach.call(buttons, function (b) {
     b.addEventListener('click', function () {
       var text = b.getAttribute('data-copy');
-      function done(label) {
-        b.textContent = label;
-        setTimeout(function () { b.textContent = 'Copy'; }, 1600);
-      }
+      function done(label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
       function fallback() {
-        var el = document.getElementById(b.getAttribute('data-target'));
         try {
-          var r = document.createRange();
-          r.selectNodeContents(el);
-          var sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(r);
+          var el = document.getElementById(b.getAttribute('data-target'));
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
           done('Selected');
         } catch (e) { done('Copy'); }
       }
@@ -720,5 +605,6 @@ summary:hover .plus { border-color: var(--apate); }
   });
 })();
 </script>
+
 </body>
 </html>

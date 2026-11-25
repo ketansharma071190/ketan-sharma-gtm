@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>India First 90 Days</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="An operator's plan for Apate's first 90 days in India, dated week by week with owners and outcomes, and a pipeline model for 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a keynote on a phone. The front is one idea per screen, each ending in an Open. Detail pages are one readable column; tables stack on phones, drawings sit in their own boxes. */
+:root {
+  --bg: #FAFAFC;
+  --band: #EFF1F5;
+  --card: #FFFFFF;
+  --ink: #0D0F14;
+  --muted: #5C6371;
+  --line: #DCE0E7;
+  --apate: #2B53EE;
+  --on-apate: #FFFFFF;
+  --soft: #E4EAFE;
+  --loss: #D2412A;
+  --close-bg: #0D0F14;
+  --close-fg: #F3F4F7;
+  --close-muted: #A3A9B5;
+  --shadow: rgba(13, 15, 20, 0.08);
+  --font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C10;
+    --band: #15171D;
+    --card: #111319;
+    --ink: #F2F3F6;
+    --muted: #9BA1AE;
+    --line: #2A2E38;
+    --apate: #7E98FF;
+    --on-apate: #0B0C10;
+    --soft: #1B2342;
+    --loss: #FF6E52;
+    --close-bg: #15171D;
+    --close-fg: #F2F3F6;
+    --close-muted: #9BA1AE;
+    --shadow: rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0C10;
+  --band: #15171D;
+  --card: #111319;
+  --ink: #F2F3F6;
+  --muted: #9BA1AE;
+  --line: #2A2E38;
+  --apate: #7E98FF;
+  --on-apate: #0B0C10;
+  --soft: #1B2342;
+  --loss: #FF6E52;
+  --close-bg: #15171D;
+  --close-fg: #F2F3F6;
+  --close-muted: #9BA1AE;
+  --shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+main { overflow-x: clip; }
+a { color: var(--apate); text-underline-offset: 3px; }
+b, strong { font-weight: 600; }
+p { margin: 0; }
+
+.in {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+
+/* The Open control: the one obvious way into the depth */
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--apate);
+  color: var(--on-apate);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  max-width: 100%;
+}
+.open .arr { flex: none; transition: transform 0.2s ease; }
+.open:hover .arr { transform: translateX(4px); }
+
+/* Expanders */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.plus {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: translate(-50%, -50%);
+}
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+details[open] > summary .plus { transform: rotate(45deg); border-color: var(--apate); }
+summary:hover .plus { border-color: var(--apate); }
+
+.bill { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--loss); vertical-align: 0.12em; flex: none; }
+
+/* Detail pages */
+body.detail::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.top .in { display: flex; align-items: center; gap: 14px; padding-block: 6px; }
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back:hover { color: var(--apate); }
+.pnav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 24px 0 0; }
+.pnav a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.pnav a:hover { color: var(--ink); }
+.pnav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+.dh { padding-block: 44px 36px; }
+.dh h1 {
+  font-weight: 700;
+  font-size: clamp(32px, 6.6vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+.lede { margin-top: 16px; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.ds { padding-block: 40px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.ds h2 {
+  font-weight: 700;
+  font-size: clamp(25px, 4.6vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+.ds h3 { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.005em; }
+.ds p { margin-top: 14px; max-width: 62ch; }
+.ds .muted, .muted { color: var(--muted); }
+.ds ul.plain { margin: 16px 0 0; padding-left: 1.1em; max-width: 62ch; display: grid; gap: 8px; }
+.read { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); }
+.so { display: block; margin-top: 8px; font-weight: 600; color: var(--apate); max-width: 56ch; }
+
+/* Worked example and draft notes */
+.callout { margin-top: 24px; padding: 20px; border-radius: 18px; background: var(--band); max-width: 680px; }
+.callout .k { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.callout p { margin-top: 8px; }
+.callout p:first-of-type { margin-top: 0; }
+.draft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1.5px dashed var(--apate);
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 640px;
+}
+.draft b { color: var(--apate); white-space: nowrap; }
+
+/* Tables: real tables on wide screens, labelled stacks on phones */
+.tbl { margin-top: 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+td:first-child { font-weight: 600; }
+td .muted { display: block; font-weight: 400; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 620px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  table.stack td { border: 0; padding: 3px 0; }
+  table.stack td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  table.stack td:first-child { font-size: 17px; }
+  .num { white-space: normal; }
+}
+
+/* Arrival from a link on the front page */
+.hit { scroll-margin-top: 72px; }
+.hit:target { animation: hitflash 2.4s ease-out 1; }
+@keyframes hitflash { 0% { background: var(--soft); } 100% { background: transparent; } }
+
+/* Inline drawings: every label is at least 13 viewBox units, so 12px or more on a 375px phone */
+.fig { margin-top: 26px; max-width: 520px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg text { font-family: var(--font-text); }
+.f-apate { fill: var(--apate); } .f-soft { fill: var(--soft); } .f-band { fill: var(--band); } .f-line { fill: var(--line); }
+.f-muted { fill: var(--muted); } .f-bg { fill: var(--bg); } .f-loss { fill: var(--loss); } .f-card { fill: var(--card); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-apate { fill: var(--apate); } .t-on { fill: var(--on-apate); } .t-loss { fill: var(--loss); }
+.s-line { stroke: var(--line); fill: none; } .s-muted { stroke: var(--muted); fill: none; } .s-apate { stroke: var(--apate); fill: none; } .s-loss { stroke: var(--loss); fill: none; }
+.k-line { stroke: var(--line); stroke-width: 1.5; } .k-apate { stroke: var(--apate); stroke-width: 1.5; } .k-muted { stroke: var(--muted); stroke-width: 1.5; }
+.figcap { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 56ch; }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; max-width: 60ch; }
+.legend li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.a { background: var(--apate); } .dot.m { border: 2px solid var(--muted); } .dot.l { background: var(--loss); }
+
+/* Owner and status tags */
+.tg {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tg.a { border-color: var(--apate); color: var(--apate); }
+.tg.l { border-color: var(--loss); color: var(--loss); }
+.tg.f { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+
+/* Next page card */
+.next {
+  display: block;
+  margin-block: 8px 56px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: var(--band);
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 680px;
+}
+.next small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.next b { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; font-family: var(--font-display); font-size: clamp(22px, 4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.next:hover b { color: var(--apate); }
+
+/* Contact band, shared by every page */
+.close { background: var(--close-bg); color: var(--close-fg); padding-block: clamp(56px, 12vw, 112px); }
+.close .line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+.close.small .line { font-size: clamp(24px, 5vw, 36px); max-width: 22ch; }
+.contact { margin-top: 36px; display: grid; gap: 14px; font-size: 18px; }
+.contact .who-am-i { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+.contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
+.contact a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; user-select: all; }
+.cp {
+  font: 600 14px/1 var(--font-text);
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--close-muted);
+  background: transparent;
+  color: var(--close-fg);
+  cursor: pointer;
+}
+.cp:hover { border-color: var(--close-fg); }
+
+:focus-visible { outline: 2px solid var(--apate); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+.mile { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.mile > li { padding: 20px; border-radius: 20px; background: var(--band); min-width: 0; }
+.mile .d { display: block; font-family: var(--font-display); font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -0.04em; color: var(--apate); }
+.mile .dl { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.mile .dt { display: block; margin-top: 4px; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.mile b { display: block; margin-top: 10px; font-size: 16px; line-height: 1.35; }
+@media (max-width: 680px) { .mile { grid-template-columns: minmax(0, 1fr); } }
+.note { margin-top: 22px; padding: 14px 18px; border-radius: 14px; background: var(--soft); max-width: 680px; font-size: 16px; }
+.note b { color: var(--apate); }
+.tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; }
+.tools .lab { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chip { font: 600 14px/1 var(--font-text); min-height: 40px; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.phase { margin-top: 36px; max-width: 760px; }
+.ph-h { display: flex; align-items: baseline; gap: 14px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.ph-h .d { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: -0.04em; color: var(--apate); font-variant-numeric: tabular-nums; }
+.ph-h h3 { font-size: 21px; }
+.ph-h .goal { margin-top: 2px; font-size: 15px; color: var(--muted); }
+.trk { margin-top: 18px; }
+.trk h4 { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.trk.new h4 { color: var(--apate); }
+.acts { list-style: none; margin: 0; padding: 0; }
+.acts li { display: grid; grid-template-columns: 118px 1fr; gap: 4px 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.acts .wk { font-size: 14px; font-weight: 700; color: var(--apate); font-variant-numeric: tabular-nums; padding-top: 1px; line-height: 1.35; }
+.acts .wk small { display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
+.acts .tx { min-width: 0; font-size: 16px; line-height: 1.45; }
+.acts .ow { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px; }
+@media (max-width: 460px) {
+  .acts li { grid-template-columns: minmax(0, 1fr); }
+  .acts .wk small { display: inline; margin-left: 6px; }
+  .acts .ow { grid-column: 1; }
+}
+.outc { margin-top: 18px; padding: 16px 18px; border-radius: 16px; background: var(--soft); }
+.outc .k { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--apate); }
+.outc ul { margin: 8px 0 0; padding-left: 1.1em; display: grid; gap: 4px; font-weight: 600; }
+.model { margin-top: 24px; padding: 22px; border-radius: 22px; background: var(--band); display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 26px; max-width: 960px; }
+@media (max-width: 760px) { .model { grid-template-columns: minmax(0, 1fr); } }
+.inputs { display: grid; gap: 16px; min-width: 0; align-content: start; }
+.inp label { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.rg { display: flex; align-items: center; gap: 12px; margin-top: 6px; min-height: 40px; }
+.rg input[type="range"] { flex: 1; min-width: 0; height: 40px; margin: 0; accent-color: var(--apate); }
+.rg output { flex: none; min-width: 6.5ch; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.inp input[type="number"] { margin-top: 6px; width: 100%; max-width: 220px; min-height: 44px; font: 600 17px/1.2 var(--font-text); font-variant-numeric: tabular-nums; padding: 9px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+.inp input[type="number"]:focus { border-color: var(--apate); outline: none; }
+.result { min-width: 0; }
+.result .rk { font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.qrows { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 0; }
+.qrows > li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 4px 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.qrows .ql, .qrows .tiles, .qrows .who, .qrows .meta { grid-column: 2; }
+.qrows .qn { grid-column: 1; grid-row: 1 / span 4; font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: -0.04em; color: var(--apate); font-variant-numeric: tabular-nums; }
+.qrows .ql { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.tiles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.tiles i { display: block; width: 22px; height: 22px; border-radius: 6px; background: var(--muted); opacity: 0.45; }
+.tiles i.nw { background: var(--apate); opacity: 1; }
+.qrows .who { font-size: 15px; line-height: 1.4; font-weight: 600; min-width: 0; }
+.qrows .meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.peak { margin-top: 12px; font-size: 14px; color: var(--muted); }
+.stage { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.stage li { padding: 9px 14px; border-radius: 999px; background: var(--band); font-size: 14px; font-weight: 600; }
+.stage li small { font-weight: 500; color: var(--muted); }
+.stage li.go { background: var(--apate); color: var(--on-apate); }
+.stage .ar { background: none; padding: 0; color: var(--muted); }
+</style>
+</head>
+<body class="detail">
+<header class="top"><div class="in">
+  <a class="back" href="../apate-india.html">&larr; Apate in India</a>
+  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html">Where Apate acts</a></li><li><a href="accounts.html">Buyer map</a></li><li><a href="pilot.html">Pilot</a></li><li><a href="plan-90.html" aria-current="page">90 days</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
+</div></header>
+<main>
+<header class="dh"><div class="in">
+  <p class="eyebrow">First 90 days</p>
+  <h1>Start in December. First bank signed before 31 March.</h1>
+  <p class="lede">Day 1 is Monday 7 December. Five tracks run side by side: banks, product and security, partners and regulators, hiring, and a sales engine. Each 30 days ends in a signature or a system going live.</p>
+  <ol class="mile">
+    <li><span class="dl">Day</span><span class="d">30</span><span class="dt">Tue 5 Jan</span><b>Warm-bank pilot signed by 18 Dec. Its first list on 4 Jan. Four first meetings held. India hosting live.</b></li>
+    <li><span class="dl">Day</span><span class="d">60</span><span class="dt">Thu 4 Feb</span><b>Pilot 1 in list week 5, with weekly numbers. First meetings held at all eleven. One partner signed.</b></li>
+    <li><span class="dl">Day</span><span class="d">90</span><span class="dt">Sat 6 Mar</span><b>Readout done on 5 Mar, contract in signature. Pilot 2 signed. Three to four banks next.</b></li>
+  </ol>
+</div></header>
+
+<section class="ds" id="path" aria-labelledby="pa-h"><div class="in">
+  <h2 id="pa-h">The first bank, on the calendar</h2>
+  <p>The warm bank is already trialling, so its pilot can be signed in December and its lists can start on the first Monday of January. Its contract papers are agreed while the lists run, so the readout only triggers the signature.</p>
+  <figure class="fig" style="margin-inline: 0; max-width: 520px">
+    <svg viewBox="0 0 360 212" role="img" aria-label="Pilot signed 18 December. Sydney break 21 December to 8 January. Agents warm up from 21 December and daily lists run 4 January to 26 February. Readout 5 March. Contract signed by 19 March. Year end 31 March. Plan day 30 is 5 January, day 60 is 4 February, day 90 is 6 March.">
+      <line x1="352" y1="4" x2="352" y2="190" class="s-loss" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="0" y="21" font-size="13" font-weight="600" class="t-ink">Pilot signed</text>
+      <path d="M135.2 10L141.2 16L135.2 22L129.2 16Z" class="f-apate"/>
+      <text x="146" y="21" font-size="13" class="t-muted">18 Dec</text>
+      <text x="0" y="47" font-size="13" font-weight="600" class="t-ink">Sydney break</text>
+      <rect x="141.5" y="34" width="40" height="16" rx="4" class="f-line k-muted" stroke-dasharray="3 3"/>
+      <text x="188" y="47" font-size="13" class="t-muted">21 Dec to 8 Jan</text>
+      <text x="0" y="73" font-size="13" font-weight="600" class="t-ink">Daily lists</text>
+      <rect x="141.5" y="59" width="29.4" height="20" rx="4" class="f-soft"/>
+      <rect x="170.9" y="59" width="113.7" height="20" rx="4" class="f-apate"/>
+      <text x="177" y="73.5" font-size="13" font-weight="600" class="t-on">4 Jan to 26 Feb</text>
+      <text x="0" y="99" font-size="13" font-weight="600" class="t-ink">Readout</text>
+      <path d="M297.3 88L303.3 94L297.3 100L291.3 94Z" class="f-apate"/>
+      <text x="287" y="99" font-size="13" text-anchor="end" class="t-muted">5 Mar</text>
+      <text x="0" y="125" font-size="13" font-weight="600" class="t-ink">Contract signed</text>
+      <path d="M326.7 114L332.7 120L326.7 126L320.7 120Z" class="f-apate"/>
+      <text x="316" y="125" font-size="13" text-anchor="end" class="t-muted">by 19 Mar</text>
+      <text x="0" y="151" font-size="13" font-weight="600" class="t-ink">Year end</text>
+      <text x="346" y="151" font-size="13" text-anchor="end" class="t-loss">31 Mar</text>
+      <text x="0" y="177" font-size="13" font-weight="600" class="t-muted">Plan day</text>
+      <text x="173.1" y="177" font-size="13" font-weight="700" text-anchor="middle" class="t-apate">30</text>
+      <text x="236.2" y="177" font-size="13" font-weight="700" text-anchor="middle" class="t-apate">60</text>
+      <text x="299.4" y="177" font-size="13" font-weight="700" text-anchor="middle" class="t-apate">90</text>
+      <line x1="112" y1="190" x2="352" y2="190" class="s-muted" stroke-width="1.5"/>
+      <path d="M112 186v8M164.6 186v8M229.9 186v8M288.8 186v8M173.1 182v8M236.2 182v8M299.4 182v8" class="s-muted" stroke-width="1"/>
+      <text x="138.3" y="208" font-size="13" text-anchor="middle" class="t-muted">Dec</text>
+      <text x="197.3" y="208" font-size="13" text-anchor="middle" class="t-muted">Jan</text>
+      <text x="259.4" y="208" font-size="13" text-anchor="middle" class="t-muted">Feb</text>
+      <text x="320.4" y="208" font-size="13" text-anchor="middle" class="t-muted">Mar</text>
+    </svg>
+  </figure>
+  <p class="note"><b>Sydney's summer break.</b> Everything Sydney builds is done by 18 December. From 21 December to 8 January the agents and the daily list run without Sydney staff, and the India lead watches them.</p>
+</div></section>
+
+<section class="ds" id="plan" aria-labelledby="pl-h"><div class="in">
+  <h2 id="pl-h">The plan, by week and owner</h2>
+  <p>Weeks run Monday to Friday from 7 December. Filter by owner to see exactly what each part of Apate is signing up for.</p>
+  <div class="tools" role="group" aria-label="Filter by owner">
+    <span class="lab">Owner</span>
+    <button class="chip" type="button" data-o="all" aria-pressed="true" id="o-all">All</button>
+    <button class="chip" type="button" data-o="lead" aria-pressed="false" id="o-lead">India lead</button>
+    <button class="chip" type="button" data-o="syd" aria-pressed="false" id="o-syd">Sydney team</button>
+    <button class="chip" type="button" data-o="exec" aria-pressed="false" id="o-exec">Dali or Sam</button>
+  </div>
+
+  <div class="phase" id="d30">
+    <div class="ph-h"><span class="d">30</span><div><h3>Days 1 to 30, 7 Dec to 5 Jan</h3><p class="goal">Goal: the warm-bank pilot signed, and its lists running.</p></div></div>
+    <div class="trk"><h4>Banks</h4><ul class="acts">
+      <li data-o="lead"><span class="wk">Week 1<small>7 to 11 Dec</small></span><span class="tx">Warm bank: success bars, price and a named signer on paper. Its security review starts the same week, and the MSA, security schedule and order form are drafted now.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead exec"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">Four first meetings, about two a week: the CROs at Yes, IndusInd and Kotak, and Gaurav Gupta at Axis. Dali or Sam join the three CRO meetings. The CRO meeting opens the door; the fraud head buys.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Dali or Sam, 3 meetings</span></span></li>
+      <li data-o="lead"><span class="wk">Week 2<small>by 18 Dec</small></span><span class="tx">Warm-bank pilot signed. Its fraud team starts passing on the scammer numbers, WhatsApp IDs and UPI handles its customers report.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 3 and 4<small>21 Dec to 1 Jan</small></span><span class="tx">Agents live on the warm bank's scam types, collecting before the first list. No first meetings in these two weeks.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 5<small>Mon 4 Jan</small></span><span class="tx">The first daily list goes to the warm bank.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Product and security, done by 18 Dec</h4><ul class="acts">
+      <li data-o="syd"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">India-region cloud tenancy, with logs kept in India.</span><span class="ow"><span class="tg">Sydney team</span></span></li>
+      <li data-o="syd lead"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">Security pack mapped to RBI's outsourcing paras 53(2), 56, 66, 67, 69, 76, 89 and 92: Apate's current certifications, a recent penetration test, a DPDP note, and the file channel.</span><span class="ow"><span class="tg">Sydney security lead</span><span class="tg a">India lead writes the RBI mapping</span></span></li>
+      <li data-o="syd"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">Personas in Hindi and Hinglish on the warm bank's scam types: digital arrest, fake KYC updates, task scams. Regional languages next.</span><span class="ow"><span class="tg">Sydney product</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">Indian numbers through a licensed telco or CPaaS, and Apate's seeded numbers placed. The risk is DoT's KYC rules on bulk numbers.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 3 to 5<small>21 Dec to 8 Jan</small></span><span class="tx">Agents and the daily list run without Sydney staff. The India lead watches them.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Commercial</h4><ul class="acts">
+      <li data-o="exec"><span class="wk">Week 1<small>by 11 Dec</small></span><span class="tx">The pilot price, and billing: invoice from Australia under reverse-charge GST, or set up a local entity.</span><span class="ow"><span class="tg">Dali or Sam decides</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Partners and regulators</h4><ul class="acts">
+      <li data-o="lead"><span class="wk">Weeks 2 to 4<small>14 Dec to 1 Jan</small></span><span class="tx">Introductory calls with RBI Innovation Hub (CEO Sahil Kinni) and I4C.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 2 to 4<small>14 Dec to 1 Jan</small></span><span class="tx">Partner shortlist: Clari5 (Perfios), Mobileum's India office, and one Big Four forensic practice.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk new"><h4>Sales engine, built in the first 30 days</h4><ul class="acts">
+      <li data-o="lead"><span class="wk">Weeks 1 and 2<small>7 to 18 Dec</small></span><span class="tx">An AI-built engine, run by the India lead with Claude Code. It researches the twelve banks every week, keeps the buyer map current as names change, and fills the CRM after every meeting.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">From week 2<small>14 Dec on</small></span><span class="tx">A page for each bank and each reader, ready before the meeting, with numbers they can change: their own mule-account count in the CFO case, their own capture sizing. This page is the first one.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Every week<small>from 7 Dec</small></span><span class="tx">Every call logged the same day. Follow-ups and next steps go out from the engine, so the India lead's time goes into meetings.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="outc"><span class="k">Outcome by day 30, 5 Jan</span><ul><li>Warm-bank pilot signed, its first list sent on 4 Jan</li><li>Four first meetings held</li><li>Security pack ready, India hosting live</li><li>Sales engine running, a page live for each of the twelve banks</li></ul></div>
+  </div>
+
+  <div class="phase" id="d60">
+    <div class="ph-h"><span class="d">60</span><div><h3>Days 31 to 60, 6 Jan to 4 Feb</h3><p class="goal">Goal: pilot 1 producing numbers, all eleven banks met.</p></div></div>
+    <div class="trk"><h4>Banks</h4><ul class="acts">
+      <li data-o="lead syd"><span class="wk">Weeks 5 to 9<small>4 Jan to 5 Feb</small></span><span class="tx">Pilot 1 lists every day, and a one-page hit report every week to the fraud head and to Apate.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Sydney product from 11 Jan</span></span></li>
+      <li data-o="lead exec"><span class="wk">Weeks 5 to 8<small>4 to 29 Jan</small></span><span class="tx">Seven more first meetings, about two a week: ICICI, City Union, HDFC, Federal, RBL, IDFC First and Airtel Payments Bank. Dali or Sam join the CRO meetings at City Union, RBL and IDFC First.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Dali or Sam, 3 meetings</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 6 to 9<small>11 Jan to 5 Feb</small></span><span class="tx">Pilot 1's MSA, security schedule and order form go through the bank's legal and procurement.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="syd lead"><span class="wk">Weeks 6 to 9<small>11 Jan to 5 Feb</small></span><span class="tx">Scoping and security review at two to three of the December banks.</span><span class="ow"><span class="tg">Sydney security lead</span><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 6 to 9<small>11 Jan to 5 Feb</small></span><span class="tx">Apate written into each engaged bank's FY28 budget ask, which closes by March.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Partners and regulators</h4><ul class="acts">
+      <li data-o="lead syd"><span class="wk">Week 6<small>11 to 15 Jan</small></span><span class="tx">RBI Innovation Hub technical session on a feed format for MuleHunter.AI and DPIP.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Sydney product</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 6 to 8<small>11 to 29 Jan</small></span><span class="tx">I4C data-sharing draft.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 7<small>18 to 22 Jan</small></span><span class="tx">NPCI: UPI IDs into its AI fraud monitoring.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 8<small>25 to 29 Jan</small></span><span class="tx">DoT Digital Intelligence Unit: scammer numbers into the Digital Intelligence Platform and the Financial Fraud Risk Indicator.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="exec"><span class="wk">By week 9<small>5 Feb</small></span><span class="tx">One partner agreement signed, Clari5 or Mobileum.</span><span class="ow"><span class="tg">Dali or Sam signs</span></span></li>
+    </ul></div>
+    <div class="outc"><span class="k">Outcome by day 60, 4 Feb</span><ul><li>Pilot 1 in list week 5, with weekly numbers</li><li>First meetings held at all eleven</li><li>Security reviews at two to three banks</li><li>Pilot 1's contract papers in legal review</li><li>One partner signed</li></ul></div>
+  </div>
+
+  <div class="phase" id="d90">
+    <div class="ph-h"><span class="d">90</span><div><h3>Days 61 to 90, 5 Feb to 6 Mar</h3><p class="goal">Goal: the readout done and the first contract in signature.</p></div></div>
+    <div class="trk"><h4>Banks</h4><ul class="acts">
+      <li data-o="lead"><span class="wk">Weeks 10 to 12<small>8 to 26 Feb</small></span><span class="tx">Pilot 1 lists run to 26 Feb. The contract papers are agreed in these weeks, so the readout only triggers the signature.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 13<small>Fri 5 Mar</small></span><span class="tx">Readout to the fraud head and the CRO, against the signed bars. The order form goes the same day.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 13<small>by 5 Mar</small></span><span class="tx">Pilot 2 signed with a bank billed in February. Its lists start in mid March.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 10 to 13<small>8 Feb to 5 Mar</small></span><span class="tx">Three to four more banks in scoping or security review.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Partners and regulators</h4><ul class="acts">
+      <li data-o="exec lead"><span class="wk">Weeks 10 to 13<small>8 Feb to 5 Mar</small></span><span class="tx">A pilot or MoU with RBI Innovation Hub or I4C.</span><span class="ow"><span class="tg">Dali or Sam</span><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Week 11<small>15 to 19 Feb</small></span><span class="tx">A brief to I4C on the scripts and faked brands seen in the pilot, and to each faked brand's own fraud team.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead"><span class="wk">Weeks 10 to 13<small>8 Feb to 5 Mar</small></span><span class="tx">Telco talks through Mobileum.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="trk"><h4>Hiring and planning</h4><ul class="acts">
+      <li data-o="lead exec"><span class="wk">Once pilot 2 signs<small>March</small></span><span class="tx">Hire a solutions engineer.</span><span class="ow"><span class="tg a">India lead hires</span><span class="tg">Sam approves</span></span></li>
+      <li data-o="lead"><span class="wk">Week 13<small>1 to 5 Mar</small></span><span class="tx">The 2027 India plan, written on real pilot numbers: accounts, pipeline, the next hire.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+    </ul></div>
+    <div class="outc"><span class="k">Outcome by day 90, 6 Mar</span><ul><li>Readout done on 5 Mar, contract in signature</li><li>Pilot 2 signed</li><li>Three to four banks next</li><li>A national-level conversation open</li></ul></div>
+  </div>
+
+  <div class="phase" id="after">
+    <div class="ph-h"><span class="d">+</span><div><h3>Then, to 31 March</h3><p class="goal">Goal: the first annual contract signed inside FY27.</p></div></div>
+    <div class="trk"><ul class="acts">
+      <li data-o="lead exec"><span class="wk">Weeks 14 and 15<small>by Fri 19 Mar</small></span><span class="tx">Pilot 1 signed as an annual contract, running from 1 April on the FY28 budget line.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Dali or Sam at the signing</span></span></li>
+      <li data-o="lead"><span class="wk">Week 15<small>15 to 19 Mar</small></span><span class="tx">Pilot 1's fraud head takes reference calls with the next two banks.</span><span class="ow"><span class="tg a">India lead</span></span></li>
+      <li data-o="lead syd"><span class="wk">Weeks 15 and 16<small>mid March</small></span><span class="tx">Pilot 2 lists start.</span><span class="ow"><span class="tg a">India lead</span><span class="tg">Sydney product</span></span></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="ds" id="risks" aria-labelledby="rk-h"><div class="in">
+  <h2 id="rk-h">What could slip, and the fix</h2>
+  <div class="tbl"><table class="stack">
+    <thead><tr><th>Risk</th><th>What we do</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Risk">Too few scam conversations in the first week</td><td data-l="What we do">The pilot bank passes on the scammer numbers, WhatsApp IDs and UPI handles its customers report, from the day it signs. Apate's seeded numbers add volume. Mobileum's telco route comes later.</td></tr>
+      <tr><td data-l="Risk">Few hits sit at the pilot bank</td><td data-l="What we do">About 1 in 75 captured accounts sits at any one large bank. Capture about 35 new accounts a day, set the bars as rates, and count accounts at other banks, reported through the national portal, as the fourth number.</td></tr>
+      <tr><td data-l="Risk">Sydney's break, 21 Dec to 8 Jan</td><td data-l="What we do">Everything Sydney builds is done by 18 Dec. The agents and the list run without Sydney staff, and the India lead watches them.</td></tr>
+      <tr><td data-l="Risk">Security review runs long</td><td data-l="What we do">Start it in week 1, beside scoping. The pack answers most of it before the first meeting.</td></tr>
+      <tr><td data-l="Risk">The warm bank wants the pilot free</td><td data-l="What we do">Credit the fee to year one.</td></tr>
+      <tr><td data-l="Risk">Indian numbers held up by DoT's KYC rules</td><td data-l="What we do">Go through a licensed CPaaS or telco, starting in week 1.</td></tr>
+      <tr><td data-l="Risk">Personas miss how Indian scams talk</td><td data-l="What we do">Test them with the warm bank's fraud team on real scripts in week 2.</td></tr>
+      <tr><td data-l="Risk">The signature slips past 31 March</td><td data-l="What we do">The papers are agreed during the pilot. If it still slips, the FY28 budget ask is in, so it signs in April from the new year's money.</td></tr>
+      <tr><td data-l="Risk">RBI's mule rules change after 30 November</td><td data-l="What we do">The pilot does not depend on them. It gets stronger if they land.</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="ds" id="pipeline" aria-labelledby="pp-h"><div class="in">
+  <h2 id="pp-h">2027: from twelve banks to signed contracts</h2>
+  <p>The first market is the twelve banks on the buyer map. Banks 13 to 24, met from April, are small finance and payments banks under the same January rules. Each bank goes through the same stages.</p>
+  <ol class="stage">
+    <li>First meeting</li><li class="ar" aria-hidden="true">&rarr;</li>
+    <li>Scoping and security <small id="stg1">about 3 months</small></li><li class="ar" aria-hidden="true">&rarr;</li>
+    <li>Pilot, readout and contract <small>about 3 months</small></li><li class="ar" aria-hidden="true">&rarr;</li>
+    <li class="go">Signed</li>
+  </ol>
+  <p>The warm bank is the exception: it is already trialling, so it goes from pilot to signature in three months. The defaults below follow the plan above. Put in Apate's own conversion rates and price.</p>
+  <div class="model" id="model">
+    <div class="inputs">
+      <div class="inp"><label for="m1">Banks met in weeks 1 to 8, besides the warm bank</label><div class="rg"><input type="range" id="m1" min="6" max="15" step="1" value="11"><output id="m1v" for="m1">11</output></div></div>
+      <div class="inp"><label for="mq">New banks met each quarter from April</label><div class="rg"><input type="range" id="mq" min="0" max="8" step="1" value="4"><output id="mqv" for="mq">4</output></div></div>
+      <div class="inp"><label for="pp">Met banks that run a pilot</label><div class="rg"><input type="range" id="pp" min="20" max="80" step="5" value="40"><output id="ppv" for="pp">40%</output></div></div>
+      <div class="inp"><label for="pw">Pilots that sign</label><div class="rg"><input type="range" id="pw" min="30" max="90" step="5" value="65"><output id="pwv" for="pw">65%</output></div></div>
+      <div class="inp"><label for="lag">Months from first meeting to signature</label><div class="rg"><input type="range" id="lag" min="4" max="9" step="1" value="6"><output id="lagv" for="lag">6 months</output></div></div>
+      <div class="inp"><label for="acv">Your India annual price, US$ (optional)</label><input type="number" id="acv" min="0" step="1000" inputmode="numeric" placeholder="Your number"></div>
+    </div>
+    <div class="result">
+      <p class="rk">Banks on signed annual contracts, 2027</p>
+      <ol class="qrows" id="qrows" aria-live="polite">
+        <li><span class="qn" id="v1">1</span><span class="ql">Jan to Mar 2027</span><span class="tiles" id="t1" aria-hidden="true"></span><span class="who" id="w1">The warm bank</span><span class="meta" id="x1"></span></li>
+        <li><span class="qn" id="v2">2</span><span class="ql">Apr to Jun 2027</span><span class="tiles" id="t2" aria-hidden="true"></span><span class="who" id="w2"></span><span class="meta" id="x2"></span></li>
+        <li><span class="qn" id="v3">4</span><span class="ql">Jul to Sep 2027</span><span class="tiles" id="t3" aria-hidden="true"></span><span class="who" id="w3"></span><span class="meta" id="x3"></span></li>
+        <li><span class="qn" id="v4">5</span><span class="ql">Oct to Dec 2027</span><span class="tiles" id="t4" aria-hidden="true"></span><span class="who" id="w4"></span><span class="meta" id="x4"></span></li>
+      </ol>
+      <p class="peak" id="peak">Pilots running at once peak at 3, in Apr to Jun. The solutions engineer is in place by then.</p>
+      <p class="peak">Expected values, rounded to whole banks. Quarters are calendar quarters: India's year starts in April and Australia's in July.</p>
+    </div>
+  </div>
+  <a class="next" href="ask.html"><small>Next</small><b>What India takes from Apate <span aria-hidden="true">&rarr;</span></b></a>
+</div></section>
+</main>
+<section class="close small" aria-label="Contact"><div class="in">
+  <p class="line">I sell to banks and build teams that sell.</p>
+  <div class="contact">
+    <span class="who-am-i">Ketan Sharma</span>
+    <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
+    <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
+  </div>
+</div></section>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.cp');
+  Array.prototype.forEach.call(buttons, function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      function done(label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+      function fallback() {
+        try {
+          var el = document.getElementById(b.getAttribute('data-target'));
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          done('Selected');
+        } catch (e) { done('Copy'); }
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#plan .chip'));
+  var acts = Array.prototype.slice.call(document.querySelectorAll('.acts li'));
+  var trks = Array.prototype.slice.call(document.querySelectorAll('.trk'));
+  function filter(o) {
+    acts.forEach(function (li) {
+      var tags = (li.getAttribute('data-o') || '').split(' ');
+      li.hidden = !(o === 'all' || tags.indexOf(o) !== -1);
+    });
+    trks.forEach(function (t) {
+      var any = Array.prototype.some.call(t.querySelectorAll('.acts li'), function (li) { return !li.hidden; });
+      t.hidden = !any;
+    });
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-o') === o ? 'true' : 'false'); });
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { filter(c.getAttribute('data-o')); }); });
+})();
+(function () {
+  // Time t is in months from 1 Dec 2026. Quarter ends: 31 Mar = 4, 30 Jun = 7, 30 Sep = 10, 31 Dec = 13.
+  // First meetings run in weeks 1, 2 (December) and 5 to 8 (January), spread evenly over those six weeks.
+  // Pilots start (lag - 3) months after the first meeting and sign 3 months after that. The warm bank signs on 19 Mar.
+  var WAVE = [0.25, 0.5, 1.1, 1.35, 1.6, 1.85];
+  var NAMES_DEC = 'Yes, IndusInd, Axis or Kotak';
+  var NAMES_JAN = 'ICICI, City Union, HDFC, Federal, RBL, IDFC First or Airtel Payments Bank';
+  var WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+  function g(id) { return document.getElementById(id); }
+  function word(n) { return WORDS[n] || String(n); }
+  function run() {
+    var N1 = +g('m1').value, NQ = +g('mq').value, p = +g('pp').value / 100, w = +g('pw').value / 100, L = +g('lag').value;
+    var S = L - 3;
+    var price = parseFloat(g('acv').value);
+    g('m1v').textContent = N1; g('mqv').textContent = NQ;
+    g('ppv').textContent = Math.round(p * 100) + '%'; g('pwv').textContent = Math.round(w * 100) + '%';
+    g('lagv').textContent = L + ' months';
+    g('stg1').textContent = 'about ' + S + (S === 1 ? ' month' : ' months');
+    var cohorts = [];
+    WAVE.forEach(function (t, i) { cohorts.push({ t: t, n: N1 / 6, grp: i < 2 ? 'dec' : 'jan' }); });
+    for (var m = 4; m <= 12; m++) cohorts.push({ t: m + 0.5, n: NQ / 3, grp: 'later' });
+    var Q = [4, 7, 10, 13], rows = [];
+    Q.forEach(function (q) {
+      var r = { warm: q >= 3.6 ? 1 : 0, dec: 0, jan: 0, later: 0, pilots: 0, met: 1 };
+      cohorts.forEach(function (h) {
+        if (h.t <= q) r.met += h.n;
+        if (h.t + L <= q) r[h.grp] += h.n * p * w;
+        if (h.t + S <= q && q < h.t + L) r.pilots += h.n * p;
+      });
+      // whole banks by cumulative rounding, in the order they sign
+      var c1 = r.warm, c2 = c1 + r.dec, c3 = c2 + r.jan, c4 = c3 + r.later;
+      r.k = { warm: Math.round(c1), dec: Math.round(c2) - Math.round(c1), jan: Math.round(c3) - Math.round(c2), later: Math.round(c4) - Math.round(c3) };
+      r.signed = Math.round(c4);
+      rows.push(r);
+    });
+    for (var i = 1; i < rows.length; i++) { if (rows[i].signed < rows[i - 1].signed) rows[i].signed = rows[i - 1].signed; }
+    var hasPrice = isFinite(price) && price > 0;
+    var peak = 0, peakQ = 0, QN = ['Jan to Mar', 'Apr to Jun', 'Jul to Sep', 'Oct to Dec'];
+    rows.forEach(function (r, i) {
+      var n = i + 1, prev = i ? rows[i - 1] : { signed: 0, k: { warm: 0, dec: 0, jan: 0, later: 0 } };
+      g('v' + n).textContent = r.signed;
+      var tiles = g('t' + n); tiles.innerHTML = '';
+      for (var j = 0; j < r.signed; j++) { var el = document.createElement('i'); if (j >= prev.signed) el.className = 'nw'; tiles.appendChild(el); }
+      var parts = [];
+      var dw = r.k.warm - prev.k.warm, dd = r.k.dec - prev.k.dec, dj = r.k.jan - prev.k.jan, dl = r.k.later - prev.k.later;
+      if (dw > 0) parts.push('The warm bank');
+      if (dd > 0) parts.push((parts.length ? '' : 'Adds ') + word(dd) + ' of ' + NAMES_DEC);
+      if (dj > 0) parts.push((parts.length ? '' : 'Adds ') + word(dj) + ' of ' + NAMES_JAN);
+      if (dl > 0) parts.push((parts.length ? '' : 'Adds ') + word(dl) + (dl === 1 ? ' small finance or payments bank' : ' small finance or payments banks'));
+      g('w' + n).textContent = parts.length ? parts.join('; ') + '.' : 'No new signature this quarter.';
+      var meta = Math.round(r.met) + ' banks met, ' + Math.round(r.pilots) + ' in pilot at quarter end';
+      if (hasPrice) meta += ', US$' + Math.round(r.signed * price).toLocaleString('en-US') + ' a year signed';
+      g('x' + n).textContent = meta;
+      if (Math.round(r.pilots) > peak) { peak = Math.round(r.pilots); peakQ = i; }
+    });
+    g('peak').textContent = 'Pilots running at once peak at ' + peak + ', in ' + QN[peakQ] + '.' + (peak >= 3 ? ' The solutions engineer is in place by then.' : '');
+  }
+  ['m1', 'mq', 'pp', 'pw', 'lag', 'acv'].forEach(function (id) { g(id).addEventListener('input', run); });
+  run();
+})();
+</script>
+</body>
+</html>

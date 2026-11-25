@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First India Pilot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The pilot playbook for an Indian bank: shape, where the scams come from, the dated path, hit sizing, the four numbers, the business case, the security pack and objections.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a keynote on a phone. The front is one idea per screen, each ending in an Open. Detail pages are one readable column; tables stack on phones, drawings sit in their own boxes. */
+:root {
+  --bg: #FAFAFC;
+  --band: #EFF1F5;
+  --card: #FFFFFF;
+  --ink: #0D0F14;
+  --muted: #5C6371;
+  --line: #DCE0E7;
+  --apate: #2B53EE;
+  --on-apate: #FFFFFF;
+  --soft: #E4EAFE;
+  --loss: #D2412A;
+  --close-bg: #0D0F14;
+  --close-fg: #F3F4F7;
+  --close-muted: #A3A9B5;
+  --shadow: rgba(13, 15, 20, 0.08);
+  --font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C10;
+    --band: #15171D;
+    --card: #111319;
+    --ink: #F2F3F6;
+    --muted: #9BA1AE;
+    --line: #2A2E38;
+    --apate: #7E98FF;
+    --on-apate: #0B0C10;
+    --soft: #1B2342;
+    --loss: #FF6E52;
+    --close-bg: #15171D;
+    --close-fg: #F2F3F6;
+    --close-muted: #9BA1AE;
+    --shadow: rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0C10;
+  --band: #15171D;
+  --card: #111319;
+  --ink: #F2F3F6;
+  --muted: #9BA1AE;
+  --line: #2A2E38;
+  --apate: #7E98FF;
+  --on-apate: #0B0C10;
+  --soft: #1B2342;
+  --loss: #FF6E52;
+  --close-bg: #15171D;
+  --close-fg: #F2F3F6;
+  --close-muted: #9BA1AE;
+  --shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+main { overflow-x: clip; }
+a { color: var(--apate); text-underline-offset: 3px; }
+b, strong { font-weight: 600; }
+p { margin: 0; }
+
+.in {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+
+/* The Open control: the one obvious way into the depth */
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--apate);
+  color: var(--on-apate);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  max-width: 100%;
+}
+.open .arr { flex: none; transition: transform 0.2s ease; }
+.open:hover .arr { transform: translateX(4px); }
+
+/* Expanders */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.plus {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: translate(-50%, -50%);
+}
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+details[open] > summary .plus { transform: rotate(45deg); border-color: var(--apate); }
+summary:hover .plus { border-color: var(--apate); }
+
+.bill { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--loss); vertical-align: 0.12em; flex: none; }
+
+/* Detail pages */
+body.detail::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.top .in { display: flex; align-items: center; gap: 14px; padding-block: 6px; }
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back:hover { color: var(--apate); }
+.pnav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 24px 0 0; }
+.pnav a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.pnav a:hover { color: var(--ink); }
+.pnav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+.dh { padding-block: 44px 36px; }
+.dh h1 {
+  font-weight: 700;
+  font-size: clamp(32px, 6.6vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+.lede { margin-top: 16px; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.ds { padding-block: 40px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.ds h2 {
+  font-weight: 700;
+  font-size: clamp(25px, 4.6vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+.ds h3 { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.005em; }
+.ds p { margin-top: 14px; max-width: 62ch; }
+.ds .muted, .muted { color: var(--muted); }
+.ds ul.plain { margin: 16px 0 0; padding-left: 1.1em; max-width: 62ch; display: grid; gap: 8px; }
+.read { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); }
+.so { display: block; margin-top: 8px; font-weight: 600; color: var(--apate); max-width: 56ch; }
+
+/* Worked example and draft notes */
+.callout { margin-top: 24px; padding: 20px; border-radius: 18px; background: var(--band); max-width: 680px; }
+.callout .k { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.callout p { margin-top: 8px; }
+.callout p:first-of-type { margin-top: 0; }
+.draft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1.5px dashed var(--apate);
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 640px;
+}
+.draft b { color: var(--apate); white-space: nowrap; }
+
+/* Tables: real tables on wide screens, labelled stacks on phones */
+.tbl { margin-top: 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+td:first-child { font-weight: 600; }
+td .muted { display: block; font-weight: 400; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 620px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  table.stack td { border: 0; padding: 3px 0; }
+  table.stack td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  table.stack td:first-child { font-size: 17px; }
+  .num { white-space: normal; }
+}
+
+/* Arrival from a link on the front page */
+.hit { scroll-margin-top: 72px; }
+.hit:target { animation: hitflash 2.4s ease-out 1; }
+@keyframes hitflash { 0% { background: var(--soft); } 100% { background: transparent; } }
+
+/* Inline drawings: every label is at least 13 viewBox units, so 12px or more on a 375px phone */
+.fig { margin-top: 26px; max-width: 520px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg text { font-family: var(--font-text); }
+.f-apate { fill: var(--apate); } .f-soft { fill: var(--soft); } .f-band { fill: var(--band); } .f-line { fill: var(--line); }
+.f-muted { fill: var(--muted); } .f-bg { fill: var(--bg); } .f-loss { fill: var(--loss); } .f-card { fill: var(--card); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-apate { fill: var(--apate); } .t-on { fill: var(--on-apate); } .t-loss { fill: var(--loss); }
+.s-line { stroke: var(--line); fill: none; } .s-muted { stroke: var(--muted); fill: none; } .s-apate { stroke: var(--apate); fill: none; } .s-loss { stroke: var(--loss); fill: none; }
+.k-line { stroke: var(--line); stroke-width: 1.5; } .k-apate { stroke: var(--apate); stroke-width: 1.5; } .k-muted { stroke: var(--muted); stroke-width: 1.5; }
+.figcap { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 56ch; }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; max-width: 60ch; }
+.legend li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.a { background: var(--apate); } .dot.m { border: 2px solid var(--muted); } .dot.l { background: var(--loss); }
+
+/* Owner and status tags */
+.tg {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tg.a { border-color: var(--apate); color: var(--apate); }
+.tg.l { border-color: var(--loss); color: var(--loss); }
+.tg.f { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+
+/* Next page card */
+.next {
+  display: block;
+  margin-block: 8px 56px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: var(--band);
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 680px;
+}
+.next small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.next b { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; font-family: var(--font-display); font-size: clamp(22px, 4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.next:hover b { color: var(--apate); }
+
+/* Contact band, shared by every page */
+.close { background: var(--close-bg); color: var(--close-fg); padding-block: clamp(56px, 12vw, 112px); }
+.close .line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+.close.small .line { font-size: clamp(24px, 5vw, 36px); max-width: 22ch; }
+.contact { margin-top: 36px; display: grid; gap: 14px; font-size: 18px; }
+.contact .who-am-i { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+.contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
+.contact a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; user-select: all; }
+.cp {
+  font: 600 14px/1 var(--font-text);
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--close-muted);
+  background: transparent;
+  color: var(--close-fg);
+  cursor: pointer;
+}
+.cp:hover { border-color: var(--close-fg); }
+
+:focus-visible { outline: 2px solid var(--apate); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+.k-loss { stroke: var(--loss); stroke-width: 1.5; }
+.glance { display: grid; grid-template-columns: 170px 1fr; gap: 0; margin: 22px 0 0; max-width: 720px; }
+.glance dt, .glance dd { padding: 12px 0; border-top: 1px solid var(--line); margin: 0; }
+.glance dt { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 15px; }
+.glance dd { min-width: 0; }
+@media (max-width: 520px) {
+  .glance { grid-template-columns: minmax(0, 1fr); }
+  .glance dd { border-top: 0; padding-top: 2px; }
+}
+.weeks { list-style: none; margin: 22px 0 0; padding: 0; max-width: 720px; }
+.weeks li { display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.weeks li:last-child { border-bottom: 1px solid var(--line); }
+.weeks .wk { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--apate); line-height: 1.35; }
+.weeks .wk small { display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
+.weeks span:last-child { min-width: 0; }
+.weeks li.sig .wk { color: var(--ink); }
+@media (max-width: 460px) { .weeks li { grid-template-columns: minmax(0, 1fr); gap: 2px; } .weeks .wk small { display: inline; margin-left: 6px; } }
+.crit { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 760px; }
+.crit li { padding: 18px; border-radius: 18px; background: var(--band); min-width: 0; }
+.crit .w { display: block; font-family: var(--font-display); font-weight: 800; font-size: 30px; letter-spacing: -0.03em; color: var(--apate); line-height: 1; }
+.crit b { display: block; margin-top: 10px; font-size: 16px; line-height: 1.35; }
+.crit .bar { margin-top: 10px; font-size: 15px; font-weight: 600; }
+.crit .bar span { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); margin-right: 6px; }
+.crit p { margin-top: 8px; font-size: 14px; color: var(--muted); }
+@media (max-width: 620px) { .crit { grid-template-columns: minmax(0, 1fr); } }
+.calc { margin-top: 24px; padding: 22px; border-radius: 22px; background: var(--band); max-width: 680px; }
+.calc h3 { margin-bottom: 4px; }
+.calc .cl { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.amtrow { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.amtrow input { width: 9.5ch; min-width: 0; min-height: 48px; font: 700 26px/1.1 var(--font-display); font-variant-numeric: tabular-nums; padding: 8px 12px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+.amtrow input:focus { border-color: var(--apate); outline: none; }
+.amtrow span { font-size: 18px; font-weight: 600; color: var(--muted); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 12px; }
+@media (max-width: 520px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.pair .amtrow input { width: 100%; max-width: 8.5ch; }
+.hint { display: block; margin-top: 6px; font-size: 13px; color: var(--muted); }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip { font: 600 14px/1.2 var(--font-text); min-height: 40px; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; text-align: left; }
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.out { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 16px; }
+.ot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; }
+.ot b { font-family: var(--font-display); font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.out .track { margin-top: 7px; height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+.out .fill { display: block; height: 100%; border-radius: 6px; min-width: 3px; background: var(--muted); }
+.out .full .fill { background: var(--loss); }
+.out .full b { color: var(--loss); }
+.out .base b { color: var(--ink); }
+.cnote { margin-top: 16px; font-size: 14px; color: var(--muted); }
+.rg { display: flex; align-items: center; gap: 12px; margin-top: 6px; min-height: 40px; }
+.rg input[type="range"] { flex: 1; min-width: 0; height: 40px; margin: 0; accent-color: var(--apate); }
+.rg output { flex: none; min-width: 5ch; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.inp + .inp { margin-top: 14px; }
+.inp label { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.sz { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sz li { padding: 14px; border-radius: 14px; background: var(--card); min-width: 0; }
+.sz b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.sz .hit2 b { color: var(--apate); }
+.sz span { display: block; margin-top: 6px; font-size: 14px; line-height: 1.35; color: var(--muted); }
+@media (max-width: 520px) { .sz { grid-template-columns: minmax(0, 1fr); } }
+.obj { list-style: none; margin: 18px 0 0; padding: 0; max-width: 720px; }
+.obj > li { border-top: 1px solid var(--line); }
+.obj > li:last-child { border-bottom: 1px solid var(--line); }
+.obj summary { display: flex; justify-content: space-between; gap: 16px; padding: 15px 0; min-height: 48px; font-family: var(--font-display); font-size: 19px; font-weight: 600; line-height: 1.3; }
+.obj details p { margin: 0 0 18px; font-size: 16px; color: var(--muted); max-width: 60ch; }
+.steps3 { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.steps3 li { padding: 10px 16px; border-radius: 999px; background: var(--band); font-weight: 600; font-size: 15px; }
+.steps3 li.go { background: var(--apate); color: var(--on-apate); }
+.steps3 .ar { background: none; padding: 0; color: var(--muted); }
+</style>
+</head>
+<body class="detail">
+<header class="top"><div class="in">
+  <a class="back" href="../apate-india.html">&larr; Apate in India</a>
+  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html">Where Apate acts</a></li><li><a href="accounts.html">Buyer map</a></li><li><a href="pilot.html" aria-current="page">Pilot</a></li><li><a href="plan-90.html">90 days</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
+</div></header>
+<main>
+<header class="dh"><div class="in">
+  <p class="eyebrow">Pilot playbook</p>
+  <h1>Eight weeks of lists, no integration, four numbers.</h1>
+  <p class="lede">Built so the fraud head can say yes without an IT project, the CISO can clear it in weeks, and the readout turns straight into a signature.</p>
+</div></header>
+
+<section class="ds" id="shape" aria-labelledby="g-h"><div class="in">
+  <h2 id="g-h">At a glance</h2>
+  <dl class="glance">
+    <dt>Length</dt><dd>Eight weeks of lists. For the warm bank, 4 January to 26 February, with the readout on 5 March. The usual window is 8 to 12 weeks; this bank is already trialling, so eight is enough.</dd>
+    <dt>Where the scams come from</dt><dd>Each day the bank's fraud team passes Apate the scammer numbers, WhatsApp IDs and UPI handles its customers report. Apate's agents contact each one as a new victim. Apate's own seeded numbers add volume.</dd>
+    <dt>What Apate engages</dt><dd>Scams that fake the bank's name or target its customers: digital arrest, fake KYC updates, task scams.</dd>
+    <dt>What the bank gets</dt><dd>A daily list of mule accounts, UPI IDs and phone numbers, each with the time Apate first saw it.</dd>
+    <dt>Integration</dt><dd>None. One file a day, over a bank-hosted secure file transfer, or a single sign-on portal open only to the bank's IP addresses.</dd>
+    <dt>Customer data</dt><dd>None, in either direction. The bank sends only scammer details.</dd>
+    <dt>Owner</dt><dd>The fraud head.</dd>
+    <dt>Gate</dt><dd>A CISO review of the file channel and the security pack.</dd>
+    <dt>Price</dt><dd>Paid and fixed, credited to year one when the bank signs. Apate sets the number.</dd>
+  </dl>
+</div></section>
+
+<section class="ds" id="flow" aria-labelledby="f-h"><div class="in">
+  <h2 id="f-h">How the data moves</h2>
+  <figure class="fig" style="margin-inline: 0; max-width: 460px">
+    <svg viewBox="0 0 360 486" role="img" aria-label="Every day the pilot bank's fraud team passes Apate the scammer numbers, WhatsApp IDs and UPI handles its customers report. Apate's seeded numbers add more, and Mobileum's telco route comes later. Apate's agent contacts each scammer as a new victim, and the scammer names where to pay. Apate sends a daily list of accounts, UPI IDs and phone numbers back to the fraud team, which holds and watches its own accounts and reports other banks' accounts through NCRP. A hit report goes back every week.">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-muted"/></marker></defs>
+      <rect x="20" y="4" width="320" height="72" rx="12" class="f-card k-line"/>
+      <text x="180" y="27" font-size="15" font-weight="700" text-anchor="middle" class="t-ink">Pilot bank's fraud team</text>
+      <text x="180" y="47" font-size="13" text-anchor="middle" class="t-ink">Scammer numbers, WhatsApp IDs, UPI handles</text>
+      <text x="180" y="65" font-size="13" text-anchor="middle" class="t-muted">its customers report, every day</text>
+      <line x1="180" y1="76" x2="180" y2="124" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="6" y="86" width="134" height="28" rx="14" class="f-band"/>
+      <text x="73" y="105" font-size="13" text-anchor="middle" class="t-ink">Seeded numbers</text>
+      <line x1="100" y1="114" x2="118" y2="125" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="220" y="86" width="134" height="28" rx="14" class="f-bg k-muted" stroke-dasharray="4 3"/>
+      <text x="287" y="105" font-size="13" text-anchor="middle" class="t-muted">Mobileum, later</text>
+      <line x1="260" y1="114" x2="242" y2="125" class="s-muted" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+      <rect x="20" y="128" width="320" height="58" rx="12" class="f-apate"/>
+      <text x="180" y="152" font-size="15" font-weight="700" text-anchor="middle" class="t-on">Apate agent</text>
+      <text x="180" y="172" font-size="13" text-anchor="middle" class="t-on">Contacts each one as a new victim</text>
+      <line x1="180" y1="186" x2="180" y2="214" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <text x="190" y="205" font-size="13" class="t-muted">names where to pay</text>
+      <rect x="20" y="218" width="320" height="72" rx="12" class="f-soft"/>
+      <text x="180" y="241" font-size="15" font-weight="700" text-anchor="middle" class="t-ink">Daily list</text>
+      <text x="180" y="261" font-size="13" text-anchor="middle" class="t-ink">Account and IFSC, UPI ID, phone</text>
+      <text x="180" y="279" font-size="13" text-anchor="middle" class="t-muted">each with the time Apate first saw it</text>
+      <line x1="180" y1="290" x2="180" y2="316" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="20" y="320" width="320" height="44" rx="12" class="f-card k-line"/>
+      <text x="180" y="347" font-size="14" font-weight="700" text-anchor="middle" class="t-ink">Back to the fraud team</text>
+      <line x1="120" y1="364" x2="94" y2="391" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="240" y1="364" x2="266" y2="391" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="4" y="396" width="170" height="60" rx="12" class="f-band"/>
+      <text x="89" y="421" font-size="13" font-weight="700" text-anchor="middle" class="t-ink">Its own accounts</text>
+      <text x="89" y="441" font-size="13" text-anchor="middle" class="t-muted">Hold and watch</text>
+      <rect x="186" y="396" width="170" height="60" rx="12" class="f-band"/>
+      <text x="271" y="421" font-size="13" font-weight="700" text-anchor="middle" class="t-ink">Other banks' accounts</text>
+      <text x="271" y="441" font-size="13" text-anchor="middle" class="t-muted">Report through NCRP</text>
+      <text x="180" y="478" font-size="13" font-weight="600" text-anchor="middle" class="t-apate">A one-page hit report goes back every week</text>
+    </svg>
+  </figure>
+</div></section>
+
+<section class="ds" id="weeks" aria-labelledby="w-h"><div class="in">
+  <h2 id="w-h">The dated path, for the warm bank</h2>
+  <p>The contract papers move while the lists run, so the readout only has to trigger a signature. Banks met in December take about three months of scoping and security first, so their pilots start in March.</p>
+  <ol class="weeks">
+    <li><span class="wk">Before lists<small>7 to 18 Dec</small></span><span>NDA. Scoping with the fraud head. The security questionnaire answered from the pack. Bars, price and a named signer on paper. The MSA, security schedule and order form drafted. Pilot signed by 18 December.</span></li>
+    <li><span class="wk">Warm-up<small>21 Dec to 3 Jan</small></span><span>Agents live on the bank's scam types, working the scammer details its customers report. It runs without Sydney staff over the Australian summer break; the India lead watches it.</span></li>
+    <li><span class="wk">List weeks 1 and 2<small>4 to 15 Jan</small></span><span>The first daily lists. The fraud team checks the format and the match rate.</span></li>
+    <li><span class="wk">List weeks 3 to 8<small>18 Jan to 26 Feb</small></span><span>A list every day and a one-page hit report every week. Legal and procurement close the MSA, security schedule and order form in parallel.</span></li>
+    <li><span class="wk">Readout draft<small>1 to 4 Mar</small></span><span>The bank's Data Analytics and MI unit checks the numbers.</span></li>
+    <li><span class="wk">Readout<small>Fri 5 Mar</small></span><span>To the fraud head and the CRO, against the signed bars. The order form goes the same day.</span></li>
+    <li class="sig"><span class="wk">Signed<small>by Fri 19 Mar</small></span><span>The annual contract runs from 1 April, on the FY28 budget line.</span></li>
+  </ol>
+</div></section>
+
+<section class="ds" id="sizing" aria-labelledby="z-h"><div class="in">
+  <h2 id="z-h">How many hits to expect at one bank</h2>
+  <p>Kotak held about 6,000 of the 4.5 lakh mule accounts frozen in the government's 2024 count, about 1.3%. So about 1 in 75 accounts Apate captures will sit at any one large bank. The rest sit at other banks, and the pilot bank reports them through the national portal.</p>
+  <div class="calc" id="size">
+    <div class="inp"><label for="zd">New accounts Apate captures a day, repeats left out</label><div class="rg"><input type="range" id="zd" min="10" max="100" step="5" value="35"><output id="zdv" for="zd">35</output></div></div>
+    <div class="inp"><label for="zs">The pilot bank's share of India's mule accounts</label><div class="rg"><input type="range" id="zs" min="0.5" max="5" step="0.1" value="1.3"><output id="zsv" for="zs">1.3%</output></div><span class="hint">Default: Kotak's share in the 2024 count.</span></div>
+    <ul class="sz" aria-live="polite">
+      <li><b id="za">1,960</b><span>accounts captured in eight weeks of lists</span></li>
+      <li class="hit2"><b id="zb">25</b><span>at the pilot bank, for the first three numbers</span></li>
+      <li><b id="zc">1,935</b><span>at other banks, reported through the national portal</span></li>
+    </ul>
+    <p class="cnote" id="zn">Thirty hits at the pilot bank need about 2,310 accounts, about 41 a day.</p>
+  </div>
+</div></section>
+
+<section class="ds" id="criteria" aria-labelledby="c-h"><div class="in">
+  <h2 id="c-h">The four numbers</h2>
+  <p>Each bar is a rate, agreed in writing before the lists start. A count would turn on how many mule accounts happen to sit at one bank. The bars below are our starting proposal, set finally with the fraud head.</p>
+  <ul class="crit">
+    <li><span class="w">New</span><b>Of the listed accounts at the bank, the share its own tools, MuleHunter.AI included, had not flagged when the list arrived.</b><p class="bar"><span>Bar</span>Half or more.</p><p>Measured against the bank's flag log, by timestamp.</p></li>
+    <li><span class="w">Early</span><b>Days between Apate first seeing an account and the first complaint against it on 1930 or the national portal.</b><p class="bar"><span>Bar</span>A median lead of two days or more.</p><p>Measured from the bank's complaint data.</p></li>
+    <li><span class="w">Held</span><b>Of the new accounts at the bank, the share held, and the rupees held on them.</b><p class="bar"><span>Bar</span>Eight in ten held within a day of the list.</p><p>Measured from the bank's hold records.</p></li>
+    <li><span class="w">Reported</span><b>Accounts at other banks, sent on through the national portal.</b><p class="bar"><span>Bar</span>Every one reported within a day.</p><p>Measured from the bank's portal filings.</p></li>
+  </ul>
+</div></section>
+
+<section class="ds" id="case" aria-labelledby="k-h"><div class="in">
+  <h2 id="k-h">The business case, for the CRO and the CFO</h2>
+  <p>Three parts: what one mule case can now cost, what a year of mule accounts can cost the bank, and what the board's fraud committee now asks for.</p>
+  <div class="calc" id="calc">
+    <h3>One case</h3>
+    <label class="cl" for="amt" style="margin-top: 10px">Money that landed in mule accounts</label>
+    <div class="amtrow"><span>Rs</span><input id="amt" type="number" inputmode="decimal" min="0" step="0.01" value="20.97"><span>lakh</span></div>
+    <div class="presets" role="group" aria-label="Examples">
+      <button type="button" class="chip" data-v="20.97" aria-pressed="true" id="p1">One Axis account, July 2026</button>
+      <button type="button" class="chip" data-v="2292" aria-pressed="false" id="p2">The February case, all five banks, Rs 22.92 cr</button>
+    </div>
+    <ul class="out" aria-live="polite">
+      <li><div class="ot"><span>At the February order's rate, 5%</span><b id="o5">Rs 1.05 lakh</b></div><div class="track"><span class="fill" style="width: 5%"></span></div></li>
+      <li><div class="ot"><span>At Yes Bank's rate, 7.5%</span><b id="o75">Rs 1.57 lakh</b></div><div class="track"><span class="fill" style="width: 7.5%"></span></div></li>
+      <li class="full"><div class="ot"><span>At the Supreme Court's standard, the full loss</span><b id="o100">Rs 20.97 lakh</b></div><div class="track"><span class="fill" style="width: 100%"></span></div></li>
+    </ul>
+    <p class="cnote">In the February case the five banks paid Rs 1.31 cr between them. Our read: the court's standard applies where the bank's due diligence failed, and an account named before the money lands is one the bank can hold first.</p>
+  </div>
+  <div class="calc" id="bank">
+    <h3>A year at one bank</h3>
+    <div class="pair">
+      <div><label class="cl" for="bn">Mule accounts at the bank</label><div class="amtrow"><input id="bn" type="number" inputmode="numeric" min="0" step="100" value="6000"></div><span class="hint">Default: Kotak in the 2024 count.</span></div>
+      <div><label class="cl" for="ba">Average landed per account</label><div class="amtrow"><span>Rs</span><input id="ba" type="number" inputmode="decimal" min="0" step="0.05" value="1.75"><span>lakh</span></div><span class="hint">Our arithmetic: Rs 56,087 cr lost over three years, over 32.08 lakh accounts on the Suspect Registry.</span></div>
+    </div>
+    <ul class="out" aria-live="polite">
+      <li class="base"><div class="ot"><span>Money landed at the bank</span><b id="b0">Rs 105 cr</b></div></li>
+      <li><div class="ot"><span>Exposure at 5%</span><b id="b5">Rs 5.25 cr</b></div><div class="track"><span class="fill" style="width: 5%"></span></div></li>
+      <li><div class="ot"><span>Exposure at 7.5%</span><b id="b75">Rs 7.88 cr</b></div><div class="track"><span class="fill" style="width: 7.5%"></span></div></li>
+      <li class="full"><div class="ot"><span>Exposure at the full loss</span><b id="b100">Rs 105 cr</b></div><div class="track"><span class="fill" style="width: 100%"></span></div></li>
+    </ul>
+    <p class="cnote">Mule accounts, times the average amount landed, times the rate, is the exposure. Our read: no bank is billed on every account. For the CFO the point is the range, a few crore a year at the Ombudsman's rates, and the full amount wherever the court's standard applies.</p>
+  </div>
+  <h3 style="margin-top: 32px">What the board now asks</h3>
+  <p>Since July the SCBMF, the board's fraud committee, oversees how well fraud risk management works, and RBI wants early warning on mule accounts in near real time. The readout gives the fraud head the number that meeting wants: mule accounts found before the first complaint.</p>
+  <h3 style="margin-top: 28px">Where the money comes from</h3>
+  <p>The pilot fee fits inside the fraud head's own budget. The annual contract needs a line in FY28, and banks write those lines between January and March. The CFO sets that envelope and never sees the pilot.</p>
+  <p class="draft"><b>First draft.</b><span>We will build on this together, with the before-and-after numbers from your bank customers in Australia.</span></p>
+</div></section>
+
+<section class="ds" id="infosec" aria-labelledby="s-h"><div class="in">
+  <h2 id="s-h">The security pack</h2>
+  <p>What the CISO will ask, the RBI rule behind it, and what Apate brings. Paragraph numbers are from RBI's 2025 outsourcing directions for commercial banks: 53(2), 56, 66, 67, 69, 76, 89 and 92.</p>
+  <div class="tbl"><table class="stack">
+    <thead><tr><th>The CISO asks</th><th>Rule</th><th>Apate brings</th></tr></thead>
+    <tbody>
+      <tr><td data-l="The CISO asks">Who is this vendor?</td><td data-l="Rule">Outsourcing, Paras 66 and 67</td><td data-l="Apate brings">Apate's current certifications, and a recent penetration test</td></tr>
+      <tr><td data-l="The CISO asks">How does the file get in?</td><td data-l="Rule">The bank's own IT and cyber security policy</td><td data-l="Apate brings">A bank-hosted secure file transfer, or a single sign-on portal open only to the bank's IP addresses</td></tr>
+      <tr><td data-l="The CISO asks">Is it material?</td><td data-l="Rule">Para 53(2)</td><td data-l="Apate brings">No bank customer data in either direction. Our read: not material.</td></tr>
+      <tr><td data-l="The CISO asks">Where does data sit?</td><td data-l="Rule">Para 69(vi), and RBI's 2018 payment-data rule</td><td data-l="Apate brings">An India-region tenancy</td></tr>
+      <tr><td data-l="The CISO asks">Logs and incidents?</td><td data-l="Rule">Para 56: cyber incidents to RBI in 6 hours. CERT-In: logs 180 days in India, incidents in 6 hours.</td><td data-l="Apate brings">Logs kept in India, and an incident runbook built to 6 hours</td></tr>
+      <tr><td data-l="The CISO asks">Can we and RBI audit you?</td><td data-l="Rule">Paras 69(xii), 76 and 89(iv)</td><td data-l="Apate brings">Audit and inspection rights in the contract, foreign vendor included</td></tr>
+      <tr><td data-l="The CISO asks">Which law governs?</td><td data-l="Rule">Para 89(ii)</td><td data-l="Apate brings">Stated in the MSA</td></tr>
+      <tr><td data-l="The CISO asks">What if we leave?</td><td data-l="Rule">Para 92</td><td data-l="Apate brings">An exit plan with secure purge</td></tr>
+      <tr><td data-l="The CISO asks">Personal data?</td><td data-l="Rule">DPDP Act: Section 17(1)(c) exempts processing to prevent and detect offences; the Section 8(5) security duty still applies; full duties from May 2027</td><td data-l="Apate brings">A one-page DPDP note</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="ds" id="objections" aria-labelledby="o-h"><div class="in">
+  <h2 id="o-h">What they will say, and the answer</h2>
+  <p class="draft"><b>First draft.</b><span>We will build on this together, starting from the objections your team already logs in Australia and the US.</span></p>
+  <ul class="obj">
+    <li><details><summary>"We already have MuleHunter.AI."<span class="plus" aria-hidden="true"></span></summary><p>MuleHunter learns from how money moves through accounts. Apate names accounts from the scammer's side, often before money lands. The first number counts only accounts MuleHunter had not flagged, which measures the overlap.</p></details></li>
+    <li><details><summary>"We built our own engine."<span class="plus" aria-hidden="true"></span></summary><p>Your engine sees your transactions. Apate sees the scammer. The list is one more input to the engine you built.</p></details></li>
+    <li><details><summary>"I4C already sends us the Suspect Registry."<span class="plus" aria-hidden="true"></span></summary><p>Registry entries come from complaints and from banks' own flags, after money moved. Apate's accounts come before the first complaint, and the second number measures that lead time.</p></details></li>
+    <li><details><summary>"Where do the scam conversations come from?"<span class="plus" aria-hidden="true"></span></summary><p>From you, on day one: the scammer numbers, WhatsApp IDs and UPI handles your customers already report. Apate's agents contact each one as a new victim. Apate's seeded numbers add volume, and the telco route through Mobileum comes later.</p></details></li>
+    <li><details><summary>"Only a few hits will be at our bank."<span class="plus" aria-hidden="true"></span></summary><p>About 1 in 75 captured accounts sits at any one large bank, so the bars are rates, not counts. The accounts at other banks still count: your team reports them through the national portal, and that is the fourth number.</p></details></li>
+    <li><details><summary>"Does any data leave India?"<span class="plus" aria-hidden="true"></span></summary><p>No customer data moves in either direction. The bank sends only scammer details, and Apate's data sits in an Indian cloud region, with logs kept in India.</p></details></li>
+    <li><details><summary>"Is talking to scammers legal here?"<span class="plus" aria-hidden="true"></span></summary><p>The agents talk to scammers on Apate's own numbers, including the scammer details the bank passes on. No customer call is diverted or recorded in the bank pilot. Telco diversion waits for a written legal opinion.</p></details></li>
+    <li><details><summary>"Is this material outsourcing?"<span class="plus" aria-hidden="true"></span></summary><p>Our read: no customer data in either direction keeps it outside "material" under Para 53(2). Your compliance team confirms it in the scoping week.</p></details></li>
+    <li><details><summary>"Why should we pay for a pilot?"<span class="plus" aria-hidden="true"></span></summary><p>A fee puts a named owner and written bars on it. It is credited to year one when you sign.</p></details></li>
+    <li><details><summary>"Our customers are hit in Tamil, Bengali, Marathi."<span class="plus" aria-hidden="true"></span></summary><p>Hindi and English first, then your main languages in the order of your complaint volume.</p></details></li>
+    <li><details><summary>"What happens after eight weeks?"<span class="plus" aria-hidden="true"></span></summary><p>A readout against the bars you signed, and the order form the same day. The contract papers are agreed while the lists run.</p></details></li>
+  </ul>
+</div></section>
+
+<section class="ds" id="contract" aria-labelledby="r-h"><div class="in">
+  <h2 id="r-h">From readout to contract</h2>
+  <ol class="steps3">
+    <li>Papers agreed, Jan and Feb</li><li class="ar" aria-hidden="true">&rarr;</li>
+    <li>Readout and order form, 5 Mar</li><li class="ar" aria-hidden="true">&rarr;</li>
+    <li class="go">Signed by 19 Mar</li>
+  </ol>
+  <p>The first bank signs twelve days before the 31 March year-end, and the contract runs from 1 April on the FY28 budget line.</p>
+  <a class="next" href="plan-90.html"><small>Next</small><b>The first 90 days, week by week <span aria-hidden="true">&rarr;</span></b></a>
+</div></section>
+</main>
+<section class="close small" aria-label="Contact"><div class="in">
+  <p class="line">I sell to banks and build teams that sell.</p>
+  <div class="contact">
+    <span class="who-am-i">Ketan Sharma</span>
+    <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
+    <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
+  </div>
+</div></section>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.cp');
+  Array.prototype.forEach.call(buttons, function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      function done(label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+      function fallback() {
+        try {
+          var el = document.getElementById(b.getAttribute('data-target'));
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          done('Selected');
+        } catch (e) { done('Copy'); }
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  function fmt(lakh) {
+    if (!isFinite(lakh) || lakh < 0) return 'Rs 0';
+    if (lakh >= 100) return 'Rs ' + (lakh / 100).toLocaleString('en-IN', { maximumFractionDigits: 2 }) + ' cr';
+    if (lakh >= 1) return 'Rs ' + lakh.toLocaleString('en-IN', { maximumFractionDigits: 2 }) + ' lakh';
+    return 'Rs ' + Math.round(lakh * 100000).toLocaleString('en-IN');
+  }
+  function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+  function set(id, t) { document.getElementById(id).textContent = t; }
+  // One case
+  var amt = document.getElementById('amt');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#calc .chip'));
+  function runCase() {
+    var v = num('amt');
+    set('o5', fmt(v * 0.05)); set('o75', fmt(v * 0.075)); set('o100', fmt(v));
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', parseFloat(c.getAttribute('data-v')) === v ? 'true' : 'false'); });
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { amt.value = c.getAttribute('data-v'); runCase(); }); });
+  amt.addEventListener('input', runCase);
+  runCase();
+  // A year at one bank
+  function runBank() {
+    var landed = num('bn') * num('ba');
+    set('b0', fmt(landed)); set('b5', fmt(landed * 0.05)); set('b75', fmt(landed * 0.075)); set('b100', fmt(landed));
+  }
+  ['bn', 'ba'].forEach(function (id) { document.getElementById(id).addEventListener('input', runBank); });
+  runBank();
+  // Hit sizing: eight weeks of lists, every day
+  function runSize() {
+    var perDay = num('zd'), share = num('zs') / 100, days = 56;
+    var total = perDay * days, here = Math.round(total * share);
+    set('zdv', perDay); set('zsv', (Math.round(share * 1000) / 10).toFixed(1) + '%');
+    set('za', Math.round(total).toLocaleString('en-IN'));
+    set('zb', here.toLocaleString('en-IN'));
+    set('zc', Math.round(total - here).toLocaleString('en-IN'));
+    if (share > 0) {
+      var need = Math.round(30 / share / 10) * 10;
+      set('zn', 'Thirty hits at the pilot bank need about ' + need.toLocaleString('en-IN') + ' accounts, about ' + Math.round(30 / share / days) + ' a day.');
+    }
+  }
+  ['zd', 'zs'].forEach(function (id) { document.getElementById(id).addEventListener('input', runSize); });
+  runSize();
+})();
+</script>
+</body>
+</html>

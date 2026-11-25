@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>India Buyer Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Who buys, who signs and who can stop it at twelve Indian banks, with the first move at each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a keynote on a phone. The front is one idea per screen, each ending in an Open. Detail pages are one readable column; tables stack on phones, drawings sit in their own boxes. */
+:root {
+  --bg: #FAFAFC;
+  --band: #EFF1F5;
+  --card: #FFFFFF;
+  --ink: #0D0F14;
+  --muted: #5C6371;
+  --line: #DCE0E7;
+  --apate: #2B53EE;
+  --on-apate: #FFFFFF;
+  --soft: #E4EAFE;
+  --loss: #D2412A;
+  --close-bg: #0D0F14;
+  --close-fg: #F3F4F7;
+  --close-muted: #A3A9B5;
+  --shadow: rgba(13, 15, 20, 0.08);
+  --font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C10;
+    --band: #15171D;
+    --card: #111319;
+    --ink: #F2F3F6;
+    --muted: #9BA1AE;
+    --line: #2A2E38;
+    --apate: #7E98FF;
+    --on-apate: #0B0C10;
+    --soft: #1B2342;
+    --loss: #FF6E52;
+    --close-bg: #15171D;
+    --close-fg: #F2F3F6;
+    --close-muted: #9BA1AE;
+    --shadow: rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0C10;
+  --band: #15171D;
+  --card: #111319;
+  --ink: #F2F3F6;
+  --muted: #9BA1AE;
+  --line: #2A2E38;
+  --apate: #7E98FF;
+  --on-apate: #0B0C10;
+  --soft: #1B2342;
+  --loss: #FF6E52;
+  --close-bg: #15171D;
+  --close-fg: #F2F3F6;
+  --close-muted: #9BA1AE;
+  --shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+main { overflow-x: clip; }
+a { color: var(--apate); text-underline-offset: 3px; }
+b, strong { font-weight: 600; }
+p { margin: 0; }
+
+.in {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+
+/* The Open control: the one obvious way into the depth */
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--apate);
+  color: var(--on-apate);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  max-width: 100%;
+}
+.open .arr { flex: none; transition: transform 0.2s ease; }
+.open:hover .arr { transform: translateX(4px); }
+
+/* Expanders */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.plus {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: translate(-50%, -50%);
+}
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+details[open] > summary .plus { transform: rotate(45deg); border-color: var(--apate); }
+summary:hover .plus { border-color: var(--apate); }
+
+.bill { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--loss); vertical-align: 0.12em; flex: none; }
+
+/* Detail pages */
+body.detail::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.top .in { display: flex; align-items: center; gap: 14px; padding-block: 6px; }
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back:hover { color: var(--apate); }
+.pnav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 24px 0 0; }
+.pnav a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.pnav a:hover { color: var(--ink); }
+.pnav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+.dh { padding-block: 44px 36px; }
+.dh h1 {
+  font-weight: 700;
+  font-size: clamp(32px, 6.6vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+.lede { margin-top: 16px; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.ds { padding-block: 40px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.ds h2 {
+  font-weight: 700;
+  font-size: clamp(25px, 4.6vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+.ds h3 { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.005em; }
+.ds p { margin-top: 14px; max-width: 62ch; }
+.ds .muted, .muted { color: var(--muted); }
+.ds ul.plain { margin: 16px 0 0; padding-left: 1.1em; max-width: 62ch; display: grid; gap: 8px; }
+.read { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); }
+.so { display: block; margin-top: 8px; font-weight: 600; color: var(--apate); max-width: 56ch; }
+
+/* Worked example and draft notes */
+.callout { margin-top: 24px; padding: 20px; border-radius: 18px; background: var(--band); max-width: 680px; }
+.callout .k { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.callout p { margin-top: 8px; }
+.callout p:first-of-type { margin-top: 0; }
+.draft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1.5px dashed var(--apate);
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 640px;
+}
+.draft b { color: var(--apate); white-space: nowrap; }
+
+/* Tables: real tables on wide screens, labelled stacks on phones */
+.tbl { margin-top: 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+td:first-child { font-weight: 600; }
+td .muted { display: block; font-weight: 400; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 620px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  table.stack td { border: 0; padding: 3px 0; }
+  table.stack td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  table.stack td:first-child { font-size: 17px; }
+  .num { white-space: normal; }
+}
+
+/* Arrival from a link on the front page */
+.hit { scroll-margin-top: 72px; }
+.hit:target { animation: hitflash 2.4s ease-out 1; }
+@keyframes hitflash { 0% { background: var(--soft); } 100% { background: transparent; } }
+
+/* Inline drawings: every label is at least 13 viewBox units, so 12px or more on a 375px phone */
+.fig { margin-top: 26px; max-width: 520px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg text { font-family: var(--font-text); }
+.f-apate { fill: var(--apate); } .f-soft { fill: var(--soft); } .f-band { fill: var(--band); } .f-line { fill: var(--line); }
+.f-muted { fill: var(--muted); } .f-bg { fill: var(--bg); } .f-loss { fill: var(--loss); } .f-card { fill: var(--card); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-apate { fill: var(--apate); } .t-on { fill: var(--on-apate); } .t-loss { fill: var(--loss); }
+.s-line { stroke: var(--line); fill: none; } .s-muted { stroke: var(--muted); fill: none; } .s-apate { stroke: var(--apate); fill: none; } .s-loss { stroke: var(--loss); fill: none; }
+.k-line { stroke: var(--line); stroke-width: 1.5; } .k-apate { stroke: var(--apate); stroke-width: 1.5; } .k-muted { stroke: var(--muted); stroke-width: 1.5; }
+.figcap { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 56ch; }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; max-width: 60ch; }
+.legend li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.a { background: var(--apate); } .dot.m { border: 2px solid var(--muted); } .dot.l { background: var(--loss); }
+
+/* Owner and status tags */
+.tg {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tg.a { border-color: var(--apate); color: var(--apate); }
+.tg.l { border-color: var(--loss); color: var(--loss); }
+.tg.f { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+
+/* Next page card */
+.next {
+  display: block;
+  margin-block: 8px 56px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: var(--band);
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 680px;
+}
+.next small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.next b { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; font-family: var(--font-display); font-size: clamp(22px, 4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.next:hover b { color: var(--apate); }
+
+/* Contact band, shared by every page */
+.close { background: var(--close-bg); color: var(--close-fg); padding-block: clamp(56px, 12vw, 112px); }
+.close .line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+.close.small .line { font-size: clamp(24px, 5vw, 36px); max-width: 22ch; }
+.contact { margin-top: 36px; display: grid; gap: 14px; font-size: 18px; }
+.contact .who-am-i { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+.contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
+.contact a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; user-select: all; }
+.cp {
+  font: 600 14px/1 var(--font-text);
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--close-muted);
+  background: transparent;
+  color: var(--close-fg);
+  cursor: pointer;
+}
+.cp:hover { border-color: var(--close-fg); }
+
+:focus-visible { outline: 2px solid var(--apate); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+.k-loss { stroke: var(--loss); stroke-width: 1.5; }
+.roles-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; max-width: 700px; }
+.roles-grid div { padding: 16px 18px; border-radius: 16px; background: var(--band); min-width: 0; }
+.roles-grid .rk { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.roles-grid b { display: block; margin-top: 4px; font-family: var(--font-display); font-size: 19px; }
+.roles-grid p { margin-top: 4px; font-size: 15px; color: var(--muted); }
+@media (max-width: 560px) { .roles-grid { grid-template-columns: minmax(0, 1fr); } }
+.tiers { list-style: none; margin: 22px 0 0; padding: 0; max-width: 700px; }
+.tiers li { display: grid; grid-template-columns: 72px 1fr; gap: 4px 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.tiers li:last-child { border-bottom: 1px solid var(--line); }
+.tiers .tg { grid-row: span 2; align-self: start; justify-self: start; margin-top: 3px; }
+.tiers b { font-family: var(--font-display); font-size: 19px; min-width: 0; }
+.tiers span.why { font-size: 15px; color: var(--muted); min-width: 0; }
+.tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
+.chip { font: 600 14px/1 var(--font-text); min-height: 40px; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.count { margin-top: 12px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; max-width: 760px; }
+.linkbtn { font: 600 14px/1 var(--font-text); min-height: 44px; min-width: 88px; background: none; border: 0; padding: 12px 0 12px 16px; text-align: right; color: var(--apate); cursor: pointer; }
+.accts { list-style: none; margin: 8px 0 0; padding: 0; max-width: 760px; }
+.accts > li { border-top: 1px solid var(--line); scroll-margin-top: 72px; }
+.accts > li:target { animation: hitflash 2.4s ease-out 1; }
+.accts > li:last-child { border-bottom: 1px solid var(--line); }
+.accts summary { display: grid; grid-template-columns: 30px 1fr 26px; column-gap: 12px; padding: 16px 0; align-items: start; }
+.accts .an { padding-top: 4px; font-size: 14px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.accts .am { min-width: 0; display: grid; gap: 4px; }
+.accts .anm { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: clamp(20px, 3.4vw, 24px); font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+.accts .aw { font-size: 16px; line-height: 1.45; color: var(--muted); }
+.accts .atg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.accts .warm .anm, .accts .warm .an { color: var(--apate); }
+.roles { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; margin: 0 0 20px 42px; font-size: 16px; line-height: 1.45; }
+.roles dt { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.roles dd { margin: 0; min-width: 0; }
+.roles dd.fm { font-weight: 600; color: var(--apate); }
+@media (max-width: 520px) {
+  .roles { grid-template-columns: minmax(0, 1fr); margin-left: 0; gap: 2px; }
+  .roles dd { margin-bottom: 10px; }
+}
+.doors { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 760px; }
+.doors li { padding: 16px 18px; border-radius: 16px; background: var(--band); min-width: 0; }
+.doors b { display: block; font-family: var(--font-display); font-size: 18px; }
+.doors p { margin-top: 6px; font-size: 15px; }
+@media (max-width: 560px) { .doors { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body class="detail">
+<header class="top"><div class="in">
+  <a class="back" href="../apate-india.html">&larr; Apate in India</a>
+  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html">Where Apate acts</a></li><li><a href="accounts.html" aria-current="page">Buyer map</a></li><li><a href="pilot.html">Pilot</a></li><li><a href="plan-90.html">90 days</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
+</div></header>
+<main>
+<header class="dh"><div class="in">
+  <p class="eyebrow">Buyer map</p>
+  <h1>Who buys, who signs, bank by bank.</h1>
+  <p class="lede">RBI's fraud rules never name the CRO. They make an official of General Manager rank or above own fraud monitoring, and every bank puts that person somewhere different.</p>
+</div></header>
+
+<section class="ds" id="signs" aria-labelledby="sg-h"><div class="in">
+  <h2 id="sg-h">How a pilot gets signed</h2>
+  <figure class="fig" style="margin-inline: 0; max-width: 440px">
+    <svg viewBox="0 0 360 386" role="img" aria-label="The fraud head champions it and buys. The CISO runs the security and vendor-risk review. If the spend is above the fraud head's limit, the CRO signs; if not, the fraud head signs. Then the purchase order.">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-muted"/></marker></defs>
+      <rect x="40" y="4" width="280" height="54" rx="12" class="f-apate"/>
+      <text x="180" y="27" font-size="15" font-weight="700" text-anchor="middle" class="t-on">Fraud head</text>
+      <text x="180" y="46" font-size="13" text-anchor="middle" class="t-on">Champions it and buys</text>
+      <line x1="180" y1="58" x2="180" y2="82" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="40" y="86" width="280" height="54" rx="12" class="f-card k-loss"/>
+      <text x="180" y="109" font-size="15" font-weight="700" text-anchor="middle" class="t-loss">CISO</text>
+      <text x="180" y="128" font-size="13" text-anchor="middle" class="t-muted">Security and vendor-risk review</text>
+      <line x1="180" y1="140" x2="180" y2="164" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="50" y="168" width="260" height="44" rx="22" class="f-bg k-muted" stroke-dasharray="4 3"/>
+      <text x="180" y="195" font-size="13" font-weight="600" text-anchor="middle" class="t-ink">Above the fraud head's limit?</text>
+      <line x1="130" y1="212" x2="97" y2="249" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="230" y1="212" x2="263" y2="249" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <text x="102" y="234" font-size="13" font-weight="600" text-anchor="end" class="t-muted">No</text>
+      <text x="258" y="234" font-size="13" font-weight="600" class="t-muted">Yes</text>
+      <rect x="10" y="254" width="165" height="50" rx="12" class="f-soft"/>
+      <text x="92.5" y="284" font-size="13" font-weight="700" text-anchor="middle" class="t-ink">Fraud head signs</text>
+      <rect x="185" y="254" width="165" height="50" rx="12" class="f-soft"/>
+      <text x="267.5" y="284" font-size="13" font-weight="700" text-anchor="middle" class="t-ink">CRO signs</text>
+      <line x1="92" y1="304" x2="157" y2="335" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="268" y1="304" x2="203" y2="335" class="s-muted" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="105" y="338" width="150" height="42" rx="21" class="f-bg k-apate"/>
+      <text x="180" y="364" font-size="13" font-weight="600" text-anchor="middle" class="t-apate">Purchase order</text>
+    </svg>
+  </figure>
+  <div class="roles-grid">
+    <div><span class="rk">Buys</span><b>Fraud head</b><p>Titles vary: Head of Fraud Risk Management, Group Head Fraud Control, Group Head Financial Crime, Chief of Vigilance.</p></div>
+    <div><span class="rk">Opens the door, signs above the limit</span><b>CRO</b><p>The CRO meeting opens the door; the fraud head buys. The CRO signs when the spend is above the fraud head's delegated limit, or it opens a new risk category.</p></div>
+    <div><span class="rk">Backs it</span><b>Chief Compliance Officer, or the AML officer</b><p>Owns the new KYC rule on mule accounts, the debit holds, and the reports to India's Financial Intelligence Unit. A list that names mule accounts early helps all three.</p></div>
+    <div><span class="rk">Can stop it</span><b>CISO, and the data protection officer</b><p>First question: how does the file get into the bank? A bank-hosted secure file transfer, or a single sign-on portal open only to the bank's IP addresses. The CTO or CDO joins only if Apate feeds a live fraud engine.</p></div>
+    <div><span class="rk">Uses it</span><b>The fraud control unit</b><p>Analysts check each listed account against the bank's books every morning, and hold or watch it.</p></div>
+    <div><span class="rk">Sees results</span><b>SCBMF and the CFO</b><p>The board's fraud committee sees outcomes, never purchase orders. The CFO sets the yearly envelope in January to March.</p></div>
+  </div>
+
+  <div class="callout"><span class="k">Our read</span>
+    <p>A feed of scammer data that carries no bank customer data in either direction is probably not "material outsourcing" under Para 53(2) of RBI's 2025 outsourcing rules. That keeps the pilot inside the fraud head's own authority, and it is the fastest path to a signature.</p>
+  </div>
+</div></section>
+
+<section class="ds" id="sits" aria-labelledby="st-h"><div class="in">
+  <h2 id="st-h">Where fraud sits, at the banks that say so</h2>
+  <div class="tbl"><table class="stack">
+    <thead><tr><th>Bank</th><th>Fraud sits in</th><th>So the first call goes to</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Bank">HDFC</td><td data-l="Fraud sits in">Retail Portfolio Management and Fraud Control</td><td data-l="So the first call goes to">Prashant Mehra, Group Head</td></tr>
+      <tr><td data-l="Bank">ICICI</td><td data-l="Fraud sits in">A Financial Crime Prevention Group, independent of the business groups</td><td data-l="So the first call goes to">The group's digital-fraud lead</td></tr>
+      <tr><td data-l="Bank">Axis</td><td data-l="Fraud sits in">Financial Crime Intelligence</td><td data-l="So the first call goes to">Gaurav Gupta, Group Head</td></tr>
+      <tr><td data-l="Bank">Federal</td><td data-l="Fraud sits in">Internal Vigilance, with Fraud Risk Management</td><td data-l="So the first call goes to">Bincy Cherian, SVP</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="ds" id="icp" aria-labelledby="i-h"><div class="in">
+  <h2 id="i-h">Who buys first</h2>
+  <ul class="tiers">
+    <li><span class="tg f">First</span><b>Private banks</b><span class="why">Quick to buy, and five were billed in February.</span></li>
+    <li><span class="tg a">Next</span><b>Small finance and payments banks</b><span class="why">Under the same January rules.</span></li>
+    <li><span class="tg">Later</span><b>Telcos</b><span class="why">They need a far bigger pipeline per close.</span></li>
+    <li><span class="tg">Later</span><b>NBFCs and UPI apps</b><span class="why">Outside the January rules.</span></li>
+    <li><span class="tg l">Skip</span><b>State banks: SBI, PNB, Bank of Baroda</b><span class="why">Too slow to buy.</span></li>
+  </ul>
+</div></section>
+
+<section class="ds" id="twelve" aria-labelledby="t-h"><div class="in">
+  <h2 id="t-h">Twelve accounts, in this order</h2>
+  <p>Tap a bank for who opens the door, who buys, who can stop it, and the first move. Names come from each bank's own pages and filings. Where a name is not public, the seat is listed.</p>
+  <div class="tools" role="group" aria-label="Filter accounts">
+    <button class="chip" type="button" data-f="all" aria-pressed="true" id="f-all">All</button>
+    <button class="chip" type="button" data-f="billed" aria-pressed="false" id="f-billed">Billed in February</button>
+    <button class="chip" type="button" data-f="newcro" aria-pressed="false" id="f-newcro">New CRO in 2026</button>
+    <button class="chip" type="button" data-f="named" aria-pressed="false" id="f-named">Fraud head named</button>
+    <button class="chip" type="button" data-f="built" aria-pressed="false" id="f-built">Builds in-house</button>
+  </div>
+  <div class="count"><span id="shown" aria-live="polite">Showing 12 of 12</span><button class="linkbtn" type="button" id="openall">Open all</button></div>
+  <ol class="accts" id="accts">
+    <li id="warm" data-tags="" class="warm"><details><summary><span class="an">01</span><span class="am"><span class="anm">Your warmest Indian bank</span><span class="aw">Already trialling Apate. The fastest reference India will get.</span><span class="atg"><span class="tg f">Trialling now</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>The fraud head, with your first contact as champion.</dd><dt>Signs</dt><dd>The fraud head, or the CRO above the limit.</dd><dt>Uses it</dt><dd>The fraud control unit.</dd><dt>Can stop it</dt><dd>The CISO, if the trial has not been through security review.</dd><dt>First move</dt><dd class="fm">Turn the trial into a paid pilot with written success criteria and a named signer. Start the security review the same week.</dd></dl></details></li>
+    <li id="yes" data-tags="billed newcro"><details><summary><span class="an">02</span><span class="am"><span class="anm">Yes Bank <span class="bill" role="img" aria-label="billed in February"></span></span><span class="aw">Top rate in the February order, 7.5%, for lapses on dormant and mule accounts.</span><span class="atg"><span class="tg l">Billed Feb</span><span class="tg a">New CRO</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>CRO S. Anantharaman, since 1 Apr 2026. His background includes fraud risk.</dd><dt>Buys</dt><dd>Head of Fraud Risk Management (not public).</dd><dt>Uses it</dt><dd>Fraud Risk Management.</dd><dt>Can stop it</dt><dd>Procurement aligned with SMBC, the largest shareholder since September 2025, with two board seats.</dd><dt>First move</dt><dd class="fm">A CRO meeting with Dali or Sam. Open with the 7.5%.</dd></dl></details></li>
+    <li id="indusind" data-tags="billed newcro"><details><summary><span class="an">03</span><span class="am"><span class="anm">IndusInd Bank <span class="bill" role="img" aria-label="billed in February"></span></span><span class="aw">In the February order, with a CRO in his first year and a CEO-led risk revamp.</span><span class="atg"><span class="tg l">Billed Feb</span><span class="tg a">New CRO</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>CRO Saurav Saha, since 24 Feb 2026. Before that, Head of Financial Risk Management at HDFC Bank.</dd><dt>Buys</dt><dd>Head of Fraud Risk Management (not public).</dd><dt>Uses it</dt><dd>FRM operations.</dd><dt>Can stop it</dt><dd>Cost scrutiny during CEO Rajiv Anand's revamp.</dd><dt>First move</dt><dd class="fm">A CRO meeting with Dali or Sam, then a pilot with no integration and a number inside one quarter.</dd></dl></details></li>
+    <li id="axis" data-tags="billed newcro named"><details><summary><span class="an">04</span><span class="am"><span class="anm">Axis Bank <span class="bill" role="img" aria-label="billed in February"></span></span><span class="aw">In the February order. In July one Axis account took Rs 20.97 lakh from five fraud cases.</span><span class="atg"><span class="tg l">Billed Feb</span><span class="tg a">New CRO</span><span class="tg">Fraud head named</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>Gaurav Gupta, Group Head, Financial Crime Intelligence. In June Axis described network-level intelligence against fraud rings; Gupta spoke of network analytics and real-time risk signals.</dd><dt>Signs</dt><dd>With CRO Anand Viswanathan, in post since 1 Jan 2026.</dd><dt>Co-sponsor</dt><dd>Sameer Shetty, Group Head, Digital Business.</dd><dt>Uses it</dt><dd>Fraud control analysts.</dd><dt>Can stop it</dt><dd>The existing vendor stack; procurement.</dd><dt>First move</dt><dd class="fm">Gupta first. Axis says retail digital fraud fell 40% in FY26, so lead with what it still misses: the account named before any money moves.</dd></dl></details></li>
+    <li id="icici" data-tags="billed built"><details><summary><span class="an">05</span><span class="am"><span class="anm">ICICI Bank <span class="bill" role="img" aria-label="billed in February"></span></span><span class="aw">In the February order. Fraud runs in its own group, apart from the business.</span><span class="atg"><span class="tg l">Billed Feb</span><span class="tg">Builds in-house</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>Head of the Financial Crime Prevention Group (not public).</dd><dt>Signs</dt><dd>With Group CRO G. Srinivas, extended to 31 Jul 2028.</dd><dt>Champion</dt><dd>The group's digital-fraud lead.</dd><dt>Uses it</dt><dd>FCPG investigations.</dd><dt>Can stop it</dt><dd>A build-it-ourselves culture; InfoSec.</dd><dt>First move</dt><dd class="fm">Find the digital-fraud lead. Offer the list as an input to what they run.</dd></dl></details></li>
+    <li id="city-union" data-tags="billed"><details><summary><span class="an">06</span><span class="am"><span class="anm">City Union Bank <span class="bill" role="img" aria-label="billed in February"></span></span><span class="aw">In the February order, and it has bought a new fraud tool before.</span><span class="atg"><span class="tg l">Billed Feb</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>The CRO (name to confirm in December).</dd><dt>Buys</dt><dd>The fraud risk head, with the team that ran napID's pilot in RBI's fraud sandbox, a product RBI found viable in June 2024.</dd><dt>Uses it</dt><dd>Fraud Risk Management.</dd><dt>Can stop it</dt><dd>A small IT team, which a no-integration pilot avoids.</dd><dt>First move</dt><dd class="fm">The sandbox team, then the CRO. Mid-sized, and it decides faster.</dd></dl></details></li>
+    <li id="hdfc" data-tags="named built"><details><summary><span class="an">07</span><span class="am"><span class="anm">HDFC Bank</span><span class="aw">Built its own real-time mule engine. Apate feeds it what it cannot see.</span><span class="atg"><span class="tg">Fraud head named</span><span class="tg">Builds in-house</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>Prashant Mehra, Group Head, Retail Portfolio Management and Fraud Control.</dd><dt>Signs</dt><dd>With CRO Sanmoy Chakrabarti.</dd><dt>Champion</dt><dd>The mule-analytics lead under Mehra (not public).</dd><dt>Uses it</dt><dd>The fraud control unit. The engine runs on UPI and cards, confirmed in July 2026, and HDFC was an early user of DoT's fraud risk indicator.</dd><dt>Can stop it</dt><dd>Build-not-buy; the CISO.</dd><dt>First move</dt><dd class="fm">HDFC sees its own transactions. Apate sees the scammer. Offer the list as one more input to the engine they built.</dd></dl></details></li>
+    <li id="kotak" data-tags=""><details><summary><span class="an">08</span><span class="am"><span class="anm">Kotak Mahindra Bank</span><span class="aw">About 6,000 mule accounts in I4C's 2024 count, and a new CEO on 1 January.</span><span class="atg"><span class="tg">CEO change Jan 2027</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>Group CRO Srishti Sethi, since 12 Jun 2025.</dd><dt>Buys</dt><dd>Head of the Fraud Risk Management Unit (not public).</dd><dt>Uses it</dt><dd>The Fraud Risk Management Unit. Police in Durg arrested 15 Kotak account holders for renting out their accounts in June 2026.</dd><dt>Ally or gate</dt><dd>CTO Nilesh Chaudhari, since February 2026, and a new Head of Innovation and AI.</dd><dt>Can stop it</dt><dd>The change to MD and CEO Anup Kumar Saha on 1 Jan 2027.</dd><dt>First move</dt><dd class="fm">Meet the CRO in December, with Dali or Sam, before the new CEO's first budget.</dd></dl></details></li>
+    <li id="federal" data-tags="named"><details><summary><span class="an">09</span><span class="am"><span class="anm">Federal Bank</span><span class="aw">One of the few banks that names its fraud head. Fraud sits with vigilance.</span><span class="atg"><span class="tg">Fraud head named</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>Bincy Cherian, SVP, Chief of Internal Vigilance and Head, Fraud Risk Management.</dd><dt>Signs</dt><dd>With CRO Damodaran C.</dd><dt>Champion</dt><dd>Cherian's FRM team, and Chief Digital Officer Indraneel Pandit.</dd><dt>Uses it</dt><dd>FRM and vigilance.</dd><dt>Can stop it</dt><dd>Chief Data Protection Officer Biju K, on DPDP; CTO Johnson K Jose's InfoSec team.</dd><dt>First move</dt><dd class="fm">Cherian directly, with the DPDP note in the first meeting.</dd></dl></details></li>
+    <li id="rbl" data-tags=""><details><summary><span class="an">10</span><span class="am"><span class="anm">RBL Bank</span><span class="aw">Emirates NBD took 60% in June, and brings its own group standards.</span><span class="atg"><span class="tg a">New owner</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>CRO Ashwini Kumar Choudhary, previously Group CRO at Union Bank.</dd><dt>Buys</dt><dd>Head of Fraud Risk Management (not public).</dd><dt>Uses it</dt><dd>FRM.</dd><dt>Can stop it</dt><dd>Emirates NBD group vendor standards, which could also speed it up.</dd><dt>First move</dt><dd class="fm">The CRO, with Dali or Sam, while the new owner sets the vendor stack.</dd></dl></details></li>
+    <li id="idfc-first" data-tags=""><details><summary><span class="an">11</span><span class="am"><span class="anm">IDFC First Bank</span><span class="aw">A Rs 590 cr insider fraud in February, handled in public by the CEO. A new CISO since October.</span><span class="atg"><span class="tg">New CISO</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Opens the door</dt><dd>The CRO, with CEO V. Vaidyanathan hands-on.</dd><dt>Buys</dt><dd>Head of the fraud control unit (not public).</dd><dt>Uses it</dt><dd>The fraud control unit.</dd><dt>Can stop it</dt><dd>CISO Hardik Thaker, in post since 30 Oct 2026; budget pulled toward insider and branch controls.</dd><dt>First move</dt><dd class="fm">The lightest security review on the list: no customer data in either direction, one file a day.</dd></dl></details></li>
+    <li id="airtel" data-tags=""><details><summary><span class="an">12</span><span class="am"><span class="anm">Airtel Payments Bank</span><span class="aw">A payments bank inside a telco group, and the way into Airtel.</span><span class="atg"><span class="tg a">Payments bank</span></span></span><span class="plus" aria-hidden="true"></span></summary>
+      <dl class="roles"><dt>Buys</dt><dd>The fraud head (not public).</dd><dt>Uses it</dt><dd>Fraud control. About 5,000 mule accounts in I4C's 2024 count, and covered by the January rules.</dd><dt>Can stop it</dt><dd>Group procurement.</dd><dt>First move</dt><dd class="fm">The bank directly, and Airtel through Mobileum's India office.</dd></dl></details></li>
+  </ol>
+</div></section>
+
+<section class="ds" id="doors" aria-labelledby="d-h"><div class="in">
+  <h2 id="d-h">Doors that open many banks at once</h2>
+  <p>Slow, little cash, a lot of trust. Each one starts in month two, once the first pilot is live.</p>
+  <ul class="doors">
+    <li><b>Clari5, part of Perfios</b><p>Runs fraud monitoring at many of India's largest banks, and already pulls in I4C's Suspect Registry. One integration, many banks.</p></li>
+    <li><b>RBI Innovation Hub</b><p>CEO Sahil Kinni. MuleHunter.AI in 29 banks, a 7-bank DPIP pilot, and I4C's Suspect Registry fed in since May 2026.</p></li>
+    <li><b>IDPIC</b><p>The payments intelligence company, with a pilot running at 8 banks.</p></li>
+    <li><b>NPCI</b><p>CEO Dilip Asbe. UPI IDs into NPCI's AI fraud monitoring.</p></li>
+    <li><b>DoT Digital Intelligence Unit</b><p>Scammer numbers into the Digital Intelligence Platform and the Financial Fraud Risk Indicator.</p></li>
+    <li><b>I4C</b><p>The Home Ministry's cybercrime centre: the national portal and the Suspect Registry. Scam scripts and the brands they fake go here, and to each brand's own fraud team.</p></li>
+  </ul>
+  <a class="next" href="pilot.html"><small>Next</small><b>The pilot playbook <span aria-hidden="true">&rarr;</span></b></a>
+</div></section>
+</main>
+<section class="close small" aria-label="Contact"><div class="in">
+  <p class="line">I sell to banks and build teams that sell.</p>
+  <div class="contact">
+    <span class="who-am-i">Ketan Sharma</span>
+    <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
+    <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
+  </div>
+</div></section>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.cp');
+  Array.prototype.forEach.call(buttons, function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      function done(label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+      function fallback() {
+        try {
+          var el = document.getElementById(b.getAttribute('data-target'));
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          done('Selected');
+        } catch (e) { done('Copy'); }
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('#accts > li'));
+  var shown = document.getElementById('shown');
+  var openAll = document.getElementById('openall');
+  function apply(f) {
+    var n = 0;
+    items.forEach(function (li) {
+      var tags = (li.getAttribute('data-tags') || '').split(' ');
+      var on = f === 'all' || tags.indexOf(f) !== -1;
+      li.hidden = !on;
+      if (on) n++;
+    });
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-f') === f ? 'true' : 'false'); });
+    shown.textContent = 'Showing ' + n + ' of ' + items.length;
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { apply(c.getAttribute('data-f')); }); });
+  function arrive() {
+    var id = (location.hash || '').slice(1);
+    if (!id) return;
+    var li = document.getElementById(id);
+    if (!li || li.parentNode.id !== 'accts') return;
+    if (li.hidden) apply('all');
+    var d = li.querySelector('details');
+    if (d) d.open = true;
+    li.scrollIntoView({ block: 'start' });
+  }
+  window.addEventListener('hashchange', arrive);
+  arrive();
+  openAll.addEventListener('click', function () {
+    var visible = items.filter(function (li) { return !li.hidden; });
+    var anyClosed = visible.some(function (li) { return !li.querySelector('details').open; });
+    visible.forEach(function (li) { li.querySelector('details').open = anyClosed; });
+    openAll.textContent = anyClosed ? 'Close all' : 'Open all';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Where Apate Acts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A digital arrest scam step by step: where each Indian tool acts, where Apate acts, and where Apate's intelligence goes in India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a keynote on a phone. The front is one idea per screen, each ending in an Open. Detail pages are one readable column; tables stack on phones, drawings sit in their own boxes. */
+:root {
+  --bg: #FAFAFC;
+  --band: #EFF1F5;
+  --card: #FFFFFF;
+  --ink: #0D0F14;
+  --muted: #5C6371;
+  --line: #DCE0E7;
+  --apate: #2B53EE;
+  --on-apate: #FFFFFF;
+  --soft: #E4EAFE;
+  --loss: #D2412A;
+  --close-bg: #0D0F14;
+  --close-fg: #F3F4F7;
+  --close-muted: #A3A9B5;
+  --shadow: rgba(13, 15, 20, 0.08);
+  --font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0C10;
+    --band: #15171D;
+    --card: #111319;
+    --ink: #F2F3F6;
+    --muted: #9BA1AE;
+    --line: #2A2E38;
+    --apate: #7E98FF;
+    --on-apate: #0B0C10;
+    --soft: #1B2342;
+    --loss: #FF6E52;
+    --close-bg: #15171D;
+    --close-fg: #F2F3F6;
+    --close-muted: #9BA1AE;
+    --shadow: rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0C10;
+  --band: #15171D;
+  --card: #111319;
+  --ink: #F2F3F6;
+  --muted: #9BA1AE;
+  --line: #2A2E38;
+  --apate: #7E98FF;
+  --on-apate: #0B0C10;
+  --soft: #1B2342;
+  --loss: #FF6E52;
+  --close-bg: #15171D;
+  --close-fg: #F2F3F6;
+  --close-muted: #9BA1AE;
+  --shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+main { overflow-x: clip; }
+a { color: var(--apate); text-underline-offset: 3px; }
+b, strong { font-weight: 600; }
+p { margin: 0; }
+
+.in {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+
+/* The Open control: the one obvious way into the depth */
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: var(--apate);
+  color: var(--on-apate);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  max-width: 100%;
+}
+.open .arr { flex: none; transition: transform 0.2s ease; }
+.open:hover .arr { transform: translateX(4px); }
+
+/* Expanders */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.plus {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: translate(-50%, -50%);
+}
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+details[open] > summary .plus { transform: rotate(45deg); border-color: var(--apate); }
+summary:hover .plus { border-color: var(--apate); }
+
+.bill { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--loss); vertical-align: 0.12em; flex: none; }
+
+/* Detail pages */
+body.detail::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.top .in { display: flex; align-items: center; gap: 14px; padding-block: 6px; }
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.back:hover { color: var(--apate); }
+.pnav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.pnav::-webkit-scrollbar { display: none; }
+.pnav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0 24px 0 0; }
+.pnav a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+.pnav a:hover { color: var(--ink); }
+.pnav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+.dh { padding-block: 44px 36px; }
+.dh h1 {
+  font-weight: 700;
+  font-size: clamp(32px, 6.6vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+.lede { margin-top: 16px; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+.ds { padding-block: 40px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.ds h2 {
+  font-weight: 700;
+  font-size: clamp(25px, 4.6vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+}
+.ds h3 { font-size: 19px; font-weight: 600; line-height: 1.25; letter-spacing: -0.005em; }
+.ds p { margin-top: 14px; max-width: 62ch; }
+.ds .muted, .muted { color: var(--muted); }
+.ds ul.plain { margin: 16px 0 0; padding-left: 1.1em; max-width: 62ch; display: grid; gap: 8px; }
+.read { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--apate); }
+.so { display: block; margin-top: 8px; font-weight: 600; color: var(--apate); max-width: 56ch; }
+
+/* Worked example and draft notes */
+.callout { margin-top: 24px; padding: 20px; border-radius: 18px; background: var(--band); max-width: 680px; }
+.callout .k { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.callout p { margin-top: 8px; }
+.callout p:first-of-type { margin-top: 0; }
+.draft {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1.5px dashed var(--apate);
+  border-radius: 14px;
+  font-size: 15px;
+  color: var(--ink);
+  max-width: 640px;
+}
+.draft b { color: var(--apate); white-space: nowrap; }
+
+/* Tables: real tables on wide screens, labelled stacks on phones */
+.tbl { margin-top: 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--ink); }
+td:first-child { font-weight: 600; }
+td .muted { display: block; font-weight: 400; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 620px) {
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  table.stack td { border: 0; padding: 3px 0; }
+  table.stack td[data-l]::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  table.stack td:first-child { font-size: 17px; }
+  .num { white-space: normal; }
+}
+
+/* Arrival from a link on the front page */
+.hit { scroll-margin-top: 72px; }
+.hit:target { animation: hitflash 2.4s ease-out 1; }
+@keyframes hitflash { 0% { background: var(--soft); } 100% { background: transparent; } }
+
+/* Inline drawings: every label is at least 13 viewBox units, so 12px or more on a 375px phone */
+.fig { margin-top: 26px; max-width: 520px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.fig svg text { font-family: var(--font-text); }
+.f-apate { fill: var(--apate); } .f-soft { fill: var(--soft); } .f-band { fill: var(--band); } .f-line { fill: var(--line); }
+.f-muted { fill: var(--muted); } .f-bg { fill: var(--bg); } .f-loss { fill: var(--loss); } .f-card { fill: var(--card); }
+.t-ink { fill: var(--ink); } .t-muted { fill: var(--muted); } .t-apate { fill: var(--apate); } .t-on { fill: var(--on-apate); } .t-loss { fill: var(--loss); }
+.s-line { stroke: var(--line); fill: none; } .s-muted { stroke: var(--muted); fill: none; } .s-apate { stroke: var(--apate); fill: none; } .s-loss { stroke: var(--loss); fill: none; }
+.k-line { stroke: var(--line); stroke-width: 1.5; } .k-apate { stroke: var(--apate); stroke-width: 1.5; } .k-muted { stroke: var(--muted); stroke-width: 1.5; }
+.figcap { margin-top: 12px; font-size: 14px; color: var(--muted); max-width: 56ch; }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; max-width: 60ch; }
+.legend li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.dot.a { background: var(--apate); } .dot.m { border: 2px solid var(--muted); } .dot.l { background: var(--loss); }
+
+/* Owner and status tags */
+.tg {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tg.a { border-color: var(--apate); color: var(--apate); }
+.tg.l { border-color: var(--loss); color: var(--loss); }
+.tg.f { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+
+/* Next page card */
+.next {
+  display: block;
+  margin-block: 8px 56px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: var(--band);
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 680px;
+}
+.next small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.next b { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; font-family: var(--font-display); font-size: clamp(22px, 4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.next:hover b { color: var(--apate); }
+
+/* Contact band, shared by every page */
+.close { background: var(--close-bg); color: var(--close-fg); padding-block: clamp(56px, 12vw, 112px); }
+.close .line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+.close.small .line { font-size: clamp(24px, 5vw, 36px); max-width: 22ch; }
+.contact { margin-top: 36px; display: grid; gap: 14px; font-size: 18px; }
+.contact .who-am-i { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+.contact .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-width: 0; }
+.contact a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; user-select: all; }
+.cp {
+  font: 600 14px/1 var(--font-text);
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--close-muted);
+  background: transparent;
+  color: var(--close-fg);
+  cursor: pointer;
+}
+.cp:hover { border-color: var(--close-fg); }
+
+:focus-visible { outline: 2px solid var(--apate); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+.rail { list-style: none; margin: 28px 0 0; padding: 0; max-width: 700px; }
+.rail > li { position: relative; padding: 0 0 26px 44px; border-radius: 12px; }
+.rail > li::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+.rail > li:first-child::before { top: 14px; }
+.rail > li:last-child::before { bottom: auto; height: 14px; }
+.rail .nd { position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; background: var(--bg); border: 2px solid var(--muted); color: var(--muted); z-index: 1; }
+.rail .ap .nd { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+.rail li.ap .nd { background: var(--apate); border-color: var(--apate); color: var(--on-apate); }
+.rail .when { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rail h3 { margin-top: 2px; }
+.rail li.ap h3 { color: var(--apate); }
+.rail .hap { margin-top: 6px; font-size: 16px; }
+.rail .who { display: grid; grid-template-columns: 88px 1fr; gap: 4px 12px; margin-top: 10px; font-size: 15px; }
+.rail .who dt { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.rail .who dd { margin: 0; min-width: 0; }
+.rail .who dd.ap { color: var(--apate); font-weight: 600; }
+.rail > li.mv { padding-bottom: 26px; }
+.rail > li.mv::before { display: none; }
+.rail .mvl { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--loss); }
+.rail .mvl::after { content: ""; flex: 1; border-top: 2px dashed var(--loss); }
+.rail .mvn { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+.paths { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 12px; max-width: 700px; }
+.paths li { padding: 18px 20px; border-radius: 18px; background: var(--band); }
+.paths .pt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.paths h3 { font-size: 18px; }
+.paths p { margin-top: 8px; font-size: 16px; }
+</style>
+</head>
+<body class="detail">
+<header class="top"><div class="in">
+  <a class="back" href="../apate-india.html">&larr; Apate in India</a>
+  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html" aria-current="page">Where Apate acts</a></li><li><a href="accounts.html">Buyer map</a></li><li><a href="pilot.html">Pilot</a></li><li><a href="plan-90.html">90 days</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
+</div></header>
+<main>
+<header class="dh"><div class="in">
+  <p class="eyebrow">Where Apate acts</p>
+  <h1>Apate gets the mule account before the money moves.</h1>
+  <p class="lede">India's tools are good at freezing and tracing. Each one learns about a mule account after money reaches it, or after a victim complains.</p>
+  <figure class="fig" style="margin-inline: 0">
+    <svg viewBox="0 0 360 106" role="img" aria-label="Apate's window is the conversation, hours to days before the payment. India's mule tools act after the payment, from minutes to days later.">
+      <text x="200" y="14" font-size="13" font-weight="700" text-anchor="middle" class="t-loss">PAYMENT</text>
+      <rect x="0" y="24" width="190" height="44" rx="8" class="f-apate"/>
+      <text x="14" y="51" font-size="14" font-weight="600" class="t-on">Apate's window</text>
+      <rect x="210" y="24" width="150" height="44" rx="8" class="f-line"/>
+      <text x="220" y="51" font-size="13" font-weight="600" class="t-ink">India's mule tools</text>
+      <line x1="200" y1="20" x2="200" y2="76" class="s-loss" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="95" y="96" font-size="13" text-anchor="middle" class="t-muted">hours to days of talk</text>
+      <text x="285" y="96" font-size="13" text-anchor="middle" class="t-muted">minutes to days after</text>
+    </svg>
+  </figure>
+</div></header>
+
+<section class="ds" id="steps" aria-labelledby="s-h"><div class="in">
+  <h2 id="s-h">A digital arrest, step by step</h2>
+  <p>The scam the new rules name. This is the common pattern in police and court filings, with who acts at each step today.</p>
+  <ol class="rail">
+    <li id="step-1" class="hit"><span class="nd">1</span>
+      <span class="when">Day 0</span><h3>The hook</h3>
+      <p class="hap">A call from a "courier", then a "police officer": a parcel in the victim's name holds drugs.</p>
+      <dl class="who"><dt>Today</dt><dd>Telco spam filters, and TRAI's new AI flagging. They block or warn on numbers already seen.</dd></dl>
+    </li>
+    <li id="step-2" class="ap hit"><span class="nd">2</span>
+      <span class="when">Hours to days</span><h3>The conversation</h3>
+      <p class="hap">A video call with a fake officer. The victim is told they are under "digital arrest" and must tell no one.</p>
+      <dl class="who"><dt>Today</dt><dd>Nobody.</dd><dt>Apate</dt><dd class="ap">An agent plays the victim and keeps the scammer talking.</dd></dl>
+    </li>
+    <li id="step-3" class="ap hit"><span class="nd">3</span>
+      <span class="when">Before any payment</span><h3>Where to pay</h3>
+      <p class="hap">The scammer names a "verification" account, a UPI ID or a wallet.</p>
+      <dl class="who"><dt>Today</dt><dd>Nobody.</dd><dt>Apate</dt><dd class="ap">Captures the account and IFSC, UPI ID, phone numbers and wallet, with the time first seen.</dd></dl>
+    </li>
+    <li class="mv"><span class="mvl">The money moves</span><span class="mvn">India's mule-account tools start here.</span></li>
+    <li id="step-4" class="hit"><span class="nd">4</span>
+      <span class="when">Seconds</span><h3>The payment</h3>
+      <p class="hap">The victim pays from their own bank, with their own PIN or OTP.</p>
+      <dl class="who"><dt>Today</dt><dd>The bank's checks pass. DoT's Financial Fraud Risk Indicator scores phone numbers already reported.</dd></dl>
+    </li>
+    <li id="step-5" class="hit"><span class="nd">5</span>
+      <span class="when">Minutes</span><h3>The money lands</h3>
+      <p class="hap">It reaches a mule account and moves on through more accounts.</p>
+      <dl class="who"><dt>Today</dt><dd>MuleHunter.AI, in 29 banks, and the bank's own early warning watch the receiving account.</dd></dl>
+    </li>
+    <li id="step-6" class="hit"><span class="nd">6</span>
+      <span class="when">Days later</span><h3>The complaint</h3>
+      <p class="hap">The victim calls 1930 or files on the national cybercrime portal.</p>
+      <dl class="who"><dt>Today</dt><dd>I4C's Suspect Registry logs the account, and the bank reports the fraud to RBI's registries. A hold, rarely a refund: 0.4% came back.</dd></dl>
+    </li>
+  </ol>
+</div></section>
+
+<section class="ds" id="sources" aria-labelledby="sc-h"><div class="in">
+  <h2 id="sc-h">Where the scam conversations come from</h2>
+  <p>Apate needs Indian scammers talking from the first day of a pilot, with no telco diversion. Three sources, in this order.</p>
+  <ol class="paths">
+    <li><div class="pt"><span class="tg f">Day 1</span><h3>The pilot bank's own reports</h3></div>
+      <p>Each day the bank's fraud team passes Apate the scammer numbers, WhatsApp IDs and UPI handles its customers report. These are the scammer's details, never the customer's. Apate's agents contact each one as a new victim.</p></li>
+    <li><div class="pt"><span class="tg f">Day 1</span><h3>Apate's own seeded numbers</h3></div>
+      <p>Indian numbers Apate holds and seeds where scammers find their targets. They add volume beyond the bank's own customers.</p></li>
+    <li><div class="pt"><span class="tg">Later</span><h3>The telco route, through Mobileum</h3></div>
+      <p>Diverted scam calls at network scale, once a written legal opinion on diverting and recording is in place.</p></li>
+  </ol>
+</div></section>
+
+<section class="ds" id="routes" aria-labelledby="r-h"><div class="in">
+  <h2 id="r-h">Where each piece goes in India</h2>
+  <p>Everything Apate captures has an Indian owner who can act on it. That is what makes the feed worth paying for here.</p>
+  <div class="tbl"><table class="stack">
+    <thead><tr><th>Apate captures</th><th>It goes to</th><th>Who acts</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Apate captures">Bank account and IFSC</td><td data-l="It goes to">The pilot bank, if the account is its own. Accounts at other banks are reported through the national cybercrime portal.</td><td data-l="Who acts">The bank's fraud control unit</td></tr>
+      <tr><td data-l="Apate captures">UPI ID</td><td data-l="It goes to">The bank behind the ID, and NPCI's AI fraud monitoring</td><td data-l="Who acts">The bank; NPCI</td></tr>
+      <tr><td data-l="Apate captures">Phone number</td><td data-l="It goes to">DoT's Digital Intelligence Platform and its Financial Fraud Risk Indicator, which RBI has asked banks to integrate</td><td data-l="Who acts">DoT's Digital Intelligence Unit; the telcos</td></tr>
+      <tr><td data-l="Apate captures">Script and the brand it fakes</td><td data-l="It goes to">I4C, and the fraud team of the brand being faked</td><td data-l="Who acts">I4C; the brand's own fraud team</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="ds" id="paths" aria-labelledby="p-h"><div class="in">
+  <h2 id="p-h">Three ways in, in this order</h2>
+  <ol class="paths">
+    <li><div class="pt"><span class="tg f">Now</span><h3>Direct to one bank</h3></div>
+      <p>A daily list to the fraud team. No integration, no bank data in. This is the pilot.</p></li>
+    <li><div class="pt"><span class="tg a">From month 2</span><h3>Through a fraud hub</h3></div>
+      <p>Clari5, part of Perfios, runs fraud monitoring at many of India's largest banks, and its Intelligence Hub already pulls in I4C's Suspect Registry. One integration reaches many banks.</p></li>
+    <li><div class="pt"><span class="tg">From month 3</span><h3>National rails</h3></div>
+      <p>RBI Innovation Hub runs MuleHunter.AI in 29 banks and a 7-bank DPIP pilot, and takes I4C's Suspect Registry under a May 2026 agreement. IDPIC has a pilot with 8 banks. NPCI and DoT each run their own fraud feeds. Slow, little cash, a lot of trust.</p></li>
+  </ol>
+</div></section>
+
+<section class="ds" id="local" aria-labelledby="l-h"><div class="in">
+  <h2 id="l-h">What changes for India</h2>
+  <div class="tbl"><table class="stack">
+    <thead><tr><th>Area</th><th>What India needs</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Area">Language</td><td data-l="What India needs">Hindi and Hinglish first. Then the pilot bank's main regional languages, in the order of its complaint volume.</td></tr>
+      <tr><td data-l="Area">Scripts</td><td data-l="What India needs">Digital arrest, fake KYC updates, task scams, and investment groups on WhatsApp and Telegram.</td></tr>
+      <tr><td data-l="Area">Numbers</td><td data-l="What India needs">Indian numbers through a licensed telco or CPaaS. DoT's KYC rules on bulk numbers are the risk to plan around.</td></tr>
+      <tr><td data-l="Area">Telco diversion</td><td data-l="What India needs">A written legal opinion on diverting and recording scam calls, before any telco pilot. The bank pilot needs no diversion: it runs on the scammer details the bank's customers report.</td></tr>
+      <tr><td data-l="Area">Hosting</td><td data-l="What India needs">An India-region cloud tenancy with logs kept in India for 180 days, per CERT-In.</td></tr>
+    </tbody>
+  </table></div>
+  <a class="next" href="accounts.html"><small>Next</small><b>Who buys, bank by bank <span aria-hidden="true">&rarr;</span></b></a>
+</div></section>
+</main>
+<section class="close small" aria-label="Contact"><div class="in">
+  <p class="line">I sell to banks and build teams that sell.</p>
+  <div class="contact">
+    <span class="who-am-i">Ketan Sharma</span>
+    <div class="row"><a href="tel:+919899380222" id="ph">+91 98993 80222</a><button class="cp" type="button" data-copy="+91 98993 80222" data-target="ph">Copy</button></div>
+    <div class="row"><a href="mailto:ketansharma071190@gmail.com" id="em">ketansharma071190@gmail.com</a><button class="cp" type="button" data-copy="ketansharma071190@gmail.com" data-target="em">Copy</button></div>
+  </div>
+</div></section>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.cp');
+  Array.prototype.forEach.call(buttons, function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      function done(label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+      function fallback() {
+        try {
+          var el = document.getElementById(b.getAttribute('data-target'));
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          done('Selected');
+        } catch (e) { done('Copy'); }
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
