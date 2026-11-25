@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <title>Apate in India</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Apate in India: why now, where Apate acts, who buys and signs, the first pilot, the first 90 days and what it takes.">
+<meta name="description" content="Apate in India: why now, where Apate acts, who buys and signs, the first pilot, the first 90 days, the sales engine and what it takes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
@@ -436,6 +435,20 @@ h2 {
 .days ul li.sig { font-weight: 600; }
 .days ul li.sig::before { background: var(--apate); }
 
+/* Sales engine: a live page, shown in miniature */
+.peek { display: block; margin-top: 40px; max-width: 440px; border-radius: 22px; overflow: hidden; background: var(--card); border: 1.5px solid var(--line); box-shadow: 0 14px 36px var(--shadow); color: var(--ink); text-decoration: none; transition: border-color 0.15s ease, transform 0.2s ease; }
+.peek:hover { border-color: var(--apate); transform: translateY(-2px); }
+.peek .pk-b { display: block; padding: 10px 18px; background: var(--soft); font-size: 13px; font-weight: 600; color: var(--apate); }
+.peek .pk-in { display: block; padding: 18px 18px 22px; }
+.peek .pk-e { display: block; margin-top: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.peek .pk-h { display: block; margin-top: 6px; font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 4.4vw, 26px); line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+.peek .pk-n { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.peek .pk-n b { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.04em; color: var(--loss); font-variant-numeric: tabular-nums; }
+.peek .pk-n span { font-size: 15px; color: var(--muted); }
+.acts2 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; margin-top: 36px; }
+.acts2 .open { margin-top: 0; }
+.how { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; font-size: 16px; }
+
 /* The ask */
 .takes { list-style: none; margin: 40px 0 0; padding: 0; max-width: 640px; }
 .takes li { padding: 15px 0; border-top: 1px solid var(--line); font-family: var(--font-display); font-size: clamp(20px, 3.2vw, 24px); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
@@ -472,8 +485,8 @@ h2 {
     <h2 id="now-h">India now bills the bank that took the scam money.</h2>
     <ol class="clock">
       <li><a href="apate-india/why-now.html#feb-order"><time>25 Feb 2026</time><span class="what">The Ombudsman bills five receiving banks for one scam.</span></a></li>
-      <li><a href="apate-india/why-now.html#court"><time>29 Oct 2026</time><span class="what">Supreme Court: where a bank's due diligence failed, it repays at least the full loss.</span></a></li>
-      <li><a href="apate-india/why-now.html#jan-rules"><time>1 Jan 2027</time><span class="what">The receiving bank pays 10% of every small-case payout.</span></a></li>
+      <li><a href="apate-india/why-now.html#court"><time>29 Oct 2026</time><span class="what">Supreme Court tells RBI: where due diligence failed, repay at least the full loss. Rules due 30 Nov.</span></a></li>
+      <li><a href="apate-india/why-now.html#jan-rules"><time>1 Jan 2027</time><span class="what">The receiving bank funds 10% of the loss in each small-fraud payout.</span></a></li>
       <li class="key"><a href="apate-india/why-now.html#budgets"><time>Jan to Mar 2027</time><span class="what">Banks set FY28 budgets.</span><span class="so">Sign by March and it's FY28. Wait to end-2027 and it's FY29.</span></a></li>
     </ol>
     <a class="open" href="apate-india/why-now.html">Open the liability clock <span class="arr" aria-hidden="true">&rarr;</span></a>
@@ -559,7 +572,27 @@ h2 {
   </div>
 </section>
 
-<section class="s" id="ask" aria-labelledby="ask-h">
+<section class="s" id="engine" aria-labelledby="eng-h">
+  <div class="in">
+    <p class="eyebrow">Sales engine</p>
+    <h2 id="eng-h">Every bank gets its own page before the first meeting.</h2>
+    <p class="sub">One for each reader, with numbers they can change. The India lead builds the engine in the first 30 days. It does the research, the CRM and the prep. People take the calls.</p>
+    <a class="peek" href="apate-india/axis-bank.html#cro" aria-label="Open Axis Bank's live page, as its CRO sees it">
+      <span class="pk-b">Built by the engine from public sources</span>
+      <span class="pk-in">
+        <span class="pk-e">Axis Bank · for the CRO</span>
+        <span class="pk-h">When scam money lands at Axis, Axis now pays.</span>
+        <span class="pk-n"><b>Rs 5.25 cr</b><span>a year, if every case went the way February's did. Change the numbers.</span></span>
+      </span>
+    </a>
+    <div class="acts2">
+      <a class="open" href="apate-india/axis-bank.html">Open a live one: Axis Bank <span class="arr" aria-hidden="true">&rarr;</span></a>
+      <a class="how" href="apate-india/engine.html">How the engine works</a>
+    </div>
+  </div>
+</section>
+
+<section class="s band" id="ask" aria-labelledby="ask-h">
   <div class="in">
     <p class="eyebrow">What it takes</p>
     <h2 id="ask-h">Four things from Apate.</h2>

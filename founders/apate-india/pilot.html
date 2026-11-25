@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>First India Pilot</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="The pilot playbook for an Indian bank: shape, where the scams come from, the dated path, hit sizing, the four numbers, the business case, the security pack and objections.">
@@ -418,7 +417,7 @@ td .muted { display: block; font-weight: 400; }
 <body class="detail">
 <header class="top"><div class="in">
   <a class="back" href="../apate-india.html">&larr; Apate in India</a>
-  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html">Where Apate acts</a></li><li><a href="accounts.html">Buyer map</a></li><li><a href="pilot.html" aria-current="page">Pilot</a></li><li><a href="plan-90.html">90 days</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
+  <nav class="pnav" aria-label="Detail pages"><ul><li><a href="why-now.html">Why now</a></li><li><a href="how-it-works.html">Where Apate acts</a></li><li><a href="accounts.html">Buyer map</a></li><li><a href="pilot.html" aria-current="page">Pilot</a></li><li><a href="plan-90.html">90 days</a></li><li><a href="engine.html">Sales engine</a></li><li><a href="ask.html">The ask</a></li></ul></nav>
 </div></header>
 <main>
 <header class="dh"><div class="in">
@@ -435,7 +434,7 @@ td .muted { display: block; font-weight: 400; }
     <dt>What Apate engages</dt><dd>Scams that fake the bank's name or target its customers: digital arrest, fake KYC updates, task scams.</dd>
     <dt>What the bank gets</dt><dd>A daily list of mule accounts, UPI IDs and phone numbers, each with the time Apate first saw it.</dd>
     <dt>Integration</dt><dd>None. One file a day, over a bank-hosted secure file transfer, or a single sign-on portal open only to the bank's IP addresses.</dd>
-    <dt>Customer data</dt><dd>None, in either direction. The bank sends only scammer details.</dd>
+    <dt>Customer data</dt><dd>No customer records leave the bank. It sends only scammer details, and what comes back is the accounts the scammers named.</dd>
     <dt>Owner</dt><dd>The fraud head.</dd>
     <dt>Gate</dt><dd>A CISO review of the file channel and the security pack.</dd>
     <dt>Price</dt><dd>Paid and fixed, credited to year one when the bank signs. Apate sets the number.</dd>
@@ -537,9 +536,9 @@ td .muted { display: block; font-weight: 400; }
     <ul class="out" aria-live="polite">
       <li><div class="ot"><span>At the February order's rate, 5%</span><b id="o5">Rs 1.05 lakh</b></div><div class="track"><span class="fill" style="width: 5%"></span></div></li>
       <li><div class="ot"><span>At Yes Bank's rate, 7.5%</span><b id="o75">Rs 1.57 lakh</b></div><div class="track"><span class="fill" style="width: 7.5%"></span></div></li>
-      <li class="full"><div class="ot"><span>At the Supreme Court's standard, the full loss</span><b id="o100">Rs 20.97 lakh</b></div><div class="track"><span class="fill" style="width: 100%"></span></div></li>
+      <li class="full"><div class="ot"><span>If the Supreme Court's line holds, the full loss</span><b id="o100">Rs 20.97 lakh</b></div><div class="track"><span class="fill" style="width: 100%"></span></div></li>
     </ul>
-    <p class="cnote">In the February case the five banks paid Rs 1.31 cr between them. Our read: the court's standard applies where the bank's due diligence failed, and an account named before the money lands is one the bank can hold first.</p>
+    <p class="cnote">In the February case the five banks paid Rs 1.31 cr between them. Our read: once RBI's rules carry the court's line, the full loss applies where the bank's due diligence failed, and an account named before the money lands is one the bank can hold first.</p>
   </div>
   <div class="calc" id="bank">
     <h3>A year at one bank</h3>
@@ -553,7 +552,7 @@ td .muted { display: block; font-weight: 400; }
       <li><div class="ot"><span>Exposure at 7.5%</span><b id="b75">Rs 7.88 cr</b></div><div class="track"><span class="fill" style="width: 7.5%"></span></div></li>
       <li class="full"><div class="ot"><span>Exposure at the full loss</span><b id="b100">Rs 105 cr</b></div><div class="track"><span class="fill" style="width: 100%"></span></div></li>
     </ul>
-    <p class="cnote">Mule accounts, times the average amount landed, times the rate, is the exposure. Our read: no bank is billed on every account. For the CFO the point is the range, a few crore a year at the Ombudsman's rates, and the full amount wherever the court's standard applies.</p>
+    <p class="cnote">Mule accounts, times the average amount landed, times the rate, is the exposure. Our read: no bank is billed on every account. For the CFO the point is the range, a few crore a year at the Ombudsman's rates, and the full amount wherever the court's line holds.</p>
   </div>
   <h3 style="margin-top: 32px">What the board now asks</h3>
   <p>Since July the SCBMF, the board's fraud committee, oversees how well fraud risk management works, and RBI wants early warning on mule accounts in near real time. The readout gives the fraud head the number that meeting wants: mule accounts found before the first complaint.</p>
@@ -570,7 +569,7 @@ td .muted { display: block; font-weight: 400; }
     <tbody>
       <tr><td data-l="The CISO asks">Who is this vendor?</td><td data-l="Rule">Outsourcing, Paras 66 and 67</td><td data-l="Apate brings">Apate's current certifications, and a recent penetration test</td></tr>
       <tr><td data-l="The CISO asks">How does the file get in?</td><td data-l="Rule">The bank's own IT and cyber security policy</td><td data-l="Apate brings">A bank-hosted secure file transfer, or a single sign-on portal open only to the bank's IP addresses</td></tr>
-      <tr><td data-l="The CISO asks">Is it material?</td><td data-l="Rule">Para 53(2)</td><td data-l="Apate brings">No bank customer data in either direction. Our read: not material.</td></tr>
+      <tr><td data-l="The CISO asks">Is it material?</td><td data-l="Rule">Para 53(2)</td><td data-l="Apate brings">No customer records leave the bank. What comes back is the accounts the scammers named. Our read: not material.</td></tr>
       <tr><td data-l="The CISO asks">Where does data sit?</td><td data-l="Rule">Para 69(vi), and RBI's 2018 payment-data rule</td><td data-l="Apate brings">An India-region tenancy</td></tr>
       <tr><td data-l="The CISO asks">Logs and incidents?</td><td data-l="Rule">Para 56: cyber incidents to RBI in 6 hours. CERT-In: logs 180 days in India, incidents in 6 hours.</td><td data-l="Apate brings">Logs kept in India, and an incident runbook built to 6 hours</td></tr>
       <tr><td data-l="The CISO asks">Can we and RBI audit you?</td><td data-l="Rule">Paras 69(xii), 76 and 89(iv)</td><td data-l="Apate brings">Audit and inspection rights in the contract, foreign vendor included</td></tr>
@@ -590,9 +589,9 @@ td .muted { display: block; font-weight: 400; }
     <li><details><summary>"I4C already sends us the Suspect Registry."<span class="plus" aria-hidden="true"></span></summary><p>Registry entries come from complaints and from banks' own flags, after money moved. Apate's accounts come before the first complaint, and the second number measures that lead time.</p></details></li>
     <li><details><summary>"Where do the scam conversations come from?"<span class="plus" aria-hidden="true"></span></summary><p>From you, on day one: the scammer numbers, WhatsApp IDs and UPI handles your customers already report. Apate's agents contact each one as a new victim. Apate's seeded numbers add volume, and the telco route through Mobileum comes later.</p></details></li>
     <li><details><summary>"Only a few hits will be at our bank."<span class="plus" aria-hidden="true"></span></summary><p>About 1 in 75 captured accounts sits at any one large bank, so the bars are rates, not counts. The accounts at other banks still count: your team reports them through the national portal, and that is the fourth number.</p></details></li>
-    <li><details><summary>"Does any data leave India?"<span class="plus" aria-hidden="true"></span></summary><p>No customer data moves in either direction. The bank sends only scammer details, and Apate's data sits in an Indian cloud region, with logs kept in India.</p></details></li>
+    <li><details><summary>"Does any data leave India?"<span class="plus" aria-hidden="true"></span></summary><p>No customer records leave the bank. It sends only scammer details, what comes back is the accounts the scammers named, and Apate's data sits in an Indian cloud region, with logs kept in India.</p></details></li>
     <li><details><summary>"Is talking to scammers legal here?"<span class="plus" aria-hidden="true"></span></summary><p>The agents talk to scammers on Apate's own numbers, including the scammer details the bank passes on. No customer call is diverted or recorded in the bank pilot. Telco diversion waits for a written legal opinion.</p></details></li>
-    <li><details><summary>"Is this material outsourcing?"<span class="plus" aria-hidden="true"></span></summary><p>Our read: no customer data in either direction keeps it outside "material" under Para 53(2). Your compliance team confirms it in the scoping week.</p></details></li>
+    <li><details><summary>"Is this material outsourcing?"<span class="plus" aria-hidden="true"></span></summary><p>Our read: no customer records leave the bank, and what comes back is only the accounts the scammers named, which keeps it outside "material" under Para 53(2). Your compliance team confirms it in the scoping week.</p></details></li>
     <li><details><summary>"Why should we pay for a pilot?"<span class="plus" aria-hidden="true"></span></summary><p>A fee puts a named owner and written bars on it. It is credited to year one when you sign.</p></details></li>
     <li><details><summary>"Our customers are hit in Tamil, Bengali, Marathi."<span class="plus" aria-hidden="true"></span></summary><p>Hindi and English first, then your main languages in the order of your complaint volume.</p></details></li>
     <li><details><summary>"What happens after eight weeks?"<span class="plus" aria-hidden="true"></span></summary><p>A readout against the bars you signed, and the order form the same day. The contract papers are agreed while the lists run.</p></details></li>
