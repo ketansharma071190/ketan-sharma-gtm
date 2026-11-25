@@ -505,7 +505,7 @@ td .muted { display: block; font-weight: 400; }
   <p>Change any number. The one that matters most is Axis's own count of mule accounts, and only Axis has it.</p>
   <div class="calc" id="cro-calc">
     <div class="pair">
-      <div><label class="cl" for="mx">Mule accounts at Axis in a year</label><div class="amtrow"><input id="mx" type="number" inputmode="numeric" min="0" step="100" value="6000"></div><span class="hint">Axis's count is not public. Put in yours.</span></div>
+      <div><label class="cl" for="mx">Mule accounts at Axis in a year</label><div class="amtrow"><input id="mx" type="number" inputmode="numeric" min="0" step="100" value="6000"></div><span class="hint">Axis holds this count. Put in yours.</span></div>
       <div><label class="cl" for="lx">Average landed per account</label><div class="amtrow"><span>Rs</span><input id="lx" type="number" inputmode="decimal" min="0" step="0.05" value="1.75"><span>lakh</span></div>
         <div class="presets" role="group" aria-label="Average landed per account"><button type="button" class="chip" data-t="lx" data-v="1.75" aria-pressed="true" id="lx1">India-wide estimate</button></div>
         <span class="hint">Our arithmetic: Rs 56,087 cr lost over three years, over 32.08 lakh accounts on the Suspect Registry.</span></div>
@@ -520,7 +520,7 @@ td .muted { display: block; font-weight: 400; }
     </ul>
     <p class="cnote">Plus, from 1 January, 10% of the loss in each small-fraud payout where the money landed at Axis, up to Rs 2,941 a case.</p>
   </div>
-  <p>An account named before the money lands is one Axis can hold first. Apate's pilot is eight weeks of daily lists, with nothing to integrate.</p>
+  <p>An account named before the money lands is one Axis can hold first. Apate's pilot is eight weeks of daily lists, from one file a day.</p>
 </div></section>
 
 <section class="ds" data-view="fraud-head" id="named" aria-labelledby="hw-h"><div class="in">
@@ -530,27 +530,27 @@ td .muted { display: block; font-weight: 400; }
     <li><span class="node">2</span><span>Apate's agents pick up the conversation and keep it going until the scammer names where to pay.</span></li>
     <li><span class="node">3</span><span>Next morning the list reaches Financial Crime Intelligence, with every account named, at Axis and at other banks.</span></li>
   </ol>
-  <p class="muted">You send the scammer details your customers report, one file a day. No customer records leave Axis. What comes back is the accounts the scammers named. There is nothing to integrate.</p>
+  <p class="muted">You send the scammer details your customers report, one file a day. Customer records stay inside Axis. What comes back is the accounts the scammers named.</p>
 </div></section>
 
 <section class="ds" data-view="fraud-head" id="capture" aria-labelledby="cp-h"><div class="in">
   <h2 id="cp-h">What eight weeks of lists would find at Axis</h2>
   <div class="calc" id="fh-calc">
     <div class="inp"><label for="cd">New accounts Apate names a day, repeats left out</label><div class="rg"><input type="range" id="cd" min="10" max="100" step="5" value="35"><output id="cdv" for="cd">35</output></div><span class="hint">Our planning figure. Apate's own volumes replace it.</span></div>
-    <div class="inp"><label for="cs">Axis's share of India's mule accounts</label><div class="rg"><input type="range" id="cs" min="0.5" max="5" step="0.1" value="1.3"><output id="csv" for="cs">1.3%</output></div><span class="hint">Default: Kotak's share in the 2024 count. Axis's own is not public.</span></div>
+    <div class="inp"><label for="cs">Axis's share of India's mule accounts</label><div class="rg"><input type="range" id="cs" min="0.5" max="5" step="0.1" value="1.3"><output id="csv" for="cs">1.3%</output></div><span class="hint">Default: Kotak's share in the 2024 count. Axis holds its own.</span></div>
     <ul class="sz" aria-live="polite">
       <li><b id="za">1,960</b><span>accounts named in eight weeks</span></li>
       <li class="hit2"><b id="zb">25</b><span>at Axis, to check against your own flags</span></li>
       <li><b id="zc">1,935</b><span>at other banks, where Axis customers were about to pay. Block the payee, then report it.</span></li>
     </ul>
-    <p class="cnote">Our read: the accounts at other banks are where scammers were sending Axis customers' money, so each is a payee Axis can stop. The Axis count rises as other pilots and Apate's own numbers feed the same list.</p>
+    <p class="cnote">Our read: the accounts at other banks are where scammers were sending Axis customers' money, so each is a payee Axis can block. The Axis count rises as other pilots and Apate's own numbers feed the same list.</p>
   </div>
 </div></section>
 
 <section class="ds" data-view="fraud-head" id="numbers" aria-labelledby="nm-h"><div class="in">
   <h2 id="nm-h">Four numbers, set with you before the first list</h2>
   <ul class="crit">
-    <li><span class="w">New</span><b>Listed accounts at Axis that your own tools had not flagged when the list arrived.</b><p class="bar"><span>Bar</span>Half or more.</p></li>
+    <li><span class="w">New</span><b>Listed accounts at Axis that were new to your own tools when the list arrived.</b><p class="bar"><span>Bar</span>Half or more.</p></li>
     <li><span class="w">Early</span><b>Days from Apate first seeing an account to the first complaint against it.</b><p class="bar"><span>Bar</span>A median of two days or more.</p></li>
     <li><span class="w">Held</span><b>New accounts at Axis put on hold, and the rupees on them.</b><p class="bar"><span>Bar</span>Eight in ten within a day of the list.</p></li>
     <li><span class="w">Reported</span><b>Accounts at other banks, sent on to the national portal.</b><p class="bar"><span>Bar</span>Every one within a day.</p></li>
@@ -562,7 +562,7 @@ td .muted { display: block; font-weight: 400; }
     <dl class="kv2">
       <dt>Stage</dt><dd>Target. First meeting planned for December: Gaurav Gupta first, then the CRO with Dali or Sam.</dd>
       <dt>Seats</dt><dd>Five seats plus a co-sponsor, four named.</dd>
-      <dt>Can stop it</dt><dd>The CISO at security review; procurement and the incumbent vendor.</dd>
+      <dt>Gate</dt><dd>The CISO at security review; procurement and the incumbent vendor.</dd>
       <dt>Prep</dt><dd>CRO Anand Viswanathan ran Market and Liquidity Risk, ERM and Model Risk at Axis before the CRO seat. Lead with the exposure numbers.</dd>
       <dt>FY26 fraud note</dt><dd>4,098 frauds, Rs 275.66 cr involved net of recoveries. FY25: 19,625 and Rs 490.49 cr.</dd>
       <dt>Ask in the room</dt><dd>Axis's own mule-account count, the fraud head's signing limit, and the CISO's rule for file transfer.</dd>
@@ -575,8 +575,8 @@ td .muted { display: block; font-weight: 400; }
       <tr><td data-l="Seat">Chief Risk Officer</td><td data-l="Who">Anand Viswanathan, since 1 Jan 2026</td><td data-l="In the decision"><span class="tg a">Opens the door</span>Signs above the fraud head's limit. Apate's CEO or President joins.</td></tr>
       <tr><td data-l="Seat">Group Head, Digital Business</td><td data-l="Who">Sameer Shetty</td><td data-l="In the decision"><span class="tg">Co-sponsor</span>Owns the controls customers see.</td></tr>
       <tr><td data-l="Seat">Group Chief Compliance Officer</td><td data-l="Who">Name to confirm</td><td data-l="In the decision"><span class="tg">Backs it</span>The mule-account KYC rule, debit holds and reports to FIU-IND.</td></tr>
-      <tr><td data-l="Seat">CISO</td><td data-l="Who">Name to confirm</td><td data-l="In the decision"><span class="tg l">Can stop it</span>At security review. First question: how the file gets in.</td></tr>
-      <tr><td data-l="Seat">Chief Financial Officer</td><td data-l="Who">Rajeev Mantri, since 28 Sep 2026</td><td data-l="In the decision"><span class="tg">Sets the budget</span>FY28, his first at Axis. Sees results, never the pilot.</td></tr>
+      <tr><td data-l="Seat">CISO</td><td data-l="Who">Name to confirm</td><td data-l="In the decision"><span class="tg l">Clears it</span>At security review. First question: how the file gets in.</td></tr>
+      <tr><td data-l="Seat">Chief Financial Officer</td><td data-l="Who">Rajeev Mantri, since 28 Sep 2026</td><td data-l="In the decision"><span class="tg">Sets the budget</span>FY28, his first at Axis. Sees the results.</td></tr>
     </tbody>
   </table></div>
     <h3 class="sh">What moved at Axis</h3>
@@ -588,7 +588,7 @@ td .muted { display: block; font-weight: 400; }
       <li><time datetime="2026-01-01">1 Jan 2026</time><span>CRO Anand Viswanathan in post.</span></li>
       <li><time>2024 and 2025</time><span>Two earlier regulatory items on account opening and monitoring, in the file.</span></li>
     </ol>
-    <p class="fine">Each line's source sits in the engine's file. The page Axis sees carries the numbers, never the list.</p>
+    <p class="fine">Each line's source sits in the engine's file. The page Axis sees carries the numbers.</p>
   </details>
   <a class="next" href="ask.html"><small>Next</small><b>What India takes from Apate <span aria-hidden="true">&rarr;</span></b></a>
 </div></section>
