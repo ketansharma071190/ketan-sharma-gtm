@@ -320,7 +320,7 @@ var T = (function () {
   <div class="grid3">
     <div class="card"><span class="eyebrow">Tier 1 &middot; White-glove</span><h3>Ketan, in person</h3><ul class="ticks small"><li>India entities of groups live on TASConnect: Lenovo, Syngenta</li><li>Deals open in the India pipeline today</li><li>Corporates a bank RM or partner introduces</li></ul></div>
     <div class="card"><span class="eyebrow">Tier 2 &middot; Trigger-led</span><h3>Outbound on their own numbers</h3><ul class="ticks small"><li>M&amp;M, Maruti Suzuki, Hero MotoCorp, Bajaj Auto, Asian Paints</li><li>Then the wider named list, 25 accounts</li><li>Each opens on one figure from its report</li></ul></div>
-    <div class="card"><span class="eyebrow">Tier 3 &middot; Nurture</span><h3>Fit, but no live signal</h3><ul class="ticks small"><li>They get a point of view, not a meeting ask</li><li>The 45-day rule at year-end, the supplier finance note in year two</li><li>Promoted to Tier 2 when a signal shows</li></ul></div>
+    <div class="card"><span class="eyebrow">Tier 3 &middot; Nurture</span><h3>Fit, waiting on a live signal</h3><ul class="ticks small"><li>They get a point of view</li><li>The 45-day rule at year-end, the supplier finance note in year two</li><li>Promoted to Tier 2 when a signal shows</li></ul></div>
   </div>
 </section>
 
@@ -329,7 +329,7 @@ var T = (function () {
   <p>Eight kinds of account, each scored 1 to 5 on how hard it is to switch and how hard it is to get a signature. Lower is easier. Turn on a move and watch which accounts get easier.</p>
   <div class="ff">
     <div class="levers" id="levers">
-      <label class="lev"><input type="checkbox" id="lv-own" data-k="own"><span><b>Start on their own cash</b><small>No bank sanction to wait for. Easier to sign for multi-bank SAP accounts, factoring accounts and one-bank portal users.</small></span></label>
+      <label class="lev"><input type="checkbox" id="lv-own" data-k="own"><span><b>Start on their own cash</b><small>Starts on day one. Easier to sign for multi-bank SAP accounts, factoring accounts and one-bank portal users.</small></span></label>
       <label class="lev"><input type="checkbox" id="lv-paper" data-k="paper"><span><b>Reuse the parent's paper</b><small>Easier to sign for the India entity of a group already live.</small></span></label>
       <label class="lev"><input type="checkbox" id="lv-rm" data-k="rm"><span><b>A bank RM introduces us</b><small>Easier to switch for multi-bank, cash-rich and factoring accounts.</small></span></label>
       <label class="lev"><input type="checkbox" id="lv-sap" data-k="sap"><span><b>A partner already in their SAP finance</b><small>Easier to switch for multi-bank SAP accounts.</small></span></label>
@@ -340,14 +340,14 @@ var T = (function () {
 </section>
 
 <section class="blk" aria-labelledby="h-neg">
-  <h2 id="h-neg">Five signs it is "nurture, not now"</h2>
+  <h2 id="h-neg">Five signs it is "nurture for later"</h2>
   <p>Tick any one and the account leaves the active list until something changes.</p>
   <div class="neg" id="neg">
     <label class="lev"><input type="checkbox" id="ng1"><span>Content with one bank's free portal</span></label>
-    <label class="lev"><input type="checkbox" id="ng2"><span>Suppliers almost all served by TReDS, and nothing else wanted</span></label>
-    <label class="lev"><input type="checkbox" id="ng3"><span>No surplus cash, no bank appetite, no multi-bank pain</span></label>
-    <label class="lev"><input type="checkbox" id="ng4"><span>Wants an open-ended pilot with no success criteria</span></label>
-    <label class="lev"><input type="checkbox" id="ng5"><span>Nobody inside owns it after two meetings</span></label>
+    <label class="lev"><input type="checkbox" id="ng2"><span>Suppliers almost all served by TReDS, and TReDS is all they want</span></label>
+    <label class="lev"><input type="checkbox" id="ng3"><span>Cash fully used, banks holding back, one bank meets every need</span></label>
+    <label class="lev"><input type="checkbox" id="ng4"><span>Wants an open-ended pilot, with success criteria left blank</span></label>
+    <label class="lev"><input type="checkbox" id="ng5"><span>Two meetings in, and the owner inside is still to be named</span></label>
   </div>
   <span class="verdict go" id="verdict" aria-live="polite">Active: keep working it</span>
 </section>
@@ -371,7 +371,7 @@ var T = (function () {
     { id: 'cash', n: 'Cash-rich, long small-supplier tail', r: 'Own-cash discounting first', f: 3, t: 2, tier: '2' },
     { id: 'fact', n: 'Factors receivables, holds a surplus', r: 'CFO conversation', f: 3, t: 3, tier: '2' },
     { id: 'portal', n: 'Content on one bank\'s free portal', r: 'Nurture', f: 5, t: 4, tier: '3' },
-    { id: 'treds', n: 'Small-supplier base all on TReDS, no surplus', r: 'Not now', f: 4, t: 5, tier: 'out' }
+    { id: 'treds', n: 'Small-supplier base all on TReDS, cash fully used', r: 'Later', f: 4, t: 5, tier: 'out' }
   ];
   var L = { own: { k: 't', d: 1, on: ['sap', 'fact', 'portal'] }, paper: { k: 't', d: 1, on: ['group'] }, rm: { k: 'f', d: 1, on: ['sap', 'cash', 'fact'] }, sap: { k: 'f', d: 1, on: ['sap'] }, pov: { k: 'f', d: 0.5, on: ['sap', 'cash', 'fact', 'portal'] } };
   var TIER = { '1': 'tier 1, warm', '2': 'tier 2, outbound', '3': 'tier 3, nurture', out: 'out' };
@@ -397,7 +397,7 @@ var T = (function () {
     var any = negs.some(function (x) { return x.checked; });
     var v = T.$('#verdict');
     v.className = 'verdict ' + (any ? 'no' : 'go');
-    v.textContent = any ? 'Nurture, not now: send a point of view, revisit next quarter' : 'Active: keep working it';
+    v.textContent = any ? 'Nurture: send a point of view, revisit next quarter' : 'Active: keep working it';
   }
   negs.forEach(function (x) { x.addEventListener('change', verdict); });
   verdict();

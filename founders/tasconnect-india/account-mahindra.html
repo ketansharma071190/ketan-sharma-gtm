@@ -325,7 +325,7 @@ var T = (function () {
       <ul class="three">
         <li><span>Strategic suppliers on longer terms, paid early by your banks<small id="s-l1">Rs 671 cr freed once, valued at 6.40%</small></span><b id="o-l1">Rs 42.9 cr</b></li>
         <li><span id="t-l2">Mid-tier suppliers outside your bank programme, whose own money costs 11%+<small id="s-l2">Rs 3,323 cr a year paid early from your cash at 10.50%, Rs 271 cr out at a time</small></span><b id="o-l2">Rs 11.1 cr</b></li>
-        <li><span>Small suppliers inside 45 days<small id="s-l3">FY26 interest on late payments, which is not tax-deductible</small></span><b id="o-l3">Rs 1.6 cr</b></li>
+        <li><span>Small suppliers inside 45 days<small id="s-l3">FY26 interest on late payments, disallowed as a tax deduction</small></span><b id="o-l3">Rs 1.6 cr</b></li>
       </ul>
       <div class="kpis">
         <div class="kpi"><span class="k">Cash freed, once</span><span class="v" id="o-fr">Rs 671 cr</span></div>
@@ -355,7 +355,7 @@ var T = (function () {
     <div class="kpis" aria-live="polite">
       <div class="kpi"><span class="k">Via your bank</span><span class="v" id="o-via">2.03%</span><span class="s" id="s-via">over 90 days, paid on day 10</span></div>
       <div class="kpi"><span class="k">Waiting today</span><span class="v" id="o-wait">2.05%</span><span class="s" id="s-wait">its own money for 75 days</span></div>
-      <div class="kpi hi"><span class="k">A strategic supplier</span><span class="v" id="o-sup">No worse off</span><span class="s" id="s-sup">0.03% better, via your bank</span></div>
+      <div class="kpi hi"><span class="k">A strategic supplier</span><span class="v" id="o-sup">Level or better</span><span class="s" id="s-sup">0.03% better, via your bank</span></div>
     </div>
   </div></details>
   </div>
@@ -393,7 +393,7 @@ var T = (function () {
       q: ['Supplier finance up 63%, on the same 7 to 90 days as everything else. What is it buying you?', 'What return would treasury need before surplus cash pays suppliers early?'] },
     treasury: { eb: 'For Treasury', h: 'Every bank, Mahindra Finance and your own cash, on one screen.', l: 'Treasury decides, invoice by invoice, who pays early: a bank at your rating, or your cash when the discount beats what it earns.', hi: 'kf4',
       q: ['Which banks carry the Rs 2,239 crore today, and how is each limit set?', 'Would you put Mahindra Finance on the programme beside your banks?'] },
-    procurement: { eb: 'For Procurement', h: 'Rs 26,727 crore owed to suppliers who are not micro or small.', l: 'Your banks could pay them early at your rating. Each supplier signs up once and chooses, invoice by invoice, when to be paid. Micro and small stay inside 45 days.', hi: 'kf3',
+    procurement: { eb: 'For Procurement', h: 'Rs 26,727 crore owed to medium and large suppliers.', l: 'Your banks could pay them early at your rating. Each supplier signs up once and chooses, invoice by invoice, when to be paid. Micro and small stay inside 45 days.', hi: 'kf3',
       q: ['Rs 382 crore reached small suppliers about 8 days late on average. Approvals or process?', 'Which plant or category would you pilot first?'] }
   };
   var DEF = { 'm-sp': 110766, 'm-sh': 15, 'm-ex': 15, 'm-cof': 6.4, 'm-ep': 3, 'm-apr': 10.5, 'm-mid': 11, 'm-de': 30, 'm-mse': 1.8, 'm-msi': 1.55, 'm-t0': 75, 'm-br': 8, 'm-pd': 10, 'm-own': 10 };
@@ -428,12 +428,12 @@ var T = (function () {
       (t1 < 90 ? ', inside your 7 to 90 day range.' : t1 === 90 ? ', the top of your 7 to 90 day range. Payables already average about 90 days, so this is for suppliers on shorter terms.' : ', past your 7 to 90 day range today.')) + ' Micro and small stay at 45.';
 
     T.$('#o-tot').textContent = c1(total);
-    T.$('#s-tot').textContent = onProg > 0 ? 'about ' + Math.round(total / onProg * 10000) + ' bps of spend on the programme' : 'Nothing on the programme yet, only the filed interest';
+    T.$('#s-tot').textContent = onProg > 0 ? 'about ' + Math.round(total / onProg * 10000) + ' bps of spend on the programme' : 'the filed interest alone, until spend joins the programme';
     T.$('#o-l1').textContent = c1(l1);
-    T.$('#s-l1').textContent = sp <= 0 ? 'No spend entered, so nothing is freed' : sh <= 0 ? 'Nothing on the programme, so nothing is freed' : ex <= 0 ? 'No days added, so nothing is freed' : fmt(freed) + ' freed once, valued at ' + T.pct(cof, 2);
+    T.$('#s-l1').textContent = sp <= 0 ? 'Enter spend to see the cash freed' : sh <= 0 ? 'Add a programme share to see the cash freed' : ex <= 0 ? 'Add days to see the cash freed' : fmt(freed) + ' freed once, valued at ' + T.pct(cof, 2);
     T.$('#t-l2').firstChild.textContent = 'Mid-tier suppliers outside your bank programme, whose own money costs ' + T.pct(mid, 2) + '+';
     T.$('#o-l2').textContent = c1(l2);
-    T.$('#s-l2').textContent = cashOn ? fmt(face) + ' a year paid early from your cash at ' + T.pct(apr, 2) + ', ' + fmt(dep) + ' out at a time' : (face > 0 ? 'Below your cost of funds, so your banks pay these suppliers instead' : 'No spend paid early from your cash');
+    T.$('#s-l2').textContent = cashOn ? fmt(face) + ' a year paid early from your cash at ' + T.pct(apr, 2) + ', ' + fmt(dep) + ' out at a time' : (face > 0 ? 'Below your cost of funds, so your banks pay these suppliers instead' : 'Enter spend to see early pay from your cash');
     T.$('#o-l3').textContent = c1(l3);
     T.$('#o-fr').textContent = fmt(freed);
     T.$('#o-dep').textContent = fmt(cashOn ? dep : 0);
@@ -445,13 +445,13 @@ var T = (function () {
     T.$('#s-via').textContent = 'over ' + t1 + ' days, paid on day ' + pd;
     T.$('#o-wait').textContent = T.pct(wait, 2);
     T.$('#s-wait').textContent = 'its own money for ' + t0 + ' days';
-    T.$('#o-sup').textContent = ok ? 'No worse off' : 'Worse off';
+    T.$('#o-sup').textContent = ok ? 'Level or better' : 'Worse off';
     T.$('#s-sup').textContent = ok ? T.pct(Math.max(0, wait - via), 2) + ' better, via your bank' : T.pct(via - wait, 2) + ' worse: add fewer days or lower the bank rate';
 
     // Warnings sit under the total, so the number is never read without them.
     var F = [];
-    if (sp <= 0) F.push(['lim', 'Enter materials spend. Lines 1 and 2 are zero without it.']);
-    if (live) F.push(ok ? ['ok', 'A strategic supplier moving from ' + t0 + ' to ' + t1 + ' days is no worse off via your bank.'] : ['lim', 'On ' + t1 + ' days a strategic supplier pays more via your bank than it does waiting ' + t0 + ' days today.']);
+    if (sp <= 0) F.push(['lim', 'Enter materials spend to fill lines 1 and 2.']);
+    if (live) F.push(ok ? ['ok', 'A strategic supplier moving from ' + t0 + ' to ' + t1 + ' days comes out level or better via your bank.'] : ['lim', 'On ' + t1 + ' days a strategic supplier pays more via your bank than it does waiting ' + t0 + ' days today.']);
     if (live && t1 > 120) F.push(['lim', 'Terms past 120 days look like borrowing to an auditor. Keep them near market norms.']);
     else if (live && t1 > 90) F.push(['lim', t1 + ' days is past the 7 to 90 day range you file today.']);
     if (face > 0 && !cashOn) F.push(['', 'At ' + T.pct(apr, 2) + ' the early-pay offer earns less than your cash costs. Your banks pay those suppliers instead.']);

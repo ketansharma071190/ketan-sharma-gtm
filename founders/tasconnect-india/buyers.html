@@ -294,8 +294,8 @@ var T = (function () {
     <li>At an MNC subsidiary, regional or global treasury (often in Singapore) frequently holds the decision.</li>
     <li>At promoter-led groups, anything touching banks or treasury policy gets a final nod from the MD or the promoter's office.</li>
     <li>Bank-funded programs need each bank's credit sanction. If a program counts as borrowing, it may need a board resolution within the company's borrowing limit. The company secretary confirms.</li>
-    <li>Where the group has its own NBFC (Mahindra Finance, Hero FinCorp, Bajaj Auto Credit), its head is a funder to bring in, not a rival to route around.</li>
-    <li>Own-cash discounting pays the corporate's own approved invoices early. That is a payment decision inside treasury policy, with no new borrowing.</li>
+    <li>Where the group has its own NBFC (Mahindra Finance, Hero FinCorp, Bajaj Auto Credit), its head is a funder to bring in.</li>
+    <li>Own-cash discounting pays the corporate's own approved invoices early. That is a payment decision inside treasury policy, funded from cash already on the balance sheet.</li>
   </ul>
 </section>
 
@@ -327,10 +327,10 @@ var T = (function () {
   <h2 id="h-rules">Rules for mapping it</h2>
   <ol class="steps">
     <li>Map six core desks in the first meeting: CFO, treasury, procurement, plant head, IT, tax. Ask who owns each.</li>
-    <li>No evaluation plan until the CFO, treasurer, IT and InfoSec are all engaged.</li>
+    <li>The evaluation plan starts once the CFO, treasurer, IT and InfoSec are all engaged.</li>
     <li>Own cash takes the banks off the critical path, and tax gains weight (the GST route on the discount). Bank-funded makes the banks the slowest track: run it in parallel.</li>
     <li>At an MNC subsidiary, ask early: "Does regional treasury decide this, or do you?"</li>
-    <li>Map the committee in person at head office. The real deciders in Indian finance teams are often not on LinkedIn.</li>
+    <li>Map the committee in person at head office. The real deciders in Indian finance teams are often met only at head office.</li>
   </ol>
 </section>
 
@@ -346,16 +346,16 @@ var T = (function () {
   var D = [
     { id: 'cfo', l: ['CFO'], ring: 0, a: 180, n: 'CFO', who: 'Amarjyoti Barua, Group CFO', role: 'Economic buyer, signs', owns: 'Working capital, cost, rating, audit, the board story', hear: 'Numbers on his own balance sheet; risk under control', land: 'One board line: working capital days down, small suppliers paid inside 45 days, the supplier finance note from one source', kill: 'A hidden-debt scare', ask: 'If this worked, what would you put on the board slide a year from now?', s: 2 },
     { id: 'tre', l: ['Treasurer'], ring: 0, a: 0, n: 'Treasurer', role: 'Program owner, champion, co-signs', owns: 'Banks, limits, pricing, liquidity, surplus', hear: 'Keep my banks; one view; banks compete on price; yield on cash', land: 'Every bank on one screen, surplus earning more than the liquid fund, a tap he can close any morning', kill: 'Losing daily cash control', ask: 'How many banks run supplier programs for you today, through how many portals?', s: 3 },
-    { id: 'cpo', l: ['CPO'], ring: 1, a: 225, n: 'CPO and procurement', role: 'Terms and suppliers; often runs the software contract', owns: 'Terms, supplier relations, adoption', hear: "Early pay is the supplier's choice; terms talks get easier", land: 'Helping a supplier under pressure without touching price', kill: 'The discount quietly becoming the price', ask: 'Which suppliers can you not afford to lose?', s: 2 },
-    { id: 'plant', l: ['Plant', 'heads'], ring: 1, a: 270, n: 'Plant or business heads', role: 'Often senior to the CFO in Indian manufacturing', owns: 'Production, supplier relationships', hear: 'No disruption, no supplier anger', land: 'Critical small suppliers stop asking for advances; fewer line stoppages', kill: 'Being told to push suppliers', ask: 'Which ten suppliers would hurt your line most if they ran short of cash?', s: 1 },
+    { id: 'cpo', l: ['CPO'], ring: 1, a: 225, n: 'CPO and procurement', role: 'Terms and suppliers; often runs the software contract', owns: 'Terms, supplier relations, adoption', hear: "Early pay is the supplier's choice; terms talks get easier", land: 'Helping a supplier under pressure while the price holds', kill: 'The discount quietly becoming the price', ask: 'Which suppliers must you keep at any cost?', s: 2 },
+    { id: 'plant', l: ['Plant', 'heads'], ring: 1, a: 270, n: 'Plant or business heads', role: 'Often senior to the CFO in Indian manufacturing', owns: 'Production, supplier relationships', hear: 'Smooth production and calm suppliers', land: 'Critical small suppliers stop asking for advances; fewer line stoppages', kill: 'Being told to push suppliers', ask: 'Which ten suppliers would hurt your line most if they ran short of cash?', s: 1 },
     { id: 'ap', l: ['AP'], ring: 1, a: 135, n: 'AP or shared services', role: 'Often a GBS centre', owns: 'Approvals, reconciliation, vendor queries', hear: 'Fewer "where is my payment" calls; reconciliation in the ERP', land: 'A quiet inbox', kill: 'New manual work', ask: 'How many days from invoice to approval today?', s: 2 },
-    { id: 'tax', l: ['Tax'], ring: 1, a: 315, n: 'Tax', role: '43B(h), now s.37(2)(g); MSME Form I; GST', owns: '43B(h), MSME Form I, GST on discounts', hear: 'MSE dues inside 45 days, with clean evidence', land: 'No disallowance at year-end', kill: 'An unclear GST or TDS route', ask: 'What share of MSME dues crossed 45 days last year?', s: 1 },
-    { id: 'aud', l: ['Auditor'], ring: 1, a: 90, n: 'Financial reporting and statutory auditor', role: 'The Ind AS 7 and 107 note', owns: 'The supplier finance note, classification', hear: 'One source across every bank', land: 'A note the auditor signs without a chase', kill: 'Debt reclassification', ask: 'How did the FY26 supplier finance note go?', s: 2 },
-    { id: 'it', l: ['IT, SAP'], ring: 1, a: 45, n: 'CIO, IT and SAP', role: 'Integration and the change queue', owns: 'Integration, change queue', hear: 'Little ERP work; banks connect to the platform, not the ERP', land: 'One link, one entity first', kill: 'A long change queue', ask: "Who owns SAP changes, and what's in their queue?", s: 0 },
+    { id: 'tax', l: ['Tax'], ring: 1, a: 315, n: 'Tax', role: '43B(h), now s.37(2)(g); MSME Form I; GST', owns: '43B(h), MSME Form I, GST on discounts', hear: 'MSE dues inside 45 days, with clean evidence', land: 'The full deduction at year-end', kill: 'An unclear GST or TDS route', ask: 'What share of MSME dues crossed 45 days last year?', s: 1 },
+    { id: 'aud', l: ['Auditor'], ring: 1, a: 90, n: 'Financial reporting and statutory auditor', role: 'The Ind AS 7 and 107 note', owns: 'The supplier finance note, classification', hear: 'One source across every bank', land: 'A note the auditor signs first time', kill: 'Debt reclassification', ask: 'How did the FY26 supplier finance note go?', s: 2 },
+    { id: 'it', l: ['IT, SAP'], ring: 1, a: 45, n: 'CIO, IT and SAP', role: 'Integration and the change queue', owns: 'Integration, change queue', hear: 'Little ERP work; banks connect to the platform', land: 'One link, one entity first', kill: 'A long change queue', ask: "Who owns SAP changes, and what's in their queue?", s: 0 },
     { id: 'sec', l: ['InfoSec'], ring: 1, a: 0, n: 'CISO and InfoSec', role: 'Vendor risk, data, DPDP', owns: 'Vendor risk, data, DPDP', hear: 'ISO 27001 and the security pack in week one', land: 'Questions closed early', kill: 'Being found at month four', ask: 'What does your vendor risk process need from us?', s: 0 },
-    { id: 'leg', l: ['Legal'], ring: 1, a: 180, n: 'Legal and company secretary', role: 'Contract, supplier and funder terms, board approvals', owns: 'Platform contract, supplier and funder terms, board approvals', hear: 'Standard paper', land: 'No surprises', kill: 'Late redlines', ask: 'Whose paper do you prefer to start from?', s: 1 },
-    { id: 'bank', l: ['Banks'], ring: 2, a: 30, n: 'Banks (funders)', role: 'Credit sanction for program limits', owns: 'Credit sanction for program limits', hear: 'A well-run program on a good name', land: 'New book without building technology', kill: 'Slow sanction', ask: 'Ask the treasurer: "Which bank is closest to its limit on you?"', s: 0 },
-    { id: 'board', l: ['Board'], ring: 2, a: 210, n: 'Audit committee or board', role: 'Told if material', owns: 'Oversight, if material', hear: 'Transparent and within policy', land: 'Nothing to explain', kill: 'A surprise', ask: 'No direct question. The CFO carries it.', s: 0 },
+    { id: 'leg', l: ['Legal'], ring: 1, a: 180, n: 'Legal and company secretary', role: 'Contract, supplier and funder terms, board approvals', owns: 'Platform contract, supplier and funder terms, board approvals', hear: 'Standard paper', land: 'Predictable paper', kill: 'Late redlines', ask: 'Whose paper do you prefer to start from?', s: 1 },
+    { id: 'bank', l: ['Banks'], ring: 2, a: 30, n: 'Banks (funders)', role: 'Credit sanction for program limits', owns: 'Credit sanction for program limits', hear: 'A well-run program on a good name', land: 'New book on a platform already built', kill: 'Slow sanction', ask: 'Ask the treasurer: "Which bank is closest to its limit on you?"', s: 0 },
+    { id: 'board', l: ['Board'], ring: 2, a: 210, n: 'Audit committee or board', role: 'Told if material', owns: 'Oversight, if material', hear: 'Transparent and within policy', land: 'A clean report', kill: 'A surprise', ask: 'The CFO carries it.', s: 0 },
     { id: 'reg', l: ['Group', 'treasury'], ring: 2, a: 300, n: 'Regional or global treasury', role: 'Often in Singapore; the decision often sits here', owns: 'Group treasury policy, group bank panel', hear: 'The India program fits the group program', land: 'Indian suppliers inside the program the group already runs', kill: 'An India-only tool outside group policy', ask: 'Does regional treasury decide this, or do you?', s: 1, mnc: true }
   ];
   var STATES = ['Unmapped', 'Identified', 'Engaged', 'Champion'];
@@ -405,13 +405,13 @@ var T = (function () {
       g.addEventListener('click', function () { sel = d.id; draw(); });
       g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sel = d.id; draw(); var n = svg.querySelector('[aria-label^="' + d.n + '"]'); if (n) n.focus(); } });
       svg.appendChild(g);
-      if (dim) svg.appendChild(el('text', { x: p.x, y: p.y + r + 14, 'text-anchor': 'middle', 'class': 'edge-lab' }, 'Not needed for own cash'));
+      if (dim) svg.appendChild(el('text', { x: p.x, y: p.y + r + 14, 'text-anchor': 'middle', 'class': 'edge-lab' }, 'Joins on the bank route'));
     });
     labels.forEach(function (L) { svg.appendChild(el('text', { x: L[0], y: L[1], 'text-anchor': L[3], 'class': 'edge-lab', fill: 'var(--accent)' }, L[2])); });
     var counted = list.filter(function (d) { return !(d.id === 'bank' && route === 'own'); });
     var n = counted.filter(function (d) { return d.s >= 2; }).length;
     T.$('#sc').textContent = n + ' of ' + counted.length;
-    T.$('#scl').textContent = route === 'own' ? 'desks engaged (banks not needed on own cash)' : 'desks engaged';
+    T.$('#scl').textContent = route === 'own' ? 'desks engaged; banks join on the bank route' : 'desks engaged';
     var need = ['cfo', 'tre', 'it', 'sec'], met = need.every(function (k) { return D.filter(function (d) { return d.id === k; })[0].s >= 2; });
     var g = T.$('#gate'); g.className = 'gate' + (met ? ' met' : '');
     g.textContent = met ? 'Ready for an evaluation plan: CFO, treasurer, IT and InfoSec are engaged.' : 'Ready for an evaluation plan when the CFO, treasurer, IT and InfoSec are engaged.';
@@ -423,7 +423,7 @@ var T = (function () {
     var c = T.$('#card');
     c.innerHTML = '<div><p class="eyebrow">' + d.role + '</p><h3>' + d.n + '</h3>' + (d.who ? '<p class="small"><b>' + d.who + '</b></p>' : '<p class="small muted">At M&amp;M: still to map</p>') + '</div>' +
       '<p class="pl">' + d.land + '</p>' +
-      '<dl class="kv"><dt>Owns</dt><dd>' + d.owns + '</dd><dt>Needs to hear</dt><dd>' + d.hear + '</dd><dt>What kills it</dt><dd>' + d.kill + '</dd><dt>Ask</dt><dd><b>' + (d.ask.indexOf('"') >= 0 || d.ask.indexOf('No direct') === 0 ? d.ask : '&ldquo;' + d.ask + '&rdquo;') + '</b></dd></dl>' +
+      '<dl class="kv"><dt>Owns</dt><dd>' + d.owns + '</dd><dt>Needs to hear</dt><dd>' + d.hear + '</dd><dt>What kills it</dt><dd>' + d.kill + '</dd><dt>Ask</dt><dd><b>' + (d.ask.indexOf('"') >= 0 || d.ask.indexOf('The CFO carries') === 0 ? d.ask : '&ldquo;' + d.ask + '&rdquo;') + '</b></dd></dl>' +
       '<div class="seg" id="cov" role="group" aria-label="Coverage">' + STATES.map(function (s, i) { return '<button type="button" data-v="' + i + '" aria-pressed="' + (d.s === i) + '">' + s + '</button>'; }).join('') + '</div>';
     T.seg(T.$('#cov'), function (v) { d.s = +v; save(); draw(); });
   }

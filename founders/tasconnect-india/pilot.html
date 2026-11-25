@@ -276,7 +276,7 @@ var T = (function () {
 <section class="hero">
   <p class="eyebrow">05 &middot; Pilot design</p>
   <h1>30 suppliers, one entity, 90 days from clearance, with success signed before day one.</h1>
-  <p class="lede">Small enough to start on the corporate's own cash, written so that the rollout is a scope change and not a second procurement.</p>
+  <p class="lede">Small enough to start on the corporate's own cash, written so that the rollout is a scope change on the same paper.</p>
   <div class="chips"><span class="chip ok">Filled</span><span class="chip o">Thresholds are defaults the CFO replaces</span></div>
 </section>
 
@@ -284,15 +284,15 @@ var T = (function () {
   <h2 id="h-scope">Scope: one of everything</h2>
   <div class="chips"><span class="chip o">One program</span><span class="chip o">One legal entity</span><span class="chip o">One plant or one category</span><span class="chip o">One ERP link</span></div>
   <div class="coh">
-    <div class="card"><span class="eyebrow">Cohort 1 &middot; Own cash</span><b class="n">20 suppliers</b><p class="small">Micro, small and mid suppliers on the longest terms. No bank sanction needed, so they start on day 1 of the 90.</p></div>
-    <div class="card"><span class="eyebrow">Cohort 2 &middot; Bank-funded, in parallel</span><b class="n">10 suppliers</b><p class="small">Bigger suppliers funded by the bank that already runs the corporate's acceptances. They start when that bank's paper clears. Cohort 1 never waits for it.</p></div>
+    <div class="card"><span class="eyebrow">Cohort 1 &middot; Own cash</span><b class="n">20 suppliers</b><p class="small">Micro, small and mid suppliers on the longest terms. On the corporate's own cash, so they start on day 1 of the 90.</p></div>
+    <div class="card"><span class="eyebrow">Cohort 2 &middot; Bank-funded, in parallel</span><b class="n">10 suppliers</b><p class="small">Bigger suppliers funded by the bank that already runs the corporate's acceptances. They start when that bank's paper clears. Cohort 1 is already running by then.</p></div>
   </div>
   <p class="small muted">30 suppliers in all, about Rs 1.7 crore of the corporate's cash rolling for cohort 1 on the brief's figures.</p>
 </section>
 
 <section class="blk" aria-labelledby="h-plan">
   <h2 id="h-plan">The evaluation plan, shown in the first meeting</h2>
-  <p>Shown early so InfoSec and legal start in week one. The 90 days start when they clear, at Gate A. Setup at a large Indian corporate often runs 12 to 16 weeks, so the date is firmed with their IT team in week one and never promised before.</p>
+  <p>Shown early so InfoSec and legal start in week one. The 90 days start when they clear, at Gate A. Setup at a large Indian corporate often runs 12 to 16 weeks, so the date is firmed with their IT team in week one, and promised from then.</p>
   <div class="seg" id="route" role="group" aria-label="Funding route"><button type="button" data-v="own" aria-pressed="false">Own cash only</button><button type="button" data-v="both" aria-pressed="true">Own cash plus a bank cohort</button><button type="button" data-v="bank" aria-pressed="false">Bank-funded only</button></div>
   <div class="svgbox"><svg id="gantt" role="img" aria-label="Pilot plan: setup before the clock, then weeks 1 to 13"></svg></div>
   <p class="first" id="first" aria-live="polite">First early payment: <b>week 2</b> of the 90 days.</p>
@@ -302,7 +302,7 @@ var T = (function () {
   <h2 id="h-gates">Two gates</h2>
   <div class="gates">
     <div class="card"><span class="eyebrow">Gate A &middot; the start line, day 1</span><ul class="ticks small"><li>InfoSec cleared</li><li>Order form signed, fee from go-live</li><li>Tax route signed: GST on the discount</li><li>Supplier terms approved</li><li>Rate card and floor signed by treasury</li><li>Interface tested on one entity</li><li>Helpdesk staffed, 20 suppliers ready to invite</li></ul></div>
-    <div class="card"><span class="eyebrow">Gate B &middot; end of week 6</span><ul class="ticks small"><li>At least 2 in 3 invited suppliers registered</li><li>At least 40% of those registered have taken one early payment</li><li>Zero unreconciled items</li><li>Bank cohort live, or a dated reason why not</li></ul></div>
+    <div class="card"><span class="eyebrow">Gate B &middot; end of week 6</span><ul class="ticks small"><li>At least 2 in 3 invited suppliers registered</li><li>At least 40% of those registered have taken one early payment</li><li>Every item reconciled</li><li>Bank cohort live, or a dated plan for it</li></ul></div>
   </div>
 </section>
 
@@ -311,7 +311,7 @@ var T = (function () {
   <p>Written and signed before day one. The CFO sets the numbers. The last line is in his own words, taken from the first meeting, and becomes the day-90 test.</p>
   <div class="sheet" id="sheet">
     <ol>
-      <li>Zero approved cohort invoices paid past 45 days.</li>
+      <li>Every approved cohort invoice paid within 45 days.</li>
       <li><input id="s-share" type="number" inputmode="numeric" placeholder="67" aria-label="Share of cohort signed up, percent">% of the cohort signed up by week <input id="s-week" type="number" inputmode="numeric" placeholder="6" aria-label="Week number">.</li>
       <li>Yield on cash used above the treasury hurdle of <input id="s-hur" type="number" inputmode="decimal" placeholder="9.2" aria-label="Treasury hurdle, percent">%.</li>
       <li>Approval to payment in <input id="s-days" type="number" inputmode="numeric" placeholder="3" aria-label="Days from approval to payment"> days or less for suppliers who take early pay.</li>
@@ -334,7 +334,7 @@ var T = (function () {
 
 <section class="blk" aria-labelledby="h-dq">
   <h2 id="h-dq">Walk away when</h2>
-  <ul class="ticks red"><li>The pilot is open-ended, with no success criteria.</li><li>Nobody is named to sign.</li></ul>
+  <ul class="ticks red"><li>The pilot stays open-ended, with success criteria left blank.</li><li>The signer stays unnamed.</li></ul>
 </section>
 
 <script>
@@ -374,7 +374,7 @@ var T = (function () {
       var y = top + i * RH;
       if (r.lane) { s.appendChild(el('text', { x: 0, y: y + (wide ? 16 : 22), 'class': 'lane' }, r.lane)); return; }
       var a = r.a, b = r.b, label = r.t, skip = false, amber = !!r.bank;
-      if (route === 'own' && r.bank) { skip = true; label = r.id === 'sanction' ? 'Bank paper: not needed, own cash' : 'Cohort 2: none, own cash only'; }
+      if (route === 'own' && r.bank) { skip = true; label = r.id === 'sanction' ? 'Bank paper: skipped on own cash' : 'Own cash only: one cohort'; }
       if (route === 'bank') {
         if (r.id === 'sanction') { a = -3.4; b = 0; label = 'Bank credit sanction: sets the start'; }
         if (r.id === 'c1') { label = 'All 30, bank-funded'; amber = true; }
@@ -390,7 +390,7 @@ var T = (function () {
     route = v; redraw();
     T.$('#first').innerHTML = route === 'bank'
       ? 'First early payment: <b>week 2</b> of the 90 days, but the 90 days wait for the bank\'s sanction.'
-      : 'First early payment: <b>week 2</b> of the 90 days, on the corporate\'s own cash. The bank never sets the pace.';
+      : 'First early payment: <b>week 2</b> of the 90 days, on the corporate\'s own cash. The corporate sets the pace.';
   }
   T.seg(T.$('#route'), draw);
   draw('both');
@@ -403,7 +403,7 @@ var T = (function () {
   });
   function val(id) { var e = T.$('#' + id); return e.value || e.placeholder; }
   T.$('#s-copy').addEventListener('click', function (e) {
-    var t = 'Pilot success sheet\n1. Zero approved cohort invoices paid past 45 days.\n2. ' + val('s-share') + '% of the cohort signed up by week ' + val('s-week') + '.\n3. Yield on cash used above the treasury hurdle of ' + val('s-hur') + '%.\n4. Approval to payment in ' + val('s-days') + ' days or less for suppliers who take early pay.\n5. One report across every funder in the pilot.\n6. Board line: ' + val('s-line');
+    var t = 'Pilot success sheet\n1. Every approved cohort invoice paid within 45 days.\n2. ' + val('s-share') + '% of the cohort signed up by week ' + val('s-week') + '.\n3. Yield on cash used above the treasury hurdle of ' + val('s-hur') + '%.\n4. Approval to payment in ' + val('s-days') + ' days or less for suppliers who take early pay.\n5. One report across every funder in the pilot.\n6. Board line: ' + val('s-line');
     T.copy(t, e.currentTarget);
   });
 })();

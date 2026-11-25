@@ -335,8 +335,8 @@ var T = (function () {
     <h1 class="mega" id="h1">Seven corporates.<br>One playbook.<br><span class="soft">USD 2.5M signed.</span></h1>
     <p class="lede">Who we sell to in India, what we say in the room, and the deals that sign the year.</p>
     <a class="strip" href="tasconnect-india/plan.html" aria-label="The signed plan: USD 2.5 million in 2027 from seven named deals, against a USD 2 million bar. Open the plan.">
-      <span class="mini" aria-hidden="true"><i style="height:25%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:100%"></i></span>
-      <span class="t"><b>USD 2.5M signed in 2027</b><span>Q1 0.25 &middot; Q2 0.45 &middot; Q3 0.8 &middot; Q4 1.0, from seven named deals</span></span>
+      <span class="mini" aria-hidden="true"><i style="height:25%"></i><i style="height:50%"></i><i style="height:75%"></i><i style="height:100%"></i></span>
+      <span class="t"><b>USD 2.5M signed in 2027</b><span>Q1 0.25 &middot; Q2 0.5 &middot; Q3 0.75 &middot; Q4 1.0, from seven named deals</span></span>
       <span class="go">Open the plan</span>
     </a>
   </div>
@@ -360,7 +360,7 @@ var T = (function () {
           <li><span class="nm">Mahindra &amp; Mahindra</span><span class="why"><b class="nw">Rs 2,239 cr</b> in supplier finance, up 63% in a year. <a class="pg" href="tasconnect-india/account-mahindra.html">Open its page</a></span></li>
           <li><span class="nm">Maruti Suzuki</span><span class="why"><b class="nw">Rs 76,838 cr</b> invested. Payable days 57 to 61.</span></li>
           <li><span class="nm">Hero MotoCorp</span><span class="why">Payable days <b>77 to 88</b> in a year.</span></li>
-          <li><span class="nm">Bajaj Auto</span><span class="why">Surplus funds above <b class="nw">Rs 18,000 cr</b>, almost no debt.</span></li>
+          <li><span class="nm">Bajaj Auto</span><span class="why">Surplus funds above <b class="nw">Rs 18,000 cr</b>, borrowings of Rs 73 cr.</span></li>
         </ul>
       </div>
       <div>
@@ -512,7 +512,7 @@ var T = (function () {
       T.$('#o-why').innerHTML = 'Every Rs 100 crore used nets <b>Rs ' + T.inr((a - FLOOR) * 100, 1) + ' crore</b> a year over what it costs.';
     } else {
       r.textContent = 'Your banks pay them'; r.className = 'v bank';
-      T.$('#o-why').innerHTML = 'Below the floor your cash stays home. Banks pay early at your rating, and <b>none of your cash</b> goes out.';
+      T.$('#o-why').innerHTML = 'Below the floor your banks pay early at your rating, and <b>all of your cash</b> stays home.';
     }
     redraw();
   }

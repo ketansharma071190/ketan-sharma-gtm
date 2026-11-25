@@ -281,7 +281,7 @@ details.xp>summary .dt{padding-top:1px}
 
 <section class="blk" aria-labelledby="h-mi">
   <h2 id="h-mi">What a late small-supplier invoice costs</h2>
-  <p>MSMED interest is 3 times the RBI bank rate, compounded monthly, and it is not deductible. Type a figure from the account's MSMED table.</p>
+  <p>MSMED interest is 3 times the RBI bank rate, compounded monthly, and it is disallowed as a tax deduction. Type a figure from the account's MSMED table.</p>
   <div class="mi">
     <div class="fields">
       <label class="f">Principal paid late, Rs cr<input id="m-p" type="number" value="100" step="10" inputmode="decimal"></label>
@@ -290,7 +290,7 @@ details.xp>summary .dt{padding-top:1px}
     </div>
     <div class="kpis" aria-live="polite">
       <div class="kpi"><span class="k">Interest rate</span><span class="v" id="m-r">17.25%</span><span class="s" id="m-e">about 18.7% effective</span></div>
-      <div class="kpi hi"><span class="k">Interest owed</span><span class="v" id="m-i">Rs 1.4 cr</span><span class="s">not deductible</span></div>
+      <div class="kpi hi"><span class="k">Interest owed</span><span class="v" id="m-i">Rs 1.4 cr</span><span class="s">disallowed as a deduction</span></div>
       <div class="kpi"><span class="k">Deduction moved</span><span class="v" id="m-t">Rs 100 cr</span><span class="s">to the year paid, if unpaid at year-end</span></div>
     </div>
     <p class="cap">Illustrative. M&amp;M's FY26 table shows Rs 382 crore paid late, with about Rs 6.5 crore of interest accrued.</p>
@@ -300,14 +300,14 @@ details.xp>summary .dt{padding-top:1px}
 <script>
 (function () {
   var R = [
-    { d: '1 Aug 2023', x: 2023.58, t: 'E-invoicing above Rs 5 crore turnover', m: 'Supplier invoices to a large corporate are GST-validated. From 1 Apr 2025, taxpayers at Rs 10 crore and above must report each e-invoice within 30 days.', u: 'Cleaner invoice data is easier to finance. A supporting line, never the lead.' },
-    { d: 'FY 2023-24', x: 2023.75, t: 'Section 43B(h), now s.37(2)(g)', m: 'Dues to micro and small enterprises paid past the MSMED limit (the agreed date, at most 45 days; 15 days with no agreement) are deductible only in the year paid. The Income-tax Act 2025 carries it as s.37(2)(g).', u: '31 Mar 2027 is the next year-end test. Own-cash early payment is the cleanest answer, because it is plainly the corporate\'s own payment.' },
+    { d: '1 Aug 2023', x: 2023.58, t: 'E-invoicing above Rs 5 crore turnover', m: 'Supplier invoices to a large corporate are GST-validated. From 1 Apr 2025, taxpayers at Rs 10 crore and above must report each e-invoice within 30 days.', u: 'Cleaner invoice data is easier to finance. Use it as a supporting line.' },
+    { d: 'FY 2023-24', x: 2023.75, t: 'Section 43B(h), now s.37(2)(g)', m: 'Dues to micro and small enterprises paid past the MSMED limit (the agreed date, at most 45 days; 15 days by default) are deductible only in the year paid. The Income-tax Act 2025 carries it as s.37(2)(g).', u: '31 Mar 2027 is the next year-end test. Own-cash early payment is the cleanest answer, because it is plainly the corporate\'s own payment.' },
     { d: '31 Mar 2025', x: 2025.25, t: 'TReDS onboarding mandatory above Rs 250 crore', m: 'Every company above Rs 250 crore turnover, and every CPSE, had to be on TReDS.', u: 'They are all on TReDS already. We sit beside it.' },
     { d: '1 Apr 2025', x: 2025.33, t: 'MSME thresholds raised', m: 'Small now runs up to Rs 100 crore turnover, so far more suppliers count as micro or small and fall under the 45-day rule.', u: 'Ask what share of the supplier base is now micro or small. It is usually higher than last year\'s answer.' },
-    { d: 'FY 2025-26', x: 2025.9, t: 'Ind AS 7 supplier finance note', m: 'First applied this year: terms, carrying amounts, amounts already paid by finance providers, due-date ranges, liquidity risk. Reliance disclosed Rs 76,377 crore, M&M Rs 2,239 crore standalone. FY27 is year two, and comparatives arrive.', u: '"The data sits with each bank." One platform gives one source. Never call it a ready-made Ind AS 7 report.' },
+    { d: 'FY 2025-26', x: 2025.9, t: 'Ind AS 7 supplier finance note', m: 'First applied this year: terms, carrying amounts, amounts already paid by finance providers, due-date ranges, liquidity risk. Reliance disclosed Rs 76,377 crore, M&M Rs 2,239 crore standalone. FY27 is year two, and comparatives arrive.', u: '"The data sits with each bank." One platform gives one source for the Ind AS 7 note.' },
     { d: '13 Nov 2025', x: 2025.87, t: 'DPDP Rules notified', m: 'Main duties apply from about May 2027. Supplier PAN and bank details are personal data.', u: 'InfoSec and legal will ask. Answer in week one.' },
-    { d: '23 and 30 Jun 2026', x: 2026.48, t: 'TReDS Directions, then the CPSE settlement mandate', m: 'RBI issued final TReDS Directions on 23 Jun. From 30 Jun every operating CPSE settles MSME invoices through TReDS, with an auditor\'s certificate. TReDS discounting grew from Rs 40,000 crore in FY22 to Rs 3.47 lakh crore in FY26.', u: 'The early-payment habit exists, led by MSME sellers. We cover what TReDS cannot: non-MSE suppliers, dealers, the corporate\'s own cash, and its own banks on one screen.' },
-    { d: '3 and 7 Aug 2026', x: 2026.6, t: 'MSMED (Amendment) Bill passes both Houses', m: 'Mediation within 90 days, faster arbitration, buyers deposit 75% of an award before a challenge, online dispute resolution. Presidential assent not yet confirmed.', u: 'Late payment is getting costlier to defend, not only to deduct.' },
+    { d: '23 and 30 Jun 2026', x: 2026.48, t: 'TReDS Directions, then the CPSE settlement mandate', m: 'RBI issued final TReDS Directions on 23 Jun. From 30 Jun every operating CPSE settles MSME invoices through TReDS, with an auditor\'s certificate. TReDS discounting grew from Rs 40,000 crore in FY22 to Rs 3.47 lakh crore in FY26.', u: 'The early-payment habit exists, led by MSME sellers. We cover the rest: non-MSE suppliers, dealers, the corporate\'s own cash, and its own banks on one screen.' },
+    { d: '3 and 7 Aug 2026', x: 2026.6, t: 'MSMED (Amendment) Bill passes both Houses', m: 'Mediation within 90 days, faster arbitration, buyers deposit 75% of an award before a challenge, online dispute resolution. Presidential assent still to be confirmed.', u: 'Late payment is getting costlier to defend as well as to deduct.' },
     { d: '7 Oct 2026', x: 2026.77, t: 'Repo up 25 bps to 5.50%', m: 'The 91-day T-bill is about 5.9% and liquid funds about 6.4%. The next MPC meets 2 to 4 Dec 2026.', u: 'The supplier\'s cost of money rises first. Surplus cash earns little next to a 9 to 12% discounting return.' },
     { d: '31 Mar 2027', x: 2027.25, t: 'The next year-end', m: 'The 45-day test again, and the second supplier finance note, with comparatives.', u: 'Every first meeting from January has a date in it.' }
   ];

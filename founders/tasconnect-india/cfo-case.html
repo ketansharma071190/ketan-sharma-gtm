@@ -327,7 +327,7 @@ var T = (function () {
     <div class="kpis">
       <div class="kpi hi"><span class="k">Break-even fee</span><span class="v" id="k-bef">Rs 8.9 cr</span><span class="s" id="k-befs">a year, about 55 bps of invoices paid early</span></div>
       <div class="kpi"><span class="k">Your cash out, rolling</span><span class="v" id="k-dep">Rs 98 cr</span><span class="s" id="k-face">pays Rs 985 cr early a year</span></div>
-      <div class="kpi"><span class="k">Banks pay early</span><span class="v" id="k-bank">Rs 630 cr</span><span class="s">a year, none of your cash</span></div>
+      <div class="kpi"><span class="k">Banks pay early</span><span class="v" id="k-bank">Rs 630 cr</span><span class="s">a year, all from your banks</span></div>
       <div class="kpi" data-fact><span class="k">Discounting stops paying</span><span class="v" id="k-stop">9.39%</span><span class="s">factoring rate, after the team</span></div>
       <div class="kpi"><span class="k">Pilot, 20 on own cash</span><span class="v" id="k-pil">Rs 1.7 cr</span><span class="s">of cash, rolling</span></div>
     </div>
@@ -366,7 +366,7 @@ var T = (function () {
     </div></details>
     <details class="xp"><summary><span class="st"><b>Take-up sensitivity</b><span>The same case at a quarter to one and a half times the take-up</span></span></summary><div class="xb">
       <div class="scroll"><table class="tbl" id="sens"><thead><tr><th>Take-up</th><th class="r">Your cash out</th><th class="r">Strict total</th><th class="r">Against today</th></tr></thead><tbody></tbody></table></div>
-      <p class="small muted">Stop new offers and the cash comes back within one cycle, about 40 days here. Doing nothing: a Rs 200 crore factored surplus parked in a liquid fund costs about Rs 5 crore a year more than it earns.</p>
+      <p class="small muted">Stop new offers and the cash comes back within one cycle, about 40 days here. Staying as is: a Rs 200 crore factored surplus parked in a liquid fund costs about Rs 5 crore a year more than it earns.</p>
     </div></details>
   </div>
 </section>
@@ -375,9 +375,9 @@ var T = (function () {
   <h2 id="h-lines">Where each line comes from</h2>
   <div class="lines">
     <div class="card"><span class="n">1 &middot; Discount earned, own cash</span><h3>Your cash pays suppliers early and earns the discount.</h3><p class="fx">return = d / (1 &minus; d) &times; 365 / days early</p><p class="small muted">1% for 30 days is 12.3% a year. 0.75% is 9.2%. 0.5% is 6.1%. Only offers above the floor use your cash.</p></div>
-    <div class="card"><span class="n">2 &middot; Days payable, bank-funded</span><h3>Banks pay strategic suppliers early at your rating. You pay on the later date.</h3><p class="fx">cash freed = enrolled spend &times; extra days / 365</p><p class="small muted">Non-MSE suppliers only. The supplier is no worse off when the bank's rate beats its own money (worked below). Keep terms near market norms: the Ind AS 7 note shows them either way.</p></div>
-    <div class="card"><span class="n">3 &middot; Compliance and controls</span><h3>Small suppliers paid inside 45 days, and one source for the note.</h3><p class="small muted">Late MSE dues carry interest at 3 times the bank rate, compounded monthly: 17.25% nominal at a 5.75% bank rate, about 18.7% effective, and not deductible. 43B(h) moves the deduction to the year of payment. Credit notes offset automatically.</p></div>
-    <div class="card"><span class="n">Also &middot; Supplier cost of funds</span><h3>The supplier swaps its own borrowing rate for yours, or takes a discount it chooses.</h3><p class="small muted">Supplier resilience and, over time, better prices. Never promise price, so it stays out of the total.</p></div>
+    <div class="card"><span class="n">2 &middot; Days payable, bank-funded</span><h3>Banks pay strategic suppliers early at your rating. You pay on the later date.</h3><p class="fx">cash freed = enrolled spend &times; extra days / 365</p><p class="small muted">Non-MSE suppliers only. The supplier comes out level or ahead when the bank's rate beats its own money (worked below). Keep terms near market norms: the Ind AS 7 note shows them either way.</p></div>
+    <div class="card"><span class="n">3 &middot; Compliance and controls</span><h3>Small suppliers paid inside 45 days, and one source for the note.</h3><p class="small muted">Late MSE dues carry interest at 3 times the bank rate, compounded monthly: 17.25% nominal at a 5.75% bank rate, about 18.7% effective, and disallowed as a tax deduction. 43B(h) moves the deduction to the year of payment. Credit notes offset automatically.</p></div>
+    <div class="card"><span class="n">Also &middot; Supplier cost of funds</span><h3>The supplier swaps its own borrowing rate for yours, or takes a discount it chooses.</h3><p class="small muted">Supplier resilience and, over time, better prices. Price gains sit outside the total, as upside.</p></div>
     <div class="card cost" style="grid-column:1/-1"><span class="n">Cost line</span><h3>The platform fee stays blank until we quote it.</h3><p class="small muted">Every figure reads "before the platform fee". The team's time is an input. The break-even fee is the total, so the price is set against value.</p></div>
   </div>
 </section>
@@ -399,10 +399,10 @@ var T = (function () {
     <div class="kpi"><span class="k">Worth a year</span><span class="v" id="c-o2">Rs 7.1 cr</span></div>
     <div class="kpi"><span class="k">Supplier's cost, via your bank</span><span class="v" id="c-o3">2.03%</span><span class="s" id="c-o3s">1.75% to the bank, 0.27% its own money to day 10</span></div>
     <div class="kpi"><span class="k">Supplier's cost, waiting today</span><span class="v" id="c-o4">2.05%</span><span class="s" id="c-o4s">its own money for 75 days</span></div>
-    <div class="kpi hi"><span class="k">The supplier</span><span class="v" id="c-o5">No worse off</span><span class="s" id="c-o6">0.03% better, via your bank</span></div>
+    <div class="kpi hi"><span class="k">The supplier</span><span class="v" id="c-o5">Level or better</span><span class="s" id="c-o6">0.03% better, via your bank</span></div>
   </div>
   <ul class="flags" id="c-flags"></ul>
-  <p class="small muted">Enrolled spend: Rs 7,000 crore of strategic spend, 60% eligible, half of that onboarded. The auditor and the rating analyst look at stretched terms. Say "your auditor's call". Never promise an accounting outcome.</p>
+  <p class="small muted">Enrolled spend: Rs 7,000 crore of strategic spend, 60% eligible, half of that onboarded. The auditor and the rating analyst look at stretched terms. Say "your auditor's call", and leave the accounting outcome with the auditor.</p>
 </section>
 
 <section class="blk" aria-labelledby="h-inv">
@@ -414,9 +414,9 @@ var T = (function () {
     <div class="kpi"><span class="k">Factored cash costs</span><span class="v">Rs 7,265</span></div>
     <div class="kpi hi"><span class="k">Stays with the corporate</span><span class="v">Rs 2,502</span></div>
   </div>
-  <details class="xp"><summary><span class="st"><b>The simple own-cash version</b><span>A Rs 200 crore pool, 0.75% for 30 days, no factoring</span></span></summary><div class="xb">
+  <details class="xp"><summary><span class="st"><b>The simple own-cash version</b><span>A Rs 200 crore pool, 0.75% for 30 days, own cash only</span></span></summary><div class="xb">
     <ul class="ticks"><li>0.75% for 30 days is 9.2% a year on the cash used.</li><li>The pool turns about 12 times: about Rs 2,452 crore paid early, Rs 18.4 crore earned.</li><li>The liquid fund at 6.4% would earn Rs 12.8 crore. The gain is about Rs 5.6 crore a year, before the fee.</li></ul>
-    <p class="small muted">It suits a cash-rich corporate with no factoring: Maruti, Bajaj, Hero.</p>
+    <p class="small muted">It suits a cash-rich corporate that funds itself: Maruti, Bajaj, Hero.</p>
   </div></details>
 </section>
 
@@ -441,8 +441,8 @@ var T = (function () {
     <thead><tr><th>Why suppliers drop off</th><th>What we design in</th></tr></thead>
     <tbody>
       <tr><td><b>KYC friction</b>, the top hurdle</td><td>Procurement sends the letter, the supplier signs up online in a few clicks, KYB runs in the background through Chekk. A DBS India program cut onboarding to three days with a two-page agreement and KYC from SAP.</td></tr>
-      <tr><td><b>Fear the discount becomes the price</b></td><td>Early pay is offered invoice by invoice, at the supplier's choice, and never written into terms.</td></tr>
-      <tr><td><b>"It is a loan"</b></td><td>It is the supplier's own invoice paid early. No credit line, no new borrowing on their books.</td></tr>
+      <tr><td><b>Fear the discount becomes the price</b></td><td>Early pay is offered invoice by invoice, at the supplier's choice, and terms stay as written.</td></tr>
+      <tr><td><b>"It is a loan"</b></td><td>It is the supplier's own invoice paid early. Their books carry the same borrowing as before.</td></tr>
       <tr><td><b>Language</b></td><td>Letters, help and the helpdesk in Hindi and the main regional languages for MSME tiers.</td></tr>
     </tbody>
   </table></div>
@@ -537,17 +537,17 @@ var T = (function () {
     var parts = [Math.max(0, M.disc), Math.max(0, M.termsVal), Math.max(0, M.comp)], sum = parts[0] + parts[1] + parts[2] || 1;
     ['#st1', '#st2', '#st3'].forEach(function (id, i) { T.$(id).style.width = (parts[i] / sum * 100).toFixed(2) + '%'; });
     T.$('#k-l1').textContent = c1(M.disc);
-    T.$('#k-l1s').textContent = M.D > 0 ? fmt(M.face) + ' paid early a year at ' + T.pct(M.ret, 1) + ', after a ' + fmt(I.team) + ' team' : 'No offer clears the floor, so no cash goes out';
+    T.$('#k-l1s').textContent = M.D > 0 ? fmt(M.face) + ' paid early a year at ' + T.pct(M.ret, 1) + ', after a ' + fmt(I.team) + ' team' : 'Every offer sits under the floor, so your cash stays home';
     T.$('#k-l2').textContent = c1(M.termsVal);
     var ext = M.rows.filter(function (r) { return r.route === 'bank' && r.ext > 0; });
     T.$('#k-l2s').textContent = ext.length ? fmt(M.freed) + ' freed once, ' + ext.map(function (r) { return r.s.terms + ' to ' + (r.s.terms + r.ext); }).join(', ') + ' days, valued at ' + T.pct(M.termsRate, 2)
-      : (src === 'own' ? 'Your own surplus clears every offer, so no group needs the banks' : 'No group sits under the floor on the bank route');
+      : (src === 'own' ? 'Your own surplus clears every offer, so your cash pays every group' : 'Every group keeps its current terms');
     T.$('#k-l3').textContent = c1(M.comp);
     T.$('#k-l3s').textContent = 'On ' + fmt(I.late) + ' paid ' + I.lateDays + ' days late today, at ' + T.pct(M.r3, 2);
     // kpis
     var paid = M.face + M.bankFace;
-    T.$('#k-bef').textContent = M.total > 0 ? c1(M.total) : 'none';
-    T.$('#k-befs').textContent = M.total > 0 && paid > 0 ? 'a year, about ' + Math.round(M.total / paid * 10000) + ' bps of invoices paid early' : 'the case does not pay on these figures';
+    T.$('#k-bef').textContent = M.total > 0 ? c1(M.total) : 'Rs 0';
+    T.$('#k-befs').textContent = M.total > 0 && paid > 0 ? 'a year, about ' + Math.round(M.total / paid * 10000) + ' bps of invoices paid early' : 'the case costs more than it earns on these figures';
     T.$('#k-dep').textContent = fmt(M.D);
     T.$('#k-face').textContent = 'pays ' + fmt(M.face) + ' early a year';
     T.$('#k-bank').textContent = fmt(M.bankFace);
@@ -567,7 +567,7 @@ var T = (function () {
       c.className = 'chip' + (r.route === 'cash' ? '' : ' o');
       T.$('#res' + i).innerHTML = r.route === 'cash'
         ? 'Discount ' + T.pct(r.d, 2) + '. <b>' + fmt(r.face) + '</b> paid early a year, <b>' + fmt(r.dep) + '</b> out, <b>' + fmt(r.inc) + '</b> earned. Paid on day ' + (r.s.terms - r.t) + ' of ' + r.s.terms + '.'
-        : (r.route === 'bank' ? '<b>' + fmt(r.face) + '</b> a year paid early by your banks at your rating. Terms ' + r.s.terms + (r.ext ? ' to ' + (r.s.terms + r.ext) : '') + ' days. None of your cash.' : 'Under the floor and no bank route: stays on normal terms.');
+        : (r.route === 'bank' ? '<b>' + fmt(r.face) + '</b> a year paid early by your banks at your rating. Terms ' + r.s.terms + (r.ext ? ' to ' + (r.s.terms + r.ext) : '') + ' days. All from your banks.' : 'Under the floor: stays on normal terms.');
     });
     var F = [];
     M.rows.forEach(function (r) {
@@ -575,7 +575,7 @@ var T = (function () {
       if (r.s.apr >= r.s.alt) F.push(['', r.s.n + ': the offer is at or above their own money (' + r.s.alt + '%). Expect little take-up.']);
       if (r.route === 'bank' && r.ext > 0) {
         var dlt = r.wait - r.viaBank;
-        F.push([dlt >= -0.0002 ? 'ok' : 'lim', r.s.n + ' via your bank: ' + T.pct(r.viaBank, 2) + ' against ' + T.pct(r.wait, 2) + ' waiting ' + r.s.terms + ' days today. ' + (dlt >= -0.0002 ? 'No worse off.' : 'Worse off: shorten the new terms or lower the bank rate.')]);
+        F.push([dlt >= -0.0002 ? 'ok' : 'lim', r.s.n + ' via your bank: ' + T.pct(r.viaBank, 2) + ' against ' + T.pct(r.wait, 2) + ' waiting ' + r.s.terms + ' days today. ' + (dlt >= -0.0002 ? 'Level or better.' : 'Worse off: shorten the new terms or lower the bank rate.')]);
       }
       if (r.route === 'bank' && r.s.mse) F.push(['lim', r.s.n + ': on the bank route, but micro and small terms stay at 45 days.']);
     });
@@ -615,12 +615,12 @@ var T = (function () {
     T.$('#c-o4').textContent = T.pct(wait, 2);
     T.$('#c-o4s').textContent = 'its own money for ' + t0 + ' days';
     var diff = wait - viaBank, o5 = T.$('#c-o5');
-    if (diff >= 0) { o5.textContent = 'No worse off'; T.$('#c-o6').textContent = T.pct(diff, 2) + ' better, via your bank'; }
+    if (diff >= 0) { o5.textContent = 'Level or better'; T.$('#c-o6').textContent = T.pct(diff, 2) + ' better, via your bank'; }
     else if (diff > -0.0005) { o5.textContent = 'About even'; T.$('#c-o6').textContent = T.pct(-diff, 2) + ' worse: close to neutral'; }
     else { o5.textContent = 'Worse off'; T.$('#c-o6').textContent = 'by ' + T.pct(-diff, 2) + ': shorten the new terms'; }
     var fl = ['<li class="lim">Non-MSE suppliers only. Micro and small stay at 45 days or less.</li>'];
     if (t1 > 120) fl.push('<li>Terms past 120 days look like borrowing to an auditor. Keep them near market norms.</li>');
-    if (br >= sr) fl.push('<li class="lim">The bank rate is not below the supplier\'s own money, so longer terms only cost the supplier.</li>');
+    if (br >= sr) fl.push('<li class="lim">The bank rate is at or above the supplier\'s own money, so longer terms only cost the supplier.</li>');
     T.$('#c-flags').innerHTML = fl.join('');
   }
   T.$$('[id^="c-"]').filter(function (x) { return x.tagName === 'INPUT'; }).forEach(function (x) { x.addEventListener('input', c); });
