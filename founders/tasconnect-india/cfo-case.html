@@ -321,7 +321,7 @@ var T = (function () {
       <ul class="lns">
         <li><span class="sw" style="background:var(--accent)"></span><span>Discounting on mid and small suppliers, from your cash</span><b id="k-l1">Rs 1.2 cr</b><small id="k-l1s">Rs 985 cr paid early a year at 10.9%, after a Rs 0.4 cr team</small></li>
         <li><span class="sw" style="background:var(--good)"></span><span>Longer terms on strategic suppliers, your banks fund them</span><b id="k-l2">Rs 7.1 cr</b><small id="k-l2s">Rs 86 cr freed once, 75 to 90 days, valued at 8.25%</small></li>
-        <li><span class="sw" style="background:var(--amber)"></span><span>Small suppliers inside 45 days, interest avoided</span><b id="k-l3">Rs 0.6 cr</b><small id="k-l3s">On Rs 40 cr paid 30 days late today, at 17.25%</small></li>
+        <li><span class="sw" style="background:var(--amber)"></span><span>Small suppliers inside 45 days, interest saved</span><b id="k-l3">Rs 0.6 cr</b><small id="k-l3s">On Rs 40 cr paid 30 days late today, at 17.25%</small></li>
       </ul>
     </div>
     <div class="kpis">
@@ -472,7 +472,7 @@ var T = (function () {
     return { fr: num('#i-fr') / 100, fee: num('#i-fee') / 100, ten: Math.max(1, num('#i-ten')), adv: Math.max(0.01, num('#i-adv') / 100), idle: Math.min(0.9, Math.max(0, num('#i-idle') / 100)), liq: num('#i-liq') / 100, hur: num('#i-hur') / 100, cap: num('#i-cap'), team: num('#i-team'), bank: T.$('#i-bank').value === '1',
       t1: num('#i-t1'), br: num('#i-br') / 100, pd: Math.max(0, num('#i-pd')), late: num('#i-late'), lateDays: num('#i-lated'), bankRate: num('#i-brate') / 100 };
   }
-  // The whole case: discounting from own cash above the floor, bank-funded longer terms below it, and late-payment interest avoided.
+  // The whole case: discounting from own cash above the floor, bank-funded longer terms below it, and late-payment interest saved.
   function model(I, mult, frOverride) {
     mult = mult == null ? 1 : mult;
     if (frOverride != null) { var J = {}; for (var q in I) J[q] = I[q]; J.fr = frOverride; I = J; }

@@ -294,10 +294,10 @@ var T = (function () {
 
 <section class="blk" aria-labelledby="h-q">
   <h2 id="h-q">The deals that make each quarter</h2>
-  <p>Tap a deal to slip it a quarter, tap again to lose it. The bars and the total follow.</p>
+  <p>Tap a deal to move it a quarter later; tap again to move it to 2028. The bars and the total follow.</p>
   <div class="qbars" id="qbars" role="group" aria-label="Signed by quarter, USD million: Q1 0.25, Q2 0.5, Q3 0.75, Q4 1.0"></div>
   <p class="small" id="lost" hidden></p>
-  <div class="legend"><span><i style="background:var(--good)"></i>Warm: a group client or a deal open today</span><span><i style="background:var(--accent)"></i>Cold: opened on its own filings</span><span><i style="background:var(--amber)"></i>Slipped in from the quarter before</span></div>
+  <div class="legend"><span><i style="background:var(--good)"></i>Warm: a group client or a deal open today</span><span><i style="background:var(--accent)"></i>Cold: opened on its own filings</span><span><i style="background:var(--amber)"></i>Moved in from the quarter before</span></div>
   <div class="res" aria-live="polite"><span class="tot" id="o-tot">USD 2.5M</span><span class="muted">signed in 2027</span><span class="pill good" id="o-gap">USD 0.5M over the bar</span><button type="button" class="btn sm" id="reset" hidden>Back to the plan</button></div>
   <p class="small muted" id="o-note">Each quarter adds USD 0.25M: one deal in Q1, then two a quarter, with the anchor programs in Q3 and Q4.</p>
 </section>
@@ -310,16 +310,16 @@ var T = (function () {
       <tr><td>Q1 2027</td><td><b>Lenovo India</b>, 0.25M</td><td>The parent's paper, InfoSec and legal carry over. India's suppliers are the next entity.</td><td class="c">1.0x</td><td>The most advanced deal open in your India pipeline</td></tr>
       <tr><td>Q2 2027</td><td><b>Syngenta India</b>, 0.25M; <b>one deal open today</b>, 0.25M</td><td>Distributors on the program before the kharif stocking peak. The open deal is already in motion before day one.</td><td class="c">0.5x</td><td>Other deals open today; Dixon once checked</td></tr>
       <tr><td>Q3 2027</td><td><b>Hero MotoCorp</b>, 0.5M; <b>Bajaj Auto</b>, 0.25M</td><td>Own cash: each approves its own funding, so the order form is signed at pilot start.</td><td class="c">2.6x</td><td>Eicher Motors, LG Electronics India, Coromandel, Dixon</td></tr>
-      <tr><td>Q4 2027</td><td><b>Mahindra &amp; Mahindra</b>, 0.5M; <b>Maruti Suzuki</b>, 0.5M</td><td>M&amp;M waits on each bank's credit sanction. Maruti's parent sees treasury policy.</td><td class="c">3.5x</td><td>Asian Paints, TVS Motor and nine more named for Q4</td></tr>
+      <tr><td>Q4 2027</td><td><b>Mahindra &amp; Mahindra</b>, 0.5M; <b>Maruti Suzuki</b>, 0.5M</td><td>M&amp;M signs as each bank sanctions its credit line. Maruti's parent sees treasury policy.</td><td class="c">3.5x</td><td>Asian Paints, TVS Motor and nine more named for Q4</td></tr>
     </tbody>
   </table></div>
-  <p class="small muted">Named cover is the estimated contract value of the named accounts aimed at the quarter, against its plan. Q1 and Q2 rest on what is already open with you, which is the first question for our call. Behind every cold deal sit 31 more accounts worked in the same cohort, so if Hero slips, another account in the cohort can sign.</p>
+  <p class="small muted">Named cover is the estimated contract value of the named accounts aimed at the quarter, against its plan. Q1 and Q2 rest on what is already open with you, which is the first question for our call. Behind every cold deal sit 31 more accounts worked in the same cohort, so another account in the cohort can sign in Hero's place.</p>
   <a class="open" href="pipeline.html">Open the funnel and capacity</a>
 </section>
 
 <section class="blk" aria-labelledby="h-sens">
   <h2 id="h-sens">If the funnel moves</h2>
-  <p>Pilot count is the riskiest input, so it is a lever here. The plan is 14 scoped pilots, half signing, at an average deal of USD 357k.</p>
+  <p>Pilot count moves the year most, so it is the lever here. The plan is 14 scoped pilots, half signing, at an average deal of USD 357k.</p>
   <div class="stress">
     <div class="ctrl">
       <div class="sl"><label for="r-pil"><span>Scoped pilots in 2027</span><output id="o-pil" for="r-pil">14</output></label><input type="range" id="r-pil" min="8" max="20" step="1" value="14"></div>
@@ -328,7 +328,7 @@ var T = (function () {
     </div>
     <div class="res" aria-live="polite"><span class="tot" id="s-tot">USD 2.5M</span><span class="muted">signed in 2027</span><span class="pill good" id="s-gap">USD 0.5M over the bar</span></div>
     <div class="scroll"><table class="tbl grid4" id="grid"><thead><tr><th>Scoped pilots</th><th class="r">30% sign</th><th class="r">40% sign</th><th class="r">50% sign</th><th class="r">60% sign</th></tr></thead><tbody></tbody></table></div>
-    <p class="small muted">At the average deal on the slider. Your slider position is outlined. Fourteen pilots clear USD 2M even if 2 in 5 sign; ten pilots at 1 in 2 land at USD 1.8M, just under the bar. Pilots are the number to watch every Monday.</p>
+    <p class="small muted">At the average deal on the slider. Your slider position is outlined. Fourteen pilots clear USD 2M when 2 in 5 sign; twelve pilots at 1 in 2 clear it too. Pilots are the number to watch every Monday.</p>
   </div>
 </section>
 
@@ -344,16 +344,16 @@ var T = (function () {
     { n: 'M&M', q: 3, v: 500000 },
     { n: 'Maruti', q: 3, v: 500000 }
   ];
-  var st = D.map(function () { return 0; }); // 0 signs, 1 slips a quarter, 2 lost
+  var st = D.map(function () { return 0; }); // 0 signs, 1 moves a quarter later, 2 moves to 2028
   var WHY = ['Paper carries over', 'Kharif peak; open deal', 'Own cash, fast start', 'Bank sanction; parent'];
   function m(v) { var x = Math.round(v / 10000) / 100, s = String(x); return s.indexOf('.') < 0 ? s + '.0' : s; }
   function mm(v) { var x = Math.round(v / 10000) / 100; return String(x); }
   function bars() {
     var q = [[], [], [], []], tot = 0, out = [];
     D.forEach(function (d, i) {
-      if (st[i] === 2) { out.push(d.n + ' lost'); return; }
+      if (st[i] === 2) { out.push(d.n + ' moves to 2028'); return; }
       var at = d.q + (st[i] === 1 ? 1 : 0);
-      if (at > 3) { out.push(d.n + ' slips into 2028'); return; }
+      if (at > 3) { out.push(d.n + ' moves to 2028'); return; }
       q[at].push({ d: d, i: i, slip: st[i] === 1 }); tot += d.v;
     });
     var top = Math.max(1250000, Math.max.apply(null, q.map(function (l) { return l.reduce(function (s, x) { return s + x.d.v; }, 0); })) * 1.08);
@@ -361,21 +361,21 @@ var T = (function () {
       var sum = list.reduce(function (s, x) { return s + x.d.v; }, 0);
       return '<div class="qb"><span class="v">' + m(sum) + '</span><span class="col">' + list.slice().reverse().map(function (x) {
         var h = (x.d.v / top * 100).toFixed(1);
-        return '<button type="button" data-i="' + x.i + '" class="' + (x.slip ? 'slip' : (x.d.warm ? 'warm' : '')) + '" style="height:' + h + '%" aria-label="' + x.d.n + ', USD ' + mm(x.d.v) + 'M, ' + (x.slip ? 'slipped from the quarter before' : 'signs') + '. Tap to change.">' + x.d.n + ' ' + mm(x.d.v) + '</button>';
+        return '<button type="button" data-i="' + x.i + '" class="' + (x.slip ? 'slip' : (x.d.warm ? 'warm' : '')) + '" style="height:' + h + '%" aria-label="' + x.d.n + ', USD ' + mm(x.d.v) + 'M, ' + (x.slip ? 'moved from the quarter before' : 'signs') + '. Tap to change.">' + x.d.n + ' ' + mm(x.d.v) + '</button>';
       }).join('') + '</span><span class="q">Q' + (k + 1) + '</span><span class="why">' + WHY[k] + '</span></div>';
     }).join('');
-    // lost deals stay tappable from a list under the bars
+    // deals moved to 2028 stay tappable from a list under the bars
     var sums = q.map(function (l) { return l.reduce(function (s, x) { return s + x.d.v; }, 0); });
     T.$('#qbars').setAttribute('aria-label', 'Signed by quarter, USD million: ' + sums.map(function (x, k) { return 'Q' + (k + 1) + ' ' + m(x); }).join(', '));
     T.$('#o-tot').textContent = 'USD ' + m(tot) + 'M';
     var gap = tot - BAR, g = T.$('#o-gap');
     g.className = 'pill ' + (gap >= 0 ? 'good' : 'warn');
-    g.textContent = gap > 0 ? 'USD ' + m(gap) + 'M over the bar' : (gap === 0 ? 'Exactly at the bar' : 'USD ' + m(-gap) + 'M short of the bar');
+    g.textContent = gap > 0 ? 'USD ' + m(gap) + 'M over the bar' : (gap === 0 ? 'Exactly at the bar' : 'USD ' + m(-gap) + 'M to reach the bar');
     var rising = sums[0] < sums[1] && sums[1] < sums[2] && sums[2] < sums[3];
     T.$('#o-note').textContent = out.length
-      ? out.join('; ') + '. ' + (gap >= 0 ? 'Still clears the bar.' : 'A backup from the same quarter has to sign.') + (rising ? '' : ' One quarter now sits at or below the one before.')
+      ? out.join('; ') + '. ' + (gap >= 0 ? 'The year clears the bar.' : (out.length > 1 ? 'Backups from the same quarters sign in their place.' : 'A backup from the same quarter signs in its place.')) + (rising ? '' : ' One quarter now sits at or below the one before.')
       : (st.some(function (x) { return x === 1; })
-        ? 'Slipped deals now sign a quarter later, and the year still clears the bar.' + (rising ? '' : ' One quarter now sits at or below the one before.')
+        ? 'Moved deals now sign a quarter later, and the year clears the bar.' + (rising ? '' : ' One quarter now sits at or below the one before.')
         : 'Each quarter adds USD 0.25M: one deal in Q1, then two a quarter, with the anchor programs in Q3 and Q4.');
     T.$('#reset').hidden = st.every(function (x) { return x === 0; });
     T.$$('#qbars button').forEach(function (b) { b.addEventListener('click', function () { var i = +b.getAttribute('data-i'); st[i] = (st[i] + 1) % 3; bars(); var nb = T.$('#qbars button[data-i="' + i + '"]'); if (nb) nb.focus(); }); });
@@ -385,7 +385,7 @@ var T = (function () {
     var box = T.$('#lost');
     var L = D.map(function (d, i) { return st[i] === 2 || (st[i] === 1 && d.q === 3) ? i : -1; }).filter(function (i) { return i >= 0; });
     box.hidden = !L.length;
-    box.innerHTML = L.length ? 'Out of 2027: ' + L.map(function (i) { return '<button type="button" class="btn sm" data-back="' + i + '">' + D[i].n + ', put back</button>'; }).join(' ') : '';
+    box.innerHTML = L.length ? 'Moved to 2028: ' + L.map(function (i) { return '<button type="button" class="btn sm" data-back="' + i + '">' + D[i].n + ', put back</button>'; }).join(' ') : '';
     T.$$('[data-back]', box).forEach(function (b) { b.addEventListener('click', function () { st[+b.getAttribute('data-back')] = 0; bars(); }); });
   }
   T.$('#reset').addEventListener('click', function () { st = D.map(function () { return 0; }); bars(); });
@@ -409,7 +409,7 @@ var T = (function () {
     T.$('#s-tot').textContent = 'USD ' + m(tot) + 'M';
     var gap = tot - BAR, g = T.$('#s-gap');
     g.className = 'pill ' + (gap >= -1 ? 'good' : 'warn');
-    g.textContent = gap > 1 ? 'USD ' + m(gap) + 'M over the bar' : (gap >= -1 ? 'Exactly at the bar' : 'USD ' + m(-gap) + 'M short of the bar');
+    g.textContent = gap > 1 ? 'USD ' + m(gap) + 'M over the bar' : (gap >= -1 ? 'Exactly at the bar' : 'USD ' + m(-gap) + 'M to reach the bar');
     grid(p, r, a);
   }
   [pil, win, acv].forEach(function (x) { x.addEventListener('input', levers); });
