@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sylvera in India: no resale</title>
+<meta name="description" content="A working draft by Ketan Sharma for Allister Furey: on 26 Oct 2026 India's Bureau of Energy Efficiency posted a draft procedure for trading compliance carbon credits that proposes no bilateral trades and no resale, and how India could open for Sylvera beside the APAC team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F6F4EE; --surface:#FFFFFF; --surface-2:#ECE9DF; --ink:#1A1E1B; --muted:#5B615C; --line:#DAD6CA;
+  --accent:#1F5C4A; --accent-ink:#FFFFFF; --accent-soft:rgba(31,92,74,.08);
+  --ochre:#9C5F12; --ochre-soft:rgba(156,95,18,.09); --rust:#A2402A; --rust-soft:rgba(162,64,42,.08);
+  --f-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --f-body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:8px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#101412; --surface:#171C19; --surface-2:#1E2420; --ink:#E7EAE4; --muted:#A0A89F; --line:#2C332E;
+  --accent:#6FCBA8; --accent-ink:#07150F; --accent-soft:rgba(111,203,168,.10);
+  --ochre:#E7B163; --ochre-soft:rgba(231,177,99,.10); --rust:#F08C72; --rust-soft:rgba(240,140,114,.10);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#101412; --surface:#171C19; --surface-2:#1E2420; --ink:#E7EAE4; --muted:#A0A89F; --line:#2C332E;
+  --accent:#6FCBA8; --accent-ink:#07150F; --accent-soft:rgba(111,203,168,.10);
+  --ochre:#E7B163; --ochre-soft:rgba(231,177,99,.10); --rust:#F08C72; --rust-soft:rgba(240,140,114,.10);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16.5px; line-height:1.62; -webkit-text-size-adjust:100%; overflow-x:hidden}
+.wrap{max-width:840px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{line-height:1.18; text-wrap:balance; margin:0}
+h1,h2{font-family:var(--f-display); font-weight:700; letter-spacing:-.01em}
+h1{font-size:clamp(27px, 5.6vw, 40px)}
+h2{font-size:clamp(21px, 3.8vw, 28px)}
+h3{font-family:var(--f-body); font-size:16.5px; font-weight:600}
+p{margin:0}
+a{color:var(--accent); text-underline-offset:2px; overflow-wrap:anywhere}
+code{font-family:var(--f-mono); font-size:.9em}
+:focus-visible{outline:2px solid var(--ochre); outline-offset:2px}
+
+.topbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-weight:600; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:400}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:13px; text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:520px){ .who span{display:none} }
+
+.hero{padding-block:36px 30px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--ochre)}
+.lede{font-size:18px; color:var(--muted); max-width:64ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+/* the clause ledger */
+.ledger{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.ledger-hd{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 14px; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.ledger-hd b{color:var(--ink); font-weight:500}
+.ledger-cols{display:grid; grid-template-columns:74px 1.15fr 1fr; gap:14px; padding:8px 16px; font-family:var(--f-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--surface-2); border-bottom:1px solid var(--line)}
+.ledger ul{list-style:none; margin:0; padding:0}
+.ledger li{display:grid; grid-template-columns:74px 1.15fr 1fr; gap:4px 14px; padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; align-items:start}
+.ledger li:last-child{border-bottom:0}
+.cl{font-family:var(--f-mono); font-size:12px; color:var(--rust); padding-top:2px}
+.says{min-width:0}
+.says q{font-style:italic}
+.price{min-width:0; color:var(--muted)}
+.mlab{display:none; font-family:var(--f-mono); font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+@media (max-width:620px){
+  .ledger-cols{display:none}
+  .ledger li{grid-template-columns:1fr}
+  .mlab{display:block}
+}
+.ledger-ft{padding:12px 16px; border-top:1px solid var(--line); background:var(--surface-2); font-size:14.5px; color:var(--muted)}
+.ledger-ft b{color:var(--ink); font-weight:600}
+
+.meaning{display:grid; gap:10px; padding:16px 18px; border-radius:var(--r); border-left:4px solid var(--accent); background:var(--accent-soft)}
+.meaning h3{font-size:16px}
+.meaning p{font-size:16px}
+
+section{padding-block:38px; border-top:1px solid var(--line); scroll-margin-top:58px}
+.sh{display:grid; gap:8px; margin-bottom:20px}
+.sh p{color:var(--muted); max-width:66ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--ochre); letter-spacing:.04em; text-transform:uppercase}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid var(--line); color:var(--muted); white-space:nowrap; vertical-align:2px}
+.tag.guess{color:var(--ochre); border-color:color-mix(in srgb, var(--ochre) 45%, transparent); background:var(--ochre-soft)}
+
+.map{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px}
+@media (max-width:720px){ .map{grid-template-columns:1fr} }
+.cell{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:8px; align-content:start; min-width:0}
+.cell .k{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+.cell h3{font-size:16px}
+.cell ul{margin:0; padding-left:18px; display:grid; gap:7px; font-size:14.5px}
+.cell.gap{border-style:dashed; border-color:color-mix(in srgb, var(--ochre) 55%, var(--line)); background:var(--ochre-soft)}
+.read{margin-top:16px; background:var(--surface-2); border-radius:var(--r); padding:16px 18px; display:grid; gap:8px}
+.read p{max-width:70ch}
+
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 50%, var(--line))}
+.door > summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start}
+.door > summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--ochre); padding-top:4px}
+.door .dt{font-weight:600; font-size:17px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted)}
+.door .dopen{grid-column:2; font-family:var(--f-mono); font-size:11.5px; color:var(--accent)}
+.door[open] .dopen{display:none}
+.door .dbody{padding:0 16px 16px; display:grid; gap:8px; font-size:15px}
+.kv{display:grid; grid-template-columns:96px 1fr; gap:6px 14px; margin:0}
+.kv > dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv > dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv > dd{margin-bottom:8px} }
+
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabbtn{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tabbtn b{font-family:var(--f-display); font-size:17px; color:inherit}
+.tabbtn small{font-family:var(--f-mono); font-size:11.5px}
+.tabbtn[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.tabpanel{display:grid; grid-template-columns:1.2fr 1fr; gap:12px}
+.tabpanel[hidden]{display:none}
+@media (max-width:660px){ .tabpanel{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.pcol.see{background:var(--surface-2)}
+.pcol h3{font-size:12px; font-family:var(--f-mono); font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15px}
+
+.hires{list-style:none; margin:0; padding:0; display:grid; gap:10px; counter-reset:h}
+.hires li{counter-increment:h; display:grid; grid-template-columns:34px 1fr; gap:4px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px}
+.hires li::before{content:counter(h); font-family:var(--f-display); font-weight:700; font-size:21px; color:var(--accent); grid-row:span 2}
+.hires h3{font-size:16px}
+.hires p{font-size:15px; color:var(--muted)}
+
+.honest{margin-bottom:14px; padding:14px 16px; border-radius:var(--r); background:var(--rust-soft); border:1px solid color-mix(in srgb, var(--rust) 35%, var(--line)); font-size:15.5px}
+.proof{display:grid}
+.pf{display:grid; grid-template-columns:150px 1fr; gap:4px 16px; padding:14px 0; border-bottom:1px solid var(--line)}
+.pf:last-child{border-bottom:0}
+.pf .co{font-weight:600; font-size:16px}
+.pf .co small{display:block; font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted)}
+.pf p{font-size:15.5px}
+@media (max-width:560px){ .pf{grid-template-columns:1fr} }
+
+.qs{margin:0; padding-left:22px; display:grid; gap:14px}
+.qs li{max-width:68ch}
+.qs li::marker{font-family:var(--f-display); font-weight:700; color:var(--accent)}
+.qs li span{display:block; color:var(--muted); font-size:15px; margin-top:2px}
+
+.end{padding-block:36px 56px; border-top:1px solid var(--line); display:grid; gap:12px}
+.contact{font-family:var(--f-mono); font-size:14px; display:flex; flex-wrap:wrap; gap:6px 18px}
+.contact a{color:var(--ink)}
+.fine{font-size:13.5px; color:var(--muted); max-width:72ch}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>for Sylvera</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#fact" class="on">The fact</a>
+      <a href="#read">Read from outside</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hires</a>
+      <a href="#why">Proof</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="hero" id="fact">
+  <p class="eyebrow">For Allister Furey &middot; Sylvera &middot; draft, 27 Nov 2026</p>
+  <h1>On 26 October India posted a draft of how its compliance credits would trade. As drafted, there is no secondary market in it.</h1>
+  <p class="lede">The Bureau of Energy Efficiency posted its draft <strong>Detailed Procedure for Transaction of Carbon Credit Certificates</strong> (dated October 2026) for public comment on the Indian Carbon Market portal on 26 Oct 2026, the upload date on the portal file. It proposes how certificates under the Carbon Credit Trading Scheme would move between companies, and as drafted it closes almost every route that normally produces price data. <a href="https://indiancarbonmarket.gov.in/storage/bee-docs/uploads/announcements/1792999111_pdf">BEE draft procedure, PDF</a> <a class="src" href="https://indiancarbonmarket.gov.in/">ICM portal notice</a></p>
+
+  <div class="ledger" role="region" aria-label="Clauses in the BEE draft procedure and what they do to price data">
+    <div class="ledger-hd"><span><b>BEE draft procedure, Oct 2026</b></span><span>under the CERC CCC Regulations of 27 Feb 2026</span></div>
+    <div class="ledger-cols" aria-hidden="true"><span>Clause</span><span>What the draft says</span><span>What it does to price data</span></div>
+    <ul>
+      <li>
+        <span class="cl">4.3</span>
+        <div class="says"><span class="mlab">What the draft says</span>Bilateral trading <q>even within the same corporate group is not permitted</q>.</div>
+        <div class="price"><span class="mlab">What it does to price</span>No OTC deals, so no broker quotes and no negotiated prices to collect.</div>
+      </li>
+      <li>
+        <span class="cl">14.5</span>
+        <div class="says"><span class="mlab">What the draft says</span>Power exchanges discover one market clearing price per trading session through a <q>closed double-sided uniform price auction</q>.</div>
+        <div class="price"><span class="mlab">What it does to price</span>One print per session per exchange, not a continuous market.</div>
+      </li>
+      <li>
+        <span class="cl">14.4(c)</span>
+        <div class="says"><span class="mlab">What the draft says</span>Certificates bought on an exchange <q>shall not be eligible for resale under any circumstances</q>.</div>
+        <div class="price"><span class="mlab">What it does to price</span>No secondary trading, no forward curve, no traders to make one.</div>
+      </li>
+      <li>
+        <span class="cl">14.4(c)</span>
+        <div class="says"><span class="mlab">What the draft says</span>A Non-Obligated Entity, a voluntary buyer, may buy only for retirement, with no resale or banking.</div>
+        <div class="price"><span class="mlab">What it does to price</span>Indian companies would get a domestic, retire-only credit to weigh against voluntary credits.</div>
+      </li>
+      <li>
+        <span class="cl">15.3(h)</span>
+        <div class="says"><span class="mlab">What the draft says</span>After each session, exchanges display demand and supply curves on their websites.</div>
+        <div class="price"><span class="mlab">What it does to price</span>The raw data is public. The read on it is not.</div>
+      </li>
+    </ul>
+    <div class="ledger-ft">Who this binds: about <b>490 obligated entities</b> in seven sectors had targets by February 2026, <a href="https://icapcarbonaction.com/en/ets/indian-carbon-credit-trading-scheme">ICAP</a>, and a revised draft notification of June 2026 would add <b>255 iron and steel units</b>, <a href="https://www.downtoearth.org.in/economy/indias-iron-and-steel-sector-moves-closer-to-ccts-compliance-will-larger-decarbonisation-follow">Down To Earth</a>. The procedure is a draft out for comment, so clauses may still change. The exchanges listed on the portal are IEX, HPX and PXIL.</div>
+  </div>
+
+  <div class="meaning">
+    <h3>What it means for Sylvera</h3>
+    <p>A finance head at an Indian cement or aluminium plant would, under this draft, decide whether to cut emissions, buy certificates or bank them against a price that appears once per session and can never be resold. That is a forecasting problem with very little market data, which is the problem your Market Intelligence product is built for in the voluntary market: price data, policy and country risk, and forecasts. And every Indian company with a voluntary climate claim would get a retire-only domestic credit to compare with the Indian project credits you already rate. I could not find CCTS coverage on your public pages <span class="tag guess">GUESS</span>, so this may be a product question before it is a sales one. Either way, it is a reason to be in the room in India now.</p>
+  </div>
+</div>
+
+<section id="read">
+  <div class="sh">
+    <p class="field">02 &middot; How I read it from outside</p>
+    <h2>APAC has a leader and Japan has a country manager. India has a seat that went quiet.</h2>
+    <p>Everything below is public. Where I am inferring, it says GUESS.</p>
+  </div>
+  <div class="map">
+    <div class="cell">
+      <span class="k">How you sell</span>
+      <h3>Enterprise, with a free door in</h3>
+      <ul>
+        <li>Territories span <q>enterprise corporates, financial institutions, public sectors and project developers</q>. <a class="src" href="https://jobs.ashbyhq.com/sylvera/3c54d102-5a6e-42f7-b520-624c321bfd7b">JD, 20 Nov</a></li>
+        <li>Ratings, Market Intelligence, Article 6 and CORSIA Hub, and Carbon Intensity Assessment with CBAM outputs. <a class="src" href="https://www.sylvera.com/products/carbon-intensity-assessment">sylvera.com</a></li>
+        <li>A "get free access" entry on every product page. <a class="src" href="https://www.sylvera.com/products/carbon-market-intelligence">sylvera.com</a></li>
+      </ul>
+    </div>
+    <div class="cell">
+      <span class="k">APAC today</span>
+      <h3>Singapore and Tokyo, led from Singapore</h3>
+      <ul>
+        <li>Beth Chim, VP Global Sales, joined in 2026 to build Asia Pacific and still leads the region. <a class="src" href="https://www.sylvera.com/team">team page</a></li>
+        <li>Yuki Katsumura, Country Manager Japan, since 31 Jul 2025, ahead of GX-ETS. <a class="src" href="https://www.sylvera.com/blog/sylvera-yuki-katsumura-country-manager-japan-carbon-market-expansion">sylvera.com</a></li>
+        <li>An Enterprise AE for APAC, Singapore, posted 20 Nov 2026. <a class="src" href="https://jobs.ashbyhq.com/sylvera/3c54d102-5a6e-42f7-b520-624c321bfd7b">Ashby</a></li>
+      </ul>
+    </div>
+    <div class="cell gap">
+      <span class="k">India today</span>
+      <h3>Ratings on the supply side, a seat posted and then gone</h3>
+      <ul>
+        <li>Pre-Issuance A ratings for FCF India and Equilibrium, both published 30 Sep 2026. <a class="src" href="https://www.sylvera.com/customer-cases/fcf-india">FCF India</a> <a class="src" href="https://www.sylvera.com/customer-cases/equilibrium">Equilibrium</a></li>
+        <li>An "Account Executive (India)" seat, listed in Singapore as remote, Hindi required, to build a territory <q>from scratch</q>, posted 21 Jul 2026 and now marked expired. <a class="src" href="https://workingreen.jobs/offers/account-executive-india-at-sylvera-singapore">WorkInGreen</a></li>
+        <li>It is not on your Ashby board today, and I found no public note of a hire. <span class="tag guess">GUESS</span> India is worked from Singapore for now.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="read">
+    <p><b>What that tells me.</b> You already decided India is worth a dedicated seller, because you posted one in July. The public trail shows Indian sellers of credits, the developers, but not Indian buyers. The CCTS turns hundreds of Indian industrial plants, about 490 entities now and 255 steel units in draft, into buyers with a price problem. I would not touch Beth's Singapore territory or the Tokyo book. I would open India from India, inside her APAC forecast and cadence.</p>
+  </div>
+</section>
+
+<section id="doors">
+  <div class="sh">
+    <p class="field">03 &middot; First doors</p>
+    <h2>Three doors, each opened by the same draft procedure</h2>
+    <p>Tap a door for who, why now, and what I would bring.</p>
+  </div>
+  <div class="doors">
+    <details class="door" open>
+      <summary><span class="dn">01</span><span class="dt">Obligated plants that also export to Europe</span><span class="dwhy">They face a CCTS target at home and CBAM abroad, on the same tonne.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>Aluminium and cement entities with notified targets, then steel once the draft is final. Coverage of the steel draft names JSW Steel, Tata Steel, SAIL and ArcelorMittal Nippon Steel. <a class="src" href="https://www.steelorbis.com/steel-news/latest-news/indias-moefcc-issues-notification-setting-greenhouse-gas-emission-targets-for-iron-and-steel-industry-1463170.htm">SteelOrbis</a></dd>
+          <dt>Why now</dt><dd>Under the draft, their buy, bank or abate call would rest on a session price they cannot hedge or resell, and their European buyers ask for carbon intensity under CBAM.</dd>
+          <dt>Bring</dt><dd>Carbon Intensity Assessment with its CBAM output, plus a CCC supply and price view, if your team decides to build one.</dd>
+        </dl>
+      </div>
+    </details>
+    <details class="door">
+      <summary><span class="dn">02</span><span class="dt">Indian developers, and the banks that lend to them</span><span class="dwhy">Your ratings already land here. The JCM with Japan adds a buyer your Tokyo team knows.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>Developers like FCF India, whose case study says direct sales to corporate buyers often took a year or two, and the Indian lenders and investors who fund their projects. <a class="src" href="https://www.sylvera.com/customer-cases/fcf-india">FCF India case</a></dd>
+          <dt>Why now</dt><dd>India's environment ministry published the Operational Manual for the India and Japan Joint Crediting Mechanism, version 1.0, September 2026, which covers authorisation of Japan's share and corresponding adjustments. <a class="src" href="https://moef.gov.in/storage/tender/1791204399.pdf">MoEFCC, PDF</a></dd>
+          <dt>Bring</dt><dd>Pre-issuance ratings and the Article 6 Hub, sold together with Yuki's team on the Japanese side of each deal.</dd>
+        </dl>
+      </div>
+    </details>
+    <details class="door">
+      <summary><span class="dn">03</span><span class="dt">Indian companies with a voluntary climate claim</span><span class="dwhy">They now choose between a retire-only CCC and a voluntary credit, and need quality and price side by side.</span><span class="dopen">open</span></summary>
+      <div class="dbody">
+        <dl class="kv">
+          <dt>Who</dt><dd>Sustainability and finance heads at listed Indian companies that are not obligated entities but buy credits for their own targets. <span class="tag guess">GUESS</span> I would size this list in the first month before committing time to it.</dd>
+          <dt>Why now</dt><dd>As drafted, clause 14.4(c) would let them buy CCCs, but only to retire. That is a new option sitting next to the voluntary market, with no rating attached to it.</dd>
+          <dt>Bring</dt><dd>Ratings, Market Intelligence and the Decarbonization Toolkit, in one comparison an Indian CFO can sign off.</dd>
+        </dl>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="days">
+  <div class="sh">
+    <p class="field">04 &middot; 30 / 60 / 90</p>
+    <h2>India as a line in the APAC forecast</h2>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Plan by phase">
+    <button class="tabbtn" role="tab" id="t1" aria-controls="p1" aria-selected="true"><b>Days 1 to 30</b><small>learn it, list it</small></button>
+    <button class="tabbtn" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><b>Days 31 to 60</b><small>first meetings</small></button>
+    <button class="tabbtn" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><b>Days 61 to 90</b><small>first contracts</small></button>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p1" aria-labelledby="t1">
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Learn the product from your analysts and client solutions team until I can run a demo without them. The carbon science is theirs to teach.</li>
+      <li>Build a named list of about 50 accounts across the three doors, starting from the notified target lists.</li>
+      <li>Agree how India accounts are covered with Beth, and the JCM split with Yuki.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>The account list, with an owner and a reason on each.</li>
+      <li>A one-page note on the draft CCC procedure and what Indian buyers will ask of you.</li>
+      <li>First ten meetings booked.</li>
+    </ul></div>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Run discovery with plant finance and sustainability heads in door 1, and log every question about CCC prices.</li>
+      <li>Take two developers in door 2 through a pre-issuance rating conversation, one with a JCM angle.</li>
+      <li>With your policy team, meet the exchanges to understand what session data will be published.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>Pipeline by door in the APAC weekly review.</li>
+      <li>A written list of what Indian buyers asked that the product does not yet answer.</li>
+      <li>Free-access users converted into named opportunities.</li>
+    </ul></div>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+    <div class="pcol"><h3>What I do</h3><ul>
+      <li>Close the first India contracts, most likely ratings for developers and an intensity assessment for an exporter.</li>
+      <li>Put an India number into Beth's forecast that I am willing to defend.</li>
+      <li>Bring you a hiring plan built on what the first 90 days showed.</li>
+    </ul></div>
+    <div class="pcol see"><h3>What you see</h3><ul>
+      <li>India as a forecast line, not an anecdote.</li>
+      <li>One Indian reference customer.</li>
+      <li>A yes or no on the first two hires.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="hire">
+  <div class="sh">
+    <p class="field">05 &middot; Who to hire, in order</p>
+    <h2>Domain first, because I am not the carbon expert</h2>
+  </div>
+  <ol class="hires">
+    <li><h3>A carbon markets analyst or solutions lead in India</h3><p>Someone who has read every CCTS notification and can sit across from a plant's energy manager. Pairs with me on every first meeting.</p></li>
+    <li><h3>An enterprise AE in Mumbai</h3><p>Once door 1 shows a pattern, one closer for the obligated companies and their lenders.</p></li>
+    <li><h3>A partnerships manager</h3><p>Developers, verifiers and the exchanges, and the JCM corridor with the Tokyo team.</p></li>
+    <li><h3>An SDR, last</h3><p>Only after the doors show which titles answer.</p></li>
+  </ol>
+</section>
+
+<section id="why">
+  <div class="sh">
+    <p class="field">06 &middot; Why me</p>
+    <h2>I have opened a region for a foreign company from zero, selling software and AI to banks and enterprises</h2>
+  </div>
+  <p class="honest">To be plain: I have never sold carbon credits or carbon data. The domain is Sylvera's. What I bring is market entry: getting a foreign company's product bought in India, from a standing start.</p>
+  <div class="proof">
+    <div class="pf"><div class="co">ZenAdmin<small>Commercial Director, 2022 to 2023</small></div><p>A Singapore company run from India. We built the commercial function from scratch to 15 people and sold to Remote, Multiplier, Omnipresent, Eventbrite and Temasek at 104% NRR.</p></div>
+    <div class="pf"><div class="co">Simplifai<small>Head of Sales APAC, 2020 to 2022</small></div><p>Norwegian AI SaaS into banks, brokers and private insurers. We built APAC from 0 to 15 reps, reached $1M ARR in the first 12 months and grew it to $1.7M. Our largest, Upstox, was $210K TCV.</p></div>
+    <div class="pf"><div class="co">Torqus<small>Manager, Inside and Channel Sales, 2017 to 2020</small></div><p>A 60+ seat sales engine and a 15-city channel network in India. Indian industry sits well beyond Mumbai and Delhi, and I have sold there.</p></div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="sh">
+    <p class="field">07 &middot; Three questions I would ask first</p>
+    <h2>Only you can answer these</h2>
+  </div>
+  <ol class="qs">
+    <li>The India seat you posted in July: did it close, and if not, what did the search teach you about who buys in India?<span>That decides whether India is a territory or a market.</span></li>
+    <li>Do Indian compliance certificates belong in Market Intelligence, or does India stay a voluntary and Article 6 story for Sylvera?<span>Door 1 is much bigger with the first answer.</span></li>
+    <li>Would India sit inside Beth's APAC number, or report to you as its own bet for a year?<span>Either works. I would plan very differently for each.</span></li>
+  </ol>
+</section>
+
+<div class="end">
+  <h2>That is the draft. Twenty minutes would tell me what I got wrong.</h2>
+  <p class="contact"><span>Ketan Sharma</span><span>Pune, India</span><a href="tel:+919899380222">+91 98993 80222</a><a href="mailto:ketansharma071190@gmail.com">ketansharma071190@gmail.com</a></p>
+  <p class="fine">Built from public sources opened on 27 Nov 2026. Each fact links to its source; anything inferred is marked GUESS. Nothing here comes from inside Sylvera.</p>
+</div>
+
+</main>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabbtn'));
+  function sel(t){
+    tabs.forEach(function(b){
+      var on=b===t; b.setAttribute('aria-selected',on?'true':'false'); b.tabIndex=on?0:-1;
+      var p=document.getElementById(b.getAttribute('aria-controls')); if(p){p.hidden=!on;}
+    });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){sel(b);});
+    b.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight'){n=tabs[(i+1)%tabs.length];}
+      if(e.key==='ArrowLeft'){n=tabs[(i-1+tabs.length)%tabs.length];}
+      if(n){e.preventDefault(); sel(n); n.focus();}
+    });
+  });
+  var links=[].slice.call(document.querySelectorAll('.chips a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    ids.forEach(function(id){var el=document.getElementById(id); if(el){io.observe(el);}});
+  }
+})();
+</script>
+</body>
+</html>

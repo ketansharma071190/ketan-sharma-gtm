@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Skyflow India: BFSI draft</title>
+<meta name="description" content="A working draft by Ketan Sharma for Anshu Sharma: RBI's draft data governance guidance asks every bank and NBFC for one source of truth per data element, and how Skyflow could sell into that in India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One column. The hero is a data-flow sketch: many copies of a customer's PAN on the left, one vault feeding tokens to every system and model on the right. */
+:root{
+  --bg:#F5F6FA; --surface:#FFFFFF; --surface-2:#ECEEF5; --ink:#141726; --muted:#565B70; --line:#D9DCE7;
+  --accent:#3343C4; --accent-ink:#FFFFFF; --accent-soft:rgba(51,67,196,.08);
+  --warn:#A4560A; --warn-soft:rgba(164,86,10,.09);
+  --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+  --f-body:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E1018; --surface:#161925; --surface-2:#1E2230; --ink:#E8EAF2; --muted:#A0A5BA; --line:#2A2F40;
+  --accent:#8F9BFF; --accent-ink:#0B0E24; --accent-soft:rgba(143,155,255,.12);
+  --warn:#F0A858; --warn-soft:rgba(240,168,88,.11);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0E1018; --surface:#161925; --surface-2:#1E2230; --ink:#E8EAF2; --muted:#A0A5BA; --line:#2A2F40;
+  --accent:#8F9BFF; --accent-ink:#0B0E24; --accent-soft:rgba(143,155,255,.12);
+  --warn:#F0A858; --warn-soft:rgba(240,168,88,.11);
+  color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16.5px; line-height:1.62; -webkit-text-size-adjust:100%; overflow-x:hidden}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{line-height:1.2; margin:0; text-wrap:balance}
+h1{font-family:var(--f-display); font-size:clamp(27px, 5.6vw, 41px); font-weight:700; letter-spacing:-.01em}
+h2{font-family:var(--f-display); font-size:clamp(21px, 3.8vw, 28px); font-weight:600}
+h3{font-size:15.5px; font-weight:600}
+p{margin:0}
+a{color:var(--accent); text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+.src{font-family:var(--f-mono); font-size:11.5px; color:var(--muted); overflow-wrap:anywhere}
+.src a{color:var(--muted)}
+.tag{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; padding:1px 6px; border-radius:4px; border:1px solid color-mix(in srgb, var(--warn) 45%, transparent); color:var(--warn); background:var(--warn-soft); white-space:nowrap; vertical-align:2px}
+
+/* top bar */
+.topbar{position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.who{font-weight:700; font-size:14px; white-space:nowrap}
+.who span{color:var(--muted); font-weight:500}
+.chips{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none; font-size:12.5px; text-decoration:none; color:var(--muted); padding:5px 10px; border-radius:999px; border:1px solid var(--line); white-space:nowrap}
+.chips a.on{color:var(--accent-ink); background:var(--accent); border-color:var(--accent)}
+@media (max-width:520px){ .who span{display:none} }
+
+/* hero */
+.hero{padding-block:34px 28px; display:grid; gap:18px}
+.eyebrow{font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.lede{font-size:18px; color:var(--muted); max-width:64ch}
+.lede strong{color:var(--ink); font-weight:600}
+
+.flow{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.flow-hd{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 12px; padding:11px 16px; border-bottom:1px solid var(--line); font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.flow-hd b{color:var(--ink); font-weight:500}
+.cmp{display:grid; grid-template-columns:1fr 1fr; gap:0}
+.cmp > div{padding:16px; min-width:0}
+.cmp > div + div{border-left:1px solid var(--line)}
+@media (max-width:600px){ .cmp{grid-template-columns:1fr} .cmp > div + div{border-left:0; border-top:1px solid var(--line)} }
+.cmp h3{font-family:var(--f-mono); font-size:11.5px; font-weight:500; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-bottom:10px}
+.cmp .after h3{color:var(--accent)}
+.nodes{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.nodes li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; padding:8px 11px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); font-size:14px}
+.nodes li > *{min-width:0}
+.nodes code{font-family:var(--f-mono); font-size:12px; color:var(--muted); white-space:nowrap}
+.before .nodes code{color:var(--warn)}
+.vault{margin-bottom:8px; padding:10px 12px; border-radius:8px; border:1px solid color-mix(in srgb, var(--accent) 55%, var(--line)); background:var(--accent-soft); font-size:14px; display:grid; gap:2px}
+.vault b{font-weight:600}
+.vault code{font-family:var(--f-mono); font-size:12px; color:var(--accent)}
+.after .nodes code{color:var(--accent)}
+.after .nodes li{animation:in .5s ease-out both}
+.after .nodes li:nth-child(2){animation-delay:.08s} .after .nodes li:nth-child(3){animation-delay:.16s} .after .nodes li:nth-child(4){animation-delay:.24s}
+@keyframes in{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
+
+.clauses{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.clauses > li{display:grid; grid-template-columns:96px 1fr; gap:2px 14px; padding:11px 16px; border-bottom:1px solid var(--line); font-size:15px}
+.clauses > li > *{min-width:0}
+.clauses .cl{font-family:var(--f-mono); font-size:12.5px; color:var(--muted); padding-top:2px}
+.clauses li.key{background:var(--accent-soft)}
+.clauses li.key .cl{color:var(--accent); font-weight:500}
+@media (max-width:560px){ .clauses > li{grid-template-columns:1fr} }
+.flow-ft{padding:13px 16px; background:var(--surface-2); font-size:14.5px; color:var(--muted)}
+.flow-ft b{color:var(--ink); font-weight:600}
+
+/* sections */
+section{padding-block:38px; border-top:1px solid var(--line); scroll-margin-top:60px}
+.sh{display:grid; gap:8px; margin-bottom:20px}
+.sh p{color:var(--muted); max-width:64ch}
+.field{font-family:var(--f-mono); font-size:12px; color:var(--accent); letter-spacing:.05em; text-transform:uppercase}
+.note{margin-top:14px; font-size:15px; color:var(--muted); max-width:68ch}
+.note b{color:var(--ink)}
+
+.facts{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:640px){ .facts{grid-template-columns:1fr} }
+.fact{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; gap:6px; align-content:start; min-width:0}
+.fact p{font-size:15px; color:var(--muted)}
+.read{margin-top:16px; border-left:3px solid var(--accent); padding:4px 0 4px 16px; display:grid; gap:10px}
+.read ol{margin:0; padding-left:20px; display:grid; gap:8px}
+.read li{max-width:68ch}
+
+/* doors */
+.doors{display:grid; gap:10px}
+details.door{background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
+details.door[open]{border-color:color-mix(in srgb, var(--accent) 45%, var(--line))}
+.door > summary{list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px}
+.door > summary::-webkit-details-marker{display:none}
+.door .dn{font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:4px}
+.door .dt{font-weight:600; font-size:16px; min-width:0}
+.door .dwhy{grid-column:2; font-size:15px; color:var(--muted); min-width:0}
+.door .dbody{padding:0 16px 16px}
+.kv{display:grid; grid-template-columns:100px 1fr; gap:6px 14px; font-size:15px; margin:0}
+.kv > dt{font-family:var(--f-mono); font-size:12px; color:var(--muted); padding-top:3px}
+.kv > dd{margin:0; min-width:0}
+@media (max-width:560px){ .kv{grid-template-columns:1fr; gap:2px} .kv > dd{margin-bottom:8px} }
+
+/* plan */
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:16px; overflow-x:auto; scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabbtn{font:inherit; background:none; border:0; border-bottom:3px solid transparent; padding:10px 12px; cursor:pointer; color:var(--muted); display:grid; text-align:left; flex:none}
+.tabbtn b{font-size:15.5px; color:inherit}
+.tabbtn small{font-family:var(--f-mono); font-size:11.5px}
+@media (max-width:480px){.tabbtn{flex:1 1 0; min-width:0; padding:10px 6px}.tabbtn b{font-size:14px; line-height:1.3}.tabbtn small{font-size:10.5px}}
+.tabbtn[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.tabpanel{display:grid; grid-template-columns:1.2fr 1fr; gap:12px}
+.tabpanel[hidden]{display:none}
+@media (max-width:660px){ .tabpanel{grid-template-columns:1fr} }
+.pcol{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px; display:grid; gap:10px; align-content:start; min-width:0}
+.pcol.see{background:var(--surface-2)}
+.pcol h3{font-family:var(--f-mono); font-size:12px; font-weight:500; color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.pcol ul{margin:0; padding-left:18px; display:grid; gap:8px; font-size:15px}
+
+/* hiring */
+.ladder{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.rung{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; display:grid; grid-template-columns:42px 1fr; gap:4px 12px}
+.rung > *{min-width:0}
+.rung .rn{grid-row:1 / span 2; width:32px; height:32px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-size:13px; background:var(--surface-2); border:1px solid var(--line); color:var(--muted)}
+.rung.now .rn{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.rung .rt{font-weight:600; font-size:15.5px}
+.rung .rt small{font-family:var(--f-mono); font-weight:400; font-size:11.5px; color:var(--muted); margin-left:6px; text-transform:uppercase; letter-spacing:.03em}
+.rung .rs{font-size:15px; color:var(--muted)}
+.rung .rs b{color:var(--ink); font-weight:600}
+
+/* proof */
+.proof{display:grid; gap:12px}
+.pc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; grid-template-columns:180px 1fr; gap:8px 18px}
+@media (max-width:620px){ .pc{grid-template-columns:1fr} }
+.pc > *{min-width:0}
+.pc .co{display:grid; gap:2px; align-content:start}
+.pc .co b{font-family:var(--f-display); font-size:18px; font-weight:600}
+.pc .co span{font-size:13.5px; color:var(--muted)}
+.pc .co .dates{font-family:var(--f-mono); font-size:12px}
+.pc p{font-size:15px}
+
+/* questions, end */
+.qs{margin:0; padding:0; list-style:none; display:grid; gap:8px; counter-reset:q}
+.qs > li{counter-increment:q; display:grid; grid-template-columns:34px 1fr; gap:8px; padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); font-size:15.5px}
+.qs > li::before{content:"Q" counter(q); font-family:var(--f-mono); font-size:12px; color:var(--accent); padding-top:3px}
+.qs > li > span{min-width:0}
+.endnote{padding-block:38px 64px; border-top:1px solid var(--line); display:grid; gap:12px}
+.endnote p{max-width:62ch}
+.contact{display:flex; flex-wrap:wrap; gap:8px 18px; font-family:var(--f-mono); font-size:13.5px; color:var(--muted)}
+.contact span{user-select:all}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="who">Ketan Sharma <span>· India BFSI for Skyflow</span></div>
+    <nav class="chips" aria-label="Sections">
+      <a href="#read">Skyflow in India</a>
+      <a href="#doors">First doors</a>
+      <a href="#days">90 days</a>
+      <a href="#hire">Hiring order</a>
+      <a href="#why">Why me</a>
+      <a href="#ask">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A working draft for Anshu Sharma · 27 November 2026</div>
+    <h1>RBI has drafted one source of truth for every bank data element. Models included.</h1>
+    <p class="lede">Anshu, on 15 July the Reserve Bank released draft guidance on data governance for eleven kinds of regulated entity, from commercial banks and NBFCs to credit bureaus. It asks for one authoritative source per data element, with every downstream system and model derived from it, and it names tokenization as a control. Comments closed on 17 August. <strong>As far as I can find, the final has not been issued, and my read is that when it is, the buyer for a vault inside an Indian bank stops being only the CISO.</strong> Below is how I would sell into that, beside your APAC team. Where I am guessing, I say so.</p>
+
+    <div class="flow" aria-label="What the RBI draft asks for, drawn as a data flow">
+      <div class="flow-hd"><b>One customer's PAN inside a lender</b><span>RBI draft guidance, 15 Jul 2026</span></div>
+      <div class="cmp">
+        <div class="before">
+          <h3>Today, in most stacks <span class="tag">my read</span></h3>
+          <ul class="nodes">
+            <li><span>Core banking</span><code>ABCPE1234F</code></li>
+            <li><span>Loan origination</span><code>ABCPE1234F</code></li>
+            <li><span>Data lake and reports</span><code>ABCPE1234F</code></li>
+            <li><span>Collections partner</span><code>ABCPE1234F</code></li>
+          </ul>
+        </div>
+        <div class="after">
+          <h3>What paragraph 43 describes</h3>
+          <div class="vault"><b>One designated source</b><code>PAN held once, with owner, class and consent attached</code></div>
+          <ul class="nodes">
+            <li><span>Core banking</span><code>tok_7Qx2</code></li>
+            <li><span>Credit and fraud models</span><code>tok_7Qx2</code></li>
+            <li><span>Data lake and reports</span><code>tok_7Qx2</code></li>
+            <li><span>Collections partner</span><code>tok_7Qx2</code></li>
+          </ul>
+        </div>
+      </div>
+      <ol class="clauses">
+        <li class="key"><span class="cl">Para 43</span><span><q>An RE should establish and maintain a SSOT for all data elements and ensure that no parallel or competing SSOT sources exist for the same data element. All downstream systems, models, and business processes should be derived from the SSOT.</q></span></li>
+        <li><span class="cl">Para 35</span><span>Ownership, classification, usage intent and consent are set <q>at the point of origination or capture</q>, so they travel with the data.</span></li>
+        <li><span class="cl">Para 39</span><span>Security controls named as examples: data loss prevention, encryption, <q>tokenization, and anonymisation</q>, at rest and in transit.</span></li>
+        <li class="key"><span class="cl">Para 63</span><span>Data shared with third parties <q>remains traceable to the designated SSOT</q>, on a need-to-know basis, with no unauthorised reuse or duplication, and periodic audits of third parties that can include CERT-In empanelled auditors.</span></li>
+        <li><span class="cl">Paras 9, 22</span><span>A Board-level Data Governance Committee (or an existing Board committee given the job), and a Data Function headed by an officer <q>not below the rank of Chief General Manager or equivalent</q>.</span></li>
+      </ol>
+      <div class="flow-ft">Sources, opened 27 Nov 2026: <a href="https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63155">RBI press release 2026-2027/677, 15 Jul 2026</a> and <a href="https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=5114">the draft text</a>. Still a draft: RBI's <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx">notifications list</a> for 27 October to 26 November shows no final, and I found none earlier. Para 44 lets each lender choose a centralised, federated or hybrid SSOT. The SSOT clause covers all data, not only personal data, and the PAN sketch is my illustration. <b>For the personal data elements, a vault is the obvious designated source.</b> <span class="tag">my read</span></div>
+    </div>
+  </header>
+
+  <section id="read">
+    <div class="sh">
+      <span class="field">What I understand</span>
+      <h2>Skyflow in India, read from outside</h2>
+      <p>From your site, your job board and RBI's papers. You know all of it better than I do. It is here so you can correct me.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>What you sell in India</h3><p>The DPDP Data Privacy Vault: format-preserving tokenization, masking and polymorphic encryption, purpose-aware access, immutable logs, consent and data principal requests, each mapped to a DPDP rule, plus entity-preserving tokens for models and agents.</p><span class="src"><a href="https://skyflow.com/press/skyflow-unveils-dpdp-data-privacy-vault-for-india">skyflow.com press</a> · <a href="https://www.crnasia.com/india/news-network/news/skyflow-unveils-dpdp-ready-data-privacy-vault-for-india">CRN Asia</a></span></div>
+      <div class="fact"><h3>Who sells it here</h3><p>Your June and September event pages name an APAC team: Deepak Annamalai, Regional Sales Director APAC; Aalap Mehta, Head of Customer Experience APAC; Neha Jamwal, Head of Marketing APAC and EMEA. Platinum sponsor at Gartner Data and Analytics, Mumbai, 21 to 22 September; a closed-door workshop in Bengaluru on 3 June.</p><span class="src"><a href="https://www.skyflow.com/events/gartner-data-analytics-summit-2026">Gartner Mumbai page</a> · <a href="https://www.skyflow.com/event/skyflow-workshop-building-responsible-ai-bengaluru">Bengaluru workshop</a></span></div>
+      <div class="fact"><h3>Who you name</h3><p>Your Mumbai session copy names Visa, ServiceNow, Flipkart, AngelOne and BigPanda as companies handling sensitive data in AI through Skyflow. AngelOne is a broker, so BFSI in India already has a reference.</p><span class="src"><a href="https://www.skyflow.com/events/gartner-data-analytics-summit-2026">Gartner Mumbai page</a></span></div>
+      <div class="fact"><h3>This month's hiring</h3><p>An Enterprise Solutions Architect, APAC, remote India, posted 17 November, to be <q>primary Solutions Architect for customers across India and the wider APAC region</q>, and a Customer Success Engineer, India, posted 20 November. Both open today. The account executive seats on the board are US-based, and the India SDR seat covers the US and EMEA.</p><span class="src"><a href="https://jobs.ashbyhq.com/skyflow/69327796-e4f9-4d10-8414-5de349d8fbb0">SA APAC</a> · <a href="https://jobs.ashbyhq.com/skyflow/adfe488b-3e1f-4447-a283-92a1bc84806f">CSE India</a> · Ashby API, 27 Nov</span></div>
+      <div class="fact"><h3>Who else pitches the same rooms</h3><p>Protecto's India page sells in-country masking for AI and anchors on RBI's 2018 payment data storage rule and SEBI's 2023 cloud framework. It pitches compliance and residency, not the bank's data architecture.</p><span class="src"><a href="https://www.protecto.ai/in/">protecto.ai/in</a></span></div>
+      <div class="fact"><h3>A second dated rule, in force now</h3><p>On 5 November RBI consolidated its cyber resilience directions for non-bank payment operators, first issued in July 2024, into one Master Direction, effective that day for large and medium ones. Para 20(b) asks for <q>traceability and visibility of data assets</q>; para 5 pushes the directions onto their payment gateways and service providers, by agreement.</p><span class="src"><a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13751&amp;Mode=0">RBI/DPSS/2026-27/475</a></span></div>
+    </div>
+    <div class="read">
+      <h3>What that tells me</h3>
+      <ol>
+        <li>This is not a greenfield. Your September Mumbai page names Deepak as Regional Sales Director, APAC, and you already have Indian logos. Whatever I do has to add pipeline to his number, not redraw it.</li>
+        <li>Two technical hires for India in one week reads like evaluations arriving faster than one team can run them. <span class="tag">guess</span></li>
+        <li>DPDP is a compliance sale, and every privacy vendor in India sells it. The RBI draft is an architecture sale to a new office, the Data Function and the Board committee, with a design word, SSOT, that a vault answers directly.</li>
+        <li>The buyer list is bounded and regulated: banks, NBFCs, payment operators, brokers, insurers. That is an account plan, run deal by deal, which is the kind of selling I have done in India.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doors">
+    <div class="sh">
+      <span class="field">First doors</span>
+      <h2>Where I would start</h2>
+      <p>In order, and shaped with Deepak so we never work the same account twice.</p>
+    </div>
+    <div class="doors">
+      <details class="door" open>
+        <summary><span class="dn">01</span><span class="dt">Private banks and large NBFCs, before the final lands</span><span class="dwhy">They are designing their Data Function and SSOT map now, from a draft. Whoever helps write that map gets specified into it.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>who</dt><dd>The head of data or the CGM-rank officer named to the Data Function, with the CISO and CTO in the room.</dd>
+          <dt>offer</dt><dd>The vault as the designated source for personal data elements, with tokens flowing to core, lending, analytics and models, mapped paragraph by paragraph to the draft.</dd>
+          <dt>timing</dt><dd>Now. Once the final is out, most of them will run a formal evaluation, and the shortlist gets written before that. <span class="tag">my read</span></dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">02</span><span class="dt">Payment operators under the 5 November directions</span><span class="dwhy">In force today for large and medium operators, and it reaches their gateways and vendors by contract.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>offer</dt><dd>Your payments vault for card and account data, sold as the answer to para 20(b) traceability, with one design the operator can push to its own vendors under para 5.</dd>
+          <dt>why</dt><dd>One operator signed can pull its ecosystem after it. <span class="tag">guess</span></dd>
+        </dl><p class="note">Source: <a href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13751&amp;Mode=0">RBI Master Directions, 5 Nov 2026</a>, paras 3, 5 and 20.</p></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">03</span><span class="dt">Brokers and private insurers, with AngelOne as the reference</span><span class="dwhy">Fast-moving buyers with big AI programs and heavy KYC data. I have sold to both.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>offer</dt><dd>Tokens for KYC, PAN and Aadhaar-linked fields across onboarding, support bots and analytics, built from the AngelOne pattern. <span class="tag">I can't see what AngelOne runs</span></dd>
+          <dt>why me</dt><dd>We sold AI into Upstox and Bajaj Allianz at Simplifai. I know how their security reviews and procurement run.</dd>
+        </dl></div>
+      </details>
+      <details class="door">
+        <summary><span class="dn">04</span><span class="dt">Global banks' capability centres in India</span><span class="dwhy">Your site menu already lists GCCs as a solution. The data sits in India, the budget sits at head office.</span></summary>
+        <div class="dbody"><dl class="kv">
+          <dt>route</dt><dd>Land the GCC's AI and data platform teams, then let the US or European parent buy. This is where Deepak's book and your US sellers meet, so it needs agreed rules. <span class="tag">guess at structure</span></dd>
+        </dl></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="days">
+    <div class="sh">
+      <span class="field">First 90 days</span>
+      <h2>One BFSI plan, timed to the RBI final</h2>
+      <p>What I would do, and what you would see at the end of each month.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="90-day plan">
+      <button class="tabbtn" role="tab" id="tb1" aria-controls="tp1" aria-selected="true" type="button"><small>Days 1 to 30</small><b>Map and meet</b></button>
+      <button class="tabbtn" role="tab" id="tb2" aria-controls="tp2" aria-selected="false" tabindex="-1" type="button"><small>Days 31 to 60</small><b>Prove it</b></button>
+      <button class="tabbtn" role="tab" id="tb3" aria-controls="tp3" aria-selected="false" tabindex="-1" type="button"><small>Days 61 to 90</small><b>Close and repeat</b></button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp1" aria-labelledby="tb1">
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Sit with Deepak, Aalap and the new SA. Split accounts by segment, write it down.</li>
+        <li>Turn the draft into a one-page paragraph-to-capability map a bank's data office can forward internally.</li>
+        <li>Meet data and security heads at private banks, large NBFCs and two payment operators.</li>
+        <li>Pull every Indian BFSI account and open opportunity into one list.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 30</h3><ul>
+        <li>A BFSI account map, agreed with Deepak.</li>
+        <li>Notes from at least eight first meetings, in the buyers' words.</li>
+        <li>The RBI mapping sheet, reviewed by your architects.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp2" aria-labelledby="tb2" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Run two scoped proofs with the SA: one lender, one payment operator.</li>
+        <li>Get the security questionnaire, data residency answer and audit pack ready once, so procurement stops repeating them. <span class="tag">to check what exists</span></li>
+        <li>Bring Indian system integrators in where a bank wants a delivery partner.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 60</h3><ul>
+        <li>Two proofs live, with success criteria signed by the buyer.</li>
+        <li>A pipeline by segment you can forecast from.</li>
+      </ul></div>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="tp3" aria-labelledby="tb3" hidden>
+      <div class="pcol"><h3>What I do</h3><ul>
+        <li>Take the first proof to an order or a signed commercial path.</li>
+        <li>Write the India BFSI playbook so the next seller starts from it.</li>
+        <li>Write the 12-month plan: revenue, hiring, partners, events.</li>
+      </ul></div>
+      <div class="pcol see"><h3>What you see by day 90</h3><ul>
+        <li>One committed BFSI logo, with a named signer.</li>
+        <li>A forecast you and Deepak can hold me to.</li>
+        <li>A 12-month plan on one page.</li>
+      </ul></div>
+    </div>
+    <p class="note"><b>Bank cycles are long.</b> The largest India software deal I have worked took 12 to 18 months. That is why the first doors are the ones designing now, and payment operators already under a rule in force.</p>
+  </section>
+
+  <section id="hire">
+    <div class="sh">
+      <span class="field">Hiring order</span>
+      <h2>Who comes after this month's two hires</h2>
+      <p>Each hire has the signal that would trigger it.</p>
+    </div>
+    <ol class="ladder">
+      <li class="rung now"><span class="rn">1</span><span class="rt">An India BFSI lead who sells first <small>now</small></span><span class="rs">Carries banks, NBFCs, payment operators, brokers and insurers, beside or under Deepak, and closes deals personally. <b>This is the role I am proposing.</b> The reporting line is yours and his to choose.</span></li>
+      <li class="rung"><span class="rn">2</span><span class="rt">The SA, APAC and the CSE, India <small>posted</small></span><span class="rs"><b>Focus:</b> I would point the SA's first proofs at the lender and the payment operator above.</span></li>
+      <li class="rung"><span class="rn">3</span><span class="rt">A partner lead for Indian integrators <small>month 4 or 5</small></span><span class="rs"><b>Signal:</b> two banks ask for a local delivery partner on the same quarter's shortlist.</span></li>
+      <li class="rung"><span class="rn">4</span><span class="rt">A second BFSI seller <small>when the final lands</small></span><span class="rs"><b>Signal:</b> RBI issues the final and more than 15 lenders are in active evaluation. <span class="tag">threshold is a guess</span></span></li>
+      <li class="rung"><span class="rn">5</span><span class="rt">An SDR on India hours for BFSI <small>month 6</small></span><span class="rs"><b>Signal:</b> inbound from Indian lenders outruns what the sellers can answer. Your India SDR seat today covers the US and EMEA.</span></li>
+    </ol>
+  </section>
+
+  <section id="why">
+    <div class="sh">
+      <span class="field">Why me</span>
+      <h2>I have sold into Indian banks, brokers and insurers</h2>
+    </div>
+    <div class="proof">
+      <div class="pc">
+        <div class="co"><b>Simplifai</b><span>Head of Sales APAC · Norwegian AI SaaS</span><span class="dates">Jul 2020 to Jun 2022</span></div>
+        <p>Built APAC from no team to 15 reps, selling AI into banks, brokers and private insurers, Upstox and Bajaj Allianz among them. Typical deal about $150K TCV, Upstox $210K. $1M ARR in the first 12 months, $1.7M when I left.</p>
+      </div>
+      <div class="pc">
+        <div class="co"><b>ZenAdmin</b><span>Commercial Director · Singapore</span><span class="dates">Aug 2022 to Nov 2023</span></div>
+        <p>Built sales, marketing and success from scratch to 15 people for a Singapore company, run from India. We closed Remote, Multiplier, Temasek, Eventbrite and Igloo, at 104 percent net revenue retention. A vault grows the same way, one more data domain at a time.</p>
+      </div>
+      <div class="pc">
+        <div class="co"><b>Torqus</b><span>Inside and Channel Sales · Pune</span><span class="dates">Apr 2017 to Jul 2020</span></div>
+        <p>A 60+ person sales engine and a channel network across 15 Indian cities. Many Indian banks buy through integrators, and I know how to make partners sell.</p>
+      </div>
+      <p class="note">Most recently founding Head of Sales at Craze (YC S22): 70+ logos. I am in Pune and available now.</p>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="sh">
+      <span class="field">For you</span>
+      <h2>Three questions I would ask first</h2>
+    </div>
+    <ol class="qs">
+      <li><span>How is Deepak's book split today, by country, by vertical or by deal size, and where would he want a second seller?</span></li>
+      <li><span>Has RBI's draft come up in a live Indian deal yet, and who on the bank's side raised it: the CISO, the data office, or compliance?</span></li>
+      <li><span>Of your India revenue, how much came in on DPDP and how much on payments tokenization, and which of the two renews and expands better?</span></li>
+    </ol>
+  </section>
+
+  <footer class="endnote">
+    <h2>That is the draft.</h2>
+    <p>Most of it changes once I see your Indian pipeline and sit with Deepak. The method stays: be in the data office before the final lands, win one lender as the reference, and hire on signals.</p>
+    <div class="contact"><span>Ketan Sharma</span><span>+91 98993 80222</span><span>ketansharma071190@gmail.com</span></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabbtn'));
+  function selectTab(id, focus){
+    tabs.forEach(function(t){
+      var on = t.id === id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) t.focus();
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t.id); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        selectTab(tabs[n].id, true); e.preventDefault();
+      }
+    });
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll('.chips a'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          links.forEach(function(a){
+            var on = a.getAttribute('href') === '#' + en.target.id;
+            a.classList.toggle('on', on);
+            if (on) { a.parentNode.scrollLeft = a.offsetLeft - 16; }
+          });
+        }
+      });
+    }, {rootMargin: '-40% 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
